@@ -1,0 +1,13 @@
+hbw:
+  entity_code_key: homsOrderCode
+
+  task_list:
+    group_by_var: order_code
+    entity_url: /orders/%s?task_id=%s
+    entity_url_params:
+      - homsOrderCode
+      - id
+
+  bp_toolbar:
+    common_buttons: []
+    entity_type_buttons: {}

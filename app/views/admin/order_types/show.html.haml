@@ -1,0 +1,15 @@
+- content_for(:title, @order_type.name)
+
+%h2= @order_type.name
+.row
+  .col-xs-12.col-sm-12.col-md-8.col-lg-9
+    = preserve(@order_type.html_from_file.html_safe)
+  .col-xs-12.col-sm-12.col-md-4.col-lg-3
+    - if @order_type.active
+      %div= t('.activated')
+      = link_to admin_order_types_path do
+        %i.fa.fa-long-arrow-left><
+        = t('.back')
+    - else
+      %div= t('.activate_dismiss')
+      = render partial: 'activate_dismiss'

@@ -1,0 +1,273 @@
+en:
+  hello: "Hello world"
+  add: Add
+  access_denied: Access denied
+  edit: Edit
+  save: Save
+  activate: Activate
+  dismiss: Dismiss
+  user: User
+  user_updated: User updated
+  user_deleted: User deleted
+  record_not_found: Record not found
+  config:
+    bad_entity_url: Wrong parameter in entity_url '%{variable_name}'
+  time:
+    formats:
+      date: "%m/%d/%Y"
+      datetime: "%m/%d/%Y %H:%M %p"
+  custom_fields:
+    definition:
+      missing_attribute: Missing attribute '%{attribute_name}'
+      unknown_type: Unknown type '%{type}'
+      invalid_type: Attribute '%{attribute_name}' should be of %{type} type
+      undefined_field: Field '%{field_name}' is not defined in order type
+      max_length: Attribute '%{attribute_name}' should be up to %{max_length} chars long
+      no_known_fields: There left no fields after ignoring unknown ones
+      invalid_value: Attribute '%{attribute_name}' with value '%{value}' should be of %{type} type
+      at_least: Attribute '%{attribute_name}' should have defined at least %{min_value} element(s) in %{in}
+      not_in_set: Attribute '%{attribute_name}' with value '%{value}' should be one of %{set}
+      invalid: Attribute '%{attribute_name}' has invalid value '%{value}'
+  devise:
+    passwords:
+      new:
+        title: "Forgot your password?"
+        description: "We'll send password reset instructions"
+        submit: "Reset password"
+      edit:
+        title: "Change password"
+        new_password: "New password"
+        confirm_new_password: "Confirm new password"
+        submit: "Save new password"
+    registrations:
+      new:
+        title: "Sign up"
+        submit: "Sign up"
+      edit:
+        title: "Edit User"
+        leave_description: "Leave these fields blank if you don't want to change your password."
+        new_password: "New password"
+        currently_waiting: "Currently waiting confirmation for"
+        current_password_description: "You must enter your current password to make changes."
+        submit: "Update"
+    sessions:
+      new:
+        title: "Sign in"
+        sign_up: "Sign up"
+        forgot_password: "Forgot password?"
+        remember_me: "Remember me"
+        submit: "Sign in"
+  helpers:
+    enter_state: Order status
+    enter_user: User name
+    enter_order_type: Order type
+    enter_archived: Archived
+    creation_date: Creation date
+    from: From
+    to: To
+    yes_no:
+      'yes': 'Yes'
+      'no': 'No'
+  users:
+    new:
+      title: Add a user
+    edit:
+      title: User profile
+    index:
+      title: User list
+    add:
+      added: User added
+    show:
+      title: User profile
+      generate_api_token: Generate API token
+      renew_api_token: Renew API token
+      renew_api_token_warning: New API token will replace the existing one. Are you sure?
+      clear_api_token: Clear API token
+      clear_api_token_warning: Existing API token is about to be cleared. Are you sure?
+      yes_clear: 'Yes, clear'
+      yes_renew: 'Yes, renew'
+    empty: Empty
+  orders:
+    new:
+      title: Adding order
+      label: Order type
+    states:
+      to_execute: To execute
+      in_progress: In progress
+      done: Done
+    search_by_not_found: Order not found for %{criteria}
+    index:
+      title: Order list
+      archived: Archived
+      ext_code: Ext. code
+      no_orders_found: No orders found
+    search_form:
+      filter_records: Filter orders
+      search_for_record: Search for an order
+    search_by:
+      search: Search
+      code: Order code
+      ext_code: Order external code
+    filter_by:
+      search: Search
+  user_role:
+    user: User
+    vip: Power user
+    admin: Admin
+  layouts:
+    navigation:
+      sign_in: Sign in
+      sign_up: Sign up
+      help: Help
+      sign_out: Sign out
+      edit_account: Profile
+      orders: Orders
+      users: Users
+      setup_order_types: Order types
+    form_errors:
+      errors: '%{count} prohibited this user from being saved:'
+  admin:
+    order_types:
+      index:
+        title: Available order types definitions
+        add: Upload order type definition from YAML file
+        order_type_removal: Delete order type
+        confirmation: "Are you sure you want delete order type «%{order_type}»? Existing orders won't be affected."
+        yes_remove: "Yes, delete"
+      show:
+        activate_dismiss: Activate that order if it's correct or dismiss it
+        activated: That order type is active
+        back: Back to list
+      create:
+        uploaded: Order type definition has been uploaded successfully
+        equal_exists: An equal order type already exists
+      dismiss:
+        dismissed: Order type definition has been dismissed
+      activate:
+        activated: Order type definition has been activated
+      destroy:
+        destroyed: Order type deleted
+  activerecord:
+    models:
+      user:
+        one: User
+        other: Users
+      order_type:
+        one: Order type
+        other: Order types
+    attributes:
+      order:
+        code: Code
+        order_type_code: Order type
+        ext_code: External code
+        user: User
+        bp_id: Business process id
+        bp_state: Business process state
+        state: Status
+        done_at: Completed at
+        archived: Archived
+        data: Custom fields
+        created_at: Created at
+        updated_at: Updated at
+      order_type:
+        code: Code
+        file: Uploaded YAML file content
+        fields: Custom fileds definitions
+        active: Active
+      user:
+        name: First name
+        email: Email
+        role: Role
+        middle_name: Middle name
+        last_name: Last name
+        full_name: Full name
+        company: Company
+        department: Department
+        api_token: API token
+        password: Password
+        password_confirmation: Password confirmation
+        current_password: Current password
+    errors:
+      models:
+        order_type:
+          attributes:
+            base:
+              cannot_delete_as_orders_exist: Cannot delete as attached orders exist
+            file:
+              invalid: file parsing error
+        order:
+          attributes:
+            data:
+              fields_definition_invalid: Order type this order was created with has invalid fields definition. This is Fatal Error. Call admin.
+        user:
+          blank: is not specified
+          attributes:
+            email:
+              invalid: is invalid
+              taken: is already taken
+            name:
+              blank: is not specified
+            last_name:
+              blank: is not specified
+            company:
+              blank: is not specified
+            department:
+              blank: is not specified
+            password:
+              blank: is not specified
+              too_short: is too short
+            password_confirmation:
+              confirmation: is not completed
+
+  js:
+    cancel: Cancel
+    error: Error
+    remove: Remove
+    'yes': Yes
+    not_selected: Not selected
+    select2:
+      not_set: Not set
+
+  doc:
+    common:
+      cases:
+        list: List
+        show: Show
+        create: Create
+        update: Update
+        delete: Delete
+      parameters:
+        default: Default
+        allowed_values: Allowed values
+        page_size: Items per page
+        page: Current page
+    orders:
+      resource: Orders
+      cases:
+        update_data: Update custom fields
+        update_base_fields: Update base fields
+        update_user_email: Update user email
+      explanations:
+        update: This method updates passed fields only, others remain unchanged.
+      parameters:
+        code: Order code
+        data: Custom fields by order type
+        user_email: Responsible user's email
+        order_type_code: Order type code
+        ext_code: External order code
+        bp_id: Business process ID
+        bp_state: Business process state
+        state: Order state
+        done_at: Order done datetime
+        archived: Archived
+    users:
+      resource: Users
+      parameters:
+        email: E-mail
+        first_name: First name
+        middle_name: Middle name
+        last_name: Last name
+        user_role: User role
+        company: Company name
+        department: Department name
+        password: Password

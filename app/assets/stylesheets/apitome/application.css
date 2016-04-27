@@ -1,0 +1,137 @@
+/*
+ *= require apitome/bootstrap.min
+ */
+
+.docs-section {
+    position: relative;
+    padding-top: 50px;
+}
+
+h1,
+h2 {
+    margin-top: 20px;
+}
+pre {
+    background: #fcfbf9;
+    max-height: 800px;
+    overflow: scroll;
+}
+pre code {
+    padding: 0;
+    background: transparent;
+}
+.table code {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.docs-nav {
+    background-color: #f4f3ee;
+    border-color: #ddd;
+    box-shadow: 0 1px 0 rgba(255,255,255,.1);
+    margin-bottom: 25px;
+}
+.docs-nav .navbar-brand {
+    margin: 0;
+    margin-left: 0 !important;
+}
+.docs-nav .navbar-brand a {
+    color: #482b25;
+    text-decoration: none;
+}
+
+.sidebar.affix {
+    position: static;
+}
+.sidenav {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #f4f3ee;
+    border-radius: 5px;
+}
+.sidebar .nav > li > a {
+    display: block;
+    color: #716b7a;
+    padding: 5px 20px;
+}
+.sidebar .nav > li > a:hover,
+.sidebar .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #e9e4df;
+    border-right: 1px solid #dbd8e0;
+}
+.sidebar .nav > .active > a,
+.sidebar .nav > .active:hover > a,
+.sidebar .nav > .active:focus > a {
+    font-weight: bold;
+    color: #716b7a;
+    background-color: transparent;
+    border-right: 1px solid #18c2e8;
+}
+.sidebar .nav .nav {
+    margin-bottom: 8px;
+}
+.sidebar .nav .nav > li > a {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 30px;
+    font-size: 90%;
+}
+
+body.single-page .docs-section > section {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+body.single-page .docs-section > section h1 {
+    padding-top: 25px;
+    margin-bottom: -45px;
+}
+body.single-page .docs-section > section article {
+    padding-top: 60px;
+}
+
+body.single-page .docs-section > section.readme {
+    padding-top: 0;
+}
+body.single-page .docs-section > section.readme h1 {
+    padding-top: 0;
+    margin-bottom: 0;
+}
+body.single-page .docs-section > section.readme article {
+    margin-top: -52px;
+}
+
+@media screen and (min-width: 992px) {
+    .sidebar.affix {
+        position: fixed;
+        top: 80px;
+    }
+    .sidebar.affix,
+    .sidebar.affix-bottom {
+        width: 283px;
+    }
+    .sidebar.affix-bottom {
+        position: absolute;
+    }
+    .sidebar.affix .sidenav,
+    .sidebar.affix-bottom .sidenav {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    body.single-page .sidebar .nav .nav {
+        display: none;
+    }
+    body.single-page .sidebar .nav > .active > ul {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .sidebar.affix,
+    .sidebar.affix-bottom {
+        width: 350px;
+    }
+}

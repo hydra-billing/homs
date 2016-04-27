@@ -1,0 +1,32 @@
+<% content_for(:title, t('.title')) %>
+<div class="authform">
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
+    <h3><%= t('.title') %></h3>
+    <%= devise_error_messages! %>
+    <div class="form-group">
+      <%= f.text_field :name, :autofocus => true, class: 'form-control floating-label', placeholder: User.human_attribute_name(:name) %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :middle_name, class: 'form-control floating-label', placeholder: User.human_attribute_name(:middle_name) %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :last_name, class: 'form-control floating-label', placeholder: User.human_attribute_name(:last_name) %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :company, class: 'form-control floating-label', placeholder: User.human_attribute_name(:company) %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :department, class: 'form-control floating-label', placeholder: User.human_attribute_name(:department) %>
+    </div>
+    <div class="form-group">
+      <%= f.email_field :email, class: 'form-control floating-label', placeholder: User.human_attribute_name(:email) %>
+    </div>
+    <div class="form-group">
+      <%= f.password_field :password, class: 'form-control floating-label', placeholder: User.human_attribute_name(:password) %>
+    </div>
+    <div class="form-group">
+      <%= f.password_field :password_confirmation, class: 'form-control floating-label', placeholder: User.human_attribute_name(:password_confirmation) %>
+    </div>
+     <%= f.submit t('.submit'), :class => 'btn btn-primary pull-right' %>
+  <% end %>
+</div>

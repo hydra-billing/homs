@@ -1,0 +1,19 @@
+en:
+  hbw:
+    js:
+      submit: Submit
+      loading_order_tasks: Loading tasks for order
+      error: Error
+      more: More
+      no_tasks: No tasks
+      tasks: Tasks
+      loading: Loading
+      hide_widget: Hide
+
+      errors:
+        cannot_obtain_available_actions: Cannot obtain available actions
+        cannot_start_process: Cannot start process
+
+      components:
+        select:
+          not_selected: Not selected

@@ -1,0 +1,24 @@
+get:
+  group_by_var: null
+  tasks: {}
+  identity/users:
+    c9830a7b0c09b919aaffe098184580d3:
+      data:
+        - id:         'demo'
+          firstName:  'Demo'
+          lastName:   'Demo'
+          url:        'http://bpm.example.com'
+          email:      'c.johnson@example.com'
+          pictureUrl: null
+      total: 1
+      start: 0
+      sort: 'id'
+      order: 'asc'
+      size: 1
+put: {}
+patch: {}
+post:
+  query/tasks:
+    7ceb15217934747a92a39f1900fe0330:
+      data: []
+delete: {}

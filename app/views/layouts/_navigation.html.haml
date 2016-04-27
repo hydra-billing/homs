@@ -1,0 +1,44 @@
+%nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      %button.navbar-toggle(data-target=".navbar-collapse" data-toggle="collapse" type="button")
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+    .navbar-collapse
+      %ul.nav.navbar-nav
+        - if user_signed_in?
+          %li
+            = link_to orders_path do
+              %span.glyphicon.glyphicon-list
+              = t('.orders')
+          - if current_user.admin?
+            %li
+              = link_to admin_order_types_path do
+                %span.glyphicon.glyphicon-cog
+                = t('.setup_order_types')
+            %li
+              = link_to users_path do
+                %span.fa.fa-users
+                = t('.users')
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li.dropdown
+            = link_to('#', class: 'dropdown-toggle', role: :button, 'data-toggle' => 'dropdown') do
+              %span.fa.fa-user
+              = current_user.name
+              %span.caret
+            %ul.dropdown-menu{role: :menu}
+              - link_to_manual = Rails.application.config.app.fetch(:link_to_manual, '')
+              - if link_to_manual.present?
+                %li
+                  %a(href="#{link_to_manual}")
+                    %span.glyphicon.glyphicon-question-sign
+                    = t('.help')
+              %li
+                = link_to destroy_user_session_path, :method=>'delete' do
+                  %span.glyphicon.glyphicon-log-out
+                  = t('.sign_out')
+
+          %li#hbw-tasks-list-button.hbw-styles

@@ -1,0 +1,17 @@
+- content_for(:title, t('.title'))
+%h2= t('.title')
+
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th= User.human_attribute_name(:full_name)
+        %th= User.human_attribute_name(:email)
+        %th= User.human_attribute_name(:role)
+        %th= User.human_attribute_name(:department)
+        %th= User.human_attribute_name(:company)
+        %th= User.human_attribute_name(:api_token)
+    %tbody
+      - @users.each do |user|
+        = render user
+= link_to t('add'), new_user_path, class: 'btn btn-primary'

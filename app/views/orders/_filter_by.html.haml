@@ -1,0 +1,36 @@
+= form_tag(list_orders_path, method: :get, class: 'form-inline orders-filter') do
+  %input(name="filter" value="true" type="hidden")
+  .col-xs-12.col-sm-7.col-md-6.col-lg-7
+    .row
+      .col-xs-6.col-sm-6.col-md-6.col-lg-4
+        %label(for="order_type_id")= t('helpers.enter_order_type')
+        = order_type_picker(:order_type_id, value: list_filter.filter_values[:order_type_id])
+      .col-xs-6.col-sm-6.col-md-6.col-lg-8
+        %label(for="user_id")= t('helpers.enter_user')
+        = user_picker(:user_id, value: list_filter.users)
+    .row
+      .col-xs-6.col-sm-6.col-md-6.col-lg-4
+        %label(for="state")= t('helpers.enter_state')
+        = order_state_picker(:state, value: list_filter.filter_values[:state])
+    .row
+      .col-xs-6.col-sm-6.col-md-6.col-lg-4
+        %label(for="archived")= t('helpers.enter_archived')
+        = order_archived_picker(:archived, value: list_filter.filter_values[:archived])
+  .col-xs-12.col-sm-7.col-md-5.col-lg-4.padding-right-0px
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12.no-margin-bottom
+        %label= t('helpers.creation_date')
+      .col-xs-6.col-sm-12.col-md-12.col-lg-12
+        .row
+          .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
+            %label(for="created_at_from")= t('helpers.from')
+          .col-xs-10.col-sm-10.col-md-10.col-lg-10
+            = datetime_picker(:created_at_from, value: list_filter.filter_values[:created_at_from])
+      .col-xs-6.col-sm-12.col-md-12.col-lg-12
+        .row
+          .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
+            %label(for="created_at_to")= t('helpers.to')
+          .col-xs-10.col-sm-10.col-md-10.col-lg-10
+            = datetime_picker(:created_at_to, value: list_filter.filter_values[:created_at_to])
+  .col-xs-3.col-sm-2.col-md-1.col-lg-1.label-padding-top.label-padding-left-0px
+    = submit_tag t('.search'), class: 'btn btn-primary'

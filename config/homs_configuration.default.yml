@@ -1,0 +1,13 @@
+locale:
+  code: en
+  datetime_format: '%m/%d/%Y %H:%M %p'
+
+sessions:
+  token_authentication:
+    enabled: false
+    token: null
+    sign_in_as: user@example.com
+
+link_to_manual: "http://hydra-oms.com/docs"
+
+greeting:

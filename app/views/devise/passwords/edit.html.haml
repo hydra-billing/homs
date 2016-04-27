@@ -1,0 +1,13 @@
+- content_for(:title, t('.title'))
+.authform
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+    %h3= t('.title')
+    = devise_error_messages!
+    = f.hidden_field :reset_password_token
+    .form-group
+      = f.label :password, t('.new_password')
+        = f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control'
+      = f.label :password_confirmation, t('.confirm_new_password')
+        = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
+    %div
+     = f.submit t('.submit'), :class => 'btn btn-primary pull-right'

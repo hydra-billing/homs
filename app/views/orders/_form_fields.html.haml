@@ -1,0 +1,16 @@
+- if @order.data.present?
+  - @order.data.each_pair do |name, value|
+    - field = @order.field_def_hash(name)
+    - case field[:type]
+      - when 'boolean'
+        = f.input(name, as: :boolean, input_html: { checked: !!value }, label: field.fetch(:label))
+      - when 'datetime'
+        = f.input(name, as: :datetime_picker, input_html: {value: value}, label: field.fetch(:label))
+      - when 'string'
+        = f.input(name, as: :string, input_html: { value: value }, label: field.fetch(:label))
+      - when 'number'
+        = f.input(name, as: :string, input_html: { value: value }, label: field.fetch(:label))
+      - else
+        = t('error.types.undefined')
+  %input(name="order_type_id" value="#{@order.order_type_id}" type="hidden")
+  = f.submit t('add'), class: 'btn btn-primary pull-right'

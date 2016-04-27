@@ -1,0 +1,8 @@
+%tr
+  %td= link_to order.code, order_path(order.code)
+  %td= order.order_type_name
+  %td= order_state_indicator(order)
+  %td= loc_datetime(order.created_at)
+  %td= order.user_full_name
+  %td= order.ext_code
+  %td= boolean_indicator(order.archived)

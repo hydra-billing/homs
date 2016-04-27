@@ -1,0 +1,4 @@
+development:
+  base_url: http://localhost:8080/activiti-rest/service/
+  login: user
+  password: changeme

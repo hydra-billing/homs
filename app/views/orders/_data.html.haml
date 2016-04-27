@@ -1,0 +1,10 @@
+.row
+  .col-xs-6
+    - data.each_pair do |name, value|
+      - field_def_hash = @order.field_def_hash(name)
+      .row.attribute-row
+        .col-xs-12{ title: field_def_hash.fetch(:description, '') }
+          = succeed ':' do
+            = field_def_hash.fetch(:label)
+          .value
+            = prettify_value(value, field_def_hash)

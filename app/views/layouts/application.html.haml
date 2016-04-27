@@ -1,0 +1,25 @@
+!!!
+%html.hbw-styles
+  %head
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title= content_for?(:title) ? yield(:title) : 'Homs'
+    %meta{ name: 'description', content: "#{content_for?(:description) ? yield(:description) : 'Homs'}"}
+    = stylesheet_link_tag 'hbw', media: 'all'
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'hbw'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body.hbw-select2
+    :coffee
+      I18n.locale = '#{I18n.locale}'
+    %header
+      = render 'layouts/navigation'
+    %main.container(role="main")
+      .container= yield
+
+    :coffee
+      Application.messenger.show(#{flash_messages.to_json});
+    - if hbw_available?
+      #hbw-tasks
+      :coffee
+        window.HBWidget = new (modulejs.require('HBW'))(#{hbw_options.to_json})

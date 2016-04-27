@@ -1,0 +1,6 @@
+sources: {}
+#  billing:
+#    type: sql/oracle
+#    tns_name: dbname
+#    username: user
+#    password: password

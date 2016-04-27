@@ -1,0 +1,19 @@
+ru:
+  hbw:
+    js:
+      submit: Отправить
+      loading_order_tasks: Обновление списка задач по заказу
+      error: Ошибка
+      more: Подробнее
+      no_tasks: Нет задач
+      tasks: Задачи
+      loading: Загрузка
+      hide_widget: Закрыть
+
+      errors:
+        cannot_obtain_available_actions: Не удалось получить список доступных действий
+        cannot_start_process: Не удалось начать процесс
+
+      components:
+        select:
+          not_selected: Не выбран

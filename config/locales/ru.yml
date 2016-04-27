@@ -1,0 +1,391 @@
+ru:
+  add: Добавить
+  access_denied: Доступ запрещен
+  edit: Править
+  save: Сохранить
+  remove: Удалить
+  activate: Активировать
+  dismiss: Отклонить
+  user: Пользователь
+  user_updated: Профиль изменен
+  user_deleted: Профиль удален
+  record_not_found: Запись не найдена
+  config:
+      bad_entity_url: Недопустимый параметр в entity_url '%{variable_name}'
+  time:
+    formats:
+      date: "%d.%m.%Y"
+      datetime: "%d.%m.%Y %H:%M"
+  date:
+    abbr_day_names:
+      - Вс
+      - Пн
+      - Вт
+      - Ср
+      - Чт
+      - Пт
+      - Сб
+    abbr_month_names:
+      -
+      - янв.
+      - февр.
+      - марта
+      - апр.
+      - мая
+      - июня
+      - июля
+      - авг.
+      - сент.
+      - окт.
+      - нояб.
+      - дек.
+    standalone_abbr_month_names:
+      -
+      - янв.
+      - февр.
+      - март
+      - апр.
+      - май
+      - июнь
+      - июль
+      - авг.
+      - сент.
+      - окт.
+      - нояб.
+      - дек.
+    day_names:
+      - воскресенье
+      - понедельник
+      - вторник
+      - среда
+      - четверг
+      - пятница
+      - суббота
+    formats:
+      default: ! '%d.%m.%Y'
+      long: ! '%-d %B %Y'
+      short: ! '%-d %b'
+    month_names:
+      -
+      - января
+      - февраля
+      - марта
+      - апреля
+      - мая
+      - июня
+      - июля
+      - августа
+      - сентября
+      - октября
+      - ноября
+      - декабря
+    standalone_month_names:
+      -
+      - Январь
+      - Февраль
+      - Март
+      - Апрель
+      - Май
+      - Июнь
+      - Июль
+      - Август
+      - Сентябрь
+      - Октябрь
+      - Ноябрь
+      - Декабрь
+    order:
+      - :day
+      - :month
+      - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        few: около %{count} часов
+        many: около %{count} часов
+        one: около %{count} часа
+        other: около %{count} часа
+      about_x_months:
+        few: около %{count} месяцев
+        many: около %{count} месяцев
+        one: около %{count} месяца
+        other: около %{count} месяца
+      about_x_years:
+        few: около %{count} лет
+        many: около %{count} лет
+        one: около %{count} года
+        other: около %{count} лет
+      almost_x_years:
+        one: почти 1 год
+        few: почти %{count} года
+        many: почти %{count} лет
+        other: почти %{count} лет
+      half_a_minute: меньше минуты
+      less_than_x_minutes:
+        few: меньше %{count} минут
+        many: меньше %{count} минут
+        one: меньше %{count} минуты
+        other: меньше %{count} минуты
+      less_than_x_seconds:
+        few: меньше %{count} секунд
+        many: меньше %{count} секунд
+        one: меньше %{count} секунды
+        other: меньше %{count} секунды
+      over_x_years:
+        few: больше %{count} лет
+        many: больше %{count} лет
+        one: больше %{count} года
+        other: больше %{count} лет
+      x_days:
+        few: ! '%{count} дня'
+        many: ! '%{count} дней'
+        one: ! '%{count} день'
+        other: ! '%{count} дня'
+      x_minutes:
+        few: ! '%{count} минуты'
+        many: ! '%{count} минут'
+        one: ! '%{count} минуту'
+        other: ! '%{count} минуты'
+      x_months:
+        few: ! '%{count} месяца'
+        many: ! '%{count} месяцев'
+        one: ! '%{count} месяц'
+        other: ! '%{count} месяца'
+      x_seconds:
+        few: ! '%{count} секунды'
+        many: ! '%{count} секунд'
+        one: ! '%{count} секундy'
+        other: ! '%{count} секунды'
+  custom_fields:
+    definition:
+      missing_attribute: Отсутствует атрибут '%{attribute_name}'
+      unknown_type: Неизвестный тип '%{type}'
+      invalid_type: Атрибут '%{attribute_name}' должен быть типа %{type}
+      undefined_field: Поле '%{field_name}' не описано в типе заказа
+      max_length: Длина атрибута '%{attribute_name}' не должна превышать %{max_length} символов
+      no_known_fields: Нет известных полей
+      invalid_value: Атрибут '%{attribute_name}' со значением '%{value}' должен быть типа %{type}
+      at_least: Атрибут '%{attribute_name}' должен иметь минимум %{min_value} значений в %{in}
+      not_in_set: Атрибут '%{attribute_name}' со значением '%{value}' должен иметь одно значение из %{set}
+      invalid: Атрибут '%{attribute_name}' имеет ошибочное значение '%{value}'
+  devise:
+    passwords:
+      new:
+        title: "Забыли ваш пароль?"
+        description: "Мы вышлем вам письмо с инструкциями по сбросу пароля"
+        submit: "Сбросить пароль"
+      edit:
+        title: "Изменить пароль"
+        new_password: "Новый пароль"
+        confirm_new_password: "Подтвердите новый пароль"
+        submit: "Сохранить новый пароль"
+    registrations:
+      new:
+        title: "Зарегистрироваться"
+        submit: "Сохранить"
+      edit:
+        title: "Профиль"
+        leave_description: "Оставьте эти поля незаполненными, если вам не нужно менять пароль."
+        new_password: "Новый пароль"
+        currently_waiting: "Ожидается подтверждение"
+        current_password_description: "Чтобы сохранить изменения, вы должны ввести текущий пароль."
+        submit: "Сохранить"
+    sessions:
+      new:
+        title: "Вход"
+        sign_up: "Зарегистрироваться"
+        forgot_password: "Забыли пароль?"
+        remember_me: "Запомнить меня"
+        submit: "Войти"
+  helpers:
+    enter_state: Состояние
+    enter_user: Пользователь
+    enter_order_type: Тип
+    enter_archived: Признак архивности
+    creation_date: Дата создания
+    from: с
+    to: по
+    archived: Архивирован
+    not_archived: Не архивирован
+    doesnt_matter: Не важно
+    yes_no:
+      'yes': Да
+      'no': Нет
+    submit:
+      create: Добавить
+      update: Сохранить
+      delete: Удалить
+      submit: Сохранить
+
+  users:
+    enew:
+      title: Добавить пользователя
+    edit:
+      title: Профиль пользователя
+    index:
+      title: Список пользователей
+    add:
+      added: Профиль добавлен
+    new:
+      title: Добавление пользователя
+    show:
+      title: Профиль пользователя
+      generate_api_token: Создать API-токен
+      renew_api_token: Пересоздать API-токен
+      renew_api_token_warning: Новый API-токен заместит текущий. Подтверждаете?
+      clear_api_token: Удалить API-токен
+      clear_api_token_warning: Текущий API-токен будет удален. Подтверждаете?
+    empty: Не указан
+  orders:
+    new:
+      title: Добавление заказа
+      label: Тип заказа
+    states:
+      to_execute: Новый
+      in_progress: В обработке
+      done: Обработан
+    search_by_not_found: Заказ не найден по запросу %{criteria}
+    index:
+      title: Список заказов
+      archived: Арх.
+      ext_code: Вн. код
+      no_orders_found: Заказов не найдено
+    search_form:
+      filter_records: Фильтр
+      search_for_record: Найти заказ
+    search_by:
+      search: Найти
+      code: Код
+      ext_code: Внешний код
+    filter_by:
+      search: Найти
+    show:
+      show_more: Показать остальное
+  user_role:
+    user: Пользователь
+    vip: Превилегированный пользователь
+    admin: Администратор
+  layouts:
+    navigation:
+      sign_in: Войти
+      sign_up: Зарегистрироваться
+      help: Справка
+      sign_out: Выйти
+      edit_account: Профиль
+      orders: Заказы
+      users: Пользователи
+      setup_order_types: Типы заказов
+    form_errors:
+      errors:
+        one: 'Из-за %{count} ошибки профиль не сохранен:'
+        few: 'Из-за %{count} ошибок профиль не сохранен:'
+        many: 'Из-за %{count} ошибок профиль не сохранен:'
+        other: 'Из-за %{count} ошибок профиль не сохранен:'
+
+  admin:
+    order_types:
+      index:
+        title: Типы заказов
+        add: Загрузить определение типа заказа из YAML-файла
+        order_type_removal: Удаление типа заказа
+        confirmation: Вы действительно хотите удалить тип заказа «%{order_type}»? Процедура не затронет существующие заказы.
+        yes_remove: Да, удалить
+      show:
+        activate_dismiss: Активируйте тип заказа, если его определение корректно, или отклоните его
+        activated: Тип заказа активирован
+        back: Вернуться к списку
+      create:
+        uploaded: Определение типа заказа успешно загружено
+        equal_exists: Тип заказа с таким определением уже имеется
+      dismiss:
+        dismissed: Тип заказа отклонен
+      activate:
+        activated: Тип заказа активирован
+      destroy:
+        destroyed: Тип заказа удален
+  activerecord:
+    models:
+      user:
+        one: Пользователь
+        other: Пользователей
+      order_type:
+        one: Тип заказов
+        other: Типы заказов
+    attributes:
+      order:
+        code: Код
+        name: Наименование
+        order_type_code: Тип заказа
+        order_type_name: Тип заказа
+        ext_code: Внешний код
+        user: Пользователь
+        bp_id: Ид. бизнес-процесса
+        bp_state: Состояние бизнес-процесса
+        state: Состояние
+        done_at: Дата выполнения
+        archived: Архивирован
+        data: Настраиваемые поля
+        created_at: Дата создания
+        updated_at: Дата изменения
+      order_type:
+        code: Код
+        name: Наименование
+        file: Содержимое загруженного YAML файла
+        fields: Определение настраиваемых полей заказа
+        active: Действует
+      user:
+        name: Имя
+        email: E-mail
+        role: Роль
+        middle_name: Отчество
+        last_name: Фамилия
+        full_name: ФИО
+        company: Компания
+        department: Подразделение
+        api_token: API-токен
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        current_password: Текущий пароль
+    errors:
+      models:
+        order_type:
+          attributes:
+            base:
+              cannot_delete_as_orders_exist: Удалить нельзя, т.к. имеются заказы
+            file:
+              invalid: Ошибка синтаксиса файла
+        order:
+          attributes:
+            data:
+              fields_definition_invalid: 'Критическая ошибка: Тип заказа данного заказа имеет ошибки в определении настраиваемых полей! Обратитесь к администратору.'
+            order_type_id:
+              blank: не задан
+        user:
+          blank: не задан
+          attributes:
+            email:
+              invalid: неправильно задан
+              taken: уже используется
+            name:
+              blank: не задано
+            last_name:
+              blank: не задана
+            company:
+              blank: не задана
+            department:
+              blank: не задано
+            password:
+              blank: не задан
+              too_short: слишком короткий
+            password_confirmation:
+              confirmation: не выполнено
+      types:
+        undefined: Неизвестный тип поля
+
+  js:
+    cancel: Отмена
+    error: Ошибка
+    remove: Удалить
+    'yes': Да
+    not_selected: Не выбран
+    select2:
+      not_set: Не указан

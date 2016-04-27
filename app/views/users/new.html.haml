@@ -1,0 +1,6 @@
+- content_for(:title, t('.title'))
+.authform
+  = simple_form_for @user || :user, url: add_users_path, html: { role: 'form'} do |f|
+    %h3= t('.title')
+    = render partial: 'form_fields', locals: { f: f }
+    = f.submit t('add'), class: 'btn btn-primary pull-right'

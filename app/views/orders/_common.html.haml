@@ -1,0 +1,42 @@
+.row
+  .col-xs-6
+    .row.attribute-row
+      .col-xs-12
+        = succeed ':' do
+          = Order.human_attribute_name(:ext_code)
+        .value= prettify_value(@order.ext_code)
+    .row.attribute-row
+      .col-xs-12
+        = succeed ':' do
+          = Order.human_attribute_name(:user)
+        .value= prettify_value(@order.user_full_name)
+    .row.attribute-row
+      .col-xs-12
+        = succeed ':' do
+          = Order.human_attribute_name(:state)
+        .value= prettify_value(order_state_indicator(@order))
+    .row.attribute-row
+      .col-xs-12
+        = succeed ':' do
+          = Order.human_attribute_name(:archived)
+        .value= prettify_value(boolean_indicator(@order.archived))
+    .row.attribute-row
+      .col-xs-12
+        = succeed ':' do
+          = Order.human_attribute_name(:created_at)
+        .value= prettify_date(@order.created_at)
+    .row.attribute-row
+      .col-xs-12
+        = succeed ':' do
+          = Order.human_attribute_name(:bp_state)
+        .value= prettify_value(@order.bp_state)
+    .row.attribute-row
+      .col-xs-12
+        = succeed ':' do
+          = Order.human_attribute_name(:bp_id)
+        .value= prettify_value(@order.bp_id)
+    .row.attribute-row
+      .col-xs-12
+        = succeed ':' do
+          = Order.human_attribute_name(:done_at)
+        .value= prettify_date(@order.done_at)

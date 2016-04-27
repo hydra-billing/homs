@@ -1,0 +1,11 @@
+common: &common
+  label: ''
+  type: string
+
+order_type:
+  code: support_request
+  name: Support Request
+  fields:
+    creationDate:
+      type: undefined
+      label: Creation date

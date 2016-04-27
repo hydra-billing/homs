@@ -1,0 +1,24 @@
+- content_for(:title, t('.title'))
+%h2= t('.title')
+
+.row
+  .col-xs-12.col-sm-12.col-md-6.col-lg-6
+    %table.table.table-hover.table-striped
+      %thead
+        %th= OrderType.human_attribute_name(:name)
+        %th(colspan="2")= OrderType.human_attribute_name(:code)
+      %tbody
+        - @order_types.each do |order_type|
+          %tr
+            %td.order-name
+              %a{ href: admin_order_type_path(order_type) }= order_type.name
+            %td= order_type.code
+            %td
+              = link_to(admin_order_type_path(order_type),
+                        method: :delete,
+                        class: 'text-danger',
+                        data: { confirm: t('.confirmation', order_type: order_type.name), confirm_title: t('.order_type_removal'), confirm_proceed: t('.yes_remove') }) do
+                %i.fa.fa-trash-o
+  .col-xs-12.col-sm-12.col-md-6.col-lg-6
+    %h5= t('.add')
+    = render partial: 'upload'

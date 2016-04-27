@@ -1,0 +1,8 @@
+%tr
+  %td
+    %a{ href: user_path(user) }= user.full_name
+  %td= user.email
+  %td= t user.role_i18n_key
+  %td= user.department
+  %td= user.company
+  %td= boolean_indicator(user.api_token?)

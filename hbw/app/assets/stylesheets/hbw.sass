@@ -1,0 +1,353 @@
+// Here all styles used by BPM widget
+
+.hbw-select2
+  @import 'select2'
+
+.hbw-styles
+  @import 'hbw/variables'
+
+  @import 'bootstrap'
+  @import 'bootswatch/flatly/bootswatch'
+  @import 'select2_bootstrap3'
+  @import 'bootstrap-datetimepicker'
+
+  .hbw-active-task
+    font-weight: bold
+
+  .hbw-active-task:hover
+    text-decoration: none
+    cursor: default
+
+  .hbw-inactive-task
+    font-weight: normal
+
+  .hbw-inactive-task:hover
+    background-color: $gray-light
+
+  .has-error
+    @include validation-state-focus($btn-danger-color)
+
+  .tab-content
+    border-bottom: 1px solid #ddd
+    border-left: 1px solid #ddd
+    border-radius: 0 0 4px 4px
+    border-right: 1px solid #ddd
+    padding: 10px
+
+  .field_with_errors
+    @extend .has-error
+    .form-control
+      color: $state-danger-text
+
+  // make all images responsive by default
+  img
+    @extend .img-responsive
+    margin: 0 auto
+
+  // override for the 'Home' navigation link
+  .navbar-brand
+    font-size: inherit
+
+  // THESE ARE EXAMPLES YOU CAN MODIFY
+  // create your own classes
+  // to make views framework-neutral
+  .column
+    @extend .col-md-6
+    @extend .text-center
+
+  .form
+    @extend .col-md-6
+
+  .form-centered
+    @extend .col-md-6
+    @extend .text-center
+
+  .submit
+    @extend .btn
+    @extend .btn-primary
+    @extend .btn-lg
+
+  .button-xs
+    @extend .btn
+    @extend .btn-primary
+    @extend .btn-xs
+
+  .container h2
+    margin-top: 1.2em
+    margin-bottom: .7em
+
+  h4.empty-list
+    padding-top: 1em
+
+  .control-label
+    font-weight: normal
+
+  .form-horizontal
+    .checkbox
+      padding-top: 3px
+
+    label.control-label
+      padding-right: 0
+
+  a > .fa
+    margin-right: .25em
+
+  header > nav > .container > .navbar-collapse
+    margin-left: -15px
+
+  .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice
+    background-color: white
+
+  .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field
+    min-width: 4em
+
+  .select2-container--bootstrap .select2-selection--single .select2-selection__placeholder
+    color: darken(#acb6c0, 20%)
+
+  .show-hidden-order-data
+    margin-top: .5em
+
+  .edit-order-button
+    margin-top: 1em
+
+  .btn-default:hover:not(.disabled)
+    background-color: $btn-default-border
+    border-color: $btn-default-border
+    color: $body-bg
+
+  .btn-primary:hover:not(.disabled)
+    background-color: $btn-primary-border
+    border-color: $btn-primary-border
+    color: $body-bg
+
+  .btn-success:hover:not(.disabled)
+    background-color: $btn-success-border
+    border-color: $btn-success-border
+    color: $body-bg
+
+  .btn-info:hover:not(.disabled)
+    background-color: $btn-info-border
+    border-color: $btn-info-border
+    color: $body-bg
+
+  .btn-warning:hover:not(.disabled)
+    background-color: $btn-warning-border
+    border-color: $btn-warning-border
+    color: $body-bg
+
+  .btn-danger:hover:not(.disabled)
+    background-color: $btn-danger-border
+    border-color: $btn-danger-border
+    color: $body-bg
+
+  .clear-both
+    clear: both
+
+  .hbw-form
+    margin-bottom: 15px
+
+    .hbw-checkbox-label
+      font-weight: normal
+      margin-top: 10px
+
+  .hbw-menu-button
+    position: relative
+
+    .counter
+      position: absolute
+      font-family: $font-family-base
+      top: 28px
+      right: 5px
+      font-size: .8em
+      text-align: center
+      height: 18px
+      width: 18px
+      border-radius: 9px
+      background-color: white
+      color: $text-color
+
+    &:hover .counter
+      background-color: $brand-success
+
+  .hbw-spinner
+    height: 45px
+    margin-bottom: 15px
+
+  .btn.disabled
+    background-size: 40px 40px
+    @include gradient-striped
+    @include animation(progress-bar-stripes 2s linear infinite)
+    color: white
+
+    &.btn-primary
+      @include progress-bar-variant($btn-primary-border)
+
+    &.btn-success
+      @include progress-bar-variant($btn-success-border)
+
+    &.btn-info
+      @include progress-bar-variant($btn-info-border)
+
+    &.btn-warning
+      @include progress-bar-variant($btn-warning-border)
+
+    &.btn-danger
+      @include progress-bar-variant($btn-danger-border)
+
+    &.btn-default
+      @include progress-bar-variant($btn-default-border)
+
+#hbw-tasks
+  .hbw-disabled
+    visibility: hidden
+
+  .hbw-enabled
+    visibility: visible
+
+  $hbw-tasks-z-index: 10
+
+  .hbw-launcher
+    bottom: 10px
+    height: 48px
+    position: fixed
+    right: 10px
+    width: 48px
+    visibility: visible
+    z-index: $hbw-tasks-z-index
+    display: block
+
+  .hbw-launcher-button
+    // background-color: #0071b2
+    background-image: url("https://js.intercomcdn.com/images/icon-launcher.png")
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: 22px 22px
+    background-color: #2C3E50
+    border-color: #2C3E50
+    // border-color: #00498a
+    border-radius: 50%
+    border-style: solid
+    // border-width: 1px
+    border-width: 0
+    bottom: 0
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
+    cursor: pointer
+    height: 48px
+    position: absolute
+    right: 0
+    width: 48px
+
+  .hbw-widget-inactive
+    visibility: hidden
+
+  .hbw-widget-enabled
+    visibility: visible
+
+  .hbw-sheet
+    top: 72px
+    height: 100%
+    position: fixed
+    right: 0
+    transform: scale(1)
+    transform-origin: right bottom 0
+    transition: transform 250ms ease-in-out 0s, opacity 100ms linear 150ms
+    z-index: $hbw-tasks-z-index
+
+  .hbw-sheet-header-container
+    background: white none repeat scroll 0 0
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08)
+    height: 54px
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    z-index: $hbw-tasks-z-index + 2
+    cursor: pointer
+
+  .hbw-sheet-header-title-container
+    -moz-text-align-last: center
+    height: 100%
+    left: 0
+    pointer-events: none
+    position: absolute
+    text-align: center
+    top: 0
+    width: 100%
+    z-index: $hbw-tasks-z-index
+
+  .hbw-sheet-header-title
+    color: #465c66
+    display: inline-block
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif
+    font-style: normal
+    font-size: 17px
+    font-weight: 500
+    letter-spacing: 0.2px
+    line-height: 54px
+    max-width: 200px
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  .hbw-sheet-header-button
+    height: 54px
+    margin: 0 20px
+    position: relative
+    z-index: $hbw-tasks-z-index + 1
+
+  .hbw-sheet-header-close-button
+    float: right
+    margin-left: 15px
+
+  .hbw-sheet-header-button-icon
+    background-position: center center
+    height: 100%
+
+  .hbw-sheet-header-close-button .hbw-sheet-header-close-button-icon
+    background-image: url("https://js.intercomcdn.com/images/icon-close.png")
+    background-repeat: no-repeat
+    background-size: 13px 13px
+    width: 16px
+
+  .hbw-sheet-body
+    background: rgb(251, 250, 251)
+    border-left: 1px solid #dadee2
+    bottom: 0
+    position: absolute
+    right: 0
+    top: 0
+    width: 100%
+    z-index: $hbw-tasks-z-index
+    padding: 65px 10px 10px 10px
+
+  .hbw-task-group-item
+    margin-bottom: 0
+    font-size: 12px
+
+  .hbw-task-item
+    padding-left: 15px
+    font-size: 12px
+    cursor: pointer
+
+  .select2-results__option:empty
+    display: none
+
+#hbw-bp-control-buttons-container
+  .process-name
+    font-size: 1.5em
+    margin-bottom: .7em
+
+  .hbw-bp-control-buttons
+    margin-bottom: 1em
+
+    .hbw-button + .hbw-button
+      padding-left: 2px
+
+  .hbw-error
+    .show-more
+      font-size: .8em
+      color: white
+
+  .collapsable
+    a
+      cursor: pointer

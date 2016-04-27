@@ -1,0 +1,8 @@
+- content_for(:title, t('.title'))
+%h2= t('.title')
+= simple_form_for(@user,
+                  method: 'put',
+                  wrapper: :horizontal_form,
+                  html: { class: 'form-horizontal order-edit-form col-sm-6' }) do |f|
+  = render partial: 'form_fields', locals: { f: f }
+  = f.submit t('save'), class: 'btn btn-primary pull-right'

@@ -1,0 +1,21 @@
+.row
+  %h2.col-sm-8.col-sm-offset-2= @order.code
+
+.row
+  = simple_form_for(@order,
+                    url: order_url(@order.code),
+                    wrapper: :horizontal_form,
+                    html: { class: 'form-horizontal order-edit-form col-sm-6' }) do |f|
+    - @order.data.each_pair do |name, value|
+      - field = @order.field_def_hash(name)
+      - case field[:type]
+        - when 'boolean'
+          = f.input(name, as: :boolean, input_html: { checked: !!value }, label: field.fetch(:label), wrapper: :horizontal_boolean)
+        - when 'datetime'
+          = f.input(name, as: :datetime_picker, value: value, label: field.fetch(:label))
+        - else
+          = f.input(name, as: :string, input_html: { value: value }, label: field.fetch(:label))
+
+    %footer.row
+      .col-sm-8.col-sm-offset-4
+        = f.button :submit

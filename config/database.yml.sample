@@ -1,0 +1,8 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  database: homs
+  username: homs
+  password: homs

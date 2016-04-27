@@ -1,0 +1,7 @@
+- if record.errors.any?
+  #error_explanation.alert.alert-danger
+    .alert.alert-danger
+      = t('.errors', count: record.errors.count)
+    %ul
+      - record.errors.full_messages.each do |msg|
+        %li= msg

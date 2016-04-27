@@ -1,0 +1,18 @@
+- content_for(:title, t('.title'))
+%h2= t('.title')
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    %p= "%s: %s"%[User.human_attribute_name(:full_name), @user.full_name]
+    %p= "%s: %s"%[User.human_attribute_name(:email), @user.email]
+    %p= "%s: %s"%[User.human_attribute_name(:role), t(@user.role_i18n_key)]
+    %p= "%s: %s"%[User.human_attribute_name(:company), @user.company]
+    %p= "%s: %s"%[User.human_attribute_name(:department), @user.department]
+    %p= "%s: %s"%[User.human_attribute_name(:api_token), @user.api_token]
+    .row
+      .col-xs-12
+        = link_to t('edit'), edit_user_path, class: 'btn btn-primary'
+        - if @user.api_token?
+          = link_to t('.renew_api_token'), generate_api_token_user_path(@user), method: 'put', class: 'btn btn-danger', data: { confirm: t('.renew_api_token_warning'), confirm_proceed: t('.yes_renew') }
+          = link_to t('.clear_api_token'), clear_api_token_user_path(@user), method: 'delete', class: 'btn btn-danger', data: { confirm: t('.clear_api_token_warning'), confirm_proceed: t('.yes_clear') }
+        - else
+          = link_to t('.generate_api_token'), generate_api_token_user_path(@user), method: 'put', class: 'btn btn-primary'

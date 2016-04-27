@@ -1,0 +1,30 @@
+<% content_for(:title, t('.title')) %>
+<div class="authform">
+  <%- if @greeting.present?%>
+    <div class="greeting alert" role="alert"><h4><p class="greeting-text text-center"><%= @greeting.html_safe %></p></h4></div>
+  <% end -%>
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
+    <h3><%= t('.title') %></h3>
+    <%= devise_error_messages! %>
+    <div class="form-group">
+      <%- if devise_mapping.registerable? %>
+        <%= link_to t('.sign_up'), new_registration_path(resource_name), class: 'right'  %>
+      <% end -%>
+      <%= f.email_field :email, :autofocus => true, class: 'form-control floating-label', placeholder: User.human_attribute_name(:email) %>
+    </div>
+    <div class="form-group">
+      <%- if devise_mapping.recoverable? %>
+        <%= link_to t('.forgot_password'), new_password_path(resource_name), class: 'right', tabindex: 5 %>
+      <% end -%>
+      <%= f.password_field :password, class: 'form-control floating-label', placeholder: User.human_attribute_name(:password) %>
+    </div>
+      <%= f.submit t('.submit'), :class => 'btn btn-primary pull-right' %>
+      <% if devise_mapping.rememberable? -%>
+        <div class="checkbox" style="width:150px">
+          <label>
+            <%= f.check_box :remember_me %> <%= t('.remember_me') %>
+          </label>
+        </div>
+      <% end -%>
+  <% end %>
+</div>
