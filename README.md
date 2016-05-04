@@ -1,10 +1,10 @@
 # Hydra Order Management System (homs)
 
-*homs* is a web-application with frontend and REST API for managing configurable orders.
+*homs* is an open source web application for order and business process management.
 
 Application consists of three parts:
 * User interface - managing orders for registered users (Single Page Application).
-* Administer interface - managing users and order types.
+* Administrator interface - managing users and order types.
 * REST API - operations with orders and users.
 
 Requirements:
@@ -95,7 +95,7 @@ sudo apt-get install tomcat8 tomcat8-admin postgresql
 
 ### homs installation
 
-homs is familiar Ruby On Rails 4 application with PostgreSQL backend. To install it you need _bundler_ and probably _rvm_.
+homs is a familiar Ruby On Rails 4 application with PostgreSQL backend. To install it you need _bundler_ and probably _rvm_.
 
 One of the possible ways of homs installation on Debian Linux is described below.
 
@@ -126,7 +126,7 @@ Follow [RVM installation guide](https://rvm.io/rvm/install).
 
 #### Install homs
 
-1. Download source code by git:
+1. Clone homs git repository:
 
   ```bash
   git clone https://github.com/latera/homs.git
