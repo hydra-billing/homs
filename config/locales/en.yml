@@ -97,7 +97,7 @@ en:
       done: Done
     search_by_not_found: Order not found for %{criteria}
     index:
-      title: Order list
+      title: Orders list
       archived: Archived
       ext_code: Ext. code
       no_orders_found: No orders found
