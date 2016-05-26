@@ -10,7 +10,7 @@ feature 'List orders', js: true do
     signin(user.email, user.password)
 
     click_on 'Orders'
-    expect(page).to have_content 'Order list'
+    expect(page).to have_content 'Orders list'
     widget_exist?
   end
 

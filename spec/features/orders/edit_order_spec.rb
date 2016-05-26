@@ -12,7 +12,7 @@ feature 'Edit order', js: true do
     user = FactoryGirl.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
-    expect(page).to     have_content 'Order list'
+    expect(page).to     have_content 'Orders list'
 
     order_type = FactoryGirl.create(:order_type, :support_request)
     FactoryGirl.create(:order, order_type: order_type)
@@ -20,7 +20,7 @@ feature 'Edit order', js: true do
 
   scenario 'success' do
     click_on 'Orders'
-    expect(page).to have_content 'Order list'
+    expect(page).to have_content 'Orders list'
     widget_exist?
 
     click_on order_code
