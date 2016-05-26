@@ -15,14 +15,14 @@ feature 'Create new order', js: true do
     user = FactoryGirl.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
-    expect(page).to     have_content 'Order list'
+    expect(page).to     have_content 'Orders list'
 
     FactoryGirl.create(:order_type, :support_request)
   end
 
   scenario 'success' do
     click_on 'Orders'
-    expect(page).to have_content 'Order list'
+    expect(page).to have_content 'Orders list'
     widget_exist?
 
     click_on 'Add'
@@ -46,7 +46,7 @@ feature 'Create new order', js: true do
 
   scenario 'failed' do
     click_on 'Orders'
-    expect(page).to have_content 'Order list'
+    expect(page).to have_content 'Orders list'
     widget_exist?
 
     click_on 'Add'

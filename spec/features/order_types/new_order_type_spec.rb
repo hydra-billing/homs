@@ -7,7 +7,7 @@ feature 'Create new order type', js: true do
     user = FactoryGirl.create(:user, :admin)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
-    expect(page).to     have_content 'Order list'
+    expect(page).to     have_content 'Orders list'
 
     click_on 'Order types'
     expect(page).to have_content 'Available order types definition'

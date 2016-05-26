@@ -20,6 +20,6 @@ feature 'User profile page', :devise, js: true do
     login_as(me, scope: :user)
     Capybara.current_session.driver.header 'Referer', "#{orders_path}"
     visit user_path(other)
-    expect(page).to have_content 'Order list'
+    expect(page).to have_content 'Orders list'
   end
 end
