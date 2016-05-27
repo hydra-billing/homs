@@ -35,7 +35,7 @@ One of the possible ways of Activiti installation with PostgreSQL database on De
 #### Install required packages
 
 ```bash
-sudo apt-get install tomcat8 tomcat8-admin postgresql
+sudo apt-get install tomcat8 tomcat8-admin postgresql libqt4-dev libqtwebkit-dev
 ```
 
 #### Enable Tomcat manager interface
