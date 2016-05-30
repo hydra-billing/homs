@@ -8,6 +8,10 @@
         %span.icon-bar
     .navbar-collapse
       %ul.nav.navbar-nav
+        %li.logo
+          = link_to list_orders_url  do
+            = t('logo')
+            %img{src: image_path("logo.svg")}
         - if user_signed_in?
           %li
             = link_to orders_path do
