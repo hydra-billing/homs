@@ -82,7 +82,7 @@ sudo apt-get install tomcat8 tomcat8-admin postgresql
     jdbc.password=activiti
     ```
   * Download [PostgreSQL JDBC jar](https://jdbc.postgresql.org/download/postgresql-9.4.1207.jar) and put it to `WEB-INF/lib` directory.
-  * Download [Latera Activiti extension *full* pack](https://github.com/latera/activiti-ext/releases) and put him to `WEB-INF/lib` directory.
+  * Download [Latera Activiti extension *full* pack](https://github.com/latera/activiti-ext/releases) and put it to `WEB-INF/lib` directory.
 4. Zip back `activiti-explorer.war` and `activiti-rest.war`.
 5. Deploy `activiti-explorer.war` and `activiti-rest.war` via Tomcat manager interface: [http://loclahost:8080/manager/html](http://loclahost:8080/manager/html)
 
