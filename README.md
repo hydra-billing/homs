@@ -102,7 +102,7 @@ One of the possible ways of homs installation on Debian Linux is described below
 #### Install required packages
 
 ```bash
-sudo apt-get install git postgresql libpq-dev nodejs
+sudo apt-get install git postgresql libpq-dev nodejs libqtwebkit-dev
 ```
 
 #### Create homs database
