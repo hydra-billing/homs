@@ -1,4 +1,4 @@
-class RenameYmlToFileInOrderType < ActiveRecord::Migration
+class RenameYMLToFileInOrderType < ActiveRecord::Migration
   def up
     rename_column :order_types, :yml, :file
   end
