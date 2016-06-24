@@ -70,7 +70,7 @@ modulejs.define 'HBWFormSelect',
 
         select = e.find('select').select2(jQuery.extend({}, {
           width: '100%'
-          allowClear: false
+          allowClear: @props.params.nullable
           theme: 'bootstrap'
           placeholder: @props.params.placeholder
           language: @getLanguage()
@@ -143,7 +143,7 @@ modulejs.define 'HBWFormSelect',
           hasNullValue = true
 
         unless hasNullValue
-          choices.push([null, @t('components.select.not_selected')])
+          choices.unshift([null, @t('components.select.not_selected')])
 
       buildOptions: (choices) ->
         choices.map (variant) ->

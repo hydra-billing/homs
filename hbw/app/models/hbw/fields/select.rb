@@ -21,6 +21,7 @@ module HBW
           mode: mode,
           label: label,
           css_class: css_class,
+          placeholder: placeholder,
           label_css: label_css,
           choices: choices,
           nullable: select? && nullable?,
@@ -57,6 +58,10 @@ module HBW
 
       def choices_sql
         sql
+      end
+
+      def placeholder
+        definition.fetch('placeholder', '')
       end
 
       def coerce(value)
