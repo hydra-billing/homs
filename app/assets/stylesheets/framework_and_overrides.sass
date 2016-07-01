@@ -108,3 +108,31 @@ main.container
     height: 18px
     display: inline
     margin: -20px 0 0 -5px
+
+input
+  &[type=checkbox]
+    display: none
+
+input
+  &[type=checkbox]
+    + span:before
+      font-family: FontAwesome
+      display: inline-block
+
+input
+  &[type=checkbox]:checked
+    + span:before
+      content: "\f046"
+
+input
+  &[type=checkbox]:disabled
+    + span:before
+      color: #D3D3D3
+
+input
+  &[type=checkbox]
+    + span:before
+      content: "\f096"
+
+.checkbox
+  padding-left: 0px !important

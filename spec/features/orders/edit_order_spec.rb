@@ -32,7 +32,7 @@ feature 'Edit order', js: true do
     widget_exist?
 
     click_on_calendar('order_creationDate')
-    check('order[callBack]')
+    click_checkbox_div('order_callBack')
     fill_in('order[problemDescription]', with: problem_descr)
     fill_in('order[contractNumber]',     with: contract_number)
     click_on 'Update Order'
