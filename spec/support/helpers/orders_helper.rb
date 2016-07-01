@@ -161,7 +161,7 @@ module Features
     end
 
     def click_checkbox_div(class_name)
-      page.find("div.#{class_name}").click
+      page.find("div.#{class_name}").find('label').click
     end
 
     def click_on_icon(class_name)

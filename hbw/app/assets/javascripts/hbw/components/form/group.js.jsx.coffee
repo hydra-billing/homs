@@ -21,7 +21,10 @@ modulejs.define 'HBWFormGroup', ['React', 'HBWFormDatetime', \
       iterateControls: (fields) ->
         self = @
         @controls = fields.map (field) ->
-          `<div key={field['name']}>{self.formControl(field['name'], field)}</div>`
+          if field.delimiter
+            `<div key={field['name']}>{self.formControl(field['name'], field)}<div className='clearfix'></div></div>`
+          else
+            `<div key={field['name']}>{self.formControl(field['name'], field)}</div>`
 
       formControl: (name, params) ->
         opts =
