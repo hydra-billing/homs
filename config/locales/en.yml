@@ -170,6 +170,7 @@ en:
         data: Custom fields
         created_at: Created at
         updated_at: Updated at
+        print_form_code: Print form template
       order_type:
         code: Code
         file: Uploaded YAML file content

@@ -5,6 +5,7 @@ common: &common
 order_type:
   code: support_request
   name: Support Request
+  print_form_code: print_form_code
   fields:
     creationDate:
       type: datetime

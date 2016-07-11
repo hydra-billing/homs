@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
   validates_with OrderDataValidator
   after_validation :coerce_values, if: -> rec { rec.errors.empty? }
 
-  delegate :fields, :field_definition_set, to: :order_type
+  delegate :fields, :field_definition_set, :print_form_code, to: :order_type
   delegate :name, :code, to: :order_type, prefix: true
 
   default_scope { includes(:order_type).order('created_at DESC') }

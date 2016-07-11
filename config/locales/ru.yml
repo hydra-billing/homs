@@ -327,6 +327,7 @@ ru:
         data: Настраиваемые поля
         created_at: Дата создания
         updated_at: Дата изменения
+        print_form_code: Код шаблона
       order_type:
         code: Код
         name: Наименование
