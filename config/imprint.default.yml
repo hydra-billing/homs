@@ -1,0 +1,10 @@
+development: &development
+  base_url: http://localhost:2300/api/
+  auth_token: changeme
+  api_version: 1
+
+staging:
+  <<: *development
+
+production:
+  <<: *development
