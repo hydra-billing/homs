@@ -68,9 +68,10 @@ class OrderType < ActiveRecord::Base
     OrderTypeFileValidator.new.validate self
     return unless errors.empty?
 
-    self.fields = hash_from_file[:order_type][:fields]
-    self.code   = hash_from_file[:order_type][:code]
-    self.name   = hash_from_file[:order_type][:name]
+    self.fields          = hash_from_file[:order_type][:fields]
+    self.code            = hash_from_file[:order_type][:code]
+    self.name            = hash_from_file[:order_type][:name]
+    self.print_form_code = hash_from_file[:order_type][:print_form_code]
   end
 
   def check_for_orders

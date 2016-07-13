@@ -8,6 +8,11 @@
     .row.attribute-row
       .col-xs-12
         = succeed ':' do
+          = Order.human_attribute_name(:print_form_code)
+        .value= prettify_value(@order.print_form_code)
+    .row.attribute-row
+      .col-xs-12
+        = succeed ':' do
           = Order.human_attribute_name(:user)
         .value= prettify_value(@order.user_full_name)
     .row.attribute-row

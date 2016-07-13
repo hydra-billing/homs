@@ -11,19 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401100542) do
+ActiveRecord::Schema.define(version: 20160711084125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "order_types", force: :cascade do |t|
-    t.string   "code",                       null: false
-    t.text     "file",                       null: false
-    t.text     "fields",                     null: false
-    t.boolean  "active",     default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "name",                       null: false
+    t.string   "code",                            null: false
+    t.text     "file",                            null: false
+    t.text     "fields",                          null: false
+    t.boolean  "active",          default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "name",                            null: false
+    t.string   "print_form_code"
   end
 
   add_index "order_types", ["code", "active"], name: "index_order_types_on_code_and_active", using: :btree

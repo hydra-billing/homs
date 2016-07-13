@@ -9,6 +9,7 @@ RSpec.describe OrderType, type: :model do
       order_type: {
           code: 'Charge',
           name: 'Charge',
+          print_form_code: 'Print form code',
           fields: { any_hash: :x }
       }
     }.to_yaml
@@ -18,6 +19,7 @@ RSpec.describe OrderType, type: :model do
     ot = OrderType.new(file: right_file)
     expect(ot.valid?).to be true
     expect(ot.code).to eq('Charge')
+    expect(ot.print_form_code).to eq('Print form code')
     expect(ot.fields).to eq(any_hash: :x)
     expect(ot.errors.full_messages).to be_empty
 
