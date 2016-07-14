@@ -3,7 +3,7 @@
     - field = @order.field_def_hash(name)
     - case field[:type]
       - when 'boolean'
-        = f.input(name, as: :boolean, input_html: { checked: !!value }, label: field.fetch(:label))
+        = f.input(name, as: :custom_boolean, input_html: { checked: !!value }, label: field.fetch(:label), wrapper: :custom_horizontal_boolean)
       - when 'datetime'
         = f.input(name, as: :datetime_picker, input_html: {value: value}, label: field.fetch(:label))
       - when 'string'

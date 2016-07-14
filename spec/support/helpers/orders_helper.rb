@@ -147,5 +147,9 @@ module Features
     def search_button_by_action(action)
       form_by_action(action).find('[name="commit"]')
     end
+
+    def click_checkbox_div(class_name)
+      page.find("div.#{class_name}").click
+    end
   end
 end
