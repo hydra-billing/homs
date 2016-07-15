@@ -161,6 +161,11 @@ Follow [RVM installation guide](https://rvm.io/rvm/install).
   ```bash
   bundle exec rake db:migrate
   ```
+8. Fill db with test data:
+
+  ```bash
+  bundle exec rake db:seed
+  ```
 
 #### Run homs
 
