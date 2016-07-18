@@ -96,5 +96,6 @@ config/database.yml
 config/secrets.yml
 config/homs_configuration.yml
 config/deploy.rb
+config/imprint.yml
 
 lib/capistrano/
