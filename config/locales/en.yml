@@ -29,6 +29,7 @@ en:
       at_least: Attribute '%{attribute_name}' should have defined at least %{min_value} element(s) in %{in}
       not_in_set: Attribute '%{attribute_name}' with value '%{value}' should be one of %{set}
       invalid: Attribute '%{attribute_name}' has invalid value '%{value}'
+      incorrect_format: Attribute '%{attribute_name}' has invalid value '%{value}'. Not a valid JSON.
   devise:
     passwords:
       new:
