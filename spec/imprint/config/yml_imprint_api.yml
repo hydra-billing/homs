@@ -3,17 +3,11 @@ post:
     method: "post"
     body: "subtitution 1"
     url: "http://localhost:2300/api/print/>"
-    request_headers:
-      Content-type: "application/json"
-      X_IMPRINT_API_VERSION: "1"
-      Accept: "application/json"
-      X_IMPRINT_API_TOKEN: "token"
-    response_headers:
-      x-frame-options: "DENY"
-      content-type: "text/plain"
-      content-disposition: "attachment; filename*=UTF-8''test_1.txt"
+    headers:
+      content_type: "text/plain"
+      content_disposition: "attachment; filename*=UTF-8''test_1.txt"
       connection: "close"
-      transfer-encoding: "chunked"
+      transfer_encoding: "chunked"
   print_task: {}
 get: {}
 put: {}

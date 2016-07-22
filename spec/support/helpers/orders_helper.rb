@@ -115,7 +115,7 @@ module Features
     end
 
     def get_datetime_picker_date(name)
-      page.evaluate_script("jQuery('[name=\"#{name}\"]').parent().data('DateTimePicker').date()")['_i']
+      to_current_locale_date(page.evaluate_script("jQuery('[name=\"#{name}\"]').val()"))
     end
 
     def set_datetime_picker_date(name, date)
@@ -123,11 +123,19 @@ module Features
     end
 
     def calendar_value(name)
-      get_datetime_picker_date(name)
+      in_current_locale(get_datetime_picker_date(name))
     end
 
     def in_current_locale(date)
-      date.strftime(I18n.t('time.formats.datetime'))
+      if date.present?
+        date.strftime(I18n.t('time.formats.datetime'))
+      end
+    end
+
+    def to_current_locale_date(date)
+      if date.present?
+        DateTime.strptime(date, I18n.t('time.formats.datetime'))
+      end
     end
 
     def search_button
@@ -154,6 +162,10 @@ module Features
 
     def click_checkbox_div(class_name)
       page.find("div.#{class_name}").click
+    end
+
+    def click_on_icon(class_name)
+      page.find(".#{class_name}").click
     end
   end
 end

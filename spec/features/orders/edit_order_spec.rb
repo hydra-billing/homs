@@ -27,7 +27,7 @@ feature 'Edit order', js: true do
     expect(page).to have_content order_code
     widget_exist?
 
-    click_on 'Edit'
+    click_on_icon 'fa.fa-pencil'
     expect(page).to have_content order_code
     widget_exist?
 

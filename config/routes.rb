@@ -24,6 +24,12 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:show, :edit, :update, :index, :new, :create]
 
+  namespace :imprint do
+    get 'prints/print',
+      to:'prints#print',
+      as: :print
+  end
+
   namespace :admin do
     resources :order_types, only: [:index, :show, :create, :destroy] do
       get :lookup, on: :collection

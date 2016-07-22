@@ -10,6 +10,8 @@ sessions:
 
 link_to_manual: "http://hydra-oms.com/docs"
 
+use_imprint: true
+
 greeting:
 
 announcement:
