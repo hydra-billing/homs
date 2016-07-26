@@ -15,10 +15,110 @@ get:
       sort: 'id'
       order: 'asc'
       size: 1
+  "process-definitions/testProcess:469:814905":
+    d41d8cd98f00b204e9800998ecf8427e:
+      id: "testProcess:469:814905"
+      url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:469:814905"
+      key: "testProcess"
+      version: 469
+      name: "Test name"
+      description: null
+      tenantId: ""
+      deploymentId: "814892"
+      deploymentUrl: "http://bpm.example.com/activiti-rest/service/repository/deployments/814892"
+      resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/814892/resources/testProcess.bpmn"
+      diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/814892/resources/testProcess.testProcess.png"
+      category: "http://www.activiti.org/test"
+      graphicalNotationDefined: true
+      suspended: false
+      startFormDefined: false
+  "repository/deployments/814892/resources":
+    d41d8cd98f00b204e9800998ecf8427e:
+      - id: "test_form.yml"
+        url: "http://bpm.example.com/activiti-rest/service/repository/deployments/814892/resources/test_form.yml"
+        contentUrl: "repository/deployments/814892/resourcedata/test_form.yml"
+        mediaType: null
+        type: resource
+  "repository/deployments/814892":
+    d41d8cd98f00b204e9800998ecf8427e:
+      id: "814892"
+      name: "person-connection.zip"
+      deploymentTime: "2016-06-30T12:04:42.000+03:00"
+      category: null
+      url: "http://bpm.example.com/activiti-rest/service/repository/deployments/814892"
+      tenantId: ""
+  "repository/deployments/814892/resourcedata/test_form.yml":
+    d41d8cd98f00b204e9800998ecf8427e: |
+      form:
+        name: Test form with options
+        css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+        fields:
+        - name: group1
+          type: group
+          label: Choose option
+          css_class: col-xs-12
+          fields:
+          - name: homsOrderDataSelect
+            type: select
+            label: Options
+            css_class: col-xs-12 col-sm-6 col-md-4
+            choices:
+              -
+                - 123456
+                - Option 1
+              -
+                - 654321
+                - Option 2
 put: {}
 patch: {}
 post:
   query/tasks:
     7ceb15217934747a92a39f1900fe0330:
-      data: []
+      - id: "816011"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/tasks/815194"
+        owner: null
+        assignee: "demo"
+        delegationState: null
+        name: "Check test form"
+        description: null
+        createTime: "2016-06-30T12:07:59.000+03:00"
+        dueDate: null
+        priority: 50
+        suspended: false
+        taskDefinitionKey: "usertask10"
+        tenantId: ""
+        category: null
+        formKey: "test_form.yml"
+        parentTaskId: null
+        parentTaskUrl: null
+        executionId: "814972"
+        executionUrl: "http://bpm.example.com/activiti-rest/service/runtime/executions/814972"
+        processInstanceId: "814972"
+        processInstanceUrl: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/814972"
+        processDefinitionId: "testProcess:469:814905"
+        processDefinitionUrl: "process-definitions/testProcess:469:814905"
+        variables:
+          - name: "homsOrderCode"
+            type: "string"
+            value: "ORD-1"
+            scope: "global"
+          - name: "homsOrderDataSelect"
+            type: "select"
+            value: "123456"
+            scope: "global"
+
+  query/process-instances:
+    921ad9476327beb89058e489a918a63e:
+      data:
+        - id: "816011"
+          url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/816011"
+          businessKey: null
+          suspended: false
+          ended: false
+          processDefinitionId: "testProcess:469:814905"
+          processDefinitionUrl: "process-definitions/testProcess:469:814905"
+          activityId: null
+          variables: []
+          tenantId: ""
+          completed: false
 delete: {}
