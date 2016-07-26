@@ -6,6 +6,7 @@ module HBW
       include HBW::Engine.routes.url_helpers
       attr_reader :choices
       definition_reader :sql
+      definition_reader :variable
 
       def fetch
         if select?
@@ -57,7 +58,15 @@ module HBW
       end
 
       def choices_sql
-        sql
+        sql if definition.key?('sql')
+      end
+
+      def choices_variable
+        variable if definition.key?('variable')
+      end
+
+      def options_condition
+        choices_sql || choices_variable
       end
 
       def placeholder
@@ -80,7 +89,7 @@ module HBW
       private
 
       def load_choices
-        choices_to_array(source.select(choices_sql, task.variables_hash))
+        choices_to_array(source.select(options_condition, task.variables_hash))
       end
 
       def choices_to_array(choices)

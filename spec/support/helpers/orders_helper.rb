@@ -72,6 +72,10 @@ module Features
       find_by_name(name).all('option[value]').map(&:text)
     end
 
+    def select_values(name)
+      find_by_name(name).all('option[value]').map(&:value)
+    end
+
     def select2_options
       parent_node(page.find('.select2-results__option--highlighted')).all('li')
     end

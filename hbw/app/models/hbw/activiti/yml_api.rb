@@ -19,7 +19,7 @@ module HBW
         end
       end
 
-      def choose_response(method, url, params)
+      def choose_response(method, url, params = {})
         HBW::Activiti::DummyResponse.new(fetch_response(method, url, params))
       end
 
