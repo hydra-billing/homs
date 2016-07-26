@@ -32,11 +32,35 @@ get:
       graphicalNotationDefined: true
       suspended: false
       startFormDefined: false
+  "process-definitions/testProcess:2:2":
+      d41d8cd98f00b204e9800998ecf8427e:
+        id: "testProcess:2:2"
+        url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:2:2"
+        key: "testProcess"
+        version: 469
+        name: "Test name"
+        description: null
+        tenantId: ""
+        deploymentId: "2"
+        deploymentUrl: "http://bpm.example.com/activiti-rest/service/repository/deployments/2"
+        resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/2/resources/testProcess.bpmn"
+        diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/2/resources/testProcess.testProcess.png"
+        category: "http://www.activiti.org/test"
+        graphicalNotationDefined: true
+        suspended: false
+        startFormDefined: false
   "repository/deployments/814892/resources":
     d41d8cd98f00b204e9800998ecf8427e:
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/814892/resources/test_form.yml"
         contentUrl: "repository/deployments/814892/resourcedata/test_form.yml"
+        mediaType: null
+        type: resource
+  "repository/deployments/2/resources":
+    d41d8cd98f00b204e9800998ecf8427e:
+      - id: "test_form_with_data_source.yml"
+        url: "http://bpm.example.com/activiti-rest/service/repository/deployments/2/resources/test_form_with_data_source.yml"
+        contentUrl: "repository/deployments/2/resourcedata/test_form_with_data_source.yml"
         mediaType: null
         type: resource
   "repository/deployments/814892":
@@ -46,6 +70,14 @@ get:
       deploymentTime: "2016-06-30T12:04:42.000+03:00"
       category: null
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/814892"
+      tenantId: ""
+  "repository/deployments/2":
+    d41d8cd98f00b204e9800998ecf8427e:
+      id: "2"
+      name: "person-connection.zip"
+      deploymentTime: "2016-06-30T12:04:42.000+03:00"
+      category: null
+      url: "http://bpm.example.com/activiti-rest/service/repository/deployments/2"
       tenantId: ""
   "repository/deployments/814892/resourcedata/test_form.yml":
     d41d8cd98f00b204e9800998ecf8427e: |
@@ -69,6 +101,23 @@ get:
               -
                 - 654321
                 - Option 2
+  "repository/deployments/2/resourcedata/test_form_with_data_source.yml":
+    d41d8cd98f00b204e9800998ecf8427e: |
+      form:
+        name: Test form with options
+        css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+        fields:
+        - name: group1
+          type: group
+          label: Choose option
+          css_class: col-xs-12
+          fields:
+          - name: homsOrderDataSelect
+            type: select
+            label: Options
+            css_class: col-xs-12 col-sm-6 col-md-4
+            data_source: bpmanagementsystem
+            variable: "homsOrderSelectOptions"
 put: {}
 patch: {}
 post:
@@ -106,7 +155,42 @@ post:
             type: "select"
             value: "123456"
             scope: "global"
-
+      - id: "53452"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/tasks/815194"
+        owner: null
+        assignee: "demo"
+        delegationState: null
+        name: "Check test form"
+        description: null
+        createTime: "2016-06-30T12:07:59.000+03:00"
+        dueDate: null
+        priority: 50
+        suspended: false
+        taskDefinitionKey: "usertask10"
+        tenantId: ""
+        category: null
+        formKey: "test_form_with_data_source.yml"
+        parentTaskId: null
+        parentTaskUrl: null
+        executionId: "972"
+        executionUrl: "http://bpm.example.com/activiti-rest/service/runtime/executions/972"
+        processInstanceId: "972"
+        processInstanceUrl: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/972"
+        processDefinitionId: "testProcess:2:2"
+        processDefinitionUrl: "process-definitions/testProcess:2:2"
+        variables:
+          - name: "homsOrderCode"
+            type: "string"
+            value: "ORD-2"
+            scope: "global"
+          - name: "homsOrderDataSelect"
+            type: "select"
+            value: "123"
+            scope: "global"
+          - name: "homsOrderSelectOptions"
+            type: "string"
+            value: '[{"id": "123", "text": "Option Var 1"}, {"id": "321", "text": "Option Var 2"}]'
+            scope: "global"
   query/process-instances:
     921ad9476327beb89058e489a918a63e:
       data:
@@ -117,6 +201,17 @@ post:
           ended: false
           processDefinitionId: "testProcess:469:814905"
           processDefinitionUrl: "process-definitions/testProcess:469:814905"
+          activityId: null
+          variables: []
+          tenantId: ""
+          completed: false
+        - id: "53452"
+          url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/53452"
+          businessKey: null
+          suspended: false
+          ended: false
+          processDefinitionId: "testProcess:2:2"
+          processDefinitionUrl: "process-definitions/testProcess:2:2"
           activityId: null
           variables: []
           tenantId: ""
