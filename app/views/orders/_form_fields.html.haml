@@ -10,6 +10,8 @@
         = f.input(name, as: :string, input_html: { value: value }, label: field.fetch(:label))
       - when 'number'
         = f.input(name, as: :string, input_html: { value: value }, label: field.fetch(:label))
+      - when 'json'
+        = f.input(name, as: :text, input_html: { value: value }, label: field.fetch(:label))
       - else
         = t('error.types.undefined')
   %input(name="order_type_id" value="#{@order.order_type_id}" type="hidden")

@@ -52,7 +52,10 @@ order_type:
       label: Resolution Text
     adjustResult:
       <<: *common
-      label: Adjust Result",
+      label: Adjust Result
+    jsonField:
+      type: json
+      label: JSON Field",
           "common: &common
   label: ''
   type: string
@@ -142,7 +145,8 @@ order_type:
           employeeEmail:     'james@example.com',
           beginDate:         '2016-07-15T14:45:03+00:00',
           endDate:           '2016-07-16T14:49:42+00:00',
-          motivationText:    'I had a lot of work last 7 years'
+          motivationText:    'I had a lot of work last 7 years',
+          jsonField:         '{"name": "James"}'
       }
       order.save
 
@@ -211,7 +215,8 @@ order_type:
                                     'motivationText'    => 'I had a lot of work last 7 years',
                                     'resolution'        => nil,
                                     'resolutionText'    => nil,
-                                    'adjustResult'      => nil
+                                    'adjustResult'      => nil,
+                                    'jsonField'         => '{"name": "James"}'
                                 },
                                 'done_at'         => nil,
                                 'order_type_code' => 'vacation_request',
@@ -248,7 +253,8 @@ order_type:
                                         'motivationText'    => 'I had a lot of work last 7 years',
                                         'resolution'        => nil,
                                         'resolutionText'    => nil,
-                                        'adjustResult'      => nil
+                                        'adjustResult'      => nil,
+                                        'jsonField'         => '{"name": "James"}'
                                     },
                                     'done_at'         => nil,
                                     'order_type_code' => 'vacation_request',
@@ -307,7 +313,8 @@ order_type:
             'motivationText'    => 'I had a lot of work last 7 years',
             'resolution'        => 'Resolution',
             'resolutionText'    => 'Resolution Text',
-            'adjustResult'      => 'Adjust Result'
+            'adjustResult'      => 'Adjust Result',
+            'jsonField'         => '{"last_name": "Carter"}'
         }
       end
 
@@ -444,7 +451,8 @@ order_type:
             'motivationText'    => 'I had a lot of work last 7 years',
             'resolution'        => nil,
             'resolutionText'    => nil,
-            'adjustResult'      => nil
+            'adjustResult'      => nil,
+            'jsonField'         => '{"last_name": "Carter"}'
         }
       end
 
