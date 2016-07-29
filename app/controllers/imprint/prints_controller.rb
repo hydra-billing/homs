@@ -11,5 +11,9 @@ module Imprint
                                disposition: response.headers[:content_disposition],
                                security_policy: response.headers[:content_security_policy])
     end
+
+    def print_task
+      render json: OrderPrintingService.process_print_task(current_user, params).to_a
+    end
   end
 end

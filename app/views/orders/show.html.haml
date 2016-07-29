@@ -19,9 +19,9 @@
                   %a.fa.fa-print.dropdown-toggle.pull-right(data-toggle='dropdown' title="#{t('.print_title')}")
                   %ul.dropdown-menu
                     %li
-                      = link_to(t('orders.print'), imprint_print_path(order_code: @order.code, convert_to_pdf: false))
+                      = link_to(t('orders.print'), print_imprint_prints_path(order_code: @order.code, convert_to_pdf: false))
                     %li
-                      = link_to(t('orders.print_pdf'), imprint_print_path(order_code: @order.code, convert_to_pdf: true))
+                      = link_to(t('orders.print_pdf'), print_imprint_prints_path(order_code: @order.code, convert_to_pdf: true))
                 - else
                   %a.fa.fa-print.dropdown-toggle.pull-right.disabled(data-toggle='dropdown' title="#{t('.empty_code_title')}")
         .clearfix

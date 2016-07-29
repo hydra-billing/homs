@@ -1,14 +1,20 @@
 post:
   print:
     method: "post"
-    body: "subtitution 1"
+    body: "substitution 1"
     url: "http://localhost:2300/api/print/>"
     headers:
       content_type: "text/plain"
       content_disposition: "attachment; filename*=UTF-8''test_1.txt"
       connection: "close"
       transfer_encoding: "chunked"
-  print_task: {}
+  print_tasks:
+    method: "post"
+    url: "http://localhost:2300/api/print_tasks"
+    headers:
+      content_type: "application/json"
+    body:
+      task_id: 123
 get: {}
 put: {}
 patch: {}

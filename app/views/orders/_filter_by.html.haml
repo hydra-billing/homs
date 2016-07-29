@@ -33,4 +33,23 @@
           .col-xs-10.col-sm-10.col-md-10.col-lg-10
             = datetime_picker(:created_at_to, value: list_filter.filter_values[:created_at_to])
   .col-xs-3.col-sm-2.col-md-1.col-lg-1.label-padding-top.label-padding-left-0px
-    = submit_tag t('.search'), class: 'btn btn-primary'
+    .row
+      .col-xs-6.col-sm-12.col-md-12.col-lg-12
+        = submit_tag t('.search'), class: 'btn btn-primary'
+      .col-xs-6.col-sm-12.col-md-12.col-lg-12
+        .print-container
+          %button(type="submit" name="print" value="#{t('.search')}" class="btn btn-primary")
+            = t('.print')
+
+:coffee
+  $ = jQuery
+
+  $('button[name="print"]').on 'click', (evt) =>
+    evt.preventDefault()
+
+    $.ajax '#{print_task_imprint_prints_path}',
+      data:
+        $('form.orders-filter').serialize()
+      method: 'POST'
+      complete: (arg) =>
+        Application.messenger.show(arg.responseJSON);

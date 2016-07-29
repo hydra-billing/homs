@@ -32,4 +32,8 @@ module OrdersHelper
     visible, hidden = data.keys[0...index], data.keys[index..-1]
     [data.slice(*visible), data.slice(*hidden)]
   end
+
+  def use_imprint?
+    Rails.application.config.app[:use_imprint]
+  end
 end

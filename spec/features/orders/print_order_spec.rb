@@ -1,5 +1,6 @@
 feature 'Print', js: true do
-  let(:order_code)       { 'ORD-1' }
+  let(:first_order_code)  { 'ORD-1' }
+  let(:second_order_code) { 'ORD-2' }
 
   before(:each) do
     OrderSequenceService.new.destroy
@@ -12,6 +13,7 @@ feature 'Print', js: true do
 
     order_type = FactoryGirl.create(:order_type, :support_request)
     FactoryGirl.create(:order, order_type: order_type)
+    FactoryGirl.create(:order, order_type: order_type)
   end
 
   scenario 'single file' do
@@ -19,8 +21,8 @@ feature 'Print', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on order_code
-    expect(page).to have_content order_code
+    click_on first_order_code
+    expect(page).to have_content first_order_code
     expect_widget_presence
 
     click_on_icon 'fa.fa-print'
@@ -34,9 +36,23 @@ feature 'Print', js: true do
     expect_widget_presence
   end
 
+  scenario 'multiple files' do
+    click_on 'Orders'
+    expect(page).to have_content 'Orders list'
+    widget_exist?
+
+    expect(page).to have_content first_order_code
+    expect(page).to have_content second_order_code
+    expect(page).to have_content 'Print'
+
+    click_on 'Print'
+
+    expect(page).to have_content 'Print task 123 processing started. Check e-mail for result.'
+  end
+
   scenario 'denied' do
     logout
-    visit edit_order_path(order_code)
+    visit edit_order_path(first_order_code)
 
     expect(page).to have_content 'Sign in'
   end

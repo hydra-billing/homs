@@ -67,17 +67,7 @@ class OrdersController < API::BaseController
 
   helper_method \
   def list_filter
-    @filter ||= ListOrdersFilter.new(current_user, filter_params)
-  end
-
-  def filter_params
-    user_ids = params[:filter] ? params[:user_id] : [current_user.id, 'empty']
-
-    params.permit(:state, :order_type_id, :archived,
-                  :created_at_from, :created_at_to,
-                  :filter, user_id: []).reverse_merge(user_id: user_ids,
-                                                      archived: '0',
-                                                      state: nil)
+    @filter ||= OrderPrintingService.build_filter(current_user, params)
   end
 
   def record_not_found

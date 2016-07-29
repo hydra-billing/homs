@@ -25,9 +25,10 @@ Rails.application.routes.draw do
   resources :orders, only: [:show, :edit, :update, :index, :new, :create]
 
   namespace :imprint do
-    get 'prints/print',
-      to:'prints#print',
-      as: :print
+    resources :prints, only: [] do
+      get :print, on: :collection
+      post :print_task, on: :collection
+    end
   end
 
   namespace :admin do

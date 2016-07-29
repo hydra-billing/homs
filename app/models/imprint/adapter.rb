@@ -10,9 +10,9 @@ module Imprint
                                                          .merge(convert_to_pdf: convert_to_pdf))
     end
 
-    def print_multiple_files(template_code, template_substitution, convert_to_pdf = false)
-      imprint_api.post('print_task', {template: template_code}.merge(data: template_substitution)
-                                                              .merge(convert_to_pdf: convert_to_pdf))
+    def print_multiple_files(template_code, template_substitutions, convert_to_pdf = false)
+      imprint_api.post('print_tasks', {template: template_code}.merge(data: template_substitutions)
+                                                               .merge(convert_to_pdf: convert_to_pdf))
     end
   end
 end
