@@ -112,6 +112,13 @@ en:
       ext_code: Order external code
     filter_by:
       search: Search
+    show:
+      order_data: Order data
+      edit_title: Edit order
+      print_title: Print order data
+      empty_code_title: For printing set print form code for order type
+    print: Print
+    print_pdf: Print PDF
   user_role:
     user: User
     vip: Power user

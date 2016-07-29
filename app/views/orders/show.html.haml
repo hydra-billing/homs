@@ -1,12 +1,33 @@
 - title = "#{@order.code} #{@order.order_type_name}"
 - content_for(:title, title)
 - @hbw_options = { entity_code: @order.code, entity_type: @order.order_type_code, widgetContainer: '#hbw-bp-control-buttons-container', task_id: params[:task_id] }
-%h2= title
+%h2
+  = title
 .row
   .col-xs-12
     #hbw-bp-control-buttons-container
-    = render partial: 'data', locals: { data: @order.data }
-    = render partial: 'common'
-    .row.edit-order-button
-      .col-xs-12
-        = link_to(t('edit'), edit_order_path(@order.code), class: 'btn btn-primary')
+    .panel.panel-default
+      .panel-heading
+        %h4.panel-title.collapsable
+          %a(data-toggle='collapse' data-target='#order_data' hrev='#')
+            = t('.order_data')
+          .btn-group.order_data_group.pull-right
+            = link_to('', edit_order_path(@order.code), class: 'fa fa-pencil pull-right', title: t('.edit_title'))
+            - if use_imprint?
+              .dropdown.print-dropdown.pull-right
+                - if @order.order_type_print_form_code.present?
+                  %a.fa.fa-print.dropdown-toggle.pull-right(data-toggle='dropdown' title="#{t('.print_title')}")
+                  %ul.dropdown-menu
+                    %li
+                      = link_to(t('orders.print'), imprint_print_path(order_code: @order.code, convert_to_pdf: false))
+                    %li
+                      = link_to(t('orders.print_pdf'), imprint_print_path(order_code: @order.code, convert_to_pdf: true))
+                - else
+                  %a.fa.fa-print.dropdown-toggle.pull-right.disabled(data-toggle='dropdown' title="#{t('.empty_code_title')}")
+        .clearfix
+      .panel-body.collapse.in#order_data
+        = render partial: 'data', locals: { data: @order.data }
+        = render partial: 'common'
+
+
+

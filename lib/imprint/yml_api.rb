@@ -9,13 +9,23 @@ module Imprint
     end
 
     def choose_response(method, url, _)
-      HBW::Activiti::DummyResponse.new(fetch_response(method, url))
+      Imprint::DummyResponse.new(fetch_response(method, url))
     end
 
     private
 
     def fetch_response(method, url)
       responses.fetch(method).fetch(url)
+    end
+  end
+
+  class DummyResponse
+    attr_accessor :body, :status, :headers
+
+    def initialize(data)
+      @body    = data['body']
+      @headers = data['headers'].symbolize_keys
+      @status  = 200
     end
   end
 end

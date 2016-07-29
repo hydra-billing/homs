@@ -260,10 +260,16 @@ ru:
     filter_by:
       search: Найти
     show:
+      order_data: Информация о заказе
       show_more: Показать остальное
+      edit_title: Редактирование заказа
+      print_title: Печать информации о заказе
+      empty_code_title: Для печати необходимо задать код шаблона печатной формы для типа заказа
+    print: Печать
+    print_pdf: Печать PDF
   user_role:
     user: Пользователь
-    vip: Превилегированный пользователь
+    vip: Привилегированный пользователь
     admin: Администратор
   layouts:
     navigation:

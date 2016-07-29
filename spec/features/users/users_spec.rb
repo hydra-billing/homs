@@ -72,11 +72,11 @@ feature 'User is', js: true do
     input_by_label('user_middle_name').set           'Jay'
     input_by_label('user_last_name').set             'Jenkins'
     input_by_label('user_email').set                 'm.jenkins@example.com'
-    select_by_label('user_role').set                 'admin'
     input_by_label('user_company').set               'LLC Tools'
     input_by_label('user_department').set            'Administrators'
     input_by_label('user_password').set              'qwe123123123'
     input_by_label('user_password_confirmation').set 'qwe123123123'
+    select_by_label('user_role').find('option[value="admin"]').select_option
     button.click
 
     users = [
@@ -245,11 +245,11 @@ feature 'User is', js: true do
     input_by_label('user_middle_name').set           'Jay'
     input_by_label('user_last_name').set             'Jenkins'
     input_by_label('user_email').set                 'm.jenkins@example.com'
-    select_by_label('user_role').set                 'admin'
     input_by_label('user_company').set               'LLC Tools'
     input_by_label('user_department').set            'Administrators'
     input_by_label('user_password').set              'qwe123123123'
     input_by_label('user_password_confirmation').set 'qwe123123123'
+    select_by_label('user_role').find('option[value="admin"]').select_option
 
     button.click
 

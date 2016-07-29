@@ -64,6 +64,10 @@ module ApplicationHelper
     end
   end
 
+  def use_imprint?
+    Rails.application.config.app[:use_imprint]
+  end
+
   def hbw_options
     default_options = {
       widgetPath: '/widget',

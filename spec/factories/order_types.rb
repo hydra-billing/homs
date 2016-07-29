@@ -5,6 +5,7 @@ FactoryGirl.define do
         order_type: {
           code: 'Without custom fields',
           name: 'Empty order type',
+          print_form_code: 'print_form_code',
           fields: {}
         }
       }.to_yaml)
@@ -55,6 +56,7 @@ FactoryGirl.define do
     trait :support_request do
       active true
       code 'Support Request'
+      print_form_code 'print_form_code'
       fields(
         creationDate: {
           type: 'datetime',

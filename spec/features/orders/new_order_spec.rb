@@ -1,6 +1,3 @@
-require 'capybara-screenshot/rspec'
-require 'tilt/coffee'
-
 feature 'Create new order', js: true do
   let(:contract_number)         { '123456' }
   let(:invalid_contract_number) { 'qwerty' }
