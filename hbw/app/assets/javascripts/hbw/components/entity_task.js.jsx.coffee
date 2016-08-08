@@ -97,6 +97,7 @@ modulejs.define(
         @setState(loading: true)
         @props.env.forms.fetch(taskId)
           .done((form) => @setState(error: null, form: form))
+          .done(=> @trigger('hbw:form-loaded'))
           .fail((response) => @setState(error: response))
           .always(=> @setState(loading: false))
 

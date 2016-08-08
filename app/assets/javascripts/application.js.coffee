@@ -173,6 +173,16 @@ class Homs
       cache: true
       language: I18n.locale)
 
+  updateForm: =>
+    $.ajax '/orders/get_order_data',
+      type: 'GET'
+      dataType: 'html'
+      data: {
+        order_code: $("input[name='order_code']").val()
+      }
+      success: (data, textStatus, jqXHR) ->
+        $('#order_data').html(data)
+
 @Application = new Homs()
 
 $ ->
@@ -203,4 +213,8 @@ $ ->
 
   widget.env.dispatcher.bind 'hbw:go-to-entity', 'host', (payload) ->
     window.location = payload.task.entity_url
+
+  widget.env.dispatcher.bind 'hbw:form-loaded', 'widget', (payload) ->
+    Application.updateForm();
+
   widget.render()
