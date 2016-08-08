@@ -9,6 +9,12 @@ class OrdersController < API::BaseController
   def show
   end
 
+  def get_order_data
+    @order = Order.find_by_code(params['order_code'])
+
+    render partial: 'data', locals: { data: @order.data }
+  end
+
   # GET /orders/search_by/{:code | :ext_code}/
   def search_by
     @criteria = "#{Order.human_attribute_name(params[:field])}: "\

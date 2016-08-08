@@ -3,6 +3,7 @@
 - @hbw_options = { entity_code: @order.code, entity_type: @order.order_type_code, widgetContainer: '#hbw-bp-control-buttons-container', task_id: params[:task_id] }
 %h2
   = title
+%input(type="hidden" name='order_code' value="#{@order.code}")
 .row
   .col-xs-12
     #hbw-bp-control-buttons-container
@@ -27,7 +28,6 @@
         .clearfix
       .panel-body.collapse.in#order_data
         = render partial: 'data', locals: { data: @order.data }
-        = render partial: 'common'
 
 
 
