@@ -21,6 +21,7 @@ modulejs.define(
         @$tasksMenuButtonContainer = jQuery(@options.tasksMenuButtonContainer)
 
         @env.dispatcher.bind('hbw:task-clicked', 'widget', @changeTask)
+        @checkActivitiUser()
 
       changeTask: (task) =>
         if task.entity_code == @options.entity_code
@@ -77,4 +78,11 @@ modulejs.define(
 
       subscribeOnTasks: =>
         @tasksSubscription = @env.connection.subscribe(client: 'root', path: 'tasks')
+
+      checkActivitiUser: =>
+        @env.connection.request(
+          url: @env.connection.serverURL + '/users/check'
+          method: 'GET'
+          contentType: 'application/json').done((data) =>
+            @env.dispatcher.trigger('hbw:activiti-user-not-found') if !data.user_exist)
 )

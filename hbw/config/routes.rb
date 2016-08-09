@@ -10,6 +10,7 @@ HBW::Engine.routes.draw do
 
     resources :users, only: [:index] do
       get :lookup, on: :collection, action: :lookup
+      get :check, on: :collection, action: :check_user
     end
   end
 end

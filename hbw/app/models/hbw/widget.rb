@@ -15,7 +15,7 @@ class HBW::Widget
 
   extend Forwardable
   def_delegators :@adapter, :task_list, :entity_task_list,
-                 :form, :submit, :users, :users_lookup
+                 :form, :submit, :users, :users_lookup, :user_exist?
 
   def initialize
     @adapter = HBW.container[:adapter_class].new(

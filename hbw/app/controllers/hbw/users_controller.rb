@@ -10,6 +10,10 @@ module HBW
       render :index
     end
 
+    def check_user
+      render json: { user_exist: widget.user_exist?(current_user_identifier) }
+    end
+
     private
 
     def query

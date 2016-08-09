@@ -237,6 +237,7 @@ en:
     not_selected: Not selected
     select2:
       not_set: Not set
+    user_not_found: Current user not found in Activiti
 
   doc:
     common:

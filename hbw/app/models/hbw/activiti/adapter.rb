@@ -15,6 +15,14 @@ module HBW
       def users
         HBW::BPMUser.fetch_all
       end
+      
+      def user_exist?(user_email)
+        user = HBW::BPMUser.with_connection(api) do
+          HBW::BPMUser.fetch(user_email)
+        end
+
+        !user.nil?
+      end
 
       def users_lookup(pattern)
         d_pattern = pattern.mb_chars.downcase.to_s
