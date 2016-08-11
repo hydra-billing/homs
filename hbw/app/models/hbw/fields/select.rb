@@ -90,7 +90,7 @@ module HBW
       end
 
       def placeholder
-        definition.fetch('placeholder', '')
+        definition['placeholder']
       end
 
       def coerce(value)
