@@ -1,5 +1,4 @@
 feature 'User is', js: true do
-  let!(:sequence) { OrderSequenceService.new.destroy; OrderSequenceService.new.create }
   let!(:admin)    { FactoryGirl.create(:user, :admin) }
   let!(:john)     { FactoryGirl.create(:user, :john) }
 

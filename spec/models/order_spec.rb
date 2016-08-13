@@ -2,11 +2,6 @@ describe Order do
   let(:order_type) { FactoryGirl.create(:order_type) }
   let(:order) { FactoryGirl.create(:order, order_type: order_type) }
 
-  before(:all) do
-    OrderSequenceService.new.destroy
-    OrderSequenceService.new.create
-  end
-
   after(:all) do
     OrderSequenceService.new.destroy
   end

@@ -6,9 +6,6 @@ feature 'Create new order', js: true do
   let(:current_date)            { Date.today.strftime('%m/%d/%Y') }
 
   before(:each) do
-    OrderSequenceService.new.destroy
-    OrderSequenceService.new.create
-
     user = FactoryGirl.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'

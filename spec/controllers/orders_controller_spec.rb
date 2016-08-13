@@ -3,11 +3,6 @@ describe OrdersController, type: :controller do
   let(:order)      { FactoryGirl.build(:order, order_type: order_type) }
   let(:user)       { FactoryGirl.create(:user) }
 
-  before(:all) do
-    OrderSequenceService.new.destroy
-    OrderSequenceService.new.create
-  end
-
   describe 'Orders' do
     render_views
     

@@ -5,9 +5,6 @@ feature 'Show business process form', js: true do
   let(:current_date_iso) { Date.today.iso8601 }
 
   before(:each) do
-    OrderSequenceService.new.destroy
-    OrderSequenceService.new.create
-
     user = FactoryGirl.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'

@@ -3,9 +3,6 @@ feature 'Print', js: true do
   let(:second_order_code) { 'ORD-2' }
 
   before(:each) do
-    OrderSequenceService.new.destroy
-    OrderSequenceService.new.create
-
     user = FactoryGirl.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'

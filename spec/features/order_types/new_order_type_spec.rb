@@ -1,9 +1,6 @@
 feature 'Create new order type', js: true do
 
   before(:each) do
-    OrderSequenceService.new.destroy
-    OrderSequenceService.new.create
-
     user = FactoryGirl.create(:user, :admin)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'

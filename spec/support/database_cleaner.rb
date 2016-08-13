@@ -13,6 +13,9 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
+
+    OrderSequenceService.new.destroy
+    OrderSequenceService.new.create
   end
 
   config.append_after(:each) do

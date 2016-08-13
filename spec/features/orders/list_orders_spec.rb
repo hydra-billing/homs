@@ -1,5 +1,4 @@
 feature 'List orders', js: true do
-  let!(:sequence)               { OrderSequenceService.new.destroy; OrderSequenceService.new.create }
   let!(:user)                   { FactoryGirl.create(:user) }
   let!(:john)                   { FactoryGirl.create(:user, :john) }
   let!(:vacation_request_type)  { FactoryGirl.create(:order_type, :vacation_request, name: 'Vacation request') }

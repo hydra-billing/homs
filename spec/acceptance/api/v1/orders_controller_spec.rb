@@ -12,9 +12,6 @@ describe API::V1::OrdersController, type: :request do
     before(:each) do
       disable_http_basic_authentication(API::V1::OrdersController)
 
-      OrderSequenceService.new.destroy
-      OrderSequenceService.new.create
-
       [
           "common: &common
   label: ''
