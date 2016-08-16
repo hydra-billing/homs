@@ -33,6 +33,8 @@ modulejs.define(
             <Tasks tasks={this.state.tasks}
                    env={this.props.env}
                    chosenTaskID={this.props.chosenTaskID}
+                   entityCode={this.props.entityCode}
+                   entityTypeCode={this.props.entityTypeCode}
                    processInstanceId={this.state.processInstanceId} />
           </div>`
         else

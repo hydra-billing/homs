@@ -173,15 +173,9 @@ class Homs
       cache: true
       language: I18n.locale)
 
-  updateForm: =>
-    $.ajax '/orders/get_order_data',
-      type: 'GET'
-      dataType: 'html'
-      data: {
-        order_code: $("input[name='order_code']").val()
-      }
-      success: (data, textStatus, jqXHR) ->
-        $('#order_data').html(data)
+  updateOrderForm: (orderCode) =>
+    $.ajax('/orders/' + orderCode, dataType: 'html')
+    .done((response) -> $('#order-data').html($(response).find('#order-data').html()))
 
 @Application = new Homs()
 
@@ -215,7 +209,7 @@ $ ->
     window.location = payload.task.entity_url
 
   widget.env.dispatcher.bind 'hbw:form-loaded', 'widget', (payload) ->
-    Application.updateForm()
+    Application.updateOrderForm(payload.entityCode)
 
   widget.env.dispatcher.bind 'hbw:activiti-user-not-found', 'widget', ->
     Application.messenger.warn(I18n.t('js.user_not_found'))

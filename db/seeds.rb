@@ -12,14 +12,15 @@ def add_admin
 
   unless existing_admin.present?
     User.create!(
-        email: 'user@example.com',
-        password: 'changeme',
-        name: 'John',
-        last_name: 'Doe',
-        role: :admin,
-        company: 'Example Corporation',
-        department: 'Administrators',
-        api_token: 'RENEWMEPLEASE')
+      email: 'user@example.com',
+      password: 'changeme',
+      name: 'John',
+      last_name: 'Doe',
+      role: :admin,
+      company: 'Example Corporation',
+      department: 'Administrators',
+      api_token: 'RENEWMEPLEASE'
+    )
   end
 end
 
@@ -137,8 +138,9 @@ order_type:
       type: number
       label: Pizza Price"].each do |order_type_file|
     OrderType.create!(
-        file: order_type_file,
-        active: true)
+      file: order_type_file,
+      active: true
+    )
   end
 end
 
@@ -152,31 +154,34 @@ def add_initial_orders
   order = Order.new(order_type_id: OrderType.find_by(code: 'vacation_request').id)
 
   order.data = {
-      employeeFirstName: 'James',
-      employeeLastName:  'Carter',
-      employeeEmail:     'james@example.com',
-      beginDate:         (Time.zone.now + 3.months).iso8601,
-      endDate:           (Time.zone.now + 3.months + 1.day).iso8601,
-      motivationText:    'I had a lot of work last 7 years'}
+    employeeFirstName: 'James',
+    employeeLastName:  'Carter',
+    employeeEmail:     'james@example.com',
+    beginDate:         (Time.zone.now + 3.months).iso8601,
+    endDate:           (Time.zone.now + 3.months + 1.day).iso8601,
+    motivationText:    'I had a lot of work last 7 years'
+  }
   order.save
 
   # support request order
   order = Order.new(order_type_id: OrderType.find_by(code: 'support_request').id)
 
   order.data = {
-      requesterName:  'Peter Park',
-      requesterPhone: '12345678900',
-      subject:        'Printer does not work',
-      description:    'I don\'t know what happened but printer in kitchen does not work. Help, please...'}
+    requesterName:  'Peter Park',
+    requesterPhone: '12345678900',
+    subject:        'The printer does not work',
+    description:    "I don't know what happened, but the printer in the kitchen doesn't work. Help, please..."
+  }
   order.save
 
   # pizza order
   order = Order.new(order_type_id: OrderType.find_by(code: 'pizza_order').id)
 
   order.data = {
-      customerName:  'John Smith',
-      customerPhone: '19876543211',
-      pizzaType:     'Margherita'}
+    customerName:  'John Smith',
+    customerPhone: '19876543211',
+    pizzaType:     'Margherita'
+  }
   order.save
 end
 

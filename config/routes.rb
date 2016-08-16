@@ -17,9 +17,6 @@ Rails.application.routes.draw do
     delete :clear_api_token, on: :member
   end
 
-  get '/orders/get_order_data',
-      to: 'orders#get_order_data'
-
   get '/orders/search_by/:field',
       to: 'orders#search_by',
       as: :search_order_by,
