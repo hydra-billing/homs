@@ -21,7 +21,7 @@ feature 'Show business process form', js: true do
   scenario 'check select options' do
     click_on 'Orders'
     expect(page).to have_content 'Orders list'
-    widget_exist?
+    expect_widget_presence
 
     click_on 'ORD-1'
     expect(page).to have_selector("[name='homsOrderDataSelect']")
@@ -31,13 +31,13 @@ feature 'Show business process form', js: true do
     expect(select_values('homsOrderDataSelect')).to  eq ['', '123456', '654321']
 
     expect(page).to have_content 'ORD-1'
-    widget_exist?
+    expect_widget_presence
   end
 
   scenario 'check select options from BP variable' do
     click_on 'Orders'
     expect(page).to have_content 'Orders list'
-    widget_exist?
+    expect_widget_presence
 
     click_on 'ORD-2'
     expect(page).to have_selector("[name='homsOrderDataSelect']")
@@ -47,6 +47,6 @@ feature 'Show business process form', js: true do
     expect(select_values('homsOrderDataSelect')).to  eq ['', '123', '321']
 
     expect(page).to have_content 'ORD-2'
-    widget_exist?
+    expect_widget_presence
   end
 end

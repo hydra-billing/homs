@@ -32,7 +32,7 @@ module Features
       page.find("input[placeholder='#{placeholder}']")
     end
 
-    def widget_exist?
+    def expect_widget_presence
       expect(page.find('#hbw-tasks-list-button').all('*')).not_to be_empty
     end
 

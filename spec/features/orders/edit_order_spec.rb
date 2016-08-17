@@ -21,15 +21,15 @@ feature 'Edit order', js: true do
   scenario 'success' do
     click_on 'Orders'
     expect(page).to have_content 'Orders list'
-    widget_exist?
+    expect_widget_presence
 
     click_on order_code
     expect(page).to have_content order_code
-    widget_exist?
+    expect_widget_presence
 
     click_on_icon 'fa.fa-pencil'
     expect(page).to have_content order_code
-    widget_exist?
+    expect_widget_presence
 
     click_on_calendar('order_creationDate')
     click_checkbox_div('order_callBack')
@@ -48,7 +48,7 @@ feature 'Edit order', js: true do
     expect(Order.find_by_code(order_code).data['contractNumber']).to     eq(contract_number.to_i)
     expect(Order.find_by_code(order_code).data['problemDescription']).to eq(problem_descr)
 
-    widget_exist?
+    expect_widget_presence
   end
 
   scenario 'denied' do

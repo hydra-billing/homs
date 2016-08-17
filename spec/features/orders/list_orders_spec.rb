@@ -11,7 +11,7 @@ feature 'List orders', js: true do
 
     click_on 'Orders'
     expect(page).to have_content 'Orders list'
-    widget_exist?
+    expect_widget_presence
   end
 
   scenario 'with correct filter defaults' do

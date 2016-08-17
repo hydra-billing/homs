@@ -11,7 +11,7 @@ feature 'Create new order type', js: true do
 
     click_on 'Order types'
     expect(page).to have_content 'Available order types definition'
-    widget_exist?
+    expect_widget_presence
   end
 
   scenario 'success' do
@@ -25,7 +25,7 @@ feature 'Create new order type', js: true do
     expect(page).to have_css     '.growl-notice', text: 'Order type definition has been uploaded successfully'
     expect(page).to have_css     '.btn-danger',   text: 'Activate'
     expect(page).to have_css     '.btn-primary',  text: 'Dismiss'
-    widget_exist?
+    expect_widget_presence
     expect(OrderType.find_by_code('support_request').active).to be_falsey
     expect(page).to have_content(fixture('order_types/support_request.yml'))
 
@@ -33,7 +33,7 @@ feature 'Create new order type', js: true do
     expect(page).to have_css     '.growl-notice', text: 'Order type definition has been activated'
     expect(page).to have_content 'Available order types definition'
     expect(page).to have_content 'Support Request'
-    widget_exist?
+    expect_widget_presence
     expect(OrderType.find_by_code('support_request').active).to be_truthy
 
     delete_order_type('Support Request')
@@ -65,13 +65,13 @@ feature 'Create new order type', js: true do
     expect(page).to have_content 'Support Request'
     expect(page).to have_css     '.btn-danger',  text: 'Activate'
     expect(page).to have_css     '.btn-primary', text: 'Dismiss'
-    widget_exist?
+    expect_widget_presence
     expect(OrderType.find_by_code('support_request').active).to be_falsey
     expect(page).to have_content(fixture('order_types/support_request.yml'))
 
     click_on 'Dismiss'
     expect(page).to have_no_content 'Support Request'
-    widget_exist?
+    expect_widget_presence
     expect(OrderType.find_by_code('support_request').present?).to be_falsey
   end
 
@@ -100,7 +100,7 @@ feature 'Create new order type', js: true do
     expect(page).to have_no_css     '.btn-danger',  text: 'Activate'
     expect(page).to have_no_css     '.btn-primary', text: 'Dismiss'
     expect(page).to have_no_content 'Support Request'
-    widget_exist?
+    expect_widget_presence
     expect(OrderType.find_by_code('support_request').present?).to be_falsey
   end
 
@@ -115,7 +115,7 @@ feature 'Create new order type', js: true do
     expect(page).to have_no_css     '.btn-danger',  text: 'Activate'
     expect(page).to have_no_css     '.btn-primary', text: 'Dismiss'
     expect(page).to have_no_content 'Support Request'
-    widget_exist?
+    expect_widget_presence
     expect(OrderType.find_by_code('support_request').present?).to be_falsey
   end
 

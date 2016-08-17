@@ -17,18 +17,18 @@ feature 'Print', js: true do
   scenario 'single file' do
     click_on 'Orders'
     expect(page).to have_content 'Orders list'
-    widget_exist?
+    expect_widget_presence
 
     click_on order_code
     expect(page).to have_content order_code
-    widget_exist?
+    expect_widget_presence
 
     click_on_icon 'fa.fa-print'
     click_on 'Print'
 
     expect(page.response_headers['Content-Type']).to eq 'text/plain'
     expect(page.response_headers['Content-Disposition']).to eq "attachment; filename*=UTF-8''test_1.txt"
-    widget_exist?
+    expect_widget_presence
   end
 
   scenario 'denied' do

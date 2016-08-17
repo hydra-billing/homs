@@ -8,7 +8,7 @@ feature 'User is', js: true do
 
     click_on 'Users'
     expect(page).to have_content 'User list'
-    widget_exist?
+    expect_widget_presence
 
     users = [
         [],
@@ -101,7 +101,7 @@ feature 'User is', js: true do
 
     click_on 'Users'
     expect(page).to have_content 'User list'
-    widget_exist?
+    expect_widget_presence
 
     expect(admin.api_token).to be_nil
 
@@ -212,10 +212,10 @@ feature 'User is', js: true do
 
     click_on 'Users'
     expect(page).to have_content 'User list'
-    widget_exist?
+    expect_widget_presence
 
     link_by_href("/users/#{john.id}").click
-    widget_exist?
+    expect_widget_presence
 
     expect(header.text).to                        eq 'User profile'
     expect(user_edit(john).text).to               eq 'Edit'

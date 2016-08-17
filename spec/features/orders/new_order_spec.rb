@@ -20,11 +20,11 @@ feature 'Create new order', js: true do
   scenario 'success' do
     click_on 'Orders'
     expect(page).to have_content 'Orders list'
-    widget_exist?
+    expect_widget_presence
 
     click_on 'Add'
     expect(page).to have_content 'Adding order'
-    widget_exist?
+    expect_widget_presence
 
     click_on_calendar('order_creationDate')
     click_checkbox_div('order_callBack')
@@ -38,23 +38,23 @@ feature 'Create new order', js: true do
     expect(find_by_title('Problem description')).to have_content problem_descr
     expect(find_by_title('Callback').first('.fa-check')).not_to  eq(nil)
     expect(Order.find_by_code('ORD-1').present?).to              be_truthy
-    widget_exist?
+    expect_widget_presence
   end
 
   scenario 'failed' do
     click_on 'Orders'
     expect(page).to have_content 'Orders list'
-    widget_exist?
+    expect_widget_presence
 
     click_on 'Add'
     expect(page).to have_content 'Adding order'
-    widget_exist?
+    expect_widget_presence
 
     fill_in('order[contractNumber]', with: invalid_contract_number)
 
     click_on 'Add'
 
-    widget_exist?
+    expect_widget_presence
     expect(page.find('#error_explanation')).to have_content "Attribute 'contractNumber' has invalid value '#{invalid_contract_number}'"
   end
 
