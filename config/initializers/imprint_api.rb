@@ -18,5 +18,5 @@ Rails.application.config.to_prepare do
   container.register(:imprint_adapter, -> { Imprint::Adapter.new })
 
   Imprint::Wrapper.container = container
-  Imprint::Wrapper.inject    = Dry::Injection.new(container, {type: :hash})
+  Imprint::Wrapper.inject    = Dry::AutoInject(container)
 end

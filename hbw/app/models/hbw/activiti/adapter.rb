@@ -2,20 +2,17 @@ module HBW
   module Activiti
     # rubocop:disable Metrics/ClassLength
     class Adapter
-      include HBW.inject[:activiti_api]
+      include HBW::Inject[:api, :config]
 
-      attr_accessor :api, :entity_code_key
-
-      def initialize(entity_code_key: , activiti_api: )
-        @entity_code_key = entity_code_key
-        @api = activiti_api
+      def entity_code_key
+        config[:entity_code_key]
       end
 
       # TODO: cache it until new user is added
       def users
         HBW::BPMUser.fetch_all
       end
-      
+
       def user_exist?(user_email)
         user = HBW::BPMUser.with_connection(api) do
           HBW::BPMUser.fetch(user_email)
@@ -33,12 +30,12 @@ module HBW
 
       def process_instances(entity_code)
         response = api.post(
-          'query/process-instances', variables: [{
+          'query/process-instances', variables: [
             name: entity_code_key,
             value: entity_code,
             operation: :equals,
             type: :string
-          }])
+          ])
         response.status == 200 && response.body['data'] || []
       end
 

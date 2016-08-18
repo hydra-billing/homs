@@ -22,11 +22,11 @@ module HBW
                      assignee: user.try(:id) || email,
                      active: true,
                      includeProcessVariables: true,
-                     processInstanceVariables: [{
+                     processInstanceVariables: [
                        name: HBW::Widget.config['entity_code_key'],
                        operation: operation,
                        value: entity_code
-                     }],
+                     ],
                      size: size))
       end
 

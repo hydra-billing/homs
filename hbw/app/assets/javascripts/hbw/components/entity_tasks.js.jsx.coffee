@@ -51,8 +51,8 @@ modulejs.define(
                  parentClass={this.PANEL_CLASS}
                  env={props.env}
                  taskId={task.id}
-                 entityCode={this.props.entityCode}
-                 entityTypeCode={this.props.entityTypeCode}
+                 entityCode={props.entityCode}
+                 entityTypeCode={props.entityTypeCode}
                  collapsed={collapsed} />`
         )
 

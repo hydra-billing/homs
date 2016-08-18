@@ -10,17 +10,12 @@ class HBW::Widget
   end
 
   class_attribute :config, instance_writer: false
-  class_attribute :adapter_class
-  delegate :config, to: :'self.class'
 
   extend Forwardable
   def_delegators :@adapter, :task_list, :entity_task_list,
                  :form, :submit, :users, :users_lookup, :user_exist?
 
-  def initialize
-    @adapter = HBW.container[:adapter_class].new(
-      entity_code_key: config[:entity_code_key])
-  end
+  include HBW::Inject[:adapter]
 
   def bp_buttons(entity_identifier, entity_type)
     return [] if @adapter.bp_running?(entity_identifier)
