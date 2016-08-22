@@ -18,6 +18,8 @@ feature 'Create new order type', js: true do
     attach_file('order_type_file',
                 fixtures_path('order_types/support_request.yml'),
                 visible: false)
+    page.find('.btn.btn-primary.btn-file').click
+
     expect(page).to have_css '.file-caption-name', text: 'support_request.yml'
 
     click_on 'Upload'
@@ -58,6 +60,7 @@ feature 'Create new order type', js: true do
     attach_file('order_type_file',
                 fixtures_path('order_types/support_request.yml'),
                 visible: false)
+    page.find('.btn.btn-primary.btn-file').click
 
     expect(page).to have_css '.file-caption-name', text: 'support_request.yml'
 
@@ -79,6 +82,7 @@ feature 'Create new order type', js: true do
     attach_file('order_type_file',
                 fixtures_path('order_types/support_request.yml'),
                 visible: false)
+    page.find('.btn.btn-primary.btn-file').click
 
     expect(page).to have_css '.file-caption-name', text: 'support_request.yml'
 
@@ -93,6 +97,8 @@ feature 'Create new order type', js: true do
     attach_file('order_type_file',
                 fixtures_path('order_types/invalid_field_request.yml'),
                 visible: false)
+    page.find('.btn.btn-primary.btn-file').click
+
     expect(page).to have_css '.file-caption-name', text: 'invalid_field_request.yml'
 
     click_on 'Upload'
@@ -108,6 +114,8 @@ feature 'Create new order type', js: true do
     attach_file('order_type_file',
                 fixtures_path('order_types/invalid_yml_request.yml'),
                 visible: false)
+    page.find('.btn.btn-primary.btn-file').click
+
     expect(page).to have_css '.file-caption-name', text: 'invalid_yml_request.yml'
 
     click_on 'Upload'
