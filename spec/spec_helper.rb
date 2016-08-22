@@ -1,5 +1,6 @@
 require 'factory_girl'
 require 'tilt/coffee'
+require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 require 'capybara/poltergeist'
 
