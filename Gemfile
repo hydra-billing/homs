@@ -28,6 +28,7 @@ gem 'asset_symlink'
 gem 'apitome'
 gem 'dry-container'
 gem 'dry-auto_inject'
+gem 'dry-validation'
 gem 'thin'
 
 group :oracle do

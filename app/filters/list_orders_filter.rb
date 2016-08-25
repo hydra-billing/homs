@@ -1,6 +1,4 @@
 class ListOrdersFilter
-  include DatetimeFormat
-
   class EmptyUser < User
     def id
       'empty'
@@ -53,14 +51,14 @@ class ListOrdersFilter
     end
 
     def filter_with_dispatch(rel, column, value)
-      if value.present?
+      if value.nil?
+        rel
+      else
         if respond_to?('filter_by_%s' % column)
           public_send('filter_by_%s' % column, rel, value)
         else
           filter_by(rel, column, value)
         end
-      else
-        rel
       end
     end
   end
@@ -90,8 +88,8 @@ class ListOrdersFilter
     @dates ||=
       begin
         now = Time.current
-        created_at_from = parse_date_value(params[:created_at_from], (now - 1.day).beginning_of_day).try(:change, {offset: Time.zone.formatted_offset})
-        created_at_to = parse_date_value(params[:created_at_to], now.end_of_day).try(:change, {offset: Time.zone.formatted_offset})
+        created_at_from = (params[:created_at_from] || (now - 1.day).beginning_of_day).try(:change, {offset: Time.zone.formatted_offset})
+        created_at_to = (params[:created_at_to] || now.end_of_day).try(:change, {offset: Time.zone.formatted_offset})
 
         { created_at_from: created_at_from,
           created_at_to: created_at_to }.with_indifferent_access
@@ -111,14 +109,6 @@ class ListOrdersFilter
   end
 
   private
-
-  def parse_date_value(value, default)
-    if value.present?
-      DateTime.strptime(value, datetime_format)
-    elsif !filter?
-      default
-    end
-  end
 
   def filter?
     !!params[:filter]

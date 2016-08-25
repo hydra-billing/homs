@@ -119,7 +119,7 @@ module Features
     end
 
     def set_datetime_picker_date(name, date)
-      page.execute_script("jQuery('[name=\"#{name}\"]').parent().data('DateTimePicker').date('#{date}')")
+      page.execute_script("jQuery('.form-control[name=\"#{name}\"]').parent().data('DateTimePicker').date('#{date}')")
     end
 
     def calendar_value(name)

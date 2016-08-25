@@ -26,12 +26,14 @@
             %label(for="created_at_from")= t('helpers.from')
           .col-xs-10.col-sm-10.col-md-10.col-lg-10
             = datetime_picker(:created_at_from, value: list_filter.filter_values[:created_at_from])
+            %input(name="created_at_from" type="hidden" value="#{list_filter.filter_values[:created_at_from]}")
       .col-xs-6.col-sm-12.col-md-12.col-lg-12
         .row
           .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
             %label(for="created_at_to")= t('helpers.to')
           .col-xs-10.col-sm-10.col-md-10.col-lg-10
             = datetime_picker(:created_at_to, value: list_filter.filter_values[:created_at_to])
+            %input(name="created_at_to" type="hidden" value="#{list_filter.filter_values[:created_at_to]}")
   .col-xs-3.col-sm-2.col-md-1.col-lg-1.label-padding-top.label-padding-left-0px
     .row
       .col-xs-6.col-sm-12.col-md-12.col-lg-12
@@ -53,3 +55,15 @@
       method: 'POST'
       complete: (arg) =>
         Application.messenger.show(arg.responseJSON);
+
+  processOnChange = (inputName) ->
+    $('input[name="' + inputName + '"]').parent().on 'dp.change', (evt) =>
+      if evt.date
+        value = evt.date.format()
+      else
+        value = null
+
+      $('input[name="' + inputName + '"]').attr('value', value)
+
+  processOnChange('created_at_from')
+  processOnChange('created_at_to')

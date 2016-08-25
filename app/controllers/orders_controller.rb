@@ -1,4 +1,8 @@
 class OrdersController < API::BaseController
+  extend Imprint::Mixin
+
+  inject['services.order_printing_service']
+
   before_action :authenticate_user!
   self.hbw_available = true
 
@@ -67,7 +71,7 @@ class OrdersController < API::BaseController
 
   helper_method \
   def list_filter
-    @filter ||= OrderPrintingService.build_filter(current_user, params)
+    @filter ||= order_printing_service.build_filter(current_user, params)
   end
 
   def record_not_found

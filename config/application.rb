@@ -2,6 +2,10 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+require 'dry-container'
+require 'dry-auto_inject'
+require 'dry-validation'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -44,6 +48,8 @@ module Homs
       config.app = HomsConfig.load(%w(config/homs_configuration.default.yml
                                       config/homs_configuration.yml))
     end
+
+    require Rails.root.join('lib/imprint')
 
     config.after_initialize do
       I18n.locale = I18n.default_locale = (config.app.locale.fetch(:code) || :en).to_sym

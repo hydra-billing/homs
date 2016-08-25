@@ -70,8 +70,8 @@ module UiElementsHelper
                          },
                          class: 'form-control order_archived-picker') do
         '<option></option>'.html_safe + options_for_select([
-          [t('helpers.yes_no.yes'), '1'],
-          [t('helpers.yes_no.no'), '0']
+          [t('helpers.yes_no.yes'), true],
+          [t('helpers.yes_no.no'), false]
         ], value)
       end
   end
