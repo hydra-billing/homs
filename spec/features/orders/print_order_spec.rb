@@ -24,6 +24,9 @@ feature 'Print', js: true do
     expect_widget_presence
 
     click_on_icon 'fa.fa-print'
+
+    expect(page).to have_selector('.print-dropdown .dropdown-menu', visible: true)
+
     click_on 'Print'
 
     expect(page.response_headers['Content-Type']).to eq 'text/plain'
