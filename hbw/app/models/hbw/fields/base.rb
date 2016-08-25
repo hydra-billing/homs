@@ -53,6 +53,10 @@ module HBW
         definition.fetch('editable', true)
       end
 
+      def delimiter?
+        definition.fetch('delimiter', false)
+      end
+
       private
 
       def fail_unsupported_coercion(value)

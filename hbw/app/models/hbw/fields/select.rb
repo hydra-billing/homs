@@ -27,6 +27,7 @@ module HBW
           choices: choices,
           nullable: select? && nullable?,
           editable: editable?,
+          delimiter: delimiter?,
           url: url }
       end
 
