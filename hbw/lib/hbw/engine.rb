@@ -7,3 +7,4 @@ module HBW
 end
 
 require 'hbw/config'
+require 'hbw/logger'
