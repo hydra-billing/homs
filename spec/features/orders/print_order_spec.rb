@@ -36,7 +36,7 @@ feature 'Print', js: true do
   scenario 'multiple files' do
     click_on 'Orders'
     expect(page).to have_content 'Orders list'
-    widget_exist?
+    expect_widget_presence
 
     expect(page).to have_content first_order_code
     expect(page).to have_content second_order_code
