@@ -229,6 +229,16 @@ get:
               -
                 - 654321
                 - Option 2
+          - name: homsOrderDataBeginDate
+            type: datetime
+            label: Begin Date
+            css_class: col-xs-6 col-sm-4 col-md-3
+          - name: homsOrderDataEndDate
+            type: datetime
+            label: End Date
+            css_class: col-xs-6 col-sm-4 col-md-3
+            locale: ru
+            format: DD.MM.YYYY
   "repository/deployments/2/resourcedata/test_form_with_data_source.yml":
     d41d8cd98f00b204e9800998ecf8427e: |
       form:
@@ -379,6 +389,14 @@ post:
           - name: "homsOrderDataSelect"
             type: "select"
             value: "123456"
+            scope: "global"
+          - name: "homsOrderDataBeginDate"
+            type: "string"
+            value: "2016-09-30T14:52:20.000+03:00"
+            scope: "global"
+          - name: "homsOrderDataEndDate"
+            type: "string"
+            value: "2016-09-30T14:52:20.000+03:00"
             scope: "global"
       - id: "53452"
         url: "http://bpm.example.com/activiti-rest/service/runtime/tasks/815194"
