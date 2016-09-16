@@ -2,12 +2,12 @@ modulejs.define 'HBWFormDatetime', ['React', 'jQuery', 'moment'], (React, jQuery
   React.createClass
     getDefaultProps: ->
       params:
-        locale: 'ru'
-        format: 'DD.MM.YYYY'
+        locale: 'en'
+        format: 'MM/DD/YYYY'
 
     getInitialState: ->
-      locale = @props.params.locale or 'ru'
-      format = @props.params.format or 'DD.MM.YYYY'
+      locale = @props.params.locale or 'en'
+      format = @props.params.format or 'MM/DD/YYYY'
 
       if @props.value
         value = moment(Date.parse(@props.value))
