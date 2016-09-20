@@ -28,6 +28,7 @@ feature 'Edit order', js: true do
     expect(page).to have_content order_code
     expect_widget_presence
 
+    expect(page).to have_css('.order_creationDate')
     click_on_calendar('order_creationDate')
     click_checkbox_div('order_callBack')
     fill_in('order[problemDescription]', with: problem_descr)
