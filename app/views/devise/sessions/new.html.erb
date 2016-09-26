@@ -21,8 +21,11 @@
       <%= f.submit t('.submit'), :class => 'btn btn-primary pull-right' %>
       <% if devise_mapping.rememberable? -%>
         <div class="checkbox" style="width:150px">
-          <label>
-            <%= f.check_box :remember_me %> <%= t('.remember_me') %>
+          <label class="custom_boolean checkbox">
+            <%= f.check_box :remember_me %>
+            <span>
+              <%= t('.remember_me') %>
+            </span>
           </label>
         </div>
       <% end -%>
