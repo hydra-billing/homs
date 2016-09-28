@@ -239,6 +239,12 @@ get:
             css_class: col-xs-6 col-sm-4 col-md-3
             locale: ru
             format: DD.MM.YYYY
+          - name: homsOrderDataAddress
+            type: string
+            label: Address
+            css_class: col-xs-6 col-sm-4 col-md-3
+            regex: .+
+            message: Поле обязательное
   "repository/deployments/2/resourcedata/test_form_with_data_source.yml":
     d41d8cd98f00b204e9800998ecf8427e: |
       form:
@@ -397,6 +403,10 @@ post:
           - name: "homsOrderDataEndDate"
             type: "string"
             value: "2016-09-30T14:52:20.000+03:00"
+            scope: "global"
+          - name: "homsOrderDataAddress"
+            type: "string"
+            value: ""
             scope: "global"
       - id: "53452"
         url: "http://bpm.example.com/activiti-rest/service/runtime/tasks/815194"

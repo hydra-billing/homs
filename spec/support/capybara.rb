@@ -4,3 +4,4 @@ Capybara.automatic_reload = false
 Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
   "screenshot_#{example.full_description.gsub(' ', '-').gsub(/^.*\/spec\//,'')}"
 end
+Capybara.default_max_wait_time = 60

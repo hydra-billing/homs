@@ -1,10 +1,12 @@
-modulejs.define 'HBWFormString', ['React', 'jQuery'], (React, jQuery) ->
+modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin'], (React, jQuery, CallbacksMixin) ->
   React.createClass
+    mixins: [CallbacksMixin]
+
     SUBSTITUTION: 'foobar'
 
     getInitialState: ->
       values = this.getNormalizedInitialValues(this.props.value)
-      { defaultValue: values[0], value: values[1] }
+      { defaultValue: values[0], value: values[1], valid: true }
 
     patterns: {
       '9': '[0-9 ]'
@@ -23,21 +25,31 @@ modulejs.define 'HBWFormString', ['React', 'jQuery'], (React, jQuery) ->
         onKeyUp: @onChange
         onKeyDown: @onChange
         onChange: @onChange
+        onBlur: @onBlur
+        onFocus: @onFocus
         disabled: @props.params.editable == false
       }
 
       `<div className={this.props.params.css_class} title={this.props.params.tooltip}>
         <div className="form-group">
           <span className={this.props.params.label_css}>{this.props.params.label}</span>
-          <input {...opts} className="form-control" />
+          <input {...opts} ref="input" className={'form-control ' + (!this.state.valid && ' invalid')} data-toggle='tooltip' data-placement='bottom' data-original-title={this.props.params.message} data-trigger='manual' />
           {!opts.disabled && <input name={this.props.name} value={this.state.value} type="hidden" />}
         </div>
       </div>`
 
-    componentDidMount: -> @hijack_formatter()
+    componentDidMount: ->
+      jQuery('[data-toggle="tooltip"]').tooltip(animation: false)
 
-    hijack_formatter: ->
-      $el = jQuery(React.findDOMNode(@)).find('input').first()
+      @validateOnSubmit()
+      @hijackFormatter()
+      @onLoadValidation()
+
+    validateOnSubmit: ->
+      @bind('hbw:validate-form', @onFormSubmit)
+
+    hijackFormatter: ->
+      $el = @getElement().first()
 
       if this.props.params.pattern
         this.extractValueRegexp = this.buildExtractRegexp(this.props.params.pattern)
@@ -48,9 +60,66 @@ modulejs.define 'HBWFormString', ['React', 'jQuery'], (React, jQuery) ->
           persistent: true
         )
 
+    getElement: ->
+      jQuery(@refs['input'].getDOMNode())
+
+    onFormSubmit: ->
+      if @validationRequired()
+        $el = @getElement()
+
+        if @isValid()
+          $el.removeClass('invalid')
+        else
+          $el.addClass('invalid')
+
+          @setValidationState()
+          @controlValidationTooltip(@isValid())
+          @trigger('hbw:form-submitting-failed')
+
+    onLoadValidation: ->
+      if @validationRequired() && !!this.state.value
+        @controlValidationTooltip(@isValid())
+        @setValidationState()
+
     onChange: (event) ->
       $el = jQuery(event.target)
       @updateValue($el)
+
+      unless this.state.valid
+        @controlValidationTooltip(@isValid())
+
+        if @validationRequired()
+          @setValidationState()
+
+    onBlur: (event) ->
+      @controlValidationTooltip(true)
+
+      if @validationRequired()
+        @setValidationState()
+
+    onFocus: (event) ->
+      unless this.state.valid
+        @controlValidationTooltip(@isValid())
+
+        if @validationRequired() && !@isValid()
+          @setValidationState()
+
+    setValidationState: ->
+      @setState(valid: @isValid())
+
+    controlValidationTooltip: (toHide) ->
+      if toHide
+        action = 'hide'
+      else
+        action = 'show'
+
+      jQuery('[name="' + this.props.name + '"]').tooltip(action)
+
+    isValid: ->
+      (this.state.value or '').search(new RegExp(this.props.params.regex)) >= 0
+
+    validationRequired: ->
+      !!this.props.params.regex
 
     updateValue: ($el) ->
       if @extractValueRegexp

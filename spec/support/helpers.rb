@@ -2,6 +2,7 @@ require 'support/helpers/sessions_helper'
 require 'support/helpers/orders_helper'
 require 'support/helpers/order_types_helper'
 require 'support/helpers/users_helper'
+require 'support/helpers/wait_for_ajax_helper'
 
 FIXTURES_PATH = File.join(__FILE__, '..', '..', '..', 'fixtures')
 
@@ -16,8 +17,9 @@ RSpec.configure do |config|
     end
   end, type: :feature)
 
-  config.include Features::SessionsHelper,   type: :feature
-  config.include Features::OrdersHelper,     type: :feature
-  config.include Features::OrderTypesHelper, type: :feature
-  config.include Features::UsersHelper,      type: :feature
+  config.include Features::SessionsHelper,    type: :feature
+  config.include Features::OrdersHelper,      type: :feature
+  config.include Features::OrderTypesHelper,  type: :feature
+  config.include Features::UsersHelper,       type: :feature
+  config.include Features::WaitForAjaxHelper, type: :feature
 end

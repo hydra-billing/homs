@@ -21,7 +21,7 @@ modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
       `<div className='hbw-form'>
         <Error error={this.state.error || this.props.error} />
         <span>{this.props.pending}</span>
-        <form method="post" onSubmit={this.submit}>
+        <form method="post" ref="form" onSubmit={this.submit}>
           {this.iterateControls(this.props.form.fields)}
           {this.submitControl(this.props.form.fields)}
         </form>
@@ -67,13 +67,19 @@ modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
     submit: (e) ->
       e.preventDefault()
       return if @state.submitting
-      @trigger('hbw:submit-form', @serializeForm())
+      @trigger('hbw:validate-form')
+      @trigger('hbw:submit-form', @serializeForm()) if @isFormValid()
+
+    getElement: ->
+      jQuery(@refs['form'].getDOMNode())
+
+    isFormValid: ->
+      @getElement().find('input[type="text"].invalid').length == 0
 
     serializeForm: ->
       variables = {}
 
-      e = jQuery(React.findDOMNode(this)).find('form')
-      jQuery.each(e.serializeArray(), (i, field) ->
+      jQuery.each(@getElement().serializeArray(), (i, field) ->
         variables[field.name] = field.value
       )
 

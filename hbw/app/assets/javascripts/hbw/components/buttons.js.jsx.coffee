@@ -16,6 +16,8 @@ modulejs.define(
       mixins: [CallbacksMixin, TranslationsMixin]
 
       getInitialState: ->
+        @setGuid()
+
         buttons: []
         subscription: @createSubscription()
         pollInterval: 5000

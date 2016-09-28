@@ -1,9 +1,12 @@
 modulejs.define 'HBWUIDMixin', [], ->
-  getDefaultProps: ->
-    guid: 'hbw-' + Math.floor(Math.random() * 0xFFFF)
+  setGuid: ->
+    @guid = 'hbw-' + Math.floor(Math.random() * 0xFFFF)
 
   getComponentId: ->
-    @props.guid
+    @guid
+
+  componentWillMount: ->
+    @setGuid() unless @guid
 
 modulejs.define 'HBWCallbacksMixin', ['HBWUIDMixin'], (UIDMixin) ->
   mixins: [UIDMixin]
@@ -22,6 +25,8 @@ modulejs.define 'HBWCallbacksMixin', ['HBWUIDMixin'], (UIDMixin) ->
 
 modulejs.define 'HBWTasksMixin', [], ->
   getInitialState: ->
+    @setGuid()
+
     subscription: @createSubscription()
     pollInterval: 5000
     syncing: false

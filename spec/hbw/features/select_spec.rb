@@ -3,9 +3,6 @@ feature 'Check select with', js: true do
   let(:first_value)           { 'Option 1' }
 
   before(:each) do
-    OrderSequenceService.new.destroy
-    OrderSequenceService.new.create
-
     user = FactoryGirl.create(:user)
 
     signin(user.email, user.password)
