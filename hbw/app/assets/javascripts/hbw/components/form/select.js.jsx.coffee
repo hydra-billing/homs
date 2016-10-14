@@ -1,8 +1,8 @@
 modulejs.define 'HBWFormSelect',
-  ['React', 'HBWTranslationsMixin', 'jQuery'],
-  (React, TranslationsMixin, jQuery) ->
+  ['React', 'HBWTranslationsMixin', 'jQuery', 'HBWDeleteIfMixin'],
+  (React, TranslationsMixin, jQuery, DeleteIfMixin) ->
     React.createClass
-      mixins: [TranslationsMixin]
+      mixins: [TranslationsMixin, DeleteIfMixin]
 
       getInitialState: ->
         value = @getChosenValue() or ''
@@ -23,6 +23,8 @@ modulejs.define 'HBWFormSelect',
         }
 
         cssClass = @props.params.css_class
+        cssClass += ' hidden' if this.hidden
+
         tooltip = @props.params.tooltip
         label = @props.params.label
         labelCss = @props.params.label_css

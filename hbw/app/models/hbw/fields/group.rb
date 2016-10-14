@@ -12,7 +12,9 @@ module HBW
           type: type,
           label: label,
           css_class: css_class,
-          fields: fields.map(&:as_json) }
+          fields: fields.map(&:as_json),
+          delete_if: delete_if,
+          variables: task.definition['variables'] }
       end
 
       def fetch

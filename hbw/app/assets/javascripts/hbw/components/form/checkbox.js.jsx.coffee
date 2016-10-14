@@ -1,5 +1,7 @@
-modulejs.define 'HBWFormCheckbox', ['React'], (React) ->
+modulejs.define 'HBWFormCheckbox', ['React', 'HBWDeleteIfMixin'], (React, DeleteIfMixin) ->
   React.createClass
+    mixins: [DeleteIfMixin]
+
     render: ->
       opts = {
         name: @props.name
@@ -7,14 +9,16 @@ modulejs.define 'HBWFormCheckbox', ['React'], (React) ->
         defaultChecked: @props.value
       }
 
-      css_class = @props.params.css_class
-      tooltip   = @props.params.tooltip
-      label     = @props.params.label
-      label_css = 'hbw-checkbox-label ' + (@props.params.label_css or '')
+      inputCSS = @props.params.css_class
+      inputCSS += ' hidden' if this.hidden
 
-      `<div className={css_class} title={tooltip}>
+      tooltip  = @props.params.tooltip
+      label    = @props.params.label
+      labelCSS = 'hbw-checkbox-label ' + (@props.params.label_css or '')
+
+      `<div className={inputCSS} title={tooltip}>
         <div className="form-group">
-          <label className={label_css}>
+          <label className={labelCSS}>
             <input type='checkbox' {...opts} />
             <span>{' ' + label}</span>
           </label>

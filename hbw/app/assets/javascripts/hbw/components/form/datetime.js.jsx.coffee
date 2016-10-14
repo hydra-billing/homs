@@ -1,5 +1,7 @@
-modulejs.define 'HBWFormDatetime', ['React', 'jQuery', 'moment'], (React, jQuery, moment) ->
+modulejs.define 'HBWFormDatetime', ['React', 'jQuery', 'moment', 'HBWDeleteIfMixin'], (React, jQuery, moment, DeleteIfMixin) ->
   React.createClass
+    mixins: [DeleteIfMixin]
+
     getDefaultProps: ->
       params:
         locale: 'en'
@@ -36,6 +38,8 @@ modulejs.define 'HBWFormDatetime', ['React', 'jQuery', 'moment'], (React, jQuery
         isoValue = ''
 
       inputCSS = 'form-group ' + this.props.params.css_class
+      inputCSS += ' hidden' if this.hidden
+
       `<div className={inputCSS} title={this.props.params.tooltip}>
          <span className={this.props.params.label_css}>{this.props.params.label}</span>
          <div className="input-group date datetime-picker">

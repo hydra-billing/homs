@@ -56,6 +56,8 @@ module HBW
           nullable: select? && nullable?,
           editable: editable?,
           delimiter: delimiter?,
+          delete_if: delete_if,
+          variables: task.definition['variables'],
           url: url }
       end
 

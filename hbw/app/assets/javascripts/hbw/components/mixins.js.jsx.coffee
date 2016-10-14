@@ -47,3 +47,63 @@ modulejs.define 'HBWTasksMixin', [], ->
 
 modulejs.define 'HBWTranslationsMixin', ['HBWTranslator'], (Translator) ->
   t: (key) -> Translator.translate(key)
+
+modulejs.define 'HBWDeleteIfMixin', [], ->
+  variables: ->
+    @props.params.variables || @props.params.task.definition.variables
+
+  variableByName: (name) ->
+    for variable in @variables()
+      return variable.value if variable.name == name
+
+  deleteIf: ->
+    conditions = @getConditions()
+
+    if jQuery.isEmptyObject(conditions)
+      false
+    else
+      conditionType = @conditionType(conditions[0])
+
+      result = for condition in conditions
+        if conditionType == 'or'
+          @evaluateOrCondition(condition)
+        else
+          @evaluateAndCondition(condition)
+
+      if conditionType == 'or'
+        @some(result)
+      else
+        @every(result)
+
+  getConditions: ->
+    @props.params.delete_if || []
+
+  conditionType: (condition) ->
+    if condition.constructor == Array
+      'or'
+    else
+      'and'
+
+  evaluateAndCondition: (data) ->
+    eval(data.condition.replace('$var', @variableByName(data.variable)))
+
+  evaluateOrCondition: (data) ->
+    result = for inner_condition in data
+      @evaluateAndCondition(inner_condition)
+
+    @every(result)
+
+  componentWillMount: ->
+    @hidden = @deleteIf()
+
+  every: (results) ->
+    for result in results
+      return result if result == false
+
+    true
+
+  some: (results) ->
+    for result in results
+      return result if result == true
+
+    false

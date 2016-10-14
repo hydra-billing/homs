@@ -1,10 +1,15 @@
 modulejs.define 'HBWFormGroup', ['React', 'HBWFormDatetime', \
   'HBWFormSubmitSelect', 'HBWFormUser', 'HBWFormSelect', \
-  'HBWFormString', 'HBWFormText', 'HBWFormCheckbox', 'HBWFormStatic'],
-  (React, Datetime, SubmitSelect, User, Select, String, Text, Checkbox, Static) ->
+  'HBWFormString', 'HBWFormText', 'HBWFormCheckbox', 'HBWFormStatic', \
+  'HBWDeleteIfMixin'],
+  (React, Datetime, SubmitSelect, User, Select, String, Text, Checkbox, Static, DeleteIfMixin) ->
     React.createClass
+      mixins: [DeleteIfMixin]
+
       render: ->
         inputCSS = 'tab-panel form-group ' + @props.params.css_class
+        inputCSS += ' hidden' if this.hidden
+
         `<div className={inputCSS}>
            <ul className='nav nav-tabs' role='tablist'>
              <li className='active' role='presentation' title={this.props.params.tooltip}>

@@ -245,6 +245,102 @@ get:
             css_class: col-xs-6 col-sm-4 col-md-3
             regex: .+
             message: Поле обязательное
+          - name: homsOrderDataWorkPlace
+            type: string
+            label: Work place
+            css_class: col-xs-6 col-sm-4 col-md-3
+            delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
+              - variable: homsOrderDataOneVariable
+                condition: $var == 1
+          - name: homsOrderDataHomePlace
+            type: string
+            label: Home place
+            css_class: col-xs-6 col-sm-4 col-md-3
+            delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var != 0
+              - variable: homsOrderDataOneVariable
+                condition: $var == 1
+          - name: homsOrderDataReason
+            type: string
+            label: Reason
+            css_class: col-xs-6 col-sm-4 col-md-3
+            delete_if:
+              -
+                - variable: homsOrderDataZeroVariable
+                  condition: $var != 0
+                - variable: homsOrderDataOneVariable
+                  condition: $var == 1
+              -
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+          - name: homsOrderDataRecommendation
+            type: string
+            label: Reason
+            css_class: col-xs-6 col-sm-4 col-md-3
+            delete_if:
+              -
+                - variable: homsOrderDataZeroVariable
+                  condition: $var != 0
+                - variable: homsOrderDataOneVariable
+                  condition: $var == 1
+              -
+                - variable: homsOrderDataOneVariable
+                  condition: $var == 0
+          - name: homsOrderDataSomeStr
+            type: string
+            label: Reason
+            css_class: col-xs-6 col-sm-4 col-md-3
+            delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
+          - name: homsOrderDataSomeDatetime
+            type: datetime
+            label: Some datetime
+            css_class: col-xs-6 col-sm-4 col-md-3
+            delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
+          - name: homsOrderDataSomeCheckbox
+            type: checkbox
+            label: Some checkbox
+            css_class: col-xs-6 col-sm-4 col-md-3 my-checkbox
+            delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
+          - name: homsOrderDataSomeSelect
+            type: select
+            label: Some select
+            css_class: col-xs-6 col-sm-4 col-md-3 my-select
+            choices: []
+            delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
+          - name: homsOrderDataSomeStatic
+            type: static
+            html: Some static
+            css_class: col-xs-6 col-sm-4 col-md-3
+            delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
+          - name: homsOrderDataSomeText
+            type: text
+            label: Text
+            css_class: col-xs-6 col-sm-4 col-md-3
+            delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
+        - name: group2
+          type: group
+          label: Hidden group
+          css_class: col-xs-12
+          fields: []
+          delete_if:
+            - variable: homsOrderDataZeroVariable
+              condition: $var == 0
+
   "repository/deployments/2/resourcedata/test_form_with_data_source.yml":
     d41d8cd98f00b204e9800998ecf8427e: |
       form:
@@ -405,6 +501,42 @@ post:
             value: "2016-09-30T14:52:20.000+03:00"
             scope: "global"
           - name: "homsOrderDataAddress"
+            type: "string"
+            value: ""
+            scope: "global"
+          - name: "homsOrderDataWorkPlace"
+            type: "string"
+            value: ""
+            scope: "global"
+          - name: "homsOrderDataZeroVariable"
+            type: "number"
+            value: 0
+            scope: "global"
+          - name: "homsOrderDataOneVariable"
+            type: "number"
+            value: 1
+            scope: "global"
+          - name: "homsOrderDataHomePlace"
+            type: "string"
+            value: ""
+            scope: "global"
+          - name: "homsOrderDataReason"
+            type: "string"
+            value: ""
+            scope: "global"
+          - name: "homsOrderDataRecommendation"
+            type: "string"
+            value: ""
+            scope: "global"
+          - name: "homsOrderDataSomeStr"
+            type: "string"
+            value: ""
+            scope: "global"
+          - name: "homsOrderDataSomeDatetime"
+            type: "string"
+            value: ""
+            scope: "global"
+          - name: "homsOrderDataSomeText"
             type: "string"
             value: ""
             scope: "global"

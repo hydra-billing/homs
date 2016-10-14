@@ -1,5 +1,7 @@
-modulejs.define 'HBWFormText', ['React'], (React) ->
+modulejs.define 'HBWFormText', ['React', 'HBWDeleteIfMixin'], (React, DeleteIfMixin) ->
   React.createClass
+    mixins: [DeleteIfMixin]
+
     render: ->
       opts = { name: this.props.name, className: 'form-control' }
       opts.rows = this.props.params.rows
@@ -8,12 +10,13 @@ modulejs.define 'HBWFormText', ['React'], (React) ->
 
       title = this.props.params.tooltip
       label = this.props.params.label
-      label_css = this.props.params.label_css
-      css_class = this.props.params.css_class
+      labelCss = this.props.params.label_css
+      cssClass = this.props.params.css_class
+      cssClass += ' hidden' if this.hidden
 
-      `<div className={css_class} title={title}>
+      `<div className={cssClass} title={title}>
         <div className='form-group'>
-          <span className={label_css}>{label}</span>
+          <span className={labelCss}>{label}</span>
           <textarea {...opts}/>
         </div>
       </div>`

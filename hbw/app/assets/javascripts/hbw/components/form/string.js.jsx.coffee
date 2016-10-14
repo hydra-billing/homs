@@ -1,6 +1,6 @@
-modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin'], (React, jQuery, CallbacksMixin) ->
+modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDeleteIfMixin'], (React, jQuery, CallbacksMixin, DeleteIfMixin) ->
   React.createClass
-    mixins: [CallbacksMixin]
+    mixins: [CallbacksMixin, DeleteIfMixin]
 
     SUBSTITUTION: 'foobar'
 
@@ -30,7 +30,10 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin'], (Reac
         disabled: @props.params.editable == false
       }
 
-      `<div className={this.props.params.css_class} title={this.props.params.tooltip}>
+      inputCSS = this.props.params.css_class
+      inputCSS += ' hidden' if this.hidden
+
+      `<div className={inputCSS} title={this.props.params.tooltip}>
         <div className="form-group">
           <span className={this.props.params.label_css}>{this.props.params.label}</span>
           <input {...opts} ref="input" className={'form-control ' + (!this.state.valid && ' invalid')} data-toggle='tooltip' data-placement='bottom' data-original-title={this.props.params.message} data-trigger='manual' />
@@ -44,6 +47,11 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin'], (Reac
       @validateOnSubmit()
       @hijackFormatter()
       @onLoadValidation()
+
+    componentWillMount: ->
+      @setGuid() unless @guid
+
+      @hidden = @deleteIf()
 
     validateOnSubmit: ->
       @bind('hbw:validate-form', @onFormSubmit)
