@@ -59,7 +59,7 @@ modulejs.define 'HBWDeleteIfMixin', [], ->
   deleteIf: ->
     conditions = @getConditions()
 
-    if jQuery.isEmptyObject(conditions)
+    if (jQuery.isArray(conditions) && conditions.length == 0) || jQuery.isEmptyObject(conditions)
       false
     else
       conditionType = @conditionType(conditions[0])

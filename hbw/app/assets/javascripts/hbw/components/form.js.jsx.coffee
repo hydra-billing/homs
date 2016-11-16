@@ -85,7 +85,7 @@ modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
 
       # get hands dirty with select2 elements,
       # 'cause they are not grabbed with serializeArray()
-      selects = jQuery(e).find('select.select2-hidden-accessible')
+      selects = jQuery(@getElement()).find('select.select2-hidden-accessible')
       jQuery.each(selects, (i, select) ->
         name = jQuery(select).attr('name')
         value = select.value
