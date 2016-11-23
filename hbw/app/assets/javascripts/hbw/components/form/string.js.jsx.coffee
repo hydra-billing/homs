@@ -27,7 +27,7 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
         onChange: @onChange
         onBlur: @onBlur
         onFocus: @onFocus
-        disabled: @props.params.editable == false
+        readOnly: @props.params.editable == false
       }
 
       inputCSS = this.props.params.css_class
@@ -37,7 +37,7 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
         <div className="form-group">
           <span className={this.props.params.label_css}>{this.props.params.label}</span>
           <input {...opts} ref="input" className={'form-control ' + (!this.state.valid && ' invalid')} data-toggle='tooltip' data-placement='bottom' data-original-title={this.props.params.message} data-trigger='manual' />
-          {!opts.disabled && <input name={this.props.name} value={this.state.value} type="hidden" />}
+          {!opts.readOnly && <input name={this.props.name} value={this.state.value} type="hidden" />}
         </div>
       </div>`
 
