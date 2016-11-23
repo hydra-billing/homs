@@ -218,6 +218,11 @@ get:
           label: Choose option
           css_class: col-xs-12
           fields:
+          - name: homsOrderDataStatic
+            type: static
+            label: TEST
+            css_class: col-xs-12 col-sm-6 col-md-4
+            html: "<h4> TEST STATIC $homsOrderCode </h4>"
           - name: homsOrderDataSelect
             type: select
             label: Options
@@ -352,6 +357,11 @@ get:
           label: Choose option
           css_class: col-xs-12
           fields:
+          - name: homsOrderDataStatic
+            type: static
+            label: TEST
+            css_class: col-xs-12 col-sm-6 col-md-4
+            html: "<h4> $homsOrderDataSelect TEST STATIC $homsOrderCode </h4>"
           - name: homsOrderDataSelect
             type: select
             label: Options
@@ -369,6 +379,11 @@ get:
           label: Choose option
           css_class: col-xs-12
           fields:
+          - name: homsOrderDataStatic
+            type: static
+            label: TEST
+            css_class: col-xs-12 col-sm-6 col-md-4
+            html: "<h4> $wrongBPVariable TEST STATIC $wrongBPVariable </h4>"
           - name: homsOrderDataSelect
             type: select
             label: Options
@@ -390,6 +405,11 @@ get:
           label: Choose option
           css_class: col-xs-12
           fields:
+          - name: homsOrderDataStatic
+            type: static
+            label: TEST
+            css_class: col-xs-12 col-sm-6 col-md-4
+            html: "<h4> $homsOrderCode TEST STATIC $homsOrderCode </h4>"
           - name: homsOrderDataSelect
             type: select
             mode: select
