@@ -1,7 +1,7 @@
 module CustomFields
   module DataTypes
     class String < CustomFields::Base
-      MAX_LENGTH = 255
+      MAX_LENGTH = 1023
 
       def validate_definition
         may_have_key?(:default, in: options, as: ::String) && (
