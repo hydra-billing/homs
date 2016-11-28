@@ -215,6 +215,7 @@ en:
           attributes:
             data:
               fields_definition_invalid: Order type this order was created with has invalid fields definition. This is Fatal Error. Call admin.
+              form_key_missed_in_task: 'Form with key «%{form_key}» is not found in current task'
         user:
           blank: is not specified
           attributes:
@@ -244,6 +245,8 @@ en:
     select2:
       not_set: Not set
     user_not_found: Current user not found in Activiti
+    bp_running: The business process is running
+    field_not_defined_in_bp: "Field with name %{field_name} not defined in BP variables"
 
   doc:
     common:

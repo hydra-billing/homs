@@ -24,7 +24,7 @@ feature 'Check select with', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-3'
+    click_and_wait('ORD-3')
 
     expect(page).to have_content 'ORD-3'
 
@@ -38,7 +38,7 @@ feature 'Check select with', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-4'
+    click_and_wait('ORD-4')
 
     expect(page).to have_content 'ORD-4'
     expect(page).to have_selector("[name='homsOrderDataSelect']")
@@ -51,7 +51,7 @@ feature 'Check select with', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-5'
+    click_and_wait('ORD-5')
 
     expect(page).to have_content 'ORD-5'
     expect(page).to have_selector("[name='homsOrderDataSelect']")
@@ -64,11 +64,55 @@ feature 'Check select with', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-6'
+    click_and_wait('ORD-6')
 
     expect(page).to have_content 'ORD-6'
     expect(page).to have_selector("[name='homsOrderDataSelect']")
     expect(select2_text('homsOrderDataSelect')).to eq first_value
+    expect_widget_presence
+  end
+
+  scenario 'defining choices as arrays' do
+    click_on 'Orders'
+    expect(page).to have_content 'Orders list'
+    expect_widget_presence
+
+    click_and_wait ('ORD-7')
+
+    expect(page).to have_content 'ORD-7'
+
+    expect(page).to have_selector("[name='homsOrderDataSelect']")
+    expect(select2_text('homsOrderDataSelect')).to eq first_value
+    expect(select_options('homsOrderDataSelect')).to eq ['Option 1', 'Option 2']
+    expect(select_values('homsOrderDataSelect')).to  eq ['112233', '445566']
+    expect_widget_presence
+  end
+
+  scenario 'defining choices as strings' do
+    click_on 'Orders'
+    expect(page).to have_content 'Orders list'
+    expect_widget_presence
+
+    click_and_wait ('ORD-8')
+
+    expect(page).to have_content 'ORD-8'
+    expect(page).to have_selector("[name='homsOrderDataSelect']")
+    expect(select2_text('homsOrderDataSelect')).to eq first_value
+    expect(select_options('homsOrderDataSelect')).to eq ['Option 1', 'Option 2']
+    expect(select_values('homsOrderDataSelect')).to  eq ['Option 1', 'Option 2']
+    expect_widget_presence
+  end
+
+  scenario 'field name not defined in BP variables' do
+    click_on 'Orders'
+    expect(page).to have_content 'Orders list'
+    expect_widget_presence
+
+    click_and_wait ('ORD-9')
+
+    expect(page).to have_content 'ORD-9'
+    expect(page).to have_selector("[name='homsOrderNotInVBPVariables']")
+    expect(page).to have_content 'Field with name homsOrderNotInVBPVariables not defined in BP variables'
     expect_widget_presence
   end
 end
