@@ -17,11 +17,16 @@ class HBW::Widget
 
   include HBW::Inject[:adapter]
 
-  def bp_buttons(entity_identifier, entity_type)
-    return [] if @adapter.bp_running?(entity_identifier)
-
-    self.class.entity_type_buttons(entity_type).map do |button_params|
-      button_params.slice(*%i(name title class fa_class bp_code))
+  def bp_buttons(entity_identifier, entity_type, current_user_identifier)
+    if !@adapter.user_exist?(current_user_identifier)
+      {}
+    elsif @adapter.bp_running?(entity_identifier, current_user_identifier)
+      {buttons: [], bp_running: true}
+    else
+      buttons = self.class.entity_type_buttons(entity_type).map do |button_params|
+        button_params.slice(*%i(name title class fa_class bp_code))
+      end
+      {buttons: buttons, bp_running: false}
     end
   end
 

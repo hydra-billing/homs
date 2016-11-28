@@ -51,8 +51,11 @@ module HBW
 
       # TODO: How to distinguish between running process instance and done
       # TODO: Think of suspended process instances
-      def bp_running?(entity_code)
-        !process_instances(entity_code).empty?
+      def bp_running?(entity_code, current_user_identifier)
+        !process_instances(entity_code).empty? || !task_list_response(current_user_identifier,
+                                                                      entity_code,
+                                                                      1000,
+                                                                      true).empty?
       end
 
       def start_process(bp_code,
@@ -112,9 +115,9 @@ module HBW
                  variables: variables)
       end
 
-      def task_list_response(email, entity_code, size)
+      def task_list_response(email, entity_code, size, for_all_users = false)
         HBW::Task.with_connection(api) do
-          HBW::Task.fetch(email, entity_code, size)
+          HBW::Task.fetch(email, entity_code, size, for_all_users)
         end
       end
 
