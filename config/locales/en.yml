@@ -244,6 +244,7 @@ en:
     select2:
       not_set: Not set
     user_not_found: Current user not found in Activiti
+    bp_running: The business process is running
 
   doc:
     common:

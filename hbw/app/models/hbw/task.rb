@@ -13,21 +13,22 @@ module HBW
 
     class << self
       using_connection \
-      def fetch(email, entity_code, size = 1000)
+      def fetch(email, entity_code, size = 1000, for_all_users = false)
         user = ::HBW::BPMUser.fetch(email)
-        operation = entity_code == '%' ? :like : :equals
-        wrap(
-          do_request(:post,
-                     'query/tasks',
-                     assignee: user.try(:id) || email,
-                     active: true,
-                     includeProcessVariables: true,
-                     processInstanceVariables: [
-                       name: HBW::Widget.config['entity_code_key'],
-                       operation: operation,
-                       value: entity_code
-                     ],
-                     size: size))
+        unless user.nil?
+          wrap(
+            do_request(:post,
+                       'query/tasks',
+                       assignee: assignee(user, email, for_all_users),
+                       active: true,
+                       includeProcessVariables: true,
+                       processInstanceVariables: [
+                         name: HBW::Widget.config['entity_code_key'],
+                         operation: operation(entity_code),
+                         value: entity_code
+                       ],
+                       size: size))
+        end
       end
 
       def wrap(tasks)
@@ -37,6 +38,20 @@ module HBW
         end
         tasks.map { |task|
           new(task.merge('processDefinition' => definitions[task.fetch('processDefinitionUrl')])) }
+      end
+
+      def assignee(user, email, for_all_users)
+        unless for_all_users
+          user.try(:id) || email
+        end
+      end
+
+      def operation(entity_code)
+        if entity_code == '%'
+          :like
+        else
+          :equals
+        end
       end
     end
 
