@@ -24,10 +24,12 @@ feature 'Print', js: true do
 
     click_on_icon 'fa.fa-print'
 
-    expect(page).to have_selector('.print-dropdown .dropdown-menu', visible: true)
+    page.has_css?('.print-dropdown .dropdown-menu', wait: 5, visible: true)
+    expect(page).to have_selector('.print-dropdown .dropdown-menu', visible: true )
 
     click_on 'Print'
 
+    wait_for_ajax
     expect(page.response_headers['Content-Type']).to eq 'text/plain'
     expect(page.response_headers['Content-Disposition']).to eq "attachment; filename*=UTF-8''test_1.txt"
     expect_widget_presence
