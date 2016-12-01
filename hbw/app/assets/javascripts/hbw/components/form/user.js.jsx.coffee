@@ -24,15 +24,15 @@ modulejs.define 'HBWFormUser', ['React', 'jQuery'], (React, jQuery) ->
           url: '/users/lookup'
           dataType: 'json'
           delay: 250
-          data: (params) -> { q: params.term, page: params.page }
-          processResults: (data, page) -> { results: data.users }
+          processResults: (data, page) -> { results: data }
+          data: (params) ->
+            q: params.term
+            page: params.page
           formatSelection: (node) -> node.id
           cache: true
         }
         minimumInputLength: 1
       })
-      # Doesn't set value, have no clue why
-      select.select2('val', this.props.value) if this.props.value
 
       # kinda hack
       e.find(".select2-selection").height(32)

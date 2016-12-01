@@ -18,15 +18,15 @@ feature 'Print', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on first_order_code
+    click_and_wait(first_order_code)
     expect(page).to have_content first_order_code
     expect_widget_presence
 
     click_on_icon 'fa.fa-print'
 
-    expect(page).to have_selector('.print-dropdown .dropdown-menu', visible: true)
+    expect(page).to have_selector('.print-dropdown .dropdown-menu', visible: true, wait: 5)
 
-    click_on 'Print'
+    click_and_wait('Print')
 
     expect(page.response_headers['Content-Type']).to eq 'text/plain'
     expect(page.response_headers['Content-Disposition']).to eq "attachment; filename*=UTF-8''test_1.txt"
@@ -42,7 +42,7 @@ feature 'Print', js: true do
     expect(page).to have_content second_order_code
     expect(page).to have_content 'Print'
 
-    click_on 'Print'
+    click_and_wait('Print')
 
     expect(page).to have_content 'Print task 123 processing started. Check e-mail for result.'
   end

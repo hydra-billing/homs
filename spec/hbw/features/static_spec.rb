@@ -20,7 +20,7 @@ feature 'Check static field', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-1'
+    click_and_wait('ORD-1')
 
     expect(page).to have_content 'ORD-1'
     expect(page).to have_content 'TEST STATIC ORD-1'
@@ -32,7 +32,7 @@ feature 'Check static field', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-2'
+    click_and_wait('ORD-2')
 
     expect(page).to have_content 'ORD-2'
     expect(page).to have_content '123 TEST STATIC ORD-2'
@@ -44,7 +44,7 @@ feature 'Check static field', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-3'
+    click_and_wait('ORD-3')
 
     expect(page).to have_content 'ORD-3'
     expect(page).to have_content '$wrongBPVariable TEST STATIC $wrongBPVariable'
@@ -56,7 +56,7 @@ feature 'Check static field', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-4'
+    click_and_wait('ORD-4')
 
     expect(page).to have_content 'ORD-4'
     expect(page).to have_content 'ORD-4 TEST STATIC ORD-4'

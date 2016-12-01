@@ -15,13 +15,12 @@ feature 'Validate form', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-1'
+    click_and_wait('ORD-1')
+
     expect(page).to have_selector("[name='homsOrderDataAddress']")
     expect(page).to have_selector("button[type='submit']")
 
-    click_on 'Submit'
+    click_and_wait('Submit')
     expect(page).to have_content 'Поле обязательное'
-
-    wait_for_ajax
   end
 end

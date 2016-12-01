@@ -12,9 +12,8 @@ feature 'Control fields on form', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-1'
+    click_and_wait('ORD-1')
 
-    # just to wait until BP form is loaded
     expect(page).to have_selector "[name='homsOrderDataAddress']"
   end
 

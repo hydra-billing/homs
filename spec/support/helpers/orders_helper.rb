@@ -179,5 +179,10 @@ module Features
     def click_on_bp_calendar(task_id, field_name)
       page.find("[data-reactid='.0.0.0.1:$task_id_#{task_id}.1.0.0.2.0:$group1.0.1.0.$homsOrderData#{field_name}.0.1.2.0']").click
     end
+
+    def click_and_wait(text)
+      click_on(text)
+      wait_for_ajax
+    end
   end
 end
