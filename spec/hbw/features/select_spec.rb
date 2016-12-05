@@ -24,7 +24,7 @@ feature 'Check select with', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-3'
+    click_and_wait('ORD-3')
 
     expect(page).to have_content 'ORD-3'
 
@@ -38,7 +38,7 @@ feature 'Check select with', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-4'
+    click_and_wait('ORD-4')
 
     expect(page).to have_content 'ORD-4'
     expect(page).to have_selector("[name='homsOrderDataSelect']")
@@ -51,7 +51,7 @@ feature 'Check select with', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-5'
+    click_and_wait('ORD-5')
 
     expect(page).to have_content 'ORD-5'
     expect(page).to have_selector("[name='homsOrderDataSelect']")
@@ -64,7 +64,7 @@ feature 'Check select with', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on 'ORD-6'
+    click_and_wait('ORD-6')
 
     expect(page).to have_content 'ORD-6'
     expect(page).to have_selector("[name='homsOrderDataSelect']")

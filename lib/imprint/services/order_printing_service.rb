@@ -79,8 +79,7 @@ module Imprint
 
         if result.success?
           result_data = result.to_h.with_indifferent_access
-
-          user_ids = result_data[:filter] ? result_data[:user_id] : [current_user.id, 'empty']
+          user_ids = result_data[:filter] ? result_data.try(:[], :user_id) : [current_user.id, 'empty']
 
           result_data.reverse_merge(
               user_id: user_ids,

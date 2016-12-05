@@ -28,6 +28,8 @@ module Features
     def logout
       page.first('.navbar-right .dropdown').click
       click_on 'Sign out'
+
+      expect(page).to have_selector('.authform', wait: 5, visible: true)
     end
   end
 end
