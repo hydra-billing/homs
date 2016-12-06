@@ -27,7 +27,7 @@ feature 'Create new order', js: true do
     click_checkbox_div('order_callBack')
     fill_in('order[problemDescription]', with: problem_descr)
     fill_in('order[contractNumber]',     with: contract_number)
-    click_on 'Add'
+    click_and_wait('Add')
 
     expect(page).to                                 have_content order_code
     expect(find_by_title('Creation date')).to       have_content current_date

@@ -153,7 +153,7 @@ get:
       startFormDefined: false
   "process-definitions/testProcess:9:9":
     d41d8cd98f00b204e9800998ecf8427e:
-      id: "testProcess:8:8"
+      id: "testProcess:9:9"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:9:9"
       key: "testProcess"
       version: 469

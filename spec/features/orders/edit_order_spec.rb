@@ -20,11 +20,13 @@ feature 'Edit order', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_on order_code
+    click_and_wait(order_code)
     expect(page).to have_content order_code
     expect_widget_presence
 
     click_on_icon 'fa.fa-pencil'
+
+    page.has_css?('.order-edit-form', wait: 5, visible: true)
     expect(page).to have_content order_code
     expect_widget_presence
 
@@ -33,7 +35,7 @@ feature 'Edit order', js: true do
     click_checkbox_div('order_callBack')
     fill_in('order[problemDescription]', with: problem_descr)
     fill_in('order[contractNumber]',     with: contract_number)
-    click_on 'Update Order'
+    click_and_wait('Update Order')
 
     expect(page).to                                 have_content order_code
     expect(find_by_title('Creation date')).to       have_content current_date

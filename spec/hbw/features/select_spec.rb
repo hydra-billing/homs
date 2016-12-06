@@ -17,6 +17,9 @@ feature 'Check select with', js: true do
     FactoryGirl.create(:order, order_type: order_type)
     FactoryGirl.create(:order, order_type: order_type)
     FactoryGirl.create(:order, order_type: order_type)
+    FactoryGirl.create(:order, order_type: order_type)
+    FactoryGirl.create(:order, order_type: order_type)
+    FactoryGirl.create(:order, order_type: order_type)
   end
 
   scenario 'nullable = true and placeholder present' do

@@ -18,7 +18,7 @@ feature 'Check datetime picker with', js: true do
     expect(page).to have_content title
     expect_widget_presence
 
-    click_on order_code
+    click_and_wait(order_code)
     expect_widget_presence
     expect(page).to have_content order_code
   end

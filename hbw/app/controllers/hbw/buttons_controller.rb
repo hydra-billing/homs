@@ -13,7 +13,7 @@ module HBW
     end
 
     def buttons
-      widget.bp_buttons(entity_identifier, entity_type)
+      widget.bp_buttons(entity_identifier, entity_type, current_user_identifier)
     end
 
     def bp_code

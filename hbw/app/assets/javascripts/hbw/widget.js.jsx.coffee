@@ -15,6 +15,7 @@ modulejs.define(
           translator: Translator
           forms: new Forms(connection)
           locale: @options.locale
+          userExist: true
 
         @$widgetContainer = jQuery(@options.widgetContainer)
         @$tasksMenuContainer = jQuery(@options.tasksMenuContainer)
@@ -84,5 +85,8 @@ modulejs.define(
           url: @env.connection.serverURL + '/users/check'
           method: 'GET'
           contentType: 'application/json').done((data) =>
-            @env.dispatcher.trigger('hbw:activiti-user-not-found') if !data.user_exist)
+            unless data.user_exist
+              @env.dispatcher.trigger('hbw:activiti-user-not-found')
+              @env.userExist = false
+            )
 )
