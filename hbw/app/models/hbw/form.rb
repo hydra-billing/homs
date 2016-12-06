@@ -9,6 +9,9 @@ module HBW
         process_definition = task.process_definition
         deployment = ::HBW::Deployment.fetch(process_definition)
         resource = deployment.resource(task.form_key)
+        if resource.nil?
+          raise ArgumentError.new(I18n.t('activerecord.errors.models.order.attributes.data.form_key_missed_in_task', form_key: task.form_key))
+        end
         definition_raw = do_request(:get, resource.fetch('contentUrl'))
         definition = YAML.load(definition_raw).fetch('form')
         new(definition.merge('processDefinition' => process_definition, 'task' => task))

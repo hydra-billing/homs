@@ -215,6 +215,7 @@ en:
           attributes:
             data:
               fields_definition_invalid: Order type this order was created with has invalid fields definition. This is Fatal Error. Call admin.
+              form_key_missed_in_task: 'Form with key «%{form_key}» is not found in current task'
         user:
           blank: is not specified
           attributes:
