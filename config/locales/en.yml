@@ -246,6 +246,7 @@ en:
       not_set: Not set
     user_not_found: Current user not found in Activiti
     bp_running: The business process is running
+    field_not_defined_in_bp: "Field with name %{field_name} not defined in BP variables"
 
   doc:
     common:

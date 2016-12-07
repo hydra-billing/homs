@@ -9,7 +9,7 @@ modulejs.define 'HBWFormSelect',
         {
           value: value
           choices: @getChoices(value)
-          error: not @hasValueInChoices(value) and value
+          error: not @hasValueInChoices(value) and value or @missFieldInVariables()
         }
 
       render: ->
@@ -28,12 +28,18 @@ modulejs.define 'HBWFormSelect',
         tooltip = @props.params.tooltip
         label = @props.params.label
         labelCss = @props.params.label_css
+
+        selectErrorMessage = I18n.t("js.field_not_defined_in_bp", field_name: @props.name)
+        selectErrorMessageCss = 'alert alert-danger'
+        selectErrorMessageCss += ' hidden' unless @missFieldInVariables()
+
         formGroupCss = 'form-group'
 
         formGroupCss += ' has-error' if @state.error
 
         `<div className={cssClass} title={tooltip}>
           <span className={labelCss}>{label}</span>
+          <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
           <div className={formGroupCss}>
             <select {...opts}>
               {this.buildOptions(this.state.choices)}
@@ -46,7 +52,7 @@ modulejs.define 'HBWFormSelect',
         @setState(
           value: newValue
           choices: @getChoices(newValue)
-          error: not @hasValueInChoices(newValue) and newValue
+          error: not @hasValueInChoices(newValue) and newValue or @missFieldInVariables()
         )
 
       componentDidMount: -> @hijackSelect2()
@@ -121,6 +127,8 @@ modulejs.define 'HBWFormSelect',
           return true if @isChoiceEqual(c, value)
 
         return false
+
+      missFieldInVariables: -> not @props.value?
 
       getChoices: (value) ->
         if @props.params.mode == 'select'
