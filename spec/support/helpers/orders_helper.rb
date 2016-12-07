@@ -56,6 +56,10 @@ module Features
       parent_node(page.find("[name='#{name}']")).find('.select2-selection__rendered')
     end
 
+    def select2_search_field
+      page.find('.select2-search__field')
+    end
+
     def select2_default_text(name)
       select2_text_node(name).text
     end
@@ -66,6 +70,10 @@ module Features
 
     def select2_multiple_text(name)
       select2_text_node(name).all('li[title]').map{|node| node.text.sub('×', '')}
+    end
+
+    def select2_value(name)
+      find_by_name(name).value
     end
 
     def select_options(name)
@@ -92,6 +100,14 @@ module Features
     def success_select_search(name, search)
       select2_text_node(name).find('.select2-search--inline').find('input').set(search)
       select2_options.map(&:text)
+    end
+
+    def select2_clear_cross(name)
+      parent_node(page.find("[name='#{name}']")).find('.select2-selection__clear')
+    end
+
+    def select2_no_clear(name)
+      expect(parent_node(page.find("[name='#{name}']"))).to have_no_selector('.select2-selection__clear')
     end
 
     def input_by_name(name)
