@@ -137,10 +137,14 @@ order_type:
       <<: *common
       type: number
       label: Pizza Price"].each do |order_type_file|
-    OrderType.create!(
-      file: order_type_file,
-      active: true
-    )
+    order_type_code = YAML.load(order_type_file).fetch('order_type').fetch('code')
+    existing_order_type = OrderType.find_by(code: order_type_code)
+    unless existing_order_type.present?
+      OrderType.create!(
+          file: order_type_file,
+          active: true
+      )
+    end
   end
 end
 
