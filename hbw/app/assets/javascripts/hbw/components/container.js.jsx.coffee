@@ -35,6 +35,7 @@ modulejs.define(
                    chosenTaskID={this.props.chosenTaskID}
                    entityCode={this.props.entityCode}
                    entityTypeCode={this.props.entityTypeCode}
+                   entityClassCode={this.props.entityClassCode}
                    processInstanceId={this.state.processInstanceId} />
           </div>`
         else
@@ -42,13 +43,14 @@ modulejs.define(
              <Error error={this.state.error} />
              <Buttons entityCode={this.props.entityCode}
                       entityTypeCode={this.props.entityTypeCode}
+                      entityClassCode={this.props.entityClassCode}
                       tasksFetched={this.state.tasksFetched}
                       showSpinner={!this.state.tasksFetched || this.state.processStarted}
                       env={this.props.env} />
           </div>`
 
       onFormSubmit: (task) ->
-        # remeber execution id of the last submitted form to open next form if
+        # remember execution id of the last submitted form to open next form if
         # task with the same processInstanceId will be loaded
         @setState(processInstanceId: task.processInstanceId)
 )

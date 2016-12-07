@@ -53,6 +53,7 @@ modulejs.define(
                  taskId={task.id}
                  entityCode={props.entityCode}
                  entityTypeCode={props.entityTypeCode}
+                 entityClassCode={props.entityClassCode}
                  collapsed={collapsed} />`
         )
 

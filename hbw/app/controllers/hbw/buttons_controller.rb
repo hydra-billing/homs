@@ -7,13 +7,14 @@ module HBW
     def create
       widget.start_bp(current_user_identifier,
                       bp_code,
-                      entity_identifier)
+                      entity_identifier,
+                      entity_class)
 
       render json: buttons.to_json
     end
 
     def buttons
-      widget.bp_buttons(entity_identifier, entity_type, current_user_identifier)
+      widget.bp_buttons(entity_identifier, entity_type, entity_class, current_user_identifier)
     end
 
     def bp_code

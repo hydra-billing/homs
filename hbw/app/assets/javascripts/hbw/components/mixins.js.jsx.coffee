@@ -39,7 +39,11 @@ modulejs.define 'HBWTasksMixin', [], ->
     @state.subscription.close()
 
   createSubscription: ->
-    @props.env.connection.subscribe(client: @getComponentId(), path: 'tasks')
+    @props.env.connection.subscribe(
+      client: @getComponentId()
+      path: 'tasks'
+      data:
+        entity_class: @props.env.entity_class)
       .syncing(=> @setState(syncing: true))
       .progress(=> @setState(error: null))
       .fail((response) => @setState(error: response))

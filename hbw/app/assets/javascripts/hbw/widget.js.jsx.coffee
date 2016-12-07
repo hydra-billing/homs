@@ -13,9 +13,10 @@ modulejs.define(
           connection: connection
           dispatcher: new Dispatcher()
           translator: Translator
-          forms: new Forms(connection)
+          forms: new Forms(connection, @options.entity_class)
           locale: @options.locale
           userExist: true
+          entity_class: @options.entity_class
 
         @$widgetContainer = jQuery(@options.widgetContainer)
         @$tasksMenuContainer = jQuery(@options.tasksMenuContainer)
@@ -58,6 +59,7 @@ modulejs.define(
         React.render(
           `<Container entityCode={this.options.entity_code}
                       entityTypeCode={this.options.entity_type}
+                      entityClassCode={this.options.entity_class}
                       chosenTaskID={this.options.task_id}
                       env={this.env} />`
           container
@@ -78,7 +80,12 @@ modulejs.define(
         )
 
       subscribeOnTasks: =>
-        @tasksSubscription = @env.connection.subscribe(client: 'root', path: 'tasks')
+        @tasksSubscription = @env.connection.subscribe(
+          client: 'root'
+          path: 'tasks'
+          data:
+            entity_class: this.options.entity_class
+        )
 
       checkActivitiUser: =>
         @env.connection.request(

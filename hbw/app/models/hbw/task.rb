@@ -13,7 +13,7 @@ module HBW
 
     class << self
       using_connection \
-      def fetch(email, entity_code, size = 1000, for_all_users = false)
+      def fetch(email, entity_code, entity_class, size = 1000, for_all_users = false)
         user = ::HBW::BPMUser.fetch(email)
         unless user.nil?
           wrap(
@@ -23,7 +23,7 @@ module HBW
                        active: true,
                        includeProcessVariables: true,
                        processInstanceVariables: [
-                         name: HBW::Widget.config['entity_code_key'],
+                         name: HBW::Widget.config.fetch(entity_class)[:entity_code_key],
                          operation: operation(entity_code),
                          value: entity_code
                        ],
@@ -80,8 +80,8 @@ module HBW
       @definition.fetch('processDefinition')
     end
 
-    def entity_code
-      variable(config[:entity_code_key]).value
+    def entity_code(entity_class)
+      variable(config.fetch(entity_class)[:entity_code_key]).value
     end
   end
 end

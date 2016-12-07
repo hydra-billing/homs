@@ -20,6 +20,10 @@ module HBW
       params[:entity_type]
     end
 
+    def entity_class
+      params[:entity_class].to_sym
+    end
+
     def csrf_token
       session['_csrf_token'] ||= form_authenticity_token
     end

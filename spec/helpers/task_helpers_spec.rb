@@ -15,6 +15,6 @@ describe HBW::TasksController, type: :controller do
   let(:task)   { Task.new }
 
   it 'Get entity url' do
-    expect(entity_url(task)).to eq('/orders/ORD-1?task_id=12345')
+    expect(entity_url(task, :order)).to eq('/orders/ORD-1?task_id=12345')
   end
 end

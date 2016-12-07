@@ -2,14 +2,14 @@ module HBW
   class TasksController < BaseController
     def index
       if entity_identifier.present?
-        @tasks = widget.entity_task_list(current_user_identifier, entity_identifier)
+        @tasks = widget.entity_task_list(current_user_identifier, entity_identifier, entity_class)
       else
-        @tasks = widget.task_list(current_user_identifier)
+        @tasks = widget.task_list(current_user_identifier, entity_class)
       end
     end
 
     def edit
-      form = find_form(task_id)
+      form = find_form(task_id, entity_class)
       if form
         form.fetch_fields
         render json: form.as_json.merge(csrf_token: csrf_token).to_json
@@ -19,7 +19,7 @@ module HBW
     end
 
     def submit
-      result = widget.submit(current_user.email, task_id, form_data)
+      result = widget.submit(current_user.email, entity_class, task_id, form_data)
       if result
         head :no_content
       else
@@ -28,7 +28,7 @@ module HBW
     end
 
     def lookup
-      form = find_form(task_id)
+      form = find_form(task_id, entity_class)
       field = form.field(params[:name])
       variants = field.lookup_values(params[:q])
 
@@ -37,8 +37,8 @@ module HBW
 
     private
 
-    def find_form(task_id)
-      widget.form(current_user_identifier, task_id)
+    def find_form(task_id, entity_class)
+      widget.form(current_user_identifier, entity_class, task_id)
     end
 
     def task_id

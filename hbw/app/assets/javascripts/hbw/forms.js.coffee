@@ -4,7 +4,7 @@ modulejs.define 'HBWForms', ['jQuery'], (jQuery) ->
     onStart: ->
     onFinish: ->
 
-    constructor: (@connection) ->
+    constructor: (@connection, @entityClass) ->
       @forms = {}
       @currentRequests = {}
 
@@ -22,7 +22,10 @@ modulejs.define 'HBWForms', ['jQuery'], (jQuery) ->
       else
         @trackRequest(
           taskId,
-          @connection.request(url: @formURL(taskId))
+          @connection.request(
+            url: @formURL(taskId)
+            data:
+              entity_class: @entityClass)
             .done((form) => @forms[taskId] = form))
 
     save: (params = {}) =>
@@ -30,7 +33,7 @@ modulejs.define 'HBWForms', ['jQuery'], (jQuery) ->
         url: @formURL(params.taskId)
         method: 'PUT'
         contentType: 'application/json'
-        data: JSON.stringify(form_data: params.variables)
+        data: JSON.stringify(form_data: params.variables, entity_class: @entityClass)
         headers:
           'X-CSRF-Token': params.token
       )

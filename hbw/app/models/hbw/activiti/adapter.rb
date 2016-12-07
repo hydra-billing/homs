@@ -4,8 +4,8 @@ module HBW
     class Adapter
       include HBW::Inject[:api, :config]
 
-      def entity_code_key
-        config[:entity_code_key]
+      def entity_code_key(entity_class)
+        config.fetch(entity_class)[:entity_code_key]
       end
 
       # TODO: cache it until new user is added
@@ -28,10 +28,10 @@ module HBW
         end
       end
 
-      def process_instances(entity_code)
+      def process_instances(entity_code, entity_class)
         response = api.post(
           'query/process-instances', variables: [
-            name: entity_code_key,
+            name: entity_code_key(entity_class),
             value: entity_code,
             operation: :equals,
             type: :string
@@ -39,8 +39,8 @@ module HBW
         response.status == 200 && response.body['data'] || []
       end
 
-      def submit(user_email, task_id, form_data)
-        form_definition = form(user_email, task_id)
+      def submit(user_email, entity_class, task_id, form_data)
+        form_definition = form(user_email, entity_class, task_id)
 
         variables = form_definition.extract_and_coerce_values(form_data).map do |key, value|
           { name: key, value: value }
@@ -51,16 +51,15 @@ module HBW
 
       # TODO: How to distinguish between running process instance and done
       # TODO: Think of suspended process instances
-      def bp_running?(entity_code, current_user_identifier)
-        !process_instances(entity_code).empty? || !task_list_response(current_user_identifier,
-                                                                      entity_code,
-                                                                      1000,
-                                                                      true).empty?
+      def bp_running?(entity_code, entity_class, current_user_identifier)
+        !process_instances(entity_code, entity_class).empty? ||
+            !task_list_response(current_user_identifier, entity_code, entity_class, 1000, true).empty?
       end
 
       def start_process(bp_code,
                         user_email,
-                        entity_code)
+                        entity_code,
+                        entity_class)
         user = HBW::BPMUser.with_connection(api) do
           HBW::BPMUser.fetch(user_email)
         end
@@ -72,15 +71,15 @@ module HBW
         variables = [
           { name: :initiator,      value: user.id,     type: :string },
           { name: :initiatorEmail, value: user.email,  type: :string },
-          { name: entity_code_key, value: entity_code, type: :string }
+          { name: entity_code_key(entity_class), value: entity_code, type: :string }
         ]
 
         response = start_process_response(p_def['id'], variables)
         response.status == 201
       end
 
-      def drop_processes(entity_code)
-        ids = process_instances(entity_code).map { |i| i['id'] }
+      def drop_processes(entity_code, entity_class)
+        ids = process_instances(entity_code, entity_class).map { |i| i['id'] }
         ids.map do |id|
           response = api.delete("runtime/process-instances/#{id}")
           response.status == 204
@@ -88,17 +87,17 @@ module HBW
         ids.reject { |e| e }.empty?
       end
 
-      def entity_task_list(user_email, entity_code, size = 1000)
-        response = task_list_response(user_email, entity_code, size)
+      def entity_task_list(user_email, entity_code, entity_class, size = 1000)
+        response = task_list_response(user_email, entity_code, entity_class, size)
         ::HBW::Task.wrap(response.body['data']) if response.status == 200
       end
 
-      def task_list(email, size = 1000)
-        task_list_response(email, '%', size)
+      def task_list(email, entity_class, size = 1000)
+        task_list_response(email, '%', entity_class, size)
       end
 
-      def form(user_email, task_id)
-        task = task_for_email_and_task_id(user_email, task_id)
+      def form(user_email, entity_class, task_id)
+        task = task_for_email_and_task_id(user_email, entity_class, task_id)
         HBW::Form.with_connection(api) do
           HBW::Form.fetch(task)
         end
@@ -115,14 +114,14 @@ module HBW
                  variables: variables)
       end
 
-      def task_list_response(email, entity_code, size, for_all_users = false)
+      def task_list_response(email, entity_code, entity_class, size, for_all_users = false)
         HBW::Task.with_connection(api) do
-          HBW::Task.fetch(email, entity_code, size, for_all_users)
+          HBW::Task.fetch(email, entity_code, entity_class, size, for_all_users)
         end
       end
 
-      def task_for_email_and_task_id(user_email, task_id)
-        task_list(user_email).find { |task| task.id == task_id }
+      def task_for_email_and_task_id(user_email, entity_class, task_id)
+        task_list(user_email, entity_class).find { |task| task.id == task_id }
       end
 
       def process_instance_from(proc_inst_id)

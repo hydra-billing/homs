@@ -37,6 +37,7 @@ modulejs.define(
           data:
             entity_code: @props.entityCode
             entity_type: @props.entityTypeCode
+            entity_class: @props.entityClassCode
         )
 
         subscription
@@ -55,6 +56,7 @@ modulejs.define(
           data:
             entity_code: @props.entityCode
             entity_type: @props.entityTypeCode
+            entity_class: @props.entityClassCode
             bp_code: businessProcessCode)
 
       buttonsURL: ->

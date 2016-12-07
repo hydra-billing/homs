@@ -73,6 +73,7 @@ module ApplicationHelper
       widgetPath: '/widget',
       tasksMenuContainer: '#hbw-tasks',
       tasksMenuButtonContainer: '#hbw-tasks-list-button',
+      entity_class: 'order',
       locale: I18n.locale
     }
 
