@@ -59,6 +59,8 @@ Rails.application.configure do
   config.log_tags = [:uuid, :remote_ip,
                      ->(req) { "#{req.cookie_jar['_session_id']}" }]
 
+  config.colorize_logging = Homs::Application.config.app.fetch(:logs).fetch(:color)
+
   config.web_console.whitelisted_ips = '10.0.2.2'
 
   config.i18n.default_locale = :en

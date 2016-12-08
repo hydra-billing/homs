@@ -1,0 +1,32 @@
+development:
+  :color: false
+  :format:
+    - "%d [%5L] %p/%t: %m"
+    - "%d.%m.%Y %H:%M:%S"
+  :adapters:
+    - :datefile:
+        :filename: '<%= Homs::Application.config.app.fetch(:logs).fetch(:development).fetch(:homs_log) %>'
+
+test:
+  :color: false
+  :level: 'gte.info'
+  :format:
+    - "%d [%5L] %p/%t: %m (%f:%n in #%M)"
+    - "%d.%m.%Y %H:%M:%S.%3L"
+
+production:
+  :level: 'gte.info'
+  :keep: 14
+
+  :format:
+    - "%d [%5L] %p/%t: %m"
+    - "%d.%m.%Y %H:%M:%S"
+
+  :adapters:
+    - :datefile:
+        :level: 'lte.warn'
+        :filename: '<%= Homs::Application.config.app.fetch(:logs).fetch(:production).fetch(:homs_log) %>'
+
+    - :datefile:
+        :level: 'gte.error'
+        :filename: '<%= Homs::Application.config.app.fetch(:logs).fetch(:production).fetch(:homs_error_log) %>'
