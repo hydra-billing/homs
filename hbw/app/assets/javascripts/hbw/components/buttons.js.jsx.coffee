@@ -93,7 +93,7 @@ modulejs.define(
         @setState(syncing: true, submitting: true)
 
         @submitButton(button.bp_code)
-          .done((data) => @setState(submitError: null, buttons: data))
+          .done((data) => @setState(submitError: null, buttons: data.buttons, bpRunning: data.bp_running))
           .done(=> @triggerBPStart(button))
           .fail((response) =>
             @setState(

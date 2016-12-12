@@ -128,7 +128,11 @@ modulejs.define 'HBWFormSelect',
 
         return false
 
-      missFieldInVariables: -> not @props.value?
+      missFieldInVariables: ->
+        for variable in @props.params.variables
+          return false if variable.name == @props.name
+
+        return true
 
       getChoices: (value) ->
         if @props.params.mode == 'select'
