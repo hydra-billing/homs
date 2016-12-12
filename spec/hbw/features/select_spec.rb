@@ -20,6 +20,7 @@ feature 'Check select with', js: true do
     FactoryGirl.create(:order, order_type: order_type)
     FactoryGirl.create(:order, order_type: order_type)
     FactoryGirl.create(:order, order_type: order_type)
+    FactoryGirl.create(:order, order_type: order_type).update(code: 'ORD-12')
   end
 
   scenario 'nullable = true and placeholder present' do
@@ -116,6 +117,20 @@ feature 'Check select with', js: true do
     expect(page).to have_content 'ORD-9'
     expect(page).to have_selector("[name='homsOrderNotInVBPVariables']")
     expect(page).to have_content 'Field with name homsOrderNotInVBPVariables not defined in BP variables'
+    expect_widget_presence
+    end
+
+  scenario 'BP variable value is null for required field' do
+    click_on 'Orders'
+    expect(page).to have_content 'Orders list'
+    expect_widget_presence
+
+    click_and_wait ('ORD-12')
+
+    expect(page).to have_content 'ORD-12'
+    expect(page).to have_selector("[name='homsOrderDataSelect']")
+    expect(select2_text('homsOrderDataSelect')).to eq first_value
+    expect(page).to have_no_content 'Field with name homsOrderNotInVBPVariables not defined in BP variables'
     expect_widget_presence
   end
 end
