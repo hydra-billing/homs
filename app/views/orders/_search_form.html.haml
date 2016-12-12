@@ -11,10 +11,11 @@
       .tab-content
         #search.tab-pane(role="tabpanel")
           .row
-            .col-xs-6.col-sm-6.col-md-4.col-lg-4
-              = render partial: 'search_by', locals: { field: :code, field_value: '', path: search_order_by_path(:code) }
-            .col-xs-6.col-sm-6.col-md-4.col-lg-4
-              = render partial: 'search_by', locals: { field: :ext_code, field_value: '', path: search_order_by_path(:ext_code) }
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              .col-xs-6.col-sm-6.col-md-4.col-lg-4
+                = render partial: 'search_by', locals: { field: :code, field_value: '', path: search_order_by_path(:code) }
+              .col-xs-6.col-sm-6.col-md-4.col-lg-4
+                = render partial: 'search_by', locals: { field: :ext_code, field_value: '', path: search_order_by_path(:ext_code) }
         #filter.tab-pane.active(role="tabpanel")
           .row
             .col-xs-12.col-sm-12.col-md-12.col-lg-12
