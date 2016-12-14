@@ -20,9 +20,9 @@ feature 'Show business process form', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_and_wait('ORD-1')
+    click_and_wait 'ORD-1'
 
-    expect(page).to                                  have_selector("[name='homsOrderDataSelect']")
+    expect(page).to                                  have_selector "[name='homsOrderDataSelect']"
     expect(page).to                                  have_content 'ORD-1'
     expect(select2_text('homsOrderDataSelect')).to   eq 'Option 1'
     expect(select_options('homsOrderDataSelect')).to eq ['Not selected', 'Option 1', 'Option 2']
@@ -35,9 +35,9 @@ feature 'Show business process form', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_and_wait('ORD-2')
+    click_and_wait 'ORD-2'
 
-    expect(page).to                                  have_selector("[name='homsOrderDataSelect']")
+    expect(page).to                                  have_selector "[name='homsOrderDataSelect']"
     expect(page).to                                  have_content 'ORD-2'
     expect(select2_text('homsOrderDataSelect')).to   eq 'Option Var 1'
     expect(select_options('homsOrderDataSelect')).to eq ['Not selected', 'Option Var 1', 'Option Var 2']
