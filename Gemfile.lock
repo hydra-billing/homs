@@ -432,6 +432,10 @@ GEM
     websocket-extensions (0.1.2)
     xpath (2.0.0)
       nokogiri (~> 1.3)
+    yell (2.0.7)
+    yell-rails (2.0.0)
+      rails (>= 3)
+      yell (~> 2.0)
 
 PLATFORMS
   ruby
@@ -502,6 +506,10 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn
   web-console (~> 2.0)
+  yell-rails
+
+RUBY VERSION
+   ruby 2.2.4p230
 
 BUNDLED WITH
-   1.11.2
+   1.13.6

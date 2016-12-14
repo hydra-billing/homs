@@ -22,11 +22,13 @@ module HBW
       end
 
       class << self
+        include HBW::Logger
+
         def build(config = API.config)
           conn = Faraday.new(url: config[:base_url]) do |faraday|
             faraday.request :json
             faraday.response :json, content_type: /\bjson$/
-            faraday.response :detailed_logger, Rails.logger
+            faraday.response :detailed_logger, logger
             faraday.adapter Faraday.default_adapter
           end
 

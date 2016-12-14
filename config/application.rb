@@ -43,11 +43,9 @@ module Homs
 
     config.allow_concurrency = true
 
-    initializer('homs.load_config') do
-      require Rails.root.join('lib/homs_config')
-      config.app = HomsConfig.load(%w(config/homs_configuration.default.yml
-                                      config/homs_configuration.yml))
-    end
+    require Rails.root.join('lib/homs_config')
+    config.app = HomsConfig.load(%w(config/homs_configuration.default.yml
+                                    config/homs_configuration.yml))
 
     require Rails.root.join('lib/imprint')
 
