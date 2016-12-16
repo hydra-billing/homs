@@ -1,6 +1,7 @@
 #= require_self
 #= require jquery
 #= require jquery.formatter
+#= require jquery-ui
 #= require moment
 #= require moment/ru
 #= require bootstrap-datetimepicker
