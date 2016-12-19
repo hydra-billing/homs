@@ -52,7 +52,7 @@ modulejs.define 'HBWTasksMixin', [], ->
 modulejs.define 'HBWTranslationsMixin', ['HBWTranslator'], (Translator) ->
   t: (key) -> Translator.translate(key)
 
-modulejs.define 'HBWDeleteIfMixin', [], ->
+modulejs.define 'HBWDeleteIfMixin', ['jQuery'], (jQuery) ->
   variables: ->
     @props.params.variables || @props.params.task.definition.variables
 

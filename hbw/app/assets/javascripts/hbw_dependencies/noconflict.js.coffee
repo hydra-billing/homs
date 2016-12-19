@@ -9,7 +9,7 @@
 #= require react
 #= require ./wrap_globals
 
-HBWDependencies = ['$', 'jQuery', 'moment', 'React']
+HBWDependencies = ['$', 'jQuery', 'moment', 'React', 'define', 'require']
 
 window._globalsBeforeHBW = {}
 
@@ -17,4 +17,4 @@ for name in HBWDependencies
   window._globalsBeforeHBW[name] = window[name]
 
   if name of window
-    delete window[name]
+    window[name] = undefined
