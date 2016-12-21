@@ -29,7 +29,7 @@ modulejs.define 'HBWFormSelect',
         label = @props.params.label
         labelCss = @props.params.label_css
 
-        selectErrorMessage = I18n.t("js.field_not_defined_in_bp", field_name: @props.name)
+        selectErrorMessage = "#{@t("errors.field_with_name")} #{@props.name} #{@t("errors.field_not_defined_in_bp")}"
         selectErrorMessageCss = 'alert alert-danger'
         selectErrorMessageCss += ' hidden' unless @missFieldInVariables()
 
