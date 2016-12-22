@@ -74,7 +74,7 @@ modulejs.define(
           if @props.showSpinner or !@state.fetched
             `<div className="hbw-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i></div>`
           else if @state.bpRunning
-            `<div className="hbw-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i><h5 className="hbw-spinner-text">{I18n.t('js.bp_running')}</h5></div>`
+            `<div className="hbw-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i><h5 className="hbw-spinner-text">{this.t('bp_running')}</h5></div>`
           else
             buttons = @state.buttons.map((button, index) =>
               self = @

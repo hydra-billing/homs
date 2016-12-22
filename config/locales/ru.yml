@@ -399,5 +399,3 @@ ru:
     select2:
       not_set: Не указан
     user_not_found: Текущий пользователь не найден в Activiti
-    bp_running: Идет выполнение бизнес-процесса
-    field_not_defined_in_bp: "Поле с именем %{field_name} отсутствует в переменных бизнес-процесса"
