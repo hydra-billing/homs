@@ -12,8 +12,7 @@ en:
       bp_running: The business process is running
 
       errors:
-        field_with_name: Field with name
-        field_not_defined_in_bp: not defined in BP variables
+        field_not_defined_in_bp: "Field with name %{field_name} not defined in BP variables"
         cannot_obtain_available_actions: Cannot obtain available actions
         cannot_start_process: Cannot start process
 

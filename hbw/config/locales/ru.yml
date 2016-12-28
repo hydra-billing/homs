@@ -12,8 +12,7 @@ ru:
       bp_running: Идет выполнение бизнес-процесса
 
       errors:
-        field_with_name: Поле с именем
-        field_not_defined_in_bp: отсутствует в переменных бизнес-процесса
+        field_not_defined_in_bp: "Поле с именем %{field_name} отсутствует в переменных бизнес-процесса"
         cannot_obtain_available_actions: Не удалось получить список доступных действий
         cannot_start_process: Не удалось начать процесс
 
