@@ -50,7 +50,7 @@ modulejs.define 'HBWTasksMixin', [], ->
       .always(=> @setState(syncing: false))
 
 modulejs.define 'HBWTranslationsMixin', ['HBWTranslator'], (Translator) ->
-  t: (key) -> Translator.translate(key)
+  t: (key, vars) -> Translator.translate(key, vars)
 
 modulejs.define 'HBWDeleteIfMixin', [], ->
   variables: ->
