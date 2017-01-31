@@ -46,7 +46,7 @@ module HBW
     end
 
     def form_data
-      params.permit(:form_data)
+      params[:form_data]
     end
   end
 end
