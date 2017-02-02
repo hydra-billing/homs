@@ -43,12 +43,13 @@ modulejs.define(
         collapseClass += ' in' unless this.props.collapsed
         iconClass = 'indicator pull-right glyphicon'
 
-        if @props.collapsed
+        task = @props.task
+
+        if jQuery('#collapse' + task.id).attr('class') == 'panel-collapse collapse'
           iconClass += ' glyphicon-chevron-down'
         else
           iconClass += ' glyphicon-chevron-up'
 
-        task = @props.task
         `<div className="panel panel-default">
           <div className="panel-heading">
             <h4 className="panel-title collapsable">
@@ -57,7 +58,11 @@ modulejs.define(
                  data-parent={'.' + this.props.parentClass}>
                 {task.name}
               </a>
-              <i className={iconClass}></i>
+              <i className={iconClass}
+                 data-toggle="collapse"
+                 data-target={"#collapse" + task.id}
+                 data-parent={'.' + this.props.parentClass}>
+              </i>
             </h4>
           </div>
           <div id={"collapse" + task.id} className={collapseClass}>
