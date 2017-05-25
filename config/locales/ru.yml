@@ -235,6 +235,8 @@ ru:
       renew_api_token_warning: Новый API-токен заместит текущий. Подтверждаете?
       clear_api_token: Удалить API-токен
       clear_api_token_warning: Текущий API-токен будет удален. Подтверждаете?
+      yes_renew: Пересоздать токен
+      yes_clear: Удалить токен
     empty: Не указан
   orders:
     new:
