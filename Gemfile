@@ -22,7 +22,7 @@ gem 'react-rails', '~> 1.0'
 gem 'font-awesome-rails'
 gem 'bootswatch-rails'
 gem 'pry-rails'
-gem 'i18n-js', github: 'fnando/i18n-js'
+gem 'i18n-js', git: 'https://github.com/fnando/i18n-js', ref: '4cb455'
 gem 'twitter-bootstrap-rails-confirm'
 gem 'hbw', path: File.join(File.dirname(__FILE__), 'hbw')
 gem 'asset_symlink'
