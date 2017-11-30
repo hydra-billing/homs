@@ -41,9 +41,7 @@ module CustomFields
         let(:options) { { } }
         let(:value) { '{"test": 1}' }
         it_behaves_like 'a CustomFields::Base descendant' do
-          it_behaves_like 'a CustomFields::Base descendant' do
-            it_behaves_like 'has no errors'
-          end
+          it_behaves_like 'has no errors'
         end
       end
     end
