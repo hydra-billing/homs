@@ -5,7 +5,7 @@ module HBW
 
     class << self
       using_connection \
-      def fetch(task)
+      def fetch(task, entity_class)
         process_definition = task.process_definition
         deployment = ::HBW::Deployment.fetch(process_definition)
         resource = deployment.resource(task.form_key)
@@ -14,11 +14,11 @@ module HBW
         end
         definition_raw = do_request(:get, resource.fetch('contentUrl'))
         definition = YAML.load(definition_raw).fetch('form')
-        new(definition.merge('processDefinition' => process_definition, 'task' => task))
+        new(definition.merge('processDefinition' => process_definition, 'task' => task, 'entityClass' => entity_class))
       end
     end
 
-    definition_reader :process_definition, :task
+    definition_reader :process_definition, :task, :entity_class
 
     def process_name
       process_definition.name
@@ -36,7 +36,7 @@ module HBW
 
     def fields
       @fields ||= definition.fetch('fields').map do |field|
-        Fields::Base.wrap(field.merge('task' => task))
+        Fields::Base.wrap(field.merge('task' => task, 'entityClass' => entity_class))
       end
     end
 

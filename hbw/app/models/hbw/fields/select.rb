@@ -7,6 +7,7 @@ module HBW
       attr_reader :choices
       definition_reader :sql
       definition_reader :variable
+      definition_reader :entity_class
 
       class SourceLoader
         include HBW::Logger
@@ -75,7 +76,7 @@ module HBW
 
       def url
         if lookup?
-          lookup_task_path(task.id, name: name)
+          lookup_task_path(task.id, name: name, entity_class: entity_class)
         end
       end
 

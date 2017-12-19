@@ -16,7 +16,7 @@ module HBW
 
       klass = case type
               when 'sql/oracle'
-                Oracle
+                HBW::Container[:oracle]
               when 'static/activiti'
                 HBW::Sources::Activiti
               else

@@ -16,7 +16,7 @@ module HBW
       end
 
       class_attribute :default_data_type, instance_writer: false
-      definition_reader :name, :type, :task, :label
+      definition_reader :name, :type, :task, :label, :entity_class
 
       def css_class
         definition['css_class']

@@ -11,6 +11,12 @@ module HBW
       register(:api) { HBW::Activiti::API.build }
     end
 
+    if Rails.env.test?
+      register(:oracle) { HBW::Sources::YMLOracle }
+    else
+      register(:oracle) { HBW::Sources::Oracle }
+    end
+
     register(:adapter) { HBW::Activiti::Adapter.new }
 
     register(:config) { HBW::Widget.config }
