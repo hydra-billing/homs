@@ -32,7 +32,7 @@ module HBW
       field = form.field(params[:name])
       variants = field.lookup_values(params[:q])
 
-      render json: variants.to_json
+      render json: variants.map { |id, text| {id: id, text: text} }.to_json
     end
 
     private

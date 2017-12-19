@@ -99,7 +99,7 @@ module HBW
       def form(user_email, entity_class, task_id)
         task = task_for_email_and_task_id(user_email, entity_class, task_id)
         HBW::Form.with_connection(api) do
-          HBW::Form.fetch(task)
+          HBW::Form.fetch(task, entity_class)
         end
       end
 

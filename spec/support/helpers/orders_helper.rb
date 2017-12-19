@@ -102,6 +102,10 @@ module Features
       select2_options.map(&:text)
     end
 
+    def select2_results
+      select2_options.map(&:text)
+    end
+
     def select2_clear_cross(name)
       parent_node(page.find("[name='#{name}']")).find('.select2-selection__clear')
     end

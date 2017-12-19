@@ -3,7 +3,7 @@ module HBW
     class Group < Base
       def fields
         @fields ||= definition.fetch('fields').map do |field|
-          Base.wrap(field.merge('task' => task))
+          Base.wrap(field.merge('task' => task, 'entityClass' => entity_class))
         end
       end
 

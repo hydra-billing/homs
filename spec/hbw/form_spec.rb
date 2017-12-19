@@ -64,7 +64,7 @@ describe HBW::Form do
   end
 
   it 'does fields coercing with empty strings' do
-    form = HBW::Form.new(form_config.fetch('form').merge('processDefinition' => {}, 'task' => {}))
+    form = HBW::Form.new(form_config.fetch('form').merge('processDefinition' => {}, 'task' => {}, 'entityClass' => :order))
     expect(form.extract_and_coerce_values(request_data['form_data'])).to eq({
                                                                                 'homsOrderDataBeginDate'      => nil,
                                                                                 'homsOrderDataEndDate'        => nil,

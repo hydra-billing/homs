@@ -13,6 +13,7 @@ feature 'Show business process form', js: true do
     order_type = FactoryGirl.create(:order_type, :support_request)
     FactoryGirl.create(:order, order_type: order_type)
     FactoryGirl.create(:order, order_type: order_type)
+    FactoryGirl.create(:order, order_type: order_type).update(code: 'ORD-13')
   end
 
   scenario 'check select options' do
@@ -42,6 +43,25 @@ feature 'Show business process form', js: true do
     expect(select2_text('homsOrderDataSelect')).to   eq 'Option Var 1'
     expect(select_options('homsOrderDataSelect')).to eq ['Not selected', 'Option Var 1', 'Option Var 2']
     expect(select_values('homsOrderDataSelect')).to  eq ['', '123', '321']
+    expect_widget_presence
+  end
+
+  scenario 'check select options from billing source' do
+    click_on 'Orders'
+    expect(page).to have_content 'Orders list'
+    expect_widget_presence
+
+    click_and_wait 'ORD-13'
+
+    expect(page).to have_selector "[name='homsOrderDataSelect']"
+    expect(page).to have_content 'ORD-13'
+
+    select2_search_field.set('cust')
+    wait_for_ajax
+
+    expect(page).to have_content 'Found customer'
+    expect(select2_results).to eq ['Found customer']
+
     expect_widget_presence
   end
 end

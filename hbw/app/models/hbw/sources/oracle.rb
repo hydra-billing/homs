@@ -20,11 +20,11 @@ module HBW
         end
       end
 
+      private
+
       def parse_bind_names(sql)
         sql.scan(/:\w+/).map { |s| s[1..-1].to_sym }
       end
-
-      private
 
       def execute(sql)
         2.times do
