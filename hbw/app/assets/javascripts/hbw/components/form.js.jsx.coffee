@@ -1,9 +1,9 @@
 modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect', \
   'HBWFormUser', 'HBWPending', 'HBWFormString', 'HBWFormText', \
-  'HBWFormCheckbox', 'HBWFormStatic', 'HBWCallbacksMixin'],
+  'HBWFormCheckbox', 'HBWFormStatic', 'HBWCallbacksMixin', 'HBWFormSelectTable'],
   (React, jQuery, Error, DateTime, Group, Select, Submit, SubmitSelect, \
-   User, Pending, String, Text, Checkbox, Static, CallbacksMixin) ->
+   User, Pending, String, Text, Checkbox, Static, CallbacksMixin, SelectTable) ->
 
   React.createClass
     mixins: [CallbacksMixin]
@@ -42,6 +42,7 @@ modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
         when 'group'           then `<Group        {...opts} variables={this.props.variables}/>`
         when 'datetime'        then `<Datetime     {...opts}/>`
         when 'select'          then `<Select       {...opts}/>`
+        when 'select_table'    then `<SelectTable  {...opts}/>`
         when 'submit_select'   then `<SubmitSelect {...opts}/>`
         when 'checkbox'        then `<Checkbox     {...opts}/>`
         when 'user'            then `<User         {...opts}/>`
