@@ -31,12 +31,12 @@ modulejs.define(
         @loadForm(@props.task.id)
         @bind('hbw:submit-form', @submitForm)
 
-        e = jQuery(React.findDOMNode(this))
+        e = jQuery(ReactDOM.findDOMNode(this))
         e.on('hidden.bs.collapse', @choose)
         e.on('shown.bs.collapse',  @choose)
 
       componentWillUnmount: ->
-        jQuery(React.findDOMNode(this)).off('hidden.bs.collapse').off('shown.bs.collapse')
+        jQuery(ReactDOM.findDOMNode(this)).off('hidden.bs.collapse').off('shown.bs.collapse')
 
       render: ->
         collapseClass = 'panel-collapse collapse'

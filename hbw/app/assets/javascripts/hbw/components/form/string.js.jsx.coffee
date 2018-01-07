@@ -69,7 +69,7 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
         )
 
     getElement: ->
-      jQuery(@refs['input'].getDOMNode())
+      jQuery(@refs.input)
 
     onFormSubmit: ->
       if @validationRequired()

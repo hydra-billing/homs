@@ -11,7 +11,7 @@ modulejs.define 'HBWFormUser', ['React', 'jQuery'], (React, jQuery) ->
     componentDidMount: -> this.hijack_select2()
 
     hijack_select2: ->
-      e = jQuery(React.findDOMNode(this))
+      e = jQuery(ReactDOM.findDOMNode(this))
       select = e.find('select')
       select.select2({
         width: '100%'

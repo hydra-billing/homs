@@ -48,7 +48,7 @@ modulejs.define 'HBWFormSelect',
         </div>`
 
       setValue: ->
-        newValue = jQuery(React.findDOMNode(this)).find('select').val()
+        newValue = jQuery(ReactDOM.findDOMNode(this)).find('select').val()
         @setState(
           value: newValue
           choices: @getChoices(newValue)
@@ -74,7 +74,7 @@ modulejs.define 'HBWFormSelect',
         else
           ajaxOptions = {}
 
-        e = jQuery(React.findDOMNode(@))
+        e = jQuery(ReactDOM.findDOMNode(@))
 
         select = e.find('select').select2(jQuery.extend({}, {
           width: '100%'
