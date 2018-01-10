@@ -29,6 +29,7 @@ modulejs.define 'HBWFormDatetime', ['React', 'jQuery', 'moment', 'HBWDeleteIfMix
       opts = {
         type: 'text'
         defaultValue: this.state.defaultValue
+        name: this.props.params.name
       }
       opts['disabled'] = 'disabled' if this.props.params.editable == false
 

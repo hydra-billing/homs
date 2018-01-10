@@ -25,17 +25,17 @@ feature 'Check datetime picker with', js: true do
 
   scenario 'en locale as default' do
     expect(page).to have_content 'Begin Date'
-    expect(bp_calendar_value('816011', 'BeginDate')).to eq('09/30/2016')
+    expect(bp_calendar_value('BeginDate')).to eq('09/30/2016')
 
-    click_on_bp_calendar('816011', 'BeginDate')
+    click_on_bp_calendar('BeginDate')
     expect(page).to have_content 'September 2016'
   end
 
   scenario 'ru locale' do
     expect(page).to have_content 'End Date'
-    expect(bp_calendar_value('816011', 'EndDate')).to eq('30.09.2016')
+    expect(bp_calendar_value('EndDate')).to eq('30.09.2016')
 
-    click_on_bp_calendar('816011', 'EndDate')
+    click_on_bp_calendar('EndDate')
     expect(page).to have_content 'сентябрь 2016'
   end
 end

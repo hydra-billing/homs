@@ -38,7 +38,7 @@ feature 'Control fields on form', js: true do
   end
 
   scenario 'for datetime' do
-    expect(page).not_to have_selector calendar_css(816011, 'SomeDatetime')
+    expect(page).not_to have_selector "[name='homsOrderDataSomeDatetime']"
   end
 
   scenario 'for group' do
