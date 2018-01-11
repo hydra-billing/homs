@@ -29,6 +29,7 @@ modulejs.define 'HBWFormDatetime', ['React', 'jQuery', 'moment', 'HBWDeleteIfMix
       opts = {
         type: 'text'
         defaultValue: this.state.defaultValue
+        name: this.props.params.name
       }
       opts['disabled'] = 'disabled' if this.props.params.editable == false
 
@@ -55,7 +56,7 @@ modulejs.define 'HBWFormDatetime', ['React', 'jQuery', 'moment', 'HBWDeleteIfMix
       this.setOnChange()
 
     componentWillUnmount: ->
-      jQuery(React.findDOMNode(this)).off()
+      jQuery(ReactDOM.findDOMNode(this)).off()
 
     updateValue: (event) ->
       date = event.date
@@ -70,7 +71,7 @@ modulejs.define 'HBWFormDatetime', ['React', 'jQuery', 'moment', 'HBWDeleteIfMix
       @setState(value: value)
 
     setOnChange: ->
-      jQuery(React.findDOMNode(this))
+      jQuery(ReactDOM.findDOMNode(this))
         .find('.datetime-picker')
         .datetimepicker(format: this.state.format, locale: this.state.locale)
         .on('dp.change', (e) => this.updateValue(e))

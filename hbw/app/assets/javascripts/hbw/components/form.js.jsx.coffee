@@ -71,7 +71,7 @@ modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
       @trigger('hbw:submit-form', @serializeForm()) if @isFormValid()
 
     getElement: ->
-      jQuery(@refs['form'].getDOMNode())
+      jQuery(@refs.form)
 
     isFormValid: ->
       @getElement().find('input[type="text"].invalid').length == 0

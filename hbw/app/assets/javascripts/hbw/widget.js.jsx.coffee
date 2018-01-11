@@ -28,14 +28,16 @@ modulejs.define(
       changeTask: (task) =>
         if task.entity_code == @options.entity_code
           if @tasksMenu
-            @tasksMenu.setProps(chosenTaskID: task.id)
-          @widget.setProps(chosenTaskID: task.id)
+            @tasksMenu = @renderTasksMenu(@$tasksMenuContainer[0],
+                                          {renderButton: @tasksMenuButton is null},
+                                          task.id)
+          @widget = @renderWidget(@$widgetContainer[0], task.id)
         else
           @env.dispatcher.trigger('hbw:go-to-entity', 'widget', code: task.entity_code, task: task)
 
       render: =>
         if @options.entity_code
-          @widget = @renderWidget(@$widgetContainer[0])
+          @widget = @renderWidget(@$widgetContainer[0], this.options.task_id)
         else
           @widget = null
 
@@ -47,7 +49,8 @@ modulejs.define(
             @tasksMenuButton = null
 
           @tasksMenu = @renderTasksMenu(@$tasksMenuContainer[0],
-                                        renderButton: @tasksMenuButton is null)
+                                        {renderButton: @tasksMenuButton is null},
+                                        this.options.task_id)
         else
           @tasksMenuButton = null
           @tasksMenu = null
@@ -55,26 +58,26 @@ modulejs.define(
         if @widget or @tasksMenu
           @subscribeOnTasks()
 
-      renderWidget: (container) =>
-        React.render(
+      renderWidget: (container, task_id) =>
+        ReactDOM.render(
           `<Container entityCode={this.options.entity_code}
                       entityTypeCode={this.options.entity_type}
                       entityClassCode={this.options.entity_class}
-                      chosenTaskID={this.options.task_id}
+                      chosenTaskID={task_id}
                       env={this.env} />`
           container
         )
 
-      renderTasksMenu: (container, options) =>
-        React.render(
+      renderTasksMenu: (container, options, task_id) =>
+        ReactDOM.render(
           `<Menu env={this.env}
-                 chosenTaskID={this.options.task_id}
+                 chosenTaskID={task_id}
                  renderButton={options.renderButton}  />`
           container
         )
 
       renderTasksMenuButton: (container) =>
-        React.render(
+        ReactDOM.render(
           `<MenuButton env={this.env} />`
           container
         )

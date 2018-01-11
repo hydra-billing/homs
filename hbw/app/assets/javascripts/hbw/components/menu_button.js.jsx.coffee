@@ -24,6 +24,6 @@ modulejs.define(
         </a>`
 
       toggleMenu: ->
-        React.findDOMNode(@).blur()
+        ReactDOM.findDOMNode(this).blur()
         @trigger('hbw:toggle-tasks-menu')
 )

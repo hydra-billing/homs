@@ -188,16 +188,12 @@ module Features
       page.find(".#{class_name}").click
     end
 
-    def calendar_css(task_id, field_name)
-      "[data-reactid='.0.0.0.1:$task_id_#{task_id}.1.0.0.2.0:$group1.0.1.0.$homsOrderData#{field_name}.0.1.0']"
+    def bp_calendar_value(name)
+      page.find("[name='homsOrderData#{name}']").value
     end
 
-    def bp_calendar_value(task_id, field_name)
-      page.find(calendar_css(task_id, field_name)).value
-    end
-
-    def click_on_bp_calendar(task_id, field_name)
-      page.find("[data-reactid='.0.0.0.1:$task_id_#{task_id}.1.0.0.2.0:$group1.0.1.0.$homsOrderData#{field_name}.0.1.2.0']").click
+    def click_on_bp_calendar(name)
+      page.find("[name='homsOrderData#{name}']").find(:xpath, '..').find('span.fa.fa-calendar').click
     end
 
     def click_and_wait(text)

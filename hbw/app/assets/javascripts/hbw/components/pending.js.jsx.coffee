@@ -9,7 +9,7 @@ modulejs.define 'HBWPending', ['React'], (React) ->
       else
         styles = {display: 'none'}
 
-      `<div className="pending" styles={styles}>
+      `<div className="pending" style={styles}>
         <i className="fa fa-spin fa-lg fa-spinner"></i>
         {' ' + this.props.text}
       </div>`
