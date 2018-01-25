@@ -28,3 +28,10 @@ greeting:
 announcement:
 
 orders_expiration_warning_days: 1
+
+minio:
+  endpoint: 'http://127.0.0.1:9000'
+  access_key_id: 'key'
+  secret_access_key: 'key'
+  bucket: 'bucket_name'
+  region: 'us-east-1'

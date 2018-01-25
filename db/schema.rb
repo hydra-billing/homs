@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20180207081049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "order_id",   null: false
+    t.string   "url",        null: false
+    t.string   "name",       null: false
+    t.string   "type"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "crc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "order_types", force: :cascade do |t|
     t.string   "code",                            null: false

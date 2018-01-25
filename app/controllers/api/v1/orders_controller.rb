@@ -1,10 +1,46 @@
+require 'minio'
+
 module API
   module V1
     class OrdersController < API::BaseController
+      include Minio
+      extend Minio::Mixin
+
+      inject['minio_adapter']
+
       include HttpBasicAuthentication if !Rails.env.development? || ENV['HOMS_API_USE_AUTH']
 
       PARAMS_ATTRIBUTES = [:order_type_code, :user_email, :ext_code, :bp_id,
                            :bp_state, :state, :done_at, :archived, :estimated_exec_date]
+
+      def create
+        resource_set(resource_class.new(resource_params))
+        ActiveRecord::Base.transaction do
+          if resource_get.save
+            if !params[:order].try(:data).try(:attachments).nil?
+              params[:order][:data][:attachments].each do |key, file|
+                minio_adapter.save_file(file, resource_get.id)
+              end
+            end
+          end
+        end
+
+        render :show, status: :created
+      end
+
+      def update
+        ActiveRecord::Base.transaction do
+          if resource_get.update(resource_params)
+            if !params[:order].try(:data).try(:attachments).nil?
+              params[:order][:data][:attachments].each do |key, file|
+                minio_adapter.save_file(file, params[:id])
+              end
+            end
+          end
+        end
+
+        render :show
+      end
 
       private
 
