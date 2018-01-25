@@ -32,6 +32,7 @@ gem 'dry-auto_inject'
 gem 'dry-validation'
 gem 'thin'
 gem 'nokogiri', '~> 1.8.1'
+gem 'aws-sdk', '~> 2'
 
 group :oracle do
   gem 'ruby-oci8', '2.2.1'
