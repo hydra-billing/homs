@@ -52,6 +52,79 @@ modulejs.define 'HBWTasksMixin', [], ->
 modulejs.define 'HBWTranslationsMixin', ['HBWTranslator'], (Translator) ->
   t: (key, vars) -> Translator.translate(key, vars)
 
+modulejs.define 'HBWSelectMixin', ['jQuery'], (jQuery) ->
+  getInitialState: ->
+    value = @getChosenValue() or ''
+    {
+      value: value
+      choices: @getChoices(value)
+      error: not @hasValueInChoices(value) and value or @missFieldInVariables()
+    }
+
+  getChoices: (value) ->
+    if @props.params.mode == 'select'
+      choices = @props.params.choices.slice()
+
+      @addCurrentValueToChoices(value)
+
+      @addNullChoice(choices) if @props.params.nullable
+
+      choices
+
+    else if @props.params.mode == 'lookup'
+      @props.params.choices
+
+  getChosenValue: ->
+    if @props.params.mode == 'select'
+      if @props.value is null
+        if @props.params.nullable
+          null
+        else if @props.params.choices.length
+          first = @props.params.choices[0]
+
+          if jQuery.isArray(first)
+            first[0]
+          else
+            first
+        else
+          null
+      else
+        @props.value
+    else
+      @props.value
+
+
+  hasValueInChoices: (value) ->
+    return true if @props.params.mode == 'lookup'
+    return true if @isEqual(value, null) and @props.params.nullable
+
+    for c in @props.params.choices
+      return true if @isChoiceEqual(c, value)
+
+    return false
+
+  isEqual: (a, b) ->
+    return true if a == b
+    return true if a is null and b is null
+    return true if a == '' and b is null or a is null and b == ''
+    return false if a is null or b is null
+
+    a.toString() == b.toString()
+
+  isChoiceEqual: (choice, value)->
+    if jQuery.isArray(choice)
+      return true if @isEqual(choice[0], value)
+    else if @isEqual(choice, value)
+      return true
+
+    return false
+
+  missFieldInVariables: ->
+    for variable in @props.params.variables
+      return false if variable.name == @props.name
+
+    return true
+
 modulejs.define 'HBWDeleteIfMixin', ['jQuery'], (jQuery) ->
   variables: ->
     @props.params.variables || @props.params.task.definition.variables

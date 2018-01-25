@@ -1,8 +1,8 @@
 modulejs.define 'HBWFormGroup', ['React', 'HBWFormDatetime', \
   'HBWFormSubmitSelect', 'HBWFormUser', 'HBWFormSelect', \
   'HBWFormString', 'HBWFormText', 'HBWFormCheckbox', 'HBWFormStatic', \
-  'HBWDeleteIfMixin'],
-  (React, Datetime, SubmitSelect, User, Select, String, Text, Checkbox, Static, DeleteIfMixin) ->
+  'HBWDeleteIfMixin', 'HBWFormSelectTable'],
+  (React, Datetime, SubmitSelect, User, Select, String, Text, Checkbox, Static, DeleteIfMixin, SelectTable) ->
     React.createClass
       mixins: [DeleteIfMixin]
 
@@ -43,6 +43,7 @@ modulejs.define 'HBWFormGroup', ['React', 'HBWFormDatetime', \
           when 'group'           then `<Group         {...opts} variables={this.props.variables}/>`
           when 'datetime'        then `<Datetime      {...opts}/>`
           when 'select'          then `<Select        {...opts}/>`
+          when 'select_table'    then `<SelectTable   {...opts}/>`
           when 'submit_select'   then `<SubmitSelect  {...opts}/>`
           when 'checkbox'        then `<Checkbox      {...opts}/>`
           when 'user'            then `<User          {...opts}/>`

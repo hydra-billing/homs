@@ -1,16 +1,8 @@
 modulejs.define 'HBWFormSelect',
-  ['React', 'HBWTranslationsMixin', 'jQuery', 'HBWDeleteIfMixin'],
-  (React, TranslationsMixin, jQuery, DeleteIfMixin) ->
+  ['React', 'HBWTranslationsMixin', 'jQuery', 'HBWDeleteIfMixin', 'HBWSelectMixin'],
+  (React, TranslationsMixin, jQuery, DeleteIfMixin, SelectMixin) ->
     React.createClass
-      mixins: [TranslationsMixin, DeleteIfMixin]
-
-      getInitialState: ->
-        value = @getChosenValue() or ''
-        {
-          value: value
-          choices: @getChoices(value)
-          error: not @hasValueInChoices(value) and value or @missFieldInVariables()
-        }
+      mixins: [TranslationsMixin, DeleteIfMixin, SelectMixin]
 
       render: ->
         lookup = @props.params.mode == 'lookup'
@@ -84,73 +76,6 @@ modulejs.define 'HBWFormSelect',
           language: @getLanguage()
         }, ajaxOptions)).on('change', => @setValue())
 
-      getChosenValue: ->
-        if @props.params.mode == 'select'
-          if @props.value is null
-            if @props.params.nullable
-              null
-            else if @props.params.choices.length
-              first = @props.params.choices[0]
-
-              if jQuery.isArray(first)
-                first[0]
-              else
-                first
-            else
-              null
-          else
-            @props.value
-        else
-          @props.value
-
-      isEqual: (a, b) ->
-        return true if a == b
-        return true if a is null and b is null
-        return true if a == '' and b is null or a is null and b == ''
-        return false if a is null or b is null
-
-        a.toString() == b.toString()
-
-      isChoiceEqual: (choice, value)->
-        if jQuery.isArray(choice)
-          return true if @isEqual(choice[0], value)
-        else if @isEqual(choice, value)
-          return true
-
-        return false
-
-      hasValueInChoices: (value) ->
-        return true if @props.params.mode == 'lookup'
-        return true if @isEqual(value, null) and @props.params.nullable
-
-        for c in @props.params.choices
-          return true if @isChoiceEqual(c, value)
-
-        return false
-
-      missFieldInVariables: ->
-        for variable in @props.params.variables
-          return false if variable.name == @props.name
-
-        return true
-
-      getChoices: (value) ->
-        if @props.params.mode == 'select'
-          choices = @props.params.choices.slice()
-
-          unless @hasValueInChoices(value)
-            if @props.value is null
-              @addNullChoice(choices)
-            else
-              choices.push(value)
-
-          @addNullChoice(choices) if @props.params.nullable
-
-          choices
-
-        else if @props.params.mode == 'lookup'
-          @props.params.choices
-
       addNullChoice: (choices) ->
         hasNullValue = false
         for choice in choices when @isChoiceEqual(choice, null)
@@ -178,3 +103,14 @@ modulejs.define 'HBWFormSelect',
         language = jQuery.extend({}, translations)
         language.maximumSelected = -> ''
         language
+
+      addCurrentValueToChoices: (value) ->
+        choices = @props.params.choices.slice()
+
+        unless @hasValueInChoices(value)
+          if @props.value is null
+            @addNullChoice(choices)
+          else
+            choices.push(value)
+
+        choices

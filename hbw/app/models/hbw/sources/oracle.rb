@@ -56,7 +56,7 @@ module HBW
           else
             id = row[id_col]
           end
-          { id: id, text: row[name_col] }
+          { id: id, text: row[name_col] }.merge(row)
         end
       ensure
         cursor.close if cursor.present?
