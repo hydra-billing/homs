@@ -185,6 +185,7 @@ en:
         created_at: Created at
         updated_at: Updated at
         print_form_code: Print form template
+        estimated_exec_date: Estimated execution date
       order_type:
         code: Code
         file: Uploaded YAML file content
@@ -277,6 +278,7 @@ en:
         bp_state: Business process state
         state: Order state
         done_at: Order done datetime
+        estimated_exec_date: Estimated execution date
         archived: Archived
     users:
       resource: Users

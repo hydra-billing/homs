@@ -4,7 +4,7 @@ module API
       include HttpBasicAuthentication if !Rails.env.development? || ENV['HOMS_API_USE_AUTH']
 
       PARAMS_ATTRIBUTES = [:order_type_code, :user_email, :ext_code, :bp_id,
-                           :bp_state, :state, :done_at, :archived]
+                           :bp_state, :state, :done_at, :archived, :estimated_exec_date]
 
       private
 

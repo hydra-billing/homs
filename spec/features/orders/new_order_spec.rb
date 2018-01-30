@@ -23,10 +23,10 @@ feature 'Create new order', js: true do
     expect(page).to have_content 'Adding order'
     expect_widget_presence
 
-    click_on_calendar('order_creationDate')
-    click_checkbox_div('order_callBack')
-    fill_in('order[problemDescription]', with: problem_descr)
-    fill_in('order[contractNumber]',     with: contract_number)
+    click_on_calendar('order_data_creationDate')
+    click_checkbox_div('order_data_callBack')
+    fill_in('order[data][problemDescription]', with: problem_descr)
+    fill_in('order[data][contractNumber]',     with: contract_number)
     click_and_wait('Add')
 
     expect(page).to                                 have_content order_code
@@ -47,7 +47,7 @@ feature 'Create new order', js: true do
     expect(page).to have_content 'Adding order'
     expect_widget_presence
 
-    fill_in('order[contractNumber]', with: invalid_contract_number)
+    fill_in('order[data][contractNumber]', with: invalid_contract_number)
 
     click_on 'Add'
 
