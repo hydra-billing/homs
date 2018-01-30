@@ -43,5 +43,10 @@
     .row.attribute-row
       .col-xs-12
         = succeed ':' do
+          = Order.human_attribute_name(:estimated_exec_date)
+        .value= prettify_date(@order.estimated_exec_date)
+    .row.attribute-row
+      .col-xs-12
+        = succeed ':' do
           = Order.human_attribute_name(:done_at)
         .value= prettify_date(@order.done_at)

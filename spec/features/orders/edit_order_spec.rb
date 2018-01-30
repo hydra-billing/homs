@@ -30,11 +30,11 @@ feature 'Edit order', js: true do
     expect(page).to have_content order_code
     expect_widget_presence
 
-    expect(page).to have_css('.order_creationDate')
-    click_on_calendar('order_creationDate')
-    click_checkbox_div('order_callBack')
-    fill_in('order[problemDescription]', with: problem_descr)
-    fill_in('order[contractNumber]',     with: contract_number)
+    expect(page).to have_css('.order_data_creationDate')
+    click_on_calendar('order_data_creationDate')
+    click_checkbox_div('order_data_callBack')
+    fill_in('order[data][problemDescription]', with: problem_descr)
+    fill_in('order[data][contractNumber]',     with: contract_number)
     click_and_wait('Update Order')
 
     expect(page).to                                 have_content order_code

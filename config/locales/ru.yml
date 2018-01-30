@@ -336,6 +336,7 @@ ru:
         created_at: Дата создания
         updated_at: Дата изменения
         print_form_code: Код шаблона
+        estimated_exec_date: Ожидаемый срок выполнения
       order_type:
         code: Код
         name: Наименование

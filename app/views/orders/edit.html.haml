@@ -10,17 +10,24 @@
       .col-sm-4
       .col-sm-8
         = render partial: 'layouts/form_errors', locals: { record: @order }
-    - @order.data.each_pair do |name, value|
-      - field = @order.field_def_hash(name)
-      - case field[:type]
-        - when 'boolean'
-          = f.input(name, as: :custom_boolean, input_html: { checked: !!value }, label: field.fetch(:label), wrapper: :horizontal_boolean)
-        - when 'datetime'
-          = f.input(name, as: :datetime_picker, value: value, label: field.fetch(:label))
-        - when 'json'
-          = f.input(name, as: :text, input_html: { value: value }, label: field.fetch(:label))
-        - else
-          = f.input(name, as: :string, input_html: { value: value }, label: field.fetch(:label))
+    = f.simple_fields_for :data do |data|
+      - @order.data.each_pair do |name, value|
+        - field = @order.field_def_hash(name)
+        - case field[:type]
+          - when 'boolean'
+            = data.input(name, as: :custom_boolean, input_html: { checked: !!value }, label: field.fetch(:label), required: field.fetch(:required, false), wrapper: :horizontal_boolean)
+          - when 'datetime'
+            = data.input(name, as: :datetime_picker, value: value, label: field.fetch(:label), required: field.fetch(:required, false))
+          - when 'json'
+            = data.input(name, as: :text, input_html: { value: value }, label: field.fetch(:label), required: field.fetch(:required, false))
+          - else
+            = data.input(name, as: :string, input_html: { value: value }, label: field.fetch(:label), required: field.fetch(:required, false))
+
+    = f.input(:estimated_exec_date,
+              as:    :datetime_picker,
+              value: @order.estimated_exec_date,
+              label: Order.human_attribute_name(:estimated_exec_date),
+              required: false)
 
     %footer.row
       .col-sm-8.col-sm-offset-4
