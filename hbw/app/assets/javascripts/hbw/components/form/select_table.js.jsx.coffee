@@ -4,6 +4,15 @@ modulejs.define 'HBWFormSelectTable',
     React.createClass
       mixins: [TranslationsMixin, DeleteIfMixin, SelectMixin]
 
+      getInitialState: ->
+        value = @props.current_value or ''
+
+        {
+          value: @props.params.current_value
+          choices: @getChoices(value)
+          error: not @hasValueInChoices(value) and value or @missFieldInVariables()
+        }
+
       render: ->
         opts = {
           name: @props.name
@@ -49,7 +58,7 @@ modulejs.define 'HBWFormSelectTable',
           hasNullValue = true
 
         unless hasNullValue
-          nullChoice = [-1]
+          nullChoice = ['null']
           nullChoice.push('-') for [1..@props.params.row_params.length]
 
           choices.push(nullChoice)
@@ -58,16 +67,10 @@ modulejs.define 'HBWFormSelectTable',
         rowParams = @props.params.row_params
 
         for i of rowParams
-          `<th className={this.buildCssFromConfig(rowParams[i])}>{rowParams[i].name}</th>`
+          `<th className={this.buildCssFromConfig(rowParams[i])} key={rowParams[i].name}>{rowParams[i].name}</th>`
 
       onClick: (event) ->
-        event.target.parentElement.getElementsByTagName('input')[0].checked = true
-
-        rows = event.target.parentElement.parentElement.getElementsByTagName('tr')
-        for row in rows
-          row.classList.remove('selected')
-
-        event.target.parentElement.classList.add('selected')
+        @setState(value: event.target.parentElement.getElementsByTagName('input')[0].value);
 
       buildTableBody: (choices, name, value) ->
         opts = {
@@ -78,18 +81,25 @@ modulejs.define 'HBWFormSelectTable',
         for _, config of @props.params.row_params
           cssClassesList.push(@buildCssFromConfig(config))
 
-        choices.map (items) ->
+        choices.map (items) =>
           renderCells = (items) ->
             for i of items
-              `<td className={cssClassesList[i]}>{items[i]}</td>`
+              `<td className={cssClassesList[i]} key={i}>{items[i]}</td>`
 
           id = items[0]
 
-          selected = 'selected' if id == value
+          selected = 'selected' if @isEqual(id, value)
 
-          `<tr {...opts} className={selected}>
-            <td className='hidden'>
-              <input name={name} type="radio" value={id} id={id}/>
+          stub = {
+            onChange: ->
+              return
+          }
+
+          isEqualFunc = @isEqual
+
+          `<tr {...opts} className={selected} key={id}>
+            <td className='hidden' key={'td-' + id}>
+              <input {...stub} name={name} type="radio" value={id} id={id} checked={isEqualFunc(id, value)} />
             </td>
             {renderCells(items.slice(1, items.length))}
           </tr>`
