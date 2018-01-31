@@ -12,6 +12,8 @@ module Imprint
         optional(:archived).maybe(:bool?)
         optional(:created_at_from).maybe(:date_time?)
         optional(:created_at_to).maybe(:date_time?)
+        optional(:estimated_exec_date_from).maybe(:date_time?)
+        optional(:estimated_exec_date_to).maybe(:date_time?)
         optional(:filter).maybe(:str?)
         optional(:user_id).maybe(:array?)
 

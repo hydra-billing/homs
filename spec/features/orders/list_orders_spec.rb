@@ -54,11 +54,20 @@ feature 'List orders', js: true do
     # Calendar "To"
     expect(label('created_at_to')).to          eq('To')
     expect(calendar_value('created_at_to')).to eq(in_current_locale((DateTime.now).end_of_day))
+
+    # Estimated execution date "From"
+    expect(label('estimated_exec_date_from')).to          eq('From')
+    expect(calendar_value('estimated_exec_date_from')).to be_nil
+
+    # Estimated execution date "To"
+    expect(label('estimated_exec_date_to')).to          eq('To')
+    expect(calendar_value('estimated_exec_date_to')).to be_nil
   end
 
   scenario 'with changing filter parameters' do
     current_orders_list = [[], ['ORD-1', 'Empty order type', 'In progress',
-                                in_current_locale(vacation_request_order.created_at), '', 'ext_code', '']]
+                                in_current_locale(vacation_request_order.created_at), '', 'ext_code', '',
+                                in_current_locale(vacation_request_order.estimated_exec_date)]]
 
     # "Archived"
     search_button.click
@@ -109,6 +118,25 @@ feature 'List orders', js: true do
     expect(empty_order_list).not_to eq(nil)
 
     set_datetime_picker_date('created_at_to', in_current_locale(vacation_request_order.created_at + 1.minute))
+    search_button.click
+    expect(orders_list).to eq(current_orders_list)
+
+    # Estimated execution date "From"
+    set_datetime_picker_date('estimated_exec_date_from', in_current_locale(vacation_request_order.estimated_exec_date + 1.minute))
+    search_button.click
+    expect(empty_order_list).not_to be_nil
+
+    calendar_date_button('estimated_exec_date_from').click
+    calendar_clear_button('estimated_exec_date_from').click
+    search_button.click
+    expect(orders_list).to eq(current_orders_list)
+
+    # Estimated execution date "To"
+    set_datetime_picker_date('estimated_exec_date_to', in_current_locale(vacation_request_order.estimated_exec_date - 1.minute))
+    search_button.click
+    expect(empty_order_list).not_to be_nil
+
+    set_datetime_picker_date('estimated_exec_date_to', in_current_locale(vacation_request_order.estimated_exec_date + 1.minute))
     search_button.click
     expect(orders_list).to eq(current_orders_list)
 

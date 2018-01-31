@@ -15,6 +15,7 @@
               %th= Order.human_attribute_name(:user)
               %th{title: Order.human_attribute_name(:ext_code)}= t('.ext_code')
               %th{title: Order.human_attribute_name(:archived)}= t('.archived')
+              %th= Order.human_attribute_name(:estimated_exec_date)
           %tbody
             - @orders.each do |order|
               = render order
