@@ -39,8 +39,9 @@ class OrdersController < API::BaseController
 
   def create
     @order.order_type_id = params[:order_type_id] || OrderType.active.first.id
-    @order.data = params[:order]
+    @order.data = params[:order][:data]
     @order.user_id = current_user.id
+    @order.update_attributes(order_common_params)
 
     if @order.save
       redirect_to order_url(@order.code)
@@ -50,7 +51,8 @@ class OrdersController < API::BaseController
   end
 
   def update
-    @order.data = params[:order]
+    @order.data = params[:order][:data]
+    @order.update_attributes(order_common_params)
 
     if @order.save
       redirect_to order_url(@order.code)
@@ -87,5 +89,11 @@ class OrdersController < API::BaseController
   def resource_set(resource = nil)
     resource ||= Order.find_by!(code: params[:id])
     instance_variable_set("@#{resource_name}", resource)
+  end
+
+  private
+
+  def order_common_params
+    params.require(:order).permit(:estimated_exec_date)
   end
 end

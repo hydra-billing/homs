@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711084125) do
+ActiveRecord::Schema.define(version: 20180129152318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,18 +31,19 @@ ActiveRecord::Schema.define(version: 20160711084125) do
   add_index "order_types", ["code", "created_at"], name: "index_order_types_on_code_and_created_at", unique: true, using: :btree
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "order_type_id",                 null: false
+    t.integer  "order_type_id",                       null: false
     t.integer  "user_id"
-    t.string   "code",                          null: false
+    t.string   "code",                                null: false
     t.string   "ext_code"
     t.string   "bp_id"
     t.string   "bp_state"
-    t.integer  "state",         default: 0
+    t.integer  "state",               default: 0
     t.datetime "done_at"
-    t.boolean  "archived",      default: false
+    t.boolean  "archived",            default: false
     t.json     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "estimated_exec_date"
   end
 
   add_index "orders", ["code"], name: "index_orders_on_code", using: :btree

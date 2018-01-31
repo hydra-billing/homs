@@ -5,7 +5,7 @@ describe OrdersController, type: :controller do
 
   describe 'Orders' do
     render_views
-    
+
     it 'create success' do
       sign_in user
 
@@ -13,7 +13,7 @@ describe OrdersController, type: :controller do
       order[:data]['creationDate']   = '2016-03-31T17:42:29.000+03:00'
       order[:data]['callBack']       = '1'
 
-      post 'create', :order => order[:data], :order_type_id => order_type.id
+      post 'create', order: {data: order[:data]}, order_type_id: order_type.id
       expect(subject).to redirect_to("/orders/#{Order.last.code}")
     end
 
@@ -24,7 +24,7 @@ describe OrdersController, type: :controller do
       order[:data]['creationDate']   = '2016-03-31T17:42:29.000+03:00'
       order[:data]['callBack']       = '1'
 
-      post 'create', :order => order[:data], :order_type_id => order_type.id
+      post 'create', order: {data: order[:data]}, order_type_id: order_type.id
       expect(response.body).to match /has invalid value/im
     end
 
@@ -43,7 +43,7 @@ describe OrdersController, type: :controller do
       order[:data]['creationDate']   = '2016-03-31T17:42:29.000+03:00'
       order[:data]['callBack']       = '1'
 
-      patch 'update', :id => order.code, :order => order[:data]
+      patch 'update', id: order.code, order: {data: order[:data]}
 
       expect(Order.find_by_id(order.id)[:data]['contractNumber']).to eq(123)
       expect(Order.find_by_id(order.id)[:data]['creationDate']).to   eq('2016-03-31T17:42:29.000+03:00')

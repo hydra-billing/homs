@@ -10,6 +10,7 @@ FactoryGirl.define do
       bp_state 'bp_state'
       state 1
       done_at Time.zone.now
+      estimated_exec_date Time.zone.now + 1.day
       archived true
     end
     data({})
