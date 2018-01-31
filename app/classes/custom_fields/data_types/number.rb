@@ -5,7 +5,7 @@ module CustomFields
         return true if value.nil?
 
         valid = case value
-                  when ::String then value == '' || value =~ /\A\d+(\.\d+)?\z/
+                  when ::String then value == coerce_value(value).to_s
                   when NilClass, Numeric then true
                   else
                     false

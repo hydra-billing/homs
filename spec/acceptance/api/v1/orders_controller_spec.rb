@@ -52,7 +52,10 @@ order_type:
       label: Adjust Result
     jsonField:
       type: json
-      label: JSON Field",
+      label: JSON Field
+    negativeNumberField:
+      type: number
+      label: Negative Number Field",
           "common: &common
   label: ''
   type: string
@@ -137,13 +140,14 @@ order_type:
           order_type_id: OrderType.find_by(code: 'vacation_request').id
       )
       order.data = {
-          employeeFirstName: 'James',
-          employeeLastName:  'Carter',
-          employeeEmail:     'james@example.com',
-          beginDate:         '2016-07-15T14:45:03+00:00',
-          endDate:           '2016-07-16T14:49:42+00:00',
-          motivationText:    'I had a lot of work last 7 years',
-          jsonField:         '{"name": "James"}'
+          employeeFirstName:   'James',
+          employeeLastName:    'Carter',
+          employeeEmail:       'james@example.com',
+          beginDate:           '2016-07-15T14:45:03+00:00',
+          endDate:             '2016-07-16T14:49:42+00:00',
+          motivationText:      'I had a lot of work last 7 years',
+          jsonField:           '{"name": "James"}',
+          negativeNumberField: '-123456789'
       }
       order.save
 
@@ -204,16 +208,17 @@ order_type:
                                 'state'               => 'to_execute',
                                 'archived'            => false,
                                 'data'                => {
-                                    'employeeFirstName' => 'James',
-                                    'employeeLastName'  => 'Carter',
-                                    'employeeEmail'     => 'james@example.com',
-                                    'beginDate'         => '2016-07-15T14:45:03.000+00:00',
-                                    'endDate'           => '2016-07-16T14:49:42.000+00:00',
-                                    'motivationText'    => 'I had a lot of work last 7 years',
-                                    'resolution'        => nil,
-                                    'resolutionText'    => nil,
-                                    'adjustResult'      => nil,
-                                    'jsonField'         => '{"name": "James"}'
+                                    'employeeFirstName'   => 'James',
+                                    'employeeLastName'    => 'Carter',
+                                    'employeeEmail'       => 'james@example.com',
+                                    'beginDate'           => '2016-07-15T14:45:03.000+00:00',
+                                    'endDate'             => '2016-07-16T14:49:42.000+00:00',
+                                    'motivationText'      => 'I had a lot of work last 7 years',
+                                    'resolution'          => nil,
+                                    'resolutionText'      => nil,
+                                    'adjustResult'        => nil,
+                                    'jsonField'           => '{"name": "James"}',
+                                    'negativeNumberField' => -123456789
                                 },
                                 'done_at'             => nil,
                                 'estimated_exec_date' => nil,
@@ -243,16 +248,17 @@ order_type:
                                     'state'               => 'to_execute',
                                     'archived'            => false,
                                     'data'                => {
-                                        'employeeFirstName' => 'James',
-                                        'employeeLastName'  => 'Carter',
-                                        'employeeEmail'     => 'james@example.com',
-                                        'beginDate'         => '2016-07-15T14:45:03.000+00:00',
-                                        'endDate'           => '2016-07-16T14:49:42.000+00:00',
-                                        'motivationText'    => 'I had a lot of work last 7 years',
-                                        'resolution'        => nil,
-                                        'resolutionText'    => nil,
-                                        'adjustResult'      => nil,
-                                        'jsonField'         => '{"name": "James"}'
+                                        'employeeFirstName'   => 'James',
+                                        'employeeLastName'    => 'Carter',
+                                        'employeeEmail'       => 'james@example.com',
+                                        'beginDate'           => '2016-07-15T14:45:03.000+00:00',
+                                        'endDate'             => '2016-07-16T14:49:42.000+00:00',
+                                        'motivationText'      => 'I had a lot of work last 7 years',
+                                        'resolution'          => nil,
+                                        'resolutionText'      => nil,
+                                        'adjustResult'        => nil,
+                                        'jsonField'           => '{"name": "James"}',
+                                        'negativeNumberField' => -123456789
                                     },
                                     'done_at'             => nil,
                                     'estimated_exec_date' => nil,
@@ -308,16 +314,17 @@ order_type:
       let(:archived)            { false }
       let(:data) do
         {
-            'employeeFirstName' => 'James',
-            'employeeLastName'  => 'Carter',
-            'employeeEmail'     => 'james@example.com',
-            'beginDate'         => '2016-07-15T14:45:03.000+00:00',
-            'endDate'           => '2016-07-16T14:49:42.000+00:00',
-            'motivationText'    => 'I had a lot of work last 7 years',
-            'resolution'        => 'Resolution',
-            'resolutionText'    => 'Resolution Text',
-            'adjustResult'      => 'Adjust Result',
-            'jsonField'         => '{"last_name": "Carter"}'
+            'employeeFirstName'   => 'James',
+            'employeeLastName'    => 'Carter',
+            'employeeEmail'       => 'james@example.com',
+            'beginDate'           => '2016-07-15T14:45:03.000+00:00',
+            'endDate'             => '2016-07-16T14:49:42.000+00:00',
+            'motivationText'      => 'I had a lot of work last 7 years',
+            'resolution'          => 'Resolution',
+            'resolutionText'      => 'Resolution Text',
+            'adjustResult'        => 'Adjust Result',
+            'jsonField'           => '{"last_name": "Carter"}',
+            'negativeNumberField' => -123456789
         }
       end
 
@@ -453,16 +460,17 @@ order_type:
       let(:code) { order_vacation_request.code }
       let(:data) do
         {
-            'employeeFirstName' => 'James',
-            'employeeLastName'  => 'Prinston',
-            'employeeEmail'     => 'james@example.com',
-            'beginDate'         => '2016-07-15T14:45:03.000+00:00',
-            'endDate'           => '2016-07-16T14:49:42.000+00:00',
-            'motivationText'    => 'I had a lot of work last 7 years',
-            'resolution'        => nil,
-            'resolutionText'    => nil,
-            'adjustResult'      => nil,
-            'jsonField'         => '{"last_name": "Carter"}'
+            'employeeFirstName'   => 'James',
+            'employeeLastName'    => 'Prinston',
+            'employeeEmail'       => 'james@example.com',
+            'beginDate'           => '2016-07-15T14:45:03.000+00:00',
+            'endDate'             => '2016-07-16T14:49:42.000+00:00',
+            'motivationText'      => 'I had a lot of work last 7 years',
+            'resolution'          => nil,
+            'resolutionText'      => nil,
+            'adjustResult'        => nil,
+            'jsonField'           => '{"last_name": "Carter"}',
+            'negativeNumberField' => -123456789
         }
       end
 
