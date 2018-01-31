@@ -53,14 +53,6 @@ modulejs.define 'HBWTranslationsMixin', ['HBWTranslator'], (Translator) ->
   t: (key, vars) -> Translator.translate(key, vars)
 
 modulejs.define 'HBWSelectMixin', ['jQuery'], (jQuery) ->
-  getInitialState: ->
-    value = @getChosenValue() or ''
-    {
-      value: value
-      choices: @getChoices(value)
-      error: not @hasValueInChoices(value) and value or @missFieldInVariables()
-    }
-
   getChoices: (value) ->
     if @props.params.mode == 'select'
       choices = @props.params.choices.slice()

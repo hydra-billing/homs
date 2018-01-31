@@ -65,6 +65,7 @@ module HBW
           delimiter: delimiter?,
           delete_if: delete_if,
           variables: task.definition['variables'],
+          current_value: value,
           url: url }
       end
 

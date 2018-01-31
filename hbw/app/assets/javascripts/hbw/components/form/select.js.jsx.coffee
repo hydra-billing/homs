@@ -4,6 +4,15 @@ modulejs.define 'HBWFormSelect',
     React.createClass
       mixins: [TranslationsMixin, DeleteIfMixin, SelectMixin]
 
+      getInitialState: ->
+        value = @getChosenValue() or ''
+
+        {
+          value: value
+          choices: @getChoices(value)
+          error: not @hasValueInChoices(value) and value or @missFieldInVariables()
+        }
+
       render: ->
         lookup = @props.params.mode == 'lookup'
         opts = {

@@ -81,6 +81,9 @@ modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
       variables = {}
 
       jQuery.each(@getElement().serializeArray(), (i, field) ->
+        if field.value == 'null'
+          field.value = null
+
         variables[field.name] = field.value
       )
 
