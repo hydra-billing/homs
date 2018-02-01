@@ -34,6 +34,23 @@
           .col-xs-10.col-sm-10.col-md-10.col-lg-10
             = datetime_picker(:created_at_to, value: list_filter.filter_values[:created_at_to])
             %input(name="created_at_to" type="hidden" value="#{list_filter.filter_values[:created_at_to]}")
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12.no-margin-bottom
+        %label= t('helpers.estimated_exec_date')
+      .col-xs-6.col-sm-12.col-md-12.col-lg-12
+        .row
+          .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
+            %label(for="estimated_exec_date_from")= t('helpers.from')
+          .col-xs-10.col-sm-10.col-md-10.col-lg-10
+            = datetime_picker(:estimated_exec_date_from, value: list_filter.filter_values[:estimated_exec_date_from])
+            %input(name="estimated_exec_date_from" type="hidden" value="#{list_filter.filter_values[:estimated_exec_date_from]}")
+      .col-xs-6.col-sm-12.col-md-12.col-lg-12
+        .row
+          .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
+            %label(for="estimated_exec_date_to")= t('helpers.to')
+          .col-xs-10.col-sm-10.col-md-10.col-lg-10
+            = datetime_picker(:estimated_exec_date_to, value: list_filter.filter_values[:estimated_exec_date_to])
+            %input(name="estimated_exec_date_to" type="hidden" value="#{list_filter.filter_values[:estimated_exec_date_to]}")
   .col-xs-3.col-sm-2.col-md-1.col-lg-1.label-padding-top.label-padding-left-0px
     .row
       .col-xs-6.col-sm-12.col-md-12.col-lg-12
@@ -67,3 +84,5 @@
 
   processOnChange('created_at_from')
   processOnChange('created_at_to')
+  processOnChange('estimated_exec_date_from')
+  processOnChange('estimated_exec_date_to')

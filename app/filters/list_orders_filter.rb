@@ -23,8 +23,10 @@ class ListOrdersFilter
     extend self
 
     def filter_by_date(rel, dates)
-      { created_at_from: 'created_at >= ?',
-        created_at_to:   'created_at <= ?' }.reduce(rel) do |r, (attr, condition)|
+      { created_at_from:          'created_at >= ?',
+        created_at_to:            'created_at <= ?',
+        estimated_exec_date_from: 'estimated_exec_date >= ?',
+        estimated_exec_date_to:   'estimated_exec_date <= ?' }.reduce(rel) do |r, (attr, condition)|
         if dates[attr].present?
           r.where(condition, dates[attr])
         else
@@ -90,9 +92,13 @@ class ListOrdersFilter
         now = Time.current
         created_at_from = (params[:created_at_from] || (now - 1.day).beginning_of_day).try(:change, {offset: Time.zone.formatted_offset})
         created_at_to = (params[:created_at_to] || now.end_of_day).try(:change, {offset: Time.zone.formatted_offset})
+        estimated_exec_date_from = params[:estimated_exec_date_from].try(:change, {offset: Time.zone.formatted_offset})
+        estimated_exec_date_to = params[:estimated_exec_date_to].try(:change, {offset: Time.zone.formatted_offset})
 
         { created_at_from: created_at_from,
-          created_at_to: created_at_to }.with_indifferent_access
+          created_at_to: created_at_to,
+          estimated_exec_date_from: estimated_exec_date_from,
+          estimated_exec_date_to: estimated_exec_date_to }.with_indifferent_access
       end
   end
 

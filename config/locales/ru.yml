@@ -203,6 +203,7 @@ ru:
     enter_order_type: Тип
     enter_archived: Признак архивности
     creation_date: Дата создания
+    estimated_exec_date: Ожидаемый срок выполнения
     from: с
     to: по
     archived: Архивирован
