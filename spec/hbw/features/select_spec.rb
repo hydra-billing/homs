@@ -116,7 +116,7 @@ feature 'Check select with', js: true do
     expect(page).to have_selector "[name='homsOrderNotInVBPVariables']"
     expect(page).to have_content  'Field with name homsOrderNotInVBPVariables not defined in BP variables'
     expect_widget_presence
-    end
+  end
 
   scenario 'BP variable value is null for required field' do
     click_on 'Orders'

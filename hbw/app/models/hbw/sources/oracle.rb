@@ -15,7 +15,11 @@ module HBW
 
         execute(sql) do |cursor|
           binds.each do |bind|
-            cursor.bind_param(bind, variables.fetch(bind))
+            if variables.fetch(bind).nil?
+              cursor.bind_param(bind, nil, Integer)
+            else
+              cursor.bind_param(bind, variables.fetch(bind))
+            end
           end
         end
       end
