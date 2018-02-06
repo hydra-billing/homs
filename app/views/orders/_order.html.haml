@@ -1,4 +1,4 @@
-%tr
+%tr{class: expired_class(order)}
   %td= link_to order.code, order_path(order.code)
   %td= order.order_type_name
   %td= order_state_indicator(order)

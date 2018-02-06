@@ -47,6 +47,19 @@ main.container
   tbody tr:hover
     background-color: #eee
 
+div.orders-list
+  tbody > tr.expired
+    td
+      background-color: #ffe4e1
+
+  tbody > tr.about-to-expire
+    td
+      background-color: #ffffe0
+
+  tbody > tr.expired:hover, tbody > tr.about-to-expire:hover
+    td
+      background-color: #f5f5f5
+
 .orders-filter
   .select2-selection__rendered
     width: 100%
