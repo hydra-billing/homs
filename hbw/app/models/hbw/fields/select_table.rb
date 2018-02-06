@@ -83,7 +83,7 @@ module HBW
                 else item
               end
             else
-              item
+              item.to_i
             end
           end
         end
