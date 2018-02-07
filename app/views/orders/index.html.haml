@@ -5,7 +5,7 @@
   .col-xs-12
     - if @orders.present?
       .table-responsive.orders-list
-        %table.table.table-striped.table-hover
+        %table.table.table-hover
           %thead
             %tr
               %th= Order.human_attribute_name(:code)

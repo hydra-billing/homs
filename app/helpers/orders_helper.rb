@@ -36,4 +36,18 @@ module OrdersHelper
   def use_imprint?
     Rails.application.config.app[:use_imprint]
   end
+
+  def expired_class(order)
+    if !order.estimated_exec_date.nil?
+      if order.estimated_exec_date <= Time.now
+        'expired'
+      elsif order.estimated_exec_date - Rails.application.config.app.fetch(:orders_expiration_warning_days, 1).days <= Time.now
+        'about-to-expire'
+      else
+        ''
+      end
+    else
+      ''
+    end
+  end
 end
