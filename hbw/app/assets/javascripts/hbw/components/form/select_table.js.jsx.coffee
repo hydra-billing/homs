@@ -17,7 +17,6 @@ modulejs.define 'HBWFormSelectTable',
         opts = {
           name: @props.name
           defaultValue: @state.value
-          disabled: @props.params.editable == false
         }
 
         cssClass = @props.params.css_class
@@ -32,14 +31,16 @@ modulejs.define 'HBWFormSelectTable',
         selectErrorMessageCss += ' hidden' unless @missFieldInVariables()
 
         formGroupCss = 'form-group'
-
         formGroupCss += ' has-error' if @state.error
+
+        tableCss = 'select-table table table-bordered table-hover'
+        tableCss += ' disabled' if @props.params.editable == false
 
         `<div className={cssClass} title={tooltip}>
             <span className={labelCss}>{label}</span>
             <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
             <div className={formGroupCss}>
-            <table className='select-table table table-bordered table-hover'>
+            <table className={tableCss}>
               <thead className='thead-inverse'>
                 <tr>
                   {this.buildTableHeader()}
@@ -70,6 +71,9 @@ modulejs.define 'HBWFormSelectTable',
           `<th className={this.buildCssFromConfig(rowParams[i])} key={rowParams[i].name}>{rowParams[i].name}</th>`
 
       onClick: (event) ->
+        if @props.params.editable == false
+          return
+
         @setState(value: event.target.parentElement.getElementsByTagName('input')[0].value);
 
       buildTableBody: (choices, name, value) ->
