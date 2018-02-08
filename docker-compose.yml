@@ -1,0 +1,29 @@
+version: '2'
+services:
+  db_activiti:
+    image: latera/postgres-activiti
+    container_name: postgres-activiti
+  db_homs:
+    image: latera/postgres-homs
+    container_name: postgres-homs
+  activiti_homs:
+    image: latera/activiti-homs
+    container_name: activiti
+    links:
+      - db_activiti:postgres-activiti
+    environment:
+      - DB_HOST=postgres-activiti
+      - HOMS_HOST=homs
+    ports:
+      - 8080:8080
+  homs:
+    image: latera/homs
+    container_name: homs
+    links:
+      - db_homs:postgres-homs
+      - activiti_homs:activiti
+    environment:
+      - ACTIVITI_HOST=activiti
+      - DB_HOST=postgres-homs
+    ports:
+      - 3000:3000
