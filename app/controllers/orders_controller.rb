@@ -65,6 +65,12 @@ class OrdersController < API::BaseController
     @order = Order.new
   end
 
+  def get_order_type_attributes
+    order_type = OrderType.find(params[:id])
+
+    render json: {options: order_type.fields}
+  end
+
   protected
 
   def resource_get

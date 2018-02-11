@@ -15,6 +15,22 @@ module ApplicationHelper
     end
   end
 
+  def custom_fields_for_filter(order_type, attributes)
+    type_attributes = OrderType.find(order_type).fields.with_indifferent_access
+    prepared_fields = attributes.each_with_object({}) do |(attr, val), fields|
+      value = val
+      value[:localized] = localize_date_range(val) if type_attributes[attr][:type] == 'datetime'
+
+      fields[attr] = {value: value}
+    end
+
+    type_attributes.slice(*attributes.keys).deep_merge(prepared_fields)
+  end
+
+  def localize_date_range(date_range)
+    date_range.reduce({}) { |range, (k,v)| range[k] = DateTime.iso8601(v).strftime(datetime_format) if v.present?; range }
+  end
+
   def boolean_indicator(boolean)
     boolean ? tag(:span, class: %w(glyphicon glyphicon-ok)) : ''
   end

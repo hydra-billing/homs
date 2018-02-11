@@ -173,6 +173,35 @@ class Homs
       cache: true
       language: I18n.locale)
 
+  enableOrderAttributePicker: (allowClear) =>
+    $('.order_attribute-picker').select2(
+      width: '100%'
+      allowClear: allowClear
+      theme: 'bootstrap'
+      formatSelection: -> (node) node.id
+      cache: true
+      language: I18n.locale)
+
+    currentOrderType = $('.order_type-picker option:selected').val()
+    if currentOrderType
+      @setAttributePickerOptions(currentOrderType)
+
+  setAttributePickerOptions: (orderType) =>
+    $.ajax '/orders/order_type_attributes/' + orderType,
+      method: 'GET'
+      success: (data) =>
+        if Object.keys(data.options).length > 0
+          $orderAttributePicker = $('.order_attribute-picker')
+          $orderAttributePicker.empty()
+
+          $.each(data.options, (key, value) =>
+            $orderAttributePicker
+              .append(
+                $('<option>', {value: key}).text(value.label)
+            ))
+
+          $orderAttributePicker.prop('disabled', false).trigger('change')
+
   updateOrderForm: (orderCode) =>
     $.ajax('/orders/' + orderCode, dataType: 'html')
     .done((response) -> $('#order-data').html($(response).find('#order-data').html()))
@@ -182,6 +211,7 @@ class Homs
 $ ->
   Application.enableDateTimePicker()
   Application.enableOrderTypePicker(true)
+  Application.enableOrderAttributePicker(false)
 
 class PatchedGrowl extends @Growl
   @growl: (settings = {}) ->

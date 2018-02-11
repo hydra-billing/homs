@@ -11,8 +11,23 @@ FactoryGirl.define do
       state 1
       done_at Time.zone.now
       estimated_exec_date Time.zone.now + 1.day
-      archived true
+      archived false
     end
+
+    trait :order_support_request do
+      ext_code 'support_ext_code'
+      bp_id 'bp_id'
+      bp_state 'bp_state'
+      state 1
+      done_at Time.zone.now
+      estimated_exec_date Time.zone.now + 1.day
+      archived false
+      data({creationDate: Time.now,
+            problemDescription: 'Problem description',
+            callBack: true,
+            contractNumber: 111})
+    end
+
     data({})
   end
 end

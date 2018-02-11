@@ -1,64 +1,80 @@
+- custom_fields = custom_fields_for_filter(params[:order_type_id], params[:custom_fields]) if params[:custom_fields]
+
 = form_tag(list_orders_path, method: :get, class: 'form-inline orders-filter') do
   %input(name="filter" value="true" type="hidden")
-  .col-xs-12.col-sm-7.col-md-6.col-lg-7
-    .row
-      .col-xs-6.col-sm-6.col-md-6.col-lg-4
-        %label(for="order_type_id")= t('helpers.enter_order_type')
-        = order_type_picker(:order_type_id, value: list_filter.filter_values[:order_type_id])
-      .col-xs-6.col-sm-6.col-md-6.col-lg-8
-        %label(for="user_id")= t('helpers.enter_user')
-        = user_picker(:user_id, value: list_filter.users)
-    .row
-      .col-xs-6.col-sm-6.col-md-6.col-lg-4
-        %label(for="state")= t('helpers.enter_state')
-        = order_state_picker(:state, value: list_filter.filter_values[:state])
-    .row
-      .col-xs-6.col-sm-6.col-md-6.col-lg-4
-        %label(for="archived")= t('helpers.enter_archived')
-        = order_archived_picker(:archived, value: list_filter.filter_values[:archived])
-  .col-xs-12.col-sm-7.col-md-5.col-lg-4.padding-right-0px
-    .row
-      .col-xs-12.col-sm-12.col-md-12.col-lg-12.no-margin-bottom
-        %label= t('helpers.creation_date')
-      .col-xs-6.col-sm-12.col-md-12.col-lg-12
-        .row
-          .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
-            %label(for="created_at_from")= t('helpers.from')
-          .col-xs-10.col-sm-10.col-md-10.col-lg-10
-            = datetime_picker(:created_at_from, value: list_filter.filter_values[:created_at_from])
-            %input(name="created_at_from" type="hidden" value="#{list_filter.filter_values[:created_at_from]}")
-      .col-xs-6.col-sm-12.col-md-12.col-lg-12
-        .row
-          .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
-            %label(for="created_at_to")= t('helpers.to')
-          .col-xs-10.col-sm-10.col-md-10.col-lg-10
-            = datetime_picker(:created_at_to, value: list_filter.filter_values[:created_at_to])
-            %input(name="created_at_to" type="hidden" value="#{list_filter.filter_values[:created_at_to]}")
-    .row
-      .col-xs-12.col-sm-12.col-md-12.col-lg-12.no-margin-bottom
-        %label= t('helpers.estimated_exec_date')
-      .col-xs-6.col-sm-12.col-md-12.col-lg-12
-        .row
-          .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
-            %label(for="estimated_exec_date_from")= t('helpers.from')
-          .col-xs-10.col-sm-10.col-md-10.col-lg-10
-            = datetime_picker(:estimated_exec_date_from, value: list_filter.filter_values[:estimated_exec_date_from])
-            %input(name="estimated_exec_date_from" type="hidden" value="#{list_filter.filter_values[:estimated_exec_date_from]}")
-      .col-xs-6.col-sm-12.col-md-12.col-lg-12
-        .row
-          .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
-            %label(for="estimated_exec_date_to")= t('helpers.to')
-          .col-xs-10.col-sm-10.col-md-10.col-lg-10
-            = datetime_picker(:estimated_exec_date_to, value: list_filter.filter_values[:estimated_exec_date_to])
-            %input(name="estimated_exec_date_to" type="hidden" value="#{list_filter.filter_values[:estimated_exec_date_to]}")
-  .col-xs-3.col-sm-2.col-md-1.col-lg-1.label-padding-top.label-padding-left-0px
-    .row
-      .col-xs-6.col-sm-12.col-md-12.col-lg-12
-        = submit_tag t('.search'), class: 'btn btn-primary'
-      .col-xs-6.col-sm-12.col-md-12.col-lg-12
-        .print-container
-          %button(type="submit" name="print" value="#{t('.search')}" class="btn btn-primary")
-            = t('.print')
+  .row
+    .col-xs-12.col-sm-7.col-md-6.col-lg-7
+      .row
+        .col-xs-6.col-sm-6.col-md-6.col-lg-4
+          %label(for="order_type_id")= t('helpers.enter_order_type')
+          = order_type_picker(:order_type_id, value: list_filter.filter_values[:order_type_id])
+        .col-xs-6.col-sm-6.col-md-6.col-lg-8
+          %label(for="user_id")= t('helpers.enter_user')
+          = user_picker(:user_id, value: list_filter.users)
+      .row
+        .col-xs-6.col-sm-6.col-md-6.col-lg-4
+          %label(for="state")= t('helpers.enter_state')
+          = order_state_picker(:state, value: list_filter.filter_values[:state])
+      .row
+        .col-xs-6.col-sm-6.col-md-6.col-lg-4
+          %label(for="archived")= t('helpers.enter_archived')
+          = order_archived_picker(:archived, value: list_filter.filter_values[:archived])
+    .col-xs-12.col-sm-7.col-md-5.col-lg-4.padding-right-0px
+      .row
+        .col-xs-12.col-sm-12.col-md-12.col-lg-12.no-margin-bottom
+          %label= t('helpers.creation_date')
+        .col-xs-6.col-sm-12.col-md-12.col-lg-12
+          .row
+            .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
+              %label(for="created_at_from")= t('helpers.from')
+            .col-xs-10.col-sm-10.col-md-10.col-lg-10
+              = datetime_picker(:created_at_from, value: list_filter.filter_values[:created_at_from])
+              %input(name="created_at_from" type="hidden" value="#{list_filter.filter_values[:created_at_from]}")
+        .col-xs-6.col-sm-12.col-md-12.col-lg-12
+          .row
+            .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
+              %label(for="created_at_to")= t('helpers.to')
+            .col-xs-10.col-sm-10.col-md-10.col-lg-10
+              = datetime_picker(:created_at_to, value: list_filter.filter_values[:created_at_to])
+              %input(name="created_at_to" type="hidden" value="#{list_filter.filter_values[:created_at_to]}")
+      .row
+        .col-xs-12.col-sm-12.col-md-12.col-lg-12.no-margin-bottom
+          %label= t('helpers.estimated_exec_date')
+        .col-xs-6.col-sm-12.col-md-12.col-lg-12
+          .row
+            .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
+              %label(for="estimated_exec_date_from")= t('helpers.from')
+            .col-xs-10.col-sm-10.col-md-10.col-lg-10
+              = datetime_picker(:estimated_exec_date_from, value: list_filter.filter_values[:estimated_exec_date_from])
+              %input(name="estimated_exec_date_from" type="hidden" value="#{list_filter.filter_values[:estimated_exec_date_from]}")
+        .col-xs-6.col-sm-12.col-md-12.col-lg-12
+          .row
+            .col-xs-2.col-sm-2.col-md-2.col-lg-2.margin-top-10px
+              %label(for="estimated_exec_date_to")= t('helpers.to')
+            .col-xs-10.col-sm-10.col-md-10.col-lg-10
+              = datetime_picker(:estimated_exec_date_to, value: list_filter.filter_values[:estimated_exec_date_to])
+              %input(name="estimated_exec_date_to" type="hidden" value="#{list_filter.filter_values[:estimated_exec_date_to]}")
+    .col-xs-3.col-sm-2.col-md-1.col-lg-1.label-padding-top.label-padding-left-0px
+      .row
+        .col-xs-6.col-sm-12.col-md-12.col-lg-12
+          = submit_tag t('.search'), class: 'btn btn-primary'
+        .col-xs-6.col-sm-12.col-md-12.col-lg-12
+          .print-container
+            %button(type="submit" name="print" value="#{t('.search')}" class="btn btn-primary")
+              = t('.print')
+
+  %hr
+  .row
+    .col-xs-12.col-sm-12.col-md-6.col-lg-6
+      .row
+        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+          %label(for='custom_field_select')= t('helpers.custom_fields_filter.add')
+        .col-xs-10.col-sm-10.col-md-10.col-lg-10
+          = order_attribute_picker(:custom_field_select)
+        .col-xs-2.col-sm-2.col-md-2.col-lg-2
+          %button(type="button" name="add_custom_field_filter" value="#{t('add')}" class="btn btn-primary" disabled)
+            = t('add')
+  .row#custom-field-filter-container{data: {attributes: custom_fields.to_json}}
 
 :coffee
   $ = jQuery
@@ -73,6 +89,116 @@
       complete: (arg) =>
         Application.messenger.show(arg.responseJSON);
 
+  $('.order_type-picker').on 'change', (evt) =>
+    clearCustomFieldFilters()
+    currentOrderType = $(evt.target).find('option:selected').val()
+
+    if (currentOrderType.length == 0)
+      $('.order_attribute-picker').empty().prop('disabled', true).trigger('change')
+    else
+      Application.setAttributePickerOptions(currentOrderType)
+
+  $('.order_attribute-picker').on 'change', (evt) =>
+    currentOrderAttributeType = $(evt.target).find('option:selected').val()
+    $('button[name="add_custom_field_filter"]').prop('disabled', !currentOrderAttributeType)
+
+  $('button[name="add_custom_field_filter"]').on 'click', (evt) =>
+    currentOrderType = $('.order_type-picker option:selected').val()
+    attributeType = $(evt.target).closest('.row').find('.order_attribute-picker option:selected').val()
+
+    if attributeType && $('#' + attributeType).length == 0
+      $.ajax '/orders/order_type_attributes/' + currentOrderType,
+        method: 'GET'
+        success: (data) =>
+          renderCustomFieldFilter(attributeType, data.options[attributeType])
+
+  renderCustomFieldFilter = (name, options) =>
+    $('#custom-field-filter-container').append(buildCustomFieldFilterInput(name, options))
+
+    labelElement = $('label[for="' + name + '"]')
+
+    if labelElement[0].scrollWidth > labelElement[0].offsetWidth
+      labelElement.prop('title', options.label).tooltip()
+
+    if options.type == 'datetime'
+      Application.enableDateTimePicker()
+      processOnChange('custom_fields['+ name + '][from]')
+      processOnChange('custom_fields['+ name + '][to]')
+
+    $('.custom-field-filter-close').on 'click', (evt) =>
+      evt.target.closest('.custom-field-filter').remove()
+
+  buildCustomFieldFilterInput = (name, options) =>
+    return switch options.type
+             when 'string' then buildStringInput(name, options)
+             when 'number' then buildNumberInput(name, options)
+             when 'boolean' then buildBooleanInput(name, options)
+             when 'datetime' then buildDatetimeInput(name, options)
+             else null
+
+  buildStringInput = (attributeName, options) =>
+    return $('<div>', {class: 'col-xs-12 col-sm-12 col-md-6 col-lg-3 custom-field-filter'}).append(
+             $('<div>', {class: 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}).append(
+               $('<label>', {for: attributeName, class: 'label-overflow'}).text(options.label),
+               $('<i>', class: 'fa fa-times custom-field-filter-close')),
+             $('<div>', {class: 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}).append(
+               $('<input>', {type: 'text', id: attributeName, name: 'custom_fields[' + attributeName + ']', value: options.value, class: 'form-control'})
+             ))
+
+  buildNumberInput = (attributeName, options) =>
+    return $('<div>', {class: 'col-xs-12 col-sm-12 col-md-6 col-lg-3 custom-field-filter'}).append(
+             $('<div>', {class: 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}).append(
+               $('<label>', {for: attributeName, class: 'label-overflow'}).text(options.label),
+               $('<i>', class: 'fa fa-times custom-field-filter-close')),
+             $('<div>', {class: 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}).append(
+               $('<input>', {type: 'number', id: attributeName, name: 'custom_fields[' + attributeName + ']', value: options.value, class: 'form-control'})
+             ))
+
+  buildBooleanInput = (attributeName, options) =>
+    return $('<div>', {class: 'col-xs-12 col-sm-12 col-md-6 col-lg-3 custom-field-filter'}).append(
+             $('<div>', {class: 'col-xs-12 col-sm-12 col-md-12 col-lg-12 ' + attributeName}).append(
+               $('<label>', {for: attributeName, class: 'label-overflow label-checkbox'}).text(options.label).append(
+                 $('<div>', {class: 'checkbox-margin'}).append(
+                   $('<input>', {type: 'hidden', name: 'custom_fields[' + attributeName + ']', value: '0'}),
+                   $('<input>', {type: 'checkbox', id: attributeName, name: 'custom_fields[' + attributeName + ']', checked: options.value == '1', value: '1', class: 'custom_boolean'}),
+                   $('<span>')
+                 )),
+                 $('<i>', class: 'fa fa-times custom-field-filter-close')))
+
+  buildDatetimeInput = (attributeName, options) =>
+    return $('<div>', {class: 'col-xs-12 col-sm-12 col-md-12 col-lg-6 custom-field-filter'}).append(
+             $('<div>', {id: attributeName, class: 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}).append(
+               $('<label>', {for: attributeName, class: 'label-overflow'}).text(options.label),
+               $('<i>', class: 'fa fa-times custom-field-filter-close')),
+             $('<div>', {class: 'col-xs-1 col-sm-1 col-md-1 col-lg-1 margin-top-10px'}).append(
+               $('<label>').text('From')),
+             $('<div>', {class: 'col-xs-5 col-sm-5 col-md-5 col-lg-5'}).append(
+               $('<div>', {class: 'form-group'}).append(
+                 $('<div>', {class: 'input-group date datetime-picker'}).data('showclear', true).append(
+                   $('<input>', {type: 'text', id: attributeName + '_from', name: 'custom_fields[' + attributeName + '][from]', value: options.value.localized.from if options.value, class: 'form-control'}),
+                   $('<span>', {class: 'input-group-addon'}).append(
+                     $('<span>', {class: 'glyphicon glyphicon-calendar'})
+                   ))),
+               $('<input>', {type: 'hidden', name: 'custom_fields[' + attributeName + '][from]', value: options.value.from if options.value, class: 'iso8601'})),
+             $('<div>', {class: 'col-xs-1 col-sm-1 col-md-1 col-lg-1 margin-top-10px'}).append(
+               $('<label>').text('To')),
+             $('<div>', {class: 'col-xs-5 col-sm-5 col-md-5 col-lg-5'}).append(
+               $('<div>', {class: 'form-group'}).append(
+                 $('<div>', {class: 'input-group date datetime-picker'}).data('showclear', true).append(
+                   $('<input>', {type: 'text', id: attributeName + '_to', name: 'custom_fields[' + attributeName + '][to]', value: options.value.localized.to if options.value, class: 'form-control'}),
+                   $('<span>', {class: 'input-group-addon'}).append(
+                     $('<span>', {class: 'glyphicon glyphicon-calendar'})
+                   ))),
+               $('<input>', {type: 'hidden', name: 'custom_fields[' + attributeName + '][to]', value: options.value.to if options.value, class: 'iso8601'})))
+
+  renderCustomFieldFilters = () =>
+    filters = $('#custom-field-filter-container').data().attributes
+    for name, options of filters
+      renderCustomFieldFilter(name, options)
+
+  clearCustomFieldFilters = () =>
+    $('#custom-field-filter-container').empty()
+
   processOnChange = (inputName) ->
     $('input[name="' + inputName + '"]').parent().on 'dp.change', (evt) =>
       if evt.date
@@ -81,6 +207,8 @@
         value = null
 
       $('input[name="' + inputName + '"]').attr('value', value)
+
+  renderCustomFieldFilters()
 
   processOnChange('created_at_from')
   processOnChange('created_at_to')

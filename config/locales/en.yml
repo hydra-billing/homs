@@ -71,6 +71,10 @@ en:
     yes_no:
       'yes': 'Yes'
       'no': 'No'
+    custom_fields_filter:
+      title: Order attributes
+      add: Add filter by attribute
+      placeholder: Select order attribute
   users:
     new:
       title: Add a user

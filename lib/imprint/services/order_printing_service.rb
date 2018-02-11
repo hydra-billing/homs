@@ -14,11 +14,16 @@ module Imprint
         optional(:created_at_to).maybe(:date_time?)
         optional(:estimated_exec_date_from).maybe(:date_time?)
         optional(:estimated_exec_date_to).maybe(:date_time?)
+        optional(:custom_fields).maybe(:hash?)
         optional(:filter).maybe(:str?)
         optional(:user_id).maybe(:array?)
 
         rule(filter_only: [:filter, :user_id]) do |filter, user_id|
           filter.filled? > user_id.filled?
+        end
+
+        rule(order_type_for_custom_fields: [:order_type_id, :custom_fields]) do |order_type_id, custom_fields|
+          custom_fields.filled?.then(order_type_id.filled?)
         end
       end
 
@@ -82,6 +87,13 @@ module Imprint
         if result.success?
           result_data = result.to_h.with_indifferent_access
           user_ids = result_data[:filter] ? result_data.try(:[], :user_id) : [current_user.id, 'empty']
+
+          if result_data[:custom_fields]
+            fds = OrderType.find(result_data[:order_type_id]).filter_field_definition_set
+
+            fds.validate_value(:data, result_data[:custom_fields])
+            result_data[:custom_fields] = fds.coerce(result_data[:custom_fields]) if fds.errors.empty?
+          end
 
           result_data.reverse_merge(
               user_id: user_ids,

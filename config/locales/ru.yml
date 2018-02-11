@@ -217,6 +217,10 @@ ru:
       update: Сохранить
       delete: Удалить
       submit: Сохранить
+    custom_fields_filter:
+      title: Атрибуты заказа
+      add: Добавить фильтр по атрибуту заказа
+      placeholder: Выберите тип атрибута
 
   users:
     enew:

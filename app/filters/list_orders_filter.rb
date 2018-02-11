@@ -48,6 +48,24 @@ class ListOrdersFilter
       end
     end
 
+    def filter_by_custom_fields(relation, data)
+      if data[:custom_fields]
+        fields_definition = OrderType.find(data[:order_type_id]).fields
+
+        string_field_names = fields_definition.select { |_k, v| %w(boolean number string).include? v[:type] }.keys
+        date_field_names   = fields_definition.select { |_k, v| v[:type] == 'datetime' }.keys
+
+        filter_string_fields = data[:custom_fields].slice(*string_field_names).compact
+        filter_date_fields   = data[:custom_fields].slice(*date_field_names).compact
+
+        filter_date_fields.reduce(relation.data_fields(filter_string_fields)) do |rel, (name, value)|
+          rel.data_datetime_range(name, value[:from], value[:to])
+        end
+      else
+        relation
+      end
+    end
+
     def filter_by(rel, column, value)
       rel.where(column => value)
     end
@@ -77,13 +95,15 @@ class ListOrdersFilter
   end
 
   def list_orders(relation = Order.all)
-    %w(state order_type_id user_id archived).reduce(Filters.filter_by_date(relation, filter_values)) do |rel, column|
+    rel = %w(state order_type_id user_id archived).reduce(Filters.filter_by_date(relation, filter_values)) do |rel, column|
       Filters.filter_with_dispatch(rel, column, filter_values[column])
     end
+
+    Filters.filter_by_custom_fields(rel, filter_values)
   end
 
   def filter_values
-    @filter_values ||= params.slice(*%w(state order_type_id archived user_id)).merge(dates)
+    @filter_values ||= params.slice(*%w(state order_type_id archived user_id custom_fields)).merge(dates)
   end
 
   def dates
