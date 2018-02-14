@@ -4,6 +4,9 @@ feature 'List orders', js: true do
   let!(:vacation_request_type)  { FactoryGirl.create(:order_type, :vacation_request, name: 'Vacation request') }
   let!(:support_request_type)   { FactoryGirl.create(:order_type, :support_request, name: 'Support request') }
   let!(:vacation_request_order) { FactoryGirl.create(:order, :order_vacation_request) }
+  let!(:support_request_order)  { FactoryGirl.create(:order, :order_support_request, order_type: support_request_type) }
+  let!(:problem_descriptions)   { 'Problem description' }
+  let!(:contract_number)        { 111 }
 
   before(:each) do
     signin(user.email, user.password)
@@ -68,21 +71,21 @@ feature 'List orders', js: true do
     current_orders_list = [[], ['ORD-1', 'Empty order type', 'In progress',
                                 in_current_locale(vacation_request_order.created_at), '', 'ext_code', '',
                                 in_current_locale(vacation_request_order.estimated_exec_date)]]
-
-    # "Archived"
-    search_button.click
-    expect(empty_order_list).not_to eq(nil)
-
-    change_select2_value('archived', 'Yes')
-    search_button.click
-    expect(orders_list).to eq(current_orders_list)
-
     # "Order type"
     change_select2_value('order_type_id', 'Vacation request')
     search_button.click
     expect(empty_order_list).not_to eq(nil)
 
     change_select2_value('order_type_id', 'Empty order type')
+    search_button.click
+    expect(orders_list).to eq(current_orders_list)
+
+    # "Archived"
+    change_select2_value('archived', 'Yes')
+    search_button.click
+    expect(empty_order_list).not_to eq(nil)
+
+    change_select2_value('archived', 'No')
     search_button.click
     expect(orders_list).to eq(current_orders_list)
 
@@ -144,6 +147,96 @@ feature 'List orders', js: true do
     select2_cross('user_id[]', 'Empty').click
     search_button.click
     expect(empty_order_list).not_to eq(nil)
+  end
+
+  scenario 'with filter by custom fields' do
+    result_orders_list = [[], ['ORD-2', 'Support request', 'In progress',
+                               in_current_locale(support_request_order.created_at), '', 'support_ext_code', '',
+                               in_current_locale(support_request_order.estimated_exec_date)]]
+
+    # default state
+    expect(label('custom_field_select')).to                eq('Add filter by attribute')
+    expect(placeholder('custom_field_select')).to          eq('Select order attribute')
+    expect(select2_default_text('custom_field_select')).to eq('Select order attribute')
+    expect(select_options('custom_field_select')).to       eq([])
+
+    # activate custom field filter selector
+    change_select2_value('order_type_id', 'Support request')
+    wait_for_ajax
+
+    expect(select2_text('custom_field_select')).to   eq('Creation date')
+    expect(select_options('custom_field_select')).to eq(['Creation date',
+                                                         'Problem description',
+                                                         'Callback',
+                                                         'Contract number'])
+
+    # custom field filter with type 'string'
+    change_select2_value('custom_field_select', 'Problem description')
+    expect(select2_text('custom_field_select')).to eq('Problem description')
+    add_custom_field_filter
+    expect(label('problemDescription')).to eq('Problem description')
+
+    fill_in('custom_fields[problemDescription]', with: problem_descriptions.reverse)
+    search_button.click
+    expect(empty_order_list).not_to eq(nil)
+
+    fill_in('custom_fields[problemDescription]', with: problem_descriptions)
+    search_button.click
+    expect(orders_list).to eq(result_orders_list)
+
+    # custom field filter with type 'boolean'
+    change_select2_value('custom_field_select', 'Callback')
+    expect(select2_text('custom_field_select')).to eq('Callback')
+    add_custom_field_filter
+    expect(label('callBack')).to eq('Callback')
+
+    search_button.click
+    expect(empty_order_list).not_to be_nil
+
+    click_checkbox_div('callBack')
+    search_button.click
+    expect(orders_list).to eq(result_orders_list)
+
+    # custom field filter with type 'number'
+    change_select2_value('custom_field_select', 'Contract number')
+    expect(select2_text('custom_field_select')).to eq('Contract number')
+    add_custom_field_filter
+    expect(label('contractNumber')).to eq('Contract number')
+
+    fill_in('custom_fields[contractNumber]', with: contract_number + 1)
+    search_button.click
+    expect(empty_order_list).not_to be_nil
+
+    fill_in('custom_fields[contractNumber]', with: contract_number)
+    search_button.click
+    expect(orders_list).to eq(result_orders_list)
+
+    # custom field filter with type 'datetime'
+    change_select2_value('custom_field_select', 'Creation date')
+    expect(select2_text('custom_field_select')).to eq('Creation date')
+    add_custom_field_filter
+    expect(label('creationDate')).to eq('Creation date')
+
+    set_datetime_picker_date('custom_fields[creationDate][from]',
+                             in_current_locale(DateTime.iso8601(support_request_order.data['creationDate']) + 1.day))
+    search_button.click
+    expect(empty_order_list).not_to be_nil
+
+    set_datetime_picker_date('custom_fields[creationDate][from]',
+                             in_current_locale(DateTime.iso8601(support_request_order.data['creationDate']) - 1.day))
+    search_button.click
+    expect(orders_list).to eq(result_orders_list)
+
+    # order type removing should clear all custom field filters
+    select2_clear_cross('order_type_id').click
+
+    expect(placeholder('custom_field_select')).to          eq('Select order attribute')
+    expect(select2_default_text('custom_field_select')).to eq('Select order attribute')
+    expect(select_options('custom_field_select')).to       eq([])
+    expect(page).not_to have_selector('[name="custom_fields[problemDescription]"]')
+    expect(page).not_to have_selector('[name="custom_fields[callBack]"]')
+    expect(page).not_to have_selector('[name="custom_fields[contractNumber]"]')
+    expect(page).not_to have_selector('[name="custom_fields[creationDate]"]')
   end
 
   scenario 'with correct search by code' do

@@ -2,6 +2,17 @@
 module UiElementsHelper
   include DatetimeFormat
 
+  def order_attribute_picker(name)
+    content_tag(:select,
+                name: name,
+                data: {
+                    allowClear: false,
+                    placeholder: I18n.t('helpers.custom_fields_filter.placeholder'),
+                },
+                disabled: true,
+                class: 'form-control order_attribute-picker') {}
+  end
+
   def datetime_picker(name, options = {})
     if options[:value].present?
       value = options[:value].strftime(datetime_format)

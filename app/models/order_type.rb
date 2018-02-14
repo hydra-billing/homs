@@ -58,6 +58,16 @@ class OrderType < ActiveRecord::Base
     CustomFields::FieldDefSet.new(fields)
   end
 
+  def filter_field_definition_set
+    filter_fields = fields.each_with_object({}) do |(key, value), h|
+      value[:type] = 'datetime_range' if value[:type] == 'datetime'
+
+      h[key] = value
+    end
+
+    CustomFields::FieldDefSet.new(filter_fields)
+  end
+
   def make_invisile
     update_attribute(:active, false)
   end

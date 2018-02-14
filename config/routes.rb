@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       as: :search_order_by,
       constraints: { field: /code|ext_code/ }
 
+  get '/orders/order_type_attributes/:id' => 'orders#get_order_type_attributes'
+
   resources :orders, only: [:show, :edit, :update, :index, :new, :create]
 
   namespace :imprint do

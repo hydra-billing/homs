@@ -196,6 +196,10 @@ module Features
       page.find("[name='homsOrderData#{name}']").find(:xpath, '..').find('span.fa.fa-calendar').click
     end
 
+    def add_custom_field_filter
+      find_by_name('add_custom_field_filter').click
+    end
+
     def click_and_wait(text)
       click_on(text)
       wait_for_ajax

@@ -19,6 +19,11 @@ class Order < ActiveRecord::Base
   delegate :name, :code, :print_form_code, to: :order_type, prefix: true
 
   default_scope { includes(:order_type).order('created_at DESC') }
+  scope :data_fields, ->(data) { where('data @> ?', data.to_json) }
+  scope :data_datetime_range, ->(field, from, to) {
+    where('(data->>:field)::timestamp between coalesce(:from, (data->>:field)::timestamp) and coalesce(:to, (data->>:field)::timestamp)',
+          {field: field, from: from, to: to})
+  }
 
   enum state: %i(to_execute in_progress done)
 
