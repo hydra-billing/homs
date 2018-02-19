@@ -31,8 +31,24 @@ There are 2 ways to install homs.
   ```
   wget https://raw.githubusercontent.com/latera/homs-docker/master/docker-compose.yml
   ```
-3. Run `docker-compose`:
+3. Create directories for db datafiles:
 
+  ```
+  mkdir -p /var/lib/hydra/activiti/postgresql
+  mkdir -p /var/lib/hydra/homs/postgresql
+  ```
+4. For OS X users: add `/var/lib/hydra/activiti/postgresql` and `/var/lib/hydra/homs/postgresql` in `Docker -> Preferences... -> File Sharing`.
+5. Copy your (or default) configs to `/etc/hydra/homs/`:
+
+  ```
+  cp activiti.yml /etc/hydra/homs/activiti.yml
+  cp database.yml /etc/hydra/homs/database.yml
+  cp hbw.yml /etc/hydra/homs/hbw.yml
+  cp homs_configuration.yml /etc/hydra/homs/homs_configuration.yml
+  cp imprint.yml /etc/hydra/homs/imprint.yml
+  cp sources.yml /etc/hydra/homs/sources.yml
+  ```
+6. Run `docker-compose`:
   ```
   docker-compose up -d
   ```
