@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:show, :edit, :update, :index, :new, :create]
 
+  resources :profiles, only: [:create, :update]
+
   namespace :imprint do
     resources :prints, only: [] do
       get :print, on: :collection
@@ -48,6 +50,7 @@ Rails.application.routes.draw do
 
       resources :users, only: actions, constraints: { id: /.*/ }
       resources :orders, only: actions
+      resources :profiles, only: actions
     end
   end
 

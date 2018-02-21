@@ -1,24 +1,16 @@
 - content_for(:title, t('.title'))
 %h2= t('.title')
 = render partial: 'search_form'
+
+- with_custom_profile = list_filter.filter_values[:order_type_id].present?
+
 .row
   .col-xs-12
     - if @orders.present?
-      .table-responsive.orders-list
-        %table.table.table-hover
-          %thead
-            %tr
-              %th= Order.human_attribute_name(:code)
-              %th= Order.human_attribute_name(:order_type_code)
-              %th= Order.human_attribute_name(:state)
-              %th= Order.human_attribute_name(:created_at)
-              %th= Order.human_attribute_name(:user)
-              %th{title: Order.human_attribute_name(:ext_code)}= t('.ext_code')
-              %th{title: Order.human_attribute_name(:archived)}= t('.archived')
-              %th= Order.human_attribute_name(:estimated_exec_date)
-          %tbody
-            - @orders.each do |order|
-              = render order
+      .table-responsive.table-nowrap.overflow-visible.orders-list
+        = react_component('OrderList', {orders: prepare_order_list(@orders),
+                                        profile: with_custom_profile ? custom_profile(@orders.first.order_type) : common_profile,
+                                        with_custom_profile: with_custom_profile})
     - else
       %h4.empty-list= t('.no_orders_found')
 = link_to t('add'), new_order_path, class: 'btn btn-primary'

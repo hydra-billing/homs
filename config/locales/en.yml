@@ -251,6 +251,7 @@ en:
     select2:
       not_set: Empty
     user_not_found: Current user not found in Activiti
+    columns_settings: Column settings
 
   doc:
     common:
@@ -296,3 +297,10 @@ en:
         company: Company name
         department: Department name
         password: Password
+    profiles:
+      resource: Profiles
+      parameters:
+        id: Profile ID
+        data: Found orders fields display settings
+        user_email: User's email
+        order_type_code: Order type code

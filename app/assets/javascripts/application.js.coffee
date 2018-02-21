@@ -1,5 +1,6 @@
 #= require ./unwrap_jquery
 #= require ./unwrap_moment
+#= require ./unwrap_react
 #= require jquery_ujs
 #= require jquery-ui
 #= require jquery.growl
@@ -10,6 +11,9 @@
 #= require i18n/translations
 #= require bootstrap-datetimepicker
 #= require twitter/bootstrap/rails/confirm
+#= require bootstrap-multiselect
+#= require react_ujs
+#= require components
 #= require_self
 
 'use strict'

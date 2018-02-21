@@ -43,9 +43,32 @@ main.container
     display: inline-block
     margin-left: .4em
 
+.table-nowrap
+  th, td
+    white-space: nowrap
+
+.overflow-visible
+  overflow: visible !important
+
 .orders-list
   tbody tr:hover
     background-color: #eee
+
+  .order-list-container
+    .multiselect-native-select
+      .btn
+        padding-left: 0
+
+      .dropdown-menu > li:not(.active) > a:focus
+        text-decoration: none
+        color: #7b8a8b
+        background-color: inherit
+
+    .btn-link:focus
+      text-decoration: none
+
+    .order-list-table
+      overflow: auto
 
 div.orders-list
   tbody > tr.expired
