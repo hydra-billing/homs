@@ -204,5 +204,31 @@ module Features
       click_on(text)
       wait_for_ajax
     end
+
+    def multiselect_by_id(id)
+      page.find_by_id(id).find(:xpath, '..')
+    end
+
+    def click_on_multiselect(id)
+      multiselect_by_id(id).click
+    end
+
+    def checked_multiselect_options(id)
+      multiselect_by_id(id).all('li.active input', visible: false).map(&:value)
+    end
+
+    def click_on_multiselect_options(id, options)
+      click_on_multiselect(id)
+
+      multiselect_by_id(id).all('li').select do |option|
+        options.include?(option.find('input', visible: false).value)
+      end.map(&:click)
+
+      click_on_multiselect(id)
+    end
+
+    def order_list_table_cols
+      page.find('.orders-list').all('th').map(&:text)
+    end
   end
 end
