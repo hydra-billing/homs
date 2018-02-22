@@ -147,6 +147,11 @@ feature 'List orders', js: true do
     select2_cross('user_id[]', 'Empty').click
     search_button.click
     expect(empty_order_list).not_to eq(nil)
+
+    # Filter by user name isn't set
+    select2_cross('user_id[]', 'Christopher Johnson').click
+    search_button.click
+    expect(orders_list).to eq(current_orders_list)
   end
 
   scenario 'with filter by custom fields' do
