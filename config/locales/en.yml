@@ -249,7 +249,7 @@ en:
     'yes': Yes
     not_selected: Not selected
     select2:
-      not_set: Not set
+      not_set: Empty
     user_not_found: Current user not found in Activiti
 
   doc:

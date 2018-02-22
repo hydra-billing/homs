@@ -18,10 +18,6 @@ module Imprint
         optional(:filter).maybe(:str?)
         optional(:user_id).maybe(:array?)
 
-        rule(filter_only: [:filter, :user_id]) do |filter, user_id|
-          filter.filled? > user_id.filled?
-        end
-
         rule(order_type_for_custom_fields: [:order_type_id, :custom_fields]) do |order_type_id, custom_fields|
           custom_fields.filled?.then(order_type_id.filled?)
         end
