@@ -1,7 +1,7 @@
 development: &development
-  base_url: http://localhost:2300/api/
-  auth_token: auth_token
-  x_imprint_api_version: 1
+  base_url: 'http://localhost:2300/api/'
+  auth_token: 'changeme'
+  api_version: '1'
 
 staging:
   <<: *development
