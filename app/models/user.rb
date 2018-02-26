@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
     [name, last_name].join ' '
   end
 
-  devise :database_authenticatable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :rememberable, :trackable, :validatable, :encryptable
 
   validates :name,        presence: true
   validates :last_name,   presence: true
