@@ -287,7 +287,9 @@ feature 'List orders', js: true do
       expect(order_list_table_cols).to include('Creation date', 'Problem description', 'Callback', 'Contract number')
 
       click_on_multiselect_options('column-settings', %w(code order_type_code))
-      expect(order_list_table_cols).not_to include('Code', 'Order type')
+      expect(order_list_table_cols).not_to include('Order type')
+      # 'Code' column can not be hidden
+      expect(order_list_table_cols).to include('Code')
     end
   end
 end

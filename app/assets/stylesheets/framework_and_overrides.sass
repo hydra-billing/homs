@@ -64,6 +64,13 @@ main.container
         color: #7b8a8b
         background-color: inherit
 
+      li.disabled > a
+        &:hover, &:focus
+          background: #2c3e50
+
+        label
+          cursor: not-allowed
+
     .btn-link:focus
       text-decoration: none
 

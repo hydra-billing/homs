@@ -251,7 +251,7 @@ en:
     select2:
       not_set: Empty
     user_not_found: Current user not found in Activiti
-    columns_settings: Column settings
+    columns_settings: Columns settings
 
   doc:
     common:

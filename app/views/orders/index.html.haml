@@ -2,11 +2,10 @@
 %h2= t('.title')
 = render partial: 'search_form'
 
-- with_custom_profile = list_filter.filter_values[:order_type_id].present?
-
 .row
   .col-xs-12
     - if @orders.present?
+      - with_custom_profile = list_filter.filter_values[:order_type_id].present?
       .table-responsive.table-nowrap.overflow-visible.orders-list
         = react_component('OrderList', {orders: prepare_order_list(@orders),
                                         profile: with_custom_profile ? custom_profile(@orders.first.order_type) : common_profile,

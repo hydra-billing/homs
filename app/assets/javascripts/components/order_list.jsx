@@ -64,14 +64,16 @@ var OrderList = React.createClass({
       method: 'PUT',
       dataType: 'json',
       contentType: 'application/json',
-      data: JSON.stringify(this.state.profile)
+      data: JSON.stringify(this.state.profile),
+      success: function(data) { this.setState({profile: data}) }.bind(this)
     })
   },
 
   render() {
     var options = [];
     for (var field in this.props.profile.data) {
-      options.push(<option key={field} value={field}>{this.props.profile.data[field].label}</option>)
+      var disabled = field == 'code';
+      options.push(<option key={field} value={field} disabled={disabled}>{this.props.profile.data[field].label}</option>)
     }
 
     return <div className="order-list-container">

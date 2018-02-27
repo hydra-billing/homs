@@ -23,7 +23,6 @@ module API
 
       def replace_order_type_code!(params)
         order_type_id = OrderType.id_from_code params[:order_type_code]
-        fail ActiveRecord::RecordNotFound unless order_type_id
         replace!(params, :order_type_code, :order_type_id, order_type_id)
       end
 
