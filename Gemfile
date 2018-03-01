@@ -12,6 +12,7 @@ gem 'coderay', '~> 1.1'
 gem 'kaminari', '~> 0.16'  # adds pagination to ActiveModels
 gem 'bootstrap-sass'
 gem 'devise'
+gem 'devise-encryptable'
 gem 'haml-rails'
 gem 'pg'
 gem 'simple_form'

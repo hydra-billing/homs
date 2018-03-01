@@ -154,6 +154,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-encryptable (0.2.0)
+      devise (>= 2.1.0)
     diff-lcs (1.3)
     dry-auto_inject (0.4.1)
       dry-container (>= 0.3.4)
@@ -469,6 +471,7 @@ DEPENDENCIES
   database_cleaner
   debbie
   devise
+  devise-encryptable
   dry-auto_inject
   dry-container
   dry-validation

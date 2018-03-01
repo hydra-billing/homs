@@ -1,7 +1,7 @@
 FROM ruby:2.2.4
 
-COPY ./entrypoint.sh /
-RUN chmod +x /entrypoint.sh
+COPY ./entrypoint.sh ./wait_for_postgres.sh /
+RUN chmod +x /entrypoint.sh /wait_for_postgres.sh
 
 # below come instructions for Hydra OMS deployment
 WORKDIR /opt
@@ -10,7 +10,8 @@ RUN apt-get update \
  && apt-get install -y git \
            libpq-dev \
            nodejs \
-           libqtwebkit-dev
+           libqtwebkit-dev \
+           postgresql-client
 
 
 COPY Gemfile Gemfile.lock Rakefile config.ru /opt/homs/
