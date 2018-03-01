@@ -264,21 +264,21 @@ feature 'List orders', js: true do
     common_fields = %w(code order_type_code state created_at user ext_code archived estimated_exec_date)
     custom_fields = %w(creationDate problemDescription callBack contractNumber)
 
-    scenario 'column settings hidden if order type not set' do
+    scenario 'columns settings hidden if order type not set' do
       expect(label('order_type_id')).to        eq('Order type')
       expect(placeholder('order_type_id')).to  eq('Order type')
       expect(select2_text('order_type_id')).to eq('Order type')
 
       search_button.click
 
-      expect(page).not_to have_content('Column settings')
+      expect(page).not_to have_content('Columns settings')
     end
 
-    scenario 'edit column settings' do
+    scenario 'edit columns settings' do
       change_select2_value('order_type_id', 'Support request')
 
       search_button.click
-      expect(page).to have_content('Column settings')
+      expect(page).to have_content('Columns settings')
       expect(checked_multiselect_options('column-settings')).to eq(common_fields)
       expect(order_list_table_cols).not_to include('Creation date', 'Problem description', 'Callback', 'Contract number')
 
