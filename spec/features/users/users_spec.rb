@@ -1,6 +1,7 @@
 feature 'User is', js: true do
-  let!(:admin)    { FactoryGirl.create(:user, :admin) }
-  let!(:john)     { FactoryGirl.create(:user, :john) }
+  let!(:admin)         { FactoryGirl.create(:user, :admin) }
+  let!(:john)          { FactoryGirl.create(:user, :john) }
+  let!(:blocked_admin) { FactoryGirl.create(:user, :blocked_admin) }
 
   scenario 'created without validation errors' do
     signin(admin.email, admin.password)
@@ -11,6 +12,7 @@ feature 'User is', js: true do
 
     users = [
         [],
+        ['Blocked Doe', 'b.j.doe@example.com', 'Admin', 'Marketing', 'LLC Tools', ''],
         ['John Doe', 'j.doe@example.com', 'User', 'Marketing', 'LLC Tools', ''],
         ['Christopher Johnson', 'c.johnson@example.com', 'Admin', 'Administrators', 'LLC Tools', '']
     ]
@@ -80,6 +82,7 @@ feature 'User is', js: true do
 
     users = [
         [],
+        ['Blocked Doe', 'b.j.doe@example.com', 'Admin', 'Marketing', 'LLC Tools', ''],
         ['John Doe', 'j.doe@example.com', 'User', 'Marketing', 'LLC Tools', ''],
         ['Mark Jenkins', 'm.jenkins@example.com', 'Admin', 'Administrators', 'LLC Tools', ''],
         ['Christopher Johnson', 'c.johnson@example.com', 'Admin', 'Administrators', 'LLC Tools', '']
@@ -254,6 +257,7 @@ feature 'User is', js: true do
 
     users = [
         [],
+        ['Blocked Doe', 'b.j.doe@example.com', 'Admin', 'Marketing', 'LLC Tools', ''],
         ['Mark Jenkins', 'm.jenkins@example.com', 'Admin', 'Administrators', 'LLC Tools', ''],
         ['Christopher Johnson', 'c.johnson@example.com', 'Admin', 'Administrators', 'LLC Tools', '']
     ]
@@ -275,5 +279,11 @@ feature 'User is', js: true do
     signin(john.email, john.password)
 
     expect(page).not_to have_content 'User list'
+  end
+
+  scenario 'inaccessible for blocked user' do
+    signin(blocked_admin.email, blocked_admin.password)
+
+    expect(page).not_to have_content 'Orders list'
   end
 end

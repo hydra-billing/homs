@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180225195426) do
+ActiveRecord::Schema.define(version: 20180303130859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,35 +68,33 @@ ActiveRecord::Schema.define(version: 20180225195426) do
 
   add_index "sequences", ["name"], name: "index_sequences_on_name", using: :btree
 
-  create_table "stations", force: :cascade do |t|
-    t.jsonb "event"
-  end
-
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",                                null: false
+    t.string   "name",                                   null: false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.integer  "role"
     t.string   "middle_name"
-    t.string   "last_name",                           null: false
+    t.string   "last_name",                              null: false
     t.string   "company"
     t.string   "department"
     t.string   "api_token"
     t.string   "password_salt"
+    t.boolean  "external",               default: false, null: false
+    t.boolean  "blocked",                default: false, null: false
   end
 
   add_index "users", ["api_token"], name: "index_users_on_api_token", using: :btree

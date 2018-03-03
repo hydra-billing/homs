@@ -297,6 +297,8 @@ en:
         company: Company name
         department: Department name
         password: Password
+        blocked: Blocked
+        external: External
     profiles:
       resource: Profiles
       parameters:
