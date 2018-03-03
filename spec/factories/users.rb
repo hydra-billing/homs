@@ -35,5 +35,14 @@ FactoryGirl.define do
       email 'demo@example.com'
       company 'Example Corporation'
     end
+
+    trait :blocked_admin do
+      name 'Blocked'
+      last_name 'Doe'
+      department 'Marketing'
+      email 'b.j.doe@example.com'
+      role 'admin'
+      blocked true
+    end
   end
 end

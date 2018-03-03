@@ -21,7 +21,9 @@ describe API::V1::UsersController, type: :request do
           role: :admin,
           company: 'Example Corporation',
           department: 'Administrators',
-          api_token: 'RENEWMEPLEASE')
+          api_token: 'RENEWMEPLEASE',
+          blocked: false,
+          external: false)
     end
 
     get '/api/users?page_size=:page_size&page=:page' do
@@ -44,7 +46,9 @@ describe API::V1::UsersController, type: :request do
                                                   'middle_name' => nil,
                                                   'company'     => 'Example Corporation',
                                                   'department'  => 'Demonstrations',
-                                                  'role'        => 'user'
+                                                  'role'        => 'user',
+                                                  'blocked'     => false,
+                                                  'external'    => false
                                               }
                                           ]
                                       )
@@ -66,7 +70,9 @@ describe API::V1::UsersController, type: :request do
                                               'middle_name' => nil,
                                               'company'     => 'Example Corporation',
                                               'department'  => 'Demonstrations',
-                                              'role'        => 'user'
+                                              'role'        => 'user',
+                                              'blocked'     => false,
+                                              'external'    => false
                                           }
                                       )
       end
@@ -80,9 +86,13 @@ describe API::V1::UsersController, type: :request do
       parameter :role,        I18n.t('doc.users.parameters.user_role'),   scope: :user
       parameter :company,     I18n.t('doc.users.parameters.company'),     scope: :user
       parameter :department,  I18n.t('doc.users.parameters.department'),  scope: :user
+      parameter :blocked,     I18n.t('doc.users.parameters.blocked'),     scope: :user
+      parameter :external,    I18n.t('doc.users.parameters.external'),    scope: :user
 
       let(:middle_name) { 'Jay' }
       let(:email)       { 'demo@example.com' }
+      let(:blocked)     { true }
+      let(:external)    { true }
       let(:raw_post)    { params.to_json }
 
       example_request I18n.t('doc.common.cases.update') do
@@ -96,7 +106,9 @@ describe API::V1::UsersController, type: :request do
                                               'middle_name' => 'Jay',
                                               'company'     => 'Example Corporation',
                                               'department'  => 'Demonstrations',
-                                              'role'        => 'user'
+                                              'role'        => 'user',
+                                              'blocked'     => true,
+                                              'external'    => true
                                           }
                                       )
         expect(updated_user.middle_name).to eq(middle_name)
@@ -135,7 +147,9 @@ describe API::V1::UsersController, type: :request do
                                               'middle_name' => 'Kay',
                                               'company'     => 'LLC Tools',
                                               'department'  => 'Administrators',
-                                              'role'        => 'admin'
+                                              'role'        => 'admin',
+                                              'blocked'     => false,
+                                              'external'    => false
                                           }
                                       )
       end

@@ -17,6 +17,7 @@ en:
       timeout: "Your session expired. Please sign in again to continue."
       unauthenticated: "You need to sign in or sign up before continuing."
       unconfirmed: "You have to confirm your email address before continuing."
+      blocked: "User is blocked"
     mailer:
       confirmation_instructions:
         subject: "Confirmation instructions"
