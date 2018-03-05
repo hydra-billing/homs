@@ -17,4 +17,4 @@ if [[ ! -a seed.lock ]]; then
     touch seed.lock
 fi
 
-thin start --threaded -e ${RACK_ENV:-development}
+bundle exec thin start --threaded -e ${RACK_ENV:-development}
