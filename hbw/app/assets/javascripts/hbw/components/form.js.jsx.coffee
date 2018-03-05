@@ -1,9 +1,9 @@
 modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect', \
   'HBWFormUser', 'HBWPending', 'HBWFormString', 'HBWFormText', \
-  'HBWFormCheckbox', 'HBWFormStatic', 'HBWCallbacksMixin', 'HBWFormSelectTable'],
+  'HBWFormCheckbox', 'HBWFormStatic', 'HBWCallbacksMixin', 'HBWFormSelectTable', 'HBWFormFileList'],
   (React, jQuery, Error, DateTime, Group, Select, Submit, SubmitSelect, \
-   User, Pending, String, Text, Checkbox, Static, CallbacksMixin, SelectTable) ->
+   User, Pending, String, Text, Checkbox, Static, CallbacksMixin, SelectTable, FileList) ->
 
   React.createClass
     mixins: [CallbacksMixin]
@@ -49,6 +49,7 @@ modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
         when 'string'          then `<String       {...opts}/>`
         when 'text'            then `<Text         {...opts}/>`
         when 'static'          then `<Static       {...opts}/>`
+        when 'file_list'       then `<FileList     {...opts}/>`
         else `<p>{name}: Unknown control type {params.type}</p>`
 
     submitControl: (fields) ->
