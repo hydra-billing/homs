@@ -38,17 +38,19 @@ modulejs.define 'HBWFormDatetime', ['React', 'jQuery', 'moment', 'HBWDeleteIfMix
       else
         isoValue = ''
 
-      inputCSS = 'form-group ' + this.props.params.css_class
+      inputCSS = this.props.params.css_class
       inputCSS += ' hidden' if this.hidden
 
       `<div className={inputCSS} title={this.props.params.tooltip}>
-         <span className={this.props.params.label_css}>{this.props.params.label}</span>
-         <div className="input-group date datetime-picker">
-           <input {...opts} className="form-control" />
-           <input name={this.props.params.name} type="hidden" value={isoValue} />
-           <span className="input-group-addon">
-             <span className="fa fa-calendar"></span>
-           </span>
+         <div className="form-group">
+           <span className={this.props.params.label_css}>{this.props.params.label}</span>
+           <div className="input-group date datetime-picker">
+             <input {...opts} className="form-control" />
+             <input name={this.props.params.name} type="hidden" value={isoValue} />
+             <span className="input-group-addon">
+               <span className="fa fa-calendar"></span>
+             </span>
+           </div>
          </div>
        </div>`
 
