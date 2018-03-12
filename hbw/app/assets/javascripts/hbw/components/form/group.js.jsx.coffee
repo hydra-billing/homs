@@ -1,8 +1,8 @@
 modulejs.define 'HBWFormGroup', ['React', 'HBWFormDatetime', \
   'HBWFormSubmitSelect', 'HBWFormUser', 'HBWFormSelect', \
   'HBWFormString', 'HBWFormText', 'HBWFormCheckbox', 'HBWFormStatic', \
-  'HBWDeleteIfMixin', 'HBWFormSelectTable'],
-  (React, Datetime, SubmitSelect, User, Select, String, Text, Checkbox, Static, DeleteIfMixin, SelectTable) ->
+  'HBWDeleteIfMixin', 'HBWFormSelectTable', 'HBWFormFileList'],
+  (React, Datetime, SubmitSelect, User, Select, String, Text, Checkbox, Static, DeleteIfMixin, SelectTable, FileList) ->
     React.createClass
       mixins: [DeleteIfMixin]
 
@@ -50,4 +50,5 @@ modulejs.define 'HBWFormGroup', ['React', 'HBWFormDatetime', \
           when 'string'          then `<String        {...opts}/>`
           when 'text'            then `<Text          {...opts}/>`
           when 'static'          then `<Static        {...opts}/>`
+          when 'file_list'       then `<FileList      {...opts}/>`
           else `<p>{name}: Unknown control type {params.type}</p>`
