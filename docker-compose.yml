@@ -37,6 +37,7 @@ services:
       - 8080:8080
     depends_on:
       - db_activiti
+    entrypoint: "bash -lc '/wait_for_postgres.sh db_activiti && /entrypoint_ah.sh'"
     networks:
       - custom_network
   homs:
@@ -58,6 +59,7 @@ services:
     depends_on:
       - db_homs
       - activiti_homs
+    entrypoint: "bash -lc '/wait_for_postgres.sh db_homs && /entrypoint.sh'"
     ports:
       - 3000:3000
     networks:

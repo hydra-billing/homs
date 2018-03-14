@@ -4,7 +4,8 @@ module API
       include HttpBasicAuthentication
 
       PARAMS_ATTRIBUTES = [:name, :last_name, :middle_name, :company,
-                           :department, :email, :role, :password]
+                           :department, :email, :role, :password, :external,
+                           :blocked]
 
       private
 

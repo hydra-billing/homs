@@ -407,3 +407,4 @@ ru:
     select2:
       not_set: Не указан
     user_not_found: Текущий пользователь не найден в Activiti
+    columns_settings: Управление столбцами
