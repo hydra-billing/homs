@@ -1,6 +1,6 @@
 modulejs.define 'HBWFormFileUpload',
-  ['React', 'HBWDeleteIfMixin'],
-  (React, TranslationsMixin, jQuery, DeleteIfMixin, SelectMixin) ->
+  ['React', 'jQuery', 'HBWDeleteIfMixin'],
+  (React, jQuery, DeleteIfMixin) ->
     React.createClass
       mixins: [DeleteIfMixin]
 
