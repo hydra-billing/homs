@@ -223,7 +223,8 @@ order_type:
                                 'done_at'             => nil,
                                 'estimated_exec_date' => nil,
                                 'order_type_code'     => 'vacation_request',
-                                'user_email'          => nil
+                                'user_email'          => nil,
+                                'attachments'         => []
                             })
       end
     end
@@ -263,7 +264,8 @@ order_type:
                                     'done_at'             => nil,
                                     'estimated_exec_date' => nil,
                                     'order_type_code'     => 'vacation_request',
-                                    'user_email'          => nil
+                                    'user_email'          => nil,
+                                    'attachments'         => []
                                 }
                             })
       end
@@ -355,7 +357,8 @@ order_type:
                                                  'done_at'             => order.done_at.iso8601,
                                                  'estimated_exec_date' => order.estimated_exec_date.iso8601,
                                                  'order_type_code'     => order.order_type.code,
-                                                 'user_email'          => nil
+                                                 'user_email'          => nil,
+                                                 'attachments'         => []
                                              }
                                          })
       end
@@ -444,7 +447,8 @@ order_type:
                                               'done_at'             => nil,
                                               'estimated_exec_date' => nil,
                                               'order_type_code'     => updated_order.order_type.code,
-                                              'user_email'          => nil
+                                              'user_email'          => nil,
+                                              'attachments'         => []
                                           })
       end
     end
@@ -493,7 +497,8 @@ order_type:
                                               'done_at'             => nil,
                                               'estimated_exec_date' => nil,
                                               'order_type_code'     => order_vacation_request.order_type.code,
-                                              'user_email'          => nil
+                                              'user_email'          => nil,
+                                              'attachments'         => []
                                           })
       end
     end
@@ -529,7 +534,8 @@ order_type:
                                               'done_at'             => nil,
                                               'estimated_exec_date' => nil,
                                               'order_type_code'     => order_vacation_request.order_type.code,
-                                              'user_email'          => user_email
+                                              'user_email'          => user_email,
+                                              'attachments'         => []
                                           })
       end
     end
@@ -604,7 +610,8 @@ order_type:
                                               'done_at'             => updated_order.done_at.iso8601,
                                               'estimated_exec_date' => updated_order.estimated_exec_date.iso8601,
                                               'order_type_code'     => order_type.code,
-                                              'user_email'          => nil
+                                              'user_email'          => nil,
+                                              'attachments'         => []
                                           })
       end
     end
