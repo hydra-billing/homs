@@ -2,7 +2,11 @@ module HBW
   module Fields
     class FileUpload < Ordinary
       def has_value?
-        false
+        true
+      end
+
+      def coerce(value)
+        value
       end
     end
   end

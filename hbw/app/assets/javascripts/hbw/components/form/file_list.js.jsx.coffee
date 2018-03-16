@@ -7,18 +7,20 @@ modulejs.define 'HBWFormFileList', ['React', 'HBWDeleteIfMixin'], (React, Delete
       cssClass += ' hidden' if this.hidden
       label    = @props.params.label
       labelCSS = 'hbw-checkbox-label ' + (@props.params.label_css or '')
-      if (@props.value !== null)
-        links = @props.value
+      if (@props.value != null)
+        links = JSON.parse(@props.value)
       else
         links = []
 
       `<div className={cssClass}>
         <label className={labelCSS}>
           <span>{' ' + label}</span>
-          {this.files(links)}
+          <ul>
+            {this.files(links)}
+          </ul>
         </label>
       </div>`
 
     files: (list) ->
       list.map (variant) ->
-        `<a href={variant.link}>{variant.name}</a>`
+        `<li><a href={variant.url}>{variant.name}</a></li>`

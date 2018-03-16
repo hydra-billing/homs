@@ -14,12 +14,15 @@ module API
                            :bp_state, :state, :done_at, :archived, :estimated_exec_date]
 
       def create
-        resource_set(resource_class.new(resource_params))
+        order_params = parse_params
+
+        resource_set(resource_class.new(order_params[:order_params]))
+
         ActiveRecord::Base.transaction do
           if resource_get.save
-            if !params[:order].try(:data).try(:attachments).nil?
-              params[:order][:data][:attachments].each do |key, file|
-                minio_adapter.save_file(file, resource_get.id)
+            if order_params[:attachments].present?
+              order_params[:attachments].each do |file|
+                minio_adapter.save_file(file.symbolize_keys, resource_get.id)
               end
             end
           end
@@ -29,11 +32,13 @@ module API
       end
 
       def update
+        order_params = parse_params
+
         ActiveRecord::Base.transaction do
-          if resource_get.update(resource_params)
-            if !params[:order].try(:data).try(:attachments).nil?
-              params[:order][:data][:attachments].each do |key, file|
-                minio_adapter.save_file(file, params[:id])
+          if resource_get.update(order_params[:order_params])
+            if order_params[:attachments].present?
+              order_params[:attachments].each do |file|
+                minio_adapter.save_file(file.symbolize_keys, resource_get.id)
               end
             end
           end
@@ -74,6 +79,17 @@ module API
 
         params.delete code_key
         params[id_key] = id_val
+      end
+
+      def parse_params
+        order_param = resource_params
+        attachments = order_param[:data].try(:delete, 'uploadedFile') || []
+
+        if attachments.present?
+          attachments = JSON.parse(attachments)
+        end
+
+        {order_params: order_param, attachments: attachments}
       end
     end
   end
