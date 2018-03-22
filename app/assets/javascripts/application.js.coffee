@@ -3,6 +3,8 @@
 #= require ./unwrap_react
 #= require jquery_ujs
 #= require jquery-ui
+#= require dataTables/jquery.dataTables
+#= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 #= require jquery.growl
 #= require jquery.formatter
 #= require bootstrap-sprockets
@@ -103,6 +105,15 @@ $ ->
     $(@).parents('.show-hidden-order-data').hide()
     $($(@).data('toggle')).show('blind')
   )
+
+$ ->
+  $('.table-sortable').dataTable({
+    'bPaginate': false,
+    'bLengthChange': false,
+    'bInfo': false,
+    'bFilter': false,
+    'bAutoWidth': false
+  })
 
 class @Messenger
   durations:

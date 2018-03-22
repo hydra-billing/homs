@@ -4,7 +4,7 @@ var OrderListTable = React.createClass({
       return <OrderListRow key={index} values={order} profile={this.props.profile} />
     }.bind(this));
 
-    return <table className="table table-hover">
+    return <table className="table table-hover table-sortable">
       <thead>
         <OrderListHeaderRow profile={this.props.profile}/>
       </thead>
