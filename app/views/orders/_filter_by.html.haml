@@ -171,7 +171,7 @@
                $('<label>', {for: attributeName, class: 'label-overflow'}).text(options.label),
                $('<i>', class: 'fa fa-times custom-field-filter-close')),
              $('<div>', {class: 'col-xs-1 col-sm-1 col-md-1 col-lg-1 margin-top-10px'}).append(
-               $('<label>').text('From')),
+               $('<label>').text(I18n.t('js.from'))),
              $('<div>', {class: 'col-xs-4 col-sm-4 col-md-4 col-lg-4'}).append(
                $('<div>', {class: 'form-group'}).append(
                  $('<div>', {class: 'input-group date datetime-picker'}).data('showclear', true).append(
@@ -181,7 +181,7 @@
                    ))),
                $('<input>', {type: 'hidden', name: 'custom_fields[' + attributeName + '][from]', value: options.value.from if options.value, class: 'iso8601'})),
              $('<div>', {class: 'col-xs-1 col-sm-1 col-md-1 col-lg-1 margin-top-10px'}).append(
-               $('<label>').text('To')),
+               $('<label>').text(I18n.t('js.to'))),
              $('<div>', {class: 'col-xs-4 col-sm-4 col-md-4 col-lg-4'}).append(
                $('<div>', {class: 'form-group'}).append(
                  $('<div>', {class: 'input-group date datetime-picker'}).data('showclear', true).append(

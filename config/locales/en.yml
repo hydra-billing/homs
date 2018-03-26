@@ -252,6 +252,8 @@ en:
       not_set: Empty
     user_not_found: Current user not found in Activiti
     columns_settings: Columns settings
+    from: From
+    to: To
 
   doc:
     common:
