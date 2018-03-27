@@ -67,6 +67,10 @@ module API
       render nothing: true, status: :bad_request
     end
 
+    def page_params
+      params.permit(:page, :page_size)
+    end
+
     private
 
     def csrf_token
@@ -79,10 +83,6 @@ module API
 
     def query_params
       {}
-    end
-
-    def page_params
-      params.permit(:page, :page_size)
     end
 
     def resource_class

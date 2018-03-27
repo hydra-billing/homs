@@ -130,6 +130,7 @@ en:
       errors:
         multiple_types: "Orders are of multiple order types. Select orders of one type for printing."
         internal_error: "Print task processing is not started due to internal error."
+    total_items: "Orders found:"
   user_role:
     user: User
     vip: Power user

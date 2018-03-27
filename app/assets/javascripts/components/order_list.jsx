@@ -1,14 +1,18 @@
 var OrderList = React.createClass({
   getInitialState() {
     return {
-      profile: this.props.profile
+      profile: this.props.profile,
+      page: 2,
+      orders: [],
+      hasMorePages: this.props.initialOrders.length == this.props.pageSize,
+      requesting: false
     }
   },
 
   componentDidMount() {
     var selectElement = $('#column-settings');
 
-    if (this.props.with_custom_profile) {
+    if (this.props.withCustomProfile) {
       var enabledOptions = [];
       for (var field in this.props.profile.data) {
         if (this.props.profile.data[field].show)
@@ -69,6 +73,31 @@ var OrderList = React.createClass({
     })
   },
 
+  showMoreOrders() {
+    filterParams           = this.props.filterParams;
+    filterParams.page_size = this.props.pageSize;
+    filterParams.page      = this.state.page;
+
+    this.setState({requesting: true});
+
+    $.ajax('/orders/list', {
+      method: 'GET',
+      dataType: 'json',
+      contentType: 'application/json',
+      data: filterParams,
+      success: function(data) { this.setState((prevState, props) =>
+        ({
+          orders: prevState.orders.concat(data),
+          page: prevState.page + 1,
+          hasMorePages: data.length == this.props.pageSize
+        }))
+      }.bind(this),
+      complete: function() {
+        this.setState({requesting: false})
+      }.bind(this)
+    })
+  },
+
   render() {
     var options = [];
     for (var field in this.props.profile.data) {
@@ -76,12 +105,26 @@ var OrderList = React.createClass({
       options.push(<option key={field} value={field} disabled={disabled}>{this.props.profile.data[field].label}</option>)
     }
 
+    var showMoreContainer;
+    if (this.state.hasMorePages) {
+      cssClass = 'show-more-container';
+
+      if (this.state.requesting) {
+        cssClass += ' requesting'
+      }
+
+      showMoreContainer = <div className={cssClass} onClick={this.showMoreOrders}>
+        <i className="fa fa-caret-down fa-lg"/>
+      </div>
+    }
+
     return <div className="order-list-container">
       <select id="column-settings" multiple="multiple">
         {options}
       </select>
       <div className="order-list-table">
-        <OrderListTable profile={this.state.profile.data} orders={this.props.orders}/>
+        <OrderListTable profile={this.state.profile.data} orders={this.props.initialOrders.concat(this.state.orders)}/>
+        {showMoreContainer}
       </div>
     </div>
   }

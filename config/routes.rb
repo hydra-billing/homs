@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   get '/orders/order_type_attributes/:id' => 'orders#get_order_type_attributes'
 
+  get '/orders/list', to: 'orders#list'
+
   resources :orders, only: [:show, :edit, :update, :index, :new, :create]
 
   resources :profiles, only: [:create, :update]
