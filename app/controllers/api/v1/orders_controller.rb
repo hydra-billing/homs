@@ -75,11 +75,9 @@ module API
 
       def parse_params
         order_param = resource_params
-        attachments = order_param[:data].try(:delete, 'uploadedFile') || []
+        attachments = order_param[:data].try(:delete, 'uploadedFile')
 
-        if attachments.present?
-          attachments = JSON.parse(attachments)
-        end
+        attachments = attachments.present? ? JSON.parse(attachments) : []
 
         {order_params: order_param, attachments: attachments.map{|obj| obj.symbolize_keys}}
       end
