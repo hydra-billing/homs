@@ -22,7 +22,13 @@ class OrdersController < API::BaseController
   end
 
   def index
-    super(list_filter.list_orders)
+    orders = list_filter.list_orders
+
+    render 'orders/index', locals: {orders: orders.page(page_params[:page]).per(page_params[:page_size]), total_items: orders.size}
+  end
+
+  def list
+    render 'orders/list', locals: {orders: list_filter.list_orders.page(page_params[:page]).per(page_params[:page_size])}
   end
 
   def edit
