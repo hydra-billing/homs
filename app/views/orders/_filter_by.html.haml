@@ -58,10 +58,11 @@
       .row
         .col-xs-6.col-sm-12.col-md-12.col-lg-12
           = submit_tag t('.search'), class: 'btn btn-primary'
-        .col-xs-6.col-sm-12.col-md-12.col-lg-12
-          .print-container
-            %button(type="submit" name="print" value="#{t('.search')}" class="btn btn-primary")
-              = t('.print')
+        - if use_imprint?
+          .col-xs-6.col-sm-12.col-md-12.col-lg-12
+            .print-container
+              %button(type="submit" name="print" value="#{t('.search')}" class="btn btn-primary")
+                = t('.print')
 
   %hr
   .row
