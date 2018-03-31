@@ -266,6 +266,7 @@ ru:
       ext_code: Внешний код
     filter_by:
       search: Найти
+      print: Печать
     show:
       order_data: Информация о заказе
       show_more: Показать остальное
