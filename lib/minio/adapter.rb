@@ -21,5 +21,16 @@ module Minio
         end
       end
     end
+
+    def destroy(attachment_id)
+      attachment = Attachment.find(attachment_id)
+
+      s3 = Aws::S3::Resource.new(Aws::S3::Client.new)
+      bucket = s3.bucket(Rails.application.config.app[:minio][:bucket])
+
+      bucket.object(attachment[:name]).delete
+
+      attachment.destroy
+    end
   end
 end

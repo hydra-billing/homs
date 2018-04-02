@@ -25,6 +25,11 @@ module API
         attachments = Order.find(params[:id]).attachments
         render :show, locals: {attachments: attachments}
       end
+
+      def destroy
+        minio_adapter.destroy(params[:id])
+        head :no_content
+      end
     end
   end
 end
