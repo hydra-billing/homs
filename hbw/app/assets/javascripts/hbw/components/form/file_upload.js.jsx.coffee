@@ -5,7 +5,7 @@ modulejs.define 'HBWFormFileUpload',
       mixins: [DeleteIfMixin, CallbacksMixin]
 
       getInitialState: ->
-        { value: '', valid: true, files: []}
+        { value: '', valid: true, files: [], files_count: 0}
 
       render: ->
         opts = {
@@ -28,10 +28,13 @@ modulejs.define 'HBWFormFileUpload',
         </div>`
 
       onChange: (event) ->
-        @state.value = ''
-        @state.files = []
+        @trigger('hbw:file-upload-started')
         $el = event.target
         files = Array.from($el.files)
+
+        @state.value = ''
+        @state.files = []
+        @state.files_count = files.length
 
         for file in files
           @readFiles(file.name, file)
@@ -39,6 +42,11 @@ modulejs.define 'HBWFormFileUpload',
       addValue: (name, res) ->
         @state.files.push({name: name, content: window.btoa(res)})
         @state.value = JSON.stringify(@state.files)
+
+        @state.files_count = @state.files_count - 1
+
+        if (@state.files_count == 0)
+          @trigger('hbw:file-upload-finished')
 
       readFiles: (name, file) ->
         file_reader = new FileReader()
