@@ -240,7 +240,7 @@ GEM
     kramdown (1.16.2)
     launchy (2.4.3)
       addressable (~> 2.3)
-    loofah (2.1.1)
+    loofah (2.2.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
@@ -292,7 +292,7 @@ GEM
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.8)
-    rack-protection (1.5.3)
+    rack-protection (1.5.5)
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
