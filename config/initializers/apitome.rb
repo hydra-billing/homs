@@ -10,7 +10,7 @@ Apitome.setup do |config|
 
   # This is where rspec_api_documentation outputs the JSON files. This is configurable within RAD, and so is
   # configurable here.
-  config.doc_path = 'doc/api'
+  config.doc_path = 'public/doc/api'
 
   # The title of the documentation -- If your project has a name, you'll want to put it here.
   config.title = 'HOMS REST API'
