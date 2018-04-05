@@ -29,6 +29,7 @@ modulejs.define(
         fetched: false
         submitting: false
         bpRunning: false
+        fileUploading: false
 
       createSubscription: ->
         subscription = @props.env.connection.subscribe(
@@ -65,6 +66,9 @@ modulejs.define(
       componentDidMount: ->
         @state.subscription.start(@state.pollInterval)
         @bind('hbw:button-activated', @onButtonActivation)
+        @bind('hbw:file-upload-started', => @setState(fileUploading: true))
+        @bind('hbw:file-upload-finished', => @setState(fileUploading: false))
+
 
       componentWillUnmount: ->
         @state.subscription.close()
@@ -80,7 +84,7 @@ modulejs.define(
               self = @
               `<Button key={index}
                        button={button}
-                       disabled={self.state.submitting}
+                       disabled={self.state.submitting || self.state.fileUploading}
                        env={self.props.env} />`
             )
             `<div className='hbw-bp-control-buttons btn-group'>

@@ -10,11 +10,14 @@ modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
     getInitialState: ->
       error: null
       submitting: false
+      fileUploading: false
 
     componentDidMount: ->
       jQuery(':input:enabled:visible:first').focus()
       @bind('hbw:submit-form', => @setState(submitting: true))
       @bind('hbw:form-submitting-failed', => @setState(submitting: false))
+      @bind('hbw:file-upload-started', => @setState(fileUploading: true))
+      @bind('hbw:file-upload-finished', => @setState(fileUploading: false))
 
     render: ->
       `<div className='hbw-form'>
@@ -34,7 +37,7 @@ modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
         name: name
         params: params
         value: @props.variables[name]
-        formSubmitting: @state.submitting
+        formSubmitting: @state.submitting || @state.fileUploading
         env: @props.env
 
       switch params.type
@@ -64,7 +67,7 @@ modulejs.define 'HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime', \
           fa_class: 'fa fa-check'
         }
 
-        `<Submit params={params} formSubmitting={this.state.submitting} />`
+        `<Submit params={params} formSubmitting={this.state.submitting || this.state.fileUploading} />`
 
     submit: (e) ->
       e.preventDefault()
