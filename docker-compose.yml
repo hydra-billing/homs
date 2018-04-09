@@ -23,6 +23,8 @@ services:
       TZ: Europe/Moscow
     volumes:
       - /var/lib/hydra/homs/postgresql:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
     networks:
       - custom_network
   activiti_homs:

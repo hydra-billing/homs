@@ -9,7 +9,7 @@ RspecApiDocumentation.configure do |config|
   config.app = Rails.application
 
   # Output folder
-  config.docs_dir = Rails.root.join("doc", "api")
+  config.docs_dir = Rails.root.join("public", "doc", "api")
 
   # An array of output format(s).
   # Possible values are :json, :html, :combined_text, :combined_json,
@@ -55,7 +55,7 @@ RspecApiDocumentation.configure do |config|
   config.define_group :public do |conf|
     # By default the group's doc_dir is a subfolder under the parent group, based
     # on the group's name.
-    conf.docs_dir = ENV['API_DOCS_PATH'] || Rails.root.join("doc", "api", "public")
+    conf.docs_dir = ENV['API_DOCS_PATH'] || Rails.root.join("public", "doc", "api", "public")
 
     # Change the filter to only include :public examples
     conf.filter = :public

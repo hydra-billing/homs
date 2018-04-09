@@ -15,12 +15,12 @@
         - if user_signed_in?
           %li
             = link_to orders_path do
-              %span.glyphicon.glyphicon-list
+              %span.fa.fa-list
               = t('.orders')
           - if current_user.admin?
             %li
               = link_to admin_order_types_path do
-                %span.glyphicon.glyphicon-cog
+                %span.fa.fa-cog
                 = t('.setup_order_types')
             %li
               = link_to users_path do
@@ -38,11 +38,16 @@
               - if link_to_manual.present?
                 %li
                   %a(href="#{link_to_manual}")
-                    %span.glyphicon.glyphicon-question-sign
+                    %span.fa.fa-question-circle
                     = t('.help')
+              - if current_user.admin?
+                %li
+                  %a(href="#{Apitome.configuration.mount_at}")
+                    %span.fa.fa-info-circle
+                    = t('.rest_api')
               %li
                 = link_to destroy_user_session_path, :method=>'delete' do
-                  %span.glyphicon.glyphicon-log-out
+                  %span.fa.fa-sign-out
                   = t('.sign_out')
 
           %li#hbw-tasks-list-button.hbw-styles
