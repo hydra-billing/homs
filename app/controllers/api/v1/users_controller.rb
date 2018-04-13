@@ -1,7 +1,7 @@
 module API
   module V1
     class UsersController < API::BaseController
-      include HttpBasicAuthentication
+      include HttpBasicAuthentication if !Rails.env.development? || ENV['HOMS_API_USE_AUTH']
 
       PARAMS_ATTRIBUTES = [:name, :last_name, :middle_name, :company,
                            :department, :email, :role, :password, :external,
