@@ -1,4 +1,4 @@
-FROM ruby:2.2.4
+FROM ruby:2.3.6
 
 RUN mkdir -p /opt/homs
 

@@ -230,5 +230,9 @@ module Features
     def order_list_table_cols
       page.find('.orders-list').all('th').map(&:text)
     end
+
+    def order_list_table_header(column)
+      page.find('.order-list-table').all('th').select { |node| node.text == column }.first
+    end
   end
 end

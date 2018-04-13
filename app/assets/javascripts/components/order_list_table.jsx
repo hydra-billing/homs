@@ -6,7 +6,10 @@ var OrderListTable = React.createClass({
 
     return <table className="table table-hover">
       <thead>
-        <OrderListHeaderRow profile={this.props.profile}/>
+        <OrderListHeaderRow profile={this.props.profile}
+                            orderRowCodeHandler={this.props.orderRowCodeHandler}
+                            orderRowCode={this.props.orderRowCode}
+                            order={this.props.order}/>
       </thead>
       <tbody>
         {tableBody}
