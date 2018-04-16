@@ -55,6 +55,59 @@ There are 2 ways to install homs.
 
 Login at [http://localhost:3000](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
+### Using development installation
+
+1. Clone homs git repository:
+
+  ```
+  git clone https://github.com/latera/homs.git
+  ```
+2. Make configs from samples:
+
+  ```
+  find config -name '*.sample' | xargs -I{} sh -c 'cp $1 ${1%.*}' -- {}
+  ```
+3. Install docker-compose.
+4. Create directories for db datafiles:
+
+  ```
+  mkdir -p /var/lib/hydra/activiti/postgresql
+  mkdir -p /var/lib/hydra/homs/postgresql
+  ```
+5. For OS X users: add /var/lib/hydra/activiti/postgresql, /var/lib/hydra/homs/postgresql and /path/to/homs (path to folder with homs) in Docker -> Preferences... -> File Sharing.
+6. Add test environment in config/database.yml:
+
+  ```
+  test:
+    adapter: postgresql
+    encoding: unicode
+    pool: 5
+    host: postgres-homs
+    database: homs_test
+    username: homs_test
+    password: homs
+  ```
+7. Add in config/sources.yml
+
+  ```
+  sources:
+    bpmanagementsystem:
+      type: 'static/activiti'
+  ```
+8. Add environment variable $HOMS_PATH with path to your homs folder:
+
+  ```
+  HOMS_PATH=/path/to/homs export HOMS_PATH
+  ```
+
+9. Run docker-compose:
+
+  ```
+  docker-compose -f docker-compose.dev.yml up -d
+  ```
+
+Login at http://localhost:3000 with user@example.com/changeme.
+
 ### Using [manual installation instruction](https://github.com/latera/homs/blob/master/INSTALL.md)
 
 ## Contributing/Development
