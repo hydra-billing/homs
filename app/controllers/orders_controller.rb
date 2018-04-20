@@ -108,4 +108,8 @@ class OrdersController < API::BaseController
   def order_common_params
     params.require(:order).permit(:estimated_exec_date)
   end
+
+  def sort_params
+    params.permit(:sort_by, :order)
+  end
 end

@@ -2,11 +2,47 @@ var OrderList = React.createClass({
   getInitialState() {
     return {
       profile: this.props.profile,
-      page: 2,
+      page: 1,
       orders: [],
-      hasMorePages: this.props.initialOrders.length == this.props.pageSize,
-      requesting: false
+      hasMorePages: true,
+      requesting: false,
+      orderRowCode: '',
+      order: 'asc'
     }
+  },
+
+  changeOrderRowCode(code) {
+    var newState = {};
+
+    if (code == this.state.orderRowCode) {
+      if (this.state.order == 'asc')
+        newState.order = 'desc';
+      else
+        newState.order = 'asc';
+    }
+
+    newState.orderRowCode = code;
+
+    this.setState(newState);
+
+    var filterParams     = this.props.filterParams;
+    filterParams.sort_by = code;
+    filterParams.order   = newState.order || this.state.order;
+    filterParams.page    = 1;
+
+    $.ajax('/orders/list', {
+      method: 'GET',
+      dataType: 'json',
+      contentType: 'application/json',
+      data: filterParams,
+      success: function(data) { this.setState((prevState, props) =>
+        ({
+          orders: data,
+          page: 2,
+          hasMorePages: data.length == this.props.pageSize
+        }))
+      }.bind(this)
+    })
   },
 
   componentDidMount() {
@@ -16,7 +52,7 @@ var OrderList = React.createClass({
       var enabledOptions = [];
       for (var field in this.props.profile.data) {
         if (this.props.profile.data[field].show)
-          enabledOptions.push(field)
+          enabledOptions.push(field);
       }
 
       selectElement.multiselect({
@@ -32,6 +68,8 @@ var OrderList = React.createClass({
     } else {
       selectElement.hide();
     }
+
+    this.showMoreOrders();
   },
 
   buttonText() {
@@ -74,9 +112,11 @@ var OrderList = React.createClass({
   },
 
   showMoreOrders() {
-    filterParams           = this.props.filterParams;
+    var filterParams       = this.props.filterParams;
     filterParams.page_size = this.props.pageSize;
     filterParams.page      = this.state.page;
+    filterParams.sort_by   = this.state.orderRowCode;
+    filterParams.order     = this.state.order;
 
     this.setState({requesting: true});
 
@@ -107,7 +147,7 @@ var OrderList = React.createClass({
 
     var showMoreContainer;
     if (this.state.hasMorePages) {
-      cssClass = 'show-more-container';
+      var cssClass = 'show-more-container';
 
       if (this.state.requesting) {
         cssClass += ' requesting'
@@ -123,7 +163,11 @@ var OrderList = React.createClass({
         {options}
       </select>
       <div className="order-list-table">
-        <OrderListTable profile={this.state.profile.data} orders={this.props.initialOrders.concat(this.state.orders)}/>
+        <OrderListTable profile={this.state.profile.data}
+                        orders={this.state.orders}
+                        orderRowCodeHandler={this.changeOrderRowCode}
+                        orderRowCode={this.state.orderRowCode}
+                        order={this.state.order}/>
         {showMoreContainer}
       </div>
     </div>

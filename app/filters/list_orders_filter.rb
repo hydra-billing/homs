@@ -23,10 +23,10 @@ class ListOrdersFilter
     extend self
 
     def filter_by_date(rel, dates)
-      { created_at_from:          'created_at >= ?',
-        created_at_to:            'created_at <= ?',
-        estimated_exec_date_from: 'estimated_exec_date >= ?',
-        estimated_exec_date_to:   'estimated_exec_date <= ?' }.reduce(rel) do |r, (attr, condition)|
+      { created_at_from:          'orders.created_at >= ?',
+        created_at_to:            'orders.created_at <= ?',
+        estimated_exec_date_from: 'orders.estimated_exec_date >= ?',
+        estimated_exec_date_to:   'orders.estimated_exec_date <= ?' }.reduce(rel) do |r, (attr, condition)|
         if dates[attr].present?
           r.where(condition, dates[attr])
         else
@@ -83,6 +83,37 @@ class ListOrdersFilter
     end
   end
 
+  module Sorters
+    extend self
+
+    MAPPING = {
+        'code'                => %w(code),
+        'order_type_code'     => %w(order_types.code),
+        'state'               => %w(state),
+        'created_at'          => %w(created_at),
+        'user'                => %w(users.name users.last_name),
+        'ext_code'            => %w(ext_code),
+        'archived'            => %w(archived),
+        'estimated_exec_date' => %w(estimated_exec_date)
+    }
+
+    def sort_by(rel, column, order)
+      if column
+        if MAPPING.keys.include?(column)
+          rel.includes(:order_type).includes(:user).reorder(render_order_by_clause(MAPPING[column], order)).order('orders.created_at DESC')
+        else
+          rel.reorder("data->>'#{column}' #{order} nulls last").order('orders.created_at DESC')
+        end
+      else
+        rel
+      end
+    end
+
+    def render_order_by_clause(conditions, order)
+      conditions.map { |condition| "#{condition} #{order} nulls last"}.join(',')
+    end
+  end
+
   EMPTY_USER_ID = 'empty'
 
   delegate :empty_user, to: :'self.class'
@@ -99,11 +130,17 @@ class ListOrdersFilter
       Filters.filter_with_dispatch(rel, column, filter_values[column])
     end
 
-    Filters.filter_by_custom_fields(rel, filter_values)
+    rel = Filters.filter_by_custom_fields(rel, filter_values)
+
+    Sorters.sort_by(rel, sort_values[:sort_by], sort_values[:order] || 'asc')
   end
 
   def filter_values
     @filter_values ||= params.slice(*%w(state order_type_id archived user_id custom_fields)).merge(dates)
+  end
+
+  def sort_values
+    @sort_values ||= params.slice(*%w(sort_by order))
   end
 
   def dates

@@ -74,28 +74,34 @@ feature 'List orders', js: true do
     # "Order type"
     change_select2_value('order_type_id', 'Vacation request')
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to eq(nil)
 
     change_select2_value('order_type_id', 'Empty order type')
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(current_orders_list)
 
     # "Archived"
     change_select2_value('archived', 'Yes')
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to eq(nil)
 
     change_select2_value('archived', 'No')
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(current_orders_list)
 
     # "Order status"
     change_select2_value('state', 'To execute')
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to eq(nil)
 
     change_select2_value('state', 'In progress')
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(current_orders_list)
 
     # Calendar "From"
@@ -104,53 +110,64 @@ feature 'List orders', js: true do
     expect(calendar_value('created_at_from')).to eq(nil)
 
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(current_orders_list)
 
     set_datetime_picker_date('created_at_from', in_current_locale(vacation_request_order.created_at + 1.minute))
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to eq(nil)
 
     calendar_date_button('created_at_from').click
     calendar_clear_button('created_at_from').click
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(current_orders_list)
 
     # Calendar "To"
     set_datetime_picker_date('created_at_to', in_current_locale(vacation_request_order.created_at - 1.minute))
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to eq(nil)
 
     set_datetime_picker_date('created_at_to', in_current_locale(vacation_request_order.created_at + 1.minute))
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(current_orders_list)
 
     # Estimated execution date "From"
     set_datetime_picker_date('estimated_exec_date_from', in_current_locale(vacation_request_order.estimated_exec_date + 1.minute))
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to be_nil
 
     calendar_date_button('estimated_exec_date_from').click
     calendar_clear_button('estimated_exec_date_from').click
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(current_orders_list)
 
     # Estimated execution date "To"
     set_datetime_picker_date('estimated_exec_date_to', in_current_locale(vacation_request_order.estimated_exec_date - 1.minute))
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to be_nil
 
     set_datetime_picker_date('estimated_exec_date_to', in_current_locale(vacation_request_order.estimated_exec_date + 1.minute))
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(current_orders_list)
 
     # "User name"
     select2_cross('user_id[]', 'Empty').click
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to eq(nil)
 
     # Filter by user name isn't set
     select2_cross('user_id[]', 'Christopher Johnson').click
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(current_orders_list)
   end
 
@@ -183,10 +200,12 @@ feature 'List orders', js: true do
 
     fill_in('custom_fields[problemDescription]', with: problem_descriptions.reverse)
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to eq(nil)
 
     fill_in('custom_fields[problemDescription]', with: problem_descriptions)
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(result_orders_list)
 
     # custom field filter with type 'boolean'
@@ -196,10 +215,12 @@ feature 'List orders', js: true do
     expect(label('callBack')).to eq('Callback')
 
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to be_nil
 
     click_checkbox_div('callBack')
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(result_orders_list)
 
     # custom field filter with type 'number'
@@ -210,10 +231,12 @@ feature 'List orders', js: true do
 
     fill_in('custom_fields[contractNumber]', with: contract_number + 1)
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to be_nil
 
     fill_in('custom_fields[contractNumber]', with: contract_number)
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(result_orders_list)
 
     # custom field filter with type 'datetime'
@@ -225,11 +248,13 @@ feature 'List orders', js: true do
     set_datetime_picker_date('custom_fields[creationDate][from]',
                              in_current_locale(DateTime.iso8601(support_request_order.data['creationDate']) + 1.day))
     search_button.click
+    wait_for_ajax
     expect(empty_order_list).not_to be_nil
 
     set_datetime_picker_date('custom_fields[creationDate][from]',
                              in_current_locale(DateTime.iso8601(support_request_order.data['creationDate']) - 1.day))
     search_button.click
+    wait_for_ajax
     expect(orders_list).to eq(result_orders_list)
 
     # order type removing should clear all custom field filters
@@ -249,6 +274,7 @@ feature 'List orders', js: true do
     input_by_placeholder('Order code').set(vacation_request_order.code)
 
     search_button_by_action('/orders/search_by/code').click
+    wait_for_ajax
     expect(header.text).to eq('ORD-1 Empty order type')
   end
 
@@ -257,6 +283,7 @@ feature 'List orders', js: true do
     input_by_placeholder('Order external code').set(vacation_request_order.ext_code)
 
     search_button_by_action('/orders/search_by/ext_code').click
+    wait_for_ajax
     expect(header.text).to eq('ORD-1 Empty order type')
   end
 
@@ -270,6 +297,7 @@ feature 'List orders', js: true do
       expect(select2_text('order_type_id')).to eq('Order type')
 
       search_button.click
+      wait_for_ajax
 
       expect(page).not_to have_content('Columns settings')
     end
@@ -278,18 +306,76 @@ feature 'List orders', js: true do
       change_select2_value('order_type_id', 'Support request')
 
       search_button.click
+      wait_for_ajax
       expect(page).to have_content('Columns settings')
       expect(checked_multiselect_options('column-settings')).to eq(common_fields)
+      wait_for_ajax
       expect(order_list_table_cols).not_to include('Creation date', 'Problem description', 'Callback', 'Contract number')
 
       click_on_multiselect_options('column-settings', custom_fields)
       expect(checked_multiselect_options('column-settings')).to eq(common_fields + custom_fields)
+      wait_for_ajax
       expect(order_list_table_cols).to include('Creation date', 'Problem description', 'Callback', 'Contract number')
 
       click_on_multiselect_options('column-settings', %w(code order_type_code))
+      wait_for_ajax
       expect(order_list_table_cols).not_to include('Order type')
       # 'Code' column can not be hidden
       expect(order_list_table_cols).to include('Code')
+    end
+  end
+
+  feature 'with ordering' do
+    let!(:support_request_order_for_ordering) { FactoryGirl.create(:order,
+                                                                   :order_support_request_for_ordering,
+                                                                   order_type: support_request_type) }
+    let(:order_2) { ['ORD-2', 'Support request', 'In progress',
+                     in_current_locale(support_request_order.created_at), '', 'support_ext_code', '',
+                     in_current_locale(support_request_order.estimated_exec_date)] }
+
+    let(:order_3) { ['ORD-3', 'Support request', 'In progress',
+                     in_current_locale(support_request_order_for_ordering.created_at), '', 'support_ext_code', '',
+                     in_current_locale(support_request_order_for_ordering.estimated_exec_date)] }
+
+    scenario 'by default fields' do
+      # "Order type"
+      change_select2_value('order_type_id', 'Support request')
+      search_button.click
+      wait_for_ajax
+      expect(orders_list).to eq([[], order_3, order_2])
+
+      order_list_table_header('Code').click
+      wait_for_ajax
+      expect(orders_list).to eq([[], order_2, order_3])
+
+      order_list_table_header('Code').click
+      wait_for_ajax
+      expect(orders_list).to eq([[], order_3, order_2])
+    end
+
+    scenario 'by custom fields' do
+      order_2_with_contract = order_2 + [support_request_order.data['contractNumber'].to_s]
+      order_3_with_contract = order_3 + [support_request_order_for_ordering.data['contractNumber'].to_s]
+
+      # "Order type"
+      change_select2_value('order_type_id', 'Support request')
+      search_button.click
+      wait_for_ajax
+      expect(orders_list).to eq([[], order_3, order_2])
+
+      # Add Contract number to orders table
+      click_on_multiselect_options('column-settings', %w(contractNumber))
+      wait_for_ajax
+      expect(orders_list).to eq([[], order_3_with_contract, order_2_with_contract])
+
+      # Check sorting
+      order_list_table_header('Contract number').click
+      wait_for_ajax
+      expect(orders_list).to eq([[], order_2_with_contract, order_3_with_contract])
+
+      order_list_table_header('Contract number').click
+      wait_for_ajax
+      expect(orders_list).to eq([[], order_3_with_contract, order_2_with_contract])
     end
   end
 end

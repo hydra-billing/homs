@@ -17,6 +17,8 @@ module Imprint
         optional(:custom_fields).maybe(:hash?)
         optional(:filter).maybe(:str?)
         optional(:user_id).maybe(:array?)
+        optional(:sort_by).maybe(:str?)
+        optional(:order).maybe(:str?)
 
         rule(order_type_for_custom_fields: [:order_type_id, :custom_fields]) do |order_type_id, custom_fields|
           custom_fields.filled?.then(order_type_id.filled?)
