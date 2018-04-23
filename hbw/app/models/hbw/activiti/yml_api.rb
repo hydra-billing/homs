@@ -4,8 +4,8 @@ module HBW
       attr_accessor :responses
 
       class << self
-        def build
-          new(YAML.load_file(Rails.root.join('hbw/config/yml_api.default.yml')))
+        def build(yml_api_file_path)
+          new(YAML.load_file(yml_api_file_path))
         end
       end
 
@@ -35,12 +35,8 @@ module HBW
 
       private
 
-      def build_params_key(params)
-        Digest::MD5.hexdigest(params.sort_by{|k, _| k}.flatten.join('.'))
-      end
-
       def fetch_response(method, url, params)
-        responses.fetch(method).fetch(url).fetch(build_params_key(params))
+        responses.fetch(method).fetch(url).fetch(URI.unescape(params.to_query))
       end
     end
 

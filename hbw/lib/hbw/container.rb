@@ -5,10 +5,14 @@ module HBW
   class Container
     extend Dry::Container::Mixin
 
-    if Rails.env.test?
-      register(:api) { HBW::Activiti::YMLAPI.build }
-    else
-      register(:api) { HBW::Activiti::API.build }
+    register(:api) do
+      if Rails.env.test?
+        HBW::Activiti::YMLAPI.build(Rails.root.join('hbw/config/yml_api.test.yml'))
+      elsif Rails.env.development? && HBW::Widget.config.fetch(:use_activiti_stub)
+        HBW::Activiti::YMLAPI.build(Rails.root.join('hbw/config/yml_api.development.yml'))
+      else
+        HBW::Activiti::API.build
+      end
     end
 
     if Rails.env.test?

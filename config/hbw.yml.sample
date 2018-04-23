@@ -36,3 +36,5 @@ hbw:
     bp_toolbar:
       common_buttons: []
       entity_type_buttons: {}
+
+  use_activiti_stub: false
