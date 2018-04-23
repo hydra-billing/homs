@@ -2,7 +2,7 @@ get:
   group_by_var: null
   tasks: {}
   identity/users:
-    c9830a7b0c09b919aaffe098184580d3:
+    "email=c.johnson@example.com":
       data:
         - id:         'demo'
           firstName:  'Demo'
@@ -16,7 +16,7 @@ get:
       order: 'asc'
       size: 1
   "process-definitions/testProcess:469:814905":
-    d41d8cd98f00b204e9800998ecf8427e: &default_process-definition
+    "": &default_process-definition
       id: "testProcess:469:814905"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:469:814905"
       key: "testProcess"
@@ -33,7 +33,7 @@ get:
       suspended: false
       startFormDefined: false
   "process-definitions/testProcess:2:2":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:2:2"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:2:2"
@@ -42,7 +42,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/2/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/2/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:3:3":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:3:3"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:3:3"
@@ -51,7 +51,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/3/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/3/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:4:4":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:4:4"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:4:4"
@@ -60,7 +60,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/4/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/4/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:5:5":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:5:5"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:5:5"
@@ -69,7 +69,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/5/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/5/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:6:6":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:6:6"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:6:6"
@@ -78,7 +78,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/6/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/6/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:7:7":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:7:7"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:7:7"
@@ -87,7 +87,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/7/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/7/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:8:8":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:8:8"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:8:8"
@@ -96,7 +96,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/8/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/8/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:9:9":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:9:9"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:9:9"
@@ -105,7 +105,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/9/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/9/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:10:10":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:10:10"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:10:10"
@@ -114,7 +114,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/10/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/10/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:11:11":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:11:11"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:11:11"
@@ -123,7 +123,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/11/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/11/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:12:12":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:12:12"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:12:12"
@@ -132,7 +132,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/12/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/12/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:13:13":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:13:13"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:13:13"
@@ -141,7 +141,7 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/13/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/13/resources/testProcess.testProcess.png"
   "process-definitions/testProcess:14:14":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_process-definition
       id: "testProcess:14:14"
       url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:14:14"
@@ -150,105 +150,105 @@ get:
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/14/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/14/resources/testProcess.testProcess.png"
   "repository/deployments/814892/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/814892/resources/test_form.yml"
         contentUrl: "repository/deployments/814892/resourcedata/test_form.yml"
         mediaType: null
         type: resource
   "repository/deployments/2/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form_with_data_source.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/2/resources/test_form_with_data_source.yml"
         contentUrl: "repository/deployments/2/resourcedata/test_form_with_data_source.yml"
         mediaType: null
         type: resource
   "repository/deployments/3/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/3/resources/test_form.yml"
         contentUrl: "repository/deployments/3/resourcedata/test_form.yml"
         mediaType: null
         type: resource
   "repository/deployments/4/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/4/resources/test_form.yml"
         contentUrl: "repository/deployments/4/resourcedata/test_form.yml"
         mediaType: null
         type: resource
   "repository/deployments/5/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/5/resources/test_form.yml"
         contentUrl: "repository/deployments/5/resourcedata/test_form.yml"
         mediaType: null
         type: resource
   "repository/deployments/6/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/6/resources/test_form.yml"
         contentUrl: "repository/deployments/6/resourcedata/test_form.yml"
         mediaType: null
         type: resource
   "repository/deployments/7/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/7/resources/test_form.yml"
         contentUrl: "repository/deployments/7/resourcedata/test_form.yml"
         mediaType: null
         type: resource
   "repository/deployments/8/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/8/resources/test_form.yml"
         contentUrl: "repository/deployments/8/resourcedata/test_form.yml"
         mediaType: null
         type: resource
   "repository/deployments/9/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/9/resources/test_form.yml"
         contentUrl: "repository/deployments/9/resourcedata/test_form.yml"
         mediaType: null
         type: resource
   "repository/deployments/10/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/10/resources/test_form.yml"
         contentUrl: "repository/deployments/10/resourcedata/test_form.yml"
         mediaType: null
         type: resource
   "repository/deployments/11/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/11/resources/test_form.yml"
         contentUrl: "repository/deployments/11/resourcedata/test_form.yml"
         mediaType: null
         type: resource
   "repository/deployments/12/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/12/resources/test_form.yml"
         contentUrl: "repository/deployments/12/resourcedata/test_form.yml"
         mediaType: null
         type: resource
   "repository/deployments/13/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form_with_data_source.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/13/resources/test_form_with_data_source.yml"
         contentUrl: "repository/deployments/13/resourcedata/test_form_with_data_source.yml"
         mediaType: null
         type: resource
   "repository/deployments/14/resources":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       - id: "test_form_with_select_table.yml"
         url: "http://bpm.example.com/activiti-rest/service/repository/deployments/14/resources/test_form_with_select_table.yml"
         contentUrl: "repository/deployments/14/resourcedata/test_form_with_select_table.yml"
         mediaType: null
         type: resource
   "repository/deployments/814892":
-    d41d8cd98f00b204e9800998ecf8427e: &default_deployments
+    "": &default_deployments
       id: "814892"
       name: "person-connection.zip"
       deploymentTime: "2016-06-30T12:04:42.000+03:00"
@@ -256,72 +256,72 @@ get:
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/814892"
       tenantId: ""
   "repository/deployments/2":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "2"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/2"
   "repository/deployments/3":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "3"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/3"
   "repository/deployments/4":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "4"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/4"
   "repository/deployments/5":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "5"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/5"
   "repository/deployments/6":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "6"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/6"
   "repository/deployments/7":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "7"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/7"
   "repository/deployments/8":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "8"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/8"
   "repository/deployments/9":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "9"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/9"
   "repository/deployments/10":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "10"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/10"
   "repository/deployments/11":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "11"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/11"
   "repository/deployments/12":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "12"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/12"
   "repository/deployments/13":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "13"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/13"
   "repository/deployments/14":
-    d41d8cd98f00b204e9800998ecf8427e:
+    "":
       <<: *default_deployments
       id: "14"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/14"
   "repository/deployments/814892/resourcedata/test_form.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
@@ -460,7 +460,7 @@ get:
               condition: $var == 0
 
   "repository/deployments/2/resourcedata/test_form_with_data_source.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
@@ -482,7 +482,7 @@ get:
             data_source: bpmanagementsystem
             variable: "homsOrderSelectOptions"
   "repository/deployments/3/resourcedata/test_form.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
@@ -508,7 +508,7 @@ get:
                 - 123456
                 - Option 1
   "repository/deployments/4/resourcedata/test_form.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
@@ -539,7 +539,7 @@ get:
                 - 654321
                 - Option 2
   "repository/deployments/5/resourcedata/test_form.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
@@ -564,7 +564,7 @@ get:
                 - 654321
                 - Option 2
   "repository/deployments/6/resourcedata/test_form.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
@@ -589,7 +589,7 @@ get:
                 - 654321
                 - Option 2
   "repository/deployments/7/resourcedata/test_form.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
@@ -614,7 +614,7 @@ get:
                 - 445566
                 - Option 2
   "repository/deployments/8/resourcedata/test_form.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
@@ -635,7 +635,7 @@ get:
               - Option 1
               - Option 2
   "repository/deployments/9/resourcedata/test_form.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
@@ -656,7 +656,7 @@ get:
               - Option 1
               - Option 2
   "repository/deployments/10/resourcedata/test_form.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
         fields:
@@ -687,7 +687,7 @@ get:
             value: Canceled
             css_class: btn btn-danger btn-lg
   "repository/deployments/11/resourcedata/test_form.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
         fields:
@@ -718,7 +718,7 @@ get:
             value: Canceled
             css_class: btn btn-danger btn-lg
   "repository/deployments/12/resourcedata/test_form.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
@@ -739,7 +739,7 @@ get:
               - Option 1
               - Option 2
   "repository/deployments/13/resourcedata/test_form_with_data_source.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
           form:
             css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
             fields:
@@ -762,7 +762,7 @@ get:
                       FROM   SI_SUBJECTS   S
                       WHERE  S.VC_CODE LIKE \'%\' || :value || \'%\'
   "repository/deployments/14/resourcedata/test_form_with_select_table.yml":
-    d41d8cd98f00b204e9800998ecf8427e: |
+    "": |
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
@@ -801,7 +801,7 @@ put: {}
 patch: {}
 post:
   query/tasks:
-    7ceb15217934747a92a39f1900fe0330:
+    "active=true&assignee=demo&includeProcessVariables=true&processInstanceVariables[][name]=homsOrderCode&processInstanceVariables[][operation]=like&processInstanceVariables[][value]=%&size=1000":
       - &default_tasks
         id: "816011"
         url: "http://bpm.example.com/activiti-rest/service/runtime/tasks/815194"
@@ -1070,7 +1070,7 @@ post:
             scope: "global"
             value: 125342601
   query/process-instances:
-    921ad9476327beb89058e489a918a63e:
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-1":
       default_data: &default_process-instances
         id: "111111"
         url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/111111"
@@ -1149,7 +1149,7 @@ post:
           url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/111113"
           processDefinitionId: "testProcess:13:13"
           processDefinitionUrl: "process-definitions/testProcess:13:13"
-    fbb9390f921345df8f998f1d8a8ae6db:
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-14":
       data:
         id: "111114"
         url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/111114"
