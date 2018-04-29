@@ -58,7 +58,7 @@ feature 'User is', js: true do
     expect(is_input_in_error?('user_password')).to   be true
     expect(input_error_text('user_password')).to     eq 'is not specified'
 
-    input_by_label('user_email').set('test@test')
+    input_by_label('user_email').set('testtest')
     button.click
     expect(validation_errors_container.find('.alert').text).to eq '6 prohibited this user from being saved:'
     expect(input_error_text('user_email')).to                  eq 'is invalid'

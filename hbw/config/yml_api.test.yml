@@ -15,6 +15,19 @@ get:
       sort: 'id'
       order: 'asc'
       size: 1
+    "email=j.doe@example.com":
+      data:
+        - id:         'john'
+          firstName:  'John'
+          lastName:   'Doe'
+          url:        'http://bpm.example.com'
+          email:      'j.doe@example.com'
+          pictureUrl: null
+      total: 1
+      start: 0
+      sort: 'id'
+      order: 'asc'
+      size: 1
   "process-definitions/testProcess:469:814905":
     "": &default_process-definition
       id: "testProcess:469:814905"
@@ -1069,6 +1082,8 @@ post:
             type: "select_table"
             scope: "global"
             value: 125342601
+    "active=true&assignee=john&includeProcessVariables=true&processInstanceVariables[][name]=homsOrderCode&processInstanceVariables[][operation]=like&processInstanceVariables[][value]=%&size=1000":
+      []
   query/process-instances:
     "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-1":
       default_data: &default_process-instances
@@ -1149,6 +1164,162 @@ post:
           url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/111113"
           processDefinitionId: "testProcess:13:13"
           processDefinitionUrl: "process-definitions/testProcess:13:13"
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-2":
+      data:
+        id: "53452"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/53452"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:2:2"
+        processDefinitionUrl: "process-definitions/testProcess:2:2"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-3":
+      data:
+        id: "111111"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/111111"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:3:3"
+        processDefinitionUrl: "process-definitions/testProcess:3:3"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-4":
+      data:
+        id: "222222"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/222222"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:4:4"
+        processDefinitionUrl: "process-definitions/testProcess:4:4"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-5":
+      data:
+        id: "333333"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/333333"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:5:5"
+        processDefinitionUrl: "process-definitions/testProcess:5:5"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-6":
+      data:
+        id: "444444"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/444444"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:6:6"
+        processDefinitionUrl: "process-definitions/testProcess:6:6"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-7":
+      data:
+        id: "555555"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/555555"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:7:7"
+        processDefinitionUrl: "process-definitions/testProcess:7:7"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-8":
+      data:
+        id: "666666"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/666666"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:8:8"
+        processDefinitionUrl: "process-definitions/testProcess:8:8"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-9":
+      data:
+        id: "777777"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/777777"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:9:9"
+        processDefinitionUrl: "process-definitions/testProcess:9:9"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-10":
+      data:
+        id: "888888"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/888888"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:10:10"
+        processDefinitionUrl: "process-definitions/testProcess:10:10"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-11":
+      data:
+        id: "999999"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/999999"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:11:11"
+        processDefinitionUrl: "process-definitions/testProcess:11:11"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-12":
+      data:
+        id: "111112"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/111112"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:12:12"
+        processDefinitionUrl: "process-definitions/testProcess:12:12"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-13":
+      data:
+        id: "111113"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/111113"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:13:13"
+        processDefinitionUrl: "process-definitions/testProcess:13:13"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
     "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-14":
       data:
         id: "111114"
