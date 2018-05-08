@@ -1,0 +1,67 @@
+version: '2'
+services:
+  db_activiti:
+    image: latera/postgres-activiti
+    hostname: postgres-activiti
+    container_name: postgres-activiti
+    restart: always
+    environment:
+      PGDATA: /var/lib/postgresql/data/activiti/
+      POSTGRES_USER: activiti
+      TZ: Europe/Moscow
+    volumes:
+      - /var/lib/hydra/activiti/postgresql:/var/lib/postgresql/data
+    networks:
+      - custom_network
+  db_homs:
+    image: latera/postgres-homs
+    hostname: postgres-homs
+    container_name: postgres-homs
+    environment:
+      PGDATA: /var/lib/postgresql/data/homs
+      POSTGRES_USER: homs
+      TZ: Europe/Moscow
+    volumes:
+      - /var/lib/hydra/homs/postgresql:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - custom_network
+  activiti_homs:
+    image: latera/activiti-homs
+    container_name: activiti
+    links:
+      - db_activiti:postgres-activiti
+    environment:
+      - DB_HOST=postgres-activiti
+      - HOMS_HOST=homs
+    ports:
+      - 8080:8080
+    depends_on:
+      - db_activiti
+    entrypoint: "bash -lc '/wait_for_postgres.sh db_activiti && /entrypoint_ah.sh'"
+    networks:
+      - custom_network
+  homs:
+    image: latera/homs-with-oracle
+    container_name: homs
+    links:
+      - db_homs:postgres-homs
+      - activiti_homs:activiti
+    volumes:
+      - $HOMS_PATH:/opt/homs
+      - $TNSNAMES_PATH:/etc/oracle/tnsnames.ora
+    environment:
+      - ACTIVITI_HOST=activiti
+      - DB_HOST=postgres-homs
+    depends_on:
+      - db_homs
+      - activiti_homs
+    entrypoint: "bash -lc '/wait_for_postgres.sh db_homs && /entrypoint.sh'"
+    ports:
+      - 3000:3000
+    networks:
+      - custom_network
+networks:
+  custom_network:
+    driver: bridge
