@@ -19,6 +19,14 @@ class ApplicationController < ActionController::Base
     new_user_session_path
   end
 
+  def admin_only
+    unless current_user.admin?
+      flash[:error] = t('access_denied')
+
+      redirect_to '/'
+    end
+  end
+
   def flash_messages
     %i(success notice error).reduce([]) do |messages, type|
       if flash.key?(type)
