@@ -3,6 +3,7 @@ class Admin::OrderTypesController < ApplicationController
   self.hbw_available = true
 
   before_filter :require_order_type, only: [:show, :activate, :dismiss, :destroy]
+  before_action :admin_only
 
   def index
     @order_types = OrderType.active

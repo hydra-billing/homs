@@ -73,10 +73,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def admin_only
-    redirect_to :back, alert: 'Access denied.' unless current_user.admin?
-  end
-
   def secure_params
     params.require(:user).permit(*PARAMS_ATTRIBUTES)
   end
