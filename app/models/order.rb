@@ -10,7 +10,6 @@ class Order < ActiveRecord::Base
 
   belongs_to :order_type
   belongs_to :user
-  has_many :attachments
 
   validates :order_type, presence: true
   validates_with OrderDataValidator

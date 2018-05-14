@@ -38,3 +38,10 @@ hbw:
       entity_type_buttons: {}
 
   use_activiti_stub: false
+
+  minio:
+    endpoint: 'http://127.0.0.1:9000'
+    access_key_id: 'key'
+    secret_access_key: 'key'
+    bucket: 'bucket_name'
+    region: 'us-east-1'

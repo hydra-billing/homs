@@ -1,7 +1,7 @@
 require 'aws-sdk'
 
 Rails.application.config.to_prepare do
-  config = Rails.application.config.app.fetch(:minio, {})
+  config = HBW::Widget.config.fetch(:minio, {})
   unless config.empty?
     Aws.config.update(
       endpoint: config[:endpoint],
