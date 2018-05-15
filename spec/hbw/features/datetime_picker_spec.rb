@@ -4,15 +4,15 @@ feature 'Check datetime picker with', js: true do
   let(:title)      { 'Orders list' }
 
   before(:each) do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
 
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
     expect(page).to     have_content 'Orders list'
 
-    order_type = FactoryGirl.create(:order_type, :support_request)
+    order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryGirl.create(:order, order_type: order_type)
+    FactoryBot.create(:order, order_type: order_type)
 
     click_on nav_button
     expect(page).to have_content title

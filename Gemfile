@@ -13,7 +13,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'devise-encryptable'
 gem 'haml-rails'
-gem 'pg', '~> 0.18'
+gem 'pg', '0.20'
 gem 'simple_form'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
@@ -57,7 +57,7 @@ group :development do
 end
 
 group :development, :test, :staging do
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails'
   gem 'rspec-mocks'

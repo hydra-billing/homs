@@ -4,9 +4,9 @@ describe API::V1::ProfilesController, type: :request do
   resource I18n.t('doc.profiles.resource') do
     include HttpAuthHelper
 
-    let(:order_type) { FactoryGirl.create(:order_type, :support_request) }
-    let(:john)       { FactoryGirl.create(:user, :john) }
-    let(:frank)      { FactoryGirl.create(:user, :frank) }
+    let(:order_type) { FactoryBot.create(:order_type, :support_request) }
+    let(:john)       { FactoryBot.create(:user, :john) }
+    let(:frank)      { FactoryBot.create(:user, :frank) }
 
     before(:each) do
       disable_http_basic_authentication(API::V1::ProfilesController)

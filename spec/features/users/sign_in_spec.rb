@@ -1,6 +1,6 @@
 feature 'Sign in', :devise, js: true do
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   scenario 'user cannot sign in if not registered' do
     signin('test@example.com', 'please123')

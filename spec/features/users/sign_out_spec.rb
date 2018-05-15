@@ -1,6 +1,6 @@
 feature 'Sign out', :devise, js: true do
   scenario 'user signs out successfully' do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     signin(user.email, user.password)
     expect(page).to have_content I18n.t 'orders.index.title'
     logout

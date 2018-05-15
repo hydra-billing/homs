@@ -1,7 +1,7 @@
 feature 'Create new order type', js: true do
 
   before(:each) do
-    user = FactoryGirl.create(:user, :admin)
+    user = FactoryBot.create(:user, :admin)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
     expect(page).to     have_content 'Orders list'

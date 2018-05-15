@@ -1,13 +1,13 @@
 feature 'Validate form', js: true do
   before(:each) do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
     expect(page).to     have_content 'Orders list'
 
-    order_type = FactoryGirl.create(:order_type, :support_request)
-    FactoryGirl.create(:order, order_type: order_type)
-    FactoryGirl.create(:order, order_type: order_type)
+    order_type = FactoryBot.create(:order_type, :support_request)
+    FactoryBot.create(:order, order_type: order_type)
+    FactoryBot.create(:order, order_type: order_type)
   end
 
   scenario 'invalid form is not submitted' do

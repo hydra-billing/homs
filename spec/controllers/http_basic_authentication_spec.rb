@@ -36,7 +36,7 @@ describe HttpBasicAuthentication, type: :controller do
     end
 
     describe 'with credentials' do
-      let(:user) { FactoryGirl.create(:user, :john, api_token: 'please123') }
+      let(:user) { FactoryBot.create(:user, :john, api_token: 'please123') }
       let(:email) { user.email }
       let(:password) { user.api_token }
       let(:wrong_password) { "#{password}!" }
