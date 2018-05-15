@@ -1,14 +1,14 @@
 feature 'Check select table with', js: true do
   before(:each) do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
 
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
     expect(page).to     have_content 'Orders list'
 
-    order_type = FactoryGirl.create(:order_type, :support_request)
+    order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryGirl.create(:order, order_type: order_type).update(code: 'ORD-14')
+    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-14')
   end
 
   scenario 'shows table with static variants' do

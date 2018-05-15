@@ -6,12 +6,12 @@ feature 'Create new order', js: true do
   let(:current_date)            { Date.today.strftime('%m/%d/%Y') }
 
   before(:each) do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
     expect(page).to     have_content 'Orders list'
 
-    FactoryGirl.create(:order_type, :support_request)
+    FactoryBot.create(:order_type, :support_request)
   end
 
   scenario 'success' do

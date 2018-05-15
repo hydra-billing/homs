@@ -1,7 +1,7 @@
 describe OrdersController, type: :controller do
-  let(:order_type) { FactoryGirl.create(:order_type, :support_request) }
-  let(:order)      { FactoryGirl.build(:order, order_type: order_type) }
-  let(:user)       { FactoryGirl.create(:user) }
+  let(:order_type) { FactoryBot.create(:order_type, :support_request) }
+  let(:order)      { FactoryBot.build(:order, order_type: order_type) }
+  let(:user)       { FactoryBot.create(:user) }
 
   describe 'Orders' do
     render_views

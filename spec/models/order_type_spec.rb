@@ -73,19 +73,19 @@ RSpec.describe OrderType, type: :model do
   end
 
   it '.id_from_code' do
-    active_c1   = FactoryGirl.create(:order_type, :active,  code: 'C1')
-    FactoryGirl.create(:order_type, code: 'C1')
-    FactoryGirl.create(:order_type, code: 'C2')
+    active_c1   = FactoryBot.create(:order_type, :active,  code: 'C1')
+    FactoryBot.create(:order_type, code: 'C1')
+    FactoryBot.create(:order_type, code: 'C2')
 
     expect(OrderType.id_from_code('C1')).to eq(active_c1.id)
     expect(OrderType.id_from_code('C2')).to be_nil
   end
 
   it '.lookup' do
-    FactoryGirl.create(:order_type, code: 'Vacation request', name: 'Vacation request')
-    FactoryGirl.create(:order_type, code: 'Support Request', name: 'Support Request')
-    a_c2 = FactoryGirl.create(:order_type, :active,  code: 'Support Request', name: 'Support Request')
-    a_c1 = FactoryGirl.create(:order_type, :active,  code: 'Vacation request', name: 'Vacation request')
+    FactoryBot.create(:order_type, code: 'Vacation request', name: 'Vacation request')
+    FactoryBot.create(:order_type, code: 'Support Request', name: 'Support Request')
+    a_c2 = FactoryBot.create(:order_type, :active,  code: 'Support Request', name: 'Support Request')
+    a_c1 = FactoryBot.create(:order_type, :active,  code: 'Vacation request', name: 'Vacation request')
 
     expect(OrderType.lookup('va')).to eq([{ id: a_c1.id, text: a_c1.code }])
     expect(OrderType.lookup('su')).to eq([{ id: a_c2.id, text: a_c2.code }])

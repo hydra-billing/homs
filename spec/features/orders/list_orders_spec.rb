@@ -1,10 +1,10 @@
 feature 'List orders', js: true do
-  let!(:user)                   { FactoryGirl.create(:user) }
-  let!(:john)                   { FactoryGirl.create(:user, :john) }
-  let!(:vacation_request_type)  { FactoryGirl.create(:order_type, :vacation_request, name: 'Vacation request') }
-  let!(:support_request_type)   { FactoryGirl.create(:order_type, :support_request, name: 'Support request') }
-  let!(:vacation_request_order) { FactoryGirl.create(:order, :order_vacation_request) }
-  let!(:support_request_order)  { FactoryGirl.create(:order, :order_support_request, order_type: support_request_type) }
+  let!(:user)                   { FactoryBot.create(:user) }
+  let!(:john)                   { FactoryBot.create(:user, :john) }
+  let!(:vacation_request_type)  { FactoryBot.create(:order_type, :vacation_request, name: 'Vacation request') }
+  let!(:support_request_type)   { FactoryBot.create(:order_type, :support_request, name: 'Support request') }
+  let!(:vacation_request_order) { FactoryBot.create(:order, :order_vacation_request) }
+  let!(:support_request_order)  { FactoryBot.create(:order, :order_support_request, order_type: support_request_type) }
   let!(:problem_descriptions)   { 'Problem description' }
   let!(:contract_number)        { 111 }
 
@@ -326,7 +326,7 @@ feature 'List orders', js: true do
   end
 
   feature 'with ordering' do
-    let!(:support_request_order_for_ordering) { FactoryGirl.create(:order,
+    let!(:support_request_order_for_ordering) { FactoryBot.create(:order,
                                                                    :order_support_request_for_ordering,
                                                                    order_type: support_request_type) }
     let(:order_2) { ['ORD-2', 'Support request', 'In progress',

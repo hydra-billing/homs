@@ -1,4 +1,4 @@
-require 'factory_girl'
+require 'factory_bot'
 require 'tilt/coffee'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
@@ -16,5 +16,5 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 end

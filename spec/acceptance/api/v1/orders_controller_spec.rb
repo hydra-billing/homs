@@ -7,7 +7,7 @@ describe API::V1::OrdersController, type: :request do
     let(:order_type_vac)         { OrderType.find_by(code: 'vacation_request') }
     let(:order_type_sup)         { OrderType.find_by(code: 'support_request') }
     let(:order_vacation_request) { Order.where(order_type_id: order_type_vac.id, done_at: nil).first }
-    let(:user_for_order)         { FactoryGirl.create(:user) }
+    let(:user_for_order)         { FactoryBot.create(:user) }
 
     before(:each) do
       disable_http_basic_authentication(API::V1::OrdersController)
@@ -540,7 +540,7 @@ order_type:
       end
     end
 
-    let(:order_type) { FactoryGirl.create(:order_type, :active) }
+    let(:order_type) { FactoryBot.create(:order_type, :active) }
 
     put '/api/orders/:code' do
       parameter :code,

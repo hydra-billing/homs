@@ -1,7 +1,7 @@
 feature 'User is', js: true do
-  let!(:admin)         { FactoryGirl.create(:user, :admin) }
-  let!(:john)          { FactoryGirl.create(:user, :john) }
-  let!(:blocked_admin) { FactoryGirl.create(:user, :blocked_admin) }
+  let!(:admin)         { FactoryBot.create(:user, :admin) }
+  let!(:john)          { FactoryBot.create(:user, :john) }
+  let!(:blocked_admin) { FactoryBot.create(:user, :blocked_admin) }
 
   scenario 'created without validation errors' do
     signin(admin.email, admin.password)

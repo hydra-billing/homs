@@ -1,6 +1,6 @@
 describe Order do
-  let(:order_type) { FactoryGirl.create(:order_type) }
-  let(:order) { FactoryGirl.create(:order, order_type: order_type) }
+  let(:order_type) { FactoryBot.create(:order_type) }
+  let(:order) { FactoryBot.create(:order, order_type: order_type) }
 
   after(:all) do
     OrderSequenceService.new.destroy
@@ -25,11 +25,11 @@ describe Order do
   # Order#data default nil values ->
 
   let(:order_type_vacation_request) do
-    FactoryGirl.create(:order_type, :vacation_request)
+    FactoryBot.create(:order_type, :vacation_request)
   end
 
   let(:order_vacation_request) do
-    FactoryGirl.create(:order, order_type: order_type_vacation_request)
+    FactoryBot.create(:order, order_type: order_type_vacation_request)
   end
 
   it '#data should have default nil values for all defined fields' do

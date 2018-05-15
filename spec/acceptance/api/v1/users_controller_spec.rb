@@ -11,7 +11,7 @@ describe API::V1::UsersController, type: :request do
     header 'Accept',       'application/json'
     header 'Content-Type', 'application/json'
 
-    let!(:david) { FactoryGirl.create(:user, :david) }
+    let!(:david) { FactoryBot.create(:user, :david) }
     let!(:user) do
       User.create!(
           email: 'user@example.com',
