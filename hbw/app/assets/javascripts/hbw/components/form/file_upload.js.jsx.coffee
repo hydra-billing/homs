@@ -5,13 +5,20 @@ modulejs.define 'HBWFormFileUpload',
       mixins: [DeleteIfMixin, CallbacksMixin]
 
       getInitialState: ->
-        { value: '', valid: true, files: [], files_count: 0}
+        {valid: true, files: [], filesCount: 0}
 
       render: ->
         opts = {
           name: @props.params.name
           onChange: @onChange
         }
+
+        incomingFiles = []
+
+        if (@props.value)
+          incomingFiles = JSON.parse(@props.value).files
+
+        hiddenValue = JSON.stringify({files: @state.files.concat(incomingFiles)})
 
         cssClass = @props.params.css_class
         cssClass += ' hidden' if this.hidden
@@ -23,7 +30,7 @@ modulejs.define 'HBWFormFileUpload',
           <span className={labelCss}>{label}</span>
           <div className="form-group">
             <input {...opts} type="file" multiple></input>
-            <input name={this.props.params.name} value={this.state.value} type="hidden"/>
+            <input name={this.props.params.name} value={hiddenValue} type="hidden"/>
           </div>
         </div>`
 
@@ -32,24 +39,22 @@ modulejs.define 'HBWFormFileUpload',
         $el = event.target
         files = Array.from($el.files)
 
-        @state.value = ''
-        @state.files = []
-        @state.files_count = files.length
+        @setState(files: [], filesCount: files.length)
 
         for file in files
           @readFiles(file.name, file)
 
       addValue: (name, res) ->
-        @state.files.push({name: name, content: window.btoa(res)})
-        @state.value = JSON.stringify(@state.files)
+        files = @state.files
+        files.push({name: name, content: window.btoa(res)})
 
-        @state.files_count = @state.files_count - 1
+        @setState(files: files, filesCount: @state.filesCount - 1)
 
-        if (@state.files_count == 0)
+        if (@state.filesCount == 0)
           @trigger('hbw:file-upload-finished')
 
       readFiles: (name, file) ->
-        file_reader = new FileReader()
-        file_reader.onloadend = () =>
-          @addValue(name, file_reader.result)
-        file_reader.readAsBinaryString(file)
+        fileReader = new FileReader()
+        fileReader.onloadend = () =>
+          @addValue(name, fileReader.result)
+        fileReader.readAsBinaryString(file)

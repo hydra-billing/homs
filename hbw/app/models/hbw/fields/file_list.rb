@@ -1,10 +1,12 @@
 module HBW
   module Fields
     class FileList < Ordinary
-      self.default_data_type = :string
-
       def has_value?
-        false
+        true
+      end
+
+      def coerce(value)
+        value
       end
     end
   end

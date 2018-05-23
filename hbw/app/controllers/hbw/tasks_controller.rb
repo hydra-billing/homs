@@ -1,5 +1,12 @@
+require 'minio'
+
 module HBW
   class TasksController < BaseController
+    include Minio
+    extend Minio::Mixin
+
+    inject['minio_adapter']
+
     def index
       if entity_identifier.present?
         @tasks = widget.entity_task_list(current_user_identifier, entity_identifier, entity_class)
@@ -19,7 +26,20 @@ module HBW
     end
 
     def submit
-      result = widget.submit(current_user.email, entity_class, task_id, form_data)
+      data = form_data.select{ |key, value| fields_for_save.include?(key) }
+
+      if files.present?
+        file_list = JSON.parse(data['homsOrderDataFileList'])
+
+        saved_files = minio_adapter.save_file(files)
+
+        file_list = file_list + saved_files
+
+        data['homsOrderDataFileList'] = file_list.uniq{ |file| file[:name] }.to_json
+      end
+
+      result = widget.submit(current_user.email, entity_class, task_id, data)
+
       if result
         head :no_content
       else
@@ -47,6 +67,21 @@ module HBW
 
     def form_data
       params[:form_data]
+    end
+
+    def files
+      form_data.map { |key, value| JSON.parse(value) rescue nil }
+          .compact
+          .map { |value| value['files'] if value.respond_to?(:key) }
+          .compact.flatten
+    end
+
+    def fields_for_save
+      fields = form_data.map do |key, value|
+        JSON.parse(value)['files'] ? nil : key rescue key
+      end
+
+      fields.compact!
     end
   end
 end

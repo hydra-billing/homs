@@ -53,7 +53,6 @@ Rails.application.routes.draw do
       resources :users, only: actions, constraints: { id: /.*/ }
       resources :orders, only: actions
       resources :profiles, only: actions
-      resources :attachments, only: actions
     end
   end
 

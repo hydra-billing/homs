@@ -1,43 +1,10 @@
-require 'minio'
-
 module API
   module V1
     class OrdersController < API::BaseController
-      include Minio
-      extend Minio::Mixin
-
-      inject['minio_adapter']
-
       include HttpBasicAuthentication if !Rails.env.development? || ENV['HOMS_API_USE_AUTH']
 
       PARAMS_ATTRIBUTES = [:order_type_code, :user_email, :ext_code, :bp_id,
                            :bp_state, :state, :done_at, :archived, :estimated_exec_date]
-
-      def create
-        order_params = parse_params
-
-        resource_set(resource_class.new(order_params[:order_params]))
-
-        ActiveRecord::Base.transaction do
-          if resource_get.save
-            minio_adapter.save_file(order_params[:attachments], resource_get.id)
-          end
-        end
-
-        render :show, status: :created
-      end
-
-      def update
-        order_params = parse_params
-
-        ActiveRecord::Base.transaction do
-          if resource_get.update(order_params[:order_params])
-            minio_adapter.save_file(order_params[:attachments], resource_get.id)
-          end
-        end
-
-        render :show
-      end
 
       private
 
@@ -71,15 +38,6 @@ module API
 
         params.delete code_key
         params[id_key] = id_val
-      end
-
-      def parse_params
-        order_param = resource_params
-        attachments = order_param[:data].try(:delete, 'uploadedFile')
-
-        attachments = attachments.present? ? JSON.parse(attachments) : []
-
-        {order_params: order_param, attachments: attachments.map{|obj| obj.symbolize_keys}}
       end
     end
   end
