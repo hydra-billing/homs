@@ -2,7 +2,7 @@ class Admin::OrderTypesController < ApplicationController
   before_action :authenticate_user!
   self.hbw_available = true
 
-  before_filter :require_order_type, only: [:show, :activate, :dismiss, :destroy]
+  before_action :require_order_type, only: [:show, :activate, :dismiss, :destroy]
   before_action :admin_only
 
   def index

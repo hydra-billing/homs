@@ -20,8 +20,8 @@
       .container= yield
 
     :coffee
-      Application.messenger.show(#{flash_messages.to_json});
+      Application.messenger.show(#{flash_messages.to_json.html_safe});
     - if hbw_available?
       #hbw-tasks
       :coffee
-        window.HBWidget = new (modulejs.require('HBW'))(#{hbw_options.to_json})
+        window.HBWidget = new (modulejs.require('HBW'))(#{hbw_options.to_json.html_safe})
