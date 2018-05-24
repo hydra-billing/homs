@@ -13,7 +13,7 @@ class ProfilesController < ApplicationController
     result = validate_arbitrary_keys(params[:data].to_unsafe_hash)
 
     if result[0] == :success
-      @profile.data = params[:data]
+      @profile.data = result[1]
       @profile.save
 
       render json: @profile

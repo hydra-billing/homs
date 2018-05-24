@@ -45,7 +45,7 @@ class OrdersController < API::BaseController
 
   def create
     @order.order_type_id = params[:order_type_id] || OrderType.active.first.id
-    @order.data = params[:order][:data]
+    @order.data = params[:order][:data].permit!
     @order.user_id = current_user.id
     @order.update_attributes(order_common_params)
 
@@ -57,7 +57,7 @@ class OrdersController < API::BaseController
   end
 
   def update
-    @order.data = params[:order][:data]
+    @order.data = params[:order][:data].permit!
     @order.update_attributes(order_common_params)
 
     if @order.save

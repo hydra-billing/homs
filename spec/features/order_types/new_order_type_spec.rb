@@ -26,7 +26,7 @@ feature 'Create new order type', js: true do
     expect(page).to have_css     '.btn-primary',  text: 'Dismiss'
     expect_widget_presence
     expect(OrderType.find_by_code('support_request').active).to be_falsey
-    expect(page).to have_content(fixture('order_types/support_request.yml'))
+    expect(page).to have_content(YAML.load(fixture('order_types/support_request.yml'))['order_type']['code'])
 
     click_on 'Activate'
     expect(page).to have_css     '.growl-notice', text: 'Order type definition has been activated'
@@ -67,7 +67,7 @@ feature 'Create new order type', js: true do
     expect(page).to have_css     '.btn-primary', text: 'Dismiss'
     expect_widget_presence
     expect(OrderType.find_by_code('support_request').active).to be_falsey
-    expect(page).to have_content(fixture('order_types/support_request.yml'))
+    expect(page).to have_content(YAML.load(fixture('order_types/support_request.yml'))['order_type']['code'])
 
     click_on 'Dismiss'
     expect(page).to have_no_content 'Support Request'
@@ -99,9 +99,10 @@ feature 'Create new order type', js: true do
     expect(page).to have_css '.file-caption-name', text: 'invalid_field_request.yml'
 
     click_on 'Upload'
-    expect(page).to have_css        '.growl-error', text: "Error Uploaded YAML file content [\"creationDate: Unknown type 'undefined'\"]"
-    expect(page).to have_no_css     '.btn-danger',  text: 'Activate'
-    expect(page).to have_no_css     '.btn-primary', text: 'Dismiss'
+    expect(page).to have_css        '.growl-title',   text: 'Error'
+    expect(page).to have_css        '.growl-message', text: "Uploaded YAML file content [\"creationDate: Unknown type 'undefined'\"]"
+    expect(page).to have_no_css     '.btn-danger',    text: 'Activate'
+    expect(page).to have_no_css     '.btn-primary',   text: 'Dismiss'
     expect(page).to have_no_content 'Support Request'
     expect_widget_presence
     expect(OrderType.find_by_code('support_request').present?).to be_falsey
@@ -116,9 +117,10 @@ feature 'Create new order type', js: true do
     expect(page).to have_css '.file-caption-name', text: 'invalid_yml_request.yml'
 
     click_on 'Upload'
-    expect(page).to have_css        '.growl-error', text: "Error Uploaded YAML file content [\"Missing attribute 'order_type'\"]"
-    expect(page).to have_no_css     '.btn-danger',  text: 'Activate'
-    expect(page).to have_no_css     '.btn-primary', text: 'Dismiss'
+    expect(page).to have_css        '.growl-title',   text: 'Error'
+    expect(page).to have_css        '.growl-message', text: "Uploaded YAML file content [\"Missing attribute 'order_type'\"]"
+    expect(page).to have_no_css     '.btn-danger',    text: 'Activate'
+    expect(page).to have_no_css     '.btn-primary',   text: 'Dismiss'
     expect(page).to have_no_content 'Support Request'
     expect_widget_presence
     expect(OrderType.find_by_code('support_request').present?).to be_falsey
