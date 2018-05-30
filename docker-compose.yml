@@ -10,7 +10,7 @@ services:
       POSTGRES_USER: activiti
       TZ: Europe/Moscow
     volumes:
-      - /var/lib/hydra/activiti/postgresql:/var/lib/postgresql/data
+      - $HOMS_PATH/data/activiti/postgresql:/var/lib/postgresql/data
     networks:
       - custom_network
   db_homs:
@@ -22,7 +22,7 @@ services:
       POSTGRES_USER: homs
       TZ: Europe/Moscow
     volumes:
-      - /var/lib/hydra/homs/postgresql:/var/lib/postgresql/data
+      - $HOMS_PATH/data/homs/postgresql:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:
