@@ -33,14 +33,8 @@ There are 2 ways to install HOMS.
   ```
   wget https://raw.githubusercontent.com/latera/homs-docker/master/docker-compose.yml
   ```
-3. Create directories for db datafiles:
-
-  ```
-  mkdir -p /var/lib/hydra/activiti/postgresql
-  mkdir -p /var/lib/hydra/homs/postgresql
-  ```
-4. For OS X users: add `/var/lib/hydra/activiti/postgresql` and `/var/lib/hydra/homs/postgresql` in `Docker -> Preferences... -> File Sharing`.
-5. Copy your (or default) configs to `/etc/hydra/homs/`:
+3. For OS X users: make path to folder with HOMS shared in `Docker -> Preferences... -> File Sharing`.
+4. Copy your (or default) configs to `/etc/hydra/homs/`:
 
   ```
   cp activiti.yml /etc/hydra/homs/activiti.yml
@@ -50,7 +44,7 @@ There are 2 ways to install HOMS.
   cp imprint.yml /etc/hydra/homs/imprint.yml
   cp sources.yml /etc/hydra/homs/sources.yml
   ```
-6. Run `docker-compose`:
+5. Run `docker-compose`:
   ```
   docker-compose up -d
   ```
@@ -74,14 +68,8 @@ If you don't want to use Oracle as source for your HOMS instance:
   find config -name '*.sample' | xargs -I{} sh -c 'cp $1 ${1%.*}' -- {}
   ```
 3. Install docker-compose.
-4. Create directories for db datafiles:
-
-  ```
-  mkdir -p /var/lib/hydra/activiti/postgresql
-  mkdir -p /var/lib/hydra/homs/postgresql
-  ```
-5. For OS X users: add `/var/lib/hydra/activiti/postgresql`, `/var/lib/hydra/homs/postgresql` and `/path/to/homs` (path to folder with HOMS) in Docker -> Preferences... -> File Sharing.
-6. Add test environment to `config/database.yml`:
+4. For OS X users: make path to folder with HOMS shared in `Docker -> Preferences... -> File Sharing`.
+5. Add test environment to `config/database.yml`:
 
   ```
   development:
@@ -93,20 +81,20 @@ If you don't want to use Oracle as source for your HOMS instance:
     username: homs
     password: homs
   ```
-7. Add to `config/sources.yml`
+6. Add to `config/sources.yml`
 
   ```
   sources:
     bpmanagementsystem:
       type: static/activiti
   ```
-8. Add environment variable `$HOMS_PATH` with path to your HOMS folder:
+7. Add environment variable `$HOMS_PATH` with path to your HOMS folder:
 
   ```
   HOMS_PATH=/path/to/homs export HOMS_PATH
   ```
 
-9. Run docker-compose:
+8. Run docker-compose:
 
   ```
   docker-compose -f docker-compose.dev.yml up -d
@@ -117,9 +105,9 @@ Or if you want to use Oracle as source for your HOMS instance
 
 ##### With Oracle Instant Client
 
-Steps 1 – 6 are the same as for [without Oracle Instant Client installation](#without-oracle-instant-client)
+Steps 1 – 5 are the same as for [without Oracle Instant Client installation](#without-oracle-instant-client)
 
-7. Download the Oracle Instant Client 11.2 archives from OTN:
+6. Download the Oracle Instant Client 11.2 archives from OTN:
 
 http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
@@ -129,13 +117,13 @@ The following three ZIPs are required:
 - `instantclient-sdk-linux.x64-11.2.0.4.0.zip`
 - `instantclient-sqlplus-linux.x64-11.2.0.4.0.zip`
 
-8. Place the downloaded Oracle Instant Client RPMs in the same directory as the `Dockerfile` and run:
+7. Place the downloaded Oracle Instant Client RPMs in the same directory as the `Dockerfile` and run:
   
 ```
 docker build -t latera/homs-with-oracle -f Dockerfile.oracle .
 ```
 
-9. Add to `config/sources.yml`
+8. Add to `config/sources.yml`
    
 ```
 sources:
@@ -148,7 +136,7 @@ sources:
     password: password
 ```
 
-10. Add environment variable `$HOMS_PATH` with path to your HOMS folder and `$TNSNAMES_PATH` with path to your `tnsnames.ora` file:
+9. Add environment variable `$HOMS_PATH` with path to your HOMS folder and `$TNSNAMES_PATH` with path to your `tnsnames.ora` file:
  
 ```
 HOMS_PATH=/path/to/homs export HOMS_PATH
@@ -156,7 +144,7 @@ TNSNAMES_PATH=/path/to/tnsnames.ora export TNSNAMES_PATH
 ```
 for access to host machine OS X users can use special DNS name `host.docker.internal` as host in `tnsnames.ora` ([details](https://docs.docker.com/docker-for-mac/networking))
 
-11. Run docker-compose:
+10. Run docker-compose:
 ```
 docker-compose -f docker-compose.dev.oracle.yml up -d
 ```
