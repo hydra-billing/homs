@@ -64,7 +64,6 @@ group :development, :test, :staging do
   gem 'translit'
   gem 'spring'
   gem 'rspec_api_documentation', '~> 4.4'
-  gem 'raddocs', '~> 0.4'
   gem 'rubocop', '~> 0.49.0'
   gem 'debbie'
   gem 'pry-byebug'
