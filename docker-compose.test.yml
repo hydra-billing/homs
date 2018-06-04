@@ -1,0 +1,31 @@
+version: '2'
+services:
+  db_homs:
+    image: latera/postgres-homs
+    hostname: postgres-homs
+    container_name: postgres-homs
+    environment:
+      PGDATA: /var/lib/postgresql/data/homs
+      POSTGRES_USER: homs
+      TZ: Europe/Moscow
+    ports:
+      - 5432:5432
+    networks:
+      - custom_network
+  homs:
+    image: latera/homs_testing
+    container_name: homs_testing
+    links:
+      - db_homs:postgres-homs
+    environment:
+      - DB_HOST=postgres-homs
+      - GENERATE_DOC=$GENERATE_DOC
+    depends_on:
+      - db_homs
+    ports:
+      - 3000:3000
+    networks:
+      - custom_network
+networks:
+  custom_network:
+    driver: bridge
