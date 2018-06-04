@@ -6,3 +6,12 @@ development:
   database: homs
   username: homs
   password: homs
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: db_homs
+  database: homs
+  username: homs
+  password: homs
