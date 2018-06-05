@@ -11,10 +11,11 @@ cp -n config/database.yml.sample config/database.yml
 [[ -n $DB_HOST ]] && sed -i -e "s/localhost/$DB_HOST/" config/database.yml
 
 bundle exec rake db:migrate
+bundle exec rake assets:precompile
 
 if [[ ! -a seed.lock ]]; then
     bundle exec rake db:seed
     touch seed.lock
 fi
 
-bundle exec thin start --threaded -e ${RACK_ENV:-development}
+bundle exec thin start --threaded
