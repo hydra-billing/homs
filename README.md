@@ -47,6 +47,7 @@ There are 2 ways to install homs.
   cp homs_configuration.yml /etc/hydra/homs/homs_configuration.yml
   cp imprint.yml /etc/hydra/homs/imprint.yml
   cp sources.yml /etc/hydra/homs/sources.yml
+  cp secrets.yml /etc/hydra/homs/secrets.yml
   ```
 6. Run `docker-compose`:
   ```
