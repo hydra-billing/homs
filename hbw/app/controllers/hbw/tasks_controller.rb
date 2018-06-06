@@ -35,7 +35,7 @@ module HBW
 
         file_list = file_list + saved_files
 
-        data['homsOrderDataFileList'] = file_list.uniq{ |file| file[:name] }.to_json
+        data['homsOrderDataFileList'] = file_list.uniq{ |file| file['name'] }.to_json
       end
 
       result = widget.submit(current_user.email, entity_class, task_id, data)
