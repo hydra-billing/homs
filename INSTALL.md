@@ -145,7 +145,26 @@ Follow [RVM installation guide](https://rvm.io/rvm/install).
   ```bash
   bundle exec rake db:seed
   ```
+9. Update base_url of activiti service in config/activiti.yml
 
+  ```
+  development:
+    base_url: http://<replace-host-name-here>:8080/activiti-rest/service/
+    login: user
+    password: changeme
+  ```
+10. Update host of database in config/database.yml
+
+  ```
+  <environment-name-here>:
+    adapter: postgresql
+    encoding: unicode
+    pool: 5
+    host: <replace-hostname-here>
+    database: homs
+    username: homs
+    password: homs
+  ```
 ### Run homs
 
 ```bash
