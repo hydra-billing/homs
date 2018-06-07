@@ -4,7 +4,6 @@ module HBW
     include HBW::Definition
 
     class << self
-      using_connection \
       def fetch(url)
         new(do_request(:get, url))
       end

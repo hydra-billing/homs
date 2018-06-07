@@ -4,7 +4,6 @@ module HBW
     include HBW::Definition
 
     class << self
-      using_connection \
       def fetch(task, entity_class)
         process_definition = task.process_definition
         deployment = ::HBW::Deployment.fetch(process_definition)

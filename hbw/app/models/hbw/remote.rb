@@ -7,25 +7,8 @@ module HBW
       end
     end
 
-    module SingletonMethods
-      def using_connection(method_name)
-        class_eval(<<-RUBY, __FILE__, __LINE__ + 1)
-          def #{method_name}_with_connection(*args)
-            ensure_connection_exists
-            #{method_name}_without_connection(*args)
-          end
-        RUBY
-        alias_method_chain method_name, :connection
-      end
-    end
-
     class << self
       attr_accessor :connection
-
-      def extended(base)
-        base.singleton_class.extend(SingletonMethods)
-        super
-      end
     end
 
     def with_connection(connection)
@@ -34,10 +17,6 @@ module HBW
       yield
     ensure
       Remote.connection = before
-    end
-
-    def ensure_connection_exists
-      raise "You've not provided connection!" unless Remote.connection.present?
     end
 
     def do_request(method, *args)
@@ -62,4 +41,17 @@ module HBW
       raise RemoteError.new(args[0], error.message, error.backtrace)
     end
   end
+
+  module RemoteWithConnection
+    def do_request(method, *args)
+      ensure_connection_exists
+      super(method, *args)
+    end
+
+    def ensure_connection_exists
+      raise "You've not provided connection!" unless Remote.connection.present?
+    end
+  end
+
+  Remote.send(:prepend, RemoteWithConnection)
 end
