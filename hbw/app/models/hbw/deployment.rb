@@ -4,7 +4,6 @@ module HBW
     include HBW::Definition
 
     class << self
-      using_connection \
       def fetch(process_definition)
         deployment_id = process_definition.deployment_id
         resources = do_request(:get, 'repository/deployments/%s/resources' % deployment_id)

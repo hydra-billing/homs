@@ -12,7 +12,6 @@ module HBW
     end
 
     class << self
-      using_connection \
       def fetch(email, entity_code, entity_class, size = 1000, for_all_users = false)
         user = ::HBW::BPMUser.fetch(email)
         unless user.nil?
