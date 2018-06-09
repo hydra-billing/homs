@@ -61,7 +61,7 @@ modulejs.define 'HBWFormSelect',
       hijackSelect2: ->
         if @props.params.mode == 'lookup'
           ajaxOptions =
-            minimumInputLength: 3
+            minimumInputLength: 1
             maximumSelectionLength: 1
             ajax:
               url: @props.params.url
