@@ -56,7 +56,7 @@ feature 'Show business process form', js: true do
     expect(page).to have_selector "[name='homsOrderDataSelect']"
     expect(page).to have_content 'ORD-13'
 
-    select2_search_field.set('cust')
+    select2_search_field.set('c')
     wait_for_ajax
 
     expect(page).to have_content 'Found customer'

@@ -4,6 +4,8 @@ module HBW
       class ConnectionFailed < RuntimeError
       end
 
+      MAX_ROW_COUNT = 20
+
       def initialize(*)
         require 'oci8' unless defined?(OCI8)
 
@@ -13,7 +15,7 @@ module HBW
       def select(sql, variables)
         binds = parse_bind_names(sql)
 
-        execute(sql) do |cursor|
+        execute(limit(sql)) do |cursor|
           binds.each do |bind|
             if variables.fetch(bind).nil?
               cursor.bind_param(bind, nil, Integer)
@@ -83,6 +85,10 @@ module HBW
       def reconnect
         @connection = nil
         establish_connection
+      end
+
+      def limit(sql)
+        "SELECT * FROM (#{sql}) WHERE ROWNUM <= #{MAX_ROW_COUNT}"
       end
     end
   end
