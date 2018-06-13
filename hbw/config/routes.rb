@@ -12,5 +12,7 @@ HBW::Engine.routes.draw do
       get :lookup, on: :collection, action: :lookup
       get :check, on: :collection, action: :check_user
     end
+
+    post 'file_upload', to: 'files#upload'
   end
 end
