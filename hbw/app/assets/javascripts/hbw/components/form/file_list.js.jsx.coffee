@@ -3,7 +3,7 @@ modulejs.define 'HBWFormFileList', ['React', 'HBWDeleteIfMixin'], (React, Delete
     mixins: [DeleteIfMixin]
 
     getInitialState: ->
-      {valid: true, links: [], deletedFiles: []}
+      { valid: true, deletedFiles: [] }
 
     render: ->
       cssClass = @props.params.css_class
@@ -30,9 +30,13 @@ modulejs.define 'HBWFormFileList', ['React', 'HBWDeleteIfMixin'], (React, Delete
 
     files: (list) ->
       onClick = this.deleteLink
+      deletedFiles = @state.deletedFiles
 
       list.map (variant) ->
-        `<li><a href={variant.url}>{variant.name}</a>&nbsp;<a href="#" className="fa fa-times" onClick={e => onClick(e, variant.name)}></a></li>`
+        if deletedFiles.includes(variant.name)
+          `<li className={"danger"}><a href={variant.url}>{variant.name}</a>&nbsp;<a href="#" className="fa fa-reply" onClick={e => onClick(e, variant.name)}></a></li>`
+        else
+          `<li><a href={variant.url}>{variant.name}</a>&nbsp;<a href="#" className="fa fa-times" onClick={e => onClick(e, variant.name)}></a></li>`
 
     deleteLink: (evt, name) ->
       deletedFiles = @state.deletedFiles
@@ -40,9 +44,7 @@ modulejs.define 'HBWFormFileList', ['React', 'HBWDeleteIfMixin'], (React, Delete
       if deletedFiles.includes(name)
         index = deletedFiles.indexOf(name)
         deletedFiles.splice(index, 1)
-        evt.target.className='fa fa-times'
       else
         deletedFiles.push(name)
-        evt.target.className='fa fa-reply'
 
       @setState(deletedFiles: deletedFiles)

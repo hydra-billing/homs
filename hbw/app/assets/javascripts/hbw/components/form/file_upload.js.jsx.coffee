@@ -5,7 +5,7 @@ modulejs.define 'HBWFormFileUpload',
       mixins: [DeleteIfMixin, CallbacksMixin]
 
       getInitialState: ->
-        {valid: true, files: [], filesCount: 0}
+        { valid: true, files: [], filesCount: 0 }
 
       render: ->
         opts = {
@@ -13,25 +13,16 @@ modulejs.define 'HBWFormFileUpload',
           onChange: @onChange
         }
 
-        incomingFiles = []
-        incomingCount = 0
-
-        if (@props.value)
-          incomingFiles = JSON.parse(@props.value).files
-          incomingCount = incomingFiles.length
-
-        hiddenValue = JSON.stringify({files: @state.files.concat(incomingFiles)})
+        hiddenValue = JSON.stringify({ files: @state.files })
 
         cssClass = @props.params.css_class
         cssClass += ' hidden' if this.hidden
 
         label = @props.params.label
-        labelForCount = @props.params.label_for_count
         labelCss = @props.params.label_css
 
         `<div className={cssClass}>
           <span className={labelCss}>{label}</span>
-          {this.countLabel(incomingCount, labelForCount)}
           <div className="form-group">
             <input {...opts} type="file" multiple></input>
             <input name={this.props.params.name} value={hiddenValue} type="hidden"/>
@@ -39,14 +30,16 @@ modulejs.define 'HBWFormFileUpload',
         </div>`
 
       onChange: (event) ->
-        @trigger('hbw:file-upload-started')
         $el = event.target
         files = Array.from($el.files)
 
         @setState(files: [], filesCount: files.length)
 
-        for file in files
-          @readFiles(file.name, file)
+        if files.length > 0
+          @trigger('hbw:file-upload-started')
+
+          for file in files
+            @readFiles(file.name, file)
 
       addValue: (name, res) ->
         files = @state.files
@@ -56,10 +49,6 @@ modulejs.define 'HBWFormFileUpload',
 
         if (@state.filesCount == 0)
           @trigger('hbw:file-upload-finished')
-
-      countLabel: (incomingCount, labelForCount) ->
-        if incomingCount > 0
-          `<span><br/>{labelForCount}: {incomingCount}</span>`
 
       readFiles: (name, file) ->
         fileReader = new FileReader()
