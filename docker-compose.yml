@@ -56,9 +56,6 @@ services:
       - /etc/hydra/homs/activiti.yml:/opt/homs/config/activiti.yml
       - /etc/hydra/homs/sources.yml:/opt/homs/config/sources.yml
       - /etc/hydra/homs/secrets.yml:/opt/homs/config/secrets.yml
-    environment:
-      - ACTIVITI_HOST=activiti
-      - DB_HOST=postgres-homs
     depends_on:
       - db_homs
       - activiti_homs

@@ -50,9 +50,6 @@ services:
       - activiti_homs:activiti
     volumes:
       - $HOMS_PATH:/opt/homs
-    environment:
-      - ACTIVITI_HOST=activiti
-      - DB_HOST=postgres-homs
     depends_on:
       - db_homs
       - activiti_homs

@@ -6,7 +6,6 @@ RUN mkdir -p /opt/oracle
 COPY instantclient*.zip /opt/oracle/
 
 RUN apt-get update && apt-get install -y \
-  git \
   libaio1 \
   libpq-dev \
   libqtwebkit-dev \
