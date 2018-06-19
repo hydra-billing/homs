@@ -3,7 +3,6 @@ FROM ruby:2.3.6
 RUN mkdir -p /opt/homs
 
 RUN apt-get update && apt-get install -y \
-  git \
   libpq-dev \
   libqtwebkit-dev \
   nodejs \

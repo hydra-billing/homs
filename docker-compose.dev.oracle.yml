@@ -51,9 +51,6 @@ services:
     volumes:
       - $HOMS_PATH:/opt/homs
       - $TNSNAMES_PATH:/etc/oracle/tnsnames.ora
-    environment:
-      - ACTIVITI_HOST=activiti
-      - DB_HOST=postgres-homs
     depends_on:
       - db_homs
       - activiti_homs
