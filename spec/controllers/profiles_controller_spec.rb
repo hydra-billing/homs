@@ -12,7 +12,8 @@ describe ProfilesController, type: :controller do
       profile.data['callBack']       = {type: 'boolean',  label: 'Callback',        show:  false}
 
       post 'create', order_type_id: profile.order_type.id, data: profile.data
-      expect(response.body).to eq(Profile.by_order_type_and_user(profile.order_type.id, profile.user.id).to_json)
+      expect(response.body).to        eq(Profile.by_order_type_and_user(profile.order_type.id, profile.user.id).to_json)
+      expect(profile.data.to_json).to eq(Profile.by_order_type_and_user(profile.order_type.id, profile.user.id).data.to_json)
     end
 
     it 'update success' do

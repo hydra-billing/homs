@@ -1,7 +1,6 @@
 module Validations
   def self.included(action)
     action.extend ClassMethods
-    # action.expose :messages
   end
 
   module ClassMethods
