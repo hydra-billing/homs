@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
   libfreetype6-dev \
   libfontconfig1 \
   libfontconfig1-dev \
+  libqtwebkit-dev \
   zip
 
 RUN wget https://github.com/Medium/phantomjs/releases/download/v2.1.1/$PHANTOM_JS.tar.bz2 \
@@ -23,5 +24,6 @@ RUN chown -R homs:homs /run_tests.sh /opt/homs/config/
 RUN chmod +x /run_tests.sh
 
 USER homs
+RUN bundle --with test --without oracle
 
 ENTRYPOINT ["/run_tests.sh"]

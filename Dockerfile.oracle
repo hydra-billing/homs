@@ -8,7 +8,6 @@ COPY instantclient*.zip /opt/oracle/
 RUN apt-get update && apt-get install -y \
   libaio1 \
   libpq-dev \
-  libqtwebkit-dev \
   nodejs \
   postgresql-client \
   unzip
@@ -37,7 +36,7 @@ COPY hbw/ /opt/homs/hbw/
 
 RUN gem install bundler
 RUN bundle config --global frozen 1
-RUN bundle --with oracle
+RUN bundle --with oracle --without test
 
 COPY app/      /opt/homs/app/
 COPY bin/      /opt/homs/bin/
