@@ -4,7 +4,6 @@ RUN mkdir -p /opt/homs
 
 RUN apt-get update && apt-get install -y \
   libpq-dev \
-  libqtwebkit-dev \
   nodejs \
   postgresql-client
 
@@ -18,7 +17,7 @@ COPY hbw/ /opt/homs/hbw/
 
 RUN gem install bundler
 RUN bundle config --global frozen 1
-RUN bundle --without oracle
+RUN bundle --without oracle test
 
 COPY app/      /opt/homs/app/
 COPY bin/      /opt/homs/bin/
