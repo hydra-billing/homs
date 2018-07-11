@@ -1,4 +1,4 @@
-class FixOrderTypesIndex < ActiveRecord::Migration
+class FixOrderTypesIndex < ActiveRecord::Migration[4.2]
   def up
     remove_index :order_types, [:active, :code]
     add_index    :order_types, [:code, :active]

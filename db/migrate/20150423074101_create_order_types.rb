@@ -1,4 +1,4 @@
-class CreateOrderTypes < ActiveRecord::Migration
+class CreateOrderTypes < ActiveRecord::Migration[4.2]
   def change
     create_table :order_types do |t|
       t.string :code, null: false

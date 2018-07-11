@@ -1,4 +1,4 @@
-class ChangeOrderTypeActiveDefault < ActiveRecord::Migration
+class ChangeOrderTypeActiveDefault < ActiveRecord::Migration[4.2]
   def up
     change_column_default :order_types, :active, false
   end
