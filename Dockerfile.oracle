@@ -1,4 +1,4 @@
-FROM ruby:2.3.6
+FROM ruby:2.5.1
 
 RUN mkdir -p /opt/homs
 RUN mkdir -p /opt/oracle

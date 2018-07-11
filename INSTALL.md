@@ -113,12 +113,12 @@ Follow [RVM installation guide](https://rvm.io/rvm/install).
 2. Install ruby:
 
   ```bash
-  rvm install ruby-2.3.6
+  rvm install ruby-2.5.1
   ```
 3. Create homs RVM gemset:
 
   ```bash
-  rvm use ruby-2.3.6@homs --create
+  rvm use ruby-2.5.1@homs --create
   ```
 4. Install bundler:
 
