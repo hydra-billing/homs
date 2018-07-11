@@ -1,4 +1,4 @@
-class MakeLastMiddleNamesCompanyDepartmentOfUserNotNull < ActiveRecord::Migration
+class MakeLastMiddleNamesCompanyDepartmentOfUserNotNull < ActiveRecord::Migration[4.2]
   def up
     undefined = ''
     User.all.map do |user|
