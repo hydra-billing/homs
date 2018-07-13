@@ -21,7 +21,13 @@ module HBW
       register(:oracle) { HBW::Sources::Oracle }
     end
 
-    register(:adapter) { HBW::Activiti::Adapter.new }
+    register(:adapter) do
+      if HBW::Widget.config.fetch(:adapter) == 'activiti'
+        HBW::Activiti::Adapter.new
+      else
+        HBW::Camunda::Adapter.new
+      end
+    end
 
     register(:config) { HBW::Widget.config }
   end

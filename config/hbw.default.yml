@@ -1,4 +1,6 @@
 hbw:
+  adapter: camunda
+
   order:
     entity_code_key: homsOrderCode
 
