@@ -5,7 +5,7 @@ module HBW
     module ClassMethods
       def definition_reader(*names)
         names.each do |name|
-          key = name.to_s.first + name.to_s.camelize[1..-1]
+          key = name.to_s.camelize(:lower)
           class_eval(<<-RUBY, __FILE__, __LINE__ + 1)
             def #{name}
               definition.fetch('#{key}')

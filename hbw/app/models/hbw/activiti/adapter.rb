@@ -30,13 +30,12 @@ module HBW
 
       def process_instances(entity_code, entity_class)
         response = api.post(
-          'query/process-instances', variables: [
+          '/rest/process-instance', variables: [
             name: entity_code_key(entity_class),
             value: entity_code,
-            operation: :equals,
-            type: :string
+            operator: :eq
           ])
-        response.status == 200 && response.body['data'] || []
+        response.status == 200 && response.body || []
       end
 
       def submit(user_email, entity_class, task_id, form_data)
@@ -45,8 +44,11 @@ module HBW
         variables = form_definition.extract_and_coerce_values(form_data).map do |key, value|
           { name: key, value: value }
         end
-        response = api.post("runtime/tasks/#{task_id}", action: :complete, variables: variables)
-        response.status == 200
+
+        variables = variables.map { |item| [item.delete(:name), item]}.to_h
+
+        response = api.post("/rest/task/#{task_id}/submit-form", variables: variables)
+        response.status == 204
       end
 
       # TODO: How to distinguish between running process instance and done
@@ -68,11 +70,11 @@ module HBW
         p_def = process_definition_for_key_like(bp_code)
         return false unless p_def
 
-        variables = [
-          { name: :initiator,      value: user.id,     type: :string },
-          { name: :initiatorEmail, value: user.email,  type: :string },
-          { name: entity_code_key(entity_class), value: entity_code, type: :string }
-        ]
+        variables = {
+            :initiator                    => {value: user.id, type: :string},
+            :initiatorEmail               => {value: user.email, type: :string},
+            entity_code_key(entity_class) => {value: entity_code, type: :string}
+        }
 
         response = start_process_response(p_def['id'], variables)
         response.status == 201
@@ -104,13 +106,12 @@ module HBW
       end
 
       def process_definition_for_key_like(key)
-        response = api.get('repository/process-definitions', keyLike: key, latest: true)
-        response.body['data'].first if response.status == 200
+        response = api.get('/rest/process-definition', keyLike: key, latestVersion: true)
+        response.body.first if response.status == 200
       end
 
       def start_process_response(id, variables)
-        api.post('runtime/process-instances',
-                 processDefinitionId: id,
+        api.post("process-definition/#{id}/start",
                  variables: variables)
       end
 
