@@ -81,7 +81,7 @@ module HBW
         JSON.parse(value)['files'] ? nil : key rescue key
       end
 
-      fields.compact!
+      fields.compact
     end
   end
 end
