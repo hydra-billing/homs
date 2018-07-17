@@ -1,15 +1,24 @@
-FROM ruby:2.5.1
+FROM ruby:2.5.1-slim
 
 RUN mkdir -p /opt/homs
 RUN mkdir -p /opt/oracle
 
 COPY instantclient*.zip /opt/oracle/
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
+  build-essential \
+  git \
   libaio1 \
   libpq-dev \
+  libqtwebkit-dev \
+  libxml2 \
+  libxml2-dev \
+  libxslt-dev \
+  make \
   nodejs \
+  pkg-config \
   postgresql-client \
+  ruby-dev \
   unzip
 
 WORKDIR /opt/oracle
@@ -33,6 +42,7 @@ WORKDIR /opt/homs
 
 COPY Gemfile Gemfile.lock Rakefile config.ru /opt/homs/
 COPY hbw/ /opt/homs/hbw/
+ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 
 RUN gem install bundler
 RUN bundle config --global frozen 1
@@ -61,5 +71,5 @@ RUN cp -r /opt/homs/config/* /tmp/config
 EXPOSE 3000
 
 USER homs
-
+WORKDIR /opt/homs
 ENTRYPOINT ["/entrypoint.sh"]
