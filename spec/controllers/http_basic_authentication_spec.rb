@@ -7,11 +7,11 @@ describe HttpBasicAuthentication, type: :controller do
     before_action :perform_http_basic_authentication, only: [:new]
 
     def index
-      render text: 'index'
+      render plain: 'index'
     end
 
     def new
-      render text: 'new'
+      render plain: 'new'
     end
   end
 

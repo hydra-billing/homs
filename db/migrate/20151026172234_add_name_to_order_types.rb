@@ -1,4 +1,4 @@
-class AddNameToOrderTypes < ActiveRecord::Migration
+class AddNameToOrderTypes < ActiveRecord::Migration[4.2]
   def change
     add_column :order_types, :name, :string, null: true
 

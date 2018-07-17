@@ -46,7 +46,7 @@ ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 
 RUN gem install bundler
 RUN bundle config --global frozen 1
-RUN bundle --with oracle
+RUN bundle --with oracle --without test
 
 COPY app/      /opt/homs/app/
 COPY bin/      /opt/homs/bin/

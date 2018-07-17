@@ -1,12 +1,12 @@
 FROM ruby:2.5.1-slim
 
-
 RUN mkdir -p /opt/homs
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
   build-essential \
   git \
   libpq-dev \
+
   libqtwebkit-dev \
   libxml2-dev \
   libxml2 \
@@ -30,7 +30,7 @@ ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 
 RUN gem install bundler
 RUN bundle config --global frozen 1
-RUN bundle --without oracle
+RUN bundle --without oracle test
 
 COPY app/      /opt/homs/app/
 COPY bin/      /opt/homs/bin/

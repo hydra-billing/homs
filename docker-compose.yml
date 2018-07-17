@@ -42,6 +42,17 @@ services:
     entrypoint: "bash -lc '/wait_for_postgres.sh db_activiti && /entrypoint_ah.sh'"
     networks:
       - custom_network
+  minio:
+    image: minio/minio
+    container_name: minio
+    command: "server /opt/minio"
+    environment:
+      - MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY=$MINIO_SECRET_KEY
+    volumes:
+      - $HOMS_PATH/data/minio:/opt/minio
+    ports:
+      - "9000:9000"
   homs:
     image: latera/homs
     container_name: homs
@@ -59,6 +70,7 @@ services:
     depends_on:
       - db_homs
       - activiti_homs
+      - minio
     entrypoint: "bash -lc '/wait_for_postgres.sh db_homs && /entrypoint.sh'"
     ports:
       - 3000:3000

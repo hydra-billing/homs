@@ -1,4 +1,4 @@
-- custom_fields = custom_fields_for_filter(params[:order_type_id], params[:custom_fields]) if params[:custom_fields]
+- custom_fields = custom_fields_for_filter(params[:order_type_id], params[:custom_fields].permit!.to_h) if params[:custom_fields]
 
 = form_tag(list_orders_path, method: :get, class: 'form-inline orders-filter') do
   %input(name="filter" value="true" type="hidden")

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.3.6'
-gem 'rails', '~> 4.2.10'
+ruby '2.5.1'
+gem 'rails', '~> 5.1.6'
 gem 'sass-rails', '~> 5.0.7'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
@@ -50,7 +50,6 @@ group :development do
   gem 'capistrano-db-tasks', require: false
   gem 'capistrano-rvm', '~> 0.1.1'
   gem 'html2haml'
-  gem 'quiet_assets'
   gem 'rails_layout'
   gem 'spring-commands-rspec'
   gem 'ruby_parser'

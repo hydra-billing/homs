@@ -4,7 +4,7 @@ module HttpBasicAuthentication
   extend ActiveSupport::Concern
 
   included do
-    before_action :perform_http_basic_authentication, if: '!defined?(current_user) || !current_user'
+    before_action :perform_http_basic_authentication, if: -> { !defined?(current_user) || !current_user }
 
     rescue_from Unauthorized, with: :unauthorized_http_basic
   end
@@ -23,6 +23,6 @@ module HttpBasicAuthentication
   end
 
   def unauthorized_http_basic
-    render nothing: true, status: :unauthorized
+    head :unauthorized
   end
 end

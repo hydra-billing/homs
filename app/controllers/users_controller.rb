@@ -13,8 +13,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    redirect_to :back, alert: t('access_denied') unless
-      @user == current_user || current_user.admin?
+    unless @user == current_user || current_user.admin?
+      flash[:alert] = t('access_denied')
+      redirect_back(fallback_location: '/')
+    end
   end
 
   def update

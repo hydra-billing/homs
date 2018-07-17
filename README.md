@@ -45,7 +45,15 @@ There are 2 ways to install HOMS.
   cp sources.yml /etc/hydra/homs/sources.yml
   cp secrets.yml /etc/hydra/homs/secrets.yml
   ```
-5. Run `docker-compose`:
+5. Add environment variables: `$HOMS_PATH` with path to your HOMS folder and [Minio](https://github.com/minio/minio) credentials:
+   
+  ```
+  HOMS_PATH=/path/to/homs export HOMS_PATH
+  MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml export MINIO_ACCESS_KEY
+  MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml export MINIO_SECRET_KEY
+  ```
+
+6. Run `docker-compose`:
   ```
   docker-compose up -d
   ```
@@ -89,10 +97,12 @@ If you don't want to use Oracle as source for your HOMS instance:
     bpmanagementsystem:
       type: static/activiti
   ```
-7. Add environment variable `$HOMS_PATH` with path to your HOMS folder:
+7. Add environment variables: `$HOMS_PATH` with path to your HOMS folder and [Minio](https://github.com/minio/minio) credentials:
 
   ```
   HOMS_PATH=/path/to/homs export HOMS_PATH
+  MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml export MINIO_ACCESS_KEY
+  MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml export MINIO_SECRET_KEY
   ```
 
 8. Run docker-compose:
@@ -137,11 +147,13 @@ sources:
     password: password
 ```
 
-9. Add environment variable `$HOMS_PATH` with path to your HOMS folder and `$TNSNAMES_PATH` with path to your `tnsnames.ora` file:
+9. Add environment variables: `$HOMS_PATH` with path to your HOMS folder, `$TNSNAMES_PATH` with path to your `tnsnames.ora` file and [Minio](https://github.com/minio/minio) credentials:
  
 ```
 HOMS_PATH=/path/to/homs export HOMS_PATH
 TNSNAMES_PATH=/path/to/tnsnames.ora export TNSNAMES_PATH
+MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml export MINIO_ACCESS_KEY
+MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml export MINIO_SECRET_KEY
 ```
 for access to host machine OS X users can use special DNS name `host.docker.internal` as host in `tnsnames.ora` ([details](https://docs.docker.com/docker-for-mac/networking))
 
