@@ -40,6 +40,8 @@ module Homs
 
     config.allow_concurrency = true
 
+    config.action_controller.permit_all_parameters = true
+
     require Rails.root.join('lib/homs_config')
     config.app = HomsConfig.load(%w(config/homs_configuration.default.yml
                                     config/homs_configuration.yml))

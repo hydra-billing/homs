@@ -66,7 +66,7 @@ module HBW
     end
 
     def form_data
-      params[:form_data]
+      params[:form_data].to_h
     end
 
     def files
