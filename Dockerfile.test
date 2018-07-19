@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
   libfontconfig1 \
   libfontconfig1-dev \
   libqtwebkit-dev \
+  wget \
   zip
 
 RUN wget https://github.com/Medium/phantomjs/releases/download/v2.1.1/$PHANTOM_JS.tar.bz2 \

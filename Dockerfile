@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 ENV NLS_LANG=AMERICAN_RUSSIA.AL32UTF8
 
-RUN useradd --uid 2004 --home /opt/homs --shell /bin/bash --comment "HOMS" homs && chown -R homs:homs /opt/homs
+RUN useradd --uid 2004 --home /opt/homs --shell /bin/bash --comment "HOMS" homs
 
 USER homs
 WORKDIR /opt/homs
@@ -46,6 +46,7 @@ COPY ./entrypoint.sh ./wait_for_postgres.sh /
 
 USER root
 
+RUN chown -R homs:homs /opt/homs
 RUN chmod +x /entrypoint.sh /wait_for_postgres.sh
 
 RUN find config -name '*.sample' | xargs -I{} sh -c 'cp $1 ${1%.*}' -- {}
