@@ -11,7 +11,6 @@ feature 'User is', js: true do
     expect_widget_presence
 
     users = [
-        [],
         ['Blocked Doe', 'b.j.doe@example.com', 'Admin', 'Marketing', 'LLC Tools', ''],
         ['John Doe', 'j.doe@example.com', 'User', 'Marketing', 'LLC Tools', ''],
         ['Christopher Johnson', 'c.johnson@example.com', 'Admin', 'Administrators', 'LLC Tools', '']
@@ -81,7 +80,6 @@ feature 'User is', js: true do
     button.click
 
     users = [
-        [],
         ['Blocked Doe', 'b.j.doe@example.com', 'Admin', 'Marketing', 'LLC Tools', ''],
         ['John Doe', 'j.doe@example.com', 'User', 'Marketing', 'LLC Tools', ''],
         ['Mark Jenkins', 'm.jenkins@example.com', 'Admin', 'Administrators', 'LLC Tools', ''],
@@ -256,7 +254,6 @@ feature 'User is', js: true do
     button.click
 
     users = [
-        [],
         ['Blocked Doe', 'b.j.doe@example.com', 'Admin', 'Marketing', 'LLC Tools', ''],
         ['Mark Jenkins', 'm.jenkins@example.com', 'Admin', 'Administrators', 'LLC Tools', ''],
         ['Christopher Johnson', 'c.johnson@example.com', 'Admin', 'Administrators', 'LLC Tools', '']

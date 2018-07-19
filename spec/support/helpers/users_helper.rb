@@ -1,8 +1,8 @@
 module Features
   module UsersHelper
     def table_lines
-      page.find('table').all('tr').map do |row|
-        row.all('td').map(&:text)
+      page.all(:xpath, '//table/tbody/tr').map do |row|
+        row.find_all('td').map(&:text)
       end
     end
 
@@ -83,7 +83,7 @@ module Features
     end
 
     def active_modal_dialogs
-      page.all('#confirmation_dialog', visible: true)
+      page.all('#confirmation_dialog', visible: true, wait: 3)
     end
   end
 end
