@@ -94,7 +94,7 @@ module API
     end
 
     def resource_params
-      @resource_params ||= send("#{resource_name}_params").permit!
+      @resource_params ||= send("#{resource_name}_params")
     end
 
     def resource_set(resource = nil)
