@@ -77,11 +77,11 @@ module Features
     end
 
     def select_options(name)
-      find_by_name(name).all('option[value]').map(&:text)
+      find_by_name(name).all('option[value]', wait: 3).map(&:text)
     end
 
     def select_values(name)
-      find_by_name(name).all('option[value]').map(&:value)
+      find_by_name(name).all('option[value]', wait: 3).map(&:value)
     end
 
     def select2_options
@@ -167,8 +167,8 @@ module Features
     end
 
     def orders_list
-      page.find('.orders-list').all('tr').map do |row|
-        row.all('td').map(&:text)
+      page.all(:xpath, '//div[contains(@class, "order-list-table")]/table/tbody/tr').map do |row|
+        row.find_all('td').map(&:text)
       end
     end
 

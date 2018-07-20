@@ -68,9 +68,9 @@ feature 'List orders', js: true do
   end
 
   scenario 'with changing filter parameters' do
-    current_orders_list = [[], ['ORD-1', 'Empty order type', 'In progress',
-                                in_current_locale(vacation_request_order.created_at), '', 'ext_code', '',
-                                in_current_locale(vacation_request_order.estimated_exec_date)]]
+    current_orders_list = [['ORD-1', 'Empty order type', 'In progress',
+                            in_current_locale(vacation_request_order.created_at), '', 'ext_code', '',
+                            in_current_locale(vacation_request_order.estimated_exec_date)]]
     # "Order type"
     change_select2_value('order_type_id', 'Vacation request')
     search_button.click
@@ -172,9 +172,9 @@ feature 'List orders', js: true do
   end
 
   scenario 'with filter by custom fields' do
-    result_orders_list = [[], ['ORD-2', 'Support request', 'In progress',
-                               in_current_locale(support_request_order.created_at), '', 'support_ext_code', '',
-                               in_current_locale(support_request_order.estimated_exec_date)]]
+    result_orders_list = [['ORD-2', 'Support request', 'In progress',
+                           in_current_locale(support_request_order.created_at), '', 'support_ext_code', '',
+                           in_current_locale(support_request_order.estimated_exec_date)]]
 
     # default state
     expect(label('custom_field_select')).to                eq('Add filter by attribute')
@@ -342,15 +342,15 @@ feature 'List orders', js: true do
       change_select2_value('order_type_id', 'Support request')
       search_button.click
       wait_for_ajax
-      expect(orders_list).to eq([[], order_3, order_2])
+      expect(orders_list).to eq([order_3, order_2])
 
       order_list_table_header('Code').click
       wait_for_ajax
-      expect(orders_list).to eq([[], order_2, order_3])
+      expect(orders_list).to eq([order_2, order_3])
 
       order_list_table_header('Code').click
       wait_for_ajax
-      expect(orders_list).to eq([[], order_3, order_2])
+      expect(orders_list).to eq([order_3, order_2])
     end
 
     scenario 'by custom fields' do
@@ -361,21 +361,21 @@ feature 'List orders', js: true do
       change_select2_value('order_type_id', 'Support request')
       search_button.click
       wait_for_ajax
-      expect(orders_list).to eq([[], order_3, order_2])
+      expect(orders_list).to eq([order_3, order_2])
 
       # Add Contract number to orders table
       click_on_multiselect_options('column-settings', %w(contractNumber))
       wait_for_ajax
-      expect(orders_list).to eq([[], order_3_with_contract, order_2_with_contract])
+      expect(orders_list).to eq([order_3_with_contract, order_2_with_contract])
 
       # Check sorting
       order_list_table_header('Contract number').click
       wait_for_ajax
-      expect(orders_list).to eq([[], order_2_with_contract, order_3_with_contract])
+      expect(orders_list).to eq([order_2_with_contract, order_3_with_contract])
 
       order_list_table_header('Contract number').click
       wait_for_ajax
-      expect(orders_list).to eq([[], order_3_with_contract, order_2_with_contract])
+      expect(orders_list).to eq([order_3_with_contract, order_2_with_contract])
     end
   end
 end

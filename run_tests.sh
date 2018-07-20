@@ -26,6 +26,6 @@ echo "sources:
     password: test
 " > config/sources.yml
 
-bundle exec rspec ./spec --format RspecJunitFormatter --out test-reports/out.xml --format progress
+bundle exec rspec ./spec --format RspecJunitFormatter --out test-reports/out.xml --format progress --profile
 
 if [ "$GENERATE_DOC" = 'true' ]; then bundle exec rake docs:generate && zip -r doc.zip public/doc; fi
