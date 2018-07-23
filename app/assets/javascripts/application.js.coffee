@@ -4,7 +4,6 @@
 #= require jquery_ujs
 #= require jquery-ui
 #= require jquery.growl
-#= require jquery.formatter
 #= require bootstrap-sprockets
 #= require fileinput
 #= require i18n
