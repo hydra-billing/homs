@@ -5,8 +5,8 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
     SUBSTITUTION: 'foobar'
 
     getInitialState: ->
-      values = this.getNormalizedInitialValues(this.props.value)
-      { defaultValue: values[0], value: values[1], valid: true }
+      values = @getNormalizedInitialValues(@props.value)
+      { defaultValue: values[0], value: values[1], valid: true, visualValue: values[2], position: values[3], previousValue: null }
 
     patterns: {
       '9': '[0-9 ]'
@@ -21,22 +21,21 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
       opts = {
         name: @props.name
         type: 'text'
-        defaultValue: @state.defaultValue
         onKeyUp: @onChange
-        onKeyDown: @onChange
+        onKeyDown: @onKeyDown
         onChange: @onChange
         onBlur: @onBlur
         onFocus: @onFocus
         readOnly: @props.params.editable == false
       }
 
-      inputCSS = this.props.params.css_class
-      inputCSS += ' hidden' if this.hidden
+      inputCSS = @props.params.css_class
+      inputCSS += ' hidden' if @hidden
 
       `<div className={inputCSS} title={this.props.params.tooltip}>
         <div className="form-group">
           <span className={this.props.params.label_css}>{this.props.params.label}</span>
-          <input {...opts} ref="input" className={'form-control ' + (!this.state.valid && ' invalid')} data-toggle='tooltip' data-placement='bottom' data-original-title={this.props.params.message} data-trigger='manual' />
+          <input {...opts} ref="input" className={'form-control ' + (!this.state.valid && ' invalid')} data-toggle='tooltip' data-placement='bottom' data-original-title={this.props.params.message} data-trigger='manual' value={this.state.visualValue} />
           {!opts.readOnly && <input name={this.props.name} value={this.state.value} type="hidden" />}
         </div>
       </div>`
@@ -57,16 +56,9 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
       @bind('hbw:validate-form', @onFormSubmit)
 
     hijackFormatter: ->
-      $el = @getElement().first()
-
-      if this.props.params.pattern
-        this.extractValueRegexp = this.buildExtractRegexp(this.props.params.pattern)
-        this.valueParts = this.buildValueParts(this.props.params.pattern)
-
-        $el.formatter(
-          pattern: this.props.params.pattern
-          persistent: true
-        )
+      if @props.params.pattern
+        @extractValueRegexp = @buildExtractRegexp(@props.params.pattern)
+        @valueParts = @buildValueParts(@props.params.pattern)
 
     getElement: ->
       jQuery(@refs.input)
@@ -85,28 +77,39 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
           @trigger('hbw:form-submitting-failed')
 
     onLoadValidation: ->
-      if @validationRequired() && !!this.state.value
+      if @validationRequired() && !!@state.value
         @controlValidationTooltip(@isValid())
         @setValidationState()
 
     onChange: (event) ->
-      $el = jQuery(event.target)
-      @updateValue($el)
+      @updateValue(event.target, false)
+      @runValidation()
 
-      unless this.state.valid
+    runValidation: ->
+      unless @state.valid
         @controlValidationTooltip(@isValid())
 
         if @validationRequired()
           @setValidationState()
 
-    onBlur: (event) ->
+    onKeyDown: (event) ->
+      if event.keyCode == 8 or event.keyCode == 46
+        event.preventDefault()
+
+        @updateValue(event.target, true)
+      else
+        @updateValue(event.target, false)
+
+      @runValidation()
+
+    onBlur: (_) ->
       @controlValidationTooltip(true)
 
       if @validationRequired()
         @setValidationState()
 
-    onFocus: (event) ->
-      unless this.state.valid
+    onFocus: (_) ->
+      unless @state.valid
         @controlValidationTooltip(@isValid())
 
         if @validationRequired() && !@isValid()
@@ -121,31 +124,62 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
       else
         action = 'show'
 
-      jQuery('[name="' + this.props.name + '"]').tooltip(action)
+      jQuery('[name="' + @props.name + '"]').tooltip(action)
 
     isValid: ->
-      (this.state.value or '').search(new RegExp(this.props.params.regex)) >= 0
+      (@state.value or '').search(new RegExp(@props.params.regex)) >= 0
 
     validationRequired: ->
-      !!this.props.params.regex
+      !!@props.params.regex
 
-    updateValue: ($el) ->
+    buildVisualAndHiddenValues: (extractValueRegexp, valueParts, pattern, nextVal) ->
+      value = @substitute(valueParts, @getSubstitutions(extractValueRegexp, nextVal))
+
+      Object.assign(CustomFormatter.applyMaskForValue(pattern, value, @templateRegexp),
+        {strippedValue: @stripNonAlphanumericChars(value)})
+
+    updateValue: ($el, remove) ->
       if @extractValueRegexp
-        substitutions = this.getSubstitutions(@extractValueRegexp, $el.val())
-        value = this.substitute(@valueParts, substitutions)
-        newValue = @stripNonAlphanumericChars(value)
-        @setState(value: newValue)
+        visualValue = @state.visualValue
+        currentVisualValue = $el.value
+        position = @state.position
+        pattern = @props.params.pattern
+
+        if visualValue != currentVisualValue
+          nextVal = CustomFormatter.getNextValForAdd(visualValue, currentVisualValue, position, pattern)
+
+          result = @buildVisualAndHiddenValues(@extractValueRegexp, @valueParts, pattern, nextVal)
+
+          $el.setSelectionRange(result.position, result.position)
+          @setState(
+            value:         result.strippedValue,
+            visualValue:   result.mask,
+            previousValue: result.mask,
+            position:      result.position)
+        else if remove
+          nextVal = CustomFormatter.getNextValForRemove(pattern, @templateRegexp, position, currentVisualValue)
+
+          result = @buildVisualAndHiddenValues(@extractValueRegexp, @valueParts, pattern, nextVal)
+
+          $el.setSelectionRange(result.position, result.position)
+          @setState(
+            value:         result.strippedValue,
+            visualValue:   result.mask,
+            previousValue: result.mask,
+            position:      result.position)
+        else
+          $el.setSelectionRange(position, position)
       else
-        @setState(value: $el.val())
+        @setState(value: $el.value)
 
     buildExtractRegexp: (pattern) ->
-      matches = this.getMatches(this.templateRegexp, pattern)
+      matches = @getMatches(@templateRegexp, pattern)
 
       result = matches.reduce(((res, match) =>
         replacement = match[1]
-          .replace(/9/g, this.patterns['9'] + '?')
-          .replace(/a/g, this.patterns['a'] + '?')
-          .replace(/\*/g, this.patterns['*'] + '?')
+          .replace(/9/g, @patterns['9'] + '?')
+          .replace(/a/g, @patterns['a'] + '?')
+          .replace(/\*/g, @patterns['*'] + '?')
 
         res.replace(match[0], '(' + replacement + ')')
       ), pattern.replace(/([\(\)\+\-\[\]\*])/g, '\\\$1'))
@@ -171,12 +205,12 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
     # "{{a}}{{a}}1" -> [S, S, '1']
     buildValueParts: (pattern) ->
       parts = []
-      strings = pattern.split(this.partRegexp)
+      strings = pattern.split(@partRegexp)
       i = 0
 
       for string in strings
         parts.push(string) if string
-        parts.push(this.SUBSTITUTION) if i != strings.length - 1
+        parts.push(@SUBSTITUTION) if i != strings.length - 1
         i += 1
 
       parts
@@ -192,14 +226,14 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
       res
 
     substitute: (template, values) ->
-      if this.isEveryBlank(values)
+      if @isEveryBlank(values)
         ''
       else
         res = []
         s = 0
 
         for i in [0...template.length]
-          if template[i] == this.SUBSTITUTION
+          if template[i] == @SUBSTITUTION
             res.push(values[s] or '')
             s += 1
           else
@@ -214,14 +248,15 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
       array.reduce(((res, val) -> res and not val.replace(/\s/g, '')), true) and true
 
     getNormalizedInitialValues: (value) ->
-      if this.props.params.pattern
-        strippedPattern = this.props.params.pattern.replace(/[^a-z0-9\{\}]/ig, '')
-        strippedParts = this.buildValueParts(strippedPattern)
-        regexp = this.buildExtractRegexp(strippedPattern)
-        substitutions = this.getSubstitutions(regexp, value)
-        fullValue = this.substitute(strippedParts, substitutions)
+      if @props.params.pattern
+        strippedPattern = @props.params.pattern.replace(/[^a-z0-9\{\}]/ig, '')
+        strippedParts = @buildValueParts(strippedPattern)
+        regexp = @buildExtractRegexp(strippedPattern)
+        substitutions = @getSubstitutions(regexp, value)
+        fullValue = @substitute(strippedParts, substitutions)
         patternedValue = substitutions.join('')
 
-        [patternedValue, fullValue]
+        result = CustomFormatter.applyMaskForValue(@props.params.pattern, value, @templateRegexp)
+        [patternedValue, fullValue, result.mask, result.position]
       else
-        [value, value]
+        [value, value, value, null]
