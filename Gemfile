@@ -76,8 +76,8 @@ end
 group :test do
   gem 'temping'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'poltergeist'
   gem 'capybara-screenshot'
 end

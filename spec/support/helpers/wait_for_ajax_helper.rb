@@ -7,7 +7,8 @@ module Features
     end
 
     def finished_all_ajax_requests?
-      page.evaluate_script('jQuery.active').zero?
+      result = page.evaluate_script('jQuery.active')
+      result.nil? || result.zero?
     end
   end
 end
