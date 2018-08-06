@@ -120,7 +120,7 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    capybara (3.3.1)
+    capybara (3.5.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -130,7 +130,9 @@ GEM
     capybara-screenshot (1.0.21)
       capybara (>= 1.0, < 4)
       launchy
-    cliver (0.3.2)
+    capybara-webkit (1.15.0)
+      capybara (>= 2.3, < 4.0)
+      json
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -244,6 +246,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    json (2.1.0)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -278,10 +281,6 @@ GEM
     parser (2.5.1.0)
       ast (~> 2.4.0)
     pg (0.20.0)
-    poltergeist (1.18.0)
-      capybara (>= 2.1, < 4)
-      cliver (~> 0.3.1)
-      websocket-driver (>= 0.2.0)
     powerpack (0.1.1)
     pry (0.11.3)
       coderay (~> 1.1.0)
@@ -296,7 +295,7 @@ GEM
       pry (>= 0.10.4)
     public_suffix (3.0.2)
     rack (2.0.5)
-    rack-test (1.0.0)
+    rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.1.6)
       actioncable (= 5.1.6)
@@ -464,6 +463,7 @@ DEPENDENCIES
   capistrano-rvm (~> 0.1.1)
   capybara
   capybara-screenshot
+  capybara-webkit
   coderay (~> 1.1)
   coffee-rails (~> 4.2)
   database_cleaner
@@ -489,7 +489,6 @@ DEPENDENCIES
   momentjs-rails (>= 2.9.0)
   nokogiri (~> 1.8.1)
   pg (= 0.20)
-  poltergeist
   pry-byebug
   pry-rails
   rails (~> 5.1.6)

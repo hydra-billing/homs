@@ -30,6 +30,8 @@ feature 'Print', js: true do
 
     expect(page.response_headers['Content-Type']).to eq 'text/plain'
     expect(page.response_headers['Content-Disposition']).to eq "attachment; filename*=UTF-8''test_1.txt"
+
+    page.driver.go_back
     expect_widget_presence
   end
 

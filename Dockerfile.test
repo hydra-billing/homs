@@ -2,9 +2,6 @@ FROM latera/homs:latest
 
 USER root
 
-# Install PhantomJS
-ENV PHANTOM_JS "phantomjs-2.1.1-linux-x86_64"
-
 RUN apt-get update && apt-get install -y \
   libfreetype6 \
   libfreetype6-dev \
@@ -14,10 +11,13 @@ RUN apt-get update && apt-get install -y \
   wget \
   zip
 
-RUN wget https://github.com/Medium/phantomjs/releases/download/v2.1.1/$PHANTOM_JS.tar.bz2 \
- && tar xvjf $PHANTOM_JS.tar.bz2 \
- && mv $PHANTOM_JS /usr/local/share \
- && ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
+RUN apt-get update && apt-get install -y \
+  qt5-default \
+  libqt5webkit5-dev \
+  gstreamer1.0-plugins-base \
+  gstreamer1.0-tools \
+  gstreamer1.0-x \
+  xvfb
 
 COPY ./run_tests.sh /
 

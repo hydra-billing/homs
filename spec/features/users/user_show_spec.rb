@@ -18,7 +18,7 @@ feature 'User profile page', :devise, js: true do
     me = FactoryBot.create(:user)
     other = FactoryBot.create(:user, email: 'other@example.com')
     login_as(me, scope: :user)
-    Capybara.current_session.driver.add_header 'Referer', "#{orders_path}"
+    Capybara.current_session.driver.header 'Referer', "#{orders_path}"
     visit user_path(other)
     expect(page).to have_content 'Orders list'
   end

@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   build-essential \
   git \
   libpq-dev \
-
   libqtwebkit-dev \
   libxml2-dev \
   libxml2 \

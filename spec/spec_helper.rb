@@ -2,7 +2,6 @@ require 'factory_bot'
 require 'tilt/coffee'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
-require 'capybara/poltergeist'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
