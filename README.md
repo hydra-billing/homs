@@ -23,6 +23,8 @@ Resources:
 
 There are 2 ways to install HOMS.
 
+The prefered way to install HOMS is to use docker
+
 ### Using [docker](https://www.docker.com/)
 
 #### In production
