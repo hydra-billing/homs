@@ -110,42 +110,36 @@ Follow [RVM installation guide](https://rvm.io/rvm/install).
   ```bash
   git clone https://github.com/latera/homs.git
   ```
-2. Install ruby:
+2. Change directory
+  ```bash
+  cd homs
+  ```
+3. Install ruby:
 
   ```bash
   rvm install ruby-2.5.1
   ```
-3. Create homs RVM gemset:
+4. Create homs RVM gemset:
 
   ```bash
   rvm use ruby-2.5.1@homs --create
   ```
-4. Install bundler:
+5. Install bundler:
 
   ```bash
   gem install bundler
   ```
-5. Install gems:
+6. Install gems:
 
   ```bash
   bundle --without oracle
   ```
-6. Make configs from samples:
+7. Make configs from samples:
 
   ```bash
   find config -name '*.sample' | xargs -I{} sh -c 'cp $1 ${1%.*}' -- {}
   ```
-7. Run migrations:
-
-  ```bash
-  bundle exec rake db:migrate
-  ```
-8. Fill db with test data:
-
-  ```bash
-  bundle exec rake db:seed
-  ```
-9. Update base_url of activiti service in config/activiti.yml
+8. Update base_url of activiti service in config/activiti.yml
 
   ```
   development:
@@ -153,7 +147,7 @@ Follow [RVM installation guide](https://rvm.io/rvm/install).
     login: user
     password: changeme
   ```
-10. Update host of database in config/database.yml
+9. Update host of database in config/database.yml
 
   ```
   <environment-name-here>:
@@ -164,6 +158,16 @@ Follow [RVM installation guide](https://rvm.io/rvm/install).
     database: homs
     username: homs
     password: homs
+  ```
+10. Run migrations:
+
+  ```bash
+  bundle exec rake db:migrate
+  ```
+11. Fill db with test data:
+
+  ```bash
+  bundle exec rake db:seed
   ```
 
 ### Run homs
