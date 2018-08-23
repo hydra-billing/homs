@@ -5,12 +5,12 @@ module HBW
 
     class << self
       def fetch(email)
-        definition = do_request(:get, 'identity/users', email: email).first
+        definition = do_request(:get, 'user', email: email).first
         new(definition) if definition
       end
 
       def fetch_all
-        do_request(:get, 'identity/users', firstNameLike: '%').map do |definition|
+        do_request(:get, 'user', firstNameLike: '%').map do |definition|
           new(definition) if definition
         end.compact
       end

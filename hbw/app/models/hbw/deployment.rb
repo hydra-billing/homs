@@ -6,8 +6,8 @@ module HBW
     class << self
       def fetch(process_definition)
         deployment_id = process_definition.deployment_id
-        resources = do_request(:get, 'repository/deployments/%s/resources' % deployment_id)
-        new(do_request(:get, 'repository/deployments/%s' % deployment_id).merge(
+        resources = do_request(:get, '/rest/deployment/%s/resources' % deployment_id)
+        new(do_request(:get, '/rest/deployment/%s' % deployment_id).merge(
           'resources' => resources
         ))
       end
@@ -17,7 +17,7 @@ module HBW
 
     def resource(resource_id)
       resources.find do |resource|
-        resource['id'] == resource_id
+        resource['name'] == resource_id
       end
     end
   end
