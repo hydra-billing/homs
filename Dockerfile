@@ -45,6 +45,10 @@ COPY ./entrypoint.sh ./wait_for_postgres.sh /
 
 USER root
 
+ARG VERSION
+
+RUN echo $VERSION > /opt/homs/VERSION
+
 RUN chown -R homs:homs /opt/homs
 RUN chmod +x /entrypoint.sh /wait_for_postgres.sh
 
