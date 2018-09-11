@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   git \
   libaio1 \
   libpq-dev \
-  libqtwebkit-dev \
   libxml2 \
   libxml2-dev \
   libxslt-dev \
