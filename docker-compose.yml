@@ -64,7 +64,7 @@ services:
       - /etc/hydra/homs/imprint.yml:/opt/homs/config/imprint.yml
       - /etc/hydra/homs/hbw.yml:/opt/homs/config/hbw.yml
       - /etc/hydra/homs/database.yml:/opt/homs/config/database.yml
-      - /etc/hydra/homs/activiti.yml:/opt/homs/config/activiti.yml
+      - /etc/hydra/homs/bpm.yml:/opt/homs/config/bpm.yml
       - /etc/hydra/homs/sources.yml:/opt/homs/config/sources.yml
       - /etc/hydra/homs/secrets.yml:/opt/homs/config/secrets.yml
     depends_on:

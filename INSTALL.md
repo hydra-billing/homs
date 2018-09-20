@@ -139,7 +139,7 @@ Follow [RVM installation guide](https://rvm.io/rvm/install).
   ```bash
   find config -name '*.sample' | xargs -I{} sh -c 'cp $1 ${1%.*}' -- {}
   ```
-8. Update base_url of activiti service in config/activiti.yml
+8. Update base_url of activiti service in config/bpm.yml
 
   ```
   development:
