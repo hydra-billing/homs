@@ -26,11 +26,11 @@ module HBW
       end
 
       def get_variables(user, entity_class, entity_code)
-        {
-          :initiator                    => { value: user.id,     type: :string },
-          :initiatorEmail               => { value: user.email,  type: :string },
-          entity_code_key(entity_class) => { value: entity_code, type: :string }
-        }
+        [
+          { name: :initiator,                    value: user.id,     type: :string },
+          { name: :initiatorEmail,               value: user.email,  type: :string },
+          { name: entity_code_key(entity_class), value: entity_code, type: :string }
+        ]
       end
 
       def process_definition_for_key_like(key)
