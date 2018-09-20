@@ -39,7 +39,7 @@ The prefered way to install HOMS is to use docker
 4. Copy your (or default) configs to `/etc/hydra/homs/`:
 
   ```
-  cp activiti.yml /etc/hydra/homs/activiti.yml
+  cp bpm.yml /etc/hydra/homs/bpm.yml
   cp database.yml /etc/hydra/homs/database.yml
   cp hbw.yml /etc/hydra/homs/hbw.yml
   cp homs_configuration.yml /etc/hydra/homs/homs_configuration.yml

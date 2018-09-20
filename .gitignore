@@ -92,7 +92,7 @@ Capfile
 config/loms_configuration.yml
 config/hbw.yml
 config/sources.yml
-config/activiti.yml
+config/bpm.yml
 config/database.yml
 config/secrets.yml
 config/homs_configuration.yml
