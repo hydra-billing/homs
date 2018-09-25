@@ -35,7 +35,7 @@ module HBW
           else
             wrap(
               do_request(:post,
-                         '/rest/task',
+                         'task',
                          assignee:   assignee(user, email, for_all_users),
                          active:     true,
                          processVariables: [
@@ -55,10 +55,10 @@ module HBW
           else
             id = task.fetch('processDefinitionId')
 
-            variables = do_request(:get, "/rest/process-instance/#{task.fetch('processInstanceId')}/variables")
+            variables = do_request(:get, "process-instance/#{task.fetch('processInstanceId')}/variables")
             task.merge!('variables' => variables.map { |k, v| v.merge({ 'name' => k })})
 
-            url = "/rest/process-definition/#{id}"
+            url = "process-definition/#{id}"
           end
 
           d[url] ||= ::HBW::ProcessDefinition.fetch(url)
@@ -67,7 +67,7 @@ module HBW
           if activiti?
             new(task.merge('processDefinition' => definitions[task.fetch('processDefinitionUrl')]))
           else
-            new(task.merge('processDefinition' => definitions["/rest/process-definition/#{task.fetch('processDefinitionId')}"]))
+            new(task.merge('processDefinition' => definitions["process-definition/#{task.fetch('processDefinitionId')}"]))
           end
         }
       end
