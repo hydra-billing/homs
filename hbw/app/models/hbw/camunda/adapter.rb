@@ -5,7 +5,7 @@ module HBW
 
       def process_instances(entity_code, entity_class)
         response = api.post(
-            '/rest/process-instance',
+            'process-instance',
             variables: [
               name:     entity_code_key(entity_class),
               value:    entity_code,
@@ -24,7 +24,7 @@ module HBW
 
         variables = variables.map { |item| [item.delete(:name), item]}.to_h
 
-        response = api.post("/rest/task/#{task_id}/submit-form", variables: variables)
+        response = api.post("task/#{task_id}/submit-form", variables: variables)
         response.status == 204
       end
 
@@ -37,7 +37,7 @@ module HBW
       end
 
       def process_definition_for_key_like(key)
-        response = api.get('/rest/process-definition', keyLike: key, latestVersion: true)
+        response = api.get('process-definition', keyLike: key, latestVersion: true)
         response.body.first if response.status == 200
       end
 
