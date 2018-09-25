@@ -21,7 +21,7 @@ module HBW
 
           definition_raw = do_request(:get, resource.fetch('contentUrl'))
         else
-          definition_raw = do_request(:get, "/rest/task/#{task.id}/deployed-form")
+          definition_raw = do_request(:get, "task/#{task.id}/deployed-form")
         end
 
         definition = YAML.load(definition_raw).fetch('form')
