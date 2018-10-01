@@ -23,7 +23,7 @@ modulejs.define(
         @$tasksMenuButtonContainer = jQuery(@options.tasksMenuButtonContainer)
 
         @env.dispatcher.bind('hbw:task-clicked', 'widget', @changeTask)
-        @checkActivitiUser()
+        @checkBpmUser()
 
       changeTask: (task) =>
         if task.entity_code == @options.entity_code
@@ -90,13 +90,13 @@ modulejs.define(
             entity_class: this.options.entity_class
         )
 
-      checkActivitiUser: =>
+      checkBpmUser: =>
         @env.connection.request(
           url: @env.connection.serverURL + '/users/check'
           method: 'GET'
           contentType: 'application/json').done((data) =>
             unless data.user_exist
-              @env.dispatcher.trigger('hbw:activiti-user-not-found')
+              @env.dispatcher.trigger('hbw:bpm-user-not-found')
               @env.userExist = false
             )
 )
