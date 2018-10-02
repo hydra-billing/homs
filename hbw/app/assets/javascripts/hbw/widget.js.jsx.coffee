@@ -93,8 +93,7 @@ modulejs.define(
       checkBpmUser: =>
         @env.connection.request(
           url: @env.connection.serverURL + '/users/check'
-          method: 'GET'
-          contentType: 'application/json').done((data) =>
+          method: 'GET').done((data) =>
             unless data.user_exist
               @env.dispatcher.trigger('hbw:bpm-user-not-found')
               @env.userExist = false
