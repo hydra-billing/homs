@@ -92,7 +92,7 @@ modulejs.define(
               {buttons}
             </div>`
         else
-          ``
+          `<div></div>`
 
       onButtonActivation: (button) ->
         console.log('Clicked button[' + button.title + '], submitting')
