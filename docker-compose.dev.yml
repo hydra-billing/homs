@@ -35,6 +35,8 @@ services:
     environment:
       - DB_HOST=postgres-activiti
       - HOMS_HOST=homs
+      - ACTIVITI_LOGIN=kermit
+      - ACTIVITI_PASSWORD=kermit
     ports:
       - 8080:8080
     depends_on:
