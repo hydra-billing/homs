@@ -1,4 +1,6 @@
 hbw:
+  adapter: camunda # BPM system adapter
+
   order:
     entity_code_key: homsOrderCode
 
