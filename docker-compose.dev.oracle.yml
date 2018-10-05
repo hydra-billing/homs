@@ -27,7 +27,7 @@ services:
       - 5432:5432
     networks:
       - custom_network
-  activiti_homs:
+  activiti:
     image: latera/activiti-homs
     container_name: activiti
     links:
@@ -58,13 +58,13 @@ services:
     container_name: homs
     links:
       - db_homs:postgres-homs
-      - activiti_homs:activiti
+      - activiti:activiti
     volumes:
       - $HOMS_PATH:/opt/homs
       - $TNSNAMES_PATH:/etc/oracle/tnsnames.ora
     depends_on:
       - db_homs
-      - activiti_homs
+      - activiti
       - minio
     entrypoint: "bash -lc '/wait_for_postgres.sh db_homs && /entrypoint.sh'"
     ports:
