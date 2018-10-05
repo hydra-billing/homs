@@ -36,7 +36,7 @@ gem 'aws-sdk', '~> 2'
 gem 'web-console', '~> 2.0', group: :development
 
 group :oracle do
-  gem 'ruby-oci8', '2.2.1'
+  gem 'ruby-oci8', '2.2.3'
 end
 
 group :development do
