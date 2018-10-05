@@ -21,7 +21,7 @@ module HBW
         if activiti?
           'repository/deployments'
         else
-          '/rest/deployment'
+          'deployment'
         end
       end
     end

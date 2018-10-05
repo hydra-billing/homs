@@ -5,7 +5,7 @@ RAILS_ENV=test
 /wait_for_postgres.sh db_homs
 
 # prepare configs
-cp config/activiti.yml.sample config/activiti.yml
+cp config/bpm.yml.sample config/bpm.yml
 cp config/database.yml.sample config/database.yml
 cp config/secrets.yml.sample config/secrets.yml
 echo "sources:
