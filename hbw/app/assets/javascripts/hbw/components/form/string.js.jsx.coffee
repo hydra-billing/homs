@@ -83,7 +83,9 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
 
     onChange: (event) ->
       @updateValue(event.target, false)
-      @runValidation()
+
+      if @validationRequired()
+        @runValidation()
 
     runValidation: ->
       unless @state.valid
@@ -93,14 +95,17 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
           @setValidationState()
 
     onKeyDown: (event) ->
-      if event.keyCode == 8 or event.keyCode == 46
-        event.preventDefault()
+      if @validationRequired()
+        if event.keyCode == 8 or event.keyCode == 46
+          event.preventDefault()
 
-        @updateValue(event.target, true)
+          @updateValue(event.target, true)
+        else
+          @updateValue(event.target, false)
+
+        @runValidation()
       else
-        @updateValue(event.target, false)
-
-      @runValidation()
+        @updateValue(event.target, true)
 
     onBlur: (_) ->
       @controlValidationTooltip(true)
@@ -130,7 +135,7 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
       (@state.value or '').search(new RegExp(@props.params.regex)) >= 0
 
     validationRequired: ->
-      !!@props.params.regex
+      !!@props.params.regex or !!@props.params.pattern
 
     buildVisualAndHiddenValues: (extractValueRegexp, valueParts, pattern, nextVal) ->
       value = @substitute(valueParts, @getSubstitutions(extractValueRegexp, nextVal))
@@ -170,7 +175,7 @@ modulejs.define 'HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
         else
           $el.setSelectionRange(position, position)
       else
-        @setState(value: $el.value)
+        @setState(value: $el.value, visualValue: $el.value)
 
     buildExtractRegexp: (pattern) ->
       matches = @getMatches(@templateRegexp, pattern)
