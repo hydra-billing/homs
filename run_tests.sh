@@ -2,7 +2,7 @@
 
 RAILS_ENV=test
 
-/wait_for_postgres.sh db_homs
+/wait_for_postgres.sh
 
 # prepare configs
 cp config/bpm.yml.sample config/bpm.yml

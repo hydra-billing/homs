@@ -7,7 +7,9 @@ services:
     restart: always
     environment:
       PGDATA: /var/lib/postgresql/data/activiti/
-      POSTGRES_USER: activiti
+      POSTGRES_DB: $BPM_DB_NAME
+      POSTGRES_USER: $BPM_DB_USER
+      POSTGRES_PASSWORD: $BPM_DB_PASSWORD
       TZ: Europe/Moscow
     volumes:
       - $HOMS_PATH/data/activiti/postgresql:/var/lib/postgresql/data
@@ -19,7 +21,9 @@ services:
     container_name: postgres-homs
     environment:
       PGDATA: /var/lib/postgresql/data/homs
-      POSTGRES_USER: homs
+      POSTGRES_DB: $HOMS_DB_NAME
+      POSTGRES_USER: $HOMS_DB_USER
+      POSTGRES_PASSWORD: $HOMS_DB_PASSWORD
       TZ: Europe/Moscow
     volumes:
       - $HOMS_PATH/data/homs/postgresql:/var/lib/postgresql/data
@@ -31,17 +35,19 @@ services:
     image: latera/activiti-homs
     container_name: activiti
     links:
-      - db_activiti:postgres-activiti
+      - $BPM_DB_HOST:postgres-activiti
     environment:
-      - DB_HOST=postgres-activiti
-      - HOMS_HOST=homs
-      - ACTIVITI_LOGIN=kermit
-      - ACTIVITI_PASSWORD=kermit
+      HOMS_HOST: homs
+      DB_HOST: $BPM_DB_HOST
+      BPM_DB_HOST: $BPM_DB_HOST
+      BPM_DB_USER: $BPM_DB_USER
+      BPM_DB_PASSWORD: $BPM_DB_PASSWORD
+      ACTIVITI_LOGIN: kermit
+      ACTIVITI_PASSWORD: kermit
     ports:
       - 8080:8080
     depends_on:
       - db_activiti
-    entrypoint: "bash -lc '/wait_for_postgres.sh db_activiti && /entrypoint_ah.sh'"
     networks:
       - custom_network
   minio:
@@ -54,12 +60,12 @@ services:
     volumes:
       - $HOMS_PATH/data/minio:/opt/minio
     ports:
-      - "9000:9000"
+      - 9000:9000
   homs:
     image: latera/homs-with-oracle
     container_name: homs
     links:
-      - db_homs:postgres-homs
+      - $HOMS_DB_HOST:postgres-homs
       - activiti:activiti
     volumes:
       - $HOMS_PATH:/opt/homs
@@ -68,7 +74,10 @@ services:
       - db_homs
       - activiti
       - minio
-    entrypoint: "bash -lc '/wait_for_postgres.sh db_homs && /entrypoint.sh'"
+    environment:
+      HOMS_DB_HOST: $HOMS_DB_HOST
+      HOMS_DB_USER: $HOMS_DB_USER
+      HOMS_DB_PASSWORD: $HOMS_DB_PASSWORD
     ports:
       - 3000:3000
     networks:
