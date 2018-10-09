@@ -24,8 +24,8 @@ module HBW
         def load
           values = source.select(condition, variables)
 
-          logger.debug("Retrieved values for %s\nfrom source %s\ncondition: %s\nvariables: %s.\nResult: %s" %
-                           [name, source, condition, variables, values.to_s])
+          logger.debug { "Retrieved values for %s\nfrom source %s\ncondition: %s\nvariables: %s.\nResult: %s" %
+                           [name, source, condition, variables, values.to_s] }
 
           values
         end
