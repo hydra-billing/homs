@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -16,7 +15,7 @@ ActiveRecord::Schema.define(version: 20180303130859) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "attachments", force: :cascade do |t|
+  create_table "attachments", id: :serial, force: :cascade do |t|
     t.integer  "order_id",   null: false
     t.string   "url",        null: false
     t.string   "name",       null: false
@@ -28,7 +27,7 @@ ActiveRecord::Schema.define(version: 20180303130859) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "order_types", force: :cascade do |t|
+  create_table "order_types", id: :serial, force: :cascade do |t|
     t.string   "code",                            null: false
     t.text     "file",                            null: false
     t.text     "fields",                          null: false
@@ -37,12 +36,11 @@ ActiveRecord::Schema.define(version: 20180303130859) do
     t.datetime "updated_at",                      null: false
     t.string   "name",                            null: false
     t.string   "print_form_code"
+    t.index ["code", "active"],     name: "index_order_types_on_code_and_active"
+    t.index ["code", "created_at"], name: "index_order_types_on_code_and_created_at", unique: true
   end
 
-  add_index "order_types", ["code", "active"], name: "index_order_types_on_code_and_active", using: :btree
-  add_index "order_types", ["code", "created_at"], name: "index_order_types_on_code_and_created_at", unique: true, using: :btree
-
-  create_table "orders", force: :cascade do |t|
+  create_table "orders", id: :serial, force: :cascade do |t|
     t.integer  "order_type_id",                       null: false
     t.integer  "user_id"
     t.string   "code",                                null: false
@@ -56,31 +54,28 @@ ActiveRecord::Schema.define(version: 20180303130859) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "estimated_exec_date"
+    t.index ["code"], name: "index_orders_on_code"
   end
 
-  add_index "orders", ["code"], name: "index_orders_on_code", using: :btree
-
-  create_table "profiles", force: :cascade do |t|
+  create_table "profiles", id: :serial, force: :cascade do |t|
     t.integer  "user_id",       null: false
     t.integer  "order_type_id", null: false
     t.json     "data",          null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["order_type_id"],            name: "index_profiles_on_order_type_id"
+    t.index ["user_id", "order_type_id"], name: "index_profiles_on_user_id_and_order_type_id", unique: true
+    t.index ["user_id"],                  name: "index_profiles_on_user_id"
   end
 
-  add_index "profiles", ["order_type_id"], name: "index_profiles_on_order_type_id", using: :btree
-  add_index "profiles", ["user_id", "order_type_id"], name: "index_profiles_on_user_id_and_order_type_id", unique: true, using: :btree
-  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
-
-  create_table "sequences", force: :cascade do |t|
-    t.string  "name",               null: false
-    t.string  "prefix",             null: false
-    t.integer "start",  default: 1
+  create_table "sequences", id: :serial, force: :cascade do |t|
+    t.string "name",              null: false
+    t.string "prefix",            null: false
+    t.integer "start", default: 1
+    t.index ["name"], name: "index_sequences_on_name"
   end
 
-  add_index "sequences", ["name"], name: "index_sequences_on_name", using: :btree
-
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
@@ -107,11 +102,10 @@ ActiveRecord::Schema.define(version: 20180303130859) do
     t.string   "password_salt"
     t.boolean  "external",               default: false, null: false
     t.boolean  "blocked",                default: false, null: false
+    t.index ["api_token"],            name: "index_users_on_api_token"
+    t.index ["email"],                name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["api_token"], name: "index_users_on_api_token", using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "profiles", "order_types"
   add_foreign_key "profiles", "users"

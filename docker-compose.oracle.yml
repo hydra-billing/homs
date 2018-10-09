@@ -1,0 +1,84 @@
+version: '2'
+services:
+  db_activiti:
+    image: latera/postgres-activiti
+    hostname: postgres-activiti
+    container_name: postgres-activiti
+    restart: always
+    environment:
+      PGDATA: /var/lib/postgresql/data/activiti/
+      POSTGRES_USER: activiti
+      TZ: Europe/Moscow
+    volumes:
+      - $HOMS_PATH/data/activiti/postgresql:/var/lib/postgresql/data
+    networks:
+      - custom_network
+  db_homs:
+    image: latera/postgres-homs
+    hostname: postgres-homs
+    container_name: postgres-homs
+    environment:
+      PGDATA: /var/lib/postgresql/data/homs
+      POSTGRES_USER: homs
+      TZ: Europe/Moscow
+    volumes:
+      - $HOMS_PATH/data/homs/postgresql:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - custom_network
+  activiti:
+    image: latera/activiti-homs
+    container_name: activiti
+    links:
+      - db_activiti:postgres-activiti
+    environment:
+      - DB_HOST=postgres-activiti
+      - HOMS_HOST=homs
+      - ACTIVITI_LOGIN=kermit
+      - ACTIVITI_PASSWORD=kermit
+    ports:
+      - 8080:8080
+    depends_on:
+      - db_activiti
+    entrypoint: "bash -lc '/wait_for_postgres.sh db_activiti && /entrypoint_ah.sh'"
+    networks:
+      - custom_network
+  minio:
+    image: minio/minio
+    container_name: minio
+    command: "server /opt/minio"
+    environment:
+      - MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY=$MINIO_SECRET_KEY
+    volumes:
+      - $HOMS_PATH/data/minio:/opt/minio
+    ports:
+      - "9000:9000"
+  homs:
+    image: latera/homs-with-oracle
+    container_name: homs
+    links:
+      - db_homs:postgres-homs
+      - activiti:activiti
+    volumes:
+      - $TNSNAMES_PATH:/etc/oracle/tnsnames.ora
+      - /etc/hydra/homs/homs_configuration.yml:/opt/homs/config/homs_configuration.yml
+      - /etc/hydra/homs/imprint.yml:/opt/homs/config/imprint.yml
+      - /etc/hydra/homs/hbw.yml:/opt/homs/config/hbw.yml
+      - /etc/hydra/homs/database.yml:/opt/homs/config/database.yml
+      - /etc/hydra/homs/bpm.yml:/opt/homs/config/bpm.yml
+      - /etc/hydra/homs/sources.yml:/opt/homs/config/sources.yml
+      - /etc/hydra/homs/secrets.yml:/opt/homs/config/secrets.yml
+    depends_on:
+      - db_homs
+      - activiti
+      - minio
+    entrypoint: "bash -lc '/wait_for_postgres.sh db_homs && /entrypoint.sh'"
+    ports:
+      - 3000:3000
+    networks:
+      - custom_network
+networks:
+  custom_network:
+    driver: bridge
