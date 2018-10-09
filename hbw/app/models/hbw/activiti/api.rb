@@ -36,7 +36,7 @@ module HBW
         end
 
         def token_from(login, password)
-          Base64.encode64 "#{login}:#{password}"
+          Base64.strict_encode64 "#{login}:#{password}"
         end
       end
     end
