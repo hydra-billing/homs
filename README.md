@@ -48,7 +48,7 @@ The prefered way to install HOMS is to use docker
   cp secrets.yml /etc/hydra/homs/secrets.yml
   ```
 5. Add environment variables: `$HOMS_PATH` with path to your HOMS folder and [Minio](https://github.com/minio/minio) credentials:
-   
+
   ```
   HOMS_PATH=/path/to/homs export HOMS_PATH
   MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml export MINIO_ACCESS_KEY
@@ -131,13 +131,13 @@ The following three ZIPs are required:
 - `instantclient-sqlplus-linux.x64-11.2.0.4.0.zip`
 
 7. Place the downloaded Oracle Instant Client RPMs in the same directory as the `Dockerfile` and run:
-  
+
 ```
 docker build -t latera/homs-with-oracle -f Dockerfile.oracle .
 ```
 
 8. Add to `config/sources.yml`
-   
+
 ```
 sources:
   bpmanagementsystem:
@@ -150,7 +150,7 @@ sources:
 ```
 
 9. Add environment variables: `$HOMS_PATH` with path to your HOMS folder, `$TNSNAMES_PATH` with path to your `tnsnames.ora` file and [Minio](https://github.com/minio/minio) credentials:
- 
+
 ```
 HOMS_PATH=/path/to/homs export HOMS_PATH
 TNSNAMES_PATH=/path/to/tnsnames.ora export TNSNAMES_PATH
@@ -199,4 +199,3 @@ bundle exec rspec spec/PATH/TO/DIR
 ## License
 
 Copyright (c) 2016 Latera LLC under the [Apache License](https://github.com/latera/homs/blob/master/LICENSE).
-

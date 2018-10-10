@@ -1,5 +1,7 @@
 #!/bin/bash
 
+/wait_for_postgres.sh
+
 cp -rn /tmp/config/* /opt/homs/config/
 
 bundle exec rake db:migrate
