@@ -56,12 +56,12 @@ Rails.application.configure do
 
   config.assets.quiet = true
 
+  require 'homs_logger'
+
+  config.logger = HomsLogger.new(Logger.new(STDOUT))
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  config.log_tags = [:uuid, :remote_ip,
-                     ->(req) { "#{req.cookie_jar['_session_id']}" }]
-
-  config.colorize_logging = Homs::Application.config.app.fetch(:logs).fetch(:color)
 
   config.web_console.whitelisted_ips = '10.0.2.2'
 
