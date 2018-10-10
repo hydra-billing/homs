@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/thoughtbot/capybara-webkit.git
+  revision: 77fdac424cd6fdb5aa266b229a888cc58da8e95e
+  branch: master
+  specs:
+    capybara-webkit (1.15.1)
+      capybara (>= 2.3, < 4.0)
+      json
+
+GIT
   remote: https://github.com/fnando/i18n-js
   revision: 7ed2d2900c844d70992b2f7222178867eaaca92a
   ref: 7ed2d2
@@ -130,9 +139,6 @@ GEM
     capybara-screenshot (1.0.21)
       capybara (>= 1.0, < 4)
       launchy
-    capybara-webkit (1.15.0)
-      capybara (>= 2.3, < 4.0)
-      json
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -463,7 +469,7 @@ DEPENDENCIES
   capistrano-rvm (~> 0.1.1)
   capybara
   capybara-screenshot
-  capybara-webkit
+  capybara-webkit!
   coderay (~> 1.1)
   coffee-rails (~> 4.2)
   database_cleaner
