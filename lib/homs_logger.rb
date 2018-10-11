@@ -21,9 +21,9 @@ module HomsLogger
 
   def self.new(logger)
     if Rails.env.production?
-      logger.formatter ||= HomsFormatterProduction.new
+      logger.formatter = HomsFormatterProduction.new
     else
-      logger.formatter ||= HomsFormatter.new
+      logger.formatter = HomsFormatter.new
     end
 
     logger.extend(self)
