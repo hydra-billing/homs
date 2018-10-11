@@ -21,9 +21,9 @@ module HBWLogger
 
   def self.new(logger)
     if Rails.env.production?
-      logger.formatter ||= HBWFormatterProduction.new
+      logger.formatter = HBWFormatterProduction.new
     else
-      logger.formatter ||= HBWFormatter.new
+      logger.formatter = HBWFormatter.new
     end
 
     logger.extend(self)
@@ -33,7 +33,7 @@ end
 module HBW
   module Logger
     def logger
-      HBWLogger.new(::Logger.new(STDOUT))
+      HBWLogger.new(ActiveSupport::Logger.new(STDOUT))
     end
   end
 end

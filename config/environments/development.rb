@@ -58,7 +58,7 @@ Rails.application.configure do
 
   require 'homs_logger'
 
-  config.logger = HomsLogger.new(Logger.new(STDOUT))
+  config.logger = HomsLogger.new(ActiveSupport::Logger.new(STDOUT))
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
