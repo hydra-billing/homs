@@ -1,4 +1,8 @@
 {
+  "name": "HOMS",
+  "description": "Web application for order and business process management.",
+  "repository": "latera/homs",
+  "license": "Apache-2.0",
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-polyfill": "^6.26.0",
