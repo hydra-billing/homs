@@ -1,7 +1,7 @@
 version: '2'
 services:
   db_homs:
-    image: latera/postgres-homs
+    image: postgres
     hostname: postgres-homs
     container_name: postgres-homs
     environment:
