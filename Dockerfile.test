@@ -1,4 +1,4 @@
-FROM latera/homs:latest
+FROM latera/homs_base:latest
 
 USER root
 
