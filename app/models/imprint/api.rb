@@ -1,5 +1,6 @@
 require 'faraday/detailed_logger'
 require 'faraday_middleware'
+require 'settings'
 
 module Imprint
   class API
@@ -32,11 +33,8 @@ module Imprint
         new(conn)
       end
 
-      def load(paths)
-        paths.map! { |path| Rails.root.join(path) }
-
-        configs = paths.select { |p| File.exists?(p) && File.read(p).present? }.map { |p| YAML.load(File.read(p))[Rails.env] || {} }
-        Imprint::API.config = configs.reduce(:deep_merge).deep_symbolize_keys
+      def load
+        Imprint::API.config = Settings::Imprint[Rails.env].deep_symbolize_keys
       end
     end
   end

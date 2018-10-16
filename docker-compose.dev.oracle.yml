@@ -42,8 +42,8 @@ services:
       BPM_DB_HOST: $BPM_DB_HOST
       BPM_DB_USER: $BPM_DB_USER
       BPM_DB_PASSWORD: $BPM_DB_PASSWORD
-      ACTIVITI_LOGIN: kermit
-      ACTIVITI_PASSWORD: kermit
+      ACTIVITI_LOGIN: $BPM_USER
+      ACTIVITI_PASSWORD: $BPM_PASSWORD
     ports:
       - 8080:8080
     depends_on:
@@ -55,8 +55,8 @@ services:
     container_name: minio
     command: "server /opt/minio"
     environment:
-      - MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY
-      - MINIO_SECRET_KEY=$MINIO_SECRET_KEY
+      MINIO_ACCESS_KEY: $MINIO_ACCESS_KEY
+      MINIO_SECRET_KEY: $MINIO_SECRET_KEY
     volumes:
       - $HOMS_PATH/data/minio:/opt/minio
     ports:
