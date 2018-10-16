@@ -2,16 +2,16 @@ development:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  host: db_homs
-  database: homs
-  username: homs
-  password: homs
+  host: <%= ENV['HOMS_DB_HOST'] %>
+  database: <%= ENV['HOMS_DB_NAME'] %>
+  username: <%= ENV['HOMS_DB_USER'] %>
+  password: <%= ENV['HOMS_DB_PASSWORD'] %>
 
 test:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  host: db_homs
-  database: homs
-  username: homs
-  password: homs
+  host: <%= ENV['HOMS_DB_HOST'] %>
+  database: <%= ENV['HOMS_DB_NAME'] %>
+  username: <%= ENV['HOMS_DB_USER'] %>
+  password: <%= ENV['HOMS_DB_PASSWORD'] %>

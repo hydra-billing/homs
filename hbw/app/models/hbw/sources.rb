@@ -1,11 +1,13 @@
+require 'settings'
+
 module HBW
   module Sources
     extend self
 
     @sources = {}
 
-    def load(config)
-      config.each do |source_name, source_config|
+    def load
+      Settings::Sources.each do |source_name, source_config|
         source = build_source(source_name, source_config)
         register(source)
       end

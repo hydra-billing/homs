@@ -392,6 +392,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    settingslogic (2.0.9)
     sexp_processor (4.11.0)
     simple_form (4.0.1)
       actionpack (>= 5.0)
@@ -508,6 +509,7 @@ DEPENDENCIES
   ruby-oci8 (= 2.2.3)
   ruby_parser
   sass-rails (~> 5.0.7)
+  settingslogic
   simple_form
   spring
   spring-commands-rspec

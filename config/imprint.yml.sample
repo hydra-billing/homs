@@ -3,6 +3,9 @@ development: &development
   auth_token: 'changeme'
   api_version: '1'
 
+test:
+  <<: *development
+
 staging:
   <<: *development
 

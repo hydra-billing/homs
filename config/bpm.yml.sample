@@ -1,4 +1,4 @@
 development:
   base_url: http://activiti:8080/activiti-rest/service/
-  login: user
-  password: changeme
+  login: <%= ENV['BPM_USER'] %>
+  password: <%= ENV['BPM_PASSWORD'] %>
