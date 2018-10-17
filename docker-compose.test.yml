@@ -4,6 +4,7 @@ services:
     image: postgres
     hostname: postgres-homs
     container_name: postgres-homs
+    restart: always
     environment:
       PGDATA: /var/lib/postgresql/data/homs
       POSTGRES_DB: $HOMS_DB_NAME
@@ -17,6 +18,7 @@ services:
   homs:
     image: latera/homs_testing
     container_name: homs_testing
+    restart: always
     links:
       - $HOMS_DB_HOST:postgres-homs
     environment:
@@ -24,6 +26,8 @@ services:
       HOMS_DB_HOST: $HOMS_DB_HOST
       HOMS_DB_USER: $HOMS_DB_USER
       HOMS_DB_PASSWORD: $HOMS_DB_PASSWORD
+      BPM_USER: $BPM_USER
+      BPM_PASSWORD: $BPM_PASSWORD
     depends_on:
       - db_homs
     ports:
