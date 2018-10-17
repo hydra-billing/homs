@@ -1,5 +1,6 @@
 require 'faraday/detailed_logger'
 require 'faraday_middleware'
+require 'settings'
 
 module HBW
   module Activiti
@@ -37,6 +38,10 @@ module HBW
 
         def token_from(login, password)
           Base64.strict_encode64 "#{login}:#{password}"
+        end
+
+        def load
+          HBW::Activiti::API.config = (Settings::BPM[Rails.env] || {}).deep_symbolize_keys
         end
       end
     end

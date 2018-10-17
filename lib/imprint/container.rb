@@ -13,9 +13,7 @@ module Imprint
       end
     else
       register(:imprint_api) do
-        Imprint::API.load(%w(config/imprint.default.yml
-                             config/imprint.yml))
-
+        Imprint::API.load
         Imprint::API.build
       end
     end

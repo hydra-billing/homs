@@ -34,6 +34,7 @@ gem 'thin'
 gem 'nokogiri', '~> 1.8.1'
 gem 'aws-sdk', '~> 2'
 gem 'web-console', '~> 2.0', group: :development
+gem 'settingslogic'
 
 group :oracle do
   gem 'ruby-oci8', '2.2.3'
