@@ -36,8 +36,8 @@ var CustomFormatter = {
         val = def;
 
       simpleMask = simpleMask.replace(/[_\d]/g, function (_) {
-        return val.charAt(i++) || "_"})
-      ;
+        return val.charAt(i++) || "_";
+      });
 
       i = simpleMask.indexOf("_");
 

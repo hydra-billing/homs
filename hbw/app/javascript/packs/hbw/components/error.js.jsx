@@ -27,7 +27,7 @@ modulejs.define('HBWError', ['React', 'HBWTranslationsMixin', 'jQuery'], (React,
           iconClass = 'fa fa-chevron-right';
         }
 
-        if (jQuery.isPlainObject(this.props.error)) {
+        if (this.props.error.hasOwnProperty('responseText')) {
           error = this.props.error.responseText;
         } else {
           ({ error } = this.props);

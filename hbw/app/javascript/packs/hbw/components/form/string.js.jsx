@@ -258,7 +258,6 @@ modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
   getMatches (regexp, value) {
     let match;
     const matches = [];
-    const i = 0;
 
     while ((match = regexp.exec(value))) {
       matches.push(match);
@@ -333,7 +332,7 @@ modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
   },
 
   isEveryBlank (array) {
-    return array.reduce(((res, val) => res && !val.replace(/\s/g, '')), true) && true;
+    return array.reduce(((res, val) => res && !val.replace(/\s/g, '')), true);
   },
 
   getNormalizedInitialValues (value) {

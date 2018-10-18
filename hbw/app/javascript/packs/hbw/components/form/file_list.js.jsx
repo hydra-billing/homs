@@ -16,7 +16,7 @@ modulejs.define('HBWFormFileList', ['React', 'HBWDeleteIfMixin'], (React, Delete
       cssClass += ' hidden';
     }
 
-    const { label }    = this.props.params;
+    const { label } = this.props.params;
     const labelCSS = `hbw-checkbox-label ${this.props.params.label_css || ''}`;
 
     if (this.props.value) {
@@ -41,7 +41,6 @@ modulejs.define('HBWFormFileList', ['React', 'HBWDeleteIfMixin'], (React, Delete
   files (list) {
     const onClick = this.deleteLink;
     const { deletedFiles } = this.state;
-
 
     return list.map((variant) => {
       if (deletedFiles.includes(variant.name)) {

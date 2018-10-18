@@ -58,7 +58,7 @@ modulejs.define('HBWTasksMixin', [], () => ({
     return this.props.env.connection.subscribe({
       client: this.getComponentId(),
       path:   'tasks',
-      data:   {
+      data: {
         entity_class: this.props.env.entity_class
       }
     })
@@ -101,7 +101,7 @@ modulejs.define('HBWSelectMixin', ['jQuery'], jQuery => ({
         } else if (this.props.params.choices.length) {
           const first = this.props.params.choices[0];
 
-          if (jQuery.isArray(first)) {
+          if (Array.isArray(first)) {
             return first[0];
           } else {
             return first;
@@ -117,20 +117,20 @@ modulejs.define('HBWSelectMixin', ['jQuery'], jQuery => ({
     }
   },
 
-
   hasValueInChoices (value) {
     if (this.props.params.mode === 'lookup') {
       return true;
     }
+
     if (this.isEqual(value, null) && this.props.params.nullable) {
       return true;
     }
 
-    for (const c of Array.from(this.props.params.choices)) {
+    this.props.params.choices.forEach((c) => {
       if (this.isChoiceEqual(c, value)) {
         return true;
       }
-    }
+    });
 
     return false;
   },
@@ -153,15 +153,11 @@ modulejs.define('HBWSelectMixin', ['jQuery'], jQuery => ({
   },
 
   isChoiceEqual (choice, value) {
-    if (jQuery.isArray(choice)) {
-      if (this.isEqual(choice[0], value)) {
-        return true;
-      }
-    } else if (this.isEqual(choice, value)) {
-      return true;
+    if (Array.isArray(choice)) {
+      return this.isEqual(choice[0], value);
+    } else {
+      return this.isEqual(choice, value);
     }
-
-    return false;
   },
 
   missFieldInVariables () {
@@ -181,7 +177,7 @@ modulejs.define('HBWDeleteIfMixin', ['jQuery'], jQuery => ({
   },
 
   variableByName (name) {
-    for (const variable of Array.from(this.variables())) {
+    for (const variable of this.variables()) {
       if (variable.name === name) {
         return variable.value;
       }
@@ -191,12 +187,12 @@ modulejs.define('HBWDeleteIfMixin', ['jQuery'], jQuery => ({
   deleteIf () {
     const conditions = this.getConditions();
 
-    if ((jQuery.isArray(conditions) && (conditions.length === 0)) || jQuery.isEmptyObject(conditions)) {
+    if ((Array.isArray(conditions) && (conditions.length === 0)) || jQuery.isEmptyObject(conditions)) {
       return false;
     } else {
       const conditionType = this.conditionType(conditions[0]);
 
-      const result = Array.from(conditions).map(condition => (conditionType === 'or' ?
+      const result = [...conditions].map(condition => (conditionType === 'or' ?
         this.evaluateOrCondition(condition) :
         this.evaluateAndCondition(condition)));
 
@@ -225,7 +221,7 @@ modulejs.define('HBWDeleteIfMixin', ['jQuery'], jQuery => ({
   },
 
   evaluateOrCondition (data) {
-    const result = Array.from(data).map(inner_condition => this.evaluateAndCondition(inner_condition));
+    const result = [...data].map(inner_condition => this.evaluateAndCondition(inner_condition));
 
     return this.every(result);
   },
@@ -235,22 +231,10 @@ modulejs.define('HBWDeleteIfMixin', ['jQuery'], jQuery => ({
   },
 
   every (results) {
-    for (const result of Array.from(results)) {
-      if (result === false) {
-        return result;
-      }
-    }
-
-    return true;
+    return results.every(el => el !== false);
   },
 
   some (results) {
-    for (const result of Array.from(results)) {
-      if (result === true) {
-        return result;
-      }
-    }
-
-    return false;
+    return results.some(el => el === true);
   }
 }));

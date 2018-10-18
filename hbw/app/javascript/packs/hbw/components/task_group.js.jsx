@@ -1,11 +1,11 @@
 modulejs.define(
   'HBWTaskGroup',
   ['React',
-    'HBWTask',
-    'HBWCallbacksMixin'],
+   'HBWTask',
+   'HBWCallbacksMixin'],
   (React,
-    Task,
-    CallbacksMixin) => React.createClass({
+   Task,
+   CallbacksMixin) => React.createClass({
     mixins: [CallbacksMixin],
 
     getDefaultProps () {

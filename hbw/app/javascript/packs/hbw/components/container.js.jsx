@@ -1,12 +1,12 @@
 modulejs.define(
   'HBWContainer',
   ['React',
-    'HBWButtons',
-    'HBWEntityTasks',
-    'HBWError',
-    'HBWPending',
-    'HBWCallbacksMixin',
-    'HBWTasksMixin'],
+   'HBWButtons',
+   'HBWEntityTasks',
+   'HBWError',
+   'HBWPending',
+   'HBWCallbacksMixin',
+   'HBWTasksMixin'],
   (React, Buttons, Tasks, Error, Pending, CallbacksMixin, TasksMixin) => React.createClass({
     mixins: [TasksMixin, CallbacksMixin],
 

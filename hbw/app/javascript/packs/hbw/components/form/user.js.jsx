@@ -21,7 +21,7 @@ modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'jQuery'], (React, ReactDOM
       allowClear:  this.props.params.nullable,
       theme:       'bootstrap',
       placeholder: this.props.params.placeholder || 'User',
-      ajax:        {
+      ajax: {
         url:      '/users/lookup',
         dataType: 'json',
         delay:    250,

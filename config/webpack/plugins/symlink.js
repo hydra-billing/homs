@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require('fs');
 const path = require('path');
 
 const CHUNKHASH_REGEX = /(-[a-z0-9]{20}\.{1}){1}/;

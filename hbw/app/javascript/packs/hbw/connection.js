@@ -207,6 +207,7 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
       if (!this.options.path) {
         this.options.path = '';
       }
+
       if (!this.options.host) {
         this.options.host = `${document.location.protocol}//${document.location.host}`;
       }

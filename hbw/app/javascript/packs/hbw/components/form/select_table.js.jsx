@@ -72,9 +72,8 @@ modulejs.define('HBWFormSelectTable',
 
       if (!hasNullValue) {
         const nullChoice = ['null'];
-        for (let i = 1, end = this.props.params.row_params.length, asc = end >= 1; asc ? i <= end : i >= end; asc ? i++ : i--) {
-          nullChoice.push('-');
-        }
+
+        [...new Array(this.props.params.row_params.length).keys()].forEach(_ => nullChoice.push('-'));
 
         choices.push(nullChoice);
       }

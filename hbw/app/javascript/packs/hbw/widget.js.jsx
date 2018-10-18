@@ -115,7 +115,7 @@ modulejs.define(
         return this.tasksSubscription = this.env.connection.subscribe({
           client: 'root',
           path:   'tasks',
-          data:   {
+          data: {
             entity_class: this.options.entity_class
           }
         });

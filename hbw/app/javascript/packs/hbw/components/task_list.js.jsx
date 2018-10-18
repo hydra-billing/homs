@@ -79,8 +79,9 @@ modulejs.define('HBWTaskList',
       }
 
       const keys = Object.keys(groups).sort((a, b) => {
-        let left; let
-          left1;
+        let left;
+        let left1;
+
         return ((left = a < b) != null ? left : -{ 1: ((left1 = a > b) != null ? left1 : { 1: 0 }) }); // The hell generated from CoffeeScript
       });
 

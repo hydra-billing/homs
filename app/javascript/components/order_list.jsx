@@ -123,7 +123,7 @@ const OrderList = React.createClass({
   },
 
   showMoreOrders () {
-    const filterParams       = this.props.filterParams;
+    const filterParams = this.props.filterParams;
     filterParams.page_size = this.props.pageSize;
     filterParams.page = this.state.page;
     filterParams.sort_by = this.state.orderRowCode;
@@ -152,7 +152,7 @@ const OrderList = React.createClass({
   render () {
     const options = [];
     for (let field in this.props.profile.data) {
-      const disabled = field == 'code';
+      let disabled = field == 'code';
       options.push(<option key={field} value={field} disabled={disabled}>{this.props.profile.data[field].label}</option>);
     }
 

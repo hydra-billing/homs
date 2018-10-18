@@ -272,10 +272,9 @@ class Homs {
           $orderAttributePicker.empty();
 
           $.each(data.options, (key, value) => {
-            $orderAttributePicker
-              .append(
-                $('<option>', { value: key }).text(value.label)
-              );
+            $orderAttributePicker.append(
+              $('<option>', { value: key }).text(value.label)
+            );
           });
 
           $orderAttributePicker.prop('disabled', false).trigger('change');

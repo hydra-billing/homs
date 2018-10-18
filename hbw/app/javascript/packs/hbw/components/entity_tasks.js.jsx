@@ -29,7 +29,6 @@ modulejs.define(
 
     render () {
       const classes = 'hbw-entity-task-list';
-      // classes += ' ' + this.props.form.css_class
       const processName = this.getProcessName();
 
       return <div className={classes}>

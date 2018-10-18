@@ -1,17 +1,17 @@
 modulejs.define(
   'HBWButtons',
   ['React',
-    'HBWButton',
-    'HBWCallbacksMixin',
-    'HBWTranslationsMixin',
-    'HBWError',
-    'HBWPending'],
+   'HBWButton',
+   'HBWCallbacksMixin',
+   'HBWTranslationsMixin',
+   'HBWError',
+   'HBWPending'],
   (React,
-    Button,
-    CallbacksMixin,
-    TranslationsMixin,
-    Error,
-    Pending) => React.createClass({
+   Button,
+   CallbacksMixin,
+   TranslationsMixin,
+   Error,
+   Pending) => React.createClass({
     mixins: [CallbacksMixin, TranslationsMixin],
 
     getInitialState () {
@@ -37,7 +37,7 @@ modulejs.define(
       const subscription = this.props.env.connection.subscribe({
         client: this.getComponentId(),
         path:   '/buttons',
-        data:   {
+        data: {
           entity_code:  this.props.entityCode,
           entity_type:  this.props.entityTypeCode,
           entity_class: this.props.entityClassCode
@@ -63,7 +63,7 @@ modulejs.define(
       return this.props.env.connection.request({
         url:    this.buttonsURL(),
         method: 'POST',
-        data:   {
+        data: {
           entity_code:  this.props.entityCode,
           entity_type:  this.props.entityTypeCode,
           entity_class: this.props.entityClassCode,
@@ -82,7 +82,6 @@ modulejs.define(
       this.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
       this.bind('hbw:file-upload-finished', () => this.setState({ fileUploading: false }));
     },
-
 
     componentWillUnmount () {
       this.state.subscription.close();

@@ -127,7 +127,7 @@ modulejs.define('HBWFormSelect',
         let rawValue;
         let visualValue;
 
-        if (jQuery.isArray(variant)) {
+        if (Array.isArray(variant)) {
           rawValue = variant[0];
           visualValue = variant[1];
         } else {

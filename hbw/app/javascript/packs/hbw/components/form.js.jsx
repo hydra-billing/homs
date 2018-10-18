@@ -26,7 +26,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       return <div className='hbw-form'>
         <Error error={this.state.error || this.props.error} />
         <span>{this.props.pending}</span>
-        <form method="post" ref="form" onSubmit={this.submit}>
+        <form method="POST" ref="form" onSubmit={this.submit}>
           {this.iterateControls(this.props.form.fields)}
           {this.submitControl(this.props.form.fields)}
         </form>
@@ -65,9 +65,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
 
     submitControl (fields) {
       const last = fields[fields.length - 1];
-      if (last.type === 'submit_select') {
-        // TODO draw submit select control
-      } else {
+      if (last.type !== 'submit_select') {
         // Draw default form submit button
         const params = {
           title:     'Submit the form',

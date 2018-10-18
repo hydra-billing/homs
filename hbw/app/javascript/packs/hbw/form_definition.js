@@ -12,12 +12,10 @@ modulejs.define('HBWFormDefinition', ['jQuery'], (jQuery) => {
       return this.allFields[name];
     }
 
-    // protected
-
     getFields (obj) {
       const allFields = {};
-
       const objFields = obj.fields || {};
+
       for (const field of Array.from(objFields)) {
         switch (field.type) {
           case ('group'): jQuery.extend(allFields, this.getFields(field)); break;
@@ -33,8 +31,10 @@ modulejs.define('HBWFormDefinition', ['jQuery'], (jQuery) => {
 
     getDatetimeRangeFields (obj) {
       const fields = {};
+
       fields[obj.from.name] = obj.from;
       fields[obj.to.name] = obj.to;
+
       return fields;
     }
   }

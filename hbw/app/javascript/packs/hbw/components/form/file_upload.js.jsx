@@ -1,9 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 modulejs.define('HBWFormFileUpload',
   ['React', 'jQuery', 'HBWDeleteIfMixin', 'HBWCallbacksMixin'],
   (React, jQuery, DeleteIfMixin, CallbacksMixin) => React.createClass({
@@ -60,6 +54,7 @@ modulejs.define('HBWFormFileUpload',
 
     addValue (name, res) {
       const { files } = this.state;
+
       files.push({
         name,
         content: window.btoa(res)

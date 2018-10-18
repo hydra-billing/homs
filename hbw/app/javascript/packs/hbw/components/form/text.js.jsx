@@ -3,15 +3,12 @@ modulejs.define('HBWFormText', ['React', 'HBWDeleteIfMixin'], (React, DeleteIfMi
 
   render () {
     const opts = {
-      name:      this.props.name,
-      className: 'form-control'
+      name:         this.props.name,
+      className:    'form-control',
+      rows:         this.props.params.rows,
+      defaultValue: this.props.value,
+      readOnly:     this.props.params.editable === false
     };
-    opts.rows = this.props.params.rows;
-    opts.defaultValue = this.props.value;
-
-    if (this.props.params.editable === false) {
-      opts.readOnly = true;
-    }
 
     const title = this.props.params.tooltip;
     const { label } = this.props.params;

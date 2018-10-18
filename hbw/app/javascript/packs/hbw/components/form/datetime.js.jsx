@@ -11,8 +11,9 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment', 'HB
   },
 
   getInitialState () {
-    let defaultValue; let
-      value;
+    let defaultValue;
+    let value;
+
     const locale = this.props.params.locale || 'en';
     const format = this.props.params.format || 'MM/DD/YYYY';
 
@@ -77,8 +78,8 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment', 'HB
   },
 
   updateValue (event) {
-    let stringValue; let
-      value;
+    let stringValue;
+    let value;
     const { date } = event;
 
     if (date) {
