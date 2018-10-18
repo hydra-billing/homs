@@ -11,6 +11,8 @@
   @import 'select2_bootstrap3'
   @import 'bootstrap-datetimepicker'
 
+  @import 'tooltip'
+
   .pre-scrollable
     overflow-y: auto
 
@@ -48,14 +50,21 @@
     .tooltip.right
       z-index: 1010
 
-    .tooltip.in
-      opacity: 1
+    .tooltip-red
+      .tooltip
+        background-color: red
 
-    .tooltip.bottom .tooltip-inner
-      background-color: red
+        &[x-placement^="top"] .tooltip-arrow
+          border-top-color: red
 
-    .tooltip.bottom .tooltip-arrow
-      border-bottom-color: red
+        &[x-placement^="bottom"] .tooltip-arrow
+          border-bottom-color: red
+
+        &[x-placement^="right"] .tooltip-arrow
+          border-right-color: red
+
+        &[x-placement^="left"] .tooltip-arrow
+          border-left-color: red
 
   .hbw-checkbox-label
     display: table-cell

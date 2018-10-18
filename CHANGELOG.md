@@ -13,6 +13,7 @@ v1.5.0 [unreleased]
 -   [#151](https://github.com/latera/homs/pull/152) Remove libqtwebkit-dev.
 -   [#177](https://github.com/latera/homs/pull/177) Improve README and docker-compose files.
 -   [#171](https://github.com/latera/homs/pull/171) Migrate from CoffeeScript to ES6 + Webpack.
+-   [#179](https://github.com/latera/homs/pull/179) Replace `jquery-ui` tooltip with `popper.js`.
 
 ### Bugfixes
 -   [#170](https://github.com/latera/homs/pull/170) Use active support logger as base.
