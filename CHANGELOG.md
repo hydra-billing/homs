@@ -11,6 +11,7 @@ v1.5.0 [unreleased]
 -   [#161](https://github.com/latera/homs/pull/161), [#6](https://github.com/latera/activiti-homs-docker/pull/6) Use activiti credentials from environment variables.
 -   [#151](https://github.com/latera/homs/pull/151) Add current version to docker container.
 -   [#151](https://github.com/latera/homs/pull/152) Remove libqtwebkit-dev.
+-   [#177](https://github.com/latera/homs/pull/177) Improve README and docker-compose files.
 
 ### Bugfixes
 -   [#170](https://github.com/latera/homs/pull/170) Use active support logger as base.

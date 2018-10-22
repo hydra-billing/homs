@@ -19,6 +19,7 @@ services:
     image: postgres
     hostname: postgres-homs
     container_name: postgres-homs
+    restart: always
     environment:
       PGDATA: /var/lib/postgresql/data/homs
       POSTGRES_DB: $HOMS_DB_NAME
@@ -34,6 +35,7 @@ services:
   activiti:
     image: latera/activiti-homs
     container_name: activiti
+    restart: always
     links:
       - $BPM_DB_HOST:postgres-activiti
     environment:
@@ -54,6 +56,7 @@ services:
     image: minio/minio
     container_name: minio
     command: "server /opt/minio"
+    restart: always
     environment:
       MINIO_ACCESS_KEY: $MINIO_ACCESS_KEY
       MINIO_SECRET_KEY: $MINIO_SECRET_KEY
@@ -64,6 +67,7 @@ services:
   homs:
     image: latera/homs
     container_name: homs
+    restart: always
     links:
       - $HOMS_DB_HOST:postgres-homs
       - activiti:activiti
@@ -77,6 +81,8 @@ services:
       HOMS_DB_HOST: $HOMS_DB_HOST
       HOMS_DB_USER: $HOMS_DB_USER
       HOMS_DB_PASSWORD: $HOMS_DB_PASSWORD
+      BPM_USER: $BPM_USER
+      BPM_PASSWORD: $BPM_PASSWORD
     ports:
       - 3000:3000
     networks:
