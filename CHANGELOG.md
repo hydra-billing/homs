@@ -19,6 +19,7 @@ v1.4.0.2 [unreleased]
 ---------------------
 ### Bugfixes
 -   [#165](https://github.com/latera/homs/pull/165) Remove new line from BPM widget basic auth generator.
+-   [#174](https://github.com/latera/homs/pull/174) Remove unnecessary scroll in BPM widget select tables.
 
 v1.4.0.1 [2018-10-08]
 ---------------------
@@ -50,4 +51,3 @@ v1.4.0.1 [2018-10-08]
 -   [#140](https://github.com/latera/homs/pull/140) Submit form with files.
 -   [#142](https://github.com/latera/homs/pull/142) Fix form-submit after Rails 5 upgrade.
 -   [#134](https://github.com/latera/homs/pull/134) Validate arbitrary keys for profiles.
--   [#174](https://github.com/latera/homs/pull/174) Remove unnecessary scroll in BPM widget select tables.
