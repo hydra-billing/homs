@@ -1,6 +1,9 @@
+import Select, { components } from 'react-select';
+import AsyncSelect from 'react-select/lib/Async';
+
 modulejs.define('HBWFormSelect',
-  ['React', 'ReactDOM', 'HBWTranslationsMixin', 'jQuery', 'HBWDeleteIfMixin', 'HBWSelectMixin'],
-  (React, ReactDOM, TranslationsMixin, jQuery, DeleteIfMixin, SelectMixin) => React.createClass({
+  ['React', 'ReactDOM', 'HBWTranslationsMixin', 'HBWDeleteIfMixin', 'HBWSelectMixin'],
+  (React, ReactDOM, TranslationsMixin, DeleteIfMixin, SelectMixin) => React.createClass({
     mixins: [TranslationsMixin, DeleteIfMixin, SelectMixin],
 
     getInitialState () {
@@ -14,13 +17,21 @@ modulejs.define('HBWFormSelect',
     },
 
     render () {
-      const lookup = this.props.params.mode === 'lookup';
+      const isMulti = !this.props.params.single && this.props.params.mode === 'lookup';
       const opts = {
-        name:         this.props.name,
-        type:         'text',
-        defaultValue: lookup ? [this.state.value] : this.state.value,
-        disabled:     this.props.params.editable === false,
-        multiple:     lookup
+        name:             this.props.name,
+        options:          this.buildOptions(),
+        defaultValue:     this.getDefaultValue(isMulti),
+        placeholder:      this.props.params.placeholder || '',
+        isClearable:      this.props.params.nullable || this.props.value === null,
+        isDisabled:       this.props.params.editable === false,
+        isMulti:          isMulti,
+        noOptionsMessage: this.noOptionsMessage,
+        loadingMessage:   this.loadingMessage,
+        className:        'react-select-container',
+        classNamePrefix:  'react-select',
+        styles:           this.customStyles(),
+        onChange:         opt => this.setValue(opt)
       };
 
       let cssClass = this.props.params.css_class;
@@ -49,15 +60,126 @@ modulejs.define('HBWFormSelect',
         <span className={labelCss}>{label}</span>
         <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
         <div className={formGroupCss}>
-          <select {...opts}>
-            {this.buildOptions(this.state.choices)}
-          </select>
+          {this.selectComponent(opts)}
         </div>
       </div>;
     },
 
-    setValue () {
-      const newValue = jQuery(ReactDOM.findDOMNode(this)).find('select').val();
+    customStyles () {
+      const bgColor = (state) => {
+        return state.isFocused ? '#2C3E50' : (state.isSelected ? '#445C72' : 'white')
+      };
+
+      return {
+        control: (base, state) => ({
+          ...base,
+          minHeight:   45,
+          borderColor: state.isFocused ? 'black' : '#dce4ec',
+          borderWidth: 2,
+          boxShadow:   'none',
+          cursor:      'pointer',
+
+          '&:hover': {
+            borderColor: 'inherit',
+            borderWidth: 2
+          }
+        }),
+        option: (base, state) => ({
+          ...base,
+          color:           (state.isFocused || state.isSelected) ? 'white' : '#2C3E50',
+          backgroundColor: bgColor(state),
+          cursor:          'pointer',
+
+          '&:active': {
+            color:           'white',
+            backgroundColor: '#2C3E50'
+          }
+        })
+      };
+    },
+
+    selectComponent (opts) {
+      if (this.props.params.mode === 'lookup') {
+        return <AsyncSelect loadOptions={this.loadOptions}
+                            {...opts} />
+      } else {
+        return <Select {...opts} />
+      }
+    },
+
+    noOptionsMessage (options) {
+      const { inputValue } = options;
+
+      if (inputValue && inputValue.length >= 2) {
+        return this.t('components.select.no_results_found');
+      } else {
+        return this.t('components.select.enter_more_chars');
+      }
+    },
+
+    loadingMessage () {
+      return this.t('components.select.searching');
+    },
+
+    componentWillMount () {
+      this.fetchOptionsAsync = this.debounce(this.fetchOptionsAsync, 250)
+    },
+
+    loadOptions (inputValue, callback) {
+      if (inputValue && inputValue.length >= 2) {
+        this.fetchOptionsAsync(inputValue, callback);
+      } else {
+        callback();
+      }
+    },
+
+    fetchOptionsAsync (inputValue, callback) {
+      const url = `${this.props.params.url}${(this.props.params.url.includes('?') ? '&' : '?')}`;
+
+      fetch(`${url}q=${inputValue}`)
+        .then((response) => {
+          return response.json();
+        })
+        .then((json) => {
+          const res = json.map(opt => ({
+            label: opt.text,
+            value: opt.id
+          }));
+
+          callback(res);
+        })
+        .catch((error) => {
+          console.error(error);
+
+          callback();
+        });
+    },
+
+    getDefaultValue (isMulti) {
+      const variants = this.buildOptions();
+
+      if (this.state.value) {
+        const value = (isMulti ? this.state.value : [this.state.value]).map(el => `${el}`);
+
+        return variants.filter(opt => value.includes(`${opt.value}`));
+      } else {
+        if (this.props.params.nullable) {
+          return [];
+        } else {
+          return [variants[0]];
+        }
+      }
+    },
+
+    setValue (option) {
+      let newValue;
+
+      if (Array.isArray(option)) {
+        newValue = option.map(opt => opt.value)
+      } else {
+        newValue = option ? option.value : null;
+      }
+
       this.setState({
         value:   newValue,
         choices: this.getChoices(newValue),
@@ -65,104 +187,40 @@ modulejs.define('HBWFormSelect',
       });
     },
 
-    componentDidMount () {
-      this.hijackSelect2();
-    },
+    buildOptions () {
+      return this.state.choices.map((variant) => {
+        const [value, label] = Array.isArray(variant) ? variant : [variant, variant];
 
-    hijackSelect2 () {
-      let ajaxOptions;
-      let select;
-
-      if (this.props.params.mode === 'lookup') {
-        ajaxOptions = {
-          minimumInputLength:     1,
-          maximumSelectionLength: 1,
-          ajax:                   {
-            url:      this.props.params.url,
-            dataType: 'json',
-            delay:    250,
-            cache:    true,
-            processResults (data, page) {
-              return { results: data };
-            },
-            data (params) {
-              return {
-                q:    params.term,
-                page: params.page
-              };
-            }
-          }
+        return {
+          label,
+          value: value || '',
+          key:   value || 'null'
         };
-      } else {
-        ajaxOptions = {};
-      }
-
-      const e = jQuery(ReactDOM.findDOMNode(this));
-
-      return select = e.find('select').select2(jQuery.extend({}, {
-        width:       '100%',
-        allowClear:  this.props.params.nullable,
-        theme:       'bootstrap',
-        placeholder: this.props.params.placeholder,
-        language:    this.getLanguage()
-      }, ajaxOptions)).on('change', () => this.setValue());
-    },
-
-    addNullChoice (choices) {
-      let hasNullValue = false;
-
-      for (const choice of choices) {
-        if (this.isChoiceEqual(choice, null)) {
-          hasNullValue = true;
-        }
-      }
-
-      if (!hasNullValue) {
-        choices.unshift([null, this.t('components.select.not_selected')]);
-      }
-    },
-
-    buildOptions (choices) {
-      return choices.map((variant) => {
-        let rawValue;
-        let visualValue;
-
-        if (Array.isArray(variant)) {
-          rawValue = variant[0];
-          visualValue = variant[1];
-        } else {
-          rawValue = variant;
-          visualValue = variant;
-        }
-
-        if (rawValue === null) {
-          return <option value="" key="null">{visualValue}</option>;
-        } else {
-          return <option value={rawValue} key={rawValue}>{visualValue}</option>;
-        }
       });
-    },
-
-    getLanguage () {
-      const translations = jQuery.fn.select2.amd.require(`select2/i18n/${this.props.env.locale}`);
-      const language = jQuery.extend({}, translations);
-
-      language.maximumSelected = () => '';
-
-      return language;
     },
 
     addCurrentValueToChoices (value) {
       const choices = this.props.params.choices.slice();
 
-      if (!this.hasValueInChoices(value)) {
-        if (this.props.value === null) {
-          this.addNullChoice(choices);
-        } else {
-          choices.push(value);
-        }
+      if (!this.hasValueInChoices(value) && this.props.value !== null) {
+        choices.push(value);
       }
 
       return choices;
+    },
+
+    addNullChoice (_) {
+      return null;
+    },
+
+    debounce (f, ms) {
+      let timer;
+
+      return function (...args) {
+        const functionCall = () => f.apply(this, args);
+
+        clearTimeout(timer);
+        timer = setTimeout(functionCall, ms);
+      };
     }
   }));

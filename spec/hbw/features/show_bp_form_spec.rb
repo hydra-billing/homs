@@ -1,9 +1,4 @@
 feature 'Show business process form', js: true do
-  let(:contract_number)  { '123456' }
-  let(:problem_descr)    { 'Problem description' }
-  let(:current_date)     { Date.today.strftime('%m/%d/%Y') }
-  let(:current_date_iso) { Date.today.iso8601 }
-
   before(:each) do
     user = FactoryBot.create(:user)
     signin(user.email, user.password)
@@ -23,11 +18,13 @@ feature 'Show business process form', js: true do
 
     click_and_wait 'ORD-1'
 
-    expect(page).to                                  have_selector "[name='homsOrderDataSelect']"
-    expect(page).to                                  have_content 'ORD-1'
-    expect(select2_text('homsOrderDataSelect')).to   eq 'Option 1'
-    expect(select_options('homsOrderDataSelect')).to eq ['Not selected', 'Option 1', 'Option 2']
-    expect(select_values('homsOrderDataSelect')).to  eq ['', '123456', '654321']
+    expect(page).to have_content 'ORD-1'
+    expect_r_select_presence('homsOrderDataSelect')
+    expect(r_select_single_value('homsOrderDataSelect')).to eq({label: 'Option 1', value: '123456'})
+
+    set_r_select_option('homsOrderDataSelect', 'Option 2')
+
+    expect(r_select_single_value('homsOrderDataSelect')).to eq({label: 'Option 2', value: '654321'})
     expect_widget_presence
   end
 
@@ -38,11 +35,13 @@ feature 'Show business process form', js: true do
 
     click_and_wait 'ORD-2'
 
-    expect(page).to                                  have_selector "[name='homsOrderDataSelect']"
-    expect(page).to                                  have_content 'ORD-2'
-    expect(select2_text('homsOrderDataSelect')).to   eq 'Option Var 1'
-    expect(select_options('homsOrderDataSelect')).to eq ['Not selected', 'Option Var 1', 'Option Var 2']
-    expect(select_values('homsOrderDataSelect')).to  eq ['', '123', '321']
+    expect(page).to have_content 'ORD-2'
+    expect_r_select_presence('homsOrderDataSelect')
+    expect(r_select_single_value('homsOrderDataSelect')).to eq({label: 'Option Var 1', value: '123'})
+
+    set_r_select_option('homsOrderDataSelect', 'Option Var 2')
+
+    expect(r_select_single_value('homsOrderDataSelect')).to eq({label: 'Option Var 2', value: '321'})
     expect_widget_presence
   end
 
@@ -53,14 +52,14 @@ feature 'Show business process form', js: true do
 
     click_and_wait 'ORD-13'
 
-    expect(page).to have_selector "[name='homsOrderDataSelect']"
     expect(page).to have_content 'ORD-13'
+    expect_r_select_presence('homsOrderDataSelect')
 
-    select2_search_field.set('c')
+    r_select_input('homsOrderDataSelect').set('cust')
     wait_for_ajax
 
     expect(page).to have_content 'Found customer'
-    expect(select2_results).to eq ['Found customer']
+    expect(r_select_lookup_options('homsOrderDataSelect')).to eq ['Found customer']
 
     expect_widget_presence
   end

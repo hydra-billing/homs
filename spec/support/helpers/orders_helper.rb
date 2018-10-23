@@ -114,6 +114,76 @@ module Features
       expect(parent_node(page.find("[name='#{name}']"))).to have_no_selector('.select2-selection__clear')
     end
 
+    def expect_r_select_presence(name)
+      expect(r_select_container(name)).to have_selector('.react-select__input')
+    end
+
+    def ensure_r_select_is_empty(name)
+      expect(r_select_container(name)).to have_no_selector('.react-select__value-container--has-value')
+    end
+
+    def ensure_r_select_unclearable(name)
+      expect(r_select_container(name)).to have_no_selector('.react-select__clear-indicator')
+    end
+
+    def r_select_container(name)
+      page.find("[name='#{name}']", visible: false).ancestor('.react-select-container')
+    end
+
+    def r_select_dropdown_indicator(name)
+      r_select_container(name).find('.react-select__dropdown-indicator')
+    end
+
+    def toggle_r_select_menu(name)
+      r_select_dropdown_indicator(name).click
+    end
+
+    def set_r_select_option(name, option)
+      r_select = r_select_container(name).click
+
+      r_select.find('.react-select__option', text: option).hover
+      r_select.find('.react-select__option', text: option).click
+    end
+
+    def set_r_select_lookup_option(name, option)
+      r_select = r_select_container(name)
+
+      r_select.find('.react-select__option', text: option).hover
+      r_select.find('.react-select__option', text: option).click
+    end
+
+    def r_select_clear_value(name)
+      r_select_container(name).find('.react-select__clear-indicator').click
+    end
+
+    def r_select_options(name)
+      r_select = r_select_container(name).click
+
+      r_select.all('.react-select__option').map(&:text)
+    end
+
+    def r_select_lookup_options(name)
+      r_select_container(name).all('.react-select__option').map(&:text)
+    end
+
+    def r_select_single_value(name)
+      hidden_input = page.find("[name='#{name}']", visible: false)
+      r_select = parent_node(hidden_input)
+
+      {
+          label: r_select.find('.react-select__single-value').text,
+          value: hidden_input.value
+      }
+    end
+
+    def r_select_placeholder(name)
+      r_select_container(name).find('.react-select__placeholder').text
+    end
+
+    def r_select_input(name)
+      r_select_container(name).find('.react-select__input').find('input')
+    end
+
     def input_by_name(name)
       page.find("input[name='#{name}']")
     end
