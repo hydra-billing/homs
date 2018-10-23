@@ -12,6 +12,7 @@ v1.5.0 [unreleased]
 -   [#151](https://github.com/latera/homs/pull/151) Add current version to docker container.
 -   [#151](https://github.com/latera/homs/pull/152) Remove libqtwebkit-dev.
 -   [#177](https://github.com/latera/homs/pull/177) Improve README and docker-compose files.
+-   [#171](https://github.com/latera/homs/pull/171) Migrate from CoffeeScript to ES6 + Webpack.
 
 ### Bugfixes
 -   [#170](https://github.com/latera/homs/pull/170) Use active support logger as base.
