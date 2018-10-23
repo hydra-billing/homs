@@ -48,42 +48,54 @@ The prefered way to install HOMS is to use docker
   cp config/secrets.yml.sample /etc/hydra/homs/secrets.yml
   ```
 
-5. Add environment variables to `.env` file and [Minio](https://github.com/minio/minio) credentials. Default values:
+5. Create `.env` near `docker-compose.yml` file and fill it up with applications credentials. Default values:
 
   ```
   HOMS_PATH=/path/to/homs
 
-  HOMS_DB_PASSWORD=homs
+  MINIO_PORT=9000
+  MINIO_BUCKET_NAME=bucket_name
+  MINIO_ACCESS_KEY=generate_some_random_value_here
+  MINIO_SECRET_KEY=generate_some_random_value_here
+
+  HOMS_HOST=homs
+  HOMS_PORT=3000
+  HOMS_DB_HOST=postgres-homs
+  HOMS_DB_PORT=5432
+  HOMS_DB_PATH=/var/lib/postgresql/data/homs
   HOMS_DB_NAME=homs
   HOMS_DB_USER=homs
-  HOMS_DB_HOST=db_homs
+  HOMS_DB_PASSWORD=homs
 
-  BPM_DB_HOST=db_activiti
-  BPM_DB_USER=activiti
-  BPM_DB_PASSWORD=activiti
-  BPM_DB_NAME=activiti
+  BPM_HOST=activiti
+  BPM_PORT=8080
   BPM_USER=kermit
   BPM_PASSWORD=kermit
-
-  MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml
-  MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml
+  BPM_DB_HOST=postgres-activiti
+  BPM_DB_PORT=5432
+  BPM_DB_DRIVER=org.postgresql.Driver
+  BPM_DB_PATH=/var/lib/postgresql/data/activiti
+  BPM_DB_NAME=kermit
+  BPM_DB_USER=activiti
+  BPM_DB_PASSWORD=activiti
   ```
 
-6. Add bucket in Minio. Default Minio address - [http://127.0.0.1:9000](http://127.0.0.1:9000)
-  
-7. Be sure to update secret key in `config/secrets.yml`. You can generate key with this command:
+6. Be sure to update secret key in `/etc/hydra/homs/secrets.yml`. You can generate key with this command:
 
   ```
   openssl rand -hex 64
   ```
 
-8. Run `docker-compose`:
+7. Run `docker-compose`:
 
   ```
   docker-compose up -d
   ```
 
-Login at [http://localhost:3000](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
+8. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
+
+9. Login at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
+
 
 #### In development
 
@@ -91,77 +103,34 @@ If you don't want to use Oracle as source for your HOMS instance:
 
 ##### Without Oracle Instant Client
 
-1. Clone HOMS git repository:
+Follow the same steps as for [In production installation](#in-production), but with certain changes:
+
+2. Clone HOMS git repository:
 
   ```
   git clone https://github.com/latera/homs.git
   ```
-2. Make configs from samples:
+
+4. Create your own configs from samples:
 
   ```
   find config -name '*.sample' | xargs -I{} sh -c 'cp $1 ${1%.*}' -- {}
   ```
 
-3. Install docker-compose.
-4. For OS X users: make path to folder with HOMS shared in `Docker -> Preferences... -> File Sharing`.
-5. Add test environment to `config/database.yml`:
+6. Skip this step
 
-  ```
-  development:
-    adapter: postgresql
-    encoding: unicode
-    pool: 5
-    host: postgres-homs
-    database: homs
-    username: homs
-    password: homs
-  ```
-
-6. Add environment variables to `.env` file and [Minio](https://github.com/minio/minio) credentials. Default values:
-
-  ```
-  HOMS_PATH=/path/to/homs
-
-  HOMS_DB_PASSWORD=homs
-  HOMS_DB_NAME=homs
-  HOMS_DB_USER=homs
-  HOMS_DB_HOST=db_homs
-
-  BPM_DB_HOST=db_activiti
-  BPM_DB_USER=activiti
-  BPM_DB_PASSWORD=activiti
-  BPM_DB_NAME=activiti
-  BPM_USER=kermit
-  BPM_PASSWORD=kermit
-
-  MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml
-  MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml
-  ```
-
-7. Add bucket in Minio. Default Minio address - [http://127.0.0.1:9000](http://127.0.0.1:9000)
-
-8. Add to `config/sources.yml`
-
-  ```
-  sources:
-    bpmanagementsystem:
-      type: static/activiti
-  ```
-
-9. Run docker-compose:
-
+7. Run `docker-compose`: with custom config:
   ```
   docker-compose -f docker-compose.dev.yml up -d
   ```
-Login at [http://localhost:3000](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
-Or if you want to use Oracle as source for your HOMS instance
+Or if you want to use Oracle as source for your HOMS instance:
 
 ##### With Oracle Instant Client
 
-Steps 1 – 7 are the same as for [without Oracle Instant Client installation](#without-oracle-instant-client)
+Follow the same steps as for [without Oracle Instant Client installation](#without-oracle-instant-client), but with certain changes:
 
-8. Download the Oracle Instant Client 11.2 archives from OTN:
+6. Download the Oracle Instant Client 11.2 archives from OTN:
 
 http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
@@ -171,18 +140,16 @@ The following three ZIPs are required:
 - `instantclient-sdk-linux.x64-11.2.0.4.0.zip`
 - `instantclient-sqlplus-linux.x64-11.2.0.4.0.zip`
 
-9. Place the downloaded Oracle Instant Client RPMs in the same directory as the `Dockerfile` and run:
+6.1. Place the downloaded Oracle Instant Client RPMs in the same directory as the `Dockerfile` and run:
 
 ```
 docker build -t latera/homs-with-oracle -f Dockerfile.oracle .
 ```
 
-10. Add to `config/sources.yml`
+6.2. Create `config/sources.yml` file with database credentials
 
 ```
 sources:
-  bpmanagementsystem:
-    type: static/activiti
   billing:
     type: sql/oracle
     tns_name: dbname
@@ -190,20 +157,18 @@ sources:
     password: password
 ```
 
-11. Add environment variable `$TNSNAMES_PATH` to `.env` file with path to your `tnsnames.ora` file:
+6.3. Add environment variable `$TNSNAMES_PATH` to `.env` file with path to your `tnsnames.ora` file:
 
 ```
-TNSNAMES_PATH=/path/to/tnsnames.ora
+TNSNAMES_PATH=/dir/with/tnsnames.ora
 ```
+
 for access to host machine OS X users can use special DNS name `host.docker.internal` as host in `tnsnames.ora` ([details](https://docs.docker.com/docker-for-mac/networking))
 
-12. Run docker-compose:
-
-```
-docker-compose -f docker-compose.dev.oracle.yml up -d
-```
-
-Login at [http://localhost:3000](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
+7. Run `docker-compose`: with custom config:
+  ```
+  docker-compose -f docker-compose.dev.oracle.yml up -d
+  ```
 
 ### Using [manual installation instruction](https://github.com/latera/homs/blob/master/INSTALL.md)
 
