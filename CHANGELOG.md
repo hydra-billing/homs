@@ -12,6 +12,7 @@ v1.5.0 [unreleased]
 -   [#151](https://github.com/latera/homs/pull/151) Add current version to docker container.
 -   [#151](https://github.com/latera/homs/pull/152) Remove libqtwebkit-dev.
 -   [#177](https://github.com/latera/homs/pull/177) Improve README and docker-compose files.
+-   [#184](https://github.com/latera/homs/pull/184) Add `base_url` option to main config provides custom prefix for all paths in app. Fixes [#148](https://github.com/latera/homs/issues/148).    
 
 ### Bugfixes
 -   [#170](https://github.com/latera/homs/pull/170) Use active support logger as base.

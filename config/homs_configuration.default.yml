@@ -17,3 +17,5 @@ greeting:
 announcement:
 
 orders_expiration_warning_days: 1
+
+base_url: '/'
