@@ -1,6 +1,7 @@
 #! /bin/bash
 
 RAILS_ENV=test
+NODE_ENV=test
 
 /wait_for_postgres.sh
 
@@ -16,6 +17,7 @@ echo "sources:
 echo "  adapter: activiti" >> config/hbw.yml
 
 bundle exec rake db:migrate && bundle exec rake db:seed
+yarn install && bundle exec rake assets:precompile
 
 # add source billing for tests
 echo "sources:
