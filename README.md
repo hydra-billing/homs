@@ -39,23 +39,46 @@ The prefered way to install HOMS is to use docker
 4. Copy your (or default) configs to `/etc/hydra/homs/`:
 
   ```
-  cp bpm.yml /etc/hydra/homs/bpm.yml
-  cp database.yml /etc/hydra/homs/database.yml
-  cp hbw.yml /etc/hydra/homs/hbw.yml
-  cp homs_configuration.yml /etc/hydra/homs/homs_configuration.yml
-  cp imprint.yml /etc/hydra/homs/imprint.yml
-  cp sources.yml /etc/hydra/homs/sources.yml
-  cp secrets.yml /etc/hydra/homs/secrets.yml
-  ```
-5. Add environment variables: `$HOMS_PATH` with path to your HOMS folder and [Minio](https://github.com/minio/minio) credentials:
-
-  ```
-  HOMS_PATH=/path/to/homs export HOMS_PATH
-  MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml export MINIO_ACCESS_KEY
-  MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml export MINIO_SECRET_KEY
+  cp config/bpm.yml.sample /etc/hydra/homs/bpm.yml
+  cp config/database.yml.sample /etc/hydra/homs/database.yml
+  cp config/hbw.yml.sample /etc/hydra/homs/hbw.yml
+  cp config/homs_configuration.yml.sample /etc/hydra/homs/homs_configuration.yml
+  cp config/imprint.yml.sample /etc/hydra/homs/imprint.yml
+  cp config/sources.yml.sample /etc/hydra/homs/sources.yml
+  cp config/secrets.yml.sample /etc/hydra/homs/secrets.yml
   ```
 
-6. Run `docker-compose`:
+5. Add environment variables to `.env` file and [Minio](https://github.com/minio/minio) credentials. Default values:
+
+  ```
+  HOMS_PATH=/path/to/homs
+
+  HOMS_DB_PASSWORD=homs
+  HOMS_DB_NAME=homs
+  HOMS_DB_USER=homs
+  HOMS_DB_HOST=db_homs
+
+  BPM_DB_HOST=db_activiti
+  BPM_DB_USER=activiti
+  BPM_DB_PASSWORD=activiti
+  BPM_DB_NAME=activiti
+  BPM_USER=kermit
+  BPM_PASSWORD=kermit
+
+  MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml
+  MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml
+  ```
+
+6. Add bucket in Minio. Default Minio address - [http://127.0.0.1:9000](http://127.0.0.1:9000)
+  
+7. Be sure to update secret key in `config/secrets.yml`. You can generate key with this command:
+
+  ```
+  openssl rand -hex 64
+  ```
+
+8. Run `docker-compose`:
+
   ```
   docker-compose up -d
   ```
@@ -78,6 +101,7 @@ If you don't want to use Oracle as source for your HOMS instance:
   ```
   find config -name '*.sample' | xargs -I{} sh -c 'cp $1 ${1%.*}' -- {}
   ```
+
 3. Install docker-compose.
 4. For OS X users: make path to folder with HOMS shared in `Docker -> Preferences... -> File Sharing`.
 5. Add test environment to `config/database.yml`:
@@ -92,22 +116,39 @@ If you don't want to use Oracle as source for your HOMS instance:
     username: homs
     password: homs
   ```
-6. Add to `config/sources.yml`
+
+6. Add environment variables to `.env` file and [Minio](https://github.com/minio/minio) credentials. Default values:
+
+  ```
+  HOMS_PATH=/path/to/homs
+
+  HOMS_DB_PASSWORD=homs
+  HOMS_DB_NAME=homs
+  HOMS_DB_USER=homs
+  HOMS_DB_HOST=db_homs
+
+  BPM_DB_HOST=db_activiti
+  BPM_DB_USER=activiti
+  BPM_DB_PASSWORD=activiti
+  BPM_DB_NAME=activiti
+  BPM_USER=kermit
+  BPM_PASSWORD=kermit
+
+  MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml
+  MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml
+  ```
+
+7. Add bucket in Minio. Default Minio address - [http://127.0.0.1:9000](http://127.0.0.1:9000)
+
+8. Add to `config/sources.yml`
 
   ```
   sources:
     bpmanagementsystem:
       type: static/activiti
   ```
-7. Add environment variables: `$HOMS_PATH` with path to your HOMS folder and [Minio](https://github.com/minio/minio) credentials:
 
-  ```
-  HOMS_PATH=/path/to/homs export HOMS_PATH
-  MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml export MINIO_ACCESS_KEY
-  MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml export MINIO_SECRET_KEY
-  ```
-
-8. Run docker-compose:
+9. Run docker-compose:
 
   ```
   docker-compose -f docker-compose.dev.yml up -d
@@ -118,9 +159,9 @@ Or if you want to use Oracle as source for your HOMS instance
 
 ##### With Oracle Instant Client
 
-Steps 1 – 5 are the same as for [without Oracle Instant Client installation](#without-oracle-instant-client)
+Steps 1 – 7 are the same as for [without Oracle Instant Client installation](#without-oracle-instant-client)
 
-6. Download the Oracle Instant Client 11.2 archives from OTN:
+8. Download the Oracle Instant Client 11.2 archives from OTN:
 
 http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
@@ -130,13 +171,13 @@ The following three ZIPs are required:
 - `instantclient-sdk-linux.x64-11.2.0.4.0.zip`
 - `instantclient-sqlplus-linux.x64-11.2.0.4.0.zip`
 
-7. Place the downloaded Oracle Instant Client RPMs in the same directory as the `Dockerfile` and run:
+9. Place the downloaded Oracle Instant Client RPMs in the same directory as the `Dockerfile` and run:
 
 ```
 docker build -t latera/homs-with-oracle -f Dockerfile.oracle .
 ```
 
-8. Add to `config/sources.yml`
+10. Add to `config/sources.yml`
 
 ```
 sources:
@@ -149,17 +190,15 @@ sources:
     password: password
 ```
 
-9. Add environment variables: `$HOMS_PATH` with path to your HOMS folder, `$TNSNAMES_PATH` with path to your `tnsnames.ora` file and [Minio](https://github.com/minio/minio) credentials:
+11. Add environment variable `$TNSNAMES_PATH` to `.env` file with path to your `tnsnames.ora` file:
 
 ```
-HOMS_PATH=/path/to/homs export HOMS_PATH
-TNSNAMES_PATH=/path/to/tnsnames.ora export TNSNAMES_PATH
-MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml export MINIO_ACCESS_KEY
-MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml export MINIO_SECRET_KEY
+TNSNAMES_PATH=/path/to/tnsnames.ora
 ```
 for access to host machine OS X users can use special DNS name `host.docker.internal` as host in `tnsnames.ora` ([details](https://docs.docker.com/docker-for-mac/networking))
 
-10. Run docker-compose:
+12. Run docker-compose:
+
 ```
 docker-compose -f docker-compose.dev.oracle.yml up -d
 ```
@@ -185,7 +224,7 @@ Issues can be reported by using [GitHub Issues](https://github.com/latera/homs/i
 
 homs uses RSpec for unit/spec tests. You need to set up different testing database. Otherwise your development DB would be erased.
 
-```bash
+```
 # Run all tests
 bundle exec rspec spec
 
@@ -198,4 +237,4 @@ bundle exec rspec spec/PATH/TO/DIR
 
 ## License
 
-Copyright (c) 2016 Latera LLC under the [Apache License](https://github.com/latera/homs/blob/master/LICENSE).
+Copyright (c) 2018 Latera LLC under the [Apache License](https://github.com/latera/homs/blob/master/LICENSE).
