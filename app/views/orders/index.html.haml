@@ -9,7 +9,7 @@
         = "#{t('orders.total_items')} #{total_items}"
       - with_custom_profile = list_filter.filter_values[:order_type_id].present?
       .table-responsive.table-nowrap.overflow-visible.orders-list
-        = react_component('OrderList', {profile: with_custom_profile ? custom_profile(orders.first.order_type) : common_profile,
+        = react_component('order_list', {profile: with_custom_profile ? custom_profile(orders.first.order_type) : common_profile,
                                         withCustomProfile: with_custom_profile,
                                         filterParams: params,
                                         pageSize: 25})

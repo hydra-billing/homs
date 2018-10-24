@@ -6,8 +6,8 @@
     %meta{ name: 'description', content: "#{content_for?(:description) ? yield(:description) : 'Homs'}"}
     = stylesheet_link_tag 'hbw', media: 'all'
     = stylesheet_link_tag 'application', media: 'all'
-    = javascript_include_tag 'hbw'
-    = javascript_include_tag 'application'
+    = javascript_pack_tag 'hbw'
+    = javascript_pack_tag 'application'
     = csrf_meta_tags
   %body.hbw-select2
     :coffee

@@ -2,6 +2,12 @@ FROM ruby:2.5.1-slim
 
 RUN mkdir -p /opt/homs
 
+RUN apt-get update -q && apt-get purge -y cmdtest && apt-get install --no-install-recommends -yq wget gnupg
+
+RUN wget -O - http://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+ && echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+ && wget -qO- https://deb.nodesource.com/setup_10.x | bash -
+
 RUN apt-get update && apt-get install --no-install-recommends -y \
   build-essential \
   git \
@@ -13,7 +19,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   nodejs \
   postgresql-client \
   pkg-config \
-  ruby-dev
+  ruby-dev \
+  yarn
 
 ENV NLS_LANG=AMERICAN_RUSSIA.AL32UTF8
 
@@ -22,7 +29,7 @@ RUN useradd --uid 2004 --home /opt/homs --shell /bin/bash --comment "HOMS" homs
 USER homs
 WORKDIR /opt/homs
 
-COPY Gemfile Gemfile.lock Rakefile config.ru /opt/homs/
+COPY Gemfile Gemfile.lock Rakefile config.ru package.json yarn.lock /opt/homs/
 COPY hbw/ /opt/homs/hbw/
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 

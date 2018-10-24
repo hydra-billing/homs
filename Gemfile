@@ -4,8 +4,6 @@ gem 'rails', '~> 5.1.6'
 gem 'sass-rails', '~> 5.0.7'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'coderay', '~> 1.1'
 gem 'kaminari', '~> 0.16'  # adds pagination to ActiveModels
@@ -23,7 +21,6 @@ gem 'font-awesome-rails'
 gem 'bootswatch-rails'
 gem 'pry-rails'
 gem 'i18n-js', git: 'https://github.com/fnando/i18n-js', ref: '7ed2d2'
-gem 'twitter-bootstrap-rails-confirm'
 gem 'hbw', path: File.join(File.dirname(__FILE__), 'hbw')
 gem 'asset_symlink'
 gem 'apitome'
@@ -35,6 +32,7 @@ gem 'nokogiri', '~> 1.8.1'
 gem 'aws-sdk', '~> 2'
 gem 'web-console', '~> 2.0', group: :development
 gem 'settingslogic'
+gem 'webpacker', '~> 3.5'
 
 group :oracle do
   gem 'ruby-oci8', '2.2.3'
