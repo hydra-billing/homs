@@ -30,7 +30,8 @@ USER homs
 WORKDIR /opt/homs
 
 COPY Gemfile Gemfile.lock Rakefile config.ru package.json yarn.lock /opt/homs/
-COPY hbw/ /opt/homs/hbw/
+COPY hbw/*.gemspec /opt/homs/hbw/
+COPY hbw/lib/hbw/ /opt/homs/hbw/lib/hbw/
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 
 RUN gem install bundler
@@ -46,6 +47,7 @@ COPY lib/      /opt/homs/lib/
 COPY public/   /opt/homs/public/
 COPY spec/     /opt/homs/spec/
 COPY vendor/   /opt/homs/vendor/
+COPY hbw/      /opt/homs/hbw/
 
 COPY ./entrypoint.sh ./wait_for_postgres.sh /
 
