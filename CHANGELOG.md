@@ -12,6 +12,8 @@ v1.5.0 [unreleased]
 -   [#151](https://github.com/latera/homs/pull/151) Add current version to docker container.
 -   [#151](https://github.com/latera/homs/pull/152) Remove libqtwebkit-dev.
 -   [#177](https://github.com/latera/homs/pull/177) Improve README and docker-compose files.
+-   [#171](https://github.com/latera/homs/pull/171) Migrate from CoffeeScript to ES6 + Webpack.
+-   [#179](https://github.com/latera/homs/pull/179) Replace `jquery-ui` tooltip with `popper.js`.
 -   [#184](https://github.com/latera/homs/pull/184) Add `base_url` option to main config provides custom prefix for all paths in app. Fixes [#148](https://github.com/latera/homs/issues/148).    
 
 ### Bugfixes
@@ -22,6 +24,7 @@ v1.4.0.2 [unreleased]
 ### Bugfixes
 -   [#165](https://github.com/latera/homs/pull/165) Remove new line from BPM widget basic auth generator.
 -   [#174](https://github.com/latera/homs/pull/174) Remove unnecessary scroll in BPM widget select tables.
+-   [#176](https://github.com/latera/homs/pull/176) Fix limits on the number of lines from sql requests.
 
 v1.4.0.1 [2018-10-08]
 ---------------------

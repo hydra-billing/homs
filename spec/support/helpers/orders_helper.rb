@@ -206,11 +206,15 @@ module Features
     end
 
     def multiselect_by_id(id)
-      page.find_by_id(id).find(:xpath, '..')
+      page.find_by_id(id, visible: false).find(:xpath, '..')
+    end
+
+    def multiselect_button_by_id(id)
+      multiselect_by_id(id).find(:xpath,  '//div[contains(@class, "btn-group")]')
     end
 
     def click_on_multiselect(id)
-      multiselect_by_id(id).click
+      multiselect_button_by_id(id).click
     end
 
     def checked_multiselect_options(id)
