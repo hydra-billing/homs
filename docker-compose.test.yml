@@ -10,7 +10,7 @@ services:
       POSTGRES_DB: $HOMS_DB_NAME
       POSTGRES_USER: $HOMS_DB_USER
       POSTGRES_PASSWORD: $HOMS_DB_PASSWORD
-      TZ: Europe/Moscow
+      TZ: UTC
     ports:
       - 5432:5432
     networks:
