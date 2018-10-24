@@ -119,7 +119,7 @@
     labelElement = $('label[for="' + name + '"]')
 
     if labelElement[0].scrollWidth > labelElement[0].offsetWidth
-      labelElement.prop('title', options.label).tooltip()
+      new Tooltip(labelElement, { title: options.label })
 
     if options.type == 'datetime'
       Application.enableDateTimePicker()

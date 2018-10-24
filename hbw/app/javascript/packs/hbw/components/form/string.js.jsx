@@ -1,4 +1,5 @@
 import CustomFormatter from 'formatter';
+import Tooltip from 'tooltip';
 
 modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDeleteIfMixin'], (React, jQuery, CallbacksMixin, DeleteIfMixin) => React.createClass({
   mixins: [CallbacksMixin, DeleteIfMixin],
@@ -50,17 +51,20 @@ modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
         <input {...opts}
                ref="input"
                className={`form-control ${!this.state.valid && ' invalid'}`}
-               data-toggle='tooltip'
-               data-placement='bottom'
-               data-original-title={this.props.params.message}
-               data-trigger='manual' value={this.state.visualValue} />
+               value={this.state.visualValue} />
+        <div ref="tooltip" className={`${!this.state.valid && 'tooltip-red'}`}></div>
         {!opts.readOnly && <input name={this.props.name} value={this.state.value} type="hidden" />}
       </div>
     </div>;
   },
 
   componentDidMount () {
-    jQuery('[data-toggle="tooltip"]').tooltip({ animation: false });
+    this.tooltip = new Tooltip(this.refs.input, {
+      title:     this.props.params.message,
+      container: this.refs.tooltip,
+      trigger:   'manual',
+      placement: 'bottom'
+    });
 
     this.validateOnSubmit();
     this.hijackFormatter();
@@ -170,9 +174,7 @@ modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
   },
 
   controlValidationTooltip (toHide) {
-    const action = toHide ? 'hide' : 'show';
-
-    jQuery(`[name="${this.props.name}"]`).tooltip(action);
+    toHide ? this.tooltip.hide() : this.tooltip.show();
   },
 
   isValid () {

@@ -4,6 +4,7 @@ const babel = require('./loaders/babel');
 const yaml = require('./loaders/yaml');
 const I18n = require('./loaders/I18n');
 const modulejs = require('./loaders/modulejs');
+const tooltip = require('./loaders/tooltip');
 
 environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
     $:      'jquery',
@@ -18,13 +19,14 @@ environment.loaders.append('babel', babel);
 // Expose libs called from haml templates
 environment.loaders.append('modulejs', modulejs);
 environment.loaders.append('i18n-js', I18n);
+environment.loaders.append('tooltip', tooltip);
 
 const config = environment.toWebpackConfig();
 
 config.resolve.alias = {
   jquery: 'jquery/src/jquery',
   modulejs: 'modulejs/dist/modulejs',
-  'jquery-ui': 'jquery-ui-dist/jquery-ui',
+  tooltip: 'tooltip.js/dist/umd/tooltip.js',
   'bootstrap-datetimepicker': 'eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
 };
 
