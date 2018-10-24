@@ -48,6 +48,8 @@ module Homs
 
     require Rails.root.join('lib/imprint')
 
+    config.relative_url_root = config.app.fetch(:base_url, '/')
+
     config.after_initialize do
       I18n.locale = I18n.default_locale = (config.app.locale.fetch(:code) || :en).to_sym
     end
