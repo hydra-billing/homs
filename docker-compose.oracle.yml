@@ -6,7 +6,7 @@ services:
     container_name: postgres-activiti
     restart: always
     environment:
-      PGDATA: /var/lib/postgresql/data/activiti/
+      PGDATA: $BPM_DB_PATH
       POSTGRES_DB: $BPM_DB_NAME
       POSTGRES_USER: $BPM_DB_USER
       POSTGRES_PASSWORD: $BPM_DB_PASSWORD
@@ -21,7 +21,7 @@ services:
     container_name: postgres-homs
     restart: always
     environment:
-      PGDATA: /var/lib/postgresql/data/homs
+      PGDATA: $HOMS_DB_PATH
       POSTGRES_DB: $HOMS_DB_NAME
       POSTGRES_USER: $HOMS_DB_USER
       POSTGRES_PASSWORD: $HOMS_DB_PASSWORD
@@ -29,7 +29,7 @@ services:
     volumes:
       - $HOMS_PATH/data/homs/postgresql:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - $HOMS_DB_PORT:5432
     networks:
       - custom_network
   activiti:
@@ -37,9 +37,9 @@ services:
     container_name: activiti
     restart: always
     links:
-      - $BPM_DB_HOST:postgres-activiti
+      - db_activiti:$BPM_DB_HOST
     environment:
-      HOMS_HOST: homs
+      HOMS_HOST: $HOMS_HOST
       DB_HOST: $BPM_DB_HOST
       BPM_DB_HOST: $BPM_DB_HOST
       BPM_DB_USER: $BPM_DB_USER
@@ -47,7 +47,7 @@ services:
       ACTIVITI_LOGIN: $BPM_USER
       ACTIVITI_PASSWORD: $BPM_PASSWORD
     ports:
-      - 8080:8080
+      - $BPM_PORT:8080
     depends_on:
       - db_activiti
     networks:
@@ -63,14 +63,14 @@ services:
     volumes:
       - $HOMS_PATH/data/minio:/opt/minio
     ports:
-      - 9000:9000
+      - $MINIO_PORT:9000
   homs:
     image: latera/homs-with-oracle
     container_name: homs
     restart: always
     links:
-      - $HOMS_DB_HOST:postgres-homs
-      - activiti:activiti
+      - db_homs:$HOMS_DB_HOST
+      - activiti:$BPM_HOST
     volumes:
       - $TNSNAMES_PATH:/etc/oracle/tnsnames.ora
       - /etc/hydra/homs/homs_configuration.yml:/opt/homs/config/homs_configuration.yml
@@ -89,10 +89,11 @@ services:
       HOMS_DB_NAME: $HOMS_DB_NAME
       HOMS_DB_USER: $HOMS_DB_USER
       HOMS_DB_PASSWORD: $HOMS_DB_PASSWORD
+      BPM_HOST: $BPM_HOST
       BPM_USER: $BPM_USER
       BPM_PASSWORD: $BPM_PASSWORD
     ports:
-      - 3000:3000
+      - $HOMS_PORT:3000
     networks:
       - custom_network
 networks:

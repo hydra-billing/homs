@@ -1,0 +1,30 @@
+locale:
+  code: en
+  datetime_format: '%m/%d/%Y %H:%M %p'
+
+sessions:
+  token_authentication:
+    enabled: false
+    token: null
+    sign_in_as: user@example.com
+
+link_to_manual: "http://hydra-oms.com/docs"
+
+use_imprint: true
+
+logs:
+  color: false
+  development:
+    homs_log: log/homs_development.log
+    hbw_log: log/hbw_development.log
+  production:
+    homs_log: /var/log/hydra/homs/homs.log
+    homs_error_log: /var/log/hydra/homs/homs_error.log
+    hbw_log: /var/log/hydra/hbw/hbw.log
+    hbw_error_log: /var/log/hydra/hbw/hbw_error.log
+
+greeting:
+
+announcement:
+
+orders_expiration_warning_days: 1

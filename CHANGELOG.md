@@ -16,7 +16,7 @@ v1.5.0 [unreleased]
 -   [#179](https://github.com/latera/homs/pull/179) Replace `jquery-ui` tooltip with `popper.js`.
 -   [#184](https://github.com/latera/homs/pull/184) Add `base_url` option to main config provides custom prefix for all paths in app. Fixes [#148](https://github.com/latera/homs/issues/148).    
 -   [#185](https://github.com/latera/homs/pull/185) Speed up docker build.
-
+-   [#187](https://github.com/latera/homs/pull/187) Use env file in homs's apps
 
 ### Bugfixes
 -   [#170](https://github.com/latera/homs/pull/170) Use active support logger as base.

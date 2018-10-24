@@ -51,27 +51,39 @@ The prefered way to install HOMS is to use docker
 5. Add environment variables to `.env` file and [Minio](https://github.com/minio/minio) credentials. Default values:
 
   ```
+  
   HOMS_PATH=/path/to/homs
-
-  HOMS_DB_PASSWORD=homs
+  
+  MINIO_PORT=9000
+  MINIO_BUCKET_NAME=bucket_name
+  MINIO_ACCESS_KEY=minio_access_key
+  MINIO_SECRET_KEY=minio_secret_key
+  
+  HOMS_HOST=homs
+  HOMS_PORT=3000
+  HOMS_DB_HOST=postgres-homs
+  HOMS_DB_PORT=5432
+  HOMS_DB_PATH=/var/lib/postgresql/data/homs
   HOMS_DB_NAME=homs
   HOMS_DB_USER=homs
-  HOMS_DB_HOST=db_homs
-
-  BPM_DB_HOST=db_activiti
-  BPM_DB_USER=activiti
-  BPM_DB_PASSWORD=activiti
-  BPM_DB_NAME=activiti
+  HOMS_DB_PASSWORD=homs
+  
+  BPM_HOST=activiti
+  BPM_PORT=8080
   BPM_USER=kermit
   BPM_PASSWORD=kermit
-
-  MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml
-  MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml
+  BPM_DB_HOST=postgres-activiti
+  BPM_DB_PORT=5432
+  BPM_DB_DRIVER=org.postgresql.Driver
+  BPM_DB_PATH=/var/lib/postgresql/data/activiti
+  BPM_DB_NAME=kermit
+  BPM_DB_USER=activiti
+  BPM_DB_PASSWORD=activiti
   ```
 
-6. Add bucket in Minio. Default Minio address - [http://127.0.0.1:9000](http://127.0.0.1:9000)
+6. Add bucket named like in '.env' file. in Minio. Default Minio address - [http://127.0.0.1:9000](http://127.0.0.1:9000)
   
-7. Be sure to update secret key in `config/secrets.yml`. You can generate key with this command:
+7. Be sure to update secret key in `/etc/hydra/homs/config/secrets.yml`. You can generate key with this command:
 
   ```
   openssl rand -hex 64
@@ -111,34 +123,15 @@ If you don't want to use Oracle as source for your HOMS instance:
     adapter: postgresql
     encoding: unicode
     pool: 5
-    host: postgres-homs
-    database: homs
-    username: homs
-    password: homs
+    host: <%= ENV['HOMS_DB_HOST'] %>
+    database: <%= ENV['HOMS_DB_NAME'] %>
+    username: <%= ENV['HOMS_DB_USER'] %>
+    password: <%= ENV['HOMS_DB_PASSWORD'] %>
   ```
 
-6. Add environment variables to `.env` file and [Minio](https://github.com/minio/minio) credentials. Default values:
+6. Add environment variables to `.env` file and [Minio](https://github.com/minio/minio) credentials like [in production installation's](#in-production) step 5
 
-  ```
-  HOMS_PATH=/path/to/homs
-
-  HOMS_DB_PASSWORD=homs
-  HOMS_DB_NAME=homs
-  HOMS_DB_USER=homs
-  HOMS_DB_HOST=db_homs
-
-  BPM_DB_HOST=db_activiti
-  BPM_DB_USER=activiti
-  BPM_DB_PASSWORD=activiti
-  BPM_DB_NAME=activiti
-  BPM_USER=kermit
-  BPM_PASSWORD=kermit
-
-  MINIO_ACCESS_KEY=minio_access_key_from_hbw_yml
-  MINIO_SECRET_KEY=minio_secret_key_from_hbw_yml
-  ```
-
-7. Add bucket in Minio. Default Minio address - [http://127.0.0.1:9000](http://127.0.0.1:9000)
+7. Add bucket named like in '.env' file. in Minio. Default Minio address - [http://127.0.0.1:9000](http://127.0.0.1:9000)
 
 8. Add to `config/sources.yml`
 

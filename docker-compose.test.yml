@@ -6,13 +6,13 @@ services:
     container_name: postgres-homs
     restart: always
     environment:
-      PGDATA: /var/lib/postgresql/data/homs
+      PGDATA: $BPM_DB_PATH
       POSTGRES_DB: $HOMS_DB_NAME
       POSTGRES_USER: $HOMS_DB_USER
       POSTGRES_PASSWORD: $HOMS_DB_PASSWORD
       TZ: UTC
     ports:
-      - 5432:5432
+      - $HOMS_DB_PORT:5432
     networks:
       - custom_network
   homs:
@@ -20,7 +20,7 @@ services:
     container_name: homs_testing
     restart: always
     links:
-      - $HOMS_DB_HOST:postgres-homs
+      - db_homs:$HOMS_DB_HOST
     environment:
       GENERATE_DOC: $GENERATE_DOC
       HOMS_DB_HOST: $HOMS_DB_HOST
@@ -32,7 +32,7 @@ services:
     depends_on:
       - db_homs
     ports:
-      - 3000:3000
+      - $HOMS_PORT:3000
     networks:
       - custom_network
 networks:
