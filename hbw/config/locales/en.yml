@@ -15,6 +15,7 @@ en:
         field_not_defined_in_bp: "Field with name %{field_name} not defined in BP variables"
         cannot_obtain_available_actions: Cannot obtain available actions
         cannot_start_process: Cannot start process
+        file_list_field_required: Field of "file_list" type with name "homsOrderDataFileList" required
 
       components:
         select:

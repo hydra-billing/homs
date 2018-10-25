@@ -1,7 +1,7 @@
 modulejs.define('HBWFormFileUpload',
-  ['React', 'jQuery', 'HBWDeleteIfMixin', 'HBWCallbacksMixin'],
-  (React, jQuery, DeleteIfMixin, CallbacksMixin) => React.createClass({
-    mixins: [DeleteIfMixin, CallbacksMixin],
+  ['React', 'HBWDeleteIfMixin', 'HBWCallbacksMixin', 'HBWTranslationsMixin'],
+  (React, DeleteIfMixin, CallbacksMixin, TranslationsMixin) => React.createClass({
+    mixins: [DeleteIfMixin, CallbacksMixin, TranslationsMixin],
 
     getInitialState () {
       return {
@@ -24,11 +24,19 @@ modulejs.define('HBWFormFileUpload',
         cssClass += ' hidden';
       }
 
+      const errorMessage = this.t('errors.file_list_field_required');
+      let errorMessageCss = 'alert alert-danger';
+
+      if (this.props.fileListPresent) {
+        errorMessageCss += ' hidden';
+      }
+
       const { label } = this.props.params;
       const labelCss = this.props.params.label_css;
 
       return <div className={cssClass}>
         <span className={labelCss}>{label}</span>
+        <div className={errorMessageCss}>{errorMessage}</div>
         <div className="form-group">
           <input {...opts} type="file" multiple></input>
           <input name={this.props.params.name} value={hiddenValue} type="hidden"/>

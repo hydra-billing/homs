@@ -57,7 +57,7 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
         case 'text': return <Text {...opts}/>;
         case 'static': return <Static {...opts}/>;
         case 'file_list': return <FileList {...opts}/>;
-        case 'file_upload': return <FileUpload {...opts}/>;
+        case 'file_upload': return <FileUpload {...opts} fileListPresent={this.props.fileListPresent}/>;
         default: return <p>{name}: Unknown control type {params.type}</p>;
       }
     }
