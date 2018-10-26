@@ -4,7 +4,6 @@ services:
     image: postgres
     hostname: postgres-homs
     container_name: postgres-homs
-    restart: always
     environment:
       PGDATA: $HOMS_DB_PATH/homs
       POSTGRES_DB: $HOMS_DB_NAME
@@ -18,7 +17,6 @@ services:
   homs:
     image: latera/homs_testing
     container_name: homs_testing
-    restart: always
     env_file:
       - ".env"
     links:
