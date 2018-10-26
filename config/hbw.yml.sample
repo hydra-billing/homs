@@ -45,5 +45,5 @@ hbw:
     endpoint: 'http://127.0.0.1:9000'
     access_key_id: <%= ENV['MINIO_ACCESS_KEY'] %>
     secret_access_key: <%= ENV['MINIO_SECRET_KEY'] %>
-    bucket: 'bucket_name'
+    bucket: <%= ENV['MINIO_BUCKET_NAME'] %>
     region: 'us-east-1'

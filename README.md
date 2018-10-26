@@ -36,6 +36,7 @@ The prefered way to install HOMS is to use docker
   wget https://raw.githubusercontent.com/latera/homs-docker/master/docker-compose.yml
   ```
 3. For OS X users: make path to folder with HOMS shared in `Docker -> Preferences... -> File Sharing`.
+
 4. Copy your (or default) configs to `/etc/hydra/homs/`:
 
   ```
@@ -48,53 +49,29 @@ The prefered way to install HOMS is to use docker
   cp config/secrets.yml.sample /etc/hydra/homs/secrets.yml
   ```
 
-5. Create `.env` near `docker-compose.yml` file and fill it up with applications credentials. Default values:
+5. Copy your (or default) `.env` file to your project's directory:
 
   ```
-  HOMS_PATH=/path/to/homs
-
-  MINIO_PORT=9000
-  MINIO_BUCKET_NAME=bucket_name
-  MINIO_ACCESS_KEY=generate_some_random_value_here
-  MINIO_SECRET_KEY=generate_some_random_value_here
-
-  HOMS_HOST=homs
-  HOMS_PORT=3000
-  HOMS_DB_HOST=postgres-homs
-  HOMS_DB_PORT=5432
-  HOMS_DB_PATH=/var/lib/postgresql/data/homs
-  HOMS_DB_NAME=homs
-  HOMS_DB_USER=homs
-  HOMS_DB_PASSWORD=homs
-
-  BPM_HOST=activiti
-  BPM_PORT=8080
-  BPM_USER=kermit
-  BPM_PASSWORD=kermit
-  BPM_DB_HOST=postgres-activiti
-  BPM_DB_PORT=5432
-  BPM_DB_DRIVER=org.postgresql.Driver
-  BPM_DB_PATH=/var/lib/postgresql/data/activiti
-  BPM_DB_NAME=kermit
-  BPM_DB_USER=activiti
-  BPM_DB_PASSWORD=activiti
+  cp homs.env.sample .env
   ```
 
-6. Be sure to update secret key in `/etc/hydra/homs/secrets.yml`. You can generate key with this command:
+6. Change [Minio](https://github.com/minio/minio) credentials in `.env` file.
+
+7. Be sure to update secret key in `/etc/hydra/homs/secrets.yml`. You can generate key with this command:
 
   ```
   openssl rand -hex 64
   ```
 
-7. Run `docker-compose`:
+8. Run `docker-compose`:
 
   ```
   docker-compose up -d
   ```
 
-8. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
+9. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
 
-9. Login at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
+10. Login at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
 
 #### In development
@@ -117,9 +94,22 @@ Follow the same steps as for [In production installation](#in-production), but w
   find config -name '*.sample' | xargs -I{} sh -c 'cp $1 ${1%.*}' -- {}
   ```
 
-6. Skip this step
+7. Skip this step
 
-7. Run `docker-compose`: with custom config:
+8. Add test environment to `config/database.yml`:
+
+  ```
+  development:
+    adapter: postgresql
+    encoding: unicode
+    pool: 5
+    host: <%= ENV['HOMS_DB_HOST'] %>
+    database: <%= ENV['HOMS_DB_NAME'] %>
+    username: <%= ENV['HOMS_DB_USER'] %>
+    password: <%= ENV['HOMS_DB_PASSWORD'] %>
+  ```
+  
+9. Run `docker-compose`: with custom config:
   ```
   docker-compose -f docker-compose.dev.yml up -d
   ```

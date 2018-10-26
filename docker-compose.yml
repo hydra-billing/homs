@@ -6,13 +6,13 @@ services:
     container_name: postgres-activiti
     restart: always
     environment:
-      PGDATA: /var/lib/postgresql/data/activiti/
+      PGDATA: $BPM_DB_PATH/activiti
       POSTGRES_DB: $BPM_DB_NAME
       POSTGRES_USER: $BPM_DB_USER
       POSTGRES_PASSWORD: $BPM_DB_PASSWORD
       TZ: Europe/Moscow
     volumes:
-      - $HOMS_PATH/data/activiti/postgresql:/var/lib/postgresql/data
+      - $HOMS_PATH/data/activiti/postgresql:$BPM_DB_PATH
     networks:
       - custom_network
   db_homs:
@@ -21,33 +21,31 @@ services:
     restart: always
     container_name: postgres-homs
     environment:
-      PGDATA: /var/lib/postgresql/data/homs
+      PGDATA: $HOMS_DB_PATH/homs
       POSTGRES_DB: $HOMS_DB_NAME
       POSTGRES_USER: $HOMS_DB_USER
       POSTGRES_PASSWORD: $HOMS_DB_PASSWORD
       TZ: Europe/Moscow
     volumes:
-      - $HOMS_PATH/data/homs/postgresql:/var/lib/postgresql/data
+      - $HOMS_PATH/data/homs/postgresql:$HOMS_DB_PATH
     ports:
-      - 5432:5432
+      - $HOMS_DB_PORT:5432
     networks:
       - custom_network
   activiti:
     image: latera/activiti-homs
     container_name: activiti
     restart: always
+    env_file:
+      - ".env"
     links:
-      - $BPM_DB_HOST:postgres-activiti
+      - db_activiti:$BPM_DB_HOST
     environment:
-      HOMS_HOST: homs
       DB_HOST: $BPM_DB_HOST
-      BPM_DB_HOST: $BPM_DB_HOST
-      BPM_DB_USER: $BPM_DB_USER
-      BPM_DB_PASSWORD: $BPM_DB_PASSWORD
       ACTIVITI_LOGIN: $BPM_USER
       ACTIVITI_PASSWORD: $BPM_PASSWORD
     ports:
-      - 8080:8080
+      - $BPM_PORT:8080
     depends_on:
       - db_activiti
     networks:
@@ -63,14 +61,16 @@ services:
     volumes:
       - $HOMS_PATH/data/minio:/opt/minio
     ports:
-      - 9000:9000
+      - $MINIO_PORT:9000
   homs:
     image: latera/homs
     container_name: homs
     restart: always
+    env_file:
+      - ".env"
     links:
-      - $HOMS_DB_HOST:postgres-homs
-      - activiti:activiti
+      - db_homs:$HOMS_DB_HOST
+      - activiti:$BPM_HOST
     volumes:
       - /etc/hydra/homs/homs_configuration.yml:/opt/homs/config/homs_configuration.yml
       - /etc/hydra/homs/imprint.yml:/opt/homs/config/imprint.yml
@@ -78,20 +78,13 @@ services:
       - /etc/hydra/homs/database.yml:/opt/homs/config/database.yml
       - /etc/hydra/homs/bpm.yml:/opt/homs/config/bpm.yml
       - /etc/hydra/homs/sources.yml:/opt/homs/config/sources.yml
-      - /etc/hydra/homs/secrets.yml:/opt/homs/config/secrets.yml
+      - /etc/hydra/homs/secrets.yml:/opt/homs/config/homs/secrets.yml
     depends_on:
       - db_homs
       - activiti
       - minio
-    environment:
-      HOMS_DB_HOST: $HOMS_DB_HOST
-      HOMS_DB_NAME: $HOMS_DB_NAME
-      HOMS_DB_USER: $HOMS_DB_USER
-      HOMS_DB_PASSWORD: $HOMS_DB_PASSWORD
-      BPM_USER: $BPM_USER
-      BPM_PASSWORD: $BPM_PASSWORD
     ports:
-      - 3000:3000
+      - $HOMS_PORT:3000
     networks:
       - custom_network
 networks:
