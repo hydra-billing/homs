@@ -20,6 +20,7 @@ v1.5.0 [unreleased]
 
 ### Bugfixes
 -   [#170](https://github.com/latera/homs/pull/170) Use active support logger as base.
+-   [#190](https://github.com/latera/homs/pull/190) Fix multiply running of tests in docker.
 
 v1.4.0.2 [unreleased]
 ---------------------
