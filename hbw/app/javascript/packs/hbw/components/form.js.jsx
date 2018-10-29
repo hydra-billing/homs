@@ -107,16 +107,6 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         return variables[field.name] = field.value;
       });
 
-      // get hands dirty with select2 elements,
-      // 'cause they are not grabbed with serializeArray()
-      const selects = jQuery(this.getElement()).find('select.select2-hidden-accessible');
-
-      jQuery.each(selects, (i, select) => {
-        const name = jQuery(select).attr('name');
-        const { value } = select;
-        return variables[name] = value;
-      });
-
       console.log(`Serialized form: ${JSON.stringify(variables)}`);
 
       return variables;

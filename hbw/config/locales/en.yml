@@ -19,3 +19,6 @@ en:
       components:
         select:
           not_selected: Not selected
+          searching: Searching...
+          no_results_found: No results found
+          enter_more_chars: Please enter 2 or more characters

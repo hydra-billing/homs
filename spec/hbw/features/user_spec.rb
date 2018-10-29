@@ -22,9 +22,9 @@ feature 'Check user picker', js: true do
 
     click_and_wait 'ORD-10'
 
-    expect(page).to have_content  'ORD-10'
-    expect(page).to have_selector "[name='homsOrderWhatUser']"
-    expect(select2_text('homsOrderWhatUser')).to eq placeholder
+    expect(page).to have_content 'ORD-10'
+    expect_r_select_presence('homsOrderWhatUser')
+    expect(r_select_placeholder('homsOrderWhatUser')).to eq placeholder
     expect_widget_presence
   end
 
@@ -35,14 +35,12 @@ feature 'Check user picker', js: true do
 
     click_and_wait 'ORD-10'
 
-    expect(page).to have_content  'ORD-10'
-    expect(page).to have_selector "[name='homsOrderWhatUser']"
-    select2_text_node('homsOrderWhatUser').click
-    select2_search_field.set('John')
+    expect(page).to have_content 'ORD-10'
+    expect_r_select_presence('homsOrderWhatUser')
+    r_select_input('homsOrderWhatUser').set('John')
     wait_for_ajax
 
-    expect(page).to have_content 'John Doe'
-    expect(page).to have_content 'Christopher Johnson'
+    expect(r_select_lookup_options('homsOrderWhatUser')).to eq ['John Doe', 'Christopher Johnson']
     expect_widget_presence
   end
 
@@ -53,16 +51,16 @@ feature 'Check user picker', js: true do
 
     click_and_wait 'ORD-10'
 
-    expect(page).to have_content  'ORD-10'
-    expect(page).to have_selector "[name='homsOrderWhatUser']"
-    select2_text_node('homsOrderWhatUser').click
-    select2_search_field.set('John')
+    expect(page).to have_content 'ORD-10'
+    expect_r_select_presence('homsOrderWhatUser')
+    r_select_input('homsOrderWhatUser').set('John')
     wait_for_ajax
 
-    choose_select2_option('John Doe').click
-    expect(select2_text('homsOrderWhatUser')).to eq 'John Doe'
-    select2_clear_cross('homsOrderWhatUser').click
-    expect(select2_value('homsOrderWhatUser')).to eq ''
+    set_r_select_lookup_option('homsOrderWhatUser', 'John Doe')
+    expect(r_select_single_value('homsOrderWhatUser')[:label]).to eq 'John Doe'
+
+    r_select_clear_value('homsOrderWhatUser')
+    ensure_r_select_is_empty('homsOrderWhatUser')
     expect_widget_presence
   end
 
@@ -73,16 +71,14 @@ feature 'Check user picker', js: true do
 
     click_and_wait 'ORD-11'
 
-    expect(page).to have_content  'ORD-11'
-    expect(page).to have_selector "[name='homsOrderWhatUser']"
-    select2_text_node('homsOrderWhatUser').click
-    select2_search_field.set('John')
+    expect(page).to have_content 'ORD-11'
+    expect_r_select_presence('homsOrderWhatUser')
+    r_select_input('homsOrderWhatUser').set('John')
     wait_for_ajax
 
-    choose_select2_option('John Doe').click
-    expect(select2_text('homsOrderWhatUser')).to  eq 'John Doe'
-    expect(select2_value('homsOrderWhatUser')).to eq '2'
-    select2_no_clear('homsOrderWhatUser')
+    set_r_select_lookup_option('homsOrderWhatUser', 'John Doe')
+    expect(r_select_single_value('homsOrderWhatUser')).to eq({label: 'John Doe', value: '2'})
+    ensure_r_select_unclearable('homsOrderWhatUser')
     expect_widget_presence
   end
 end
