@@ -17,8 +17,8 @@ const OrderList = React.createClass({
   changeOrderRowCode (code) {
     const newState = {};
 
-    if (code == this.state.orderRowCode) {
-      if (this.state.order == 'asc') {
+    if (code === this.state.orderRowCode) {
+      if (this.state.order === 'asc') {
         newState.order = 'desc';
       } else {
         newState.order = 'asc';
@@ -29,11 +29,11 @@ const OrderList = React.createClass({
 
     this.setState(newState);
 
-    const filterParams = this.props.filterParams;
+    const { filterParams } = this.props;
 
     filterParams.sort_by = code;
-    filterParams.order   = newState.order || this.state.order;
-    filterParams.page    = 1;
+    filterParams.order = newState.order || this.state.order;
+    filterParams.page = 1;
 
     $.ajax('/orders/list', {
       method:      'GET',
@@ -41,10 +41,10 @@ const OrderList = React.createClass({
       contentType: 'application/json',
       data:        filterParams,
       success:     (data) => {
-        this.setState((prevState, props) => ({
+        this.setState(() => ({
           orders:       data,
           page:         2,
-          hasMorePages: data.length == this.props.pageSize
+          hasMorePages: data.length === parseInt(this.props.pageSize)
         }));
       }
     });
@@ -55,11 +55,12 @@ const OrderList = React.createClass({
 
     if (this.props.withCustomProfile) {
       const enabledOptions = [];
-      for (let field in this.props.profile.data) {
+
+      Object.keys(this.props.profile.data).forEach((field) => {
         if (this.props.profile.data[field].show) {
           enabledOptions.push(field);
         }
-      }
+      });
 
       selectElement.multiselect({
         maxHeight:      400,
@@ -123,7 +124,7 @@ const OrderList = React.createClass({
   },
 
   showMoreOrders () {
-    const filterParams = this.props.filterParams;
+    const { filterParams } = this.props;
     filterParams.page_size = this.props.pageSize;
     filterParams.page = this.state.page;
     filterParams.sort_by = this.state.orderRowCode;
@@ -137,10 +138,10 @@ const OrderList = React.createClass({
       contentType: 'application/json',
       data:        filterParams,
       success:     (data) => {
-        this.setState((prevState, props) => ({
+        this.setState(prevState => ({
           orders:       prevState.orders.concat(data),
           page:         prevState.page + 1,
-          hasMorePages: data.length == this.props.pageSize
+          hasMorePages: data.length === parseInt(this.props.pageSize)
         }));
       },
       complete: () => {
@@ -151,10 +152,13 @@ const OrderList = React.createClass({
 
   render () {
     const options = [];
-    for (let field in this.props.profile.data) {
-      let disabled = field == 'code';
-      options.push(<option key={field} value={field} disabled={disabled}>{this.props.profile.data[field].label}</option>);
-    }
+
+    Object.keys(this.props.profile.data).forEach((field) => {
+      const disabled = field === 'code';
+      options.push(
+        <option key={field} value={field} disabled={disabled}>{this.props.profile.data[field].label}</option>
+      );
+    });
 
     let showMoreContainer;
     if (this.state.hasMorePages) {

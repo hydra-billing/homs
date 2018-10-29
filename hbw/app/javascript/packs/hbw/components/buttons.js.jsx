@@ -1,18 +1,24 @@
+/* eslint no-console: "off" */
+
 modulejs.define(
   'HBWButtons',
-  ['React',
-   'HBWButton',
-   'HBWCallbacksMixin',
-   'HBWTranslationsMixin',
-   'HBWError',
-   'HBWPending'],
-  (React,
-   Button,
-   CallbacksMixin,
-   TranslationsMixin,
-   Error,
-   Pending) => React.createClass({
+  [
+    'React',
+    'HBWButton',
+    'HBWCallbacksMixin',
+    'HBWTranslationsMixin',
+    'HBWError'
+  ],
+  (
+    React,
+    Button,
+    CallbacksMixin,
+    TranslationsMixin,
+    Error
+  ) => React.createClass({
     mixins: [CallbacksMixin, TranslationsMixin],
+
+    displayName: 'HBWButtons',
 
     getInitialState () {
       this.setGuid();
@@ -37,6 +43,7 @@ modulejs.define(
       const subscription = this.props.env.connection.subscribe({
         client: this.getComponentId(),
         path:   '/buttons',
+
         data: {
           entity_code:  this.props.entityCode,
           entity_type:  this.props.entityTypeCode,
@@ -63,6 +70,7 @@ modulejs.define(
       return this.props.env.connection.request({
         url:    this.buttonsURL(),
         method: 'POST',
+
         data: {
           entity_code:  this.props.entityCode,
           entity_type:  this.props.entityTypeCode,
@@ -92,17 +100,21 @@ modulejs.define(
         if (this.props.showSpinner || !this.state.fetched) {
           return <div className="hbw-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i></div>;
         } else if (this.state.bpRunning) {
-          return <div className="hbw-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i><h5 className="hbw-spinner-text">{this.t('bp_running')}</h5></div>;
+          return <div className="hbw-spinner">
+            <i className="fa fa-spinner fa-spin fa-2x"></i>
+            <h5 className="hbw-spinner-text">{this.t('bp_running')}</h5>
+          </div>;
         } else {
           const buttons = this.state.buttons.map((button, index) => {
             const self = this;
             return <Button key={index}
-              button={button}
-              disabled={self.state.submitting || self.state.fileUploading}
-              env={self.props.env} />;
+                           button={button}
+                           disabled={self.state.submitting || self.state.fileUploading}
+                           env={self.props.env}/>;
           });
+
           return <div className='hbw-bp-control-buttons btn-group'>
-            <Error error={this.state.submitError || this.state.syncError} errorHeader={this.state.errorHeader} />
+            <Error error={this.state.submitError || this.state.syncError} errorHeader={this.state.errorHeader}/>
             {buttons}
           </div>;
         }
@@ -136,4 +148,5 @@ modulejs.define(
     triggerBPStart (button) {
       this.trigger('hbw:process-started', button);
     }
-  }));
+  })
+);

@@ -1,3 +1,6 @@
+/* eslint no-console: "off" */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["request"] }] */
+
 modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
   class Subscription {
     constructor (channel, options) {
@@ -99,9 +102,9 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
     }
 
     eachSubscriptions (update) {
-      for (let key in this.subscriptions) {
+      Object.keys(this.subscriptions).forEach((key) => {
         update(this.subscriptions[key]);
-      }
+      });
     }
 
     subscribe (options) {
@@ -110,15 +113,16 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
       if (client in this.subscriptions) {
         if (options.returnExisting) {
           return this.subscriptions[client];
-        } else {
-          throw new Error('Error!');
         }
+        throw new Error('Error!');
       } else {
-        return this.subscriptions[client] = new Subscription(this, {
+        this.subscriptions[client] = new Subscription(this, {
           client:   options.client,
           fetched:  this.fetched,
           lastPoll: this.lastPoll
         });
+
+        return this.subscriptions[client];
       }
     }
 
@@ -126,7 +130,7 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
       delete this.subscriptions[client];
 
       if (jQuery.isEmptyObject(this.subscriptions)) {
-        return this.stop();
+        this.stop();
       }
     }
 
@@ -156,7 +160,7 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
 
     poll () {
       if (this.polling) {
-        return;
+        return null;
       }
 
       this.polling = true;
@@ -235,7 +239,9 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
           return this.channels[id];
         }
       } else {
-        return this.channels[id] = channel;
+        this.channels[id] = channel;
+
+        return channel;
       }
     }
 

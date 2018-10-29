@@ -16,20 +16,20 @@ modulejs.define('HBWFormDefinition', ['jQuery'], (jQuery) => {
       const allFields = {};
       const objFields = obj.fields || {};
 
-      for (const field of Array.from(objFields)) {
+      [...objFields].forEach((field) => {
         switch (field.type) {
           case ('group'): jQuery.extend(allFields, this.getFields(field)); break;
-          case ('datetime_range'): jQuery.extend(allFields, this.getDatetimeRangeFields(field)); break;
-          case ('note'): continue; break;
-          case ('static'): continue; break;
+          case ('datetime_range'): jQuery.extend(allFields, Definition.getDatetimeRangeFields(field)); break;
+          case ('note'): break;
+          case ('static'): break;
           default: allFields[field.name] = field;
         }
-      }
+      });
 
       return allFields;
     }
 
-    getDatetimeRangeFields (obj) {
+    static getDatetimeRangeFields (obj) {
       const fields = {};
 
       fields[obj.from.name] = obj.from;

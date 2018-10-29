@@ -4,9 +4,9 @@ import OrderListHeaderRow from './order_list_header_row';
 
 const OrderListTable = React.createClass({
   render () {
-    const tableBody = this.props.orders.map((order, index) => {
-      return <OrderListRow key={index} values={order} profile={this.props.profile} />
-    });
+    const tableBody = this.props.orders.map((order, index) => (
+      <OrderListRow key={index} values={order} profile={this.props.profile} />
+    ));
 
     return <table className="table table-hover">
       <thead>

@@ -1,6 +1,8 @@
 modulejs.define('HBWButton', ['React', 'HBWCallbacksMixin'], (React, CallbacksMixin) => React.createClass({
   mixins: [CallbacksMixin],
 
+  displayName: 'HBWButton',
+
   render () {
     const classes = [];
     if (this.props.button.class) {

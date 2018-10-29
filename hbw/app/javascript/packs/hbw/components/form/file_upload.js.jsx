@@ -3,6 +3,8 @@ modulejs.define('HBWFormFileUpload',
   (React, DeleteIfMixin, CallbacksMixin, TranslationsMixin) => React.createClass({
     mixins: [DeleteIfMixin, CallbacksMixin, TranslationsMixin],
 
+    displayName: 'HBWFormFileUpload',
+
     getInitialState () {
       return {
         valid:      true,
@@ -58,6 +60,8 @@ modulejs.define('HBWFormFileUpload',
 
         return files.map(file => this.readFiles(file.name, file));
       }
+
+      return null;
     },
 
     addValue (name, res) {

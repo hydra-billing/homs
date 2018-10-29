@@ -1,5 +1,5 @@
 import './hbw/init/dependencies';
-import './hbw/components/';
+import './hbw/components';
 import './hbw/connection';
 import './hbw/dispatcher';
 import './hbw/form_definition';

@@ -3,6 +3,10 @@
   "description": "Web application for order and business process management.",
   "repository": "latera/homs",
   "license": "Apache-2.0",
+  "scripts": {
+    "lint": "eslint 'app/javascript/**/*' 'hbw/app/javascript/**/*'",
+    "lint-fix": "eslint 'app/javascript/**/*' 'hbw/app/javascript/**/*' --fix"
+  },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -32,6 +36,12 @@
     "yaml-loader": "^0.5.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-react": "^7.11.1",
     "webpack-dev-server": "2.11.2"
   }
 }

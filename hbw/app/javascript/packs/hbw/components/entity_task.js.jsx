@@ -1,26 +1,13 @@
 modulejs.define(
   'HBWEntityTask',
-  ['React',
-   'ReactDOM',
-   'jQuery',
-   'HBWForm',
-   'HBWTestForm',
-   'HBWError',
-   'HBWPending',
-   'HBWCallbacksMixin',
-   'HBWTranslationsMixin',
-   'HBWFormDefinition'],
-  (React,
-   ReactDOM,
-   jQuery,
-   Form,
-   TestForm,
-   Error,
-   Pending,
-   CallbacksMixin,
-   TranslationsMixin,
-   FormDefinition) => React.createClass({
+  ['React', 'ReactDOM', 'jQuery', 'HBWForm', 'HBWTestForm', 'HBWError', 'HBWPending', 'HBWCallbacksMixin',
+    'HBWTranslationsMixin', 'HBWFormDefinition'
+  ],
+  (React, ReactDOM, jQuery, Form, TestForm, Error, Pending, CallbacksMixin, TranslationsMixin,
+    FormDefinition) => React.createClass({
     mixins: [CallbacksMixin, TranslationsMixin],
+
+    displayName: 'HBWEntityTask',
 
     getInitialState () {
       return {
@@ -35,13 +22,13 @@ modulejs.define(
       this.loadForm(this.props.task.id);
       this.bind('hbw:submit-form', this.submitForm);
 
-      const e = jQuery(ReactDOM.findDOMNode(this));
+      const e = jQuery(this.rootNode);
       e.on('hidden.bs.collapse', this.choose);
       e.on('shown.bs.collapse', this.choose);
     },
 
     componentWillUnmount () {
-      jQuery(ReactDOM.findDOMNode(this)).off('hidden.bs.collapse').off('shown.bs.collapse');
+      jQuery(this.rootNode).off('hidden.bs.collapse').off('shown.bs.collapse');
     },
 
     render () {
@@ -59,7 +46,7 @@ modulejs.define(
         iconClass += ' glyphicon-chevron-up';
       }
 
-      return <div className="panel panel-default">
+      return <div className="panel panel-default" ref={(node) => { this.rootNode = node; }}>
         <div className="panel-heading">
           <h4 className="panel-title collapsable">
             <a data-toggle="collapse"
@@ -93,23 +80,21 @@ modulejs.define(
         };
 
         return <Form {...opts}/>;
-      } else if (this.state.error) {
+      } if (this.state.error) {
         return <Error error={this.state.error} />;
-      } else {
-        return <Pending active={this.state.loading} />;
       }
+      return <Pending active={this.state.loading} />;
     },
 
     formVariablesFromTask () {
-      const { form } = this.state;
       const formVariables = {};
       const formDef = new FormDefinition(this.state.form);
 
-      for (const varHash of Array.from(this.props.task.variables)) {
+      [...this.props.task.variables].forEach((varHash) => {
         if (formDef.fieldExist(varHash.name)) {
           formVariables[varHash.name] = varHash.value;
         }
-      }
+      });
 
       return formVariables;
     },
@@ -135,7 +120,7 @@ modulejs.define(
         variables,
         token:  this.state.form.csrf_token
       })
-        .done(form => this.setState({ error: null }))
+        .done(() => this.setState({ error: null }))
         .done(() => this.trigger('hbw:form-submitted', this.props.task))
         .fail((response) => {
           this.setState({ error: response });
@@ -147,7 +132,8 @@ modulejs.define(
         .always(() => this.setState({ pending: false }));
     },
 
-    choose (e) {
+    choose () {
       this.trigger('hbw:task-clicked', this.props.task);
     }
-  }));
+  })
+);

@@ -4,6 +4,8 @@ modulejs.define(
   (React, TaskList, CallbacksMixin) => React.createClass({
     mixins: [CallbacksMixin],
 
+    displayName: 'HBWMenu',
+
     getInitialState () {
       return { visible: false };
     },
@@ -18,8 +20,8 @@ modulejs.define(
 
     render () {
       return <div>
-        { this.props.renderButton &&
-          <div className='hbw-launcher' onClick={this.toggleVisibility}>
+        { this.props.renderButton
+          && <div className='hbw-launcher' onClick={this.toggleVisibility}>
             <div className='hbw-launcher-button btn-primary'>
             </div>
           </div> }
@@ -27,4 +29,5 @@ modulejs.define(
           chosenTaskID={this.props.chosenTaskID} /> : null }
       </div>;
     }
-  }));
+  })
+);

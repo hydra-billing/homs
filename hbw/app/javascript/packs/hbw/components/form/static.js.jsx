@@ -1,6 +1,8 @@
 modulejs.define('HBWFormStatic', ['React', 'HBWDeleteIfMixin'], (React, DeleteIfMixin) => React.createClass({
   mixins: [DeleteIfMixin],
 
+  displayName: 'HBWFormStatic',
+
   render () {
     let cssClass = this.props.params.css_class;
 

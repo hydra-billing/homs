@@ -1,12 +1,9 @@
-modulejs.define(
-  'HBWTaskGroup',
-  ['React',
-   'HBWTask',
-   'HBWCallbacksMixin'],
-  (React,
-   Task,
-   CallbacksMixin) => React.createClass({
+modulejs.define('HBWTaskGroup',
+  ['React', 'HBWTask', 'HBWCallbacksMixin'],
+  (React, Task, CallbacksMixin) => React.createClass({
     mixins: [CallbacksMixin],
+
+    displayName: 'HBWTaskGroup',
 
     getDefaultProps () {
       return {
@@ -20,7 +17,7 @@ modulejs.define(
       return <Task key={task.id}
         task={task}
         env={this.props.env}
-        active={task.id == this.props.chosenTaskID}
+        active={parseInt(task.id) === parseInt(this.props.chosenTaskID)}
         form_loading={this.props.form_loading}
       />;
     },

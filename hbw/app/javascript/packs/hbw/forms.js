@@ -1,13 +1,9 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["onStart", "onFinish"] }] */
+
 modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
   class Forms {
     onStart () {}
+
     onFinish () {}
 
     constructor (connection, entityClass) {
@@ -21,7 +17,6 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
       this._registerRequest = this._registerRequest.bind(this);
       this._pushRequest = this._pushRequest.bind(this);
       this._popRequest = this._popRequest.bind(this);
-      this._wrapWithDeferred = this._wrapWithDeferred.bind(this);
 
       this.whenFinished = null;
 
@@ -43,7 +38,7 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
       const existing = this.forms[taskId];
 
       if (existing && !options.force) {
-        return this._wrapWithDeferred(existing);
+        return Forms._wrapWithDeferred(existing);
       } else {
         return this.trackRequest(
           taskId,
@@ -54,7 +49,11 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
                 entity_class: this.entityClass
               }
             })
-            .done(form => this.forms[taskId] = form));
+            .done((form) => {
+              this.forms[taskId] = form;
+              return form;
+            })
+        );
       }
     }
 
@@ -78,7 +77,7 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
     }
 
     currentRequestsList () {
-      return jQuery.map(this.currentRequests, (val, _) => val);
+      return jQuery.map(this.currentRequests, val => val);
     }
 
     trackRequest (taskId, request) {
@@ -94,6 +93,8 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
         if (deferred === this.whenFinished) {
           return this.onFinish();
         }
+
+        return null;
       }))(this.whenFinished);
 
       return request;
@@ -105,7 +106,9 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
     }
 
     _pushRequest (taskId, request) {
-      return this.currentRequests[taskId] = request;
+      this.currentRequests[taskId] = request;
+
+      return request;
     }
 
     _popRequest (taskId) {
@@ -114,7 +117,7 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
       return request;
     }
 
-    _wrapWithDeferred (value) {
+    static _wrapWithDeferred (value) {
       return (new jQuery.Deferred()).resolve(value);
     }
   }

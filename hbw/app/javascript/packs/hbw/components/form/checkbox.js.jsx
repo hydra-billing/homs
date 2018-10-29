@@ -1,6 +1,8 @@
 modulejs.define('HBWFormCheckbox', ['React', 'HBWDeleteIfMixin'], (React, DeleteIfMixin) => React.createClass({
   mixins: [DeleteIfMixin],
 
+  displayName: 'HBWFormCheckbox',
+
   render () {
     const opts = {
       name:           this.props.name,
@@ -15,7 +17,7 @@ modulejs.define('HBWFormCheckbox', ['React', 'HBWDeleteIfMixin'], (React, Delete
     }
 
     const { tooltip } = this.props.params;
-    const { label }   = this.props.params;
+    const { label } = this.props.params;
     const labelCSS = `hbw-checkbox-label ${this.props.params.label_css || ''}`;
 
     return <div className={inputCSS} title={tooltip}>

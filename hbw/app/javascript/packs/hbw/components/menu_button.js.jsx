@@ -4,6 +4,8 @@ modulejs.define(
   (React, ReactDOM, CallbacksMixin, TasksMixin) => React.createClass({
     mixins: [CallbacksMixin, TasksMixin],
 
+    displayName: 'HBWMenuButton',
+
     getInitialState () {
       return { tasksNumber: 0 };
     },
@@ -19,13 +21,20 @@ modulejs.define(
     },
 
     render () {
-      return <a href="javascript:;" onClick={this.toggleMenu} className="hbw-menu-button fa fa-reorder">
-        {this.state.tasksNumber && <span className="counter">{this.state.tasksNumber}</span> || ''}
+      const counter = this.state.tasksNumber ? <span className="counter">{this.state.tasksNumber}</span> : '';
+
+      return <a ref={(node) => { this.rootNode = node; }}
+                onClick={this.toggleMenu}
+                className="hbw-menu-button fa fa-reorder">
+        {counter}
       </a>;
     },
 
-    toggleMenu () {
-      ReactDOM.findDOMNode(this).blur();
+    toggleMenu (e) {
+      e.preventDefault();
+
+      this.rootNode.blur();
       this.trigger('hbw:toggle-tasks-menu');
     }
-  }));
+  })
+);

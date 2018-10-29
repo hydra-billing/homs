@@ -4,6 +4,8 @@ modulejs.define('HBWFormSubmit', ['React', 'HBWTranslationsMixin'], (React, Tran
   return React.createClass({
     mixins: [TranslationsMixin],
 
+    displayName: 'HBWFormSubmit',
+
     getDefaultProps () {
       return { name: t('submit') };
     },
