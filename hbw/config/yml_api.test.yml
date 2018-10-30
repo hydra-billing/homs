@@ -162,6 +162,15 @@ get:
       deploymentUrl: "http://bpm.example.com/activiti-rest/service/repository/deployments/14"
       resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/14/resources/testProcess.bpmn"
       diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/14/resources/testProcess.testProcess.png"
+  "process-definitions/testProcess:15:15":
+    "":
+      <<: *default_process-definition
+      id: "testProcess:15:15"
+      url: "http://bpm.example.com/activiti-rest/service/repository/process-definitions/testProcess:15:15"
+      deploymentId: "15"
+      deploymentUrl: "http://bpm.example.com/activiti-rest/service/repository/deployments/15"
+      resource: "http://bpm.example.com/activiti-rest/service/repository/deployments/15/resources/testProcess.bpmn"
+      diagramResource: "http://bpm.example.com/activiti-rest/service/repository/deployments/15/resources/testProcess.testProcess.png"
   "repository/deployments/814892/resources":
     "":
       - id: "test_form.yml"
@@ -260,6 +269,13 @@ get:
         contentUrl: "repository/deployments/14/resourcedata/test_form_with_select_table.yml"
         mediaType: null
         type: resource
+  "repository/deployments/15/resources":
+    "":
+      - id: "file_upload_without_file_list.yml"
+        url: "http://bpm.example.com/activiti-rest/service/repository/deployments/15/resources/file_upload_without_file_list.yml"
+        contentUrl: "repository/deployments/15/resourcedata/file_upload_without_file_list.yml"
+        mediaType: null
+        type: resource
   "repository/deployments/814892":
     "": &default_deployments
       id: "814892"
@@ -333,6 +349,11 @@ get:
       <<: *default_deployments
       id: "14"
       url: "http://bpm.example.com/activiti-rest/service/repository/deployments/14"
+  "repository/deployments/15":
+    "":
+      <<: *default_deployments
+      id: "15"
+      url: "http://bpm.example.com/activiti-rest/service/repository/deployments/15"
   "repository/deployments/814892/resourcedata/test_form.yml":
     "": |
       form:
@@ -810,6 +831,21 @@ get:
                   - My favourite region name2
                   - My favourite region code2
                   - 3252349284
+  "repository/deployments/15/resourcedata/file_upload_without_file_list.yml":
+    "": |
+      form:
+        name: Test form with file upload without file list
+        css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+        fields:
+        - name: group1
+          type: group
+          label: Files
+          css_class: col-xs-12
+          fields:
+          - name: homsOrderDataUploadedFile
+            type: file_upload
+            label: Attach file
+            css_class: col-md-4 col-xs-4 col-lg-4
 put: {}
 patch: {}
 post:
@@ -1082,6 +1118,20 @@ post:
             type: "select_table"
             scope: "global"
             value: 125342601
+      - <<: *default_tasks
+        id: "111115"
+        formKey: "file_upload_without_file_list.yml"
+        processDefinitionId: "testProcess:15:15"
+        processDefinitionUrl: "process-definitions/testProcess:15:15"
+        variables:
+          - name: "homsOrderCode"
+            type: "string"
+            value: "ORD-15"
+            scope: "global"
+          - name: "homsOrderDataUploadedFile"
+            type: "file_upload"
+            scope: "global"
+            value: null
     "active=true&assignee=john&includeProcessVariables=true&processInstanceVariables[][name]=homsOrderCode&processInstanceVariables[][operation]=like&processInstanceVariables[][value]=%&size=1000":
       []
   query/process-instances:
@@ -1329,6 +1379,19 @@ post:
         ended: false
         processDefinitionId: "testProcess:14:14"
         processDefinitionUrl: "process-definitions/testProcess:14:14"
+        activityId: null
+        variables: []
+        tenantId: ""
+        completed: false
+    "variables[][name]=homsOrderCode&variables[][operation]=equals&variables[][type]=string&variables[][value]=ORD-15":
+      data:
+        id: "111115"
+        url: "http://bpm.example.com/activiti-rest/service/runtime/process-instances/111115"
+        businessKey: null
+        suspended: false
+        ended: false
+        processDefinitionId: "testProcess:15:15"
+        processDefinitionUrl: "process-definitions/testProcess:15:15"
         activityId: null
         variables: []
         tenantId: ""

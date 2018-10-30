@@ -41,9 +41,10 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       const opts = {
         name,
         params,
-        value:          this.props.variables[name],
-        formSubmitting: this.state.submitting || this.state.fileUploading,
-        env:            this.props.env
+        value:           this.props.variables[name],
+        formSubmitting:  this.state.submitting || this.state.fileUploading,
+        env:             this.props.env,
+        fileListPresent: this.fileListPresent(this.props.form.fields)
       };
 
       switch (params.type) {
@@ -94,6 +95,20 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
 
     isFormValid () {
       return this.getElement().find('input[type="text"].invalid').length === 0;
+    },
+
+    fileListPresent (fields) {
+      if (fields.map(f => [f.name, f.type]).includes(['homsOrderDataFileList', 'file_list'])) {
+        return true;
+      }
+
+      for (const f of fields) {
+        if (f.hasOwnProperty('fields') && this.fileListPresent(f.fields)) {
+          return true;
+        }
+      }
+
+      return false;
     },
 
     serializeForm () {

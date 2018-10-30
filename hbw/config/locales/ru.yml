@@ -15,6 +15,7 @@ ru:
         field_not_defined_in_bp: "Поле с именем %{field_name} отсутствует в переменных бизнес-процесса"
         cannot_obtain_available_actions: Не удалось получить список доступных действий
         cannot_start_process: Не удалось начать процесс
+        file_list_field_required: Для загрузки файлов необходимо добавить поле типа "file_list" с именем "homsOrderDataFileList"
 
       components:
         select:
