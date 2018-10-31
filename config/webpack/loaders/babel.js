@@ -5,7 +5,10 @@ module.exports = {
     loader: 'babel-loader',
     options: {
       presets: ['env', 'react'],
-      plugins: ['transform-object-rest-spread']
+      plugins: [
+        'transform-object-rest-spread',
+        'transform-class-properties'
+      ]
     }
   }
 };

@@ -4,6 +4,7 @@ v1.6.0 [unreleased]
 ### Features
 -   [#189](https://github.com/latera/homs/pull/189) Show alert if form with file upload field has no file list field.
 -   [#197](https://github.com/latera/homs/pull/197) Use Camunda as BPMS in default docker-compose.
+-   [#195](https://github.com/latera/homs/pull/195) Upgrade React & ReactDOM to 15.6.2, migrate to higher order components from mixins.
 
 v1.5.0 [2018-10-29]
 -------------------

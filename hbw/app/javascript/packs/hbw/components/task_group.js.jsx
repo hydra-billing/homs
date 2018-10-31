@@ -1,8 +1,7 @@
-modulejs.define('HBWTaskGroup',
-  ['React', 'HBWTask', 'HBWCallbacksMixin'],
-  (React, Task, CallbacksMixin) => React.createClass({
-    mixins: [CallbacksMixin],
+import { withCallbacks } from './helpers';
 
+modulejs.define('HBWTaskGroup', ['React', 'HBWTask'], (React, Task) => {
+  const TaskGroup = React.createClass({
     displayName: 'HBWTaskGroup',
 
     getDefaultProps () {
@@ -15,10 +14,10 @@ modulejs.define('HBWTaskGroup',
 
     renderTask (task) {
       return <Task key={task.id}
-        task={task}
-        env={this.props.env}
-        active={parseInt(task.id) === parseInt(this.props.chosenTaskID)}
-        form_loading={this.props.form_loading}
+                   task={task}
+                   env={this.props.env}
+                   active={parseInt(task.id) === parseInt(this.props.chosenTaskID)}
+                   form_loading={this.props.form_loading}
       />;
     },
 
@@ -31,4 +30,7 @@ modulejs.define('HBWTaskGroup',
         <ul className="hbw-task-item">{children}</ul>
       </div>;
     }
-  }));
+  });
+
+  return withCallbacks(TaskGroup);
+});

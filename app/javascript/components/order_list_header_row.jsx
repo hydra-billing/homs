@@ -1,7 +1,7 @@
 import React from 'react';
 import OrderListHeaderCell from './order_list_header_cell';
 
-const OrderListHeaderRow = React.createClass({
+class OrderListHeaderRow extends React.Component {
   render () {
     const headerCells = [];
 
@@ -20,6 +20,6 @@ const OrderListHeaderRow = React.createClass({
       {headerCells}
     </tr>;
   }
-});
+}
 
 export default OrderListHeaderRow;

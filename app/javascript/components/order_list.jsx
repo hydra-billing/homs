@@ -1,20 +1,18 @@
 import React from 'react';
 import OrderListTable from './order_list_table';
 
-const OrderList = React.createClass({
-  getInitialState () {
-    return {
-      profile:      this.props.profile,
-      page:         1,
-      orders:       [],
-      hasMorePages: true,
-      requesting:   false,
-      orderRowCode: '',
-      order:        'asc'
-    };
-  },
+class OrderList extends React.Component {
+  state = {
+    profile:      this.props.profile,
+    page:         1,
+    orders:       [],
+    hasMorePages: true,
+    requesting:   false,
+    orderRowCode: '',
+    order:        'asc'
+  };
 
-  changeOrderRowCode (code) {
+  changeOrderRowCode = (code) => {
     const newState = {};
 
     if (code === this.state.orderRowCode) {
@@ -48,7 +46,7 @@ const OrderList = React.createClass({
         }));
       }
     });
-  },
+  };
 
   componentDidMount () {
     const selectElement = $('#column-settings');
@@ -77,29 +75,29 @@ const OrderList = React.createClass({
     }
 
     this.showMoreOrders();
-  },
+  }
 
-  buttonText () {
+  buttonText = () => {
     return I18n.t('js.columns_settings');
-  },
+  };
 
-  handleOptionChange (option, checked) {
+  handleOptionChange = (option, checked) => {
     const value = $(option).val();
     const newProfile = $.extend(true, {}, this.state.profile);
 
     newProfile.data[value].show = checked;
     this.setState({ profile: newProfile });
-  },
+  };
 
-  saveProfile () {
+  saveProfile = () => {
     if (this.state.profile.id) {
       this.updateProfile();
     } else {
       this.createProfile();
     }
-  },
+  };
 
-  createProfile () {
+  createProfile = () => {
     $.ajax('/profiles', {
       method:      'POST',
       dataType:    'json',
@@ -109,9 +107,9 @@ const OrderList = React.createClass({
         this.setState({ profile: data });
       }
     });
-  },
+  };
 
-  updateProfile () {
+  updateProfile = () => {
     $.ajax(`/profiles/${this.state.profile.id}`, {
       method:      'PUT',
       dataType:    'json',
@@ -121,9 +119,9 @@ const OrderList = React.createClass({
         this.setState({ profile: data });
       }
     });
-  },
+  };
 
-  showMoreOrders () {
+  showMoreOrders = () => {
     const { filterParams } = this.props;
     filterParams.page_size = this.props.pageSize;
     filterParams.page = this.state.page;
@@ -148,7 +146,7 @@ const OrderList = React.createClass({
         this.setState({ requesting: false });
       }
     });
-  },
+  };
 
   render () {
     const options = [];
@@ -187,6 +185,6 @@ const OrderList = React.createClass({
       </div>
     </div>;
   }
-});
+}
 
 export default OrderList;

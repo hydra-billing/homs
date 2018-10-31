@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OrderListHeaderCell = React.createClass({
+class OrderListHeaderCell extends React.Component {
   render () {
     const cellClass = this.props.show ? '' : 'hidden';
 
@@ -20,6 +20,6 @@ const OrderListHeaderCell = React.createClass({
       {orderIcon}
     </th>;
   }
-});
+}
 
 export default OrderListHeaderCell;
