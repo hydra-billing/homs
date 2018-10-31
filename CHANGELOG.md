@@ -5,6 +5,9 @@ v1.6.0 [unreleased]
 -   [#189](https://github.com/latera/homs/pull/189) Show alert if form with file upload field has no file list field.
 -   [#197](https://github.com/latera/homs/pull/197) Use Camunda as BPMS in default docker-compose.
 
+### Bugfixes
+-   [#194](https://github.com/latera/homs/pull/194) Set limit on the number of choices in lookup select from sql requests.
+
 v1.5.0 [2018-10-29]
 -------------------
 

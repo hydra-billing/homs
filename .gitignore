@@ -44,6 +44,7 @@ db/*.sqlite3
 /public/assets/*
 /spec/tmp/*
 /cache
+/.cache
 /capybara*
 /capybara-*.html
 /gems
@@ -107,3 +108,4 @@ lib/capistrano/
 /public/assets/packs-test
 /node_modules
 yarn-debug.log*
+yarn-error.log*

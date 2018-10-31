@@ -9,6 +9,8 @@ module HBW
       definition_reader :variable
       definition_reader :entity_class
 
+      MAX_ROW_COUNT = 20
+
       class SourceLoader
         include HBW::Logger
 
@@ -21,8 +23,8 @@ module HBW
           @variables = variables
         end
 
-        def load
-          values = source.select(condition, variables)
+        def load(limit = nil)
+          values = source.select(condition, variables, limit)
 
           logger.debug { "Retrieved values for %s\nfrom source %s\ncondition: %s\nvariables: %s.\nResult: %s" %
                            [name, source, condition, variables, values.to_s] }
@@ -110,7 +112,7 @@ module HBW
       end
 
       def lookup_values(query)
-        choices_to_array(loader(lookup_sql, task.variables_hash.merge(value: query)).load.uniq)
+        choices_to_array(loader(lookup_sql, task.variables_hash.merge(value: query)).load(MAX_ROW_COUNT).uniq)
       end
 
       private
