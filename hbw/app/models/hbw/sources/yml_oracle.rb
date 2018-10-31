@@ -1,7 +1,7 @@
 module HBW
   module Sources
     class YMLOracle < Base
-      def select(sql, variables)
+      def select(sql, variables, limit = nil)
         find_response(build_params_key(sql, variables))
       end
 

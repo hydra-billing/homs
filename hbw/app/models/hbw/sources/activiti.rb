@@ -1,7 +1,7 @@
 module HBW
   module Sources
     class Activiti < Base
-      def select(variable_name, variables)
+      def select(variable_name, variables, _ = nil)
         value = variables.fetch(variable_name.to_sym)
 
         if value.present?

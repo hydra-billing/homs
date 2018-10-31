@@ -4,17 +4,16 @@ module HBW
       class ConnectionFailed < RuntimeError
       end
 
-
       def initialize(*)
         require 'oci8' unless defined?(OCI8)
 
         super
       end
 
-      def select(sql, variables)
+      def select(sql, variables, limit = nil)
         binds = parse_bind_names(sql)
 
-        execute(sql) do |cursor|
+        execute(sql, limit) do |cursor|
           binds.each do |bind|
             if variables.fetch(bind).nil?
               cursor.bind_param(bind, nil, Integer)
@@ -31,11 +30,15 @@ module HBW
         sql.scan(/:\w+/).map { |s| s[1..-1].to_sym }
       end
 
-      def execute(sql)
+      def execute(sql, limit = nil)
         2.times do
           begin
             establish_connection
-            return try_query(sql) { |c| yield(c) if block_given? }
+            if limit.nil?
+              return try_query(sql) { |c| yield(c) if block_given? }
+            else
+              return try_query(limit(sql, limit)) { |c| yield(c) if block_given? }
+            end
           rescue ConnectionFailed
             reconnect
           end
@@ -84,6 +87,10 @@ module HBW
       def reconnect
         @connection = nil
         establish_connection
+      end
+
+      def limit(sql, max_row_count)
+        "SELECT * FROM (#{sql}) WHERE ROWNUM <= #{max_row_count}"
       end
     end
   end
