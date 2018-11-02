@@ -4,11 +4,10 @@
 
 cp -rn /tmp/config/* /opt/homs/config/
 
-bundle exec rake db:migrate
-yarn install && bundle exec rake assets:precompile
+yarn install && bundle exec rails db:migrate && bundle exec rails assets:precompile
 
 if [[ ! -a seed.lock ]]; then
-    bundle exec rake db:seed
+    bundle exec rails db:seed
     touch seed.lock
 fi
 
