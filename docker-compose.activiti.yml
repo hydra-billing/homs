@@ -1,25 +1,25 @@
 version: '2'
 services:
-  db_camunda:
+  db_activiti:
     image: postgres
-    hostname: postgres-camunda
-    container_name: postgres-camunda
+    hostname: postgres-activiti
+    container_name: postgres-activiti
     restart: always
     environment:
-      PGDATA: $BPM_DB_PATH/camunda
+      PGDATA: $BPM_DB_PATH/activiti
       POSTGRES_DB: $BPM_DB_NAME
       POSTGRES_USER: $BPM_DB_USER
       POSTGRES_PASSWORD: $BPM_DB_PASSWORD
       TZ: Europe/Moscow
     volumes:
-      - $HOMS_PATH/data/camunda/postgresql:/var/lib/postgresql/data
+      - $HOMS_PATH/data/activiti/postgresql:$BPM_DB_PATH
     networks:
       - custom_network
   db_homs:
     image: postgres
     hostname: postgres-homs
-    restart: always
     container_name: postgres-homs
+    restart: always
     environment:
       PGDATA: $HOMS_DB_PATH/homs
       POSTGRES_DB: $HOMS_DB_NAME
@@ -30,6 +30,23 @@ services:
       - $HOMS_PATH/data/homs/postgresql:$HOMS_DB_PATH
     ports:
       - $HOMS_DB_PORT:5432
+    networks:
+      - custom_network
+  activiti:
+    image: latera/activiti-homs
+    container_name: activiti
+    env_file:
+      - ".env"
+    links:
+      - db_activiti:$BPM_DB_HOST
+    environment:
+      DB_HOST: $BPM_DB_HOST
+      ACTIVITI_LOGIN: $BPM_USER
+      ACTIVITI_PASSWORD: $BPM_PASSWORD
+    ports:
+      - $BPM_PORT:8080
+    depends_on:
+      - db_activiti
     networks:
       - custom_network
   minio:
@@ -46,46 +63,28 @@ services:
       - $MINIO_PORT:9000
   homs:
     image: latera/homs
+    hostname: homs
     container_name: homs
     env_file:
       - ".env"
     links:
       - db_homs:$HOMS_DB_HOST
-      - camunda:$BPM_HOST
+      - activiti:$BPM_HOST
     volumes:
       - $HOMS_PATH/hbw:/opt/homs/hbw
-      - /etc/hydra/homs/homs_configuration.yml:/opt/homs/config/homs_configuration.yml
-      - /etc/hydra/homs/imprint.yml:/opt/homs/config/imprint.yml
-      - /etc/hydra/homs/hbw.yml:/opt/homs/config/hbw.yml
-      - /etc/hydra/homs/database.yml:/opt/homs/config/database.yml
-      - /etc/hydra/homs/bpm.yml:/opt/homs/config/bpm.yml
-      - /etc/hydra/homs/sources.yml:/opt/homs/config/sources.yml
-      - /etc/hydra/homs/secrets.yml:/opt/homs/config/secrets.yml
+      - /etc/hydra/homs/config/homs_configuration.yml:/opt/homs/config/homs_configuration.yml
+      - /etc/hydra/homs/config/imprint.yml:/opt/homs/config/imprint.yml
+      - /etc/hydra/homs/config/hbw.yml:/opt/homs/config/hbw.yml
+      - /etc/hydra/homs/config/database.docker.yml:/opt/homs/config/database.yml
+      - /etc/hydra/homs/config/bpm.yml:/opt/homs/config/bpm.yml
+      - /etc/hydra/homs/config/sources.yml:/opt/homs/config/sources.yml
+      - /etc/hydra/homs/config/secrets.yml:/opt/homs/config/secrets.yml
     depends_on:
       - db_homs
-      - camunda
+      - activiti
       - minio
     ports:
       - $HOMS_PORT:3000
-    networks:
-      - custom_network
-  camunda:
-    image: latera/camunda
-    container_name: camunda
-    env_file:
-      - ".env"
-    links:
-      - db_camunda:$BPM_DB_HOST
-    environment:
-      DB_DRIVER: org.postgresql.Driver
-      DB_URL: "jdbc:postgresql://db_camunda:5432/$BPM_DB_NAME"
-      DB_USERNAME: $BPM_DB_USER
-      DB_PASSWORD: $BPM_DB_PASSWORD
-      WAIT_FOR: "db_camunda:5432"
-    ports:
-      - 8080:8080
-    depends_on:
-      - db_camunda
     networks:
       - custom_network
 networks:

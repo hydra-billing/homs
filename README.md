@@ -23,7 +23,7 @@ Resources:
 
 There are 2 ways to install HOMS.
 
-The prefered way to install HOMS is to use docker
+The prefered way to install HOMS is to use Docker
 
 ### Using [docker](https://www.docker.com/)
 
@@ -71,7 +71,11 @@ The prefered way to install HOMS is to use docker
 
 9. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
 
-10. Login at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
+10. Navigate to [Camunda Admin](http://localhost:8080/camunda) and create admin user with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file.
+
+11. (Optional) If you want to use demo processes navigate to Camunda Admin and create user with `user@example.com` email.
+
+12. Login at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
 
 #### In development
