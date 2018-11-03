@@ -1,6 +1,8 @@
 modulejs.define('HBWFormText', ['React', 'HBWDeleteIfMixin'], (React, DeleteIfMixin) => React.createClass({
   mixins: [DeleteIfMixin],
 
+  displayName: 'HBWFormText',
+
   render () {
     const opts = {
       name:         this.props.name,

@@ -1,6 +1,8 @@
 modulejs.define('HBWFormFileList', ['React', 'HBWDeleteIfMixin'], (React, DeleteIfMixin) => React.createClass({
   mixins: [DeleteIfMixin],
 
+  displayName: 'HBWFormFileList',
+
   getInitialState () {
     return {
       valid:        true,
@@ -42,11 +44,19 @@ modulejs.define('HBWFormFileList', ['React', 'HBWDeleteIfMixin'], (React, Delete
     const onClick = this.deleteLink;
     const { deletedFiles } = this.state;
 
-    return list.map((variant) => {
+    return list.map((variant, i) => {
       if (deletedFiles.includes(variant.name)) {
-        return <li className={'danger'}><a href={variant.url}>{variant.name}</a>&nbsp;<a href="#" className="fa fa-reply" onClick={e => onClick(e, variant.name)}></a></li>;
+        return <li className={'danger'}>
+          <a href={variant.url}>{variant.name}</a>
+          &nbsp;
+          <a href="#" className="fa fa-reply" onClick={e => onClick(e, variant.name)}></a>
+        </li>;
       } else {
-        return <li><a href={variant.url}>{variant.name}</a>&nbsp;<a href="#" className="fa fa-times" onClick={e => onClick(e, variant.name)}></a></li>;
+        return <li key={i}>
+          <a href={variant.url}>{variant.name}</a>
+          &nbsp;
+          <a href="#" className="fa fa-times" onClick={e => onClick(e, variant.name)}></a>
+        </li>;
       }
     });
   },

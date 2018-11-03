@@ -1,4 +1,6 @@
-import Select, { components } from 'react-select';
+/* eslint no-console: "off" */
+
+import Select from 'react-select';
 import AsyncSelect from 'react-select/lib/Async';
 
 modulejs.define('HBWFormSelect',
@@ -19,13 +21,13 @@ modulejs.define('HBWFormSelect',
     render () {
       const isMulti = !this.props.params.single && this.props.params.mode === 'lookup';
       const opts = {
+        isMulti,
         name:             this.props.name,
         options:          this.buildOptions(),
         defaultValue:     this.getDefaultValue(isMulti),
         placeholder:      this.props.params.placeholder || '',
         isClearable:      this.props.params.nullable || this.props.value === null,
         isDisabled:       this.props.params.editable === false,
-        isMulti:          isMulti,
         noOptionsMessage: this.noOptionsMessage,
         loadingMessage:   this.loadingMessage,
         className:        'react-select-container',
@@ -67,7 +69,15 @@ modulejs.define('HBWFormSelect',
 
     customStyles () {
       const bgColor = (state) => {
-        return state.isFocused ? '#2C3E50' : (state.isSelected ? '#445C72' : 'white')
+        if (state.isFocused) {
+          return '#2C3E50';
+        }
+
+        if (state.isSelected) {
+          return '#445C72';
+        }
+
+        return 'white';
       };
 
       return {
@@ -101,9 +111,9 @@ modulejs.define('HBWFormSelect',
     selectComponent (opts) {
       if (this.props.params.mode === 'lookup') {
         return <AsyncSelect loadOptions={this.loadOptions}
-                            {...opts} />
+                            {...opts} />;
       } else {
-        return <Select {...opts} />
+        return <Select {...opts} />;
       }
     },
 
@@ -122,7 +132,7 @@ modulejs.define('HBWFormSelect',
     },
 
     componentWillMount () {
-      this.fetchOptionsAsync = this.debounce(this.fetchOptionsAsync, 250)
+      this.fetchOptionsAsync = this.debounce(this.fetchOptionsAsync, 250);
     },
 
     loadOptions (inputValue, callback) {
@@ -137,9 +147,7 @@ modulejs.define('HBWFormSelect',
       const url = `${this.props.params.url}${(this.props.params.url.includes('?') ? '&' : '?')}`;
 
       fetch(`${url}q=${inputValue}`)
-        .then((response) => {
-          return response.json();
-        })
+        .then(response => response.json())
         .then((json) => {
           const res = json.map(opt => ({
             label: opt.text,
@@ -162,12 +170,12 @@ modulejs.define('HBWFormSelect',
         const value = (isMulti ? this.state.value : [this.state.value]).map(el => `${el}`);
 
         return variants.filter(opt => value.includes(`${opt.value}`));
+      }
+
+      if (this.props.params.nullable) {
+        return [];
       } else {
-        if (this.props.params.nullable) {
-          return [];
-        } else {
-          return [variants[0]];
-        }
+        return [variants[0]];
       }
     },
 
@@ -175,7 +183,7 @@ modulejs.define('HBWFormSelect',
       let newValue;
 
       if (Array.isArray(option)) {
-        newValue = option.map(opt => opt.value)
+        newValue = option.map(opt => opt.value);
       } else {
         newValue = option ? option.value : null;
       }
@@ -209,7 +217,7 @@ modulejs.define('HBWFormSelect',
       return choices;
     },
 
-    addNullChoice (_) {
+    addNullChoice () {
       return null;
     },
 

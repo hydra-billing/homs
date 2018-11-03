@@ -1,4 +1,4 @@
-import allTranslations from './init/translations'
+import allTranslations from './init/translations';
 
 modulejs.define('HBWTranslator', ['jQuery'], (jQuery) => {
   const translations = allTranslations[I18n.locale].hbw.js;
@@ -7,30 +7,29 @@ modulejs.define('HBWTranslator', ['jQuery'], (jQuery) => {
     translate (key, vars = {}) {
       let current = translations;
 
-      for (const part of key.split('.')) {
+      key.split('.').forEach((part) => {
         if (jQuery.isPlainObject(current) && part in current) {
           current = this.interpolateString(current[part], vars);
         } else {
           throw new Error(`Cannot find ${key} in translations`);
         }
-      }
+      });
 
       return current;
     },
 
     interpolateString (str, vars) {
       if (typeof str === 'string') {
-        return str.replace(/%{([^{}]*)}/g, (full_match, var_name) => {
-          const subst = vars[var_name];
+        return str.replace(/%{([^{}]*)}/g, (fullMatch, varName) => {
+          const subst = vars[varName];
           if ((typeof subst !== 'string') && (typeof subst !== 'number')) {
-            throw new Error(`Undefined variable ${var_name}`);
+            throw new Error(`Undefined variable ${varName}`);
           }
 
           return subst;
         });
-      } else {
-        return str;
       }
+      return str;
     }
   };
 });

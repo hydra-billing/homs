@@ -1,4 +1,4 @@
-import './form/';
+import './form';
 import './button.js';
 import './buttons.js';
 import './container.js';

@@ -1,10 +1,16 @@
+/* eslint class-methods-use-this: "off" */
+/* eslint no-this-before-super: "off" */
+/* eslint no-constant-condition: "off" */
+/* eslint no-eval: "off" */
+/* eslint constructor-super: "off" */
+
 import '../init/unwrap_jquery';
 import '../init/unwrap_moment';
 import '../init/unwrap_react';
 import '../init/translations';
 import 'jquery-ujs';
 import 'select2/select2.full';
-import 'select2/i18n/ru'
+import 'select2/i18n/ru';
 import { Growl } from 'jquery.growl';
 import 'bootstrap-sass';
 import 'fileinput';
@@ -40,8 +46,7 @@ $(() => $('body').on('dp.change', (evt) => {
 
     $hiddenValue.val(value);
   }
-})
-);
+}));
 
 $(() => {
   $('.order_state-picker,.order_archived-picker').select2({
@@ -60,7 +65,7 @@ $(() => {
         page: params.page
       };
     },
-    processResults (data, page) {
+    processResults (data) {
       return { results: data };
     }
   };
@@ -78,7 +83,7 @@ $(() => {
         decorated.call(this, params, callback);
 
         if (!params.term && !emptySelected) {
-          return this.trigger('results:append', {
+          this.trigger('results:append', {
             data: {
               results: [{
                 id:   'empty',
@@ -107,21 +112,20 @@ $(() => {
       });
     });
 
-     $.fn.twitter_bootstrap_confirmbox.defaults = {
-       fade:          false,
-       title:         null, // if title equals null window.top.location.origin is used
-       cancel:        I18n.t('js.cancel'),
-       cancel_class:  'btn cancel',
-       proceed:       I18n.t('js.yes'),
-       proceed_class: 'btn proceed btn-danger'
-     };
+  $.fn.twitter_bootstrap_confirmbox.defaults = {
+    fade:          false,
+    title:         null, // if title equals null window.top.location.origin is used
+    cancel:        I18n.t('js.cancel'),
+    cancel_class:  'btn cancel',
+    proceed:       I18n.t('js.yes'),
+    proceed_class: 'btn proceed btn-danger'
+  };
 });
 
 $(() => $('.show-hidden-order-data').on('click', 'a', function () {
   $(this).parents('.show-hidden-order-data').hide();
   $($(this).data('toggle')).show('blind');
-})
-);
+}));
 
 const defaultExport = {};
 class Messenger {
@@ -146,21 +150,25 @@ class Messenger {
 
     this.stylesMap = { success: 'notice' };
 
-    for (let key in this.typeMap) {
+    Object.keys(this.typeMap).forEach((key) => {
       const aliases = this.typeMap[key];
-      this[key] = (key => options => this.inform(options, key))(key);
 
-      for (const alias of Array.from(aliases)) {
+      this[key] = (_key => options => this.inform(options, _key))(key);
+
+      [...aliases].forEach((alias) => {
         this[alias] = this[key];
-      }
-    }
+      });
+    });
   }
 
-  inform (options, level) {
-    if ($.type(options) === 'string') {
-      options = { message: options };
+  inform (opts, level) {
+    let options = opts;
+
+    if ($.type(opts) === 'string') {
+      options = { message: opts };
     }
-    const o = $.extend({}, options);
+
+    const o = Object.assign({}, options);
 
     if (!options.title) {
       const title = this.titleFor(options, level);
@@ -179,24 +187,27 @@ class Messenger {
     if (level === 'error') {
       return I18n.t('js.error');
     }
+    return null;
   }
 
   show (messages) {
     return (() => {
       const result = [];
-      for (var message of Array.from(messages)) {
+
+      [...messages].forEach((message) => {
         const messageType = message[0];
 
         if (this[messageType]) {
           if ($.type(message[1]) === 'array') {
-            result.push(Array.from(message[1]).map(msg => this[message[0]](msg)));
+            result.push([...message[1]].map(msg => this[message[0]](msg)));
           } else {
             result.push(this[message[0]](message[1]));
           }
         } else {
           result.push(undefined);
         }
-      }
+      });
+
       return result;
     })();
   }
@@ -214,11 +225,7 @@ class Homs {
     this.messenger = new Messenger();
   }
 
-  enableDateTimePicker (allowClear) {
-    if (allowClear == null) {
-      allowClear = false;
-    }
-
+  enableDateTimePicker (allowClear = false) {
     $('.datetime-picker').each(function () {
       const $el = $(this);
       const format = $el.data('format') ? $el.data('format') : false;
@@ -280,8 +287,7 @@ class Homs {
           $orderAttributePicker.prop('disabled', false).trigger('change');
         }
       }
-    }
-    );
+    });
   }
 
   updateOrderForm (orderCode) {
@@ -309,8 +315,10 @@ class PatchedGrowl extends Growl {
       const thisName = thisFn.slice(thisFn.indexOf('return') + 6 + 1, thisFn.indexOf(';')).trim();
       eval(`${thisName} = this;`);
     }
+
     this.click = this.click.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
+
     super(...args);
 
     this.stopped = false;
@@ -321,12 +329,12 @@ class PatchedGrowl extends Growl {
     return new PatchedGrowl(settings);
   }
 
-  click (event) {
+  click () {
     this.$growl().stop(true, true);
     this.stopped = true;
   }
 
-  mouseLeave (event) {
+  mouseLeave () {
     if (!this.stopped) {
       this.waitAndDismiss();
     }
@@ -344,11 +352,12 @@ $(() => {
   }
   const widget = window.HBWidget;
 
-  widget.env.dispatcher.bind('hbw:go-to-entity', 'host', payload => window.location = payload.task.entity_url);
+  widget.env.dispatcher.bind('hbw:go-to-entity', 'host', (payload) => { window.location = payload.task.entity_url; });
 
   widget.env.dispatcher.bind('hbw:form-loaded', 'widget', payload => Application.updateOrderForm(payload.entityCode));
 
-  widget.env.dispatcher.bind('hbw:bpm-user-not-found', 'widget', () => Application.messenger.warn(I18n.t('js.user_not_found')));
+  widget.env.dispatcher.bind('hbw:bpm-user-not-found', 'widget',
+    () => Application.messenger.warn(I18n.t('js.user_not_found')));
 
   widget.render();
 });

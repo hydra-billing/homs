@@ -1,8 +1,12 @@
-modulejs.define('HBWError', ['React', 'HBWTranslationsMixin', 'jQuery'], (React, TranslationsMixin, jQuery) => {
+/* eslint no-script-url: "off" */
+
+modulejs.define('HBWError', ['React', 'HBWTranslationsMixin'], (React, TranslationsMixin) => {
   const { t } = TranslationsMixin;
 
   return React.createClass({
     mixins: [TranslationsMixin],
+
+    displayName: 'HBWError',
 
     getDefaultProps () {
       return { errorHeader: t('error') };
@@ -27,7 +31,7 @@ modulejs.define('HBWError', ['React', 'HBWTranslationsMixin', 'jQuery'], (React,
           iconClass = 'fa fa-chevron-right';
         }
 
-        if (this.props.error.hasOwnProperty('responseText')) {
+        if ({}.hasOwnProperty.call(this.props.error, 'responseText')) {
           error = this.props.error.responseText;
         } else {
           ({ error } = this.props);

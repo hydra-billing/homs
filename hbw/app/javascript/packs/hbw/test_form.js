@@ -1,3 +1,5 @@
+/* eslint max-len: "off" */
+
 modulejs.define('HBWTestForm', [], () => {
   class TestForm {
     constructor () {

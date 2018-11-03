@@ -1,0 +1,45 @@
+{
+  "extends": ["eslint:recommended", "airbnb-base", "plugin:react/recommended"],
+
+  "plugins": ["react"],
+
+  "parser": "babel-eslint",
+
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jquery": true
+  },
+
+  "rules": {
+    "comma-dangle": [1, "only-multiline"],
+    "func-names": [1, "never"],
+    "import/extensions": 0,
+    "import/no-unresolved": 0,
+    "key-spacing": [1, {
+      "singleLine": { "beforeColon": false,"afterColon": true },
+      "multiLine": { "beforeColon": false,"afterColon": true, "align": "value" }
+    }],
+    "max-len": [1, { "code": 121, "ignoreComments": true }],
+    "no-underscore-dangle": 0,
+    "no-else-return": 0,
+    "radix": [2, "as-needed"],
+    "react/prop-types": [1, { "skipUndeclared": true }],
+    "space-before-function-paren": [1, "always"]
+  },
+
+  "globals": {
+    "Application": true,
+    "I18n": true,
+    "modulejs": true,
+    "moment": true,
+    "node": true
+  },
+
+  "settings": {
+    "react": {
+      "createClass": "createClass",
+      "version": "15.4.2"
+    }
+  }
+}

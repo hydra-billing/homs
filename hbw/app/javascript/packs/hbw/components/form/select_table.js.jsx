@@ -3,6 +3,8 @@ modulejs.define('HBWFormSelectTable',
   (React, TranslationsMixin, jQuery, DeleteIfMixin, SelectMixin) => React.createClass({
     mixins: [TranslationsMixin, DeleteIfMixin, SelectMixin],
 
+    displayName: 'HBWFormSelectTable',
+
     getInitialState () {
       const value = this.props.current_value || '';
 
@@ -14,12 +16,8 @@ modulejs.define('HBWFormSelectTable',
     },
 
     render () {
-      const opts = {
-        name:         this.props.name,
-        defaultValue: this.state.value
-      };
-
       let cssClass = this.props.params.css_class;
+
       if (this.hidden) {
         cssClass += ' hidden';
       }
@@ -29,6 +27,7 @@ modulejs.define('HBWFormSelectTable',
       const labelCss = this.props.params.label_css;
 
       const selectErrorMessage = this.t('errors.field_not_defined_in_bp', { field_name: this.props.name });
+
       let selectErrorMessageCss = 'alert alert-danger';
       if (!this.missFieldInVariables()) {
         selectErrorMessageCss += ' hidden';
@@ -64,16 +63,17 @@ modulejs.define('HBWFormSelectTable',
 
     addNullChoice (choices) {
       let hasNullValue = false;
-      for (const choice of Array.from(choices)) {
+
+      [...choices].forEach((choice) => {
         if (this.isChoiceEqual(choice, null)) {
           hasNullValue = true;
         }
-      }
+      });
 
       if (!hasNullValue) {
         const nullChoice = ['null'];
 
-        [...new Array(this.props.params.row_params.length).keys()].forEach(_ => nullChoice.push('-'));
+        [...new Array(this.props.params.row_params.length).keys()].forEach(() => nullChoice.push('-'));
 
         choices.push(nullChoice);
       }
@@ -83,9 +83,9 @@ modulejs.define('HBWFormSelectTable',
       const rowParams = this.props.params.row_params;
       const result = [];
 
-      for (let i in rowParams) {
-        result.push(<th className={this.buildCssFromConfig(rowParams[i])} key={rowParams[i].name}>{rowParams[i].name}</th>);
-      }
+      [...rowParams].forEach((param) => {
+        result.push(<th className={this.buildCssFromConfig(param)} key={param.name}>{param.name}</th>);
+      });
 
       return result;
     },
@@ -104,19 +104,21 @@ modulejs.define('HBWFormSelectTable',
       };
 
       const cssClassesList = [];
-      for (let _ in this.props.params.row_params) {
+
+      Object.keys(this.props.params.row_params).forEach((_) => {
         const config = this.props.params.row_params[_];
+
         cssClassesList.push(this.buildCssFromConfig(config));
-      }
+      });
 
       return choices.map((items) => {
         let selected;
         const renderCells = (_items) => {
           const result = [];
 
-          for (let i in _items) {
+          Object.keys(_items).forEach((i) => {
             result.push(<td className={cssClassesList[i]} key={i}>{_items[i]}</td>);
-          }
+          });
 
           return result;
         };
@@ -146,7 +148,7 @@ modulejs.define('HBWFormSelectTable',
       return `text-align-${config.alignment}`;
     },
 
-    addCurrentValueToChoices (value) {
+    addCurrentValueToChoices () {
       return null;
     }
   }));

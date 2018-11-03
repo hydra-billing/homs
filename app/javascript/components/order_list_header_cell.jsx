@@ -6,8 +6,8 @@ const OrderListHeaderCell = React.createClass({
 
     let orderIcon;
 
-    if (this.props.rowCode == this.props.orderRowCode) {
-      if (this.props.order == 'desc') {
+    if (this.props.rowCode === this.props.orderRowCode) {
+      if (this.props.order === 'desc') {
         orderIcon = <i className='fa fa-sort-down'/>;
       } else {
         orderIcon = <i className='fa fa-sort-up'/>;

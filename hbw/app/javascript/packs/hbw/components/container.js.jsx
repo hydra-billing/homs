@@ -1,14 +1,10 @@
 modulejs.define(
   'HBWContainer',
-  ['React',
-   'HBWButtons',
-   'HBWEntityTasks',
-   'HBWError',
-   'HBWPending',
-   'HBWCallbacksMixin',
-   'HBWTasksMixin'],
+  ['React', 'HBWButtons', 'HBWEntityTasks', 'HBWError', 'HBWPending', 'HBWCallbacksMixin', 'HBWTasksMixin'],
   (React, Buttons, Tasks, Error, Pending, CallbacksMixin, TasksMixin) => React.createClass({
     mixins: [TasksMixin, CallbacksMixin],
+
+    displayName: 'HBWContainer',
 
     getInitialState () {
       return {
@@ -47,13 +43,13 @@ modulejs.define(
         </div>;
       } else {
         return <div className='hbw-entity-tools'>
-          <Error error={this.state.error} />
+          <Error error={this.state.error}/>
           <Buttons entityCode={this.props.entityCode}
-            entityTypeCode={this.props.entityTypeCode}
-            entityClassCode={this.props.entityClassCode}
-            tasksFetched={this.state.tasksFetched}
-            showSpinner={!this.state.tasksFetched || this.state.processStarted}
-            env={this.props.env} />
+                   entityTypeCode={this.props.entityTypeCode}
+                   entityClassCode={this.props.entityClassCode}
+                   tasksFetched={this.state.tasksFetched}
+                   showSpinner={!this.state.tasksFetched || this.state.processStarted}
+                   env={this.props.env}/>
         </div>;
       }
     },
@@ -63,4 +59,5 @@ modulejs.define(
       // task with the same processInstanceId will be loaded
       this.setState({ processInstanceId: task.processInstanceId });
     }
-  }));
+  })
+);

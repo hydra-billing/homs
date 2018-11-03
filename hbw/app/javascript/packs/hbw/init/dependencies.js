@@ -1,4 +1,4 @@
-import './noconflict'
+import './noconflict';
 import 'jquery';
 import 'moment';
 import 'bootstrap-datetimepicker';

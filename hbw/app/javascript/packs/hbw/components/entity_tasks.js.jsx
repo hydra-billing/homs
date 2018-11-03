@@ -6,6 +6,8 @@ modulejs.define(
 
     mixins: [CallbacksMixin],
 
+    displayName: 'HBWEntityTasks',
+
     getInitialState () {
       return {
         error:        null,
@@ -39,7 +41,7 @@ modulejs.define(
       </div>;
     },
 
-    iterateTasks (tasks, chosenTaskID) {
+    iterateTasks (tasks) {
       let taskAlreadyExpanded = false; // only one task should show its form - to be expanded
       const { props } = this;
 
@@ -72,4 +74,5 @@ modulejs.define(
         return null;
       }
     }
-  }));
+  })
+);

@@ -1,4 +1,6 @@
 modulejs.define('HBWPending', ['React'], React => React.createClass({
+  displayName: 'HBWPending',
+
   getDefaultProps () {
     return { text: '' };
   },

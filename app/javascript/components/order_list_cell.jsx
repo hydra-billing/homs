@@ -5,13 +5,12 @@ const OrderListCell = React.createClass({
     switch (this.props.profile.type) {
       case 'link':
         return <a href={this.props.value.href}>{this.props.value.title}</a>;
-        break;
       case 'boolean':
         return this.props.value ? <i className="fa fa-check"></i> : '';
-        break;
-      case 'state':
-        var stateIconClass = `fa ${this.props.value.icon}`;
+      case 'state': {
+        const stateIconClass = `fa ${this.props.value.icon}`;
         return <span><i className={stateIconClass}></i> {this.props.value.title}</span>;
+      }
       default:
         return this.props.value;
     }
