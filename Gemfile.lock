@@ -148,7 +148,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
-    connection_pool (2.2.1)
+    connection_pool (2.2.2)
     coolline (0.5.0)
       unicode_utils (~> 1.4)
     crass (1.0.4)
@@ -330,7 +330,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    react-rails (1.11.0)
+    react-rails (2.3.1)
       babel-transpiler (>= 0.7.0)
       connection_pool
       execjs
@@ -497,7 +497,7 @@ DEPENDENCIES
   pry-rails
   rails (~> 5.1.6)
   rails_layout
-  react-rails (~> 1.0)
+  react-rails (~> 2.3.1)
   rspec-mocks
   rspec-rails
   rspec_api_documentation (~> 4.4)

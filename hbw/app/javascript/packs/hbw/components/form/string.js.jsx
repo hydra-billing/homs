@@ -3,11 +3,11 @@
 
 import CustomFormatter from 'formatter';
 import Tooltip from 'tooltip';
+import { withCallbacks } from '../helpers';
 
-modulejs.define('HBWFormString',
-  ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDeleteIfMixin'],
-  (React, jQuery, CallbacksMixin, DeleteIfMixin) => React.createClass({
-    mixins: [CallbacksMixin, DeleteIfMixin],
+modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWDeleteIfMixin'], (React, jQuery, DeleteIfMixin) => {
+  const FormString = React.createClass({
+    mixins: [DeleteIfMixin],
 
     displayName: 'HBWFormString',
 
@@ -26,8 +26,8 @@ modulejs.define('HBWFormString',
     },
 
     patterns: {
-      9:   '[0-9 ]',
-      a:   '[A-Za-z ]',
+      '9': '[0-9 ]',
+      'a': '[A-Za-z ]',
       '*': '[A-Za-z0-9 ]'
     },
 
@@ -53,16 +53,16 @@ modulejs.define('HBWFormString',
       }
 
       return <div className={inputCSS} title={this.props.params.tooltip}>
-      <div className="form-group">
-        <span className={this.props.params.label_css}>{this.props.params.label}</span>
-        <input {...opts}
-               ref={(i) => { this.input = i; }}
-               className={`form-control ${!this.state.valid && ' invalid'}`}
-               value={this.state.visualValue} />
-        <div ref={(t) => { this.tooltipContainer = t; }} className={`${!this.state.valid && 'tooltip-red'}`}></div>
-        {!opts.readOnly && <input name={this.props.name} value={this.state.value} type="hidden" />}
-      </div>
-    </div>;
+        <div className="form-group">
+          <span className={this.props.params.label_css}>{this.props.params.label}</span>
+          <input {...opts}
+                 ref={(i) => { this.input = i; }}
+                 className={`form-control ${!this.state.valid && ' invalid'}`}
+                 value={this.state.visualValue} />
+          <div ref={(t) => { this.tooltipContainer = t; }} className={`${!this.state.valid && 'tooltip-red'}`}></div>
+          {!opts.readOnly && <input name={this.props.name} value={this.state.value} type="hidden" />}
+        </div>
+      </div>;
     },
 
     componentDidMount () {
@@ -80,14 +80,14 @@ modulejs.define('HBWFormString',
 
     componentWillMount () {
       if (!this.guid) {
-        this.setGuid();
+        this.props.setGuid();
       }
 
       this.hidden = this.deleteIf();
     },
 
     validateOnSubmit () {
-      this.bind('hbw:validate-form', this.onFormSubmit);
+      this.props.bind('hbw:validate-form', this.onFormSubmit);
     },
 
     hijackFormatter () {
@@ -112,7 +112,7 @@ modulejs.define('HBWFormString',
 
           this.setValidationState();
           this.controlValidationTooltip(this.isValid());
-          this.trigger('hbw:form-submitting-failed');
+          this.props.trigger('hbw:form-submitting-failed');
         }
       }
     },
@@ -262,8 +262,7 @@ modulejs.define('HBWFormString',
           .replace(/\*/g, `${this.patterns['*']}?`);
 
         return res.replace(match[0], `(${replacement})`);
-      }
-      ), pattern.replace(/([\(\)\+\-\[\]\*])/g, '\\\$1'));
+      }), pattern.replace(/([\(\)\+\-\[\]\*])/g, '\\\$1'));
 
       return new RegExp(`^${result}$`);
     },
@@ -323,20 +322,21 @@ modulejs.define('HBWFormString',
     substitute (template, values) {
       if (this.isEveryBlank(values)) {
         return '';
-      }
-      const res = [];
-      let s = 0;
+      } else {
+        const res = [];
+        let s = 0;
 
-      for (let i = 0; i < template.length; i += 1) {
-        if (template[i] === this.SUBSTITUTION) {
-          res.push(values[s] || '');
-          s += 1;
-        } else {
-          res.push(template[i]);
+        for (let i = 0; i < template.length; i += 1) {
+          if (template[i] === this.SUBSTITUTION) {
+            res.push(values[s] || '');
+            s += 1;
+          } else {
+            res.push(template[i]);
+          }
         }
-      }
 
-      return res.join('');
+        return res.join('');
+      }
     },
 
     stripNonAlphanumericChars (value) {
@@ -362,4 +362,7 @@ modulejs.define('HBWFormString',
         return [value, value, value, null];
       }
     }
-  }));
+  });
+
+  return withCallbacks(FormString);
+});

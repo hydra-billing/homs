@@ -1,10 +1,8 @@
-modulejs.define(
-  'HBWEntityTasks',
-  ['React', 'HBWEntityTask', 'HBWCallbacksMixin'],
-  (React, Task, CallbacksMixin) => React.createClass({
-    PANEL_CLASS: 'hbw-entity-task-list-panel',
+import { withCallbacks } from './helpers';
 
-    mixins: [CallbacksMixin],
+modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
+  const EntityTasks = React.createClass({
+    PANEL_CLASS: 'hbw-entity-task-list-panel',
 
     displayName: 'HBWEntityTasks',
 
@@ -21,10 +19,10 @@ modulejs.define(
 
     selectFirstTaskId () {
       if (this.props.tasks.length > 0) {
-        this.trigger('hbw:task-clicked', this.props.tasks[0]);
+        this.props.trigger('hbw:task-clicked', this.props.tasks[0]);
         return this.props.tasks[0].id;
       } else {
-        this.trigger('hbw:task-clicked', null);
+        this.props.trigger('hbw:task-clicked', null);
         return null;
       }
     },
@@ -55,15 +53,15 @@ modulejs.define(
         }
 
         return <Task id={`task_id_${task.id}`}
-          key={`task_id_${task.id}`}
-          task={task}
-          parentClass={this.PANEL_CLASS}
-          env={props.env}
-          taskId={task.id}
-          entityCode={props.entityCode}
-          entityTypeCode={props.entityTypeCode}
-          entityClassCode={props.entityClassCode}
-          collapsed={collapsed} />;
+                     key={`task_id_${task.id}`}
+                     task={task}
+                     parentClass={this.PANEL_CLASS}
+                     env={props.env}
+                     taskId={task.id}
+                     entityCode={props.entityCode}
+                     entityTypeCode={props.entityTypeCode}
+                     entityClassCode={props.entityClassCode}
+                     collapsed={collapsed} />;
       });
     },
 
@@ -74,5 +72,7 @@ modulejs.define(
         return null;
       }
     }
-  })
-);
+  });
+
+  return withCallbacks(EntityTasks);
+});

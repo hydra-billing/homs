@@ -1,9 +1,7 @@
-modulejs.define(
-  'HBWMenuButton',
-  ['React', 'ReactDOM', 'HBWCallbacksMixin', 'HBWTasksMixin'],
-  (React, ReactDOM, CallbacksMixin, TasksMixin) => React.createClass({
-    mixins: [CallbacksMixin, TasksMixin],
+import { withCallbacks, withTasks, compose } from './helpers';
 
+modulejs.define('HBWMenuButton', ['React'], (React) => {
+  const MenuButton = React.createClass({
     displayName: 'HBWMenuButton',
 
     getInitialState () {
@@ -15,8 +13,8 @@ modulejs.define(
     },
 
     componentDidMount () {
-      this.bind('hbw:hide-widget', this.toggleVisibility);
-      this.state.subscription
+      this.props.bind('hbw:hide-widget', this.toggleVisibility);
+      this.props.subscription
         .progress(data => this.setState({ tasksNumber: data.tasks.length }));
     },
 
@@ -34,7 +32,9 @@ modulejs.define(
       e.preventDefault();
 
       this.rootNode.blur();
-      this.trigger('hbw:toggle-tasks-menu');
+      this.props.trigger('hbw:toggle-tasks-menu');
     }
-  })
-);
+  });
+
+  return compose(withTasks, withCallbacks)(MenuButton);
+});

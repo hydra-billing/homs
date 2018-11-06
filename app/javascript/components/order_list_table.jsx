@@ -2,7 +2,7 @@ import React from 'react';
 import OrderListRow from './order_list_row';
 import OrderListHeaderRow from './order_list_header_row';
 
-const OrderListTable = React.createClass({
+class OrderListTable extends React.Component {
   render () {
     const tableBody = this.props.orders.map((order, index) => (
       <OrderListRow key={index} values={order} profile={this.props.profile} />
@@ -20,6 +20,6 @@ const OrderListTable = React.createClass({
       </tbody>
     </table>;
   }
-});
+}
 
 export default OrderListTable;

@@ -1,9 +1,7 @@
-modulejs.define(
-  'HBWMenu',
-  ['React', 'HBWTaskList', 'HBWCallbacksMixin'],
-  (React, TaskList, CallbacksMixin) => React.createClass({
-    mixins: [CallbacksMixin],
+import { withCallbacks } from './helpers';
 
+modulejs.define('HBWMenu', ['React', 'HBWTaskList'], (React, TaskList) => {
+  const Menu = React.createClass({
     displayName: 'HBWMenu',
 
     getInitialState () {
@@ -15,19 +13,21 @@ modulejs.define(
     },
 
     componentDidMount () {
-      this.bind('hbw:toggle-tasks-menu', this.toggleVisibility);
+      this.props.bind('hbw:toggle-tasks-menu', this.toggleVisibility);
     },
 
     render () {
       return <div>
-        { this.props.renderButton
-          && <div className='hbw-launcher' onClick={this.toggleVisibility}>
-            <div className='hbw-launcher-button btn-primary'>
-            </div>
-          </div> }
+        { this.props.renderButton &&
+        <div className='hbw-launcher' onClick={this.toggleVisibility}>
+          <div className='hbw-launcher-button btn-primary'>
+          </div>
+        </div> }
         { this.state.visible ? <TaskList env={this.props.env}
-          chosenTaskID={this.props.chosenTaskID} /> : null }
+                                         chosenTaskID={this.props.chosenTaskID} /> : null }
       </div>;
     }
-  })
-);
+  });
+
+  return withCallbacks(Menu);
+});

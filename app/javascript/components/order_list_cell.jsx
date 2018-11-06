@@ -1,7 +1,7 @@
 import React from 'react';
 
-const OrderListCell = React.createClass({
-  getValueForType () {
+class OrderListCell extends React.Component {
+  getValueForType = () => {
     switch (this.props.profile.type) {
       case 'link':
         return <a href={this.props.value.href}>{this.props.value.title}</a>;
@@ -14,7 +14,7 @@ const OrderListCell = React.createClass({
       default:
         return this.props.value;
     }
-  },
+  };
 
   render () {
     const cellClass = this.props.profile.show ? '' : 'hidden';
@@ -24,6 +24,6 @@ const OrderListCell = React.createClass({
       {cellValue}
     </td>;
   }
-});
+}
 
 export default OrderListCell;

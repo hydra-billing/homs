@@ -1,7 +1,7 @@
 import React from 'react';
 import OrderListCell from './order_list_cell';
 
-const OrderListRow = React.createClass({
+class OrderListRow extends React.Component {
   render () {
     const cells = [];
 
@@ -13,6 +13,6 @@ const OrderListRow = React.createClass({
       {cells}
     </tr>;
   }
-});
+}
 
 export default OrderListRow;
