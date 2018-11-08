@@ -5,7 +5,7 @@ module API
 
       PARAMS_ATTRIBUTES = [:name, :last_name, :middle_name, :company,
                            :department, :email, :role, :password, :external,
-                           :blocked]
+                           :blocked, :password_salt, :encrypted_password]
 
       private
 

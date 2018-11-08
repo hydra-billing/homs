@@ -302,6 +302,8 @@ en:
         password: Password
         blocked: Blocked
         external: External
+        password_salt: Password salt
+        encrypted_password: Encrypted password
     profiles:
       resource: Profiles
       parameters:
