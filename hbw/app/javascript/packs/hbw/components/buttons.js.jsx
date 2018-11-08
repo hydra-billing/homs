@@ -110,6 +110,8 @@ modulejs.define(
               {buttons}
             </div>;
           }
+        } else {
+          return <div></div>;
         }
       },
 
