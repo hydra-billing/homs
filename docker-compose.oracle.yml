@@ -1,7 +1,7 @@
 version: '2'
 services:
   db_activiti:
-    image: postgres
+    image: postgres:11.0
     hostname: postgres-activiti
     container_name: postgres-activiti
     restart: always
@@ -16,7 +16,7 @@ services:
     networks:
       - custom_network
   db_homs:
-    image: postgres
+    image: postgres:11.0
     hostname: postgres-homs
     container_name: postgres-homs
     restart: always
