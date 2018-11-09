@@ -37,14 +37,14 @@ modulejs.define(
         if (!this.props.collapsed) {
           collapseClass += ' in';
         }
-        let iconClass = 'indicator pull-right glyphicon';
+        let iconClass = 'indicator pull-right fa';
 
         const { task } = this.props;
 
         if (jQuery(`#collapse${task.id}`).attr('class') === 'panel-collapse collapse') {
-          iconClass += ' glyphicon-chevron-down';
+          iconClass += ' fa-chevron-down';
         } else {
-          iconClass += ' glyphicon-chevron-up';
+          iconClass += ' fa-chevron-up';
         }
 
         return <div className="panel panel-default" ref={(node) => { this.rootNode = node; }}>
