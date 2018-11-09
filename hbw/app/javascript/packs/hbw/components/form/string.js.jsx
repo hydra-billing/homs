@@ -26,8 +26,8 @@ modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWDeleteIfMixin'], (React
     },
 
     patterns: {
-      '9': '[0-9 ]',
-      'a': '[A-Za-z ]',
+      9:   '[0-9 ]',
+      a:   '[A-Za-z ]',
       '*': '[A-Za-z0-9 ]'
     },
 

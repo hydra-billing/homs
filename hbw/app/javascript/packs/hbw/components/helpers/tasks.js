@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { getDisplayName } from './utils';
 
 export default WrappedComponent => React.createClass({
@@ -39,12 +38,12 @@ export default WrappedComponent => React.createClass({
 
   createSubscription () {
     return this.props.env.connection.subscribe({
-        client: this.getComponentId(),
-        path:   'tasks',
-        data: {
-          entity_class: this.props.env.entity_class
-        }
-      })
+      client: this.getComponentId(),
+      path:   'tasks',
+      data:   {
+        entity_class: this.props.env.entity_class
+      }
+    })
       .syncing(() => this.setState({ syncing: true }))
       .progress(() => this.setState({ error: null }))
       .fail(response => this.setState({ error: response }))
@@ -56,6 +55,6 @@ export default WrappedComponent => React.createClass({
                              getComponentId={this.getComponentId}
                              createSubscription={this.createSubscription}
                              {...this.state}
-                             {...this.props} />
+                             {...this.props} />;
   }
 });

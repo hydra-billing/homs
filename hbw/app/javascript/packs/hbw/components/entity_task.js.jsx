@@ -2,7 +2,7 @@ import { withCallbacks } from './helpers';
 
 modulejs.define(
   'HBWEntityTask',
-  ['React', 'ReactDOM', 'jQuery', 'HBWForm', 'HBWTestForm', 'HBWError', 'HBWPending','HBWTranslationsMixin',
+  ['React', 'ReactDOM', 'jQuery', 'HBWForm', 'HBWTestForm', 'HBWError', 'HBWPending', 'HBWTranslationsMixin',
     'HBWFormDefinition'],
   (React, ReactDOM, jQuery, Form, TestForm, Error, Pending, TranslationsMixin, FormDefinition) => {
     const EntityTask = React.createClass({
@@ -139,4 +139,5 @@ modulejs.define(
     });
 
     return withCallbacks(EntityTask);
-  });
+  }
+);
