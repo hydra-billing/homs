@@ -12,6 +12,7 @@ v1.6.0 [unreleased]
 -   [#199](https://github.com/latera/homs/pull/199) Move assets generation to Dockerfiles.
 -   [#207](https://github.com/latera/homs/pull/207) Remove extra locales from moment.js
 -   [#209](https://github.com/latera/homs/pull/209) Drop react-rails & react_ujs dependencies.
+-   [#205](https://github.com/latera/homs/pull/205) Use higher order component instead of HBWSelectMixin.
 
 ### Bugfixes
 -   [#194](https://github.com/latera/homs/pull/194) Set limit on the number of choices in lookup select from sql requests.

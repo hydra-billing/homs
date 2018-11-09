@@ -1,44 +1,30 @@
-/* eslint no-eval: "off" */
+import React from 'react';
+import { getDisplayName } from './utils';
 
-modulejs.define('HBWSelectMixin', [], () => ({
-  getChoices (value) {
-    let choices;
-
-    if (this.props.params.mode === 'select') {
-      choices = this.props.params.choices.slice();
-
-      this.addCurrentValueToChoices(value);
-
-      if (this.props.params.nullable) {
-        this.addNullChoice(choices);
-      }
-
-      return choices;
-    } else if (this.props.params.mode === 'lookup') {
-      return this.props.params.choices;
-    }
-
-    return null;
-  },
+export default WrappedComponent => React.createClass({
+  displayName: `withSelect(${getDisplayName(WrappedComponent)})`,
 
   getChosenValue () {
     if (this.props.params.mode === 'select') {
       if (this.props.value === null) {
         if (this.props.params.nullable) {
           return null;
-        } if (this.props.params.choices.length) {
+        } else if (this.props.params.choices.length) {
           const first = this.props.params.choices[0];
 
           if (Array.isArray(first)) {
             return first[0];
+          } else {
+            return first;
           }
-          return first;
         }
         return null;
+      } else {
+        return this.props.value;
       }
+    } else {
       return this.props.value;
     }
-    return this.props.value;
   },
 
   hasValueInChoices (value) {
@@ -77,11 +63,22 @@ modulejs.define('HBWSelectMixin', [], () => ({
   isChoiceEqual (choice, value) {
     if (Array.isArray(choice)) {
       return this.isEqual(choice[0], value);
+    } else {
+      return this.isEqual(choice, value);
     }
-    return this.isEqual(choice, value);
   },
 
   missFieldInVariables () {
     return this.props.params.variables.every(v => v.name !== this.props.name);
+  },
+
+  render () {
+    return <WrappedComponent getChosenValue={this.getChosenValue}
+                             hasValueInChoices={this.hasValueInChoices}
+                             isEqual={this.isEqual}
+                             isChoiceEqual={this.isChoiceEqual}
+                             missFieldInVariables={this.missFieldInVariables}
+                             {...this.state}
+                             {...this.props} />;
   }
-}));
+});

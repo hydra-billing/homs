@@ -2,21 +2,20 @@
 
 import Select from 'react-select';
 import AsyncSelect from 'react-select/lib/Async';
-import { withDeleteIf } from '../helpers';
+import { withDeleteIf, withSelect, compose } from '../helpers';
 
 modulejs.define('HBWFormSelect',
-  ['React', 'ReactDOM', 'HBWSelectMixin'],
-  (React, ReactDOM, SelectMixin) => {
+  ['React'],
+  (React) => {
     const FormSelect = React.createClass({
-      mixins: [SelectMixin],
 
       getInitialState () {
-        const value = this.getChosenValue() || '';
+        const value = this.props.getChosenValue() || '';
 
         return {
           value,
           choices: this.getChoices(value),
-          error:   (!this.hasValueInChoices(value) && value) || this.missFieldInVariables()
+          error:   (!this.props.hasValueInChoices(value) && value) || this.props.missFieldInVariables()
         };
       },
 
@@ -51,7 +50,7 @@ modulejs.define('HBWFormSelect',
           { field_name: this.props.name });
         let selectErrorMessageCss = 'alert alert-danger';
 
-        if (!this.missFieldInVariables()) {
+        if (!this.props.missFieldInVariables()) {
           selectErrorMessageCss += ' hidden';
         }
 
@@ -194,7 +193,7 @@ modulejs.define('HBWFormSelect',
         this.setState({
           value:   newValue,
           choices: this.getChoices(newValue),
-          error:   (!this.hasValueInChoices(newValue) && newValue) || this.missFieldInVariables()
+          error:   (!this.props.hasValueInChoices(newValue) && newValue) || this.props.missFieldInVariables()
         });
       },
 
@@ -213,7 +212,7 @@ modulejs.define('HBWFormSelect',
       addCurrentValueToChoices (value) {
         const choices = this.props.params.choices.slice();
 
-        if (!this.hasValueInChoices(value) && this.props.value !== null) {
+        if (!this.props.hasValueInChoices(value) && this.props.value !== null) {
           choices.push(value);
         }
 
@@ -233,8 +232,20 @@ modulejs.define('HBWFormSelect',
           clearTimeout(timer);
           timer = setTimeout(functionCall, ms);
         };
+      },
+
+      getChoices (value) {
+        if (this.props.params.mode === 'select') {
+          this.addCurrentValueToChoices(value);
+
+          return this.props.params.choices.slice();
+        } else if (this.props.params.mode === 'lookup') {
+          return this.props.params.choices;
+        } else {
+          return null;
+        }
       }
     });
 
-    return withDeleteIf(FormSelect);
+    return compose(withSelect, withDeleteIf)(FormSelect);
   });

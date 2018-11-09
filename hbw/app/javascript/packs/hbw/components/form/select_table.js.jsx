@@ -1,10 +1,9 @@
-import { withDeleteIf } from '../helpers';
+import { withDeleteIf, withSelect, compose } from '../helpers';
 
 modulejs.define('HBWFormSelectTable',
-  ['React', 'jQuery', 'HBWSelectMixin'],
-  (React, jQuery, SelectMixin) => {
+  ['React'],
+  (React) => {
     const FormSelectTable = React.createClass({
-      mixins: [SelectMixin],
 
       displayName: 'HBWFormSelectTable',
 
@@ -13,8 +12,8 @@ modulejs.define('HBWFormSelectTable',
 
         return {
           value:   this.props.params.current_value,
-          choices: this.getChoices(value),
-          error:   (!this.hasValueInChoices(value) && value) || this.missFieldInVariables()
+          choices: this.getChoices(),
+          error:   (!this.props.hasValueInChoices(value) && value) || this.props.missFieldInVariables()
         };
       },
 
@@ -33,7 +32,7 @@ modulejs.define('HBWFormSelectTable',
           { field_name: this.props.name });
 
         let selectErrorMessageCss = 'alert alert-danger';
-        if (!this.missFieldInVariables()) {
+        if (!this.props.missFieldInVariables()) {
           selectErrorMessageCss += ' hidden';
         }
 
@@ -69,7 +68,7 @@ modulejs.define('HBWFormSelectTable',
         let hasNullValue = false;
 
         [...choices].forEach((choice) => {
-          if (this.isChoiceEqual(choice, null)) {
+          if (this.props.isChoiceEqual(choice, null)) {
             hasNullValue = true;
           }
         });
@@ -129,7 +128,7 @@ modulejs.define('HBWFormSelectTable',
 
           const id = items[0];
 
-          if (this.isEqual(id, value)) {
+          if (this.props.isEqual(id, value)) {
             selected = 'selected';
           }
 
@@ -137,7 +136,7 @@ modulejs.define('HBWFormSelectTable',
             onChange () {}
           };
 
-          const isEqualFunc = this.isEqual;
+          const isEqualFunc = this.props.isEqual;
 
           return <tr {...opts} className={selected} key={id}>
             <td className='hidden' key={`td-${id}`}>
@@ -152,10 +151,22 @@ modulejs.define('HBWFormSelectTable',
         return `text-align-${config.alignment}`;
       },
 
-      addCurrentValueToChoices () {
-        return null;
+      getChoices () {
+        let choices;
+
+        if (this.props.params.mode === 'select') {
+          choices = this.props.params.choices.slice();
+
+          if (this.props.params.nullable) {
+            this.addNullChoice(choices);
+          }
+
+          return choices;
+        } else {
+          return null;
+        }
       }
     });
 
-    return withDeleteIf(FormSelectTable);
+    return compose(withSelect, withDeleteIf)(FormSelectTable);
   });
