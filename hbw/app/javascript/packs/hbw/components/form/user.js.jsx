@@ -8,6 +8,6 @@ modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'HBWFormSelect'], (React, R
       single:      true
     });
 
-    return <Select name={this.props.name} params={params}/>;
+    return <Select name={this.props.name} params={params} env={this.props.env}/>;
   }
 }));

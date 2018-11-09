@@ -5,10 +5,10 @@ import AsyncSelect from 'react-select/lib/Async';
 import { withDeleteIf } from '../helpers';
 
 modulejs.define('HBWFormSelect',
-  ['React', 'ReactDOM', 'HBWTranslationsMixin', 'HBWSelectMixin'],
-  (React, ReactDOM, TranslationsMixin, SelectMixin) => {
+  ['React', 'ReactDOM', 'HBWSelectMixin'],
+  (React, ReactDOM, SelectMixin) => {
     const FormSelect = React.createClass({
-      mixins: [TranslationsMixin, SelectMixin],
+      mixins: [SelectMixin],
 
       getInitialState () {
         const value = this.getChosenValue() || '';
@@ -47,7 +47,8 @@ modulejs.define('HBWFormSelect',
         const { label } = this.props.params;
         const labelCss = this.props.params.label_css;
 
-        const selectErrorMessage = this.t('errors.field_not_defined_in_bp', { field_name: this.props.name });
+        const selectErrorMessage = this.props.env.translator('errors.field_not_defined_in_bp',
+          { field_name: this.props.name });
         let selectErrorMessageCss = 'alert alert-danger';
 
         if (!this.missFieldInVariables()) {
@@ -123,14 +124,14 @@ modulejs.define('HBWFormSelect',
         const { inputValue } = options;
 
         if (inputValue && inputValue.length >= 2) {
-          return this.t('components.select.no_results_found');
+          return this.props.env.translator('components.select.no_results_found');
         } else {
-          return this.t('components.select.enter_more_chars');
+          return this.props.env.translator('components.select.enter_more_chars');
         }
       },
 
       loadingMessage () {
-        return this.t('components.select.searching');
+        return this.props.env.translator('components.select.searching');
       },
 
       componentWillMount () {

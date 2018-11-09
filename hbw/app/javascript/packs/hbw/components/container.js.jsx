@@ -42,7 +42,7 @@ modulejs.define(
           </div>;
         } else {
           return <div className='hbw-entity-tools'>
-            <Error error={this.props.error} />
+            <Error error={this.props.error} env={this.props.env} />
             <Buttons entityCode={this.props.entityCode}
                      entityTypeCode={this.props.entityTypeCode}
                      entityClassCode={this.props.entityClassCode}

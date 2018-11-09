@@ -39,6 +39,7 @@ v1.5.0 [2018-10-29]
 ### Bugfixes
 -   [#170](https://github.com/latera/homs/pull/170) Use active support logger as base.
 -   [#190](https://github.com/latera/homs/pull/190) Fix multiply running of tests in docker.
+-   [#204](https://github.com/latera/homs/pull/204) Pass locale for translations from environment.
 
 v1.4.0.2 [unreleased]
 ---------------------

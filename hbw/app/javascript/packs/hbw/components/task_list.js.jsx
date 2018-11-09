@@ -4,11 +4,9 @@
 import { withCallbacks, withTasks, compose } from './helpers';
 
 modulejs.define('HBWTaskList',
-  ['React', 'HBWTaskGroup', 'HBWError', 'HBWPending', 'HBWTranslationsMixin'],
-  (React, TaskGroup, Error, Pending, TranslationsMixin) => {
+  ['React', 'HBWTaskGroup', 'HBWError', 'HBWPending'],
+  (React, TaskGroup, Error, Pending) => {
     const TaskList = React.createClass({
-      mixins: [TranslationsMixin],
-
       displayName: 'HBWTaskList',
 
       getInitialState () {
@@ -40,16 +38,18 @@ modulejs.define('HBWTaskList',
           <div className='hbw-sheet-header'>
             <div className='hbw-sheet-header-container'>
               <div className='hbw-sheet-header-title-container'>
-                <em className='hbw-sheet-header-title'>{this.t('tasks')}</em>
+                <em className='hbw-sheet-header-title'>{this.props.env.translator('tasks')}</em>
               </div>
-              <a className={aClass} href="#" onClick={this.hideWidget} title={this.t('hide_widget')}>
+              <a className={aClass} href="#" onClick={this.hideWidget}
+                 title={this.props.env.translator('hide_widget')}>
                 <div className="hbw-sheet-header-button-icon hbw-sheet-header-close-button-icon"></div>
               </a>
             </div>
           </div>
           <div className='hbw-sheet-body'>
-            { !this.state.fetched && <Pending text={this.t('loading')} /> }
-            { this.state.tasks.length === 0 && this.state.fetched && <p>{this.t('no_tasks')}</p> }
+            { !this.state.fetched && <Pending text={this.props.env.translator('loading')} /> }
+            { this.state.tasks.length === 0 && this.state.fetched
+            && <p>{this.props.env.translator('no_tasks')}</p> }
             { this.createGroupsChildren() }
           </div>
           <div className='hbw-sheet-content'></div>

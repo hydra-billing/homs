@@ -1,9 +1,7 @@
 import { withCallbacks, withDeleteIf, compose } from '../helpers';
 
-modulejs.define('HBWFormFileUpload', ['React', 'HBWTranslationsMixin'], (React, TranslationsMixin) => {
+modulejs.define('HBWFormFileUpload', ['React'], (React) => {
   const FormFileUpload = React.createClass({
-    mixins: [TranslationsMixin],
-
     displayName: 'HBWFormFileUpload',
 
     getInitialState () {
@@ -27,7 +25,7 @@ modulejs.define('HBWFormFileUpload', ['React', 'HBWTranslationsMixin'], (React, 
         cssClass += ' hidden';
       }
 
-      const errorMessage = this.t('errors.file_list_field_required');
+      const errorMessage = this.props.env.translator('errors.file_list_field_required');
       let errorMessageCss = 'alert alert-danger';
 
       if (this.props.fileListPresent) {
