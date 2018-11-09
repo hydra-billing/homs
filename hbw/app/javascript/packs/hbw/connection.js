@@ -248,6 +248,16 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
     subscribe (options) {
       return this.createChannel(options).subscribe(options);
     }
+
+    unsubscribe () {
+      Object.keys(this.channels).forEach((ch) => {
+        Object.values(this.channels[ch].subscriptions).forEach((s) => {
+          s.close();
+        });
+
+        delete this.channels[ch];
+      });
+    }
   }
 
   return Connection;
