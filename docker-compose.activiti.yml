@@ -1,7 +1,7 @@
 version: '2'
 services:
   db_activiti:
-    image: postgres
+    image: postgres:11.0
     hostname: postgres-activiti
     container_name: postgres-activiti
     restart: always
@@ -16,7 +16,7 @@ services:
     networks:
       - custom_network
   db_homs:
-    image: postgres
+    image: postgres:11.0
     hostname: postgres-homs
     container_name: postgres-homs
     restart: always
@@ -70,14 +70,6 @@ services:
     links:
       - db_homs:$HOMS_DB_HOST
       - activiti:$BPM_HOST
-    volumes:
-      - /etc/hydra/homs/config/homs_configuration.yml:/opt/homs/config/homs_configuration.yml
-      - /etc/hydra/homs/config/imprint.yml:/opt/homs/config/imprint.yml
-      - /etc/hydra/homs/config/hbw.yml:/opt/homs/config/hbw.yml
-      - /etc/hydra/homs/config/database.docker.yml:/opt/homs/config/database.yml
-      - /etc/hydra/homs/config/bpm.yml:/opt/homs/config/bpm.yml
-      - /etc/hydra/homs/config/sources.yml:/opt/homs/config/sources.yml
-      - /etc/hydra/homs/config/secrets.yml:/opt/homs/config/secrets.yml
     depends_on:
       - db_homs
       - activiti
