@@ -6,7 +6,8 @@ v1.6.0 [unreleased]
 -   [#197](https://github.com/latera/homs/pull/197) Use Camunda as BPMS in default docker-compose.
 -   [#195](https://github.com/latera/homs/pull/195) Upgrade React & ReactDOM to 15.6.2, migrate to higher order components from mixins.
 -   [#153](https://github.com/latera/homs/pull/153) Allow updating users encrypted password and salt.
--   [#239](https://github.com/latera/homs/pull/202) Remove mount configs from docker-compose and set postgres version.
+-   [#202](https://github.com/latera/homs/pull/202) Remove mount configs from docker-compose and set postgres version.
+-   [#206](https://github.com/latera/homs/pull/206) Use higher order component instead of HBWDeleteIfMixin.
 
 ### Bugfixes
 -   [#194](https://github.com/latera/homs/pull/194) Set limit on the number of choices in lookup select from sql requests.

@@ -1,7 +1,7 @@
-modulejs.define('HBWFormDatetime',
-  ['React', 'ReactDOM', 'jQuery', 'moment', 'HBWDeleteIfMixin'],
-  (React, ReactDOM, jQuery, moment, DeleteIfMixin) => React.createClass({
-    mixins: [DeleteIfMixin],
+import { withDeleteIf } from '../helpers';
+
+modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (React, ReactDOM, jQuery, moment) => {
+  const FormDateTime = React.createClass({
 
     displayName: 'HBWFormDatetime',
 
@@ -57,22 +57,22 @@ modulejs.define('HBWFormDatetime',
       }
 
       let inputCSS = this.props.params.css_class;
-      if (this.hidden) {
+      if (this.props.hidden) {
         inputCSS += ' hidden';
       }
 
       return <div className={inputCSS} title={this.props.params.tooltip} ref={(node) => { this.rootNode = node; }}>
-      <div className="form-group">
-        <span className={this.props.params.label_css}>{this.props.params.label}</span>
-        <div className="input-group date datetime-picker">
-          <input {...opts} className="form-control" />
-          <input name={this.props.params.name} type="hidden" value={isoValue} />
-          <span className="input-group-addon">
+        <div className="form-group">
+          <span className={this.props.params.label_css}>{this.props.params.label}</span>
+          <div className="input-group date datetime-picker">
+            <input {...opts} className="form-control" />
+            <input name={this.props.params.name} type="hidden" value={isoValue} />
+            <span className="input-group-addon">
             <span className="fa fa-calendar"></span>
           </span>
+          </div>
         </div>
-      </div>
-    </div>;
+      </div>;
     },
 
     componentDidMount () {
@@ -108,4 +108,7 @@ modulejs.define('HBWFormDatetime',
         })
         .on('dp.change', e => this.updateValue(e));
     }
-  }));
+  });
+
+  return withDeleteIf(FormDateTime);
+});
