@@ -31,17 +31,17 @@ modulejs.define(
         };
       },
 
-    createSubscription () {
-      const subscription = this.props.env.connection.subscribe({
-        client: this.props.getComponentId(),
-        path:   '/buttons',
+      createSubscription () {
+        const subscription = this.props.env.connection.subscribe({
+          client: this.props.getComponentId(),
+          path:   '/buttons',
 
-        data: {
-          entity_code:  this.props.entityCode,
-          entity_type:  this.props.entityTypeCode,
-          entity_class: this.props.entityClassCode
-        }
-      });
+          data: {
+            entity_code:  this.props.entityCode,
+            entity_type:  this.props.entityTypeCode,
+            entity_class: this.props.entityClassCode
+          }
+        });
 
         return subscription
           .syncing(() => this.setState({ syncing: true }))
@@ -143,4 +143,5 @@ modulejs.define(
     });
 
     return withCallbacks(Buttons);
-});
+  }
+);

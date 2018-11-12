@@ -8,6 +8,7 @@ v1.6.0 [unreleased]
 -   [#153](https://github.com/latera/homs/pull/153) Allow updating users encrypted password and salt.
 -   [#202](https://github.com/latera/homs/pull/202) Remove mount configs from docker-compose and set postgres version.
 -   [#206](https://github.com/latera/homs/pull/206) Use higher order component instead of HBWDeleteIfMixin.
+-   [#203](https://github.com/latera/homs/pull/203) Allow to unmount widget and replace some glyphicons with FontAwesome.
 
 ### Bugfixes
 -   [#194](https://github.com/latera/homs/pull/194) Set limit on the number of choices in lookup select from sql requests.

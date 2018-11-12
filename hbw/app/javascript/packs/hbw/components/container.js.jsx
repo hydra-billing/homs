@@ -61,4 +61,5 @@ modulejs.define(
     });
 
     return compose(withTasks, withCallbacks)(Container);
-  });
+  }
+);

@@ -18,8 +18,8 @@ modulejs.define('HBWMenu', ['React', 'HBWTaskList'], (React, TaskList) => {
 
     render () {
       return <div>
-        { this.props.renderButton &&
-        <div className='hbw-launcher' onClick={this.toggleVisibility}>
+        { this.props.renderButton
+        && <div className='hbw-launcher' onClick={this.toggleVisibility}>
           <div className='hbw-launcher-button btn-primary'>
           </div>
         </div> }

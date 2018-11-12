@@ -77,9 +77,7 @@ class OrderList extends React.Component {
     this.showMoreOrders();
   }
 
-  buttonText = () => {
-    return I18n.t('js.columns_settings');
-  };
+  buttonText = () => I18n.t('js.columns_settings');
 
   handleOptionChange = (option, checked) => {
     const value = $(option).val();

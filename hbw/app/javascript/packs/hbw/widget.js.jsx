@@ -116,6 +116,11 @@ modulejs.define(
         );
       }
 
+      unmountWidget () {
+        this.env.connection.unsubscribe();
+        ReactDOM.unmountComponentAtNode(this.$widgetContainer[0]);
+      }
+
       subscribeOnTasks () {
         this.tasksSubscription = this.env.connection.subscribe({
           client: 'root',
