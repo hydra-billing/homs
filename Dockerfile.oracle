@@ -79,5 +79,8 @@ RUN cp -r /opt/homs/config/* /tmp/config
 EXPOSE 3000
 
 USER homs
+
+RUN yarn install && bundle exec rails assets:precompile && rm -rf /opt/homs/node_modules/
+
 WORKDIR /opt/homs
 ENTRYPOINT ["/entrypoint.sh"]
