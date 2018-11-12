@@ -10,6 +10,7 @@ v1.6.0 [unreleased]
 -   [#206](https://github.com/latera/homs/pull/206) Use higher order component instead of HBWDeleteIfMixin.
 -   [#203](https://github.com/latera/homs/pull/203) Allow to unmount widget and replace some glyphicons with FontAwesome.
 -   [#199](https://github.com/latera/homs/pull/199) Move assets generation to Dockerfiles.
+-   [#207](https://github.com/latera/homs/pull/207) Remove extra locales from moment.js
 
 ### Bugfixes
 -   [#194](https://github.com/latera/homs/pull/194) Set limit on the number of choices in lookup select from sql requests.

@@ -13,6 +13,8 @@ environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
   })
 );
 
+environment.plugins.prepend('moment',new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru/));
+
 environment.loaders.append('yaml', yaml);
 environment.loaders.append('babel', babel);
 
