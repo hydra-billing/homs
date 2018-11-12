@@ -37,46 +37,35 @@ The prefered way to install HOMS is to use Docker
   ```
 3. For OS X users: make path to folder with HOMS shared in `Docker -> Preferences... -> File Sharing`.
 
-4. Copy your (or default) configs to `/etc/hydra/homs/`:
+4. Copy your (or default) `.env` file to your project's directory:
 
   ```
-  cp config/bpm.yml.sample /etc/hydra/homs/bpm.yml
-  cp config/database.yml.sample /etc/hydra/homs/database.yml
-  cp config/hbw.yml.sample /etc/hydra/homs/hbw.yml
-  cp config/homs_configuration.yml.sample /etc/hydra/homs/homs_configuration.yml
-  cp config/imprint.yml.sample /etc/hydra/homs/imprint.yml
-  cp config/sources.yml.sample /etc/hydra/homs/sources.yml
-  cp config/secrets.yml.sample /etc/hydra/homs/secrets.yml
+  cp .env.sample .env
   ```
+  
+   All variables are set in `.env` file. There you can change them, if you want to.
 
-5. Copy your (or default) `.env` file to your project's directory:
+5. Change [Minio](https://github.com/minio/minio) credentials in `.env` file.
 
-  ```
-  cp homs.env.sample .env
-  ```
-
-6. Change [Minio](https://github.com/minio/minio) credentials in `.env` file.
-
-7. Be sure to update secret key in `/etc/hydra/homs/secrets.yml`. You can generate key with this command:
+6. Be sure to update secret key in `/etc/hydra/homs/secrets.yml`. You can generate key with this command:
 
   ```
   openssl rand -hex 64
   ```
 
-8. Run `docker-compose`:
+7. Run `docker-compose`:
 
   ```
   docker-compose up -d
   ```
 
-9. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
+8. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
 
-10. Navigate to [Camunda Admin](http://localhost:8080/camunda) and create admin user with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file.
+9. Navigate to [Camunda Admin](http://localhost:8080/camunda) and create admin user with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file.
 
-11. (Optional) If you want to use demo processes navigate to Camunda Admin and create user with `user@example.com` email.
+10. (Optional) If you want to use demo processes navigate to [Camunda](http://localhost:8080/camunda/app/admin/default/#/user-create) and create user with `user@example.com` email.
 
-12. Login at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
-
+11. Login at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
 #### In development
 
@@ -92,15 +81,15 @@ Follow the same steps as for [In production installation](#in-production), but w
   git clone https://github.com/latera/homs.git
   ```
 
-4. Create your own configs from samples:
+4.1. Create your own configs from samples:
 
   ```
   find config -name '*.sample' | xargs -I{} sh -c 'cp $1 ${1%.*}' -- {}
   ```
 
-7. Skip this step
+6. Skip this step
 
-8. Add test environment to `config/database.yml`:
+7. Add test environment to `config/database.yml`:
 
   ```
   development:
@@ -113,7 +102,7 @@ Follow the same steps as for [In production installation](#in-production), but w
     password: <%= ENV['HOMS_DB_PASSWORD'] %>
   ```
   
-9. Run `docker-compose`: with custom config:
+8. Run `docker-compose`: with custom config:
   ```
   docker-compose -f docker-compose.dev.yml up -d
   ```
@@ -124,7 +113,7 @@ Or if you want to use Oracle as source for your HOMS instance:
 
 Follow the same steps as for [without Oracle Instant Client installation](#without-oracle-instant-client), but with certain changes:
 
-6. Download the Oracle Instant Client 11.2 archives from OTN:
+5. Download the Oracle Instant Client 11.2 archives from OTN:
 
 http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 
@@ -134,13 +123,13 @@ The following three ZIPs are required:
 - `instantclient-sdk-linux.x64-11.2.0.4.0.zip`
 - `instantclient-sqlplus-linux.x64-11.2.0.4.0.zip`
 
-6.1. Place the downloaded Oracle Instant Client RPMs in the same directory as the `Dockerfile` and run:
+5.1. Place the downloaded Oracle Instant Client RPMs in the same directory as the `Dockerfile` and run:
 
 ```
 docker build -t latera/homs-with-oracle -f Dockerfile.oracle .
 ```
 
-6.2. Create `config/sources.yml` file with database credentials
+5.2. Create `config/sources.yml` file with database credentials
 
 ```
 sources:
@@ -151,7 +140,7 @@ sources:
     password: password
 ```
 
-6.3. Add environment variable `$TNSNAMES_PATH` to `.env` file with path to your `tnsnames.ora` file:
+5.3. Add environment variable `$TNSNAMES_PATH` to `.env` file with path to your `tnsnames.ora` file:
 
 ```
 TNSNAMES_PATH=/dir/with/tnsnames.ora
@@ -159,7 +148,7 @@ TNSNAMES_PATH=/dir/with/tnsnames.ora
 
 for access to host machine OS X users can use special DNS name `host.docker.internal` as host in `tnsnames.ora` ([details](https://docs.docker.com/docker-for-mac/networking))
 
-7. Run `docker-compose`: with custom config:
+6. Run `docker-compose`: with custom config:
   ```
   docker-compose -f docker-compose.dev.oracle.yml up -d
   ```

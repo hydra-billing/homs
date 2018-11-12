@@ -3,12 +3,10 @@
 
 import CustomFormatter from 'formatter';
 import Tooltip from 'tooltip';
-import { withCallbacks } from '../helpers';
+import { withCallbacks, withDeleteIf, compose } from '../helpers';
 
-modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWDeleteIfMixin'], (React, jQuery, DeleteIfMixin) => {
+modulejs.define('HBWFormString', ['React', 'jQuery'], (React, jQuery) => {
   const FormString = React.createClass({
-    mixins: [DeleteIfMixin],
-
     displayName: 'HBWFormString',
 
     SUBSTITUTION: 'foobar',
@@ -48,7 +46,7 @@ modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWDeleteIfMixin'], (React
 
       let inputCSS = this.props.params.css_class;
 
-      if (this.hidden) {
+      if (this.props.hidden) {
         inputCSS += ' hidden';
       }
 
@@ -82,8 +80,6 @@ modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWDeleteIfMixin'], (React
       if (!this.guid) {
         this.props.setGuid();
       }
-
-      this.hidden = this.deleteIf();
     },
 
     validateOnSubmit () {
@@ -364,5 +360,5 @@ modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWDeleteIfMixin'], (React
     }
   });
 
-  return withCallbacks(FormString);
+  return compose(withCallbacks, withDeleteIf)(FormString);
 });
