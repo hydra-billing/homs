@@ -31,6 +31,9 @@ We are following several style guides:
         // good
         const x = function () {};
         const y = function a () {};
+  
+    * [16.3](https://github.com/airbnb/javascript#blocks--no-else-return)
+    Else-return is allowed.
 
 * [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
 
