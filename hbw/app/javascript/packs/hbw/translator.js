@@ -1,11 +1,13 @@
 import allTranslations from './init/translations'
 
 modulejs.define('HBWTranslator', ['jQuery'], (jQuery) => {
-  const translations = allTranslations[I18n.locale].hbw.js;
+  const Translator = {
+    getTranslatorForLocale (locale) {
+      return (key, vars) => this.translate(key, locale, vars);
+    },
 
-  return {
-    translate (key, vars = {}) {
-      let current = translations;
+    translate (key, locale = 'en', vars = {}) {
+      let current = allTranslations[locale].hbw.js;
 
       for (const part of key.split('.')) {
         if (jQuery.isPlainObject(current) && part in current) {
@@ -33,4 +35,6 @@ modulejs.define('HBWTranslator', ['jQuery'], (jQuery) => {
       }
     }
   };
+
+  return Translator;
 });

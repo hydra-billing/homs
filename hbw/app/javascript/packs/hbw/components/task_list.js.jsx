@@ -1,8 +1,8 @@
 modulejs.define('HBWTaskList',
   ['React', 'HBWTaskGroup', 'HBWError', 'HBWPending', 'HBWTasksMixin',
-    'HBWCallbacksMixin', 'HBWTranslationsMixin'],
-  (React, TaskGroup, Error, Pending, TasksMixin, CallbacksMixin, TranslationsMixin) => React.createClass({
-    mixins: [TasksMixin, CallbacksMixin, TranslationsMixin],
+    'HBWCallbacksMixin'],
+  (React, TaskGroup, Error, Pending, TasksMixin, CallbacksMixin) => React.createClass({
+    mixins: [TasksMixin, CallbacksMixin],
 
     getInitialState () {
       return {
@@ -37,17 +37,17 @@ modulejs.define('HBWTaskList',
         <div className='hbw-sheet-header'>
           <div className='hbw-sheet-header-container'>
             <div className='hbw-sheet-header-title-container'>
-              <em className='hbw-sheet-header-title'>{this.t('tasks')}</em>
+              <em className='hbw-sheet-header-title'>{this.props.env.translator('tasks')}</em>
             </div>
-            <a className={a_class} href="#" onClick={this.hideWidget} title={this.t('hide_widget')}>
+            <a className={a_class} href="#" onClick={this.hideWidget} title={this.props.env.translator('hide_widget')}>
               <div className="hbw-sheet-header-button-icon hbw-sheet-header-close-button-icon">
               </div>
             </a>
           </div>
         </div>
         <div className='hbw-sheet-body'>
-          { !this.state.fetched && <Pending text={this.t('loading')} /> }
-          { this.state.tasks.length == 0 && this.state.fetched && <p>{this.t('no_tasks')}</p> }
+          { !this.state.fetched && <Pending text={this.props.env.translator('loading')} /> }
+          { this.state.tasks.length == 0 && this.state.fetched && <p>{this.props.env.translator('no_tasks')}</p> }
           { this.createGroupsChildren() }
         </div>
         <div className='hbw-sheet-content'>

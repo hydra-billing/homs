@@ -8,7 +8,6 @@ modulejs.define(
    'HBWError',
    'HBWPending',
    'HBWCallbacksMixin',
-   'HBWTranslationsMixin',
    'HBWFormDefinition'],
   (React,
    ReactDOM,
@@ -18,9 +17,8 @@ modulejs.define(
    Error,
    Pending,
    CallbacksMixin,
-   TranslationsMixin,
    FormDefinition) => React.createClass({
-    mixins: [CallbacksMixin, TranslationsMixin],
+    mixins: [CallbacksMixin],
 
     getInitialState () {
       return {
@@ -94,7 +92,7 @@ modulejs.define(
 
         return <Form {...opts}/>;
       } else if (this.state.error) {
-        return <Error error={this.state.error} />;
+        return <Error error={this.state.error} env={this.props.env} />;
       } else {
         return <Pending active={this.state.loading} />;
       }

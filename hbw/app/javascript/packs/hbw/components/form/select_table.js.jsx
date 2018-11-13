@@ -1,7 +1,7 @@
 modulejs.define('HBWFormSelectTable',
-  ['React', 'HBWTranslationsMixin', 'jQuery', 'HBWDeleteIfMixin', 'HBWSelectMixin'],
-  (React, TranslationsMixin, jQuery, DeleteIfMixin, SelectMixin) => React.createClass({
-    mixins: [TranslationsMixin, DeleteIfMixin, SelectMixin],
+  ['React', 'jQuery', 'HBWDeleteIfMixin', 'HBWSelectMixin'],
+  (React, jQuery, DeleteIfMixin, SelectMixin) => React.createClass({
+    mixins: [DeleteIfMixin, SelectMixin],
 
     getInitialState () {
       const value = this.props.current_value || '';
@@ -28,7 +28,8 @@ modulejs.define('HBWFormSelectTable',
       const { label } = this.props.params;
       const labelCss = this.props.params.label_css;
 
-      const selectErrorMessage = this.t('errors.field_not_defined_in_bp', { field_name: this.props.name });
+      const selectErrorMessage = this.props.env.translator('errors.field_not_defined_in_bp',
+        { field_name: this.props.name });
       let selectErrorMessageCss = 'alert alert-danger';
       if (!this.missFieldInVariables()) {
         selectErrorMessageCss += ' hidden';
