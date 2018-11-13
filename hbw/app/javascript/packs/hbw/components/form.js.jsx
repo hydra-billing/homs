@@ -31,7 +31,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
 
     render () {
       return <div className='hbw-form'>
-          <Error error={this.state.error || this.props.error} />
+          <Error error={this.state.error || this.props.error} env={this.props.env} />
           <span>{this.props.pending}</span>
           <form method="POST" ref={(form) => { this.form = form; }} onSubmit={this.submit}>
             {this.iterateControls(this.props.form.fields)}
@@ -83,7 +83,8 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
           fa_class:  'fa fa-check'
         };
 
-        return <Submit params={params} formSubmitting={this.state.submitting || this.state.fileUploading} />;
+        return <Submit params={params} formSubmitting={this.state.submitting || this.state.fileUploading}
+                       env={this.props.env} />;
       }
 
       return null;

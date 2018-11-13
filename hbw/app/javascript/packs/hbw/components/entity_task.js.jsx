@@ -2,12 +2,10 @@ import { withCallbacks } from './helpers';
 
 modulejs.define(
   'HBWEntityTask',
-  ['React', 'ReactDOM', 'jQuery', 'HBWForm', 'HBWTestForm', 'HBWError', 'HBWPending', 'HBWTranslationsMixin',
+  ['React', 'ReactDOM', 'jQuery', 'HBWForm', 'HBWTestForm', 'HBWError', 'HBWPending',
     'HBWFormDefinition'],
-  (React, ReactDOM, jQuery, Form, TestForm, Error, Pending, TranslationsMixin, FormDefinition) => {
+  (React, ReactDOM, jQuery, Form, TestForm, Error, Pending, FormDefinition) => {
     const EntityTask = React.createClass({
-      mixins: [TranslationsMixin],
-
       displayName: 'HBWEntityTask',
 
       getInitialState () {
@@ -82,7 +80,7 @@ modulejs.define(
 
           return <Form {...opts}/>;
         } if (this.state.error) {
-          return <Error error={this.state.error} />;
+          return <Error error={this.state.error} env={this.props.env} />;
         }
         return <Pending active={this.state.loading} />;
       },

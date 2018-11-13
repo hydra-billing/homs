@@ -2,7 +2,6 @@ ru:
   hbw:
     js:
       submit: Отправить
-      loading_order_tasks: Обновление списка задач по заказу
       error: Ошибка
       more: Подробнее
       no_tasks: Нет задач
@@ -19,7 +18,6 @@ ru:
 
       components:
         select:
-          not_selected: Не выбран
           searching: Поиск...
           no_results_found: Совпадений не найдено
           enter_more_chars: Пожалуйста, введите больше одного символа

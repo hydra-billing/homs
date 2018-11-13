@@ -5,11 +5,9 @@ import { withCallbacks } from './helpers';
 
 modulejs.define(
   'HBWButtons',
-  ['React', 'HBWButton', 'HBWTranslationsMixin', 'HBWError'],
-  (React, Button, TranslationsMixin, Error) => {
+  ['React', 'HBWButton', 'HBWError'],
+  (React, Button, Error) => {
     const Buttons = React.createClass({
-      mixins: [TranslationsMixin],
-
       displayName: 'HBWButtons',
 
       getInitialState () {
@@ -49,7 +47,7 @@ modulejs.define(
           .always(() => this.setState({ syncing: false }))
           .fail(response => this.setState({
             syncError:   response,
-            errorHeader: this.t('errors.cannot_obtain_available_actions')
+            errorHeader: this.props.env.translator('errors.cannot_obtain_available_actions')
           }))
           .progress(data => this.setState({
             buttons:   data.buttons,
@@ -94,7 +92,7 @@ modulejs.define(
           } else if (this.state.bpRunning) {
             return <div className="hbw-spinner">
               <i className="fa fa-spinner fa-spin fa-2x"></i>
-              <h5 className="hbw-spinner-text">{this.t('bp_running')}</h5>
+              <h5 className="hbw-spinner-text">{this.props.env.translator('bp_running')}</h5>
             </div>;
           } else {
             const buttons = this.state.buttons.map((button, index) => {
@@ -106,7 +104,8 @@ modulejs.define(
             });
 
             return <div className='hbw-bp-control-buttons btn-group'>
-              <Error error={this.state.submitError || this.state.syncError} errorHeader={this.state.errorHeader}/>
+              <Error error={this.state.submitError || this.state.syncError} errorHeader={this.state.errorHeader}
+                     env={this.props.env}/>
               {buttons}
             </div>;
           }
@@ -132,7 +131,7 @@ modulejs.define(
           .fail(response => this.setState({
             submitError: response,
             submitting:  false,
-            errorHeader: this.t('errors.cannot_start_process')
+            errorHeader: this.props.env.translator('errors.cannot_start_process')
           }))
           .always(() => this.setState({ syncing: false }));
       },

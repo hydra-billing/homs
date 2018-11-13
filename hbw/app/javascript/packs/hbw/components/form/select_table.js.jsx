@@ -1,10 +1,10 @@
 import { withDeleteIf } from '../helpers';
 
 modulejs.define('HBWFormSelectTable',
-  ['React', 'HBWTranslationsMixin', 'jQuery', 'HBWSelectMixin'],
-  (React, TranslationsMixin, jQuery, SelectMixin) => {
+  ['React', 'jQuery', 'HBWSelectMixin'],
+  (React, jQuery, SelectMixin) => {
     const FormSelectTable = React.createClass({
-      mixins: [TranslationsMixin, SelectMixin],
+      mixins: [SelectMixin],
 
       displayName: 'HBWFormSelectTable',
 
@@ -29,7 +29,8 @@ modulejs.define('HBWFormSelectTable',
         const { label } = this.props.params;
         const labelCss = this.props.params.label_css;
 
-        const selectErrorMessage = this.t('errors.field_not_defined_in_bp', { field_name: this.props.name });
+        const selectErrorMessage = this.props.env.translator('errors.field_not_defined_in_bp',
+          { field_name: this.props.name });
 
         let selectErrorMessageCss = 'alert alert-danger';
         if (!this.missFieldInVariables()) {
