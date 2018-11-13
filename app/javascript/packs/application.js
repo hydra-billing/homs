@@ -6,7 +6,6 @@
 
 import '../init/unwrap_jquery';
 import '../init/unwrap_moment';
-import '../init/unwrap_react';
 import '../init/translations';
 import 'jquery-ujs';
 import 'select2/select2.full';
@@ -17,12 +16,9 @@ import 'fileinput';
 import 'bootstrap-datetimepicker';
 import 'confirm';
 import 'bootstrap-multiselect';
-import '../components/order_list';
-
-const componentRequireContext = require.context('components', true);
-const ReactRailsUJS = require('react_ujs');
-
-ReactRailsUJS.useContext(componentRequireContext);
+import React from 'react';
+import ReactDOM from 'react-dom';
+import OrderList from '../components/order_list';
 
 $(() => $('body').on('dp.change', (evt) => {
   const $target = $(evt.target);
@@ -293,6 +289,13 @@ class Homs {
   updateOrderForm (orderCode) {
     $.ajax(`/orders/${orderCode}`, { dataType: 'html' })
       .done(response => $('#order-data').html($(response).find('#order-data').html()));
+  }
+
+  renderOrderList = (container, props) => {
+    ReactDOM.render(
+      <OrderList {...props} />,
+      container
+    );
   }
 }
 defaultExport.Application = new Homs();

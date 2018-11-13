@@ -7,12 +7,16 @@
     - if orders.present?
       .total-items
         = "#{t('orders.total_items')} #{total_items}"
-      - with_custom_profile = list_filter.filter_values[:order_type_id].present?
       .table-responsive.table-nowrap.overflow-visible.orders-list
-        = react_component('order_list', {profile: with_custom_profile ? custom_profile(orders.first.order_type) : common_profile,
-                                        withCustomProfile: with_custom_profile,
-                                        filterParams: params,
-                                        pageSize: 25})
+        #order-list-container
+      - with_custom_profile = list_filter.filter_values[:order_type_id].present?
+      - options = {profile: with_custom_profile ? custom_profile(orders.first.order_type) : common_profile,
+                    withCustomProfile: with_custom_profile,
+                    filterParams: params,
+                    pageSize: 25}
+      :javascript
+        Application.renderOrderList(document.getElementById('order-list-container'),
+                                    JSON.parse('#{options.to_json.html_safe}'))
     - else
       %h4.empty-list= t('.no_orders_found')
 = link_to t('add'), new_order_path, class: 'btn btn-primary'
