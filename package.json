@@ -29,7 +29,6 @@
     "react": "15.6.2",
     "react-dom": "15.6.2",
     "react-select": "^2.1.0",
-    "react_ujs": "^2.4.4",
     "select2": "^4.0.6-rc.1",
     "tooltip.js": "^1.3.0",
     "url-polyfill": "^1.1.0",
