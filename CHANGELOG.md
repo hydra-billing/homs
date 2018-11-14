@@ -1,3 +1,10 @@
+v1.5.1 [unreleased]
+-------------------
+
+ ### Bugfixes
+ 
+-   [#212](https://github.com/latera/homs/pull/212) Fix lookup and change multi select to single.
+
 v1.5.0 [2018-10-29]
 -------------------
 
