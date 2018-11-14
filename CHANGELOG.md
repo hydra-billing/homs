@@ -18,6 +18,12 @@ v1.6.0 [unreleased]
 -   [#198](https://github.com/latera/homs/pull/198) Add seed in test's logs.
 -   [#201](https://github.com/latera/homs/pull/201) Fix pointer on menu button.
 
+v1.5.1 [unreleased]
+-------------------
+
+### Bugfixes
+-   [#204](https://github.com/latera/homs/pull/204) Pass locale for translations from environment.
+
 v1.5.0 [2018-10-29]
 -------------------
 
@@ -42,7 +48,6 @@ v1.5.0 [2018-10-29]
 ### Bugfixes
 -   [#170](https://github.com/latera/homs/pull/170) Use active support logger as base.
 -   [#190](https://github.com/latera/homs/pull/190) Fix multiply running of tests in docker.
--   [#204](https://github.com/latera/homs/pull/204) Pass locale for translations from environment.
 
 v1.4.0.2 [unreleased]
 ---------------------
