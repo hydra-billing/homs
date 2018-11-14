@@ -220,8 +220,14 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
       this.channels = {};
     }
 
-    request (...args) {
-      return jQuery.ajax(...args);
+    request (opts) {
+      return jQuery.ajax({
+        ...opts,
+        data: {
+          ...opts.data,
+          payload: this.options.payload || {}
+        }
+      });
     }
 
     createChannel (options) {
