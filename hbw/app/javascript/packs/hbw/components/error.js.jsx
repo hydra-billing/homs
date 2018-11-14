@@ -1,13 +1,5 @@
-modulejs.define('HBWError', ['React', 'HBWTranslationsMixin', 'jQuery'], (React, TranslationsMixin, jQuery) => {
-  const { t } = TranslationsMixin;
-
-  return React.createClass({
-    mixins: [TranslationsMixin],
-
-    getDefaultProps () {
-      return { errorHeader: t('error') };
-    },
-
+modulejs.define('HBWError', ['React', 'jQuery'], (React, jQuery) => {
+  const Error = React.createClass({
     getInitialState () {
       return { showFull: false };
     },
@@ -35,14 +27,14 @@ modulejs.define('HBWError', ['React', 'HBWTranslationsMixin', 'jQuery'], (React,
 
         return <div className="alert alert-danger hbw-error">
           <i className="fa fa-exclamation-triangle"></i>
-          <strong>{` ${this.props.errorHeader}`}</strong>
+          <strong>{` ${this.props.env.translator('error')}`}</strong>
           <br />
           <a href="javascript:;"
             onClick={this.toggleBacktrace}
             className="show-more"
             style={{ display: error ? 'block' : 'none' }}>
             <i className={iconClass}></i>
-            {this.t('more')}
+            {this.props.env.translator('more')}
           </a>
           <pre style={{ display }}>{error}</pre>
         </div>;
@@ -55,4 +47,6 @@ modulejs.define('HBWError', ['React', 'HBWTranslationsMixin', 'jQuery'], (React,
       this.setState({ showFull: !this.state.showFull });
     }
   });
+
+  return Error;
 });

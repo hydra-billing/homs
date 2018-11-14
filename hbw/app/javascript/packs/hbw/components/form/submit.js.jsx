@@ -1,13 +1,5 @@
-modulejs.define('HBWFormSubmit', ['React', 'HBWTranslationsMixin'], (React, TranslationsMixin) => {
-  const { t } = TranslationsMixin;
-
-  return React.createClass({
-    mixins: [TranslationsMixin],
-
-    getDefaultProps () {
-      return { name: t('submit') };
-    },
-
+modulejs.define('HBWFormSubmit', ['React'], (React) => {
+  const FormSubmit = React.createClass({
     render () {
       let className = 'btn btn-primary';
 
@@ -20,9 +12,11 @@ modulejs.define('HBWFormSubmit', ['React', 'HBWTranslationsMixin'], (React, Tran
           className={className}
           disabled={this.props.formSubmitting}>
           <i className="fa fa-check" />
-          {` ${this.props.name}`}
+          {` ${this.props.env.translator('submit')}`}
         </button>
       </div>;
     }
   });
+
+  return FormSubmit;
 });

@@ -69,12 +69,6 @@ modulejs.define('HBWTasksMixin', [], () => ({
   }
 }));
 
-modulejs.define('HBWTranslationsMixin', ['HBWTranslator'], Translator => ({
-  t (key, vars) {
-    return Translator.translate(key, vars);
-  }
-}));
-
 modulejs.define('HBWSelectMixin', ['jQuery'], jQuery => ({
   getChoices (value) {
     let choices;

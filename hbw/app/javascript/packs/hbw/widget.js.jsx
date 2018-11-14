@@ -25,7 +25,7 @@ modulejs.define(
         this.env = {
           connection,
           dispatcher:   new Dispatcher(),
-          translator:   Translator,
+          translator:   Translator.getTranslatorForLocale(this.options.locale),
           forms:        new Forms(connection, this.options.entity_class),
           locale:       this.options.locale,
           userExist:    true,
