@@ -18,7 +18,7 @@ v1.6.0 [unreleased]
 -   [#198](https://github.com/latera/homs/pull/198) Add seed in test's logs.
 -   [#201](https://github.com/latera/homs/pull/201) Fix pointer on menu button.
 
-v1.5.1 [unreleased]
+v1.5.1 [2018-11-14]
 -------------------
 
 ### Bugfixes
