@@ -21,12 +21,10 @@ modulejs.define('HBWFormSelect',
       },
 
       render () {
-        const isMulti = !this.props.params.single && this.props.params.mode === 'lookup';
         const opts = {
-          isMulti,
           name:             this.props.name,
           options:          this.buildOptions(),
-          defaultValue:     this.getDefaultValue(isMulti),
+          defaultValue:     this.getDefaultValue(),
           placeholder:      this.props.params.placeholder || '',
           isClearable:      this.props.params.nullable || this.props.value === null,
           isDisabled:       this.props.params.editable === false,
@@ -166,13 +164,11 @@ modulejs.define('HBWFormSelect',
           });
       },
 
-      getDefaultValue (isMulti) {
+      getDefaultValue () {
         const variants = this.buildOptions();
 
         if (this.state.value) {
-          const value = (isMulti ? this.state.value : [this.state.value]).map(el => `${el}`);
-
-          return variants.filter(opt => value.includes(`${opt.value}`));
+          return variants.filter(opt => `${this.state.value}` === `${opt.value}`);
         }
 
         if (this.props.params.nullable) {
@@ -183,13 +179,7 @@ modulejs.define('HBWFormSelect',
       },
 
       setValue (option) {
-        let newValue;
-
-        if (Array.isArray(option)) {
-          newValue = option.map(opt => opt.value);
-        } else {
-          newValue = option ? option.value : null;
-        }
+        const newValue = option ? option.value : null;
 
         this.setState({
           value:   newValue,
