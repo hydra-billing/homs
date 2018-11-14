@@ -1,3 +1,9 @@
+v1.5.1 [unreleased]
+-------------------
+
+### Bugfixes
+-   [#204](https://github.com/latera/homs/pull/204) Pass locale for translations from environment.
+
 v1.5.0 [2018-10-29]
 -------------------
 
