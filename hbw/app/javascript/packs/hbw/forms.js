@@ -61,11 +61,10 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
       return this.connection.request({
         url:         this.formURL(params.taskId),
         method:      'PUT',
-        contentType: 'application/json',
-        data:        JSON.stringify({
+        data: {
           form_data:    params.variables,
           entity_class: this.entityClass
-        }),
+        },
         headers: {
           'X-CSRF-Token': params.token
         }
