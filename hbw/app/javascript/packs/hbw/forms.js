@@ -59,9 +59,9 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
 
     save (params = {}) {
       return this.connection.request({
-        url:         this.formURL(params.taskId),
-        method:      'PUT',
-        data: {
+        url:    this.formURL(params.taskId),
+        method: 'PUT',
+        data:   {
           form_data:    params.variables,
           entity_class: this.entityClass
         },

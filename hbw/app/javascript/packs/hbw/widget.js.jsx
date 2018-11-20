@@ -20,8 +20,8 @@ modulejs.define(
 
         this.options = options;
         const connection = new Connection({
-          path: this.options.widgetPath,
-          host: this.options.widgetHost,
+          path:    this.options.widgetPath,
+          host:    this.options.widgetHost,
           payload: this.options.payload
         });
 

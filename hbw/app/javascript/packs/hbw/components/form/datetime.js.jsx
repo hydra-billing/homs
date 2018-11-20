@@ -100,11 +100,24 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
     },
 
     setOnChange () {
+      const icons = {
+        up:       'fa fa-chevron-up',
+        down:     'fa fa-chevron-down',
+        date:     'fa fa-calendar',
+        time:     'fa fa-clock-o',
+        next:     'fa fa-chevron-right',
+        previous: 'fa fa-chevron-left',
+        today:    'fa fa-dot-circle-o',
+        clear:    'fa fa-trash',
+        close:    'fa fa-times'
+      };
+
       jQuery(this.rootNode)
         .find('.datetime-picker')
         .datetimepicker({
           format: this.state.format,
-          locale: this.state.locale
+          locale: this.state.locale,
+          icons,
         })
         .on('dp.change', e => this.updateValue(e));
     }
