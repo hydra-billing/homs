@@ -48,6 +48,7 @@ v1.5.0 [2018-10-29]
 -   [#185](https://github.com/latera/homs/pull/185) Speed up docker build.
 -   [#188](https://github.com/latera/homs/pull/188) Use `.env` file in docker-compose.
 -   [#183](https://github.com/latera/homs/pull/183) Replace `Select2` with `react-select` in widget.
+-   [#215](https://github.com/latera/homs/pull/215) Use FontAwesome instead of Glyphicons in `bootstrap-datimepicker`.
 
 ### Bugfixes
 -   [#170](https://github.com/latera/homs/pull/170) Use active support logger as base.
