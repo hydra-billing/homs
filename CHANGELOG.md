@@ -1,3 +1,9 @@
+v1.5.1 [unreleased]
+-------------------
+
+### Features
+-   [#215](https://github.com/latera/homs/pull/215) Use FontAwesome instead of Glyphicons in `bootstrap-datimepicker`.
+
 v1.5.1 [2018-11-14]
 -------------------
 
