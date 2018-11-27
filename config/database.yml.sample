@@ -15,3 +15,12 @@ test:
   database: <%= ENV['HOMS_DB_NAME'] %>
   username: <%= ENV['HOMS_DB_USER'] %>
   password: <%= ENV['HOMS_DB_PASSWORD'] %>
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: <%= ENV['HOMS_DB_HOST'] %>
+  database: <%= ENV['HOMS_DB_NAME'] %>
+  username: <%= ENV['HOMS_DB_USER'] %>
+  password: <%= ENV['HOMS_DB_PASSWORD'] %>
