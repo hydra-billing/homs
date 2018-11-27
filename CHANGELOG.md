@@ -2,7 +2,7 @@ v1.5.2 [2018-11-27]
 -------------------
 
 ### Features
--   [#204](https://github.com/latera/homs/pull/204) Pass locale for translations from environment.
+-   [#215](https://github.com/latera/homs/pull/215) Use FontAwesome instead of Glyphicons in `bootstrap-datimepicker`.
 
 ### Bugfixes
 -   [#217](https://github.com/latera/homs/pull/217) Add production as a default setting.
