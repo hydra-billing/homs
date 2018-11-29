@@ -32,6 +32,7 @@ gem 'aws-sdk', '~> 2'
 gem 'web-console', '~> 2.0', group: :development
 gem 'settingslogic'
 gem 'webpacker', '~> 3.5'
+gem 'rack', '~> 2.0.6'
 
 group :oracle do
   gem 'ruby-oci8', '2.2.3'
