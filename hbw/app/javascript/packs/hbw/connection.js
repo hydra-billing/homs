@@ -225,7 +225,7 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
         ...opts,
         data: {
           ...opts.data,
-          payload: this.options.payload || {}
+          payload: this.options.payload
         }
       });
     }

@@ -62,10 +62,11 @@ modulejs.define(
           method: 'POST',
 
           data: {
-            entity_code:  this.props.entityCode,
-            entity_type:  this.props.entityTypeCode,
-            entity_class: this.props.entityClassCode,
-            bp_code:      businessProcessCode
+            entity_code:       this.props.entityCode,
+            entity_type:       this.props.entityTypeCode,
+            entity_class:      this.props.entityClassCode,
+            bp_code:           businessProcessCode,
+            initial_variables: this.props.env.initialVariables
           }
         });
       },

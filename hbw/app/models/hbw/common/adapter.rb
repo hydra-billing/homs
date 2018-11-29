@@ -50,7 +50,8 @@ module HBW
       def start_process(bp_code,
                         user_email,
                         entity_code,
-                        entity_class)
+                        entity_class,
+                        initial_variables)
         user = HBW::BPMUser.with_connection(api) do
           HBW::BPMUser.fetch(user_email)
         end
@@ -59,7 +60,7 @@ module HBW
         p_def = process_definition_for_key_like(bp_code)
         return false unless p_def
 
-        variables = get_variables(user, entity_class, entity_code)
+        variables = get_variables(user, entity_class, entity_code).merge(initial_variables)
 
         response = start_process_response(p_def['id'], variables)
         response.status == 201
