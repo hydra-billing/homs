@@ -21,6 +21,7 @@ v1.6.0 [unreleased]
 -   [#194](https://github.com/latera/homs/pull/194) Set limit on the number of choices in lookup select from sql requests.
 -   [#198](https://github.com/latera/homs/pull/198) Add seed in test's logs.
 -   [#201](https://github.com/latera/homs/pull/201) Fix pointer on menu button.
+-   [#219](https://github.com/latera/homs/pull/219) Update obsolete dependencies.
 
 v1.5.2 [2018-11-27]
 -------------------
