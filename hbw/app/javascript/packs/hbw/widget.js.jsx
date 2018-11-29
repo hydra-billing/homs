@@ -19,20 +19,24 @@ modulejs.define(
         this.tasksMenu = null;
 
         this.options = options;
+
+        const payload = Object.assign({ variables: {} }, this.options.payload);
+
         const connection = new Connection({
-          path:    this.options.widgetPath,
-          host:    this.options.widgetHost,
-          payload: this.options.payload
+          path: this.options.widgetPath,
+          host: this.options.widgetHost,
+          payload
         });
 
         this.env = {
           connection,
-          dispatcher:   new Dispatcher(),
-          translator:   Translator.getTranslatorForLocale(this.options.locale),
-          forms:        new Forms(connection, this.options.entity_class),
-          locale:       this.options.locale,
-          userExist:    true,
-          entity_class: this.options.entity_class
+          dispatcher:       new Dispatcher(),
+          translator:       Translator.getTranslatorForLocale(this.options.locale),
+          forms:            new Forms(connection, this.options.entity_class),
+          locale:           this.options.locale,
+          userExist:        true,
+          entity_class:     this.options.entity_class,
+          initialVariables: payload.variables
         };
 
         this.$widgetContainer = jQuery(this.options.widgetContainer);

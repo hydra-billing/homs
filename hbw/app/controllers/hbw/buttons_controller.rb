@@ -8,7 +8,8 @@ module HBW
       widget.start_bp(current_user_identifier,
                       bp_code,
                       entity_identifier,
-                      entity_class)
+                      entity_class,
+                      initial_variables)
 
       render json: buttons.to_json
     end
