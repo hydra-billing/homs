@@ -334,7 +334,7 @@ modulejs.define('HBWFormString', ['React', 'jQuery', 'HBWCallbacksMixin', 'HBWDe
   },
 
   isEveryBlank (array) {
-    return array.reduce(((res, val) => res && !val.replace(/\s/g, '')), true);
+    return array.reduce(((res, val) => res && val && !val.replace(/\s/g, '')), true);
   },
 
   getNormalizedInitialValues (value) {
