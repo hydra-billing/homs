@@ -23,6 +23,12 @@ v1.6.0 [unreleased]
 -   [#201](https://github.com/latera/homs/pull/201) Fix pointer on menu button.
 -   [#219](https://github.com/latera/homs/pull/219) Update obsolete dependencies.
 
+v1.5.3 [unreleased]
+-------------------
+
+### Bugfixes
+-   [#220](https://github.com/latera/homs/pull/220) Fix error when using string's static pattern only.
+
 v1.5.2 [2018-11-27]
 -------------------
 
