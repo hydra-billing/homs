@@ -70,7 +70,7 @@ v1.5.0 [2018-10-29]
 -   [#170](https://github.com/latera/homs/pull/170) Use active support logger as base.
 -   [#190](https://github.com/latera/homs/pull/190) Fix multiply running of tests in docker.
 
-v1.4.0.2 [unreleased]
+v1.4.0.2 [2018-12-10]
 ---------------------
 ### Bugfixes
 -   [#165](https://github.com/latera/homs/pull/165) Remove new line from BPM widget basic auth generator.
