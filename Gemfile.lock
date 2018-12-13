@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/thoughtbot/capybara-webkit.git
-  revision: 77fdac424cd6fdb5aa266b229a888cc58da8e95e
-  branch: master
-  specs:
-    capybara-webkit (1.15.1)
-      capybara (>= 2.3, < 4.0)
-      json
-
-GIT
   remote: https://github.com/fnando/i18n-js
   revision: 7ed2d2900c844d70992b2f7222178867eaaca92a
   ref: 7ed2d2
@@ -139,6 +130,8 @@ GEM
     capybara-screenshot (1.0.21)
       capybara (>= 1.0, < 4)
       launchy
+    childprocess (0.9.0)
+      ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -246,7 +239,6 @@ GEM
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     jmespath (1.4.0)
-    json (2.1.0)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -377,6 +369,7 @@ GEM
     ruby-progressbar (1.9.0)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
+    rubyzip (1.2.2)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -388,6 +381,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    selenium-webdriver (3.141.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.2, >= 1.2.2)
     settingslogic (2.0.9)
     sexp_processor (4.11.0)
     simple_form (4.0.1)
@@ -469,7 +465,6 @@ DEPENDENCIES
   capistrano-rvm (~> 0.1.1)
   capybara
   capybara-screenshot
-  capybara-webkit!
   coderay (~> 1.1)
   coffee-rails (~> 4.2)
   database_cleaner
@@ -506,6 +501,7 @@ DEPENDENCIES
   ruby-oci8 (= 2.2.3)
   ruby_parser
   sass-rails (~> 5.0.7)
+  selenium-webdriver
   settingslogic
   simple_form
   spring
@@ -522,4 +518,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.3
+   1.17.1

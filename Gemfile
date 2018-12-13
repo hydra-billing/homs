@@ -75,7 +75,7 @@ end
 group :test do
   gem 'temping'
   gem 'capybara'
-  gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit', branch: 'master'
+  gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'capybara-screenshot'

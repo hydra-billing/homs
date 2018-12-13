@@ -1,8 +1,12 @@
 feature 'Print', js: true do
+  include DownloadHelper
+
   let(:first_order_code)  { 'ORD-1' }
   let(:second_order_code) { 'ORD-2' }
 
   before(:each) do
+    clear_downloads
+
     user = FactoryBot.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
@@ -28,8 +32,9 @@ feature 'Print', js: true do
 
     click_and_wait('Print')
 
-    expect(page.response_headers['Content-Type']).to eq 'text/plain'
-    expect(page.response_headers['Content-Disposition']).to eq "attachment; filename*=UTF-8''test_1.txt"
+    expect(downloads.count).to eq 1
+    expect(download.include?('test_1.txt')).to be_truthy
+    expect(download_content).to eq 'substitution 1'
 
     page.driver.go_back
     expect_widget_presence
