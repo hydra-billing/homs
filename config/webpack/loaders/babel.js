@@ -6,6 +6,7 @@ module.exports = {
     options: {
       presets: ['env', 'react'],
       plugins: [
+        'transform-runtime',
         'transform-object-rest-spread',
         'transform-class-properties'
       ]

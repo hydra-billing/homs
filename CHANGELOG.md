@@ -22,6 +22,7 @@ v1.6.0 [unreleased]
 -   [#198](https://github.com/latera/homs/pull/198) Add seed in test's logs.
 -   [#201](https://github.com/latera/homs/pull/201) Fix pointer on menu button.
 -   [#219](https://github.com/latera/homs/pull/219) Update obsolete dependencies.
+-   [#221](https://github.com/latera/homs/pull/221) Use babel-transform-runtime-plugin instead of babel-polyfill.
 
 v1.5.3 [unreleased]
 -------------------
