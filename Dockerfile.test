@@ -16,7 +16,17 @@ RUN apt-get update && apt-get install -y \
   gstreamer1.0-plugins-base \
   gstreamer1.0-tools \
   gstreamer1.0-x \
-  xvfb
+  xvfb \
+  fonts-liberation \
+  libappindicator3-1 \
+  libasound2 \
+  libnspr4 \
+  libnss3 \
+  libxss1 \
+  xdg-utils \
+  chromedriver
+
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb
 
 COPY ./run_tests.sh /
 

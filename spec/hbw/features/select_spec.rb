@@ -58,7 +58,7 @@ feature 'Check select with', js: true do
 
     expect(page).to have_content 'ORD-5'
     expect_r_select_presence('homsOrderDataSelect')
-    expect(r_select_placeholder('homsOrderDataSelect')).to eq ''
+    expect(r_select_placeholder('homsOrderDataSelect', visible: false)).to eq ''
     expect_widget_presence
   end
 

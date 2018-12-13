@@ -176,8 +176,8 @@ module Features
       }
     end
 
-    def r_select_placeholder(name)
-      r_select_container(name).find('.react-select__placeholder').text
+    def r_select_placeholder(name, params={})
+      r_select_container(name).find('.react-select__placeholder', **params).text
     end
 
     def r_select_input(name)

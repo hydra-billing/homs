@@ -15,7 +15,6 @@ feature 'Create new order type', js: true do
     attach_file('order_type_file',
                 fixtures_path('order_types/support_request.yml'),
                 visible: false)
-    page.find('.btn.btn-primary.btn-file').click
 
     expect(page).to have_css '.file-caption-name', text: 'support_request.yml'
 
@@ -42,7 +41,7 @@ feature 'Create new order type', js: true do
     expect(page).to have_no_css '.confirmation_dialog'
 
     delete_order_type('Support Request')
-    page.find('.close').trigger('click')
+    page.find('.close').click
     expect(page).to have_no_css '.confirmation_dialog'
 
     delete_order_type('Support Request')
@@ -57,7 +56,6 @@ feature 'Create new order type', js: true do
     attach_file('order_type_file',
                 fixtures_path('order_types/support_request.yml'),
                 visible: false)
-    page.find('.btn.btn-primary.btn-file').click
 
     expect(page).to have_css '.file-caption-name', text: 'support_request.yml'
 
@@ -79,7 +77,6 @@ feature 'Create new order type', js: true do
     attach_file('order_type_file',
                 fixtures_path('order_types/support_request.yml'),
                 visible: false)
-    page.find('.btn.btn-primary.btn-file').click
 
     expect(page).to have_css '.file-caption-name', text: 'support_request.yml'
 
@@ -87,14 +84,12 @@ feature 'Create new order type', js: true do
     expect(page).to have_no_css '.file-caption-name', text: 'support_request.yml'
     expect(page).to have_no_css '.fileinput-upload-button'
     expect(page).to have_no_css '.fileinput-remove-button'
-    expect(page).to have_css    '.file-caption-name'
   end
 
   scenario 'failed with invalid field type' do
     attach_file('order_type_file',
                 fixtures_path('order_types/invalid_field_request.yml'),
                 visible: false)
-    page.find('.btn.btn-primary.btn-file').click
 
     expect(page).to have_css '.file-caption-name', text: 'invalid_field_request.yml'
 
@@ -112,7 +107,6 @@ feature 'Create new order type', js: true do
     attach_file('order_type_file',
                 fixtures_path('order_types/invalid_yml_request.yml'),
                 visible: false)
-    page.find('.btn.btn-primary.btn-file').click
 
     expect(page).to have_css '.file-caption-name', text: 'invalid_yml_request.yml'
 

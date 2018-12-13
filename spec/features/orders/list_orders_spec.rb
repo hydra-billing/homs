@@ -39,7 +39,7 @@ feature 'List orders', js: true do
     # "Archived" select
     expect(label('archived')).to          eq('Archived')
     expect(placeholder('archived')).to    eq('Archived')
-    expect(select2_text('archived')).to   eq('No')
+    expect(select2_text('archived')).to   eq("\nNo")
     expect(select_options('archived')).to eq(%w(Yes No))
 
     # "User name" multiple select
