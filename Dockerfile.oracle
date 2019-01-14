@@ -11,7 +11,7 @@ RUN wget -O - http://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
  && echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
  && wget -qO- https://deb.nodesource.com/setup_10.x | bash -
 
-RUN apt-get update && apt-get install --no-install-recommends -y \
+RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} && apt-get update && apt-get install --no-install-recommends -y \
   build-essential \
   git \
   libaio1 \
@@ -68,6 +68,10 @@ COPY hbw/      /opt/homs/hbw/
 COPY ./entrypoint.sh ./wait_for_postgres.sh /
 
 USER root
+
+ARG VERSION
+
+RUN echo $VERSION > /opt/homs/VERSION
 
 RUN chown -R homs:homs /opt/homs
 RUN chmod +x /entrypoint.sh /wait_for_postgres.sh

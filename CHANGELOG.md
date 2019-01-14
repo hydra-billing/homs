@@ -16,6 +16,7 @@ v1.6.0 [unreleased]
 -   [#214](https://github.com/latera/homs/pull/214) Update ruby version to 2.5.3.
 -   [#213](https://github.com/latera/homs/pull/213) Add payload to widget's requests.
 -   [#218](https://github.com/latera/homs/pull/218) Pass initial BP variables to widget initial payload.
+-   [#223](https://github.com/latera/homs/pull/223) Add directories for postgresql-client.
 
 ### Bugfixes
 -   [#194](https://github.com/latera/homs/pull/194) Set limit on the number of choices in lookup select from sql requests.

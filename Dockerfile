@@ -4,7 +4,7 @@ RUN mkdir -p /opt/homs
 
 RUN apt-get update -q && apt-get purge -y cmdtest && apt-get install --no-install-recommends -yq wget gnupg
 
-RUN wget -O - http://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} && wget -O - http://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
  && echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
  && wget -qO- https://deb.nodesource.com/setup_10.x | bash -
 
