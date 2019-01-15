@@ -29,6 +29,7 @@ v1.5.3 [unreleased]
 
 ### Bugfixes
 -   [#220](https://github.com/latera/homs/pull/220) Fix error when using string's static pattern only.
+-   [#224](https://github.com/latera/homs/pull/224) Fix type change in the order creation.
 
 v1.5.2 [2018-11-27]
 -------------------

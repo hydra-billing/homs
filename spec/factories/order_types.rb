@@ -22,6 +22,7 @@ FactoryBot.define do
       fields(vacationLeaveDate: {
                type: 'datetime',
                label: 'Leave date',
+               description: 'Leave date',
                required: true,
                multiple: false,
                visible:  true,
@@ -30,6 +31,7 @@ FactoryBot.define do
              vacationBackDate: {
                type: 'datetime',
                label: 'Vacation end date',
+               description: 'Vacation end date',
                required: true,
                multiple: false,
                visible:  true,
@@ -38,6 +40,7 @@ FactoryBot.define do
              employee: {
                type: 'string',
                label: 'Employee',
+               description: 'Employee',
                required: true,
                multiple: false,
                visible:  true,
@@ -46,6 +49,7 @@ FactoryBot.define do
              approver: {
                type: 'string',
                label: 'Approver',
+               description: 'Approver',
                required: true,
                multiple: false,
                visible:  true,
