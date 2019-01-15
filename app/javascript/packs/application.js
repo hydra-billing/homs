@@ -294,7 +294,6 @@ window.Application = defaultExport.Application;
 
 $(() => {
   Application.enableDateTimePicker();
-  Application.enableOrderTypePicker(true);
   Application.enableOrderAttributePicker(false);
 });
 

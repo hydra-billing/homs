@@ -11,17 +11,24 @@
   = render partial: 'common_form_fields', locals: { f: f }
   %input(name="order_type_id" value="#{@order.order_type_id}" type="hidden")
   = f.submit t('add'), class: 'btn btn-primary pull-right'
-:coffee
-  $('.order_type-picker').change ->
-    $.ajax 'new',
-      type: 'GET'
-      dataType: 'html'
-      data: {
-        order_type_id: $('.order_type-picker').val()
-        partial_name: "new_form"}
-      success: (data, textStatus, jqXHR) ->
-            $('.new_order').html(data)
-            eval($('.new_order script').text())
 
-  Application.enableDateTimePicker(true)
-  Application.enableOrderTypePicker(false)
+:javascript
+  $ = jQuery;
+
+  $('.order_type-picker').on('change', function() {
+    return $.ajax('new', {
+      type: 'GET',
+      dataType: 'html',
+      data: {
+        order_type_id: $('.order_type-picker').val(),
+        partial_name: "new_form"
+      },
+      success: function(data) {
+        $('.new_order').html(data);
+        return eval($('.new_order script').text());
+      }
+    });
+  });
+
+  Application.enableDateTimePicker(true);
+  Application.enableOrderTypePicker(false);
