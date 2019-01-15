@@ -126,10 +126,6 @@ $(() => $('.show-hidden-order-data').on('click', 'a', function () {
 const defaultExport = {};
 class Messenger {
   constructor () {
-    this.inform = this.inform.bind(this);
-    this.titleFor = this.titleFor.bind(this);
-    this.show = this.show.bind(this);
-
     this.durations = {
       default: 5,
       success: 5,
@@ -157,7 +153,7 @@ class Messenger {
     });
   }
 
-  inform (opts, level) {
+  inform = (opts, level) => {
     let options = opts;
 
     if ($.type(opts) === 'string') {
@@ -177,16 +173,16 @@ class Messenger {
     o.size = 'large';
 
     $.growl(o);
-  }
+  };
 
-  titleFor (options, level) {
+  titleFor = (options, level) => {
     if (level === 'error') {
       return I18n.t('js.error');
     }
     return null;
-  }
+  };
 
-  show (messages) {
+  show = (messages) => {
     return (() => {
       const result = [];
 
@@ -206,22 +202,14 @@ class Messenger {
 
       return result;
     })();
-  }
+  };
 }
 defaultExport.Messenger = Messenger;
 
 class Homs {
-  constructor () {
-    this.enableDateTimePicker = this.enableDateTimePicker.bind(this);
-    this.enableOrderTypePicker = this.enableOrderTypePicker.bind(this);
-    this.enableOrderAttributePicker = this.enableOrderAttributePicker.bind(this);
-    this.setAttributePickerOptions = this.setAttributePickerOptions.bind(this);
-    this.updateOrderForm = this.updateOrderForm.bind(this);
+  messenger = new Messenger();
 
-    this.messenger = new Messenger();
-  }
-
-  enableDateTimePicker (allowClear = false) {
+  enableDateTimePicker = (allowClear = false) => {
     $('.datetime-picker').each(function () {
       const $el = $(this);
       const format = $el.data('format') ? $el.data('format') : false;
@@ -232,9 +220,9 @@ class Homs {
         showClear: showClear || allowClear
       });
     });
-  }
+  };
 
-  enableOrderTypePicker (allowClear) {
+  enableOrderTypePicker = (allowClear) => {
     $('.order_type-picker').select2({
       width: '100%',
       allowClear,
@@ -245,9 +233,9 @@ class Homs {
       cache:    true,
       language: I18n.locale
     });
-  }
+  };
 
-  enableOrderAttributePicker (allowClear) {
+  enableOrderAttributePicker = (allowClear) => {
     $('.order_attribute-picker').select2({
       width: '100%',
       allowClear,
@@ -264,10 +252,10 @@ class Homs {
     if (currentOrderType) {
       this.setAttributePickerOptions(currentOrderType);
     }
-  }
+  };
 
-  setAttributePickerOptions (orderType) {
-    return $.ajax(`/orders/order_type_attributes/${orderType}`, {
+  setAttributePickerOptions = (orderType) => {
+    $.ajax(`/orders/order_type_attributes/${orderType}`, {
       method:  'GET',
       success: (data) => {
         if (Object.keys(data.options).length > 0) {
@@ -284,12 +272,12 @@ class Homs {
         }
       }
     });
-  }
+  };
 
-  updateOrderForm (orderCode) {
+  updateOrderForm = (orderCode) => {
     $.ajax(`/orders/${orderCode}`, { dataType: 'html' })
       .done(response => $('#order-data').html($(response).find('#order-data').html()));
-  }
+  };
 
   renderOrderList = (container, props) => {
     ReactDOM.render(
@@ -319,9 +307,6 @@ class PatchedGrowl extends Growl {
       eval(`${thisName} = this;`);
     }
 
-    this.click = this.click.bind(this);
-    this.mouseLeave = this.mouseLeave.bind(this);
-
     super(...args);
 
     this.stopped = false;
@@ -332,16 +317,16 @@ class PatchedGrowl extends Growl {
     return new PatchedGrowl(settings);
   }
 
-  click () {
+  click = () => {
     this.$growl().stop(true, true);
     this.stopped = true;
-  }
+  };
 
-  mouseLeave () {
+  mouseLeave = () => {
     if (!this.stopped) {
       this.waitAndDismiss();
     }
-  }
+  };
 }
 export default defaultExport;
 
