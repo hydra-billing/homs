@@ -77,7 +77,7 @@ feature 'Check user picker', js: true do
     wait_for_ajax
 
     set_r_select_lookup_option('homsOrderWhatUser', 'John Doe')
-    expect(r_select_single_value('homsOrderWhatUser')).to eq({label: 'John Doe', value: '2'})
+    expect(r_select_single_value('homsOrderWhatUser')[:label]).to eq('John Doe')
     ensure_r_select_unclearable('homsOrderWhatUser')
     expect_widget_presence
   end
