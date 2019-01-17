@@ -2,7 +2,8 @@
 
 import Select from 'react-select';
 import AsyncSelect from 'react-select/lib/Async';
-import { withDeleteIf, withSelect, compose } from '../helpers';
+import Tooltip from 'tooltip.js';
+import { withDeleteIf, withSelect, withCallbacks, compose } from '../helpers';
 
 modulejs.define('HBWFormSelect',
   ['React'],
@@ -19,13 +20,24 @@ modulejs.define('HBWFormSelect',
         };
       },
 
+      componentDidMount () {
+        this.tooltip = new Tooltip(this.select, {
+          title:     this.props.env.translator('errors.field_is_required'),
+          container: this.tooltipContainer,
+          trigger:   'manual',
+          placement: 'top'
+        });
+
+        this.validateOnSubmit();
+      },
+
       render () {
         const opts = {
           name:             this.props.name,
           options:          this.buildOptions(),
           defaultValue:     this.getDefaultValue(),
           placeholder:      this.props.params.placeholder || '',
-          isClearable:      this.props.params.nullable || this.props.value === null,
+          isClearable:      this.props.params.nullable,
           isDisabled:       this.props.params.editable === false,
           noOptionsMessage: this.noOptionsMessage,
           loadingMessage:   this.loadingMessage,
@@ -52,6 +64,11 @@ modulejs.define('HBWFormSelect',
           selectErrorMessageCss += ' hidden';
         }
 
+        const errorTooltip = <div
+          ref={(t) => { this.tooltipContainer = t; }}
+          className={`${!this.state.valid && 'tooltip-red'}`}
+        />;
+
         let formGroupCss = 'form-group';
 
         if (this.state.error) {
@@ -61,10 +78,51 @@ modulejs.define('HBWFormSelect',
         return <div className={cssClass} title={tooltip}>
           <span className={labelCss}>{label}</span>
           <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
-          <div className={formGroupCss}>
+          <div className={formGroupCss} ref={(i) => { this.select = i; }}>
             {this.selectComponent(opts)}
           </div>
+          {errorTooltip}
         </div>;
+      },
+
+      validateOnSubmit () {
+        this.props.bind('hbw:validate-form', this.onFormSubmit);
+      },
+
+      onFormSubmit () {
+        const el = this.select;
+
+        if (this.isValid()) {
+          el.classList.remove('invalid');
+        } else {
+          el.classList.add('invalid');
+
+          this.setValidationState();
+          this.controlValidationTooltip(this.isValid());
+          this.props.trigger('hbw:form-submitting-failed');
+        }
+      },
+
+      isValid () {
+        return this.props.params.nullable || this.isFilled();
+      },
+
+      isFilled () {
+        const { value } = this.state;
+
+        return value !== null && value !== undefined && value.length > 0;
+      },
+
+      setValidationState () {
+        this.setState({ valid: this.isValid() });
+      },
+
+      controlValidationTooltip (toHide) {
+        if (toHide) {
+          this.tooltip.hide();
+        } else {
+          this.tooltip.show();
+        }
       },
 
       customStyles () {
@@ -237,5 +295,5 @@ modulejs.define('HBWFormSelect',
       }
     });
 
-    return compose(withSelect, withDeleteIf)(FormSelect);
+    return compose(withSelect, withDeleteIf, withCallbacks)(FormSelect);
   });

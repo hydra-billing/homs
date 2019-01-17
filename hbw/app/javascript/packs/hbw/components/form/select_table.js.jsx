@@ -1,4 +1,5 @@
-import { withDeleteIf, withSelect, compose } from '../helpers';
+import Tooltip from 'tooltip';
+import { withDeleteIf, withSelect, withCallbacks, compose } from '../helpers';
 
 modulejs.define('HBWFormSelectTable',
   ['React'],
@@ -13,8 +14,20 @@ modulejs.define('HBWFormSelectTable',
         return {
           value:   this.props.params.current_value,
           choices: this.getChoices(),
-          error:   (!this.props.hasValueInChoices(value) && value) || this.props.missFieldInVariables()
+          error:   (!this.props.hasValueInChoices(value) && value) || this.props.missFieldInVariables(),
+          valid:   true
         };
+      },
+
+      componentDidMount () {
+        this.tooltip = new Tooltip(this.label, {
+          title:     this.props.env.translator('errors.field_is_required'),
+          container: this.tooltipContainer,
+          trigger:   'manual',
+          placement: 'bottom'
+        });
+
+        this.validateOnSubmit();
       },
 
       render () {
@@ -24,12 +37,16 @@ modulejs.define('HBWFormSelectTable',
           cssClass += ' hidden';
         }
 
-        const { tooltip } = this.props.params;
-        const { label } = this.props.params;
+        const { tooltip, label } = this.props.params;
         const labelCss = this.props.params.label_css;
 
         const selectErrorMessage = this.props.env.translator('errors.field_not_defined_in_bp',
           { field_name: this.props.name });
+
+        const errorTooltip = <div
+          ref={(t) => { this.tooltipContainer = t; }}
+          className={`${!this.state.valid && 'tooltip-red'}`}
+        />;
 
         let selectErrorMessageCss = 'alert alert-danger';
         if (!this.props.missFieldInVariables()) {
@@ -47,7 +64,7 @@ modulejs.define('HBWFormSelectTable',
         }
 
         return <div className={cssClass} title={tooltip}>
-          <span className={labelCss}>{label}</span>
+          <span className={labelCss} ref={(i) => { this.label = i; }}>{label}</span>
           <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
           <div className={formGroupCss}>
             <table className={tableCss}>
@@ -59,9 +76,50 @@ modulejs.define('HBWFormSelectTable',
               <tbody>
               {this.buildTableBody(this.state.choices, this.props.name, this.state.value)}
               </tbody>
+              {errorTooltip}
             </table>
           </div>
         </div>;
+      },
+
+      validateOnSubmit () {
+        this.props.bind('hbw:validate-form', this.onFormSubmit);
+      },
+
+      onFormSubmit () {
+        const el = this.label;
+
+        if (this.isValid()) {
+          el.classList.remove('invalid');
+        } else {
+          el.classList.add('invalid');
+
+          this.setValidationState();
+          this.controlValidationTooltip(this.isValid());
+          this.props.trigger('hbw:form-submitting-failed');
+        }
+      },
+
+      isValid () {
+        return this.props.params.nullable || this.isFilled();
+      },
+
+      isFilled () {
+        const { value } = this.state;
+
+        return value !== null && value !== undefined && value.length > 0;
+      },
+
+      setValidationState () {
+        this.setState({ valid: this.isValid() });
+      },
+
+      controlValidationTooltip (toHide) {
+        if (toHide) {
+          this.tooltip.hide();
+        } else {
+          this.tooltip.show();
+        }
       },
 
       addNullChoice (choices) {
@@ -99,6 +157,8 @@ modulejs.define('HBWFormSelectTable',
         }
 
         this.setState({ value: event.target.parentElement.getElementsByTagName('input')[0].value });
+        this.setValidationState();
+        this.controlValidationTooltip(this.isValid());
       },
 
       buildTableBody (choices, name, value) {
@@ -168,5 +228,5 @@ modulejs.define('HBWFormSelectTable',
       }
     });
 
-    return compose(withSelect, withDeleteIf)(FormSelectTable);
+    return compose(withSelect, withDeleteIf, withCallbacks)(FormSelectTable);
   });

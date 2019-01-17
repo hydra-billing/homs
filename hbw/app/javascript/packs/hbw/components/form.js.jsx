@@ -110,7 +110,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     },
 
     isFormValid () {
-      return this.getElement().find('input[type="text"].invalid').length === 0;
+      return this.getElement().find('.invalid').length === 0;
     },
 
     fileListPresent (fields) {
