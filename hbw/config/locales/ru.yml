@@ -15,6 +15,7 @@ ru:
         cannot_obtain_available_actions: Не удалось получить список доступных действий
         cannot_start_process: Не удалось начать процесс
         file_list_field_required: Для загрузки файлов необходимо добавить поле типа "file_list" с именем "homsOrderDataFileList"
+        field_is_required: Обязательное поле
 
       components:
         select:

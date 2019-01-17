@@ -17,6 +17,7 @@ v1.6.0 [unreleased]
 -   [#213](https://github.com/latera/homs/pull/213) Add payload to widget's requests.
 -   [#218](https://github.com/latera/homs/pull/218) Pass initial BP variables to widget initial payload.
 -   [#223](https://github.com/latera/homs/pull/223) Add directories for postgresql-client.
+-   [#227](https://github.com/latera/homs/pull/227) Add `required` option for string inputs. Use `nullable: false` in select/select_table for the same reason.
 
 ### Bugfixes
 -   [#194](https://github.com/latera/homs/pull/194) Set limit on the number of choices in lookup select from sql requests.

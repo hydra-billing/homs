@@ -5,7 +5,7 @@ import CustomFormatter from 'formatter';
 import Tooltip from 'tooltip';
 import { withCallbacks, withDeleteIf, compose } from '../helpers';
 
-modulejs.define('HBWFormString', ['React', 'jQuery'], (React, jQuery) => {
+modulejs.define('HBWFormString', ['React'], (React) => {
   const FormString = React.createClass({
     displayName: 'HBWFormString',
 
@@ -44,6 +44,11 @@ modulejs.define('HBWFormString', ['React', 'jQuery'], (React, jQuery) => {
         readOnly:  this.props.params.editable === false
       };
 
+      const errorTooltip = <div
+        ref={(t) => { this.tooltipContainer = t; }}
+        className={`${!this.state.valid && 'tooltip-red'}`}
+      />;
+
       let inputCSS = this.props.params.css_class;
 
       if (this.props.hidden) {
@@ -57,18 +62,18 @@ modulejs.define('HBWFormString', ['React', 'jQuery'], (React, jQuery) => {
                  ref={(i) => { this.input = i; }}
                  className={`form-control ${!this.state.valid && ' invalid'}`}
                  value={this.state.visualValue} />
-          <div ref={(t) => { this.tooltipContainer = t; }} className={`${!this.state.valid && 'tooltip-red'}`}></div>
           {!opts.readOnly && <input name={this.props.name} value={this.state.value} type="hidden" />}
+          {errorTooltip}
         </div>
       </div>;
     },
 
     componentDidMount () {
       this.tooltip = new Tooltip(this.input, {
-        title:     this.props.params.message,
+        title:     this.props.params.message || this.props.env.translator('errors.field_is_required'),
         container: this.tooltipContainer,
         trigger:   'manual',
-        placement: 'bottom'
+        placement: 'top'
       });
 
       this.validateOnSubmit();
@@ -94,17 +99,17 @@ modulejs.define('HBWFormString', ['React', 'jQuery'], (React, jQuery) => {
     },
 
     getElement () {
-      return jQuery(this.input);
+      return this.input;
     },
 
     onFormSubmit () {
       if (this.validationRequired()) {
-        const $el = this.getElement();
+        const el = this.getElement();
 
         if (this.isValid()) {
-          $el.removeClass('invalid');
+          el.classList.remove('invalid');
         } else {
-          $el.addClass('invalid');
+          el.classList.add('invalid');
 
           this.setValidationState();
           this.controlValidationTooltip(this.isValid());
@@ -114,7 +119,7 @@ modulejs.define('HBWFormString', ['React', 'jQuery'], (React, jQuery) => {
     },
 
     onLoadValidation () {
-      if (this.validationRequired() && !!this.state.value) {
+      if (this.validationRequired() && this.isFilled()) {
         this.controlValidationTooltip(this.isValid());
         this.setValidationState();
       }
@@ -139,7 +144,7 @@ modulejs.define('HBWFormString', ['React', 'jQuery'], (React, jQuery) => {
     },
 
     onKeyDown (event) {
-      if (this.validationRequired()) {
+      if (this.props.params.pattern) {
         if ((event.keyCode === 8) || (event.keyCode === 46)) {
           event.preventDefault();
 
@@ -147,10 +152,12 @@ modulejs.define('HBWFormString', ['React', 'jQuery'], (React, jQuery) => {
         } else {
           this.updateValue(event.target, false);
         }
-
-        this.runValidation();
       } else {
         this.updateValue(event.target, true);
+      }
+
+      if (this.validationRequired()) {
+        this.runValidation();
       }
     },
 
@@ -185,11 +192,26 @@ modulejs.define('HBWFormString', ['React', 'jQuery'], (React, jQuery) => {
     },
 
     isValid () {
-      return (this.state.value || '').search(new RegExp(this.props.params.regex)) >= 0;
+      const requiredOK = !this.props.params.required || this.isFilled();
+      const regexOK = !this.props.params.regex || this.regexMatched();
+
+      return requiredOK && regexOK;
     },
 
     validationRequired () {
-      return !!this.props.params.regex || !!this.props.params.pattern;
+      const { required, regex } = this.props.params;
+
+      return required || !!regex;
+    },
+
+    isFilled () {
+      const { value } = this.state;
+
+      return value !== null && value !== undefined && value.length > 0;
+    },
+
+    regexMatched () {
+      return (this.state.value || '').search(new RegExp(this.props.params.regex)) >= 0;
     },
 
     buildVisualAndHiddenValues (extractValueRegexp, valueParts, pattern, nextVal) {
