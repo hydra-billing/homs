@@ -28,12 +28,12 @@ module HBW
         response.status == 204
       end
 
-      def get_variables(user, entity_class, entity_code)
+      def get_variables(user, entity_class, entity_code, initial_variables)
         {
           :initiator                    => { value: user.id,     type: :string },
           :initiatorEmail               => { value: user.email,  type: :string },
           entity_code_key(entity_class) => { value: entity_code, type: :string }
-        }
+        }.merge(initial_variables)
       end
 
       def process_definition_for_key_like(key)
