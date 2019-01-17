@@ -43,7 +43,7 @@ module HBW
           !task_list_response(current_user_identifier, entity_code, entity_class, 1000, true).empty?
       end
 
-      def get_variables(_, _, _)
+      def get_variables(_, _, _, _)
         raise NotImplementedError
       end
 
@@ -60,7 +60,7 @@ module HBW
         p_def = process_definition_for_key_like(bp_code)
         return false unless p_def
 
-        variables = get_variables(user, entity_class, entity_code).merge(initial_variables)
+        variables = get_variables(user, entity_class, entity_code, initial_variables)
 
         response = start_process_response(p_def['id'], variables)
         response.status == 201

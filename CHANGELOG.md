@@ -24,6 +24,7 @@ v1.6.0 [unreleased]
 -   [#201](https://github.com/latera/homs/pull/201) Fix pointer on menu button.
 -   [#219](https://github.com/latera/homs/pull/219) Update obsolete dependencies.
 -   [#221](https://github.com/latera/homs/pull/221) Use babel-transform-runtime-plugin instead of babel-polyfill.
+-   [#226](https://github.com/latera/homs/pull/226) Fix initial variables for Activiti.
 
 v1.5.3 [2019-01-16]
 -------------------
