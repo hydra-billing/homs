@@ -25,7 +25,7 @@ v1.6.0 [unreleased]
 -   [#219](https://github.com/latera/homs/pull/219) Update obsolete dependencies.
 -   [#221](https://github.com/latera/homs/pull/221) Use babel-transform-runtime-plugin instead of babel-polyfill.
 
-v1.5.3 [unreleased]
+v1.5.3 [2019-01-16]
 -------------------
 
 ### Bugfixes
