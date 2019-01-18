@@ -2,6 +2,10 @@ module OrdersHelper
   EMPTY_VALUE = '—'.freeze
 
   def prettify_value(value, field = {})
+    if value.kind_of?(Array)
+      return value.map { |v| prettify_value(v, field) }.join(', ')
+    end
+
     case field[:type]
       when 'datetime'
         prettify_date(value)

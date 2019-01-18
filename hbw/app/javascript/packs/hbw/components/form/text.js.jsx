@@ -4,12 +4,29 @@ modulejs.define('HBWFormText', ['React'], (React) => {
   const FormText = React.createClass({
     displayName: 'HBWFormText',
 
+    componentDidMount () {
+      this.props.onRef(this);
+    },
+
+    componentWillUnmount() {
+      this.props.onRef(undefined);
+    },
+
+    getInitialState () {
+      return {
+        value: this.props.value
+      };
+    },
+
+    handleChange (event) {
+      this.setState({ value: event.target.value });
+    },
+
     render () {
       const opts = {
         name:         this.props.name,
         className:    'form-control',
         rows:         this.props.params.rows,
-        defaultValue: this.props.value,
         readOnly:     this.props.params.editable === false || this.props.disabled
       };
 
@@ -25,9 +42,13 @@ modulejs.define('HBWFormText', ['React'], (React) => {
       return <div className={cssClass} title={title}>
         <div className='form-group'>
           <span className={labelCss}>{label}</span>
-          <textarea {...opts}/>
+          <textarea {...opts} value={this.state.value} onChange={this.handleChange} />
         </div>
       </div>;
+    },
+
+    serialize () {
+      return { [this.props.name]: this.state.value };
     }
   });
 

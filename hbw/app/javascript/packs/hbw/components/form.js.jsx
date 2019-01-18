@@ -56,19 +56,58 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         fileListPresent: this.fileListPresent(this.props.form.fields)
       };
 
+      const onRef = { onRef: (i) => { this[`${name}`] = i; } };
+
       switch (params.type) {
-        case 'group': return <Group {...opts} variables={this.props.variables}/>;
-        case 'datetime': return <DateTime {...opts}/>;
-        case 'select': return <Select {...opts}/>;
-        case 'select_table': return <SelectTable {...opts}/>;
-        case 'submit_select': return <SubmitSelect {...opts}/>;
-        case 'checkbox': return <Checkbox {...opts}/>;
-        case 'user': return <User {...opts}/>;
-        case 'string': return <String {...opts}/>;
-        case 'text': return <Text {...opts}/>;
-        case 'static': return <Static {...opts}/>;
-        case 'file_list': return <FileList {...opts}/>;
-        case 'file_upload': return <FileUpload {...opts}/>;
+        case 'group':
+          return <Group
+            {...opts}
+            variables={this.props.variables}
+            {...onRef}
+             />;
+        case 'datetime':
+          return <DateTime
+            {...opts}
+            {...onRef}
+             />;
+        case 'select':
+          return <Select
+            {...opts}
+            {...onRef} />;
+        case 'select_table':
+          return <SelectTable
+            {...opts}
+            {...onRef} />;
+        case 'submit_select':
+          return <SubmitSelect
+            {...opts}
+            {...onRef}/>;
+        case 'checkbox':
+          return <Checkbox
+            {...opts}
+            {...onRef} />;
+        case 'user':
+          return <User
+            {...opts}
+            {...onRef} />;
+        case 'string':
+          return <String
+            {...opts}
+            {...onRef} />;
+        case 'text':
+          return <Text
+            {...opts}
+            {...onRef} />;
+        case 'static':
+          return <Static {...opts}/>;
+        case 'file_list':
+          return <FileList
+            {...opts}
+            {...onRef} />;
+        case 'file_upload':
+          return <FileUpload
+            {...opts}
+            {...onRef} />;
         default: return <p>{name}: Unknown control type {params.type}</p>;
       }
     },
@@ -127,15 +166,17 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       return false;
     },
 
+    notSerializableFields () {
+      return ['static'];
+    },
+
     serializeForm () {
-      const variables = {};
+      let variables = {};
 
-      jQuery.each(this.getElement().serializeArray(), (i, field) => {
-        const value = field.value === 'null' ? null : field.value;
-
-        variables[field.name] = value;
-
-        return value;
+      this.props.form.fields.forEach((field) => {
+        if (!this.notSerializableFields().includes(field.type)) {
+          variables = {...variables, ...this[`${field.name}`].serialize()};
+        }
       });
 
       console.log(`Serialized form: ${JSON.stringify(variables)}`);

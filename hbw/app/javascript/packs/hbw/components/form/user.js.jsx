@@ -1,4 +1,12 @@
 modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'HBWFormSelect'], (React, ReactDOM, Select) => React.createClass({
+  componentDidMount () {
+    this.props.onRef(this);
+  },
+
+  componentWillUnmount () {
+    this.props.onRef(undefined);
+  },
+
   render () {
     const params = Object.assign({}, this.props.params, {
       placeholder: this.props.params.placeholder || 'User',
@@ -7,6 +15,14 @@ modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'HBWFormSelect'], (React, R
       choices:     []
     });
 
-    return <Select name={this.props.name} params={params} env={this.props.env}/>;
+    return <Select
+      name={this.props.name}
+      params={params}
+      env={this.props.env}
+      onRef={(i) => { this[`${this.props.name}`] = i }} />;
+  },
+
+  serialize () {
+    return this[`${this.props.name}`].serialize();
   }
 }));

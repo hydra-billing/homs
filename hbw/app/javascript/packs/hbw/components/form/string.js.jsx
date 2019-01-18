@@ -69,6 +69,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
     },
 
     componentDidMount () {
+      this.props.onRef(this);
       this.tooltip = new Tooltip(this.input, {
         title:     this.props.params.message || this.props.env.translator('errors.field_is_required'),
         container: this.tooltipContainer,
@@ -79,6 +80,10 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       this.validateOnSubmit();
       this.hijackFormatter();
       this.onLoadValidation();
+    },
+
+    componentWillUnmount() {
+      this.props.onRef(undefined);
     },
 
     componentWillMount () {
@@ -379,6 +384,10 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       } else {
         return [value, value, value, null];
       }
+    },
+
+    serialize () {
+      return { [this.props.name]: this.state.value };
     }
   });
 

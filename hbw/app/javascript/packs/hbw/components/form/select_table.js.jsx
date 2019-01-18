@@ -9,10 +9,10 @@ modulejs.define('HBWFormSelectTable',
       displayName: 'HBWFormSelectTable',
 
       getInitialState () {
-        const value = this.props.current_value || '';
+        const value = this.props.current_value ? [this.props.current_value].flat() : [];
 
         return {
-          value:   this.props.params.current_value,
+          value:   this.props.params.current_value ? [this.props.params.current_value].flat() : [],
           choices: this.getChoices(),
           error:   (!this.props.hasValueInChoices(value) && value) || this.props.missFieldInVariables(),
           valid:   true
@@ -20,6 +20,7 @@ modulejs.define('HBWFormSelectTable',
       },
 
       componentDidMount () {
+        this.props.onRef(this);
         this.tooltip = new Tooltip(this.label, {
           title:     this.props.env.translator('errors.field_is_required'),
           container: this.tooltipContainer,
@@ -28,6 +29,10 @@ modulejs.define('HBWFormSelectTable',
         });
 
         this.validateOnSubmit();
+      },
+
+      componentWillUnmount() {
+        this.props.onRef(undefined);
       },
 
       render () {
@@ -156,7 +161,19 @@ modulejs.define('HBWFormSelectTable',
           return;
         }
 
-        this.setState({ value: event.target.parentElement.getElementsByTagName('input')[0].value });
+        const newValue = event.target.parentElement.getElementsByTagName('input')[0].value;
+
+        if (this.state.value.includes(newValue)) {
+          const index = this.state.value.indexOf(newValue);
+          this.setState(prevState => { value: prevState.value.splice(index, 1) });
+        } else {
+          if (this.props.params.multi) {
+            this.setState(prevState => { value: prevState.value.push(newValue) })
+          } else {
+            this.setState({ value: newValue });
+          }
+        }
+
         this.setValidationState();
         this.controlValidationTooltip(this.isValid());
       },
@@ -178,7 +195,6 @@ modulejs.define('HBWFormSelectTable',
           let selected;
           const renderCells = (_items) => {
             const result = [];
-
             Object.keys(_items).forEach((i) => {
               result.push(<td className={cssClassesList[i]} key={i}>{_items[i]}</td>);
             });
@@ -188,7 +204,7 @@ modulejs.define('HBWFormSelectTable',
 
           const id = items[0];
 
-          if (this.props.isEqual(id, value)) {
+          if (value.includes(id.toString())) {
             selected = 'selected';
           }
 
@@ -196,11 +212,13 @@ modulejs.define('HBWFormSelectTable',
             onChange () {}
           };
 
-          const isEqualFunc = this.props.isEqual;
-
           return <tr {...opts} className={selected} key={id}>
             <td className='hidden' key={`td-${id}`}>
-              <input {...stub} name={name} type="radio" value={id} id={id} checked={isEqualFunc(id, value)} />
+              <input
+                {...stub}
+                name={name}
+                type={this.props.params.multi ? "checkbox" : "radio"}
+                value={id} id={id} checked={value.includes(id.toString())}/>
             </td>
             {renderCells(items.slice(1, items.length))}
           </tr>;
@@ -224,6 +242,14 @@ modulejs.define('HBWFormSelectTable',
           return choices;
         } else {
           return null;
+        }
+      },
+
+      serialize () {
+        if (this.props.params.editable === false || this.props.disabled) {
+          return null;
+        } else {
+          return { [this.props.name]: this.state.value };
         }
       }
     });

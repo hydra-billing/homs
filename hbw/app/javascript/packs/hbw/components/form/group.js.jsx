@@ -10,6 +10,14 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
   const FormGroup = React.createClass({
     displayName: 'HBWFormGroup',
 
+    componentDidMount () {
+      this.props.onRef(this);
+    },
+
+    componentWillUnmount () {
+      this.props.onRef(undefined);
+    },
+
     render () {
       let inputCSS = `tab-panel form-group ${this.props.params.css_class}`;
       if (this.props.hidden) {
@@ -51,21 +59,76 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
         env:            this.props.env
       };
 
+      const onRef = { onRef: (i) => { this[`${name}`] = i; } };
+
       switch (params.type) {
-        case 'group': return <Group {...opts} variables={this.props.variables}/>;
-        case 'datetime': return <Datetime {...opts}/>;
-        case 'select': return <Select {...opts}/>;
-        case 'select_table': return <SelectTable {...opts}/>;
-        case 'submit_select': return <SubmitSelect {...opts}/>;
-        case 'checkbox': return <Checkbox {...opts}/>;
-        case 'user': return <User {...opts}/>;
-        case 'string': return <String {...opts}/>;
-        case 'text': return <Text {...opts}/>;
-        case 'static': return <Static {...opts}/>;
-        case 'file_list': return <FileList {...opts}/>;
-        case 'file_upload': return <FileUpload {...opts} fileListPresent={this.props.fileListPresent}/>;
+        case 'group':
+          return <Group
+            {...opts}
+            variables={this.props.variables}
+            {...onRef} />;
+        case 'datetime':
+          return <Datetime
+            {...opts}
+            {...onRef} />;
+        case 'select':
+          return <Select
+            {...opts}
+            {...onRef} />;
+        case 'select_table':
+          return <SelectTable
+            {...opts}
+            {...onRef} />;
+        case 'submit_select':
+          return <SubmitSelect
+            {...opts}
+            {...onRef} />;
+        case 'checkbox':
+          return <Checkbox
+            {...opts}
+            {...onRef} />;
+        case 'user':
+          return <User
+            {...opts}
+            {...onRef} />;
+        case 'string':
+          return <String
+            {...opts}
+            {...onRef} />;
+        case 'text':
+          return <Text
+            {...opts}
+            {...onRef} />;
+        case 'static':
+          return <Static
+            {...opts}/>;
+        case 'file_list':
+          return <FileList
+            {...opts}
+            {...onRef} />;
+        case 'file_upload':
+          return <FileUpload
+            {...opts}
+            fileListPresent={this.props.fileListPresent}
+            {...onRef} />;
         default: return <p>{name}: Unknown control type {params.type}</p>;
       }
+    },
+
+    notSerializableFields () {
+      return ['static'];
+    },
+
+    serialize () {
+      let variables = {};
+
+      this.props.params.fields.forEach((field) => {
+        if (!this.notSerializableFields().includes(field.type)) {
+          variables = {...variables, ...this[`${field.name}`].serialize()};
+        }
+      });
+
+      return variables;
     }
   });
 

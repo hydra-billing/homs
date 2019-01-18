@@ -29,6 +29,7 @@ module CustomFields
           when ::String then value
           when ::Numeric then value.to_s
           when ::Time, ::Date then value.iso8601
+          when ::Array then value.map { |v| coerce_value(v) }
           else
             raise NotImplementedError
         end

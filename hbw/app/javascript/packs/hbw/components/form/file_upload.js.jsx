@@ -4,6 +4,14 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
   const FormFileUpload = React.createClass({
     displayName: 'HBWFormFileUpload',
 
+    componentDidMount () {
+      this.props.onRef(this);
+    },
+
+    componentWillUnmount () {
+      this.props.onRef(undefined);
+    },
+
     getInitialState () {
       return {
         valid:      true,
@@ -89,6 +97,10 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       };
 
       return fileReader.readAsBinaryString(file);
+    },
+
+    serialize () {
+      return { [this.props.params.name]: {files: this.state.files} };
     }
   });
 
