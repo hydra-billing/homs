@@ -1,4 +1,4 @@
-import { withCallbacks, withDeleteIf, compose } from '../helpers';
+import { withCallbacks, withConditions, compose } from '../helpers';
 
 modulejs.define('HBWFormFileUpload', ['React'], (React) => {
   const FormFileUpload = React.createClass({
@@ -92,5 +92,5 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     }
   });
 
-  return compose(withCallbacks, withDeleteIf)(FormFileUpload);
+  return compose(withCallbacks, withConditions)(FormFileUpload);
 });

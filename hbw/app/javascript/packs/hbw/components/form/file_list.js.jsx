@@ -1,4 +1,4 @@
-import { withDeleteIf } from '../helpers';
+import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormFileList', ['React'], (React) => {
   const FormFileList = React.createClass({
@@ -50,13 +50,17 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
           return <li className={'danger'}>
             <a href={variant.url}>{variant.name}</a>
             &nbsp;
-            <a href="#" className="fa fa-reply" onClick={e => onClick(e, variant.name)}></a>
+            {!this.props.disabled && (
+              <a href="#" className="fa fa-reply" onClick={e => onClick(e, variant.name)} />
+            )}
           </li>;
         } else {
           return <li key={i}>
             <a href={variant.url}>{variant.name}</a>
             &nbsp;
-            <a href="#" className="fa fa-times" onClick={e => onClick(e, variant.name)}></a>
+            {!this.props.disabled && (
+              <a href="#" className="fa fa-times" onClick={e => onClick(e, variant.name)} />
+            )}
           </li>;
         }
       });
@@ -76,5 +80,5 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
     }
   });
 
-  return withDeleteIf(FormFileList);
+  return withConditions(FormFileList);
 });

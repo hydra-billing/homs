@@ -1,4 +1,4 @@
-import { withDeleteIf } from '../helpers';
+import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormText', ['React'], (React) => {
   const FormText = React.createClass({
@@ -10,7 +10,7 @@ modulejs.define('HBWFormText', ['React'], (React) => {
         className:    'form-control',
         rows:         this.props.params.rows,
         defaultValue: this.props.value,
-        readOnly:     this.props.params.editable === false
+        readOnly:     this.props.params.editable === false || this.props.disabled
       };
 
       const title = this.props.params.tooltip;
@@ -31,5 +31,5 @@ modulejs.define('HBWFormText', ['React'], (React) => {
     }
   });
 
-  return withDeleteIf(FormText);
+  return withConditions(FormText);
 });

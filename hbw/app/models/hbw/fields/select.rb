@@ -60,6 +60,7 @@ module HBW
           editable: editable?,
           delimiter: delimiter?,
           delete_if: delete_if,
+          disable_if: disable_if,
           variables: task.definition['variables'],
           url: url }
       end

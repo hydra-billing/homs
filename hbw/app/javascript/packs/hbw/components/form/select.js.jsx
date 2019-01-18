@@ -3,7 +3,7 @@
 import Select from 'react-select';
 import AsyncSelect from 'react-select/lib/Async';
 import Tooltip from 'tooltip.js';
-import { withDeleteIf, withSelect, withCallbacks, compose } from '../helpers';
+import { withConditions, withSelect, withCallbacks, compose } from '../helpers';
 
 modulejs.define('HBWFormSelect',
   ['React'],
@@ -38,7 +38,7 @@ modulejs.define('HBWFormSelect',
           defaultValue:     this.getDefaultValue(),
           placeholder:      this.props.params.placeholder || '',
           isClearable:      this.props.params.nullable,
-          isDisabled:       this.props.params.editable === false,
+          isDisabled:       this.props.params.editable === false || this.props.disabled,
           noOptionsMessage: this.noOptionsMessage,
           loadingMessage:   this.loadingMessage,
           className:        'react-select-container',
@@ -295,5 +295,5 @@ modulejs.define('HBWFormSelect',
       }
     });
 
-    return compose(withSelect, withDeleteIf, withCallbacks)(FormSelect);
+    return compose(withSelect, withConditions, withCallbacks)(FormSelect);
   });

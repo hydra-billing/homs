@@ -3,7 +3,7 @@
 
 import CustomFormatter from 'formatter';
 import Tooltip from 'tooltip';
-import { withCallbacks, withDeleteIf, compose } from '../helpers';
+import { withCallbacks, withConditions, compose } from '../helpers';
 
 modulejs.define('HBWFormString', ['React'], (React) => {
   const FormString = React.createClass({
@@ -41,7 +41,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
         onChange:  this.onChange,
         onBlur:    this.onBlur,
         onFocus:   this.onFocus,
-        readOnly:  this.props.params.editable === false
+        readOnly:  this.props.params.editable === false || this.props.disabled
       };
 
       const errorTooltip = <div
@@ -382,5 +382,5 @@ modulejs.define('HBWFormString', ['React'], (React) => {
     }
   });
 
-  return compose(withCallbacks, withDeleteIf)(FormString);
+  return compose(withCallbacks, withConditions)(FormString);
 });

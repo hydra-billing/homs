@@ -1,4 +1,4 @@
-import { withDeleteIf } from '../helpers';
+import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (React, ReactDOM, jQuery, moment) => {
   const FormDateTime = React.createClass({
@@ -46,7 +46,7 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
         name:         this.props.params.name
       };
 
-      if (this.props.params.editable === false) {
+      if (this.props.params.editable === false || this.props.disabled) {
         opts.disabled = 'disabled';
       }
 
@@ -123,5 +123,5 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
     }
   });
 
-  return withDeleteIf(FormDateTime);
+  return withConditions(FormDateTime);
 });
