@@ -26,6 +26,7 @@ v1.6.0 [unreleased]
 -   [#219](https://github.com/latera/homs/pull/219) Update obsolete dependencies.
 -   [#221](https://github.com/latera/homs/pull/221) Use babel-transform-runtime-plugin instead of babel-polyfill.
 -   [#226](https://github.com/latera/homs/pull/226) Fix initial variables for Activiti.
+-   [#229](https://github.com/latera/homs/pull/229) Add list of exceptions for binds, which are used for oracle's dates.
 
 v1.5.3 [2019-01-16]
 -------------------
