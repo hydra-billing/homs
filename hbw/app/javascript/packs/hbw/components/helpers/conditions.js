@@ -4,7 +4,7 @@ import React from 'react';
 import { getDisplayName } from './utils';
 
 export default WrappedComponent => React.createClass({
-  displayName: `WithDeleteIf(${getDisplayName(WrappedComponent)})`,
+  displayName: `WithConditions(${getDisplayName(WrappedComponent)})`,
 
   variables () {
     return this.props.params.variables || this.props.params.task.definition.variables;
@@ -21,8 +21,14 @@ export default WrappedComponent => React.createClass({
   },
 
   deleteIf () {
-    const conditions = this.getConditions();
+    return this.evaluateConditions(this.getDeleteIfConditions());
+  },
 
+  disableIf () {
+    return this.evaluateConditions(this.getDisableIfConditions());
+  },
+
+  evaluateConditions (conditions) {
     if ((Array.isArray(conditions) && (conditions.length === 0)) || Object.keys(conditions).length === 0) {
       return false;
     }
@@ -40,8 +46,12 @@ export default WrappedComponent => React.createClass({
     return this.every(result);
   },
 
-  getConditions () {
+  getDeleteIfConditions () {
     return this.props.params.delete_if || [];
+  },
+
+  getDisableIfConditions () {
+    return this.props.params.disable_if || [];
   },
 
   conditionType (condition) {
@@ -64,6 +74,7 @@ export default WrappedComponent => React.createClass({
 
   componentWillMount () {
     this.hidden = this.deleteIf();
+    this.disabled = this.disableIf();
   },
 
   every (results) {
@@ -76,6 +87,7 @@ export default WrappedComponent => React.createClass({
 
   render () {
     return <WrappedComponent hidden={this.hidden}
+                             disabled={this.disabled}
                              {...this.state}
                              {...this.props} />;
   }

@@ -1,4 +1,4 @@
-import { withDeleteIf } from '../helpers';
+import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormStatic', ['React'], (React) => {
   const FormStatic = React.createClass({
@@ -15,5 +15,5 @@ modulejs.define('HBWFormStatic', ['React'], (React) => {
     }
   });
 
-  return withDeleteIf(FormStatic);
+  return withConditions(FormStatic);
 });

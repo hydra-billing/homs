@@ -391,12 +391,30 @@ get:
             css_class: col-xs-6 col-sm-4 col-md-3
             locale: ru
             format: DD.MM.YYYY
+          - name: homsOrderDataDisabledEndDate
+            type: datetime
+            label: End Date
+            css_class: col-xs-6 col-sm-4 col-md-3
+            locale: ru
+            format: DD.MM.YYYY
+            disable_if:
+              -
+                - variable: homsOrderDataZeroVariable
+                  condition: $var != 0
+              -
+                - variable: homsOrderDataOneVariable
+                  condition: $var == 1
           - name: homsOrderDataAddress
             type: string
             label: Address
             css_class: col-xs-6 col-sm-4 col-md-3
             regex: .+\s.+
             message: Field does not match regex
+            disable_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var != 0
+              - variable: homsOrderDataOneVariable
+                condition: $var == 1
           - name: homsOrderDataWorkPlace
             type: string
             label: Work place
@@ -414,6 +432,15 @@ get:
             delete_if:
               - variable: homsOrderDataZeroVariable
                 condition: $var != 0
+              - variable: homsOrderDataOneVariable
+                condition: $var == 1
+          - name: homsOrderDataWorkAddress
+            type: string
+            label: Work address
+            css_class: col-xs-6 col-sm-4 col-md-3
+            disable_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
               - variable: homsOrderDataOneVariable
                 condition: $var == 1
           - name: homsOrderDataReason
@@ -442,6 +469,15 @@ get:
               -
                 - variable: homsOrderDataOneVariable
                   condition: $var == 0
+            disable_if:
+              -
+                - variable: homsOrderDataZeroVariable
+                  condition: $var != 0
+                - variable: homsOrderDataOneVariable
+                  condition: $var == 1
+              -
+                - variable: homsOrderDataOneVariable
+                  condition: $var == 0
           - name: homsOrderDataSomeStr
             type: string
             label: Reason
@@ -459,8 +495,15 @@ get:
           - name: homsOrderDataSomeCheckbox
             type: checkbox
             label: Some checkbox
-            css_class: col-xs-6 col-sm-4 col-md-3 my-checkbox
+            css_class: col-xs-6 col-sm-4 col-md-3
             delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
+          - name: homsOrderDataSomeDisabledCheckbox
+            type: checkbox
+            label: Some disabled checkbox
+            css_class: col-xs-6 col-sm-4 col-md-3
+            disable_if:
               - variable: homsOrderDataZeroVariable
                 condition: $var == 0
           - name: homsOrderDataSomeSelect
@@ -469,6 +512,14 @@ get:
             css_class: col-xs-6 col-sm-4 col-md-3 my-select
             choices: []
             delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
+          - name: homsOrderDataSomeDisabledSelect
+            type: select
+            label: Some select
+            css_class: col-xs-6 col-sm-4 col-md-3 my-disabled-select
+            choices: []
+            disable_if:
               - variable: homsOrderDataZeroVariable
                 condition: $var == 0
           - name: homsOrderDataSomeStatic
@@ -483,6 +534,13 @@ get:
             label: Text
             css_class: col-xs-6 col-sm-4 col-md-3
             delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
+          - name: homsOrderDataSomeDisabledText
+            type: text
+            label: Disabled Text
+            css_class: col-xs-6 col-sm-4 col-md-3
+            disable_if:
               - variable: homsOrderDataZeroVariable
                 condition: $var == 0
         - name: group2
@@ -894,6 +952,10 @@ post:
             type: "string"
             value: "2016-09-30T14:52:20.000+03:00"
             scope: "global"
+          - name: "homsOrderDataDisabledEndDate"
+            type: "string"
+            value: "2016-09-30T14:52:20.000+03:00"
+            scope: "global"
           - name: "homsOrderDataAddress"
             type: "string"
             value: ""
@@ -914,6 +976,10 @@ post:
             type: "string"
             value: ""
             scope: "global"
+          - name: "homsOrderDataWorkAddress"
+            type: "string"
+            value: ""
+            scope: "global"
           - name: "homsOrderDataReason"
             type: "string"
             value: ""
@@ -931,6 +997,10 @@ post:
             value: ""
             scope: "global"
           - name: "homsOrderDataSomeText"
+            type: "string"
+            value: ""
+            scope: "global"
+          - name: "homsOrderDataSomeDisabledText"
             type: "string"
             value: ""
             scope: "global"
@@ -1399,8 +1469,8 @@ post:
         tenantId: ""
         completed: false
   runtime/tasks/816011:
-    "action=complete&variables[][name]=homsOrderDataSelect&variables[][value]=123456&variables[][name]=homsOrderDataBeginDate&variables[][value]=2016-09-30T11:52:20+00:00&variables[][name]=homsOrderDataEndDate&variables[][value]=2016-09-30T11:52:20+00:00&variables[][name]=homsOrderDataAddress&variables[][value]=test+address&variables[][name]=homsOrderDataWorkPlace&variables[][value]=&variables[][name]=homsOrderDataHomePlace&variables[][value]=test+home+place&variables[][name]=homsOrderDataReason&variables[][value]=&variables[][name]=homsOrderDataRecommendation&variables[][value]=&variables[][name]=homsOrderDataSomeStr&variables[][value]=&variables[][name]=homsOrderDataSomeDatetime&variables[][value]=&variables[][name]=homsOrderDataSomeCheckbox&variables[][value]=false&variables[][name]=homsOrderDataSomeSelect&variables[][value]=&variables[][name]=homsOrderDataSomeText&variables[][value]=":
+    "action=complete&variables[][name]=homsOrderDataSelect&variables[][value]=123456&variables[][name]=homsOrderDataBeginDate&variables[][value]=2016-09-30T11:52:20+00:00&variables[][name]=homsOrderDataEndDate&variables[][value]=2016-09-30T11:52:20+00:00&variables[][name]=homsOrderDataDisabledEndDate&variables[][value]=&variables[][name]=homsOrderDataAddress&variables[][value]=test+address&variables[][name]=homsOrderDataWorkPlace&variables[][value]=&variables[][name]=homsOrderDataHomePlace&variables[][value]=test+home+place&variables[][name]=homsOrderDataWorkAddress&variables[][value]=&variables[][name]=homsOrderDataReason&variables[][value]=&variables[][name]=homsOrderDataRecommendation&variables[][value]=&variables[][name]=homsOrderDataSomeStr&variables[][value]=&variables[][name]=homsOrderDataSomeDatetime&variables[][value]=&variables[][name]=homsOrderDataSomeCheckbox&variables[][value]=false&variables[][name]=homsOrderDataSomeDisabledCheckbox&variables[][value]=false&variables[][name]=homsOrderDataSomeSelect":
       - ""
-    "action=complete&variables[][name]=homsOrderDataSelect&variables[][value]=123456&variables[][name]=homsOrderDataBeginDate&variables[][value]=2016-09-30T11:52:20+00:00&variables[][name]=homsOrderDataEndDate&variables[][value]=2016-09-30T11:52:20+00:00&variables[][name]=homsOrderDataAddress&variables[][value]=regex+field&variables[][name]=homsOrderDataWorkPlace&variables[][value]=&variables[][name]=homsOrderDataHomePlace&variables[][value]=required+field&variables[][name]=homsOrderDataReason&variables[][value]=&variables[][name]=homsOrderDataRecommendation&variables[][value]=&variables[][name]=homsOrderDataSomeStr&variables[][value]=&variables[][name]=homsOrderDataSomeDatetime&variables[][value]=&variables[][name]=homsOrderDataSomeCheckbox&variables[][value]=false&variables[][name]=homsOrderDataSomeSelect&variables[][value]=&variables[][name]=homsOrderDataSomeText&variables[][value]=":
+    "action=complete&variables[][name]=homsOrderDataSelect&variables[][value]=123456&variables[][name]=homsOrderDataBeginDate&variables[][value]=2016-09-30T11:52:20+00:00&variables[][name]=homsOrderDataEndDate&variables[][value]=2016-09-30T11:52:20+00:00&variables[][name]=homsOrderDataAddress&variables[][value]=regex+field&variables[][name]=homsOrderDataWorkPlace&variables[][value]=&variables[][name]=homsOrderDataHomePlace=&variables[][name]=homsOrderDataWorkAddress&variables[][value]=required+field&variables[][name]=homsOrderDataReason&variables[][value]=&variables[][name]=homsOrderDataRecommendation&variables[][value]=&variables[][name]=homsOrderDataSomeStr&variables[][value]=&variables[][name]=homsOrderDataSomeDatetime&variables[][value]=&variables[][name]=homsOrderDataSomeCheckbox=&variables[][name]=homsOrderDataSomeDisabledCheckbox&variables[][value]=false&variables[][name]=homsOrderDataSomeSelect&variables[][value]=&variables[][name]=homsOrderDataSomeText&variables[][value]=":
       - ""
 delete: {}

@@ -1,4 +1,4 @@
-import { withDeleteIf } from '../helpers';
+import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormCheckbox', ['React'], (React) => {
   const FormCheckbox = React.createClass({
@@ -8,7 +8,7 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
     render () {
       const opts = {
         name:           this.props.name,
-        disabled:       this.props.params.editable === false,
+        disabled:       this.props.params.editable === false || this.props.disabled,
         defaultChecked: this.props.value
       };
 
@@ -33,5 +33,5 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
     }
   });
 
-  return withDeleteIf(FormCheckbox);
+  return withConditions(FormCheckbox);
 });

@@ -36,7 +36,7 @@ module HBW
       private
 
       def fetch_response(method, url, params)
-        responses.fetch(method).fetch(url).fetch(URI.unescape(params.to_query))
+        responses.fetch(method).fetch(url).fetch(URI.unescape(params.to_query)[0..1021])
       end
     end
 

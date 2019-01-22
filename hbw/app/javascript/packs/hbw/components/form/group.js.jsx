@@ -1,6 +1,6 @@
 /* eslint react/jsx-no-undef: "off" */
 
-import { withDeleteIf } from '../helpers';
+import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
   'HBWFormSubmitSelect', 'HBWFormUser', 'HBWFormSelect',
@@ -69,5 +69,5 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
     }
   });
 
-  return withDeleteIf(FormGroup);
+  return withConditions(FormGroup);
 });

@@ -1,5 +1,5 @@
 import Tooltip from 'tooltip';
-import { withDeleteIf, withSelect, withCallbacks, compose } from '../helpers';
+import { withConditions, withSelect, withCallbacks, compose } from '../helpers';
 
 modulejs.define('HBWFormSelectTable',
   ['React'],
@@ -59,7 +59,7 @@ modulejs.define('HBWFormSelectTable',
         }
 
         let tableCss = 'select-table table table-bordered table-hover';
-        if (this.props.params.editable === false) {
+        if (this.props.params.editable === false || this.props.disabled) {
           tableCss += ' disabled';
         }
 
@@ -228,5 +228,5 @@ modulejs.define('HBWFormSelectTable',
       }
     });
 
-    return compose(withSelect, withDeleteIf, withCallbacks)(FormSelectTable);
+    return compose(withSelect, withConditions, withCallbacks)(FormSelectTable);
   });

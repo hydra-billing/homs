@@ -14,6 +14,7 @@ module HBW
           css_class: css_class,
           fields: fields.map(&:as_json),
           delete_if: delete_if,
+          disable_if: disable_if,
           variables: task.definition['variables'] }
       end
 

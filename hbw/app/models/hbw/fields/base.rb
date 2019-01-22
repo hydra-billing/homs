@@ -61,6 +61,10 @@ module HBW
         definition.fetch('delete_if', [])
       end
 
+      def disable_if
+        definition.fetch('disable_if', [])
+      end
+
       private
 
       def fail_unsupported_coercion(value)
