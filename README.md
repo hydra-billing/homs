@@ -97,6 +97,7 @@ Follow the same steps as for [In production installation](#in-production), but w
     encoding: unicode
     pool: 5
     host: <%= ENV['HOMS_DB_HOST'] %>
+    port: <%= ENV['HOMS_DB_PORT'] %>
     database: <%= ENV['HOMS_DB_NAME'] %>
     username: <%= ENV['HOMS_DB_USER'] %>
     password: <%= ENV['HOMS_DB_PASSWORD'] %>

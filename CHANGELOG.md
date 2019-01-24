@@ -20,6 +20,7 @@ v1.6.0 [unreleased]
 -   [#227](https://github.com/latera/homs/pull/227) Add `required` option for string inputs. Use `nullable: false` in select/select_table for the same reason.
 -   [#230](https://github.com/latera/homs/pull/230) Add disable_if condition to checkbox, datetime, file_list, select, select_table, string, text.
 -   [#232](https://github.com/latera/homs/pull/232) [DEPRECATION] Deprecate Activiti usage.
+-   [#233](https://github.com/latera/homs/pull/233) Run DB on port specified in `.env` file.
 
 ### Bugfixes
 -   [#194](https://github.com/latera/homs/pull/194) Set limit on the number of choices in lookup select from sql requests.
