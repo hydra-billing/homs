@@ -7,7 +7,11 @@ module HBW
 
     register(:api) do
       if Rails.env.test?
-        HBW::Activiti::YMLAPI.build(Rails.root.join('hbw/config/yml_api.test.yml'))
+        if HBW::Widget.config.fetch(:adapter) == 'activiti'
+          HBW::Activiti::YMLAPI.build(Rails.root.join('hbw/config/yml_api.test.activiti.yml'))
+        else
+          HBW::Camunda::YMLAPI.build(Rails.root.join('hbw/config/yml_api.test.camunda.yml'))
+        end
       elsif Rails.env.development? && HBW::Widget.config.fetch(:use_activiti_stub)
         HBW::Activiti::YMLAPI.build(Rails.root.join('hbw/config/yml_api.development.yml'))
       else

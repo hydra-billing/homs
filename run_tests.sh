@@ -14,7 +14,7 @@ echo "sources:
     type: 'static/activiti'
 " > config/sources.yml
 
-echo "  adapter: activiti" >> config/hbw.yml
+echo "  adapter: camunda" >> config/hbw.yml
 
 bundle exec rake db:migrate && bundle exec rake db:seed
 
