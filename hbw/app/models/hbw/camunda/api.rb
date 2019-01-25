@@ -1,5 +1,5 @@
 module HBW
-  module Activiti
+  module Camunda
     class API < ::HBW::Common::Adapter
     end
   end

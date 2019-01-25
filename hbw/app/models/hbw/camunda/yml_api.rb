@@ -1,5 +1,5 @@
 module HBW
-  module Activiti
+  module Camunda
     class YMLAPI < ::HBW::Common::YMLAPI
     end
   end
