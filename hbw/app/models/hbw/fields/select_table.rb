@@ -125,11 +125,13 @@ module HBW
       end
 
       def prepare_date(item, config)
-        date = Time.iso8601(item)
-        if config[:format]
-          date.strftime(config[:format])
-        else
-          I18n.l(date)
+        unless item.nil?
+          date = Time.iso8601(item)
+          if config[:format]
+            date.strftime(config[:format])
+          else
+            I18n.l(date)
+          end
         end
       end
 
