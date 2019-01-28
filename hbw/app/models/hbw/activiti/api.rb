@@ -1,6 +1,6 @@
 module HBW
   module Activiti
-    class API < ::HBW::Common::Adapter
+    class API < ::HBW::Common::API
     end
   end
 end
