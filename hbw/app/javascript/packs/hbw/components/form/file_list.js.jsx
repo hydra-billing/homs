@@ -4,15 +4,24 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
   const FormFileList = React.createClass({
     displayName: 'HBWFormFileList',
 
+    componentDidMount () {
+      this.props.onRef(this);
+    },
+
+    componentWillUnmount () {
+      this.props.onRef(undefined);
+    },
+
     getInitialState () {
       return {
         valid:        true,
-        deletedFiles: []
+        deletedFiles: [],
+        links:        JSON.parse(this.props.value) || []
       };
     },
 
     render () {
-      let links;
+      const { links } = this.state;
       let cssClass = this.props.params.css_class;
 
       if (this.props.hidden) {
@@ -21,12 +30,6 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
 
       const { label } = this.props.params;
       const labelCSS = `hbw-checkbox-label ${this.props.params.label_css || ''}`;
-
-      if (this.props.value) {
-        links = JSON.parse(this.props.value);
-      } else {
-        links = [];
-      }
 
       const hiddenValue = JSON.stringify(links.filter(link => !this.state.deletedFiles.includes(link.name)));
 
@@ -77,6 +80,10 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
       }
 
       this.setState({ deletedFiles });
+    },
+
+    serialize () {
+      return { [this.props.params.name]: this.state.links.filter(link => !this.state.deletedFiles.includes(link.name)) };
     }
   });
 

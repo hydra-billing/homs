@@ -1,6 +1,14 @@
 modulejs.define('HBWFormSubmitSelect', ['React'], React => React.createClass({
   displayName: 'HBWFormSubmitSelect',
 
+  componentDidMount () {
+    this.props.onRef(this);
+  },
+
+  componentWillUnmount () {
+    this.props.onRef(undefined);
+  },
+
   getInitialState () {
     return {
       value: this.props.value || ''
@@ -38,5 +46,13 @@ modulejs.define('HBWFormSubmitSelect', ['React'], React => React.createClass({
       <i className={faClass} />
       {` ${option.name}`}
     </button>;
+  },
+
+  serialize () {
+    if (this.props.disabled || this.props.formSubmitting) {
+      return null;
+    } else {
+      return { [this.props.name]: this.state.value };
+    }
   }
 }));

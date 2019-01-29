@@ -29,6 +29,11 @@ modulejs.define('HBWFormSelect',
         });
 
         this.validateOnSubmit();
+        this.props.onRef(this);
+      },
+
+      componentWillUnmount() {
+        this.props.onRef(undefined);
       },
 
       render () {
@@ -291,6 +296,14 @@ modulejs.define('HBWFormSelect',
           return this.props.params.choices;
         } else {
           return null;
+        }
+      },
+
+      serialize () {
+        if (this.props.params.editable === false || this.props.disabled) {
+          return null;
+        } else {
+          return { [this.props.name]: this.state.value };
         }
       }
     });

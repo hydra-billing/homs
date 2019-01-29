@@ -27,6 +27,7 @@ module CustomFields
             else
               value.to_i
             end
+          when ::Array then value.map { |v| coerce_value(v) }
           else
             raise NotImplementedError
         end

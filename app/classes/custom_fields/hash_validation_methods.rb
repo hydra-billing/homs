@@ -44,6 +44,10 @@ module CustomFields
     def key_value_should_be_of_certain_type(key, options)
       if options[:as].is_a?(Array)
         options[:as].any? { |klass| options[:in][key].is_a?(klass) }
+      elsif options[:in][key].kind_of?(Array)
+        options[:in][key].map do |e|
+          e.is_a?(options[:as])
+        end
       else
         options[:in][key].is_a?(options[:as])
       end || add_unexpected_type_error(key, options[:as])

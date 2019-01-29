@@ -67,7 +67,8 @@ module HBW
           disable_if: disable_if,
           variables: task.definition['variables'],
           current_value: value,
-          url: url }
+          url: url,
+          multi: multi }
       end
 
       def processed_choices
@@ -94,6 +95,10 @@ module HBW
 
       def mode
         'select'
+      end
+
+      def multi
+        definition.fetch('multi', false)
       end
 
       def choices_to_array(choices)

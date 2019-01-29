@@ -77,10 +77,12 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
 
     componentDidMount () {
       this.setOnChange();
+      this.props.onRef(this);
     },
 
     componentWillUnmount () {
       jQuery(this.rootNode).off();
+      this.props.onRef(undefined);
     },
 
     updateValue (event) {
@@ -120,6 +122,14 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
           icons,
         })
         .on('dp.change', e => this.updateValue(e));
+    },
+
+    serialize () {
+      if (this.props.params.editable === false || this.props.disabled) {
+        return null;
+      } else {
+        return { [this.props.params.name]: this.state.value ? this.state.value.format() : '' }
+      }
     }
   });
 
