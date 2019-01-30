@@ -10,10 +10,11 @@ modulejs.define(
 
       getInitialState () {
         return {
-          error:   null,
-          loading: true,
-          pending: null,
-          form:    null
+          error:     null,
+          loading:   true,
+          pending:   null,
+          form:      null,
+          collapsed: this.props.collapsed || false
         };
       },
 
@@ -39,7 +40,7 @@ modulejs.define(
 
         const { task } = this.props;
 
-        if (jQuery(`#collapse${task.id}`).attr('class') === 'panel-collapse collapse') {
+        if (this.state.collapsed) {
           iconClass += ' fa-chevron-down';
         } else {
           iconClass += ' fa-chevron-up';
@@ -48,16 +49,21 @@ modulejs.define(
         return <div className="panel panel-default" ref={(node) => { this.rootNode = node; }}>
           <div className="panel-heading">
             <h4 className="panel-title collapsable">
-              <a data-toggle="collapse"
-                data-target={`#collapse${task.id}`}
-                data-parent={`.${this.props.parentClass}`}>
-                {task.name}
-              </a>
-              <i className={iconClass}
+              <a
+                onClick={this.toggleCollapse}
                 data-toggle="collapse"
                 data-target={`#collapse${task.id}`}
-                data-parent={`.${this.props.parentClass}`}>
-              </i>
+                data-parent={`.${this.props.parentClass}`}
+              >
+                {task.name}
+              </a>
+              <i
+                onClick={this.toggleCollapse}
+                className={iconClass}
+                data-toggle="collapse"
+                data-target={`#collapse${task.id}`}
+                data-parent={`.${this.props.parentClass}`}
+              />
             </h4>
           </div>
           <div id={`collapse${task.id}`} className={collapseClass}>
@@ -133,6 +139,10 @@ modulejs.define(
 
       choose () {
         this.props.trigger('hbw:task-clicked', this.props.task);
+      },
+
+      toggleCollapse () {
+        this.setState(prevState => ({ collapsed: !prevState.collapsed }));
       }
     });
 
