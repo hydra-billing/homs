@@ -3,6 +3,7 @@ v1.6.1 [unreleased]
 
 ### Bugfixes
 -   [#241](https://github.com/latera/homs/pull/241) Fix chevron reaction on task collapse.
+-   [#242](https://github.com/latera/homs/pull/242) Search file_list field in nested field sets.
 
 v1.6.0 [2019-01-29]
 -------------------
