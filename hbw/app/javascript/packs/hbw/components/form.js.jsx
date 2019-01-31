@@ -153,7 +153,9 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     },
 
     fileListPresent (fields) {
-      if (fields.map(f => [f.name, f.type]).includes(['homsOrderDataFileList', 'file_list'])) {
+      if (fields.map(f => [f.name, f.type])
+        .some(pair => pair.every(el => ['homsOrderDataFileList', 'file_list']
+          .includes(el)))) {
         return true;
       }
 
