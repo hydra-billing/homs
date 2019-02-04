@@ -3,7 +3,6 @@
 set -e
 
 export PGHOST=$HOMS_DB_HOST
-export PGPORT=$HOMS_DB_PORT
 export PGUSER=$HOMS_DB_USER
 export PGPASSWORD=$HOMS_DB_PASSWORD
 
