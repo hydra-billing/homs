@@ -31,10 +31,12 @@ modulejs.define('HBWFormSubmitSelect', ['React'], React => React.createClass({
     const onClick = () => this.setState({ value: option.value });
     let cssClass = option.css_class;
     let faClass = option.fa_class;
+    let disabled = false;
 
     if (this.props.disabled || this.props.formSubmitting) {
       cssClass += ' disabled';
       faClass += ' disabled';
+      disabled = true;
     }
 
     return <button key={option.name}
@@ -42,7 +44,8 @@ modulejs.define('HBWFormSubmitSelect', ['React'], React => React.createClass({
       className={cssClass}
       title={option.title}
       onClick={onClick}
-      href="#">
+      href="#"
+      disabled={disabled}>
       <i className={faClass} />
       {` ${option.name}`}
     </button>;
