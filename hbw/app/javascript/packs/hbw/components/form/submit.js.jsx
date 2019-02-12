@@ -13,7 +13,7 @@ modulejs.define('HBWFormSubmit', ['React'], (React) => {
         <button type="submit"
           className={className}
           disabled={this.props.formSubmitting}>
-          <i className="fa fa-check" />
+          <i className="fas fa-check" />
           {` ${this.props.env.translator('submit')}`}
         </button>
       </div>;

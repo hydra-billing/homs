@@ -1,6 +1,9 @@
 v1.6.1 [unreleased]
 -------------------
 
+### Features
+-   [#246](https://github.com/latera/homs/pull/246) Download Font Awesome when widget is loaded.
+
 ### Bugfixes
 -   [#241](https://github.com/latera/homs/pull/241) Fix chevron reaction on task collapse.
 -   [#242](https://github.com/latera/homs/pull/242) Search file_list field in nested field sets.

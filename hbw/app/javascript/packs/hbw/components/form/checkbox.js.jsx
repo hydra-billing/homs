@@ -19,8 +19,8 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
       };
     },
 
-    handleChange (event) {
-      this.setState({ value: event.target.value });
+    handleChange () {
+      this.setState(prevState => ({ value: !prevState.value }));
     },
 
     render () {
@@ -38,11 +38,10 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
       const { tooltip } = this.props.params;
       const { label } = this.props.params;
       const labelCSS = `hbw-checkbox-label ${this.props.params.label_css || ''}`;
-
       return <div className={inputCSS} title={tooltip}>
         <div className="form-group">
           <label className={labelCSS}>
-            <input type='checkbox' {...opts} onChange={this.handleChange} checked={this.state.value} />
+            <input type='checkbox' {...opts} onChange={this.handleChange} checked={this.state.value} className='hbw-checkbox'/>
             <span>{` ${label}`}</span>
           </label>
         </div>

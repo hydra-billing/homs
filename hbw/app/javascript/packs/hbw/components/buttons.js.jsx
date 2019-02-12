@@ -89,10 +89,10 @@ modulejs.define(
       render () {
         if (this.props.env.userExist) {
           if (this.props.showSpinner || !this.state.fetched) {
-            return <div className="hbw-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i></div>;
+            return <div className="hbw-spinner"><i className="fas fa-spinner fa-spin fa-2x"></i></div>;
           } else if (this.state.bpRunning) {
             return <div className="hbw-spinner">
-              <i className="fa fa-spinner fa-spin fa-2x"></i>
+              <i className="fas fa-spinner fa-spin fa-2x"></i>
               <h5 className="hbw-spinner-text">{this.props.env.translator('bp_running')}</h5>
             </div>;
           } else {

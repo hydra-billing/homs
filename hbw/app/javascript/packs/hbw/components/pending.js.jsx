@@ -15,7 +15,7 @@ modulejs.define('HBWPending', ['React'], React => React.createClass({
     }
 
     return <div className="pending" style={styles}>
-      <i className="fa fa-spin fa-lg fa-spinner"></i>
+      <i className="fas fa-spin fa-lg fa-spinner"></i>
       {` ${this.props.text}`}
     </div>;
   },
