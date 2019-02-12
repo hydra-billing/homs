@@ -119,7 +119,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         const params = {
           title:     'Submit the form',
           css_class: 'btn btn-primary',
-          fa_class:  'fa fa-check'
+          fa_class:  'fas fa-check-square'
         };
 
         return <Submit params={params} formSubmitting={this.state.submitting || this.state.fileUploading}
