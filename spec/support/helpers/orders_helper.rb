@@ -267,7 +267,7 @@ module Features
     end
 
     def click_on_bp_calendar(name)
-      page.find("[name='homsOrderData#{name}']").find(:xpath, '..').find('span.fa.fa-calendar').click
+      page.find("[name='homsOrderData#{name}']").find(:xpath, '..').find('span.fas.fa-calendar').click
     end
 
     def add_custom_field_filter

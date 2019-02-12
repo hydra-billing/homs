@@ -18,10 +18,10 @@ modulejs.define('HBWError', ['React'], (React) => {
 
         if (this.state.showFull) {
           display = 'block';
-          iconClass = 'fa fa-chevron-down';
+          iconClass = 'fas fa-chevron-down';
         } else {
           display = 'none';
-          iconClass = 'fa fa-chevron-right';
+          iconClass = 'fas fa-chevron-right';
         }
 
         if ({}.hasOwnProperty.call(this.props.error, 'responseText')) {
@@ -31,7 +31,7 @@ modulejs.define('HBWError', ['React'], (React) => {
         }
 
         return <div className="alert alert-danger hbw-error">
-          <i className="fa fa-exclamation-triangle"></i>
+          <i className="fas fa-exclamation-triangle"></i>
           <strong>{` ${this.props.env.translator('error')}`}</strong>
           <br />
           <a href="javascript:;"

@@ -68,7 +68,7 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
             <input {...opts} className="form-control" />
             <input name={this.props.params.name} type="hidden" value={isoValue} />
             <span className="input-group-addon">
-            <span className="fa fa-calendar"></span>
+            <span className="fas fa-calendar"></span>
           </span>
           </div>
         </div>
@@ -103,15 +103,15 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
 
     setOnChange () {
       const icons = {
-        up:       'fa fa-chevron-up',
-        down:     'fa fa-chevron-down',
-        date:     'fa fa-calendar',
-        time:     'fa fa-clock-o',
-        next:     'fa fa-chevron-right',
-        previous: 'fa fa-chevron-left',
-        today:    'fa fa-dot-circle-o',
-        clear:    'fa fa-trash',
-        close:    'fa fa-times'
+        up:       'fas fa-chevron-up',
+        down:     'fas fa-chevron-down',
+        date:     'fas fa-calendar',
+        time:     'fas fa-clock-o',
+        next:     'fas fa-chevron-right',
+        previous: 'fas fa-chevron-left',
+        today:    'fas fa-dot-circle-o',
+        clear:    'fas fa-trash',
+        close:    'fas fa-times'
       };
 
       jQuery(this.rootNode)

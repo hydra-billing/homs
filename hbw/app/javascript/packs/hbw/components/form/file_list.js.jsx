@@ -54,7 +54,7 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
             <a href={variant.url}>{variant.name}</a>
             &nbsp;
             {!this.props.disabled && (
-              <a href="#" className="fa fa-reply" onClick={e => onClick(e, variant.name)} />
+              <a href="#" className="fas fa-reply" onClick={e => onClick(e, variant.name)} />
             )}
           </li>;
         } else {
@@ -62,7 +62,7 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
             <a href={variant.url}>{variant.name}</a>
             &nbsp;
             {!this.props.disabled && (
-              <a href="#" className="fa fa-times" onClick={e => onClick(e, variant.name)} />
+              <a href="#" className="fas fa-times" onClick={e => onClick(e, variant.name)} />
             )}
           </li>;
         }

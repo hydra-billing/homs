@@ -13,7 +13,7 @@ modulejs.define('HBWTask', ['React'], (React) => {
 
       if (this.props.active) {
         return <li className="hbw-active-task" onClick={this.onClick}>
-          {label} {this.props.form_loading ? <span className="fa fa-spinner fa-pulse"></span> : '' }
+          {label} {this.props.form_loading ? <span className="fas fa-spinner fa-pulse"></span> : '' }
         </li>;
       } else {
         return <li className="hbw-inactive-task" onClick={this.onClick}>{label}</li>;
