@@ -71,12 +71,12 @@ services:
       - db_camunda:$BPM_DB_HOST
     environment:
       DB_DRIVER: org.postgresql.Driver
-      DB_URL: "jdbc:postgresql://db_camunda:$BPM_DB_PORT/$BPM_DB_NAME"
+      DB_URL: "jdbc:postgresql://db_camunda:5432/$BPM_DB_NAME"
       DB_USERNAME: $BPM_DB_USER
       DB_PASSWORD: $BPM_DB_PASSWORD
-      WAIT_FOR: "db_camunda:$BPM_DB_PORT"
+      WAIT_FOR: "db_camunda:5432"
     ports:
-      - 8080:8080
+      - 8766:8080
     depends_on:
       - db_camunda
     networks:
