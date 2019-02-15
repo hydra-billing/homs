@@ -62,7 +62,7 @@ group :development, :test, :staging do
   gem 'translit'
   gem 'spring'
   gem 'rspec_api_documentation', '~> 4.4'
-  gem 'rubocop', '~> 0.49.0'
+  gem 'rubocop', '~> 0.64.0'
   gem 'debbie'
   gem 'pry-byebug'
   gem 'rspec_junit_formatter'
@@ -79,4 +79,5 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'capybara-screenshot'
+  gem 'rubocop-junit_formatter'
 end

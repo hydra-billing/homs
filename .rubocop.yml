@@ -1,12 +1,57 @@
+inherit_from: .rubocop_todo.yml
+
 AllCops:
-  RunRailsCops: true
+  TargetRubyVersion: 2.6.0
   Exclude:
-    - db/schema.rb
-    - db/seeds.rb
-    - db/migrate/*.rb
-    - bin/**/*
-    - vendor/bundle/**/*
+  - 'db/schema.rb'
+  - 'db/seeds.rb'
+  - 'db/migrate/*.rb'
+  - 'bin/**/*'
+  - 'vendor/bundle/**/*'
+  - 'node_modules/**/*'
+
+Rails:
+  Enabled: true
+
 Style/Documentation:
   Enabled: false
-Metrics/AbcSize:
-  Max: 16
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+  - 'spec/**/*.rb'
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false
+
+Performance/StringReplacement:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Style/DateTime:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/LambdaCall:
+  Enabled: false
