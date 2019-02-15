@@ -30,5 +30,6 @@ echo "sources:
 " > config/sources.yml
 
 xvfb-run -a bundle exec rspec ./spec --format RspecJunitFormatter --out test-reports/out.xml --format progress
+xvfb-run rubocop --require rubocop/formatter/junit_formatter --format RuboCop::Formatter::JUnitFormatter --out test-reports/rubocop.xml
 
 if [ "$GENERATE_DOC" = 'true' ]; then bundle exec rake docs:generate && zip -r doc.zip public/doc; fi

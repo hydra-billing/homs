@@ -1,8 +1,6 @@
 module CustomFields
   class FieldDefSet < Base
 
-    # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/MethodLength
     def validate_value(_name, fields_values)
       fields_values.each do |field_name, field_value|
         fd = @fds[field_name] || @fds[field_name.intern]
@@ -17,8 +15,6 @@ module CustomFields
         end
       end
     end
-    # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/MethodLength
 
     def nil_fields_values
       options.keys.each_with_object({}) do |key, h|

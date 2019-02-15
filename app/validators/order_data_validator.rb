@@ -1,8 +1,6 @@
 # Checks record.data to conform record_type.fields definition
 
 class OrderDataValidator < ActiveModel::Validator
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
   def validate(record)
     fds = record.field_definition_set
     if fds.valid?
@@ -19,6 +17,4 @@ class OrderDataValidator < ActiveModel::Validator
                             " :fields  attribute value: #{record.fields}" }
     end
   end
-  # rubocop:enable Metrics/MethodLength
-  # rubocop:enable Metrics/AbcSize
 end

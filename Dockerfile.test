@@ -28,7 +28,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb
 
-COPY ./run_tests.sh /
+COPY ./run_tests.sh ./.rubocop.yml ./.rubocop_todo.yml /
+COPY ./.rubocop.yml ./.rubocop_todo.yml  /opt/homs/
 
 RUN chown -R homs:homs /run_tests.sh /opt/homs/config/
 RUN chmod +x /run_tests.sh

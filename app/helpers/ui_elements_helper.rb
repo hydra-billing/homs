@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/MethodLength
 module UiElementsHelper
   include DatetimeFormat
 

@@ -1,5 +1,4 @@
 module CustomFields
-  # rubocop:disable Metrics/ModuleLength
   module DataTypes
     describe CustomFields::DataTypes::String do
       let(:attribute_name) { 'my_string' }

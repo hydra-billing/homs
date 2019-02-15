@@ -1,3 +1,9 @@
+v1.7.0 [unreleased]
+-------------------
+
+### Features
+-   [#248](https://github.com/latera/homs/pull/248) Add Rubocop.
+
 v1.6.1 [unreleased]
 -------------------
 
