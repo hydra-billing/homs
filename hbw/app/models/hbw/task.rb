@@ -12,63 +12,36 @@ module HBW
     end
 
     class << self
-      def activiti?
-        HBW::Widget.config.fetch(:adapter) == 'activiti'
-      end
-
       def fetch(email, entity_code, entity_class, size = 1000, for_all_users = false)
         user = ::HBW::BPMUser.fetch(email)
         unless user.nil?
-          if activiti?
-            wrap(
-              do_request(:post,
-                         'query/tasks',
-                         assignee:                assignee(user, email, for_all_users),
-                         active:                  true,
-                         includeProcessVariables: true,
-                         processInstanceVariables: [
-                           name:      HBW::Widget.config.fetch(entity_class)[:entity_code_key],
-                           operation: operation(entity_code),
-                           value:     entity_code
-                         ],
-                         size:                    size))
-          else
-            wrap(
-              do_request(:post,
-                         'task',
-                         assignee:   assignee(user, email, for_all_users),
-                         active:     true,
-                         processVariables: [
-                           name:     HBW::Widget.config.fetch(entity_class)[:entity_code_key],
-                           operator: operation(entity_code),
-                           value:    entity_code
-                         ],
-                         maxResults: size))
-          end
+          wrap(
+            do_request(:post,
+                       'task',
+                       assignee:   assignee(user, email, for_all_users),
+                       active:     true,
+                       processVariables: [
+                         name:     HBW::Widget.config.fetch(entity_class)[:entity_code_key],
+                         operator: operation(entity_code),
+                         value:    entity_code
+                       ],
+                       maxResults: size))
         end
       end
 
       def wrap(tasks)
         definitions = tasks.map.with_object({}) do |task, d|
-          if activiti?
-            url = task.fetch('processDefinitionUrl')
-          else
-            id = task.fetch('processDefinitionId')
+          id = task.fetch('processDefinitionId')
 
-            variables = do_request(:get, "process-instance/#{task.fetch('processInstanceId')}/variables")
-            task.merge!('variables' => variables.map { |k, v| v.merge({ 'name' => k })})
+          variables = do_request(:get, "process-instance/#{task.fetch('processInstanceId')}/variables")
+          task.merge!('variables' => variables.map { |k, v| v.merge({ 'name' => k })})
 
-            url = "process-definition/#{id}"
-          end
+          url = "process-definition/#{id}"
 
           d[url] ||= ::HBW::ProcessDefinition.fetch(url)
         end
         tasks.map { |task|
-          if activiti?
-            new(task.merge('processDefinition' => definitions[task.fetch('processDefinitionUrl')]))
-          else
-            new(task.merge('processDefinition' => definitions["process-definition/#{task.fetch('processDefinitionId')}"]))
-          end
+          new(task.merge('processDefinition' => definitions["process-definition/#{task.fetch('processDefinitionId')}"]))
         }
       end
 
@@ -82,11 +55,7 @@ module HBW
         if entity_code == '%'
           :like
         else
-          if activiti?
-            :equals
-          else
-            :eq
-          end
+          :eq
         end
       end
     end

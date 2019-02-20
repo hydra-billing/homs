@@ -7,15 +7,11 @@ module HBW
 
     register(:api) do
       if Rails.env.test?
-        if HBW::Widget.config.fetch(:adapter) == 'activiti'
-          HBW::Activiti::YMLAPI.build(Rails.root.join('hbw/config/yml_api.test.activiti.yml'))
-        else
-          HBW::Camunda::YMLAPI.build(Rails.root.join('hbw/config/yml_api.test.camunda.yml'))
-        end
-      elsif Rails.env.development? && HBW::Widget.config.fetch(:use_activiti_stub)
-        HBW::Activiti::YMLAPI.build(Rails.root.join('hbw/config/yml_api.development.yml'))
+        HBW::Camunda::YMLAPI.build(Rails.root.join('hbw/config/yml_api.test.camunda.yml'))
+      elsif Rails.env.development? && HBW::Widget.config.fetch(:use_bpm_stub)
+        HBW::Camunda::YMLAPI.build(Rails.root.join('hbw/config/yml_api.development.yml'))
       else
-        HBW::Activiti::API.build
+        HBW::Camunda::API.build
       end
     end
 
@@ -26,11 +22,7 @@ module HBW
     end
 
     register(:adapter) do
-      if HBW::Widget.config.fetch(:adapter) == 'activiti'
-        HBW::Activiti::Adapter.new
-      else
-        HBW::Camunda::Adapter.new
-      end
+      HBW::Camunda::Adapter.new
     end
 
     register(:config) { HBW::Widget.config }

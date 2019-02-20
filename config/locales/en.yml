@@ -251,7 +251,7 @@ en:
     not_selected: Not selected
     select2:
       not_set: Empty
-    user_not_found: Current user not found in Activiti
+    user_not_found: Current user not found in Camunda
     columns_settings: Columns settings
     from: From
     to: To

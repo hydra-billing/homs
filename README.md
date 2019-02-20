@@ -9,8 +9,6 @@ Application consists of three parts:
 
 Requirements:
 * [PostgreSQL](http://www.postgresql.org/) 9.4.x+
-* [Activiti](http://www.activiti.org/) 5.19.x
-* [Latera Activiti extension](https://github.com/latera/activiti-ext)
 
 Resources:
 * Documentation: [http://hydra-oms.com/docs](http://hydra-oms.com/docs)
@@ -153,8 +151,6 @@ for access to host machine OS X users can use special DNS name `host.docker.inte
   ```
   docker-compose -f docker-compose.dev.oracle.yml up -d
   ```
-
-### Using [manual installation instruction](https://github.com/latera/homs/blob/master/INSTALL.md)
 
 ## Contributing/Development
 
