@@ -409,7 +409,7 @@ ru:
     not_selected: Не выбран
     select2:
       not_set: Не указан
-    user_not_found: Текущий пользователь не найден в Activiti
+    user_not_found: Текущий пользователь не найден в Camunda
     columns_settings: Управление столбцами
     from: с
     to: по

@@ -15,16 +15,8 @@ module HBW
         end.compact
       end
 
-      def activiti?
-        HBW::Widget.config.fetch(:adapter) == 'activiti'
-      end
-
       def users_url
-        if activiti?
-          'identity/users'
-        else
-          'user'
-        end
+        'user'
       end
     end
 

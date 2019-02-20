@@ -39,7 +39,7 @@ hbw:
       common_buttons: []
       entity_type_buttons: {}
 
-  use_activiti_stub: false
+  use_bpm_stub: false
 
   minio:
     endpoint: 'http://127.0.0.1:9000'

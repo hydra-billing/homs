@@ -13,16 +13,8 @@ module HBW
         ))
       end
 
-      def activiti?
-        HBW::Widget.config.fetch(:adapter) == 'activiti'
-      end
-
       def deployments_url_prefix
-        if activiti?
-          'repository/deployments'
-        else
-          'deployment'
-        end
+        'deployment'
       end
     end
 
@@ -35,11 +27,7 @@ module HBW
     end
 
     def resource_key
-      if config.fetch(:adapter) == 'activiti'
-        'id'
-      else
-        'name'
-      end
+      'name'
     end
   end
 end

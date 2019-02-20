@@ -19,8 +19,8 @@ module HBW
       klass = case type
               when 'sql/oracle'
                 HBW::Container[:oracle]
-              when 'static/activiti'
-                HBW::Sources::Activiti
+              when 'static/bpm'
+                HBW::Sources::BPM
               else
                 raise ArgumentError.new('Unknown source type %s: %s' % [source_name, type])
               end

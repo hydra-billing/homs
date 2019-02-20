@@ -4,25 +4,10 @@ module HBW
     include HBW::Definition
 
     class << self
-      def activiti?
-        HBW::Widget.config.fetch(:adapter) == 'activiti'
-      end
-
       def fetch(task, entity_class)
         process_definition = task.process_definition
 
-        if activiti?
-          deployment = ::HBW::Deployment.fetch(process_definition)
-          resource = deployment.resource(task.form_key)
-
-          if resource.nil?
-            raise ArgumentError.new(I18n.t('activerecord.errors.models.order.attributes.data.form_key_missed_in_task', form_key: task.form_key))
-          end
-
-          definition_raw = do_request(:get, resource.fetch('contentUrl'))
-        else
-          definition_raw = do_request(:get, "task/#{task.id}/deployed-form")
-        end
+        definition_raw = do_request(:get, "task/#{task.id}/deployed-form")
 
         definition = YAML.load(definition_raw).fetch('form')
         new(definition.merge('processDefinition' => process_definition, 'task' => task, 'entityClass' => entity_class))

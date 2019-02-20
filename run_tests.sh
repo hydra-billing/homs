@@ -11,7 +11,7 @@ cp config/database.yml.sample config/database.yml
 cp config/secrets.yml.sample config/secrets.yml
 echo "sources:
   bpmanagementsystem:
-    type: 'static/activiti'
+    type: 'static/bpm'
 " > config/sources.yml
 
 echo "  adapter: camunda" >> config/hbw.yml
@@ -21,7 +21,7 @@ bundle exec rake db:migrate && bundle exec rake db:seed
 # add source billing for tests
 echo "sources:
   bpmanagementsystem:
-    type: 'static/activiti'
+    type: 'static/bpm'
   billing:
     type: sql/oracle
     tns_name: test

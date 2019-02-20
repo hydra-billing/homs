@@ -1,18 +1,20 @@
 version: '2'
 services:
-  db_activiti:
+  db_camunda:
     image: postgres:11.0
-    hostname: postgres-activiti
-    container_name: postgres-activiti
+    hostname: postgres-camunda
+    container_name: postgres-camunda
     restart: always
     environment:
-      PGDATA: $BPM_DB_PATH/activiti
+      PGDATA: $BPM_DB_PATH/camunda
       POSTGRES_DB: $BPM_DB_NAME
       POSTGRES_USER: $BPM_DB_USER
       POSTGRES_PASSWORD: $BPM_DB_PASSWORD
       TZ: Europe/Moscow
     volumes:
-      - $HOMS_PATH/data/activiti/postgresql:$BPM_DB_PATH
+      - $HOMS_PATH/data/camunda/postgresql:$BPM_DB_PATH
+    ports:
+      - $BPM_DB_PORT:5432
     networks:
       - custom_network
   db_homs:
@@ -32,22 +34,23 @@ services:
       - $HOMS_DB_PORT:5432
     networks:
       - custom_network
-  activiti:
-    image: latera/activiti-homs
-    container_name: activiti
-    restart: always
+  camunda:
+    image: latera/camunda
+    container_name: camunda
     env_file:
       - ".env"
     links:
-      - db_activiti:$BPM_DB_HOST
+      - db_camunda:$BPM_DB_HOST
     environment:
-      DB_HOST: $BPM_DB_HOST
-      ACTIVITI_LOGIN: $BPM_USER
-      ACTIVITI_PASSWORD: $BPM_PASSWORD
+      DB_DRIVER: org.postgresql.Driver
+      DB_URL: "jdbc:postgresql://db_camunda:5432/$BPM_DB_NAME"
+      DB_USERNAME: $BPM_DB_USER
+      DB_PASSWORD: $BPM_DB_PASSWORD
+      WAIT_FOR: "db_camunda:5432"
     ports:
-      - $BPM_PORT:8080
+      - 8766:8080
     depends_on:
-      - db_activiti
+      - db_camunda
     networks:
       - custom_network
   minio:
@@ -70,12 +73,12 @@ services:
       - ".env"
     links:
       - db_homs:$HOMS_DB_HOST
-      - activiti:$BPM_HOST
+      - camunda:$BPM_HOST
     volumes:
       - $HOMS_PATH:/opt/homs
     depends_on:
       - db_homs
-      - activiti
+      - camunda
     ports:
       - $HOMS_PORT:3000
     networks:
