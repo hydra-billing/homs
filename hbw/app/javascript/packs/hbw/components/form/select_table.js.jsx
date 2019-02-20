@@ -1,23 +1,22 @@
+import { Component } from 'react';
 import Tooltip from 'tooltip';
 import { withConditions, withSelect, withCallbacks, compose } from '../helpers';
 
 modulejs.define('HBWFormSelectTable',
   ['React'],
   (React) => {
-    const FormSelectTable = React.createClass({
-
-      displayName: 'HBWFormSelectTable',
-
-      getInitialState () {
+    class HBWFormSelectTable extends Component {
+      constructor (props) {
+        super(props);
         const value = this.props.current_value ? [this.props.current_value].flat() : [];
 
-        return {
+        this.state = {
           value:   this.props.params.current_value ? [this.props.params.current_value].flat() : [],
           choices: this.getChoices(),
           error:   (!this.props.hasValueInChoices(value) && value) || this.props.missFieldInVariables(),
           valid:   true
         };
-      },
+      };
 
       componentDidMount () {
         this.props.onRef(this);
@@ -29,11 +28,11 @@ modulejs.define('HBWFormSelectTable',
         });
 
         this.validateOnSubmit();
-      },
+      };
 
       componentWillUnmount() {
         this.props.onRef(undefined);
-      },
+      };
 
       render () {
         let cssClass = this.props.params.css_class;
@@ -85,13 +84,13 @@ modulejs.define('HBWFormSelectTable',
             </table>
           </div>
         </div>;
-      },
+      };
 
       validateOnSubmit () {
         this.props.bind('hbw:validate-form', this.onFormSubmit);
-      },
+      };
 
-      onFormSubmit () {
+      onFormSubmit = () => {
         const el = this.label;
 
         if (this.isValid()) {
@@ -103,21 +102,21 @@ modulejs.define('HBWFormSelectTable',
           this.controlValidationTooltip(this.isValid());
           this.props.trigger('hbw:form-submitting-failed');
         }
-      },
+      };
 
       isValid () {
         return this.props.params.nullable || this.isFilled();
-      },
+      };
 
       isFilled () {
         const { value } = this.state;
 
         return value !== null && value !== undefined && value.length > 0;
-      },
+      };
 
       setValidationState () {
         this.setState({ valid: this.isValid() });
-      },
+      };
 
       controlValidationTooltip (toHide) {
         if (toHide) {
@@ -125,7 +124,7 @@ modulejs.define('HBWFormSelectTable',
         } else {
           this.tooltip.show();
         }
-      },
+      };
 
       addNullChoice (choices) {
         let hasNullValue = false;
@@ -143,7 +142,7 @@ modulejs.define('HBWFormSelectTable',
 
           choices.push(nullChoice);
         }
-      },
+      };
 
       buildTableHeader () {
         const rowParams = this.props.params.row_params;
@@ -154,7 +153,7 @@ modulejs.define('HBWFormSelectTable',
         });
 
         return result;
-      },
+      };
 
       onClick (event) {
         if (this.props.params.editable === false) {
@@ -176,7 +175,7 @@ modulejs.define('HBWFormSelectTable',
 
         this.setValidationState();
         this.controlValidationTooltip(this.isValid());
-      },
+      };
 
       buildTableBody (choices, name, value) {
         const opts = {
@@ -223,11 +222,11 @@ modulejs.define('HBWFormSelectTable',
             {renderCells(items.slice(1, items.length))}
           </tr>;
         });
-      },
+      };
 
-      buildCssFromConfig (config) {
+      buildCssFromConfig = (config) => {
         return `text-align-${config.alignment}`;
-      },
+      };
 
       getChoices () {
         let choices;
@@ -243,7 +242,7 @@ modulejs.define('HBWFormSelectTable',
         } else {
           return null;
         }
-      },
+      };
 
       serialize () {
         if (this.props.params.editable === false || this.props.disabled) {
@@ -252,7 +251,7 @@ modulejs.define('HBWFormSelectTable',
           return { [this.props.name]: this.state.value };
         }
       }
-    });
+    };
 
-    return compose(withSelect, withConditions, withCallbacks)(FormSelectTable);
+    return compose(withSelect, withConditions, withCallbacks)(HBWFormSelectTable);
   });

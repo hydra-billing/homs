@@ -1,12 +1,11 @@
+import { Component } from 'react';
 import { withCallbacks } from './helpers';
 
 modulejs.define('HBWTask', ['React'], (React) => {
-  const Task = React.createClass({
-    displayName: 'HBWTask',
-
-    onClick () {
+  class HBWTask extends Component {
+    onClick = () => {
       this.props.trigger('hbw:task-clicked', this.props.task);
-    },
+    };
 
     render () {
       const label = `${this.props.task.entity_code} – ${this.props.task.name}`;
@@ -19,7 +18,7 @@ modulejs.define('HBWTask', ['React'], (React) => {
         return <li className="hbw-inactive-task" onClick={this.onClick}>{label}</li>;
       }
     }
-  });
+  }
 
-  return withCallbacks(Task);
+  return withCallbacks(HBWTask);
 });

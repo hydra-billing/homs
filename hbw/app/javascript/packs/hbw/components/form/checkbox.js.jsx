@@ -1,27 +1,23 @@
+import { Component } from 'react';
 import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormCheckbox', ['React'], (React) => {
-  const FormCheckbox = React.createClass({
-
-    displayName: 'HBWFormCheckbox',
+  class HBWFormCheckbox extends Component {
+    state = {
+      value: this.props.value
+    };
 
     componentDidMount () {
       this.props.onRef(this);
-    },
+    };
 
     componentWillUnmount () {
       this.props.onRef(undefined);
-    },
+    };
 
-    getInitialState () {
-      return {
-        value: this.props.value
-      };
-    },
-
-    handleChange () {
+    handleChange = () => {
       this.setState(prevState => ({ value: !prevState.value }));
-    },
+    };
 
     render () {
       const opts = {
@@ -46,7 +42,7 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
           </label>
         </div>
       </div>;
-    },
+    };
 
     serialize () {
       if (this.props.params.editable === false  || this.props.disabled) {
@@ -55,7 +51,7 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
         return { [this.props.name]: this.state.value ? 'on' : 'off' };
       }
     }
-  });
+  };
 
-  return withConditions(FormCheckbox);
+  return withConditions(HBWFormCheckbox);
 });

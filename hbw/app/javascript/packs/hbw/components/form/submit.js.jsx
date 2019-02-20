@@ -1,7 +1,7 @@
-modulejs.define('HBWFormSubmit', ['React'], (React) => {
-  const FormSubmit = React.createClass({
-    displayName: 'HBWFormSubmit',
+import { Component } from 'react';
 
+modulejs.define('HBWFormSubmit', ['React'], (React) => {
+  class HBWFormSubmit extends Component {
     render () {
       let className = 'btn btn-primary';
 
@@ -18,7 +18,7 @@ modulejs.define('HBWFormSubmit', ['React'], (React) => {
         </button>
       </div>;
     }
-  });
+  };
 
-  return FormSubmit;
+  return HBWFormSubmit;
 });

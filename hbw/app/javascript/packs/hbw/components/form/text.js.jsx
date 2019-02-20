@@ -1,26 +1,23 @@
+import { Component } from 'react';
 import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormText', ['React'], (React) => {
-  const FormText = React.createClass({
-    displayName: 'HBWFormText',
+  class HBWFormText extends Component {
+    state = {
+      value: this.props.value
+    };
 
     componentDidMount () {
       this.props.onRef(this);
-    },
+    };
 
-    componentWillUnmount() {
+    componentWillUnmount () {
       this.props.onRef(undefined);
-    },
+    };
 
-    getInitialState () {
-      return {
-        value: this.props.value
-      };
-    },
-
-    handleChange (event) {
+    handleChange = (event) => {
       this.setState({ value: event.target.value });
-    },
+    };
 
     render () {
       const opts = {
@@ -45,12 +42,12 @@ modulejs.define('HBWFormText', ['React'], (React) => {
           <textarea {...opts} value={this.state.value} onChange={this.handleChange} />
         </div>
       </div>;
-    },
+    };
 
     serialize () {
       return { [this.props.name]: this.state.value };
     }
-  });
+  };
 
-  return withConditions(FormText);
+  return withConditions(HBWFormText);
 });
