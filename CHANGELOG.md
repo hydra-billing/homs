@@ -3,6 +3,7 @@ v1.7.0 [unreleased]
 
 ### Features
 -   [#248](https://github.com/latera/homs/pull/248) Add Rubocop.
+-   [#251](https://github.com/latera/homs/pull/251) Update react-select up to 2.1.1.
 
 v1.6.1 [unreleased]
 -------------------
