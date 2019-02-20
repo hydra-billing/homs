@@ -100,7 +100,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     },
 
     serialize () {
-      return { [this.props.params.name]: {files: this.state.files} };
+      return { [this.props.params.name]: JSON.stringify({ files: this.state.files }) };
     }
   });
 

@@ -16,6 +16,7 @@ v1.6.1 [unreleased]
 -   [#243](https://github.com/latera/homs/pull/243) Fix database port config usage.
 -   [#245](https://github.com/latera/homs/pull/245) Disable business process buttons when loading.
 -   [#247](https://github.com/latera/homs/pull/247) Use internal ports in homs_network.
+-   [#250](https://github.com/latera/homs/pull/250) Fix file uploading.
 
 v1.6.0 [2019-01-29]
 -------------------
