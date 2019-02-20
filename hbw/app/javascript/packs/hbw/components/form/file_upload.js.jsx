@@ -1,24 +1,21 @@
+import { Component } from 'react';
 import { withCallbacks, withConditions, compose } from '../helpers';
 
 modulejs.define('HBWFormFileUpload', ['React'], (React) => {
-  const FormFileUpload = React.createClass({
-    displayName: 'HBWFormFileUpload',
+  class HBWFormFileUpload extends Component {
+    state = {
+      valid:      true,
+      files:      [],
+      filesCount: 0
+    };
 
     componentDidMount () {
       this.props.onRef(this);
-    },
+    };
 
     componentWillUnmount () {
       this.props.onRef(undefined);
-    },
-
-    getInitialState () {
-      return {
-        valid:      true,
-        files:      [],
-        filesCount: 0
-      };
-    },
+    };
 
     render () {
       const opts = {
@@ -51,7 +48,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
           <input name={this.props.params.name} value={hiddenValue} type="hidden"/>
         </div>
       </div>;
-    },
+    };
 
     onChange (event) {
       const $el = event.target;
@@ -69,7 +66,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       }
 
       return null;
-    },
+    };
 
     addValue (name, res) {
       const { files } = this.state;
@@ -87,7 +84,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       if (this.state.filesCount === 0) {
         this.props.trigger('hbw:file-upload-finished');
       }
-    },
+    };
 
     readFiles (name, file) {
       const fileReader = new FileReader();
@@ -97,12 +94,12 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       };
 
       return fileReader.readAsBinaryString(file);
-    },
+    };
 
     serialize () {
       return { [this.props.params.name]: JSON.stringify({ files: this.state.files }) };
     }
-  });
+  };
 
-  return compose(withCallbacks, withConditions)(FormFileUpload);
+  return compose(withCallbacks, withConditions)(HBWFormFileUpload);
 });

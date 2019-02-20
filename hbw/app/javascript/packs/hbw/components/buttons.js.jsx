@@ -1,19 +1,19 @@
 /* eslint no-console: "off" */
 /* eslint consistent-return: "off" */
 
+import { Component } from 'react';
 import { withCallbacks } from './helpers';
 
 modulejs.define(
   'HBWButtons',
   ['React', 'HBWButton', 'HBWError'],
   (React, Button, Error) => {
-    const Buttons = React.createClass({
-      displayName: 'HBWButtons',
-
-      getInitialState () {
+    class HBWButtons extends Component {
+      constructor (props) {
+        super(props);
         this.props.setGuid();
 
-        return {
+        this.state = {
           buttons:       [],
           subscription:  this.createSubscription(),
           pollInterval:  5000,
@@ -27,9 +27,16 @@ modulejs.define(
           bpRunning:     false,
           fileUploading: false
         };
-      },
+      }
 
-      createSubscription () {
+      componentDidMount () {
+        this.state.subscription.start(this.state.pollInterval);
+        this.props.bind('hbw:button-activated', this.onButtonActivation);
+        this.props.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
+        this.props.bind('hbw:file-upload-finished', () => this.setState({ fileUploading: false }));
+      };
+
+      createSubscription = () => {
         const subscription = this.props.env.connection.subscribe({
           client: this.props.getComponentId(),
           path:   '/buttons',
@@ -54,9 +61,9 @@ modulejs.define(
             syncError: null,
             bpRunning: data.bp_running
           }));
-      },
+      };
 
-      submitButton (businessProcessCode) {
+      submitButton = (businessProcessCode) => {
         return this.props.env.connection.request({
           url:    this.buttonsURL(),
           method: 'POST',
@@ -69,22 +76,15 @@ modulejs.define(
             initial_variables: this.props.env.initialVariables
           }
         });
-      },
+      };
 
-      buttonsURL () {
+      buttonsURL = () => {
         return `${this.props.env.connection.serverURL}/buttons`;
-      },
-
-      componentDidMount () {
-        this.state.subscription.start(this.state.pollInterval);
-        this.props.bind('hbw:button-activated', this.onButtonActivation);
-        this.props.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
-        this.props.bind('hbw:file-upload-finished', () => this.setState({ fileUploading: false }));
-      },
+      };
 
       componentWillUnmount () {
         this.state.subscription.close();
-      },
+      };
 
       render () {
         if (this.props.env.userExist) {
@@ -113,9 +113,9 @@ modulejs.define(
         } else {
           return <div></div>;
         }
-      },
+      };
 
-      onButtonActivation (button) {
+      onButtonActivation = (button) => {
         console.log(`Clicked button[${button.title}], submitting`);
         this.setState({
           syncing:    true,
@@ -135,13 +135,13 @@ modulejs.define(
             errorHeader: this.props.env.translator('errors.cannot_start_process')
           }))
           .always(() => this.setState({ syncing: false }));
-      },
+      };
 
       triggerBPStart (button) {
         this.props.trigger('hbw:process-started', button);
       }
-    });
+    };
 
-    return withCallbacks(Buttons);
+    return withCallbacks(HBWButtons);
   }
 );

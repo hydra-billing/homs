@@ -7,14 +7,6 @@ modulejs.define(
   (React, ReactDOM, TaskList, Menu, MenuButton, Container, Connection, Dispatcher, Forms, Translator, jQuery) => {
     class HBW {
       constructor (options) {
-        this.changeTask = this.changeTask.bind(this);
-        this.render = this.render.bind(this);
-        this.renderWidget = this.renderWidget.bind(this);
-        this.renderTasksMenu = this.renderTasksMenu.bind(this);
-        this.renderTasksMenuButton = this.renderTasksMenuButton.bind(this);
-        this.subscribeOnTasks = this.subscribeOnTasks.bind(this);
-        this.checkBpmUser = this.checkBpmUser.bind(this);
-
         this.widget = null;
         this.tasksMenu = null;
 
@@ -45,9 +37,9 @@ modulejs.define(
 
         this.env.dispatcher.bind('hbw:task-clicked', 'widget', this.changeTask);
         this.checkBpmUser();
-      }
+      };
 
-      changeTask (task) {
+      changeTask = (task) => {
         if (task.entity_code === this.options.entity_code) {
           if (this.tasksMenu) {
             this.tasksMenu = this.renderTasksMenu(
@@ -63,9 +55,9 @@ modulejs.define(
             task
           });
         }
-      }
+      };
 
-      render () {
+      render = () => {
         if (this.options.entity_code) {
           this.widget = this.renderWidget(this.$widgetContainer[0], this.options.task_id);
         } else {
@@ -92,9 +84,9 @@ modulejs.define(
         if (this.widget || this.tasksMenu) {
           this.subscribeOnTasks();
         }
-      }
+      };
 
-      renderWidget (container, taskId) {
+      renderWidget = (container, taskId) => {
         return ReactDOM.render(
           <Container entityCode={this.options.entity_code}
             entityTypeCode={this.options.entity_type}
@@ -105,28 +97,28 @@ modulejs.define(
         );
       }
 
-      renderTasksMenu (container, options, taskId) {
+      renderTasksMenu = (container, options, taskId) => {
         return ReactDOM.render(
           <Menu env={this.env}
             chosenTaskID={taskId}
             renderButton={options.renderButton} />,
           container
         );
-      }
+      };
 
-      renderTasksMenuButton (container) {
+      renderTasksMenuButton = (container) => {
         return ReactDOM.render(
           <MenuButton env={this.env} />,
           container
         );
-      }
+      };
 
-      unmountWidget () {
+      unmountWidget = () => {
         this.env.connection.unsubscribe();
         ReactDOM.unmountComponentAtNode(this.$widgetContainer[0]);
-      }
+      };
 
-      subscribeOnTasks () {
+      subscribeOnTasks = () => {
         this.tasksSubscription = this.env.connection.subscribe({
           client: 'root',
           path:   'tasks',
@@ -135,9 +127,9 @@ modulejs.define(
             entity_class: this.options.entity_class
           }
         });
-      }
+      };
 
-      checkBpmUser () {
+      checkBpmUser = () => {
         this.env.connection.request({
           url:    `${this.env.connection.serverURL}/users/check`,
           method: 'GET',
@@ -148,7 +140,7 @@ modulejs.define(
             this.env.userExist = false;
           }
         });
-      }
+      };
     }
 
     return HBW;

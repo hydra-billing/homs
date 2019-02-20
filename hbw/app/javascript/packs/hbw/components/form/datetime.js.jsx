@@ -1,41 +1,24 @@
+import { Component } from 'react';
 import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (React, ReactDOM, jQuery, moment) => {
-  const FormDateTime = React.createClass({
-
-    displayName: 'HBWFormDatetime',
-
-    getDefaultProps () {
-      return {
-        params: {
-          locale: 'en',
-          format: 'MM/DD/YYYY'
-        }
-      };
-    },
-
-    getInitialState () {
-      let defaultValue;
-      let value;
-
-      const locale = this.props.params.locale || 'en';
-      const format = this.props.params.format || 'MM/DD/YYYY';
-
-      if (this.props.value) {
-        value = moment(Date.parse(this.props.value));
-        defaultValue = value.locale(locale).format(format);
-      } else {
-        value = null;
-        defaultValue = '';
+  class HBWFormDatetime extends Component {
+    static defaultProps = {
+      params: {
+        locale: 'en',
+        format: 'MM/DD/YYYY'
       }
+    };
 
-      return {
-        value,
-        defaultValue,
-        locale,
-        format
-      };
-    },
+    state = {
+      value: this.props.value ? moment(Date.parse(this.props.value)) : '',
+      locale: this.props.params.locale || 'en',
+      format: this.props.params.format || 'MM/DD/YYYY'
+    };
+
+    componentWillMount () {
+      this.setState({ defaultValue: this.props.value ? this.state.value.locale(this.state.locale).format(this.state.format) : '' });
+    }
 
     render () {
       let isoValue;
@@ -73,17 +56,17 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
           </div>
         </div>
       </div>;
-    },
+    };
 
     componentDidMount () {
       this.setOnChange();
       this.props.onRef(this);
-    },
+    };
 
     componentWillUnmount () {
       jQuery(this.rootNode).off();
       this.props.onRef(undefined);
-    },
+    };
 
     updateValue (event) {
       let stringValue;
@@ -99,7 +82,7 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
       }
 
       this.setState({ value });
-    },
+    };
 
     setOnChange () {
       const icons = {
@@ -122,7 +105,7 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
           icons,
         })
         .on('dp.change', e => this.updateValue(e));
-    },
+    };
 
     serialize () {
       if (this.props.params.editable === false || this.props.disabled) {
@@ -131,7 +114,7 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
         return { [this.props.params.name]: this.state.value ? this.state.value.format() : '' }
       }
     }
-  });
+  };
 
-  return withConditions(FormDateTime);
+  return withConditions(HBWFormDatetime);
 });

@@ -7,17 +7,6 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
     onFinish () {}
 
     constructor (connection, entityClass) {
-      this.start = this.start.bind(this);
-      this.finish = this.finish.bind(this);
-      this.fetch = this.fetch.bind(this);
-      this.save = this.save.bind(this);
-      this.formURL = this.formURL.bind(this);
-      this.currentRequestsList = this.currentRequestsList.bind(this);
-      this.trackRequest = this.trackRequest.bind(this);
-      this._registerRequest = this._registerRequest.bind(this);
-      this._pushRequest = this._pushRequest.bind(this);
-      this._popRequest = this._popRequest.bind(this);
-
       this.whenFinished = null;
 
       this.connection = connection;
@@ -26,15 +15,15 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
       this.currentRequests = {};
     }
 
-    start (clbk) {
+    start = clbk => {
       this.onStart = clbk;
-    }
+    };
 
-    finish (clbk) {
+    finish = clbk => {
       this.onFinish = clbk;
-    }
+    };
 
-    fetch (taskId, options = {}) {
+    fetch = (taskId, options = {}) => {
       const existing = this.forms[taskId];
 
       if (existing && !options.force) {
@@ -55,9 +44,9 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
             })
         );
       }
-    }
+    };
 
-    save (params = {}) {
+    save = (params = {}) => {
       return this.connection.request({
         url:    this.formURL(params.taskId),
         method: 'PUT',
@@ -69,17 +58,17 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
           'X-CSRF-Token': params.token
         }
       });
-    }
+    };
 
-    formURL (taskId) {
+    formURL = taskId => {
       return `${this.connection.serverURL}/tasks/${taskId}/form`;
-    }
+    };
 
-    currentRequestsList () {
+    currentRequestsList = () => {
       return jQuery.map(this.currentRequests, val => val);
-    }
+    };
 
-    trackRequest (taskId, request) {
+    trackRequest = (taskId, request) => {
       if (jQuery.isEmptyObject(this.currentRequests)) {
         this.onStart();
       }
@@ -97,24 +86,24 @@ modulejs.define('HBWForms', ['jQuery'], (jQuery) => {
       }))(this.whenFinished);
 
       return request;
-    }
+    };
 
-    _registerRequest (taskId, request) {
+    _registerRequest = (taskId, request) => {
       this._pushRequest(taskId, request);
       return request.done(() => this._popRequest(taskId));
-    }
+    };
 
-    _pushRequest (taskId, request) {
+    _pushRequest = (taskId, request) => {
       this.currentRequests[taskId] = request;
 
       return request;
-    }
+    };
 
-    _popRequest (taskId) {
+    _popRequest = taskId => {
       const request = this.currentRequests[taskId];
       delete this.currentRequests[taskId];
       return request;
-    }
+    };
 
     static _wrapWithDeferred (value) {
       return (new jQuery.Deferred()).resolve(value);
