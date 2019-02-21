@@ -1,18 +1,21 @@
 /* eslint no-return-assign: "off" */
 /* eslint no-cond-assign: "off" */
 
-import { Component } from 'react';
 import { withCallbacks, withTasks, compose } from './helpers';
 
 modulejs.define('HBWTaskList',
   ['React', 'HBWTaskGroup', 'HBWError', 'HBWPending'],
   (React, TaskGroup, Error, Pending) => {
-    class HBWTaskList extends Component {
-      state = {
-        tasks:      [],
-        groupByVar: 'id',
-        fetched:    false
-      };
+    const TaskList = React.createClass({
+      displayName: 'HBWTaskList',
+
+      getInitialState () {
+        return {
+          tasks:      [],
+          groupByVar: 'id',
+          fetched:    false
+        };
+      },
 
       componentDidMount () {
         this.props.subscription
@@ -21,12 +24,12 @@ modulejs.define('HBWTaskList',
             tasks:      data.tasks,
             groupByVar: data.group_by_var
           }));
-      };
+      },
 
-      hideWidget = (e) => {
+      hideWidget (e) {
         e.preventDefault();
         this.props.trigger('hbw:toggle-tasks-menu');
-      };
+      },
 
       render () {
         const aClass = 'hbw-sheet-header-button hbw-sheet-header-close-button';
@@ -51,7 +54,7 @@ modulejs.define('HBWTaskList',
           </div>
           <div className='hbw-sheet-content'></div>
         </div>;
-      };
+      },
 
       createGroupsChildren () {
         return this.groupsFromTasks(this.state.tasks).map((group) => {
@@ -63,7 +66,7 @@ modulejs.define('HBWTaskList',
 
           return React.createElement(TaskGroup, newGroup);
         });
-      };
+      },
 
       groupsFromTasks (tasks) {
         let group;
@@ -96,7 +99,7 @@ modulejs.define('HBWTaskList',
           tasks: groups[_group]
         }));
       }
-    };
+    });
 
-    return compose(withTasks, withCallbacks)(HBWTaskList);
+    return compose(withTasks, withCallbacks)(TaskList);
   });

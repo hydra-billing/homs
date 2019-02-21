@@ -1,6 +1,5 @@
 /* eslint react/jsx-no-undef: "off" */
 
-import { Component } from 'react';
 import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
@@ -8,14 +7,16 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
   'HBWFormString', 'HBWFormText', 'HBWFormCheckbox', 'HBWFormStatic',
   'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload'],
 (React, Datetime, SubmitSelect, User, Select, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload) => {
-  class HBWFormGroup extends Component {
+  const FormGroup = React.createClass({
+    displayName: 'HBWFormGroup',
+
     componentDidMount () {
       this.props.onRef(this);
-    };
+    },
 
     componentWillUnmount () {
       this.props.onRef(undefined);
-    };
+    },
 
     render () {
       let inputCSS = `tab-panel form-group ${this.props.params.css_class}`;
@@ -35,7 +36,7 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
           </div>
         </div>
       </div>;
-    };
+    },
 
     iterateControls (fields) {
       this.controls = fields.map((field) => {
@@ -47,7 +48,7 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
       });
 
       return this.controls;
-    };
+    },
 
     formControl (name, params) {
       const opts = {
@@ -112,11 +113,11 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
             {...onRef} />;
         default: return <p>{name}: Unknown control type {params.type}</p>;
       }
-    };
+    },
 
-    notSerializableFields = () => {
+    notSerializableFields () {
       return ['static'];
-    };
+    },
 
     serialize () {
       let variables = {};
@@ -129,7 +130,7 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
 
       return variables;
     }
-  };
+  });
 
-  return withConditions(HBWFormGroup);
+  return withConditions(FormGroup);
 });

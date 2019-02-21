@@ -1,19 +1,20 @@
-import { Component } from 'react';
 import { withCallbacks } from './helpers';
 
 modulejs.define('HBWMenu', ['React', 'HBWTaskList'], (React, TaskList) => {
-  class HBWMenu extends Component {
-    state = {
-      visible: false
-    };
+  const Menu = React.createClass({
+    displayName: 'HBWMenu',
 
-    toggleVisibility = () => {
+    getInitialState () {
+      return { visible: false };
+    },
+
+    toggleVisibility () {
       this.setState({ visible: !this.state.visible });
-    };
+    },
 
     componentDidMount () {
       this.props.bind('hbw:toggle-tasks-menu', this.toggleVisibility);
-    };
+    },
 
     render () {
       return <div>
@@ -26,7 +27,7 @@ modulejs.define('HBWMenu', ['React', 'HBWTaskList'], (React, TaskList) => {
                                          chosenTaskID={this.props.chosenTaskID} /> : null }
       </div>;
     }
-  };
+  });
 
-  return withCallbacks(HBWMenu);
+  return withCallbacks(Menu);
 });

@@ -1,21 +1,22 @@
-import { Component } from 'react';
 import { withCallbacks, withTasks, compose } from './helpers';
 
 modulejs.define('HBWMenuButton', ['React'], (React) => {
-  class HBWMenuButton extends Component {
-    state = {
-      tasksNumber: 0
-    };
+  const MenuButton = React.createClass({
+    displayName: 'HBWMenuButton',
 
-    toggleVisibility = () => {
+    getInitialState () {
+      return { tasksNumber: 0 };
+    },
+
+    toggleVisibility () {
       this.setState({ visible: !this.state.visible });
-    };
+    },
 
     componentDidMount () {
       this.props.bind('hbw:hide-widget', this.toggleVisibility);
       this.props.subscription
         .progress(data => this.setState({ tasksNumber: data.tasks.length }));
-    };
+    },
 
     render () {
       const counter = this.state.tasksNumber ? <span className="counter">{this.state.tasksNumber}</span> : '';
@@ -25,7 +26,7 @@ modulejs.define('HBWMenuButton', ['React'], (React) => {
                 className="hbw-menu-button fas fa-reorder">
         {counter}
       </a>;
-    };
+    },
 
     toggleMenu (e) {
       e.preventDefault();
@@ -33,7 +34,7 @@ modulejs.define('HBWMenuButton', ['React'], (React) => {
       this.rootNode.blur();
       this.props.trigger('hbw:toggle-tasks-menu');
     }
-  };
+  });
 
-  return compose(withTasks, withCallbacks)(HBWMenuButton);
+  return compose(withTasks, withCallbacks)(MenuButton);
 });

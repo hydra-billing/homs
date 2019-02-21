@@ -19,9 +19,9 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
       return this.callbacks[kind].push(clbk);
     }
 
-    runCallbacks = (kind, args = []) => {
+    runCallbacks (kind, args = []) {
       this.callbacks[kind].forEach(clbk => clbk(...args));
-    };
+    }
 
     fetch (clbk) {
       this.addCallback('fetch', clbk);
@@ -58,9 +58,9 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
       return this;
     }
 
-    start = (...args) => {
+    start (...args) {
       return this.channel.start(...args);
-    };
+    }
 
     close () {
       return this.channel.unsubscribe(this.options.client);
@@ -73,6 +73,16 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
 
   class Channel {
     constructor (connection, options) {
+      this.buildId = this.buildId.bind(this);
+      this.eachSubscriptions = this.eachSubscriptions.bind(this);
+      this.subscribe = this.subscribe.bind(this);
+      this.unsubscribe = this.unsubscribe.bind(this);
+      this.start = this.start.bind(this);
+      this.stop = this.stop.bind(this);
+      this.poll = this.poll.bind(this);
+      this.abort = this.abort.bind(this);
+      this.runCallbacks = this.runCallbacks.bind(this);
+
       this.defaultInterval = 5000;
       this.started = false;
       this.fetched = false;
@@ -87,17 +97,17 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
       this.subscriptions = {};
     }
 
-    buildId = () => {
+    buildId () {
       return `${this.options.method} ${this.options.path}`;
-    };
+    }
 
-    eachSubscriptions = update => {
+    eachSubscriptions (update) {
       Object.keys(this.subscriptions).forEach((key) => {
         update(this.subscriptions[key]);
       });
-    };
+    }
 
-    subscribe = options => {
+    subscribe (options) {
       const { client } = options;
 
       if (client in this.subscriptions) {
@@ -114,17 +124,17 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
 
         return this.subscriptions[client];
       }
-    };
+    }
 
-    unsubscribe = client => {
+    unsubscribe (client) {
       delete this.subscriptions[client];
 
       if (jQuery.isEmptyObject(this.subscriptions)) {
         this.stop();
       }
-    };
+    }
 
-    start = (interval = this.defaultInterval) => {
+    start (interval = this.defaultInterval) {
       if (this.started) {
         const newInterval = interval || this.defaultInterval;
 
@@ -137,18 +147,18 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
         this.poll();
         this.intervalId = setInterval(this.poll, this.interval);
       }
-    };
+    }
 
-    stop = () => {
+    stop () {
       this.abort();
       clearInterval(this.intervalId);
       this.intervalId = null;
       this.started = false;
       this.polling = false;
       this.lastPoll = null;
-    };
+    }
 
-    poll = () => {
+    poll () {
       if (this.polling) {
         return null;
       }
@@ -177,22 +187,24 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
         })
         .fail((...args) => this.runCallbacks('fail', args))
         .always((...args) => this.runCallbacks('always', args));
-    };
+    }
 
-    abort = () => {
+    abort () {
       if (this._currentXHR) {
         this._currentXHR.abort();
         this._currentXHR = null;
       }
-    };
+    }
 
-    runCallbacks = (kind, args = []) => {
+    runCallbacks (kind, args = []) {
       this.eachSubscriptions(s => s.runCallbacks(kind, args));
-    };
+    }
   }
 
   class Connection {
     constructor (options) {
+      this.request = this.request.bind(this);
+      this.createChannel = this.createChannel.bind(this);
       this.subscribe = this.subscribe.bind(this);
 
       this.options = options;
@@ -208,7 +220,7 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
       this.channels = {};
     }
 
-    request = opts => {
+    request (opts) {
       return jQuery.ajax({
         ...opts,
         data: {
@@ -216,9 +228,9 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
           payload: this.options.payload
         }
       });
-    };
+    }
 
-    createChannel = options => {
+    createChannel (options) {
       const channel = new Channel(this, {
         path:   options.path,
         data:   options.data || {},
@@ -237,13 +249,13 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
 
         return channel;
       }
-    };
+    }
 
-    subscribe = options => {
+    subscribe (options) {
       return this.createChannel(options).subscribe(options);
-    };
+    }
 
-    unsubscribe = () => {
+    unsubscribe () {
       Object.keys(this.channels).forEach((ch) => {
         Object.values(this.channels[ch].subscriptions).forEach((s) => {
           s.close();
@@ -251,7 +263,7 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
 
         delete this.channels[ch];
       });
-    };
+    }
   }
 
   return Connection;

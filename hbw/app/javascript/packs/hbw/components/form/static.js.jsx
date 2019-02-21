@@ -1,8 +1,9 @@
-import { Component } from 'react';
 import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormStatic', ['React'], (React) => {
-  class HBWFormStatic extends Component {
+  const FormStatic = React.createClass({
+    displayName: 'HBWFormStatic',
+
     render () {
       let cssClass = this.props.params.css_class;
 
@@ -12,7 +13,7 @@ modulejs.define('HBWFormStatic', ['React'], (React) => {
 
       return <div className={cssClass} dangerouslySetInnerHTML={{ __html: this.props.params.html }} />;
     }
-  };
+  });
 
-  return withConditions(HBWFormStatic);
+  return withConditions(FormStatic);
 });

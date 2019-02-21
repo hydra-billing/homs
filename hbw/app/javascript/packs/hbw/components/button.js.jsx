@@ -1,8 +1,9 @@
-import { Component } from 'react';
 import { withCallbacks } from './helpers';
 
 modulejs.define('HBWButton', ['React'], (React) => {
-  class HBWButton extends Component {
+  const Button = React.createClass({
+    displayName: 'HBWButton',
+
     render () {
       const classes = [];
       if (this.props.button.class) {
@@ -22,14 +23,14 @@ modulejs.define('HBWButton', ['React'], (React) => {
       <i className={this.props.button.fa_class}></i>
         {` ${this.props.button.name}`}
     </a></span>;
-    };
+    },
 
-    onClick = (evt) => {
+    onClick (evt) {
       evt.preventDefault();
 
       this.props.trigger('hbw:button-activated', this.props.button);
     }
-  };
+  });
 
-  return withCallbacks(HBWButton);
+  return withCallbacks(Button);
 });

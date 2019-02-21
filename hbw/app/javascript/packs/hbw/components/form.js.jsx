@@ -1,8 +1,8 @@
 /* eslint no-console: "off" */
 /* eslint no-restricted-syntax: "off" */
 
-import { Component } from 'react';
 import { withCallbacks } from './helpers';
+
 
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect',
@@ -10,12 +10,16 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
   'HBWFormCheckbox', 'HBWFormStatic', 'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload'],
 (React, jQuery, Error, DateTime, Group, Select, Submit, SubmitSelect,
   User, Pending, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload) => {
-  class HBWForm extends Component {
-    state = {
-      error:         null,
-      submitting:    false,
-      fileUploading: false
-    };
+  const Form = React.createClass({
+    displayName: 'HBWForm',
+
+    getInitialState () {
+      return {
+        error:         null,
+        submitting:    false,
+        fileUploading: false
+      };
+    },
 
     componentDidMount () {
       jQuery(':input:enabled:visible:first').focus();
@@ -23,7 +27,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       this.props.bind('hbw:form-submitting-failed', () => this.setState({ submitting: false }));
       this.props.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
       this.props.bind('hbw:file-upload-finished', () => this.setState({ fileUploading: false }));
-    };
+    },
 
     render () {
       return <div className='hbw-form'>
@@ -34,13 +38,13 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
             {this.submitControl(this.props.form.fields)}
           </form>
         </div>;
-    };
+    },
 
     iterateControls (fields) {
       return [...fields].map(field => (
           <div key={field.name} className="row">{this.formControl(field.name, field)}</div>
       ));
-    };
+    },
 
     formControl (name, params) {
       const opts = {
@@ -106,7 +110,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
             {...onRef} />;
         default: return <p>{name}: Unknown control type {params.type}</p>;
       }
-    };
+    },
 
     submitControl (fields) {
       const last = fields[fields.length - 1];
@@ -123,9 +127,9 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       }
 
       return null;
-    };
+    },
 
-    submit = (e) => {
+    submit (e) {
       e.preventDefault();
       if (this.state.submitting) {
         return null;
@@ -138,15 +142,15 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       }
 
       return null;
-    };
+    },
 
     getElement () {
       return jQuery(this.form);
-    };
+    },
 
     isFormValid () {
       return this.getElement().find('.invalid').length === 0;
-    };
+    },
 
     fileListPresent (fields) {
       if (fields.map(f => [f.name, f.type])
@@ -162,11 +166,11 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       }
 
       return false;
-    };
+    },
 
-    notSerializableFields = () => {
+    notSerializableFields () {
       return ['static'];
-    };
+    },
 
     serializeForm () {
       let variables = {};
@@ -181,7 +185,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
 
       return variables;
     }
-  };
+  });
 
-  return withCallbacks(HBWForm);
+  return withCallbacks(Form);
 });

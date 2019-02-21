@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import { withCallbacks } from './helpers';
 
 modulejs.define(
@@ -6,14 +5,18 @@ modulejs.define(
   ['React', 'ReactDOM', 'jQuery', 'HBWForm', 'HBWTestForm', 'HBWError', 'HBWPending',
     'HBWFormDefinition'],
   (React, ReactDOM, jQuery, Form, TestForm, Error, Pending, FormDefinition) => {
-    class HBWEntityTask extends Component {
-      state = {
-        error:     null,
-        loading:   true,
-        pending:   null,
-        form:      null,
-        collapsed: this.props.collapsed || false
-      };
+    const EntityTask = React.createClass({
+      displayName: 'HBWEntityTask',
+
+      getInitialState () {
+        return {
+          error:     null,
+          loading:   true,
+          pending:   null,
+          form:      null,
+          collapsed: this.props.collapsed || false
+        };
+      },
 
       componentDidMount () {
         this.loadForm(this.props.task.id);
@@ -22,11 +25,11 @@ modulejs.define(
         const e = jQuery(this.rootNode);
         e.on('hidden.bs.collapse', this.choose);
         e.on('shown.bs.collapse', this.choose);
-      };
+      },
 
       componentWillUnmount () {
         jQuery(this.rootNode).off('hidden.bs.collapse').off('shown.bs.collapse');
-      };
+      },
 
       render () {
         let collapseClass = 'panel-collapse collapse';
@@ -69,7 +72,7 @@ modulejs.define(
             </div>
           </div>
         </div>;
-      };
+      },
 
       renderForm () {
         if (this.state.form) {
@@ -86,7 +89,7 @@ modulejs.define(
           return <Error error={this.state.error} env={this.props.env} />;
         }
         return <Pending active={this.state.loading} />;
-      };
+      },
 
       formVariablesFromTask () {
         const formVariables = {};
@@ -99,7 +102,7 @@ modulejs.define(
         });
 
         return formVariables;
-      };
+      },
 
       loadForm (taskId) {
         this.setState({ loading: true });
@@ -112,9 +115,9 @@ modulejs.define(
           .done(() => this.props.trigger('hbw:form-loaded', { entityCode: this.props.entityCode }))
           .fail(response => this.setState({ error: response }))
           .always(() => this.setState({ loading: false }));
-      };
+      },
 
-      submitForm = (variables) => {
+      submitForm (variables) {
         this.setState({ pending: true });
 
         this.props.env.forms.save({
@@ -132,17 +135,17 @@ modulejs.define(
             });
           })
           .always(() => this.setState({ pending: false }));
-      };
+      },
 
-      choose = () => {
+      choose () {
         this.props.trigger('hbw:task-clicked', this.props.task);
-      };
+      },
 
-      toggleCollapse = () => {
+      toggleCollapse () {
         this.setState(prevState => ({ collapsed: !prevState.collapsed }));
       }
-    };
+    });
 
-    return withCallbacks(HBWEntityTask);
+    return withCallbacks(EntityTask);
   }
 );

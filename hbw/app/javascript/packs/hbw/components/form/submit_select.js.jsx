@@ -1,63 +1,61 @@
-import { Component } from 'react';
+modulejs.define('HBWFormSubmitSelect', ['React'], React => React.createClass({
+  displayName: 'HBWFormSubmitSelect',
 
-modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
-  class HBWFormSubmitSelect extends Component {
-    state = {
+  componentDidMount () {
+    this.props.onRef(this);
+  },
+
+  componentWillUnmount () {
+    this.props.onRef(undefined);
+  },
+
+  getInitialState () {
+    return {
       value: this.props.value || ''
     };
+  },
 
-    componentDidMount () {
-      this.props.onRef(this);
-    };
+  render () {
+    const cssClass = `col-xs-12 ${this.props.params.css_class}`;
+    const self = this;
 
-    componentWillUnmount() {
-      this.props.onRef(undefined);
-    };
+    const buttons = this.props.params.options.map(option => self.buildButton(option));
 
-    render() {
-      const cssClass = `col-xs-12 ${this.props.params.css_class}`;
-      const self = this;
+    return <div className={cssClass}>
+      <span className="btn-group">{ buttons }</span>
+      <input type="hidden" name={this.props.name} value={this.state.value} />
+    </div>;
+  },
 
-      const buttons = this.props.params.options.map(option => self.buildButton(option));
+  buildButton (option) {
+    const onClick = () => this.setState({ value: option.value });
+    let cssClass = option.css_class;
+    let faClass = option.fa_class;
+    let disabled = false;
 
-      return <div className={cssClass}>
-        <span className="btn-group">{buttons}</span>
-        <input type="hidden" name={this.props.name} value={this.state.value}/>
-      </div>;
-    };
+    if (this.props.disabled || this.props.formSubmitting) {
+      cssClass += ' disabled';
+      faClass += ' disabled';
+      disabled = true;
+    }
 
-    buildButton(option) {
-      const onClick = () => this.setState({value: option.value});
-      let cssClass = option.css_class;
-      let faClass = option.fa_class;
-      let disabled = false;
+    return <button key={option.name}
+      type="submit"
+      className={cssClass}
+      title={option.title}
+      onClick={onClick}
+      href="#"
+      disabled={disabled}>
+      <i className={faClass} />
+      {` ${option.name}`}
+    </button>;
+  },
 
-      if (this.props.disabled || this.props.formSubmitting) {
-        cssClass += ' disabled';
-        faClass += ' disabled';
-        disabled = true;
-      }
-
-      return <button key={option.name}
-                     type="submit"
-                     className={cssClass}
-                     title={option.title}
-                     onClick={onClick}
-                     href="#"
-                     disabled={disabled}>
-        <i className={faClass}/>
-        {` ${option.name}`}
-      </button>;
-    };
-
-    serialize() {
-      if (this.props.disabled || this.props.formSubmitting) {
-        return null;
-      } else {
-        return {[this.props.name]: this.state.value};
-      }
+  serialize () {
+    if (this.props.disabled || this.props.formSubmitting) {
+      return null;
+    } else {
+      return { [this.props.name]: this.state.value };
     }
   }
-
-  return HBWFormSubmitSelect;
-});
+}));

@@ -1,29 +1,19 @@
 /* eslint no-useless-escape: "off" */
 /* eslint no-cond-assign: ["error", "except-parens"] */
 
-import { Component } from 'react';
 import CustomFormatter from 'formatter';
 import Tooltip from 'tooltip';
 import { withCallbacks, withConditions, compose } from '../helpers';
 
 modulejs.define('HBWFormString', ['React'], (React) => {
-  class HBWFormString extends Component {
-    SUBSTITUTION: 'foobar';
+  const FormString = React.createClass({
+    displayName: 'HBWFormString',
 
-    patterns = {
-      9:   '[0-9 ]',
-      a:   '[A-Za-z ]',
-      '*': '[A-Za-z0-9 ]'
-    };
+    SUBSTITUTION: 'foobar',
 
-    constructor (props) {
-      super(props);
-      this.partRegexp     = new RegExp('{{[^}]+}}');
-      this.templateRegexp = new RegExp('{{([^}]+)}}', 'g');
-
+    getInitialState () {
       const values = this.getNormalizedInitialValues(this.props.value || '');
-
-      this.state = {
+      return {
         defaultValue:  values[0],
         value:         values[1],
         valid:         true,
@@ -31,7 +21,16 @@ modulejs.define('HBWFormString', ['React'], (React) => {
         position:      values[3],
         previousValue: null
       };
-    };
+    },
+
+    patterns: {
+      9:   '[0-9 ]',
+      a:   '[A-Za-z ]',
+      '*': '[A-Za-z0-9 ]'
+    },
+
+    partRegexp:     new RegExp('{{[^}]+}}'),
+    templateRegexp: new RegExp('{{([^}]+)}}', 'g'),
 
     render () {
       const opts = {
@@ -67,7 +66,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
           {errorTooltip}
         </div>
       </div>;
-    };
+    },
 
     componentDidMount () {
       this.props.onRef(this);
@@ -81,34 +80,34 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       this.validateOnSubmit();
       this.hijackFormatter();
       this.onLoadValidation();
-    };
+    },
 
-    componentWillUnmount () {
+    componentWillUnmount() {
       this.props.onRef(undefined);
-    };
+    },
 
     componentWillMount () {
       if (!this.guid) {
         this.props.setGuid();
       }
-    };
+    },
 
     validateOnSubmit () {
       this.props.bind('hbw:validate-form', this.onFormSubmit);
-    };
+    },
 
     hijackFormatter () {
       if (this.props.params.pattern) {
         this.extractValueRegexp = this.buildExtractRegexp(this.props.params.pattern);
         this.valueParts = this.buildValueParts(this.props.params.pattern);
       }
-    };
+    },
 
     getElement () {
       return this.input;
-    };
+    },
 
-    onFormSubmit = () => {
+    onFormSubmit () {
       if (this.validationRequired()) {
         const el = this.getElement();
 
@@ -122,22 +121,22 @@ modulejs.define('HBWFormString', ['React'], (React) => {
           this.props.trigger('hbw:form-submitting-failed');
         }
       }
-    };
+    },
 
     onLoadValidation () {
       if (this.validationRequired() && this.isFilled()) {
         this.controlValidationTooltip(this.isValid());
         this.setValidationState();
       }
-    };
+    },
 
-    onChange = (event) => {
+    onChange (event) {
       this.updateValue(event.target, false);
 
       if (this.validationRequired()) {
         this.runValidation();
       }
-    };
+    },
 
     runValidation () {
       if (!this.state.valid) {
@@ -147,9 +146,9 @@ modulejs.define('HBWFormString', ['React'], (React) => {
           this.setValidationState();
         }
       }
-    };
+    },
 
-    onKeyDown = (event) => {
+    onKeyDown (event) {
       if (this.props.params.pattern) {
         if ((event.keyCode === 8) || (event.keyCode === 46)) {
           event.preventDefault();
@@ -165,17 +164,17 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       if (this.validationRequired()) {
         this.runValidation();
       }
-    };
+    },
 
-    onBlur = () => {
+    onBlur () {
       this.controlValidationTooltip(true);
 
       if (this.validationRequired()) {
         this.setValidationState();
       }
-    };
+    },
 
-    onFocus = () => {
+    onFocus () {
       if (!this.state.valid) {
         this.controlValidationTooltip(this.isValid());
 
@@ -183,11 +182,11 @@ modulejs.define('HBWFormString', ['React'], (React) => {
           this.setValidationState();
         }
       }
-    };
+    },
 
     setValidationState () {
       this.setState({ valid: this.isValid() });
-    };
+    },
 
     controlValidationTooltip (toHide) {
       if (toHide) {
@@ -195,30 +194,30 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       } else {
         this.tooltip.show();
       }
-    };
+    },
 
     isValid () {
       const requiredOK = !this.props.params.required || this.isFilled();
       const regexOK = !this.props.params.regex || this.regexMatched();
 
       return requiredOK && regexOK;
-    };
+    },
 
     validationRequired () {
       const { required, regex } = this.props.params;
 
       return required || !!regex;
-    };
+    },
 
     isFilled () {
       const { value } = this.state;
 
       return value !== null && value !== undefined && value.length > 0;
-    };
+    },
 
     regexMatched () {
       return (this.state.value || '').search(new RegExp(this.props.params.regex)) >= 0;
-    };
+    },
 
     buildVisualAndHiddenValues (extractValueRegexp, valueParts, pattern, nextVal) {
       const value = this.substitute(valueParts, this.getSubstitutions(extractValueRegexp, nextVal));
@@ -227,7 +226,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
         CustomFormatter.applyMaskForValue(pattern, value, this.templateRegexp),
         { strippedValue: this.stripNonAlphanumericChars(value) }
       );
-    };
+    },
 
     updateValue ($el, remove) {
       let visualValue;
@@ -274,9 +273,9 @@ modulejs.define('HBWFormString', ['React'], (React) => {
           visualValue: $el.value
         });
       }
-    };
+    },
 
-    buildExtractRegexp = (pattern) => {
+    buildExtractRegexp (pattern) {
       const matches = this.getMatches(this.templateRegexp, pattern);
 
       const result = matches.reduce(((res, match) => {
@@ -289,10 +288,9 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       }), pattern.replace(/([\(\)\+\-\[\]\*])/g, '\\\$1'));
 
       return new RegExp(`^${result}$`);
-    };
+    },
 
-
-    getMatches = (regexp, value) => {
+    getMatches (regexp, value) {
       let match;
       const matches = [];
 
@@ -301,7 +299,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       }
 
       return matches;
-    };
+    },
 
     // "1" -> ['1']
     // "{{a}}" -> [S]
@@ -329,9 +327,9 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       });
 
       return parts;
-    };
+    },
 
-    getSubstitutions = (regexp, value) => {
+    getSubstitutions (regexp, value) {
       const match = regexp.exec(value);
       const res = [];
 
@@ -342,7 +340,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       }
 
       return res;
-    };
+    },
 
     substitute (template, values) {
       if (this.isEveryBlank(values)) {
@@ -362,15 +360,15 @@ modulejs.define('HBWFormString', ['React'], (React) => {
 
         return res.join('');
       }
-    };
+    },
 
-    stripNonAlphanumericChars = (value) => {
+    stripNonAlphanumericChars (value) {
       return value.replace(/[^a-z0-9]/ig, '');
-    };
+    },
 
-    isEveryBlank = (array) => {
+    isEveryBlank (array) {
       return array.reduce(((res, val) => res && val && !val.replace(/\s/g, '')), true);
-    };
+    },
 
     getNormalizedInitialValues (value) {
       if (this.props.params.pattern) {
@@ -386,12 +384,12 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       } else {
         return [value, value, value, null];
       }
-    };
+    },
 
     serialize () {
       return { [this.props.name]: this.state.value };
     }
-  };
+  });
 
-  return compose(withCallbacks, withConditions)(HBWFormString);
+  return compose(withCallbacks, withConditions)(FormString);
 });

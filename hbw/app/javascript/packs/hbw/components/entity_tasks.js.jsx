@@ -1,22 +1,21 @@
-import { Component } from 'react';
 import { withCallbacks } from './helpers';
 
 modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
-  class HBWEntityTasks extends Component {
-    PANEL_CLASS: 'hbw-entity-task-list-panel';
+  const EntityTasks = React.createClass({
+    PANEL_CLASS: 'hbw-entity-task-list-panel',
 
-    constructor (props) {
-      super(props);
+    displayName: 'HBWEntityTasks',
 
-      this.state = {
+    getInitialState () {
+      return {
         error:        null,
         chosenTaskID: this.props.chosenTaskID || this.selectFirstTaskId()
       };
-    }
+    },
 
     componentWillReceiveProps (nextProps) {
       this.setState({ chosenTaskID: nextProps.chosenTaskID });
-    };
+    },
 
     selectFirstTaskId () {
       if (this.props.tasks.length > 0) {
@@ -26,7 +25,7 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
         this.props.trigger('hbw:task-clicked', null);
         return null;
       }
-    };
+    },
 
     render () {
       const classes = 'hbw-entity-task-list';
@@ -38,7 +37,7 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
           {this.iterateTasks(this.props.tasks, this.state.chosenTaskID)}
         </div>
       </div>;
-    };
+    },
 
     iterateTasks (tasks) {
       let taskAlreadyExpanded = false; // only one task should show its form - to be expanded
@@ -64,7 +63,7 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
                      entityClassCode={props.entityClassCode}
                      collapsed={collapsed} />;
       });
-    };
+    },
 
     getProcessName () {
       if (this.props.tasks.length > 0) {
@@ -73,7 +72,7 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
         return null;
       }
     }
-  };
+  });
 
-  return withCallbacks(HBWEntityTasks);
+  return withCallbacks(EntityTasks);
 });
