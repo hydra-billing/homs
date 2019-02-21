@@ -8,22 +8,14 @@ modulejs.define('HBWFormSelectTable',
     class HBWFormSelectTable extends Component {
       constructor (props) {
         super(props);
-        const value = this.getInputValues(this.props.current_value);
+        const value = this.props.current_value ? [this.props.current_value].flat() : [];
 
         this.state = {
-          value:   this.getInputValues(this.props.params.current_value),
+          value:   this.props.params.current_value ? [this.props.params.current_value].flat() : [],
           choices: this.getChoices(),
           error:   (!this.props.hasValueInChoices(value) && value) || this.props.missFieldInVariables(),
           valid:   true
         };
-      };
-
-      getInputValues(value) {
-        if (this.props.params.multi) {
-          return value || [];
-        } else {
-          return value || '';
-        }
       };
 
       componentDidMount () {
@@ -170,15 +162,15 @@ modulejs.define('HBWFormSelectTable',
 
         const newValue = event.target.parentElement.getElementsByTagName('input')[0].value;
 
-        if (this.props.params.multi) {
-          if (this.state.value.includes(newValue)) {
-            const index = this.state.value.indexOf(newValue);
-            this.setState(prevState => { value: prevState.value.splice(index, 1) });
-          } else {
-            this.setState(prevState => { value: prevState.value.push(newValue) });
-          }
+        if (this.state.value.includes(newValue)) {
+          const index = this.state.value.indexOf(newValue);
+          this.setState(prevState => { value: prevState.value.splice(index, 1) });
         } else {
-          this.setState({ value: newValue });
+          if (this.props.params.multi) {
+            this.setState(prevState => { value: prevState.value.push(newValue) })
+          } else {
+            this.setState({ value: newValue });
+          }
         }
 
         this.setValidationState();
