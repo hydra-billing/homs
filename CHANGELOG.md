@@ -1,6 +1,16 @@
 v1.7.0 [unreleased]
 -------------------
 
+### Breaking changes
+
+-   Dropped `activiti` support:
+    - changed `activiti` to `camunda` in all `docker-compose` files
+    - removed `docker-compose.activiti.yml`
+    - sources type `static/activiti` was renamed to `static/bpm` in `config/sources.yml`
+    - key `use_activiti_stub` was renamed to `use_bpm_stub` in ` config/hbw.yml`
+
+    See [#253](https://github.com/latera/homs/pull/253) for more details.
+
 ### Features
 -   [#248](https://github.com/latera/homs/pull/248) Add Rubocop.
 -   [#251](https://github.com/latera/homs/pull/251) Update react-select up to 2.1.1.
