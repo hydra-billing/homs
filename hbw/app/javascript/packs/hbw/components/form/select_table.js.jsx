@@ -201,6 +201,9 @@ modulejs.define('HBWFormSelectTable',
 
         return choices.map((items) => {
           let selected;
+          let checked = false;
+          let type;
+
           const renderCells = (_items) => {
             const result = [];
             Object.keys(_items).forEach((i) => {
@@ -212,8 +215,20 @@ modulejs.define('HBWFormSelectTable',
 
           const id = items[0];
 
-          if (value.includes(id.toString())) {
-            selected = 'selected';
+          if (this.props.params.multi) {
+            type = 'checkbox';
+
+            if (value.includes(id.toString())) {
+              selected = 'selected';
+              checked = true;
+            }
+          } else {
+            type = 'radio';
+
+            if (this.props.isEqual(id, value)) {
+              selected = 'selected';
+              checked = true;
+            }
           }
 
           const stub = {
@@ -225,8 +240,11 @@ modulejs.define('HBWFormSelectTable',
               <input
                 {...stub}
                 name={name}
-                type={this.props.params.multi ? "checkbox" : "radio"}
-                value={id} id={id} checked={value.includes(id.toString())}/>
+                type={type}
+                value={id}
+                id={id}
+                checked={checked}
+              />
             </td>
             {renderCells(items.slice(1, items.length))}
           </tr>;
