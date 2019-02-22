@@ -31,7 +31,7 @@ The prefered way to install HOMS is to use Docker
 2. Download `docker-compose.yml`:
 
   ```
-  wget https://raw.githubusercontent.com/latera/homs-docker/master/docker-compose.yml
+  wget https://raw.githubusercontent.com/latera/homs/master/docker-compose.yml
   ```
 3. For OS X users: make path to folder with HOMS shared in `Docker -> Preferences... -> File Sharing`.
 
@@ -43,27 +43,34 @@ The prefered way to install HOMS is to use Docker
   
    All variables are set in `.env` file. There you can change them, if you want to.
 
-5. Change [Minio](https://github.com/minio/minio) credentials in `.env` file.
+5. Add `SECRET_KEY_BASE` variable to your `.env` with uniq id as value. Generate it any way you like. For example:
+  ```
+  SECRET_KEY_BASE=0750fd0eac13032778f0a42e2ab450003eaece477ea881501be0cc438f870a2f498dbbc00ffb7c8379c30c960568a402d315496bb7bc2b3ee324401ba788a
+  ```
+ 
+  **Make sure this key is secret and don't share it with anyone**.
 
-6. Be sure to update secret key in `/etc/hydra/homs/secrets.yml`. You can generate key with this command:
+6. Change [Minio](https://github.com/minio/minio) credentials in `.env` file.
+
+7. Be sure to update secret key in `/etc/hydra/homs/secrets.yml`. You can generate key with this command:
 
   ```
   openssl rand -hex 64
   ```
 
-7. Run `docker-compose`:
+8. Run `docker-compose`:
 
   ```
   docker-compose up -d
   ```
 
-8. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
+9. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
 
-9. Navigate to [Camunda Admin](http://localhost:8080/camunda) and create admin user with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file.
+10. Navigate to [Camunda Admin](http://localhost:8080/camunda) and create admin user with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file.
 
-10. (Optional) If you want to use demo processes navigate to [Camunda](http://localhost:8080/camunda/app/admin/default/#/user-create) and create user with `user@example.com` email.
+11. (Optional) If you want to use demo processes navigate to [Camunda](http://localhost:8080/camunda/app/admin/default/#/user-create) and create user with `user@example.com` email.
 
-11. Login at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
+12. Login at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
 #### In development
 
