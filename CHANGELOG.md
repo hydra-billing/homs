@@ -12,6 +12,7 @@ v1.6.1 [unreleased]
 -   [#247](https://github.com/latera/homs/pull/247) Use internal ports in homs_network.
 -   [#250](https://github.com/latera/homs/pull/250) Fix file uploading.
 -   [#252](https://github.com/latera/homs/pull/252) Fix `select_table` behavior in multi mode.
+-   [#257](https://github.com/latera/homs/pull/257) Check flag `multi` in `select_table` when select row.
 
 v1.6.0 [2019-01-29]
 -------------------
