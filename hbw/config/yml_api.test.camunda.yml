@@ -1075,4 +1075,9 @@ post:
   task/816011/submit-form:
     "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataDisabledEndDate][value]=&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataReason][value]=&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456&variables[homsOrderDataSomeCheckbox][value]=false&variables[homsOrderDataSomeDatetime][value]=&variables[homsOrderDataSomeDisabledCheckbox][value]=false&variables[homsOrderDataSomeDisabledSelect][value]=&variables[homsOrderDataSomeDisabledText][value]=&variables[homsOrderDataSomeSelect][value]=&variables[homsOrderDataSomeStr][value]=&variables[homsOrderDataSomeText][value]=&variables[homsOrderDataWorkAddress][value]=&variables[homsOrderDataWorkPlace][value]=":
       - ""
+  task/count:
+    "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
+      count: 15
+    "active=true&assignee=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
+      count: 0
 delete: {}

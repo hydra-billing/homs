@@ -16,6 +16,7 @@ v1.7.0 [unreleased]
 -   [#251](https://github.com/latera/homs/pull/251) Update react-select up to 2.1.1.
 -   [#253](https://github.com/latera/homs/pull/253) Drop Activiti support.
 -   [#258](https://github.com/latera/homs/pull/258) Update React & ReactDOM to 16.0.0
+-   [#259](https://github.com/latera/homs/pull/259) Get number of tasks by request to Camunda.
 
 v1.6.1 [unreleased]
 -------------------

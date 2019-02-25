@@ -84,6 +84,12 @@ module HBW
         task_list_response(email, '%', entity_class, size)
       end
 
+      def task_count(email:, entity_code: '%', entity_class:, for_all_users: false)
+        HBW::Task.with_connection(api) do
+          HBW::Task.fetch_task_count(email, entity_code, entity_class, for_all_users)
+        end
+      end
+
       def form(user_email, entity_class, task_id)
         task = task_for_email_and_task_id(user_email, entity_class, task_id)
         HBW::Form.with_connection(api) do
