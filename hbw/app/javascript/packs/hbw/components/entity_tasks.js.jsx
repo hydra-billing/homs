@@ -1,23 +1,14 @@
 import { withCallbacks } from './helpers';
 
 modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
-  const EntityTasks = React.createClass({
-    PANEL_CLASS: 'hbw-entity-task-list-panel',
-
-    displayName: 'HBWEntityTasks',
-
-    getInitialState () {
-      return {
-        error:        null,
-        chosenTaskID: this.props.chosenTaskID || this.selectFirstTaskId()
-      };
-    },
+  class HBWEntityTasks extends React.Component {
+    PANEL_CLASS = 'hbw-entity-task-list-panel';
 
     componentWillReceiveProps (nextProps) {
       this.setState({ chosenTaskID: nextProps.chosenTaskID });
-    },
+    }
 
-    selectFirstTaskId () {
+    selectFirstTaskId = () => {
       if (this.props.tasks.length > 0) {
         this.props.trigger('hbw:task-clicked', this.props.tasks[0]);
         return this.props.tasks[0].id;
@@ -25,7 +16,20 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
         this.props.trigger('hbw:task-clicked', null);
         return null;
       }
-    },
+    };
+
+    state = {
+      error:        null,
+      chosenTaskID: this.props.chosenTaskID || this.selectFirstTaskId()
+    };
+
+    getProcessName = () => {
+      if (this.props.tasks.length > 0) {
+        return this.props.tasks[0].process_name;
+      } else {
+        return null;
+      }
+    };
 
     render () {
       const classes = 'hbw-entity-task-list';
@@ -37,9 +41,9 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
           {this.iterateTasks(this.props.tasks, this.state.chosenTaskID)}
         </div>
       </div>;
-    },
+    }
 
-    iterateTasks (tasks) {
+    iterateTasks = (tasks) => {
       let taskAlreadyExpanded = false; // only one task should show its form - to be expanded
       const { props } = this;
 
@@ -63,16 +67,8 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
                      entityClassCode={props.entityClassCode}
                      collapsed={collapsed} />;
       });
-    },
+    };
+  }
 
-    getProcessName () {
-      if (this.props.tasks.length > 0) {
-        return this.props.tasks[0].process_name;
-      } else {
-        return null;
-      }
-    }
-  });
-
-  return withCallbacks(EntityTasks);
+  return withCallbacks(HBWEntityTasks);
 });

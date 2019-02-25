@@ -4,15 +4,13 @@ modulejs.define(
   'HBWContainer',
   ['React', 'HBWButtons', 'HBWEntityTasks', 'HBWError'],
   (React, Buttons, Tasks, Error) => {
-    const Container = React.createClass({
-      getInitialState () {
-        return {
-          buttons:        [],
-          tasks:          [],
-          tasksFetched:   false,
-          processStarted: false
-        };
-      },
+    class Container extends React.Component {
+      state = {
+        buttons:        [],
+        tasks:          [],
+        tasksFetched:   false,
+        processStarted: false
+      };
 
       componentDidMount () {
         this.props.subscription
@@ -27,7 +25,7 @@ modulejs.define(
 
         this.props.bind('hbw:form-submitted', this.onFormSubmit);
         this.props.bind('hbw:process-started', () => this.setState({ processStarted: true }));
-      },
+      }
 
       render () {
         if ((this.state.tasks.length > 0) && this.state.tasksFetched) {
@@ -51,14 +49,14 @@ modulejs.define(
                      env={this.props.env} />
           </div>;
         }
-      },
+      }
 
-      onFormSubmit (task) {
+      onFormSubmit = (task) => {
         // remember execution id of the last submitted form to open next form if
         // task with the same processInstanceId will be loaded
         this.setState({ processInstanceId: task.processInstanceId });
-      }
-    });
+      };
+    }
 
     return compose(withTasks, withCallbacks)(Container);
   }

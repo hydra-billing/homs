@@ -1,24 +1,20 @@
 modulejs.define('HBWFormSubmit', ['React'], (React) => {
-  const FormSubmit = React.createClass({
-    displayName: 'HBWFormSubmit',
+  const HBWFormSubmit = ({ formSubmitting, env }) => {
+    let className = 'btn btn-primary';
 
-    render () {
-      let className = 'btn btn-primary';
-
-      if (this.props.formSubmitting) {
-        className += ' disabled';
-      }
-
-      return <div className="form-group">
-        <button type="submit"
-          className={className}
-          disabled={this.props.formSubmitting}>
-          <i className="fas fa-check" />
-          {` ${this.props.env.translator('submit')}`}
-        </button>
-      </div>;
+    if (formSubmitting) {
+      className += ' disabled';
     }
-  });
 
-  return FormSubmit;
+    return <div className="form-group">
+      <button type="submit"
+        className={className}
+        disabled={formSubmitting}>
+        <i className="fas fa-check" />
+        {` ${env.translator('submit')}`}
+      </button>
+    </div>;
+  };
+
+  return HBWFormSubmit;
 });

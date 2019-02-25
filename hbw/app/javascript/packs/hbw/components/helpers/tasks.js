@@ -1,43 +1,40 @@
-import React from 'react';
-import { getDisplayName } from './utils';
+import React, { Component } from 'react';
 
-export default WrappedComponent => React.createClass({
-  displayName: `WithTasks(${getDisplayName(WrappedComponent)})`,
-
-  setGuid () {
-    this.guid = `hbw-${Math.floor(Math.random() * 0xFFFF)}`;
-  },
-
-  getComponentId () {
-    return this.guid;
-  },
-
-  componentWillMount () {
-    if (!this.guid) {
-      this.setGuid();
-    }
-  },
-
-  getInitialState () {
+export default WrappedComponent => class WithTasks extends Component {
+  constructor (props, context) {
+    super(props, context);
     this.setGuid();
-    return {
+
+    this.state = {
       subscription: this.createSubscription(),
       pollInterval: 5000,
       syncing:      false,
       error:        null
     };
-  },
+  }
+
+  setGuid = () => {
+    this.guid = `hbw-${Math.floor(Math.random() * 0xFFFF)}`;
+  };
+
+  getComponentId = () => this.guid;
+
+  componentWillMount () {
+    if (!this.guid) {
+      this.setGuid();
+    }
+  }
 
   componentDidMount () {
     this.state.subscription.start(this.props.pollInterval);
-  },
+  }
 
   componentWillUnmount () {
     this.state.subscription.close();
-  },
+  }
 
-  createSubscription () {
-    return this.props.env.connection.subscribe({
+  createSubscription = () => (
+    this.props.env.connection.subscribe({
       client: this.getComponentId(),
       path:   'tasks',
       data:   {
@@ -47,8 +44,8 @@ export default WrappedComponent => React.createClass({
       .syncing(() => this.setState({ syncing: true }))
       .progress(() => this.setState({ error: null }))
       .fail(response => this.setState({ error: response }))
-      .always(() => this.setState({ syncing: false }));
-  },
+      .always(() => this.setState({ syncing: false }))
+  );
 
   render () {
     return <WrappedComponent setGuid={this.setGuid}
@@ -57,4 +54,4 @@ export default WrappedComponent => React.createClass({
                              {...this.state}
                              {...this.props} />;
   }
-});
+};

@@ -1,41 +1,37 @@
 import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (React, ReactDOM, jQuery, moment) => {
-  const FormDateTime = React.createClass({
+  class HBWFormDatetime extends React.Component {
+    static defaultProps = {
+      params: {
+        locale: 'en',
+        format: 'MM/DD/YYYY'
+      }
+    };
 
-    displayName: 'HBWFormDatetime',
-
-    getDefaultProps () {
-      return {
-        params: {
-          locale: 'en',
-          format: 'MM/DD/YYYY'
-        }
-      };
-    },
-
-    getInitialState () {
+    constructor (props) {
+      super(props);
       let defaultValue;
       let value;
 
-      const locale = this.props.params.locale || 'en';
-      const format = this.props.params.format || 'MM/DD/YYYY';
+      const locale = props.params.locale || 'en';
+      const format = props.params.format || 'MM/DD/YYYY';
 
-      if (this.props.value) {
-        value = moment(Date.parse(this.props.value));
+      if (props.value) {
+        value = moment(Date.parse(props.value));
         defaultValue = value.locale(locale).format(format);
       } else {
         value = null;
         defaultValue = '';
       }
 
-      return {
+      this.state = {
         value,
         defaultValue,
         locale,
         format
       };
-    },
+    }
 
     render () {
       let isoValue;
@@ -68,27 +64,26 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
             <input {...opts} className="form-control" />
             <input name={this.props.params.name} type="hidden" value={isoValue} />
             <span className="input-group-addon">
-            <span className="fas fa-calendar"></span>
-          </span>
+              <span className="fas fa-calendar" />
+            </span>
           </div>
         </div>
       </div>;
-    },
+    }
 
     componentDidMount () {
       this.setOnChange();
       this.props.onRef(this);
-    },
+    }
 
     componentWillUnmount () {
       jQuery(this.rootNode).off();
       this.props.onRef(undefined);
-    },
+    }
 
-    updateValue (event) {
+    updateValue = ({ date }) => {
       let stringValue;
       let value;
-      const { date } = event;
 
       if (date) {
         stringValue = date.format(this.state.format);
@@ -99,9 +94,9 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
       }
 
       this.setState({ value });
-    },
+    };
 
-    setOnChange () {
+    setOnChange = () => {
       const icons = {
         up:       'fas fa-chevron-up',
         down:     'fas fa-chevron-down',
@@ -122,16 +117,16 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
           icons,
         })
         .on('dp.change', e => this.updateValue(e));
-    },
+    };
 
-    serialize () {
+    serialize = () => {
       if (this.props.params.editable === false || this.props.disabled) {
         return null;
       } else {
-        return { [this.props.params.name]: this.state.value ? this.state.value.format() : '' }
+        return { [this.props.params.name]: this.state.value ? this.state.value.format() : '' };
       }
-    }
-  });
+    };
+  }
 
-  return withConditions(FormDateTime);
+  return withConditions(HBWFormDatetime);
 });

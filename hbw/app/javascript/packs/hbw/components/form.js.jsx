@@ -3,23 +3,18 @@
 
 import { withCallbacks } from './helpers';
 
-
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect',
   'HBWFormUser', 'HBWPending', 'HBWFormString', 'HBWFormText',
   'HBWFormCheckbox', 'HBWFormStatic', 'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload'],
 (React, jQuery, Error, DateTime, Group, Select, Submit, SubmitSelect,
   User, Pending, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload) => {
-  const Form = React.createClass({
-    displayName: 'HBWForm',
-
-    getInitialState () {
-      return {
-        error:         null,
-        submitting:    false,
-        fileUploading: false
-      };
-    },
+  class HBWForm extends React.Component {
+    state = {
+      error:         null,
+      submitting:    false,
+      fileUploading: false
+    };
 
     componentDidMount () {
       jQuery(':input:enabled:visible:first').focus();
@@ -27,7 +22,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       this.props.bind('hbw:form-submitting-failed', () => this.setState({ submitting: false }));
       this.props.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
       this.props.bind('hbw:file-upload-finished', () => this.setState({ fileUploading: false }));
-    },
+    }
 
     render () {
       return <div className='hbw-form'>
@@ -38,15 +33,13 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
             {this.submitControl(this.props.form.fields)}
           </form>
         </div>;
-    },
+    }
 
-    iterateControls (fields) {
-      return [...fields].map(field => (
-          <div key={field.name} className="row">{this.formControl(field.name, field)}</div>
-      ));
-    },
+    iterateControls = fields => [...fields].map(field => (
+      <div key={field.name} className="row">{this.formControl(field.name, field)}</div>
+    ));
 
-    formControl (name, params) {
+    formControl = (name, params) => {
       const opts = {
         name,
         params,
@@ -110,9 +103,9 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
             {...onRef} />;
         default: return <p>{name}: Unknown control type {params.type}</p>;
       }
-    },
+    };
 
-    submitControl (fields) {
+    submitControl = (fields) => {
       const last = fields[fields.length - 1];
       if (last.type !== 'submit_select') {
         // Draw default form submit button
@@ -127,9 +120,9 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       }
 
       return null;
-    },
+    };
 
-    submit (e) {
+    submit = (e) => {
       e.preventDefault();
       if (this.state.submitting) {
         return null;
@@ -142,17 +135,13 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       }
 
       return null;
-    },
+    };
 
-    getElement () {
-      return jQuery(this.form);
-    },
+    getElement = () => jQuery(this.form);
 
-    isFormValid () {
-      return this.getElement().find('.invalid').length === 0;
-    },
+    isFormValid = () => this.getElement().find('.invalid').length === 0;
 
-    fileListPresent (fields) {
+    fileListPresent = (fields) => {
       if (fields.map(f => [f.name, f.type])
         .some(pair => pair.every(el => ['homsOrderDataFileList', 'file_list']
           .includes(el)))) {
@@ -166,26 +155,24 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       }
 
       return false;
-    },
+    };
 
-    notSerializableFields () {
-      return ['static'];
-    },
+    notSerializableFields = () => ['static'];
 
-    serializeForm () {
+    serializeForm = () => {
       let variables = {};
 
       this.props.form.fields.forEach((field) => {
         if (!this.notSerializableFields().includes(field.type)) {
-          variables = {...variables, ...this[`${field.name}`].serialize()};
+          variables = { ...variables, ...this[`${field.name}`].serialize() };
         }
       });
 
       console.log(`Serialized form: ${JSON.stringify(variables)}`);
 
       return variables;
-    }
-  });
+    };
+  }
 
-  return withCallbacks(Form);
+  return withCallbacks(HBWForm);
 });
