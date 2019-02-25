@@ -11,7 +11,7 @@ modulejs.define('HBWMenuButton', ['React'], (React) => {
     componentDidMount () {
       this.props.bind('hbw:hide-widget', this.toggleVisibility);
       this.props.subscription
-        .progress(data => this.setState({ tasksNumber: data.tasks.length }));
+        .progress(data => this.setState({ tasksNumber: data.task_count }));
     }
 
     render () {

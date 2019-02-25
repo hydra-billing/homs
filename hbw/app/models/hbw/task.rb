@@ -29,6 +29,21 @@ module HBW
         end
       end
 
+      def fetch_task_count(email, entity_code, entity_class, for_all_users = false)
+        user = ::HBW::BPMUser.fetch(email)
+        unless user.nil?
+          do_request(:post,
+                     'task/count',
+                     assignee:   assignee(user, email, for_all_users),
+                     active:     true,
+                     processVariables: [
+                       name:     HBW::Widget.config.fetch(entity_class)[:entity_code_key],
+                       operator: operation(entity_code),
+                       value:    entity_code
+                     ])['count']
+        end
+      end
+
       def wrap(tasks)
         definitions = tasks.map.with_object({}) do |task, d|
           id = task.fetch('processDefinitionId')
