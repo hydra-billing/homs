@@ -1,25 +1,21 @@
 import { withCallbacks } from './helpers';
 
 modulejs.define('HBWTaskGroup', ['React', 'HBWTask'], (React, Task) => {
-  const TaskGroup = React.createClass({
-    displayName: 'HBWTaskGroup',
+  class HBWTaskGroup extends React.Component {
+    static defaultProps = {
+      group:        '',
+      tasks:        [],
+      form_loading: false
+    };
 
-    getDefaultProps () {
-      return {
-        group:        '',
-        tasks:        [],
-        form_loading: false
-      };
-    },
-
-    renderTask (task) {
-      return <Task key={task.id}
-                   task={task}
-                   env={this.props.env}
-                   active={parseInt(task.id) === parseInt(this.props.chosenTaskID)}
-                   form_loading={this.props.form_loading}
-      />;
-    },
+    renderTask = task => (
+      <Task key={task.id}
+            task={task}
+            env={this.props.env}
+            active={parseInt(task.id) === parseInt(this.props.chosenTaskID)}
+            form_loading={this.props.form_loading}
+      />
+    );
 
     render () {
       const tasks = [...this.props.tasks.sort((a, b) => a.id - b.id)];
@@ -30,7 +26,7 @@ modulejs.define('HBWTaskGroup', ['React', 'HBWTask'], (React, Task) => {
         <ul className="hbw-task-item">{children}</ul>
       </div>;
     }
-  });
+  }
 
-  return withCallbacks(TaskGroup);
+  return withCallbacks(HBWTaskGroup);
 });

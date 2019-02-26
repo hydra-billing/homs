@@ -1,36 +1,38 @@
 import { withCallbacks } from './helpers';
 
 modulejs.define('HBWButton', ['React'], (React) => {
-  const Button = React.createClass({
-    displayName: 'HBWButton',
+  const HBWButton = ({ button, disabled, trigger }) => {
+    const classes = [];
 
-    render () {
-      const classes = [];
-      if (this.props.button.class) {
-        classes.push(this.props.button.class);
-      }
-      if (this.props.disabled) {
-        classes.push('disabled');
-      }
+    if (button.class) {
+      classes.push(button.class);
+    }
 
-      const opts = {
-        className: classes.join(' '),
-        title:     this.props.button.title,
-        disabled:  this.props.disabled
-      };
+    if (disabled) {
+      classes.push('disabled');
+    }
 
-      return <span className="hbw-button"><a onClick={this.onClick} {...opts} href='#'>
-      <i className={this.props.button.fa_class}></i>
-        {` ${this.props.button.name}`}
-    </a></span>;
-    },
+    const opts = {
+      className: classes.join(' '),
+      title:     button.title,
+      disabled
+    };
 
-    onClick (evt) {
+    const onClick = (evt) => {
       evt.preventDefault();
 
-      this.props.trigger('hbw:button-activated', this.props.button);
-    }
-  });
+      trigger('hbw:button-activated', button);
+    };
 
-  return withCallbacks(Button);
+    return (
+      <span className="hbw-button">
+        <a onClick={onClick} {...opts} href='#'>
+        <i className={button.fa_class} />
+        {` ${button.name}`}
+        </a>
+      </span>
+    );
+  };
+
+  return withCallbacks(HBWButton);
 });

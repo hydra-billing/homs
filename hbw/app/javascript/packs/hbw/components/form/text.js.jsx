@@ -1,33 +1,29 @@
 import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormText', ['React'], (React) => {
-  const FormText = React.createClass({
-    displayName: 'HBWFormText',
+  class HBWFormText extends React.Component {
+    state = {
+      value: this.props.value
+    };
 
     componentDidMount () {
       this.props.onRef(this);
-    },
+    }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
       this.props.onRef(undefined);
-    },
+    }
 
-    getInitialState () {
-      return {
-        value: this.props.value
-      };
-    },
-
-    handleChange (event) {
+    handleChange = (event) => {
       this.setState({ value: event.target.value });
-    },
+    };
 
     render () {
       const opts = {
-        name:         this.props.name,
-        className:    'form-control',
-        rows:         this.props.params.rows,
-        readOnly:     this.props.params.editable === false || this.props.disabled
+        name:      this.props.name,
+        className: 'form-control',
+        rows:      this.props.params.rows,
+        readOnly:  this.props.params.editable === false || this.props.disabled
       };
 
       const title = this.props.params.tooltip;
@@ -45,12 +41,10 @@ modulejs.define('HBWFormText', ['React'], (React) => {
           <textarea {...opts} value={this.state.value} onChange={this.handleChange} />
         </div>
       </div>;
-    },
-
-    serialize () {
-      return { [this.props.name]: this.state.value };
     }
-  });
 
-  return withConditions(FormText);
+    serialize = () => ({ [this.props.name]: this.state.value });
+  }
+
+  return withConditions(HBWFormText);
 });

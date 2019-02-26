@@ -1,10 +1,7 @@
-import React from 'react';
-import { getDisplayName } from './utils';
+import React, { Component } from 'react';
 
-export default WrappedComponent => React.createClass({
-  displayName: `withSelect(${getDisplayName(WrappedComponent)})`,
-
-  getChosenValue () {
+export default WrappedComponent => class WithSelect extends Component {
+  getChosenValue = () => {
     if (this.props.params.mode === 'select') {
       if (this.props.value === null) {
         if (this.props.params.nullable) {
@@ -25,9 +22,9 @@ export default WrappedComponent => React.createClass({
     } else {
       return this.props.value;
     }
-  },
+  };
 
-  hasValueInChoices (value) {
+  hasValueInChoices = (value) => {
     if (this.props.params.mode === 'lookup') {
       return true;
     }
@@ -41,9 +38,9 @@ export default WrappedComponent => React.createClass({
     }
 
     return false;
-  },
+  };
 
-  isEqual (a, b) {
+  isEqual = (a, b) => {
     if (a === b) {
       return true;
     }
@@ -58,19 +55,17 @@ export default WrappedComponent => React.createClass({
     }
 
     return a.toString() === b.toString();
-  },
+  };
 
-  isChoiceEqual (choice, value) {
+  isChoiceEqual = (choice, value) => {
     if (Array.isArray(choice)) {
       return this.isEqual(choice[0], value);
     } else {
       return this.isEqual(choice, value);
     }
-  },
+  };
 
-  missFieldInVariables () {
-    return this.props.params.variables.every(v => v.name !== this.props.name);
-  },
+  missFieldInVariables = () => this.props.params.variables.every(v => v.name !== this.props.name);
 
   render () {
     return <WrappedComponent getChosenValue={this.getChosenValue}
@@ -81,4 +76,4 @@ export default WrappedComponent => React.createClass({
                              {...this.state}
                              {...this.props} />;
   }
-});
+};

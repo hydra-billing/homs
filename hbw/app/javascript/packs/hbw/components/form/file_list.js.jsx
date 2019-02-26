@@ -1,24 +1,20 @@
 import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormFileList', ['React'], (React) => {
-  const FormFileList = React.createClass({
-    displayName: 'HBWFormFileList',
+  class HBWFormFileList extends React.Component {
+    state = {
+      valid:        true,
+      deletedFiles: [],
+      links:        (this.props.value && JSON.parse(this.props.value)) || []
+    };
 
     componentDidMount () {
       this.props.onRef(this);
-    },
+    }
 
     componentWillUnmount () {
       this.props.onRef(undefined);
-    },
-
-    getInitialState () {
-      return {
-        valid:        true,
-        deletedFiles: [],
-        links:        (this.props.value && JSON.parse(this.props.value)) || []
-      };
-    },
+    }
 
     render () {
       const { links } = this.state;
@@ -42,9 +38,9 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
           </ul>
         </label>
       </div>;
-    },
+    }
 
-    files (list) {
+    files = (list) => {
       const onClick = this.deleteLink;
       const { deletedFiles } = this.state;
 
@@ -67,9 +63,9 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
           </li>;
         }
       });
-    },
+    };
 
-    deleteLink (evt, name) {
+    deleteLink = (evt, name) => {
       const { deletedFiles } = this.state;
 
       if (deletedFiles.includes(name)) {
@@ -80,12 +76,14 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
       }
 
       this.setState({ deletedFiles });
-    },
+    };
 
-    serialize () {
-      return { [this.props.params.name]: JSON.stringify(this.state.links.filter(link => !this.state.deletedFiles.includes(link.name))) };
-    }
-  });
+    serialize = () => {
+      const { links, deletedFiles } = this.state;
 
-  return withConditions(FormFileList);
+      return { [this.props.params.name]: JSON.stringify(links.filter(link => !deletedFiles.includes(link.name))) };
+    };
+  }
+
+  return withConditions(HBWFormFileList);
 });

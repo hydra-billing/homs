@@ -1,19 +1,15 @@
 import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormStatic', ['React'], (React) => {
-  const FormStatic = React.createClass({
-    displayName: 'HBWFormStatic',
+  const HBWFormStatic = ({ params, hidden }) => {
+    let cssClass = params.css_class;
 
-    render () {
-      let cssClass = this.props.params.css_class;
-
-      if (this.props.hidden) {
-        cssClass += ' hidden';
-      }
-
-      return <div className={cssClass} dangerouslySetInnerHTML={{ __html: this.props.params.html }} />;
+    if (hidden) {
+      cssClass += ' hidden';
     }
-  });
 
-  return withConditions(FormStatic);
+    return <div className={cssClass} dangerouslySetInnerHTML={{ __html: params.html }} />;
+  };
+
+  return withConditions(HBWFormStatic);
 });

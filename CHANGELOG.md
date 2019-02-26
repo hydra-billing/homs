@@ -15,6 +15,7 @@ v1.7.0 [unreleased]
 -   [#248](https://github.com/latera/homs/pull/248) Add Rubocop.
 -   [#251](https://github.com/latera/homs/pull/251) Update react-select up to 2.1.1.
 -   [#253](https://github.com/latera/homs/pull/253) Drop Activiti support.
+-   [#258](https://github.com/latera/homs/pull/258) Update React & ReactDOM to 16.0.0
 
 v1.6.1 [unreleased]
 -------------------

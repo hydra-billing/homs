@@ -1,24 +1,20 @@
 import { withCallbacks, withConditions, compose } from '../helpers';
 
 modulejs.define('HBWFormFileUpload', ['React'], (React) => {
-  const FormFileUpload = React.createClass({
-    displayName: 'HBWFormFileUpload',
+  class HBWFormFileUpload extends React.Component {
+    state = {
+      valid:      true,
+      files:      [],
+      filesCount: 0
+    };
 
     componentDidMount () {
       this.props.onRef(this);
-    },
+    }
 
     componentWillUnmount () {
       this.props.onRef(undefined);
-    },
-
-    getInitialState () {
-      return {
-        valid:      true,
-        files:      [],
-        filesCount: 0
-      };
-    },
+    }
 
     render () {
       const opts = {
@@ -51,9 +47,9 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
           <input name={this.props.params.name} value={hiddenValue} type="hidden"/>
         </div>
       </div>;
-    },
+    }
 
-    onChange (event) {
+    onChange = (event) => {
       const $el = event.target;
       const files = Array.from($el.files);
 
@@ -69,9 +65,9 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       }
 
       return null;
-    },
+    };
 
-    addValue (name, res) {
+    addValue = (name, res) => {
       const { files } = this.state;
 
       files.push({
@@ -87,9 +83,9 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       if (this.state.filesCount === 0) {
         this.props.trigger('hbw:file-upload-finished');
       }
-    },
+    };
 
-    readFiles (name, file) {
+    readFiles = (name, file) => {
       const fileReader = new FileReader();
 
       fileReader.onloadend = () => {
@@ -97,12 +93,10 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       };
 
       return fileReader.readAsBinaryString(file);
-    },
+    };
 
-    serialize () {
-      return { [this.props.params.name]: JSON.stringify({ files: this.state.files }) };
-    }
-  });
+    serialize = () => ({ [this.props.params.name]: JSON.stringify({ files: this.state.files }) });
+  }
 
-  return compose(withCallbacks, withConditions)(FormFileUpload);
+  return compose(withCallbacks, withConditions)(HBWFormFileUpload);
 });

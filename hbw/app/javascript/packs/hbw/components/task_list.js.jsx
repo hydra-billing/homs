@@ -6,16 +6,12 @@ import { withCallbacks, withTasks, compose } from './helpers';
 modulejs.define('HBWTaskList',
   ['React', 'HBWTaskGroup', 'HBWError', 'HBWPending'],
   (React, TaskGroup, Error, Pending) => {
-    const TaskList = React.createClass({
-      displayName: 'HBWTaskList',
-
-      getInitialState () {
-        return {
-          tasks:      [],
-          groupByVar: 'id',
-          fetched:    false
-        };
-      },
+    class HBWTaskList extends React.Component {
+      state = {
+        tasks:      [],
+        groupByVar: 'id',
+        fetched:    false
+      };
 
       componentDidMount () {
         this.props.subscription
@@ -24,12 +20,12 @@ modulejs.define('HBWTaskList',
             tasks:      data.tasks,
             groupByVar: data.group_by_var
           }));
-      },
+      }
 
-      hideWidget (e) {
+      hideWidget = (e) => {
         e.preventDefault();
         this.props.trigger('hbw:toggle-tasks-menu');
-      },
+      };
 
       render () {
         const aClass = 'hbw-sheet-header-button hbw-sheet-header-close-button';
@@ -42,7 +38,7 @@ modulejs.define('HBWTaskList',
               </div>
               <a className={aClass} href="#" onClick={this.hideWidget}
                  title={this.props.env.translator('hide_widget')}>
-                <div className="hbw-sheet-header-button-icon hbw-sheet-header-close-button-icon"></div>
+                <div className="hbw-sheet-header-button-icon hbw-sheet-header-close-button-icon" />
               </a>
             </div>
           </div>
@@ -52,23 +48,20 @@ modulejs.define('HBWTaskList',
             && <p>{this.props.env.translator('no_tasks')}</p> }
             { this.createGroupsChildren() }
           </div>
-          <div className='hbw-sheet-content'></div>
+          <div className='hbw-sheet-content' />
         </div>;
-      },
+      }
 
-      createGroupsChildren () {
-        return this.groupsFromTasks(this.state.tasks).map((group) => {
-          const newGroup = group;
+      createGroupsChildren = () => this.groupsFromTasks(this.state.tasks).map((group) => {
+        const newGroup = group;
 
-          newGroup.key = group.group;
-          newGroup.env = this.props.env;
-          newGroup.chosenTaskID = this.props.chosenTaskID;
+        newGroup.env = this.props.env;
+        newGroup.chosenTaskID = this.props.chosenTaskID;
 
-          return React.createElement(TaskGroup, newGroup);
-        });
-      },
+        return <TaskGroup key={group.group} {...newGroup} />;
+      });
 
-      groupsFromTasks (tasks) {
+      groupsFromTasks = (tasks) => {
         let group;
         const groups = {};
 
@@ -95,11 +88,11 @@ modulejs.define('HBWTaskList',
         });
 
         return keys.map(_group => ({
-          _group,
+          group: _group,
           tasks: groups[_group]
         }));
-      }
-    });
+      };
+    }
 
-    return compose(withTasks, withCallbacks)(TaskList);
+    return compose(withTasks, withCallbacks)(HBWTaskList);
   });

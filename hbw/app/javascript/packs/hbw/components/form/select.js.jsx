@@ -3,22 +3,24 @@
 import Select from 'react-select';
 import AsyncSelect from 'react-select/lib/Async';
 import Tooltip from 'tooltip.js';
-import { withConditions, withSelect, withCallbacks, compose } from '../helpers';
+import {
+  withConditions, withSelect, withCallbacks, compose
+} from '../helpers';
 
 modulejs.define('HBWFormSelect',
   ['React'],
   (React) => {
-    const FormSelect = React.createClass({
+    class FormSelect extends React.Component {
+      constructor (props, context) {
+        super(props, context);
+        const value = props.getChosenValue() || '';
 
-      getInitialState () {
-        const value = this.props.getChosenValue() || '';
-
-        return {
+        this.state = {
           value,
           choices: this.getChoices(value),
-          error:   (!this.props.hasValueInChoices(value) && value) || this.props.missFieldInVariables()
+          error:   (!props.hasValueInChoices(value) && value) || props.missFieldInVariables()
         };
-      },
+      }
 
       componentDidMount () {
         this.tooltip = new Tooltip(this.select, {
@@ -30,11 +32,11 @@ modulejs.define('HBWFormSelect',
 
         this.validateOnSubmit();
         this.props.onRef(this);
-      },
+      }
 
-      componentWillUnmount() {
+      componentWillUnmount () {
         this.props.onRef(undefined);
-      },
+      }
 
       render () {
         const opts = {
@@ -88,13 +90,13 @@ modulejs.define('HBWFormSelect',
           </div>
           {errorTooltip}
         </div>;
-      },
+      }
 
-      validateOnSubmit () {
+      validateOnSubmit = () => {
         this.props.bind('hbw:validate-form', this.onFormSubmit);
-      },
+      };
 
-      onFormSubmit () {
+      onFormSubmit = () => {
         const el = this.select;
 
         if (this.isValid()) {
@@ -106,31 +108,29 @@ modulejs.define('HBWFormSelect',
           this.controlValidationTooltip(this.isValid());
           this.props.trigger('hbw:form-submitting-failed');
         }
-      },
+      };
 
-      isValid () {
-        return this.props.params.nullable || this.isFilled();
-      },
+      isValid = () => this.props.params.nullable || this.isFilled();
 
-      isFilled () {
+      isFilled = () => {
         const { value } = this.state;
 
         return value !== null && value !== undefined && value.length > 0;
-      },
+      };
 
-      setValidationState () {
+      setValidationState = () => {
         this.setState({ valid: this.isValid() });
-      },
+      };
 
-      controlValidationTooltip (toHide) {
+      controlValidationTooltip = (toHide) => {
         if (toHide) {
           this.tooltip.hide();
         } else {
           this.tooltip.show();
         }
-      },
+      };
 
-      customStyles () {
+      customStyles = () => {
         const bgColor = (state) => {
           if (state.isFocused) {
             return '#2C3E50';
@@ -169,18 +169,18 @@ modulejs.define('HBWFormSelect',
             }
           })
         };
-      },
+      };
 
-      selectComponent (opts) {
+      selectComponent = (opts) => {
         if (this.props.params.mode === 'lookup') {
           return <AsyncSelect loadOptions={this.loadOptions}
                               {...opts} />;
         } else {
           return <Select {...opts} />;
         }
-      },
+      };
 
-      noOptionsMessage (options) {
+      noOptionsMessage = (options) => {
         const { inputValue } = options;
 
         if (inputValue && inputValue.length >= 2) {
@@ -188,25 +188,23 @@ modulejs.define('HBWFormSelect',
         } else {
           return this.props.env.translator('components.select.enter_more_chars');
         }
-      },
+      };
 
-      loadingMessage () {
-        return this.props.env.translator('components.select.searching');
-      },
+      loadingMessage = () => this.props.env.translator('components.select.searching');
 
       componentWillMount () {
         this.fetchOptionsAsync = this.debounce(this.fetchOptionsAsync, 250);
-      },
+      }
 
-      loadOptions (inputValue, callback) {
+      loadOptions = (inputValue, callback) => {
         if (inputValue && inputValue.length >= 2) {
           this.fetchOptionsAsync(inputValue, callback);
         } else {
           callback();
         }
-      },
+      };
 
-      fetchOptionsAsync (inputValue, callback) {
+      fetchOptionsAsync = (inputValue, callback) => {
         const url = `${this.props.params.url}${(this.props.params.url.includes('?') ? '&' : '?')}`;
 
         fetch(`${url}q=${inputValue}`)
@@ -224,9 +222,9 @@ modulejs.define('HBWFormSelect',
 
             callback();
           });
-      },
+      };
 
-      getDefaultValue () {
+      getDefaultValue = () => {
         const variants = this.buildOptions();
 
         if (this.state.value) {
@@ -238,9 +236,9 @@ modulejs.define('HBWFormSelect',
         } else {
           return [variants[0]];
         }
-      },
+      };
 
-      setValue (option) {
+      setValue = (option) => {
         const newValue = option ? option.value : null;
 
         this.setState({
@@ -248,21 +246,19 @@ modulejs.define('HBWFormSelect',
           choices: this.getChoices(newValue),
           error:   (!this.props.hasValueInChoices(newValue) && newValue) || this.props.missFieldInVariables()
         });
-      },
+      };
 
-      buildOptions () {
-        return this.state.choices.map((variant) => {
-          const [value, label] = Array.isArray(variant) ? variant : [variant, variant];
+      buildOptions = () => this.state.choices.map((variant) => {
+        const [value, label] = Array.isArray(variant) ? variant : [variant, variant];
 
-          return {
-            label,
-            value: value || '',
-            key:   value || 'null'
-          };
-        });
-      },
+        return {
+          label,
+          value: value || '',
+          key:   value || 'null'
+        };
+      });
 
-      addCurrentValueToChoices (value) {
+      addCurrentValueToChoices = (value) => {
         const choices = this.props.params.choices.slice();
 
         if (!this.props.hasValueInChoices(value) && this.props.value !== null) {
@@ -270,13 +266,11 @@ modulejs.define('HBWFormSelect',
         }
 
         return choices;
-      },
+      };
 
-      addNullChoice () {
-        return null;
-      },
+      addNullChoice = () => null;
 
-      debounce (f, ms) {
+      debounce = (f, ms) => {
         let timer;
 
         return function (...args) {
@@ -285,9 +279,9 @@ modulejs.define('HBWFormSelect',
           clearTimeout(timer);
           timer = setTimeout(functionCall, ms);
         };
-      },
+      };
 
-      getChoices (value) {
+      getChoices = (value) => {
         if (this.props.params.mode === 'select') {
           this.addCurrentValueToChoices(value);
 
@@ -297,16 +291,16 @@ modulejs.define('HBWFormSelect',
         } else {
           return null;
         }
-      },
+      };
 
-      serialize () {
+      serialize = () => {
         if (this.props.params.editable === false || this.props.disabled) {
           return null;
         } else {
           return { [this.props.name]: this.state.value };
         }
-      }
-    });
+      };
+    }
 
     return compose(withSelect, withConditions, withCallbacks)(FormSelect);
   });

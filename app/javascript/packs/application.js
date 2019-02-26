@@ -182,27 +182,25 @@ class Messenger {
     return null;
   };
 
-  show = (messages) => {
-    return (() => {
-      const result = [];
+  show = messages => (() => {
+    const result = [];
 
-      [...messages].forEach((message) => {
-        const messageType = message[0];
+    [...messages].forEach((message) => {
+      const messageType = message[0];
 
-        if (this[messageType]) {
-          if ($.type(message[1]) === 'array') {
-            result.push([...message[1]].map(msg => this[message[0]](msg)));
-          } else {
-            result.push(this[message[0]](message[1]));
-          }
+      if (this[messageType]) {
+        if ($.type(message[1]) === 'array') {
+          result.push([...message[1]].map(msg => this[message[0]](msg)));
         } else {
-          result.push(undefined);
+          result.push(this[message[0]](message[1]));
         }
-      });
+      } else {
+        result.push(undefined);
+      }
+    });
 
-      return result;
-    })();
-  };
+    return result;
+  })();
 }
 defaultExport.Messenger = Messenger;
 

@@ -7,16 +7,14 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
   'HBWFormString', 'HBWFormText', 'HBWFormCheckbox', 'HBWFormStatic',
   'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload'],
 (React, Datetime, SubmitSelect, User, Select, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload) => {
-  const FormGroup = React.createClass({
-    displayName: 'HBWFormGroup',
-
+  class HBWFormGroup extends React.Component {
     componentDidMount () {
       this.props.onRef(this);
-    },
+    }
 
     componentWillUnmount () {
       this.props.onRef(undefined);
-    },
+    }
 
     render () {
       let inputCSS = `tab-panel form-group ${this.props.params.css_class}`;
@@ -36,9 +34,9 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
           </div>
         </div>
       </div>;
-    },
+    }
 
-    iterateControls (fields) {
+    iterateControls = (fields) => {
       this.controls = fields.map((field) => {
         if (field.delimiter) {
           return <div key={field.name}>{this.formControl(field.name, field)}<div className='clearfix'></div></div>;
@@ -48,9 +46,9 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
       });
 
       return this.controls;
-    },
+    };
 
-    formControl (name, params) {
+    formControl = (name, params) => {
       const opts = {
         name,
         params,
@@ -113,24 +111,22 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
             {...onRef} />;
         default: return <p>{name}: Unknown control type {params.type}</p>;
       }
-    },
+    };
 
-    notSerializableFields () {
-      return ['static'];
-    },
+    notSerializableFields = () => ['static'];
 
-    serialize () {
+    serialize = () => {
       let variables = {};
 
       this.props.params.fields.forEach((field) => {
         if (!this.notSerializableFields().includes(field.type)) {
-          variables = {...variables, ...this[`${field.name}`].serialize()};
+          variables = { ...variables, ...this[`${field.name}`].serialize() };
         }
       });
 
       return variables;
-    }
-  });
+    };
+  }
 
-  return withConditions(FormGroup);
+  return withConditions(HBWFormGroup);
 });

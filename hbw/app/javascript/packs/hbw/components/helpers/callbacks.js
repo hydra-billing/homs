@@ -1,38 +1,33 @@
-import React from 'react';
-import { getDisplayName } from './utils';
+import React, { Component } from 'react';
 
-export default WrappedComponent => React.createClass({
-  displayName: `WithCallbacks(${getDisplayName(WrappedComponent)})`,
-
-  setGuid () {
+export default WrappedComponent => class WithCallbacks extends Component {
+  setGuid = () => {
     this.guid = `hbw-${Math.floor(Math.random() * 0xFFFF)}`;
-  },
+  };
 
-  getComponentId () {
-    return this.guid;
-  },
+  getComponentId = () => this.guid;
 
   componentWillMount () {
     if (!this.guid) {
       this.setGuid();
     }
-  },
+  }
 
-  bind (event, clbk) {
+  bind = (event, clbk) => {
     this.props.env.dispatcher.bind(event, this.getComponentId(), clbk);
-  },
+  };
 
-  unbind (event) {
+  unbind = (event) => {
     this.props.env.dispatcher.unbind(event, this.getComponentId());
-  },
+  };
 
   componentWillUnmount () {
     this.props.env.dispatcher.unbindAll(this.getComponentId());
-  },
+  }
 
-  trigger (event, payload = null) {
+  trigger = (event, payload = null) => {
     this.props.env.dispatcher.trigger(event, this, payload);
-  },
+  };
 
   render () {
     return <WrappedComponent setGuid={this.setGuid}
@@ -43,4 +38,4 @@ export default WrappedComponent => React.createClass({
                              {...this.state}
                              {...this.props} />;
   }
-});
+};

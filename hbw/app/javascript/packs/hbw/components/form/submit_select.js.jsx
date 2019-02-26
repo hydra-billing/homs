@@ -1,19 +1,15 @@
-modulejs.define('HBWFormSubmitSelect', ['React'], React => React.createClass({
-  displayName: 'HBWFormSubmitSelect',
+modulejs.define('HBWFormSubmitSelect', ['React'], React => class HBWFormSubmitSelect extends React.Component {
+  state = {
+    value: this.props.value || ''
+  };
 
   componentDidMount () {
     this.props.onRef(this);
-  },
+  }
 
   componentWillUnmount () {
     this.props.onRef(undefined);
-  },
-
-  getInitialState () {
-    return {
-      value: this.props.value || ''
-    };
-  },
+  }
 
   render () {
     const cssClass = `col-xs-12 ${this.props.params.css_class}`;
@@ -25,9 +21,9 @@ modulejs.define('HBWFormSubmitSelect', ['React'], React => React.createClass({
       <span className="btn-group">{ buttons }</span>
       <input type="hidden" name={this.props.name} value={this.state.value} />
     </div>;
-  },
+  }
 
-  buildButton (option) {
+  buildButton = (option) => {
     const onClick = () => this.setState({ value: option.value });
     let cssClass = option.css_class;
     let faClass = option.fa_class;
@@ -49,13 +45,13 @@ modulejs.define('HBWFormSubmitSelect', ['React'], React => React.createClass({
       <i className={faClass} />
       {` ${option.name}`}
     </button>;
-  },
+  };
 
-  serialize () {
+  serialize = () => {
     if (this.props.disabled || this.props.formSubmitting) {
       return null;
     } else {
       return { [this.props.name]: this.state.value };
     }
-  }
-}));
+  };
+});

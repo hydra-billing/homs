@@ -1,13 +1,8 @@
 /* eslint no-script-url: "off" */
 
-modulejs.define('HBWError', ['React'], (React) => {
-  const Error = React.createClass({
-
-    displayName: 'HBWError',
-
-    getInitialState () {
-      return { showFull: false };
-    },
+modulejs.define('HBWError', ['React'], React => (
+  class HBWError extends React.Component {
+    state = { showFull: false };
 
     render () {
       let display;
@@ -46,12 +41,9 @@ modulejs.define('HBWError', ['React'], (React) => {
       } else {
         return <div style={{ display: 'none' }}></div>;
       }
-    },
-
-    toggleBacktrace () {
-      this.setState({ showFull: !this.state.showFull });
     }
-  });
 
-  return Error;
-});
+    toggleBacktrace = () => {
+      this.setState({ showFull: !this.state.showFull });
+    };
+  }));
