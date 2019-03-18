@@ -49,13 +49,12 @@ v1.6.0 [2019-01-29]
 -   [#207](https://github.com/latera/homs/pull/207) Remove extra locales from moment.js
 -   [#209](https://github.com/latera/homs/pull/209) Drop react-rails & react_ujs dependencies.
 -   [#205](https://github.com/latera/homs/pull/205) Use higher order component instead of HBWSelectMixin.
--   [#214](https://github.com/latera/homs/pull/214) Update ruby version to 2.5.3.
 -   [#213](https://github.com/latera/homs/pull/213) Add payload to widget's requests.
 -   [#218](https://github.com/latera/homs/pull/218) Pass initial BP variables to widget initial payload.
 -   [#223](https://github.com/latera/homs/pull/223) Add directories for postgresql-client.
 -   [#227](https://github.com/latera/homs/pull/227) Add `required` option for string inputs. Use `nullable: false` in select/select_table for the same reason.
 -   [#230](https://github.com/latera/homs/pull/230) Add disable_if condition to checkbox, datetime, file_list, select, select_table, string, text.
--   [#232](https://github.com/latera/homs/pull/232) [DEPRECATION] Deprecate Activiti usage.
+-   [#232](https://github.com/latera/homs/pull/232) [**DEPRECATION**] Deprecate Activiti usage.
 -   [#233](https://github.com/latera/homs/pull/233) Run DB on port specified in `.env` file.
 -   [#231](https://github.com/latera/homs/pull/231) Add `multi` option to select_table.
 -   [#240](https://github.com/latera/homs/pull/240) Update ruby up to 2.6.0.
