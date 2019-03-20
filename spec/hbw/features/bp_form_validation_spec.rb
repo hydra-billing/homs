@@ -8,6 +8,7 @@ feature 'Validate form', js: true do
     order_type = FactoryBot.create(:order_type, :support_request)
     FactoryBot.create(:order, order_type: order_type)
     FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-14')
+    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-16')
   end
 
   describe 'form is not submitted' do
@@ -56,6 +57,18 @@ feature 'Validate form', js: true do
       click_and_wait 'Submit'
 
       expect(page).to have_content 'Field is required'
+    end
+
+    scenario 'with empty required multi select table' do
+      click_and_wait 'ORD-16'
+      click_td_by_text 'My favourite region name1'
+
+      expect(page).to have_content 'Options'
+      expect(page).to have_selector "button[type='submit']"
+
+      click_and_wait 'Submit'
+
+      expect(page).not_to have_content 'Field is required'
     end
   end
 end

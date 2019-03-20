@@ -9,10 +9,11 @@ modulejs.define('HBWFormSelectTable',
     class HBWFormSelectTable extends React.Component {
       constructor (props, context) {
         super(props, context);
-        const value = this.getInputValues(props.current_value);
+
+        const value = this.getInputValues(props.params.current_value);
 
         this.state = {
-          value:   this.getInputValues(props.params.current_value),
+          value:   value,
           choices: this.getChoices(),
           error:   (!props.hasValueInChoices(value) && value) || props.missFieldInVariables(),
           valid:   true
@@ -162,6 +163,11 @@ modulejs.define('HBWFormSelectTable',
         return result;
       };
 
+      controlValidation = () => {
+        this.setValidationState();
+        this.controlValidationTooltip(this.isValid());
+      };
+
       onClick = (event) => {
         if (this.props.params.editable === false) {
           return;
@@ -172,16 +178,13 @@ modulejs.define('HBWFormSelectTable',
         if (this.props.params.multi) {
           if (this.state.value.includes(newValue)) {
             const index = this.state.value.indexOf(newValue);
-            this.setState((prevState) => { prevState.value.splice(index, 1); });
+            this.setState((prevState) => { prevState.value.splice(index, 1); }, this.controlValidation);
           } else {
-            this.setState((prevState) => { prevState.value.push(newValue); });
+            this.setState((prevState) => { prevState.value.push(newValue); }, this.controlValidation);
           }
         } else {
-          this.setState({ value: newValue });
+          this.setState({ value: newValue }, this.controlValidation);
         }
-
-        this.setValidationState();
-        this.controlValidationTooltip(this.isValid());
       };
 
       buildTableBody = (choices, name, value) => {
