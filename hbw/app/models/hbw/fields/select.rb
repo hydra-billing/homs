@@ -56,7 +56,7 @@ module HBW
           placeholder: placeholder,
           label_css: label_css,
           choices: choices,
-          nullable: select? && nullable?,
+          nullable: nullable?,
           editable: editable?,
           delimiter: delimiter?,
           delete_if: delete_if,
