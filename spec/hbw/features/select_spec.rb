@@ -21,6 +21,7 @@ feature 'Check select with', js: true do
     FactoryBot.create(:order, order_type: order_type)
     FactoryBot.create(:order, order_type: order_type)
     FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-12')
+    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-17')
   end
 
   scenario 'nullable = true and placeholder present' do
@@ -133,6 +134,19 @@ feature 'Check select with', js: true do
     expect_r_select_presence('homsOrderDataSelect')
     expect(r_select_single_value('homsOrderDataSelect')[:label]).to eq first_value
     expect(page).to have_no_content 'Field with name homsOrderNotInVBPVariables not defined in BP variables'
+    expect_widget_presence
+  end
+
+  scenario 'nullable = true, placeholder present and mode = lookup' do
+    click_on 'Orders'
+    expect(page).to have_content 'Orders list'
+    expect_widget_presence
+
+    click_and_wait 'ORD-17'
+
+    expect(page).to have_content 'ORD-17'
+    expect_r_select_presence('homsOrderDataSelect')
+    expect(r_select_placeholder('homsOrderDataSelect')).to eq placeholder
     expect_widget_presence
   end
 end

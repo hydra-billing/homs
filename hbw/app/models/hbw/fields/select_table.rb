@@ -60,7 +60,7 @@ module HBW
           label_css: label_css,
           choices: processed_choices,
           row_params: rows,
-          nullable: select? && nullable?,
+          nullable: nullable?,
           editable: editable?,
           delimiter: delimiter?,
           delete_if: delete_if,

@@ -14,6 +14,7 @@ v1.6.1 [unreleased]
 -   [#252](https://github.com/latera/homs/pull/252) Fix `select_table` behavior in multi mode.
 -   [#257](https://github.com/latera/homs/pull/257) Check flag `multi` in `select_table` when select row.
 -   [#262](https://github.com/latera/homs/pull/262) Fix multi nullable `select_table`.
+-   [#265](https://github.com/latera/homs/pull/265) Allow nullability for `select` lookup mode.
 
 v1.6.0 [2019-01-29]
 -------------------
