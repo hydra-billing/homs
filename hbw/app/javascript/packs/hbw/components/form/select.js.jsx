@@ -115,8 +115,8 @@ modulejs.define('HBWFormSelect',
       isFilled () {
         const { value } = this.state;
 
-        return value !== null && value !== undefined && value.length > 0;
-      },
+        return value !== null && value !== undefined && `${value}`.length > 0;
+      };
 
       setValidationState () {
         this.setState({ valid: this.isValid() });
