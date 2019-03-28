@@ -13,7 +13,7 @@ modulejs.define('HBWFormSelectTable',
         const value = this.getInputValues(props.params.current_value);
 
         this.state = {
-          value:   value,
+          value,
           choices: this.getChoices(),
           error:   (!props.hasValueInChoices(value) && value) || props.missFieldInVariables(),
           valid:   true
@@ -119,7 +119,7 @@ modulejs.define('HBWFormSelectTable',
       isFilled = () => {
         const { value } = this.state;
 
-        return value !== null && value !== undefined && value.length > 0;
+        return value !== null && value !== undefined && `${value}`.length > 0;
       };
 
       setValidationState = () => {

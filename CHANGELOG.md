@@ -34,6 +34,7 @@ v1.6.1 [unreleased]
 -   [#252](https://github.com/latera/homs/pull/252) Fix `select_table` behavior in multi mode.
 -   [#257](https://github.com/latera/homs/pull/257) Check flag `multi` in `select_table` when select row.
 -   [#262](https://github.com/latera/homs/pull/262) Fix multi nullable `select_table`.
+-   [#264](https://github.com/latera/homs/pull/264) Fix required `select` with numeric value.
 
 v1.6.0 [2019-01-29]
 -------------------
