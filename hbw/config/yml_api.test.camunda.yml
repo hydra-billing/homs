@@ -148,6 +148,7 @@ get:
             type: select
             label: Options
             css_class: col-xs-12 col-sm-6 col-md-4
+            nullable: false
             choices:
               -
                 - 123456
@@ -748,7 +749,7 @@ get:
         value: "ORD-1"
       homsOrderDataSelect:
         type: "select"
-        value: "123456"
+        value: 123456
       homsOrderDataBeginDate:
         type: "string"
         value: "2016-09-30T14:52:20.000+03:00"

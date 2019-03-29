@@ -23,6 +23,10 @@ feature 'Submit form', js: true do
     expect(page).to have_selector "button[type='submit']"
 
     click_and_wait 'Submit'
+
+    expect(page).not_to have_content 'Field does not match regex'
+    expect(page).not_to have_content 'Field is required'
+
     expect_widget_presence
   end
 end
