@@ -23,10 +23,14 @@ RUN apt-get update && apt-get install -y \
   libnspr4 \
   libnss3 \
   libxss1 \
+  libxtst6 \
   xdg-utils \
-  chromedriver
+  unzip
 
-RUN wget https://dl.google.com/linux/direct/google-chrome-unstable_current_amd64.deb && dpkg -i google-chrome-unstable_current_amd64.deb
+RUN wget https://dl.google.com/linux/direct/google-chrome-beta_current_amd64.deb && dpkg -i google-chrome-beta_current_amd64.deb
+RUN wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip && \
+    unzip chromedriver_linux64.zip chromedriver -d /usr/bin/ && \
+    chmod +x /usr/bin/chromedriver
 
 COPY ./run_tests.sh ./.rubocop.yml ./.rubocop_todo.yml /
 COPY ./.rubocop.yml ./.rubocop_todo.yml  /opt/homs/
