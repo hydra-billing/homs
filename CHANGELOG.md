@@ -36,6 +36,7 @@ v1.6.1 [unreleased]
 -   [#262](https://github.com/latera/homs/pull/262) Fix multi nullable `select_table`.
 -   [#265](https://github.com/latera/homs/pull/265) Allow nullability for `select` lookup mode.
 -   [#264](https://github.com/latera/homs/pull/264) Fix required `select` with numeric value.
+-   [#267](https://github.com/latera/homs/pull/267) Fix widget calendar locale.
 
 v1.6.0 [2019-01-29]
 -------------------
