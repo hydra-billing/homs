@@ -2,19 +2,12 @@ import { withConditions } from '../helpers';
 
 modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (React, ReactDOM, jQuery, moment) => {
   class HBWFormDatetime extends React.Component {
-    static defaultProps = {
-      params: {
-        locale: 'en',
-        format: 'MM/DD/YYYY'
-      }
-    };
-
     constructor (props) {
       super(props);
       let defaultValue;
       let value;
 
-      const locale = props.params.locale || 'en';
+      const locale = props.params.locale || props.env.locale || 'en';
       const format = props.params.format || 'MM/DD/YYYY';
 
       if (props.value) {
