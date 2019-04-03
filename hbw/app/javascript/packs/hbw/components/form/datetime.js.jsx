@@ -5,20 +5,11 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
 
     displayName: 'HBWFormDatetime',
 
-    getDefaultProps () {
-      return {
-        params: {
-          locale: 'en',
-          format: 'MM/DD/YYYY'
-        }
-      };
-    },
-
     getInitialState () {
       let defaultValue;
       let value;
 
-      const locale = this.props.params.locale || 'en';
+      const locale = this.props.params.locale || this.props.env.locale || 'en';
       const format = this.props.params.format || 'MM/DD/YYYY';
 
       if (this.props.value) {
