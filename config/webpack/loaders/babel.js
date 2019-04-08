@@ -4,11 +4,11 @@ module.exports = {
   use: {
     loader: 'babel-loader',
     options: {
-      presets: ['env', 'react'],
+      presets: ['@babel/preset-env', '@babel/preset-react'],
       plugins: [
-        'transform-runtime',
-        'transform-object-rest-spread',
-        'transform-class-properties'
+        '@babel/transform-runtime',
+        '@babel/proposal-object-rest-spread',
+        '@babel/proposal-class-properties'
       ]
     }
   }
