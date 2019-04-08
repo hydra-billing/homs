@@ -1,6 +1,6 @@
 import Tooltip from 'tooltip';
 import {
-  withConditions, withSelect, withCallbacks, compose
+  withConditions, withSelect, withCallbacks, withValidations, compose
 } from '../helpers';
 
 modulejs.define('HBWFormSelectTable',
@@ -103,27 +103,19 @@ modulejs.define('HBWFormSelectTable',
       onFormSubmit = () => {
         const el = this.label;
 
-        if (this.isValid()) {
+        if (this.props.isValid(this.state.value)) {
           el.classList.remove('invalid');
         } else {
           el.classList.add('invalid');
 
           this.setValidationState();
-          this.controlValidationTooltip(this.isValid());
+          this.controlValidationTooltip(this.props.isValid(this.state.value));
           this.props.trigger('hbw:form-submitting-failed');
         }
       };
 
-      isValid = () => this.props.params.nullable || this.isFilled();
-
-      isFilled = () => {
-        const { value } = this.state;
-
-        return value !== null && value !== undefined && `${value}`.length > 0;
-      };
-
       setValidationState = () => {
-        this.setState({ valid: this.isValid() });
+        this.setState({ valid: this.props.isValid(this.state.value) });
       };
 
       controlValidationTooltip = (toHide) => {
@@ -165,7 +157,7 @@ modulejs.define('HBWFormSelectTable',
 
       controlValidation = () => {
         this.setValidationState();
-        this.controlValidationTooltip(this.isValid());
+        this.controlValidationTooltip(this.props.isValid(this.state.value));
       };
 
       onClick = (event) => {
@@ -279,5 +271,5 @@ modulejs.define('HBWFormSelectTable',
       };
     }
 
-    return compose(withSelect, withConditions, withCallbacks)(HBWFormSelectTable);
+    return compose(withSelect, withConditions, withCallbacks, withValidations)(HBWFormSelectTable);
   });
