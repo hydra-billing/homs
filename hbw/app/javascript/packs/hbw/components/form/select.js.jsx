@@ -4,7 +4,7 @@ import Select from 'react-select';
 import AsyncSelect from 'react-select/lib/Async';
 import Tooltip from 'tooltip.js';
 import {
-  withConditions, withSelect, withCallbacks, compose
+  withConditions, withSelect, withCallbacks, withValidations, compose
 } from '../helpers';
 
 modulejs.define('HBWFormSelect',
@@ -99,27 +99,19 @@ modulejs.define('HBWFormSelect',
       onFormSubmit = () => {
         const el = this.select;
 
-        if (this.isValid()) {
+        if (this.props.isValid(this.state.value)) {
           el.classList.remove('invalid');
         } else {
           el.classList.add('invalid');
 
           this.setValidationState();
-          this.controlValidationTooltip(this.isValid());
+          this.controlValidationTooltip(this.props.isValid(this.state.value));
           this.props.trigger('hbw:form-submitting-failed');
         }
       };
 
-      isValid = () => this.props.params.nullable || this.isFilled();
-
-      isFilled = () => {
-        const { value } = this.state;
-
-        return value !== null && value !== undefined && `${value}`.length > 0;
-      };
-
       setValidationState = () => {
-        this.setState({ valid: this.isValid() });
+        this.setState({ valid: this.props.isValid(this.state.value) });
       };
 
       controlValidationTooltip = (toHide) => {
@@ -302,5 +294,5 @@ modulejs.define('HBWFormSelect',
       };
     }
 
-    return compose(withSelect, withConditions, withCallbacks)(FormSelect);
+    return compose(withSelect, withConditions, withCallbacks, withValidations)(FormSelect);
   });
