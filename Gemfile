@@ -30,7 +30,7 @@ gem 'nokogiri', '~> 1.8.1'
 gem 'aws-sdk', '~> 2'
 gem 'web-console', '~> 2.0', group: :development
 gem 'settingslogic'
-gem 'webpacker', '~> 3.5'
+gem 'webpacker', '~> 4.0'
 gem 'rack', '~> 2.0.6'
 
 group :oracle do

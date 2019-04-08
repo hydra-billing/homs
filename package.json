@@ -8,12 +8,12 @@
     "lint-fix": "eslint 'app/javascript/**/*' 'hbw/app/javascript/**/*' --fix"
   },
   "dependencies": {
-    "@rails/webpacker": "3.5",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-runtime": "^6.26.0",
+    "@rails/webpacker": "^4.0.2",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.4.3",
     "bootstrap-multiselect": "^0.9.13-1",
     "bootstrap-sass": "^3.3.7",
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
@@ -43,6 +43,7 @@
     "eslint-loader": "^2.1.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-react": "^7.11.1",
-    "webpack-dev-server": "3.1.11"
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
   }
 }
