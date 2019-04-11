@@ -33,7 +33,7 @@ modulejs.define(
 
       render () {
         let collapseClass = 'panel-collapse collapse';
-        if (!this.props.collapsed) {
+        if (!this.state.collapsed) {
           collapseClass += ' in';
         }
         let iconClass = 'indicator pull-right fa';
