@@ -247,11 +247,15 @@
     visibility: hidden
 
   table.select-table
-    td
-      cursor: pointer
-
-    tr.selected
-      background-color: lightgray
+    tr
+      &.selected
+        background-color: #445C72
+        color: white
+      &:hover
+        td
+          cursor: pointer
+          background-color: #2C3E50
+          color: white
 
     .text-align-left
       text-align: left

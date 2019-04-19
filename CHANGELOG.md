@@ -18,6 +18,7 @@ v1.7.0 [unreleased]
 -   [#258](https://github.com/latera/homs/pull/258) Update React & ReactDOM to 16.0.0
 -   [#259](https://github.com/latera/homs/pull/259) Get number of tasks by request to Camunda.
 -   [#268](https://github.com/latera/homs/pull/268) Move validation of `select` and `select_table` to helpers.
+-   [#273](https://github.com/latera/homs/pull/273) Change colors on select and hover of `select_table`.
 
 v1.6.1 [unreleased]
 -------------------

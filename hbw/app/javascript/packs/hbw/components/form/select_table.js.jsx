@@ -72,7 +72,7 @@ modulejs.define('HBWFormSelectTable',
           formGroupCss += ' has-error';
         }
 
-        let tableCss = 'select-table table table-bordered table-hover';
+        let tableCss = 'select-table table table-bordered';
         if (this.props.params.editable === false || this.props.disabled) {
           tableCss += ' disabled';
         }
