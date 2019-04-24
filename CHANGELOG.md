@@ -4,6 +4,7 @@ v1.7.1 [unreleased]
 ### Features
 -   [#277](https://github.com/latera/homs/pull/277) Allow to configure widget polling interval.
 -   [#275](https://github.com/latera/homs/pull/275) Set logging level from env file.
+-   [#274](https://github.com/latera/homs/pull/274) Add duration of requests logging.
 
 v1.7.0 [2019-04-25]
 -------------------
