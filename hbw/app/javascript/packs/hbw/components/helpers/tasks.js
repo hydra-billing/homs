@@ -7,7 +7,7 @@ export default WrappedComponent => class WithTasks extends Component {
 
     this.state = {
       subscription: this.createSubscription(),
-      pollInterval: 5000,
+      pollInterval: this.props.env.poll_interval,
       syncing:      false,
       error:        null
     };
@@ -26,7 +26,7 @@ export default WrappedComponent => class WithTasks extends Component {
   }
 
   componentDidMount () {
-    this.state.subscription.start(this.props.pollInterval);
+    this.state.subscription.start(this.state.pollInterval);
   }
 
   componentWillUnmount () {

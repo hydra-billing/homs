@@ -135,6 +135,11 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
     }
 
     start (interval = this.defaultInterval) {
+      if (interval < 0) {
+        this.poll();
+        return;
+      }
+
       if (this.started) {
         const newInterval = interval || this.defaultInterval;
 

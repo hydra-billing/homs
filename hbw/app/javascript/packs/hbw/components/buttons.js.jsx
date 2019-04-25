@@ -15,7 +15,7 @@ modulejs.define(
         this.state = {
           buttons:       [],
           subscription:  this.createSubscription(),
-          pollInterval:  5000,
+          pollInterval:  this.props.env.poll_interval,
           syncing:       false,
           syncError:     null,
           submitError:   null,
