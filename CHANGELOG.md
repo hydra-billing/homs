@@ -1,4 +1,4 @@
-v1.7.0 [unreleased]
+v1.7.0 [2019-04-25]
 -------------------
 
 ### Breaking changes
