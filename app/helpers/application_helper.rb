@@ -98,7 +98,8 @@ module ApplicationHelper
       tasksMenuContainer: '#hbw-tasks',
       tasksMenuButtonContainer: '#hbw-tasks-list-button',
       entity_class: 'order',
-      locale: I18n.locale
+      locale: I18n.locale,
+      fetch_all: true
     }
 
     if defined? @hbw_options

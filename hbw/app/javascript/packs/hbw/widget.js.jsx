@@ -36,7 +36,9 @@ modulejs.define(
           locale:           this.options.locale,
           userExist:        true,
           entity_class:     this.options.entity_class,
-          initialVariables: payload.variables
+          entity_code:      this.options.entity_code,
+          initialVariables: payload.variables,
+          fetch_all:        this.options.fetch_all
         };
 
         this.$widgetContainer = jQuery(this.options.widgetContainer);

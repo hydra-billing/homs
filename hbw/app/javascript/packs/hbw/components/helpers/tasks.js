@@ -33,19 +33,30 @@ export default WrappedComponent => class WithTasks extends Component {
     this.state.subscription.close();
   }
 
-  createSubscription = () => (
-    this.props.env.connection.subscribe({
+  createSubscription = () => {
+    let data;
+
+    if (this.props.env.fetch_all) {
+      data = {
+        entity_class: this.props.env.entity_class
+      };
+    } else {
+      data = {
+        entity_class: this.props.env.entity_class,
+        entity_code:  this.props.env.entity_code
+      };
+    }
+
+    return this.props.env.connection.subscribe({
       client: this.getComponentId(),
       path:   'tasks',
-      data:   {
-        entity_class: this.props.env.entity_class
-      }
+      data
     })
       .syncing(() => this.setState({ syncing: true }))
       .progress(() => this.setState({ error: null }))
       .fail(response => this.setState({ error: response }))
-      .always(() => this.setState({ syncing: false }))
-  );
+      .always(() => this.setState({ syncing: false }));
+  };
 
   render () {
     return <WrappedComponent setGuid={this.setGuid}
