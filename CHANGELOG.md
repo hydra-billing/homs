@@ -1,3 +1,9 @@
+v1.7.1 [unreleased]
+-------------------
+
+### Features
+-   [#277](https://github.com/latera/homs/pull/277) Allow to configure widget polling interval.
+
 v1.7.0 [2019-04-25]
 -------------------
 
