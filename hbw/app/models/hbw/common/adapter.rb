@@ -40,7 +40,7 @@ module HBW
       # TODO: Think of suspended process instances
       def bp_running?(entity_code, entity_class, current_user_identifier)
         !process_instances(entity_code, entity_class).empty? ||
-          !task_list_response(current_user_identifier, entity_code, entity_class, 1000, true).empty?
+          !task_list_wrapped(current_user_identifier, entity_code, entity_class, 1000, true).empty?
       end
 
       def get_variables(_, _, _, _)
@@ -76,12 +76,11 @@ module HBW
       end
 
       def entity_task_list(user_email, entity_code, entity_class, size = 1000)
-        response = task_list_response(user_email, entity_code, entity_class, size)
-        ::HBW::Task.wrap(response.body['data']) if response.status == 200
+        task_list_wrapped(user_email, entity_code, entity_class, size)
       end
 
       def task_list(email, entity_class, size = 1000)
-        task_list_response(email, '%', entity_class, size)
+        task_list_wrapped(email, '%', entity_class, size)
       end
 
       def task_count(email:, entity_code: '%', entity_class:, for_all_users: false)
@@ -97,7 +96,7 @@ module HBW
         end
       end
 
-      def task_list_response(email, entity_code, entity_class, size, for_all_users = false)
+      def task_list_wrapped(email, entity_code, entity_class, size, for_all_users = false)
         HBW::Task.with_connection(api) do
           HBW::Task.fetch(email, entity_code, entity_class, size, for_all_users)
         end
