@@ -11,4 +11,4 @@ if [[ ! -a seed.lock ]]; then
     touch seed.lock
 fi
 
-bundle exec thin start --threaded
+bundle exec unicorn -E production -c config/unicorn.rb

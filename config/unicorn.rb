@@ -1,44 +1,64 @@
-app_root = '/var/www/homs'
-rails_root = "#{app_root}/current"
+rails_root = '/opt/homs'
 
 working_directory rails_root
-worker_processes 4
+worker_processes  ENV['HOMS_UNICORN_WORKERS'].to_i || 8
+timeout           ENV['HOMS_UNICORN_TIMEOUT'].to_i || 30
+
+memory_limit = ENV['HOMS_UNICORN_MEMORY_LIMIT_MB'].to_i || 300
+
+listen '0.0.0.0:3000', backlog: 2048
+pid '/tmp/unicorn.pid'
+
 preload_app true
-timeout 30
 
-listen "#{app_root}/shared/tmp/sockets/unicorn.sock", backlog: 2048
-pid "#{app_root}/shared/tmp/pids/unicorn.pid"
-stderr_path "#{app_root}/shared/log/unicorn.log"
-stdout_path "#{app_root}/shared/log/unicorn.log"
+module UnicornMonitor
+  attr_reader :memory_limit
 
-GC.copy_on_write_friendly = true if GC.respond_to?(:copy_on_write_friendly=)
+  def process_client(*)
+    @monitor_counter += 1
+    start = Time.now.to_i
+    super.tap do
+      finish = Time.now.to_i
 
-before_fork do |server, _worker|
-  ActiveRecord::Base.connection.disconnect!
-
-  ##
-  # When sent a USR2, Unicorn will suffix its pidfile with .oldbin and
-  # immediately start loading up a new version of itself (loaded with a new
-  # version of our app). When this new Unicorn is completely loaded
-  # it will begin spawning workers. The first worker spawned will check to
-  # see if an .oldbin pidfile exists. If so, this means we've just booted up
-  # a new Unicorn and need to tell the old one that it can now die. To do so
-  # we send it a QUIT.
-  #
-  # Using this method we get 0 downtime deploys.
-
-  old_pid = "#{app_root}/shared/pids/unicorn.pid.oldbin"
-  if File.exist?(old_pid) && server.pid != old_pid
-    begin
-      Process.kill('QUIT', File.read(old_pid).to_i)
-      # rubocop:disable Lint/HandleExceptions
-    rescue Errno::ENOENT, Errno::ESRCH
-      # rubocop:enable Lint/HandleExceptions
-      # someone else did our job for us
+      if finish - start > 3 || (@monitor_counter % 20).zero?
+        check_memory_consumption
+      end
     end
+  end
+
+  def check_memory_consumption
+    mem_size = current_memory_consumption
+    logger = Rails.logger
+    if mem_size > memory_limit
+      ::Process.kill('QUIT', $$)
+      logger.info('Current memory consumption: %s mb. Reloading' % (mem_size.to_f / 1.megabyte).round(2))
+    elsif logger.debug?
+      logger.debug('Current memory consumption: %s mb' % (mem_size.to_f / 1.megabyte).round(2))
+    end
+  end
+
+  def init_monitor(memory_limit)
+    @memory_limit = memory_limit
+    @monitor_counter = 0
+  end
+
+  def current_memory_consumption
+    line = `#{memory_command}`
+    parts = line.split(' ')
+    parts[1].to_i.kilobytes
+  end
+
+  def memory_command
+    @memory_command ||= "ps -e -www -o pid,rss,command | grep '[u]nicorn_rails worker' | grep #{$$}"
   end
 end
 
-after_fork do |_server, _worker|
+before_fork do |_server, _worker|
+  ActiveRecord::Base.connection.disconnect!
+end
+
+after_fork do |server, _worker|
   ActiveRecord::Base.establish_connection
+
+  server.extend(UnicornMonitor).init_monitor(memory_limit)
 end
