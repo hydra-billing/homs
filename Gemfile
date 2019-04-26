@@ -26,7 +26,6 @@ gem 'apitome'
 gem 'dry-container'
 gem 'dry-auto_inject'
 gem 'dry-validation'
-gem 'thin'
 gem 'nokogiri', '~> 1.8.1'
 gem 'aws-sdk', '~> 2'
 gem 'web-console', '~> 2.0', group: :development
