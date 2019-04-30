@@ -29,7 +29,6 @@ v1.7.0 [2019-04-25]
 -   [#268](https://github.com/latera/homs/pull/268) Move validation of `select` and `select_table` to helpers.
 -   [#273](https://github.com/latera/homs/pull/273) Change colors on select and hover of `select_table`.
 -   [#276](https://github.com/latera/homs/pull/276) Fetch tasks for one entity by default.
--   [#279](https://github.com/latera/homs/pull/279) Add chrome stable version Dockerfile.test
 
 v1.6.1 [unreleased]
 -------------------
