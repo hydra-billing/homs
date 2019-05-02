@@ -1,3 +1,7 @@
+v1.8.0 [unreleased]
+-------------------
+- [#283](https://github.com/latera/homs/pull/283) Seed improvements: add env variables for initial values
+
 v1.7.1 [unreleased]
 -------------------
 

@@ -1,25 +1,30 @@
 def seed
-  add_admin
-  add_initial_order_types
-  add_initial_orders
+  if ENV['SEED_DB']
+    add_admin
+    add_initial_order_types
+    add_initial_orders
+  end
 end
 
 def add_admin
   User.connection.schema_cache.clear!
   User.reset_column_information
+  admin_email = ENV['ADMIN_EMAIL'] || 'user@example.com'
+  admin_password = ENV['ADMIN_PASSWORD'] || 'changeme'
+  admin_token = ENV['ADMIN_API_TOKEN'] || 'RENEWMEPLEASE'
 
-  existing_admin = User.find_by(email: 'user@example.com')
+  existing_admin = User.find_by(email: admin_email)
 
   unless existing_admin.present?
     User.create!(
-      email: 'user@example.com',
-      password: 'changeme',
+      email: admin_email,
+      password: admin_password,
       name: 'John',
       last_name: 'Doe',
       role: :admin,
       company: 'Example Corporation',
       department: 'Administrators',
-      api_token: 'RENEWMEPLEASE'
+      api_token: admin_token
     )
   end
 end
