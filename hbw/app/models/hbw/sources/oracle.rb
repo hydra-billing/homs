@@ -1,6 +1,13 @@
 module HBW
   module Sources
     class Oracle < Base
+      # ORA-00028: your session has been killed
+      # ORA-03113: end-of-file on communication channel
+      # ORA-03114: not connected to ORACLE
+      # ORA-03135: connection lost contact
+      # ORA-12541: TNS no listener
+      CONNECTION_ERROR_CODES = [28, 3113, 3114, 3135, 12541].freeze
+
       class ConnectionFailed < RuntimeError
       end
 
@@ -26,6 +33,16 @@ module HBW
 
       private
 
+      def with_connection_errors_handler
+        yield
+      rescue OCIError => error
+        if CONNECTION_ERROR_CODES.include?(error.code)
+          raise ConnectionFailed.new('Oracle connection error: %s' % error)
+        else
+          raise
+        end
+      end
+
       def parse_bind_names(sql)
         sql.scan(/:\w+/).map { |s| s[1..-1].to_sym } - [:HH, :HH12, :HH24, :MI, :SS, :SSSS]
       end
@@ -46,41 +63,42 @@ module HBW
       end
 
       def try_query(sql)
-        cursor = @connection.parse(sql)
-        yield(cursor)
-        cursor.exec
+        with_connection_errors_handler do
+          begin
+            cursor = @connection.parse(sql)
+            yield(cursor)
+            cursor.exec
 
-        id_col, name_col = cursor.get_col_names
-        name_col ||= id_col
-        integer_id = id_col =~ /_id\z/i
-        rows = []
-        while r = cursor.fetch_hash
-          rows << r
-        end
+            id_col, name_col = cursor.get_col_names
+            name_col ||= id_col
+            integer_id = id_col =~ /_id\z/i
+            rows = []
+            while r = cursor.fetch_hash
+              rows << r
+            end
 
-        rows.map do |row|
-          if integer_id
-            id = row[id_col].to_i
-          else
-            id = row[id_col]
+            rows.map do |row|
+              if integer_id
+                id = row[id_col].to_i
+              else
+                id = row[id_col]
+              end
+              { id: id, text: row[name_col] }.merge(row)
+            end
+          ensure
+            cursor.close if cursor.present?
           end
-          { id: id, text: row[name_col] }.merge(row)
         end
-      ensure
-        cursor.close if cursor.present?
       end
 
       def establish_connection
         return if @connection.present?
-        @connection = OCI8.new(
-          config.fetch('username'),
-          config.fetch('password'),
-          config.fetch('tns_name'))
-      rescue OCIError => error
-        if error.code.in?([12541])
-          raise ConnectionFailed.new('Oracle connection error: %s' % error)
-        else
-          raise
+
+        with_connection_errors_handler do
+          @connection = OCI8.new(
+            config.fetch('username'),
+            config.fetch('password'),
+            config.fetch('tns_name'))
         end
       end
 
