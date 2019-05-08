@@ -11,6 +11,7 @@ v1.7.1 [unreleased]
 -   [#274](https://github.com/latera/homs/pull/274) Add duration of requests logging.
 -   [#278](https://github.com/latera/homs/pull/278) Migrate from thin to unicorn.
 -   [#284](https://github.com/latera/homs/pull/284) Try to reconnect if got Oracle connection error.
+-   [#272](https://github.com/latera/homs/pull/272) Better view for multiple BP buttons.
 
 v1.7.0 [2019-04-25]
 -------------------
@@ -34,7 +35,6 @@ v1.7.0 [2019-04-25]
 -   [#268](https://github.com/latera/homs/pull/268) Move validation of `select` and `select_table` to helpers.
 -   [#273](https://github.com/latera/homs/pull/273) Change colors on select and hover of `select_table`.
 -   [#276](https://github.com/latera/homs/pull/276) Fetch tasks for one entity by default.
--   [#272](https://github.com/latera/homs/pull/272) Better view for multiple BP buttons.
 
 v1.6.1 [unreleased]
 -------------------
