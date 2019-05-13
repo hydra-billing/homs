@@ -1,10 +1,10 @@
 rails_root = '/opt/homs'
 
 working_directory rails_root
-worker_processes  ENV['HOMS_UNICORN_WORKERS'].to_i || 8
-timeout           ENV['HOMS_UNICORN_TIMEOUT'].to_i || 30
+worker_processes((ENV['HOMS_UNICORN_WORKERS'] || 8).to_i)
+timeout((ENV['HOMS_UNICORN_TIMEOUT'] || 30).to_i)
 
-memory_limit = ENV['HOMS_UNICORN_MEMORY_LIMIT_MB'].to_i || 300
+memory_limit = (ENV['HOMS_UNICORN_MEMORY_LIMIT_MB'] || 300).to_i
 
 listen '0.0.0.0:3000', backlog: 2048
 pid '/tmp/unicorn.pid'
