@@ -24,7 +24,9 @@ RUN apt-get update && apt-get install -y \
   xdg-utils \
   unzip
 
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb
+ARG CHROME_DEB_LINK
+
+RUN wget -O google-chrome.deb $CHROME_DEB_LINK && dpkg -i google-chrome.deb
 RUN chrome_version=$(google-chrome --version | grep -oE '[0-9]{2,}' | head -1) && \
     chromedriver_version=$(wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$chrome_version) && \
     wget https://chromedriver.storage.googleapis.com/$chromedriver_version/chromedriver_linux64.zip && \
