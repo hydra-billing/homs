@@ -22,3 +22,5 @@ ru:
           searching: Поиск...
           no_results_found: Совпадений не найдено
           enter_more_chars: Пожалуйста, введите больше одного символа
+        file_upload:
+          drag_and_drop: Перетащите файлы, чтобы прикрепить их
