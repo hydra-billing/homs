@@ -5,7 +5,8 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     state = {
       valid:      true,
       files:      [],
-      filesCount: 0
+      filesCount: 0,
+      dragStyleClass: 'attacher'
     };
 
     componentDidMount () {
@@ -39,20 +40,50 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       const { label } = this.props.params;
       const labelCss = this.props.params.label_css;
 
-      return <div className={cssClass}>
-        <span className={labelCss}>{label}</span>
-        <div className={errorMessageCss}>{errorMessage}</div>
-        <div className="form-group">
-          <input {...opts} type="file" multiple></input>
-          <input name={this.props.params.name} value={hiddenValue} type="hidden"/>
+      return (
+        <div className={cssClass}>
+          <span className={labelCss}>{label}</span>
+          <div className={errorMessageCss}>{errorMessage}</div>
+          <div className="form-group">
+            <input {...opts} type="file" multiple></input>
+            <input name={this.props.params.name} value={hiddenValue} type="hidden"/>
+            <div
+              className={this.state.dragStyleClass}
+              onDragEnter={e => this.onDragEnter(e)}
+              onDragLeave={e => this.onDragLeave(e)}
+              onDragOver={e => e.preventDefault()}
+              onDrop={e => this.onDrop(e)}
+            >
+              <div className={'drop_text'}>{this.props.env.translator('components.file_upload.drag_and_drop')}</div>
+            </div>
+          </div>
         </div>
-      </div>;
+      );
     }
 
-    onChange = (event) => {
-      const $el = event.target;
-      const files = Array.from($el.files);
+    onDragEnter = (event) => {
+      event.preventDefault();
+      this.setState({ dragStyleClass: 'attacher activated' });
+    };
 
+    onDragLeave = (event) => {
+      event.preventDefault();
+      this.setState({ dragStyleClass: 'attacher' });
+    };
+
+    onDrop = (event) => {
+      event.preventDefault();
+      const files = Array.from(event.dataTransfer.files);
+      this.setState({ dragStyleClass: 'attacher' });
+      this.readFiles(files);
+    };
+
+    onChange = (event) => {
+      const files = Array.from(event.target.files);
+      this.readFiles(files);
+    };
+
+    readFiles = (files) => {
       this.setState({
         files:      [],
         filesCount: files.length
@@ -61,7 +92,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       if (files.length > 0) {
         this.props.trigger('hbw:file-upload-started');
 
-        return files.map(file => this.readFiles(file.name, file));
+        return files.map(file => this.readFile(file.name, file));
       }
 
       return null;
@@ -85,7 +116,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       }
     };
 
-    readFiles = (name, file) => {
+    readFile = (name, file) => {
       const fileReader = new FileReader();
 
       fileReader.onloadend = () => {

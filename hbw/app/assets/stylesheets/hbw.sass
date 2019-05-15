@@ -267,6 +267,33 @@
   table.disabled
     background-color: #eeeeee
 
+  .attacher
+    align-items: center
+    justify-content: center
+    display: flex
+    margin-top: 5px
+    border: 1px solid #ccc
+    border-radius: 7px
+    width: 150px
+    padding: 8px
+    color: #ccc
+
+    &.activated
+      border: 2px dashed #dce4ec
+      width: auto
+      max-width: 480px
+      height: 115px
+      padding-top: 13px
+
+      .drop_text
+        font-size: 16px
+        color: #2C3E50
+
+    .drop_text
+      pointer-events: none
+      font-size: 12px
+      text-align: center
+
 #hbw-tasks
   .hbw-disabled
     visibility: hidden
