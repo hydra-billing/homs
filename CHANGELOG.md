@@ -3,7 +3,7 @@ v1.8.0 [unreleased]
 - [#283](https://github.com/latera/homs/pull/283) Seed improvements: add env variables for initial values
 - [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
 
-v1.7.1 [unreleased]
+v1.7.1 [2019-05-17]
 -------------------
 
 ### Features
