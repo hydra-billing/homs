@@ -3,9 +3,9 @@ import { withCallbacks, withConditions, compose } from '../helpers';
 modulejs.define('HBWFormFileUpload', ['React'], (React) => {
   class HBWFormFileUpload extends React.Component {
     state = {
-      valid:      true,
-      files:      [],
-      filesCount: 0,
+      valid:          true,
+      files:          [],
+      filesCount:     0,
       dragStyleClass: 'attacher'
     };
 
