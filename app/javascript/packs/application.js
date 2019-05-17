@@ -294,16 +294,6 @@ $(() => {
 
 class PatchedGrowl extends Growl {
   constructor (...args) {
-    {
-      // Hack: trick Babel/TypeScript into allowing this before super.
-      if (false) {
-        super();
-      }
-      const thisFn = (() => this).toString();
-      const thisName = thisFn.slice(thisFn.indexOf('return') + 6 + 1, thisFn.indexOf(';')).trim();
-      eval(`${thisName} = this;`);
-    }
-
     super(...args);
 
     this.stopped = false;
