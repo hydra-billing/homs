@@ -24,6 +24,7 @@
     "no-underscore-dangle": 0,
     "no-else-return": 0,
     "radix": [2, "as-needed"],
+    "react/display-name": 0,
     "react/prop-types": [1, { "skipUndeclared": true }],
     "space-before-function-paren": [1, "always"]
   },
