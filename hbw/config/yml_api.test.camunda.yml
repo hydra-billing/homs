@@ -1052,7 +1052,7 @@ post:
     "active=true&assignee=john&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
       []
   process-instance:
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-1":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq":
       default_data: &default_process-instances
         id: "111111"
         businessKey: null
@@ -1100,82 +1100,82 @@ post:
         - <<: *default_process-instances
           id: "111113"
           processDefinitionId: "testProcess:13:13"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-2":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-2&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "53452"
           processDefinitionId: "testProcess:2:2"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-3":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-3&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111111"
           processDefinitionId: "testProcess:3:3"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-4":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-4&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "222222"
           processDefinitionId: "testProcess:4:4"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-5":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-5&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "333333"
           processDefinitionId: "testProcess:5:5"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-6":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-6&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "444444"
           processDefinitionId: "testProcess:6:6"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-7":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-7&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "555555"
           processDefinitionId: "testProcess:7:7"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-8":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-8&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "666666"
           processDefinitionId: "testProcess:8:8"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-9":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-9&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "777777"
           processDefinitionId: "testProcess:9:9"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-10":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-10&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "888888"
           processDefinitionId: "testProcess:10:10"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-11":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-11&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "999999"
           processDefinitionId: "testProcess:11:11"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-12":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-12&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111112"
           processDefinitionId: "testProcess:12:12"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-13":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-13&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111113"
           processDefinitionId: "testProcess:13:13"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-14":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-14&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111114"
           processDefinitionId: "testProcess:14:14"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-15":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-15&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111115"
           processDefinitionId: "testProcess:15:15"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-16":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-16&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111116"
           processDefinitionId: "testProcess:16:16"
-    "variables[][name]=homsOrderCode&variables[][operator]=eq&variables[][value]=ORD-17":
+    "variables[][name]=homsOrderCode&variables[][value]=ORD-17&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111117"
