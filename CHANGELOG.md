@@ -5,6 +5,7 @@ v1.8.0 [unreleased]
 - [#283](https://github.com/latera/homs/pull/283) Seed improvements: add env variables for initial values
 - [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
 - [#289](https://github.com/latera/homs/pull/289) Make conditions `disable_if` and `delete_if` dynamic.
+- [#294](https://github.com/latera/homs/pull/294) Add test for dynamic disable and delete.
 
 v1.7.1 [2019-05-17]
 -------------------
