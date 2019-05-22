@@ -73,11 +73,12 @@ modulejs.define(
       renderForm = () => {
         if (this.state.form) {
           const opts = {
-            form:      this.state.form,
-            env:       this.props.env,
-            error:     this.state.error,
-            pending:   this.state.pending,
-            variables: this.formVariablesFromTask(this.props.task)
+            form:          this.state.form,
+            env:           this.props.env,
+            error:         this.state.error,
+            pending:       this.state.pending,
+            variables:     this.formVariablesFromTask(this.props.task),
+            taskVariables: this.props.task.variables
           };
 
           return <Form {...opts}/>;

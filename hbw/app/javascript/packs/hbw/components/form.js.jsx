@@ -13,15 +13,18 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     state = {
       error:         null,
       submitting:    false,
-      fileUploading: false
+      fileUploading: false,
+      formValues:    {}
     };
 
     componentDidMount () {
+      this.setInitialValuesForm();
       jQuery(':input:enabled:visible:first').focus();
       this.props.bind('hbw:submit-form', () => this.setState({ submitting: true }));
       this.props.bind('hbw:form-submitting-failed', () => this.setState({ submitting: false }));
       this.props.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
       this.props.bind('hbw:file-upload-finished', () => this.setState({ fileUploading: false }));
+      this.props.bind('hbw:update-value', data => this.updateFormValues(data));
     }
 
     render () {
@@ -43,6 +46,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       const opts = {
         name,
         params,
+        formValues:      this.state.formValues,
         value:           this.props.variables[name],
         formSubmitting:  this.state.submitting || this.state.fileUploading,
         env:             this.props.env,
@@ -157,7 +161,21 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       return false;
     };
 
+    updateFormValues = ({ name, value }) => {
+      this.setState(prevState => ({ formValues: { ...prevState.formValues, [name]: value } }));
+    };
+
     notSerializableFields = () => ['static'];
+
+    setInitialValuesForm = () => {
+      let variables = {};
+
+      this.props.taskVariables.forEach((variable) => {
+        variables[variable.name] = variable.value;
+      });
+
+      this.setState({ formValues: variables });
+    };
 
     serializeForm = () => {
       let variables = {};

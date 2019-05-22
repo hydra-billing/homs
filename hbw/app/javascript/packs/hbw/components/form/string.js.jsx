@@ -270,6 +270,8 @@ modulejs.define('HBWFormString', ['React'], (React) => {
           visualValue: $el.value
         });
       }
+
+      this.props.fireFieldValueUpdate(this.props.name, this.state.value);
     };
 
     buildExtractRegexp = (pattern) => {

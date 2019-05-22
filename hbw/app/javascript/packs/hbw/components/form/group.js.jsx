@@ -52,6 +52,7 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
       const opts = {
         name,
         params,
+        formValues:     this.props.formValues,
         value:          this.props.variables[name],
         formSubmitting: this.props.formSubmitting,
         env:            this.props.env
