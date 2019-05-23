@@ -114,6 +114,12 @@ get:
       - <<: *default_process-definition
         id: "testProcess:24:24"
         deploymentId: "24"
+      - <<: *default_process-definition
+        id: "testProcess:25:25"
+        deploymentId: "25"
+      - <<: *default_process-definition
+        id: "testProcess:26:26"
+        deploymentId: "26"
 
   # form definitions
   task/816011/deployed-form: &form_with_everything
@@ -856,6 +862,122 @@ get:
                 filter_condition: "SELECT 123, 'Some text' FROM DUAL"
   task/111123/deployed-form: *form_with_everything
   task/111124/deployed-form: *form_with_everything
+  "task/111125/deployed-form":
+    "": |
+      form:
+        css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+        fields:
+          - name: group1
+            type: group
+            label: Dynamic disable_if test
+            css_class: col-xs-12
+            fields:
+              - name: homsOrderCheckingThis
+                css_class: col-xs-6 col-sm-4 col-md-3
+                label: Reason
+                type: string
+              - name: homsOrderOrEnableAfterChanges
+                type: string
+                label: Will be enable after changes
+                css_class: col-xs-6 col-sm-4 col-md-3
+                dynamic: true
+                disable_if:
+                  -
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 1
+                  -
+                    - variable: homsOrderCheckingThis
+                      condition: parseInt($var) == 666
+              - name: homsOrderAndEnableAfterChanges
+                type: string
+                label: Will be enable after changes
+                css_class: col-xs-6 col-sm-4 col-md-3
+                dynamic: true
+                disable_if:
+                  - variable: homsOrderDataZeroVariable
+                    condition: $var == 0
+                  - variable: homsOrderCheckingThis
+                    condition: parseInt($var) == 666
+              - name: homsOrderOrDisableAfterChanges
+                type: string
+                label: OR Will be disable after changes
+                css_class: col-xs-6 col-sm-4 col-md-3
+                dynamic: true
+                disable_if:
+                  -
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 1
+                  -
+                    - variable: homsOrderCheckingThis
+                      condition: parseInt($var) == 1234
+              - name: homsOrderAndDisableAfterChanges
+                type: string
+                label: AND Will be disable after changes
+                css_class: col-xs-6 col-sm-4 col-md-3
+                dynamic: true
+                disable_if:
+                  - variable: homsOrderDataZeroVariable
+                    condition: $var == 0
+                  - variable: homsOrderCheckingThis
+                    condition: parseInt($var) == 1234
+  "task/111126/deployed-form":
+    "": |
+      form:
+        css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+        fields:
+          - name: group1
+            type: group
+            label: Dynamic delete_if test
+            css_class: col-xs-12
+            fields:
+              - name: homsOrderCheckingThis
+                css_class: col-xs-6 col-sm-4 col-md-3
+                label: Reason
+                type: string
+              - name: homsOrderOrShownAfterChanges
+                type: string
+                label: OR Will be shown after changes
+                css_class: col-xs-6 col-sm-4 col-md-3
+                dynamic: true
+                delete_if:
+                  -
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 1
+                  -
+                    - variable: homsOrderCheckingThis
+                      condition: parseInt($var) == 666
+              - name: homsOrderAndShownAfterChanges
+                type: string
+                label: AND Will be shown after changes
+                css_class: col-xs-6 col-sm-4 col-md-3
+                dynamic: true
+                delete_if:
+                  - variable: homsOrderDataZeroVariable
+                    condition: $var == 0
+                  - variable: homsOrderCheckingThis
+                    condition: parseInt($var) == 666
+              - name: homsOrderOrHiddenAfterChanges
+                type: string
+                label: OR Will be hidden after changes
+                css_class: col-xs-6 col-sm-4 col-md-3
+                dynamic: true
+                delete_if:
+                  -
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 1
+                  -
+                    - variable: homsOrderCheckingThis
+                      condition: parseInt($var) == 1234
+              - name: homsOrderAndHiddenAfterChanges
+                type: string
+                label: AND Will be hidden after changes
+                css_class: col-xs-6 col-sm-4 col-md-3
+                dynamic: true
+                delete_if:
+                  - variable: homsOrderDataZeroVariable
+                    condition: $var == 0
+                  - variable: homsOrderCheckingThis
+                    condition: parseInt($var) == 1234
 
   # task variables
   task/816011/variables:
@@ -1122,6 +1244,54 @@ get:
         type: "string"
         value: null
 
+  task/111125/variables:
+    "":
+      homsOrderCode:
+        type: "string"
+        value: "ORD-25"
+      homsOrderDataZeroVariable:
+        type: "number"
+        value: 0
+      homsOrderCheckingThis:
+        type: "number"
+        value: 666
+      homsOrderOrEnableAfterChanges:
+        type: "string"
+        value: "or_enabled"
+      homsOrderAndEnableAfterChanges:
+        type: "string"
+        value: "and_enabled"
+      homsOrderOrDisableAfterChanges:
+        type: "string"
+        value: "or_disabled"
+      homsOrderAndDisableAfterChanges:
+        type: "string"
+        value: "and_disabled"
+
+  task/111126/variables:
+    "":
+      homsOrderCode:
+        type: "string"
+        value: "ORD-26"
+      homsOrderDataZeroVariable:
+        type: "number"
+        value: 0
+      homsOrderCheckingThis:
+        type: "number"
+        value: 666
+      homsOrderOrShownAfterChanges:
+        type: "string"
+        value: "or_shown"
+      homsOrderAndShownAfterChanges:
+        type: "string"
+        value: "and_shown"
+      homsOrderOrHiddenAfterChanges:
+        type: "string"
+        value: "or_hidden"
+      homsOrderAndHiddenAfterChanges:
+        type: "string"
+        value: "and_hidden"
+
   task/816011:
     "": &default_tasks
       id: "816011"
@@ -1321,6 +1491,22 @@ get:
       processInstanceId: 23
       processDefinitionId: "testProcess:23:23"
 
+  task/111125:
+    "":
+      <<: *default_tasks
+      id: "111125"
+      formKey: "test_form_with_select_table_multi.yml"
+      processInstanceId: 25
+      processDefinitionId: "testProcess:25:25"
+
+  task/111126:
+    "":
+      <<: *default_tasks
+      id: "111126"
+      formKey: "test_form_with_select_table_multi.yml"
+      processInstanceId: 26
+      processDefinitionId: "testProcess:26:26"
+
 put: {}
 patch: {}
 post:
@@ -1453,6 +1639,16 @@ post:
         processInstanceId: 23
         description: 'Some test description'
         processDefinitionId: "testProcess:23:23"
+      - <<: *default_tasks
+        id: "111125"
+        formKey: "test_form_with_select_table_multi.yml"
+        processInstanceId: 25
+        processDefinitionId: "testProcess:25:25"
+      - <<: *default_tasks
+        id: "111126"
+        formKey: "test_form_with_select_table_multi.yml"
+        processInstanceId: 26
+        processDefinitionId: "testProcess:26:26"
     "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
       - <<: *default_tasks
         id: "111124"
@@ -1633,6 +1829,16 @@ post:
         - <<: *default_process-instances
           id: "111123"
           processDefinitionId: "testProcess:23:23"
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-25&variables[][operator]=eq":
+      data:
+        - <<: *default_process-instances
+          id: "111125"
+          processDefinitionId: "testProcess:25:25"
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-26&variables[][operator]=eq":
+      data:
+        - <<: *default_process-instances
+          id: "111126"
+          processDefinitionId: "testProcess:26:26"
 
   task/816011/submit-form:
     "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataDisabledEndDate][value]=&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataReason][value]=&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456&variables[homsOrderDataSomeCheckbox][value]=false&variables[homsOrderDataSomeDatetime][value]=&variables[homsOrderDataSomeDisabledCheckbox][value]=false&variables[homsOrderDataSomeDisabledSelect][value]=&variables[homsOrderDataSomeDisabledText][value]=&variables[homsOrderDataSomeSelect][value]=&variables[homsOrderDataSomeStr][value]=&variables[homsOrderDataSomeText][value]=&variables[homsOrderDataWorkAddress][value]=&variables[homsOrderDataWorkPlace][value]=":
@@ -1658,13 +1864,19 @@ post:
   task/111122/submit-form:
     "variables[homsOrderDataSelect][value]=123":
       - ""
+  task/111125/submit-form:
+    "variables[homsOrderAndDisableAfterChanges][value]=and_disabled&variables[homsOrderAndEnableAfterChanges][value]=and_enabled&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrDisableAfterChanges][value]=or_disabled&variables[homsOrderOrEnableAfterChanges][value]=or_enabled":
+      - ""
+  task/111126/submit-form:
+    "variables[homsOrderAndHiddenAfterChanges][value]=and_hidden&variables[homsOrderAndShownAfterChanges][value]=and_shown&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrHiddenAfterChanges][value]=or_hidden&variables[homsOrderOrShownAfterChanges][value]=or_shown":
+      - ""
   task/111123/claim:
     "userId=demo": null
   task/111124/claim:
     "userId=demo": null
 
   variable-instance:
-    "processInstanceIdIn[]=814972&processInstanceIdIn[]=2&processInstanceIdIn[]=3&processInstanceIdIn[]=4&processInstanceIdIn[]=5&processInstanceIdIn[]=6&processInstanceIdIn[]=7&processInstanceIdIn[]=8&processInstanceIdIn[]=9&processInstanceIdIn[]=10&processInstanceIdIn[]=11&processInstanceIdIn[]=12&processInstanceIdIn[]=13&processInstanceIdIn[]=14&processInstanceIdIn[]=15&processInstanceIdIn[]=16&processInstanceIdIn[]=17&processInstanceIdIn[]=18&processInstanceIdIn[]=19&processInstanceIdIn[]=20&processInstanceIdIn[]=21&processInstanceIdIn[]=22&processInstanceIdIn[]=23&processInstanceIdIn[]=24&variableName=homsOrderCode":
+    "processInstanceIdIn[]=814972&processInstanceIdIn[]=2&processInstanceIdIn[]=3&processInstanceIdIn[]=4&processInstanceIdIn[]=5&processInstanceIdIn[]=6&processInstanceIdIn[]=7&processInstanceIdIn[]=8&processInstanceIdIn[]=9&processInstanceIdIn[]=10&processInstanceIdIn[]=11&processInstanceIdIn[]=12&processInstanceIdIn[]=13&processInstanceIdIn[]=14&processInstanceIdIn[]=15&processInstanceIdIn[]=16&processInstanceIdIn[]=17&processInstanceIdIn[]=18&processInstanceIdIn[]=19&processInstanceIdIn[]=20&processInstanceIdIn[]=21&processInstanceIdIn[]=22&processInstanceIdIn[]=23&processInstanceIdIn[]=24&processInstanceIdIn[]=25&processInstanceIdIn[]=26&variableName=homsOrderCode":
       - processInstanceId: 814972
         type: string
         name: homsOrderCode
@@ -1761,6 +1973,14 @@ post:
         type: string
         name: homsOrderCode
         value: ORD-24
+      - processInstanceId: 25
+        type: string
+        name: homsOrderCode
+        value: ORD-25
+      - processInstanceId: 26
+        type: string
+        name: homsOrderCode
+        value: ORD-26
 
     variableName=homsOrderCode: []
 

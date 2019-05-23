@@ -98,7 +98,7 @@ Layout/ClosingParenthesisIndentation:
     - 'spec/acceptance/api/v1/users_controller_spec.rb'
     - 'spec/classes/custom_fields/field_def_spec.rb'
 
-# Offense count: 4
+# Offense count: 5
 # Cop supports --auto-correct.
 Layout/EmptyLineAfterGuardClause:
   Exclude:
@@ -626,6 +626,28 @@ Rails/Delegate:
   Exclude:
     - 'app/models/order_type.rb'
 
+# Offense count: 66
+# Cop supports --auto-correct.
+# Configuration parameters: Whitelist.
+# Whitelist: find_by_sql
+Rails/DynamicFindBy:
+  Exclude:
+    - 'app/controllers/api/v1/orders_controller.rb'
+    - 'app/controllers/api/v1/users_controller.rb'
+    - 'app/controllers/concerns/http_basic_authentication.rb'
+    - 'app/controllers/imprint/prints_controller.rb'
+    - 'app/models/sequence.rb'
+    - 'spec/acceptance/api/v1/orders_controller_spec.rb'
+    - 'spec/acceptance/api/v1/users_controller_spec.rb'
+    - 'spec/controllers/orders_controller_spec.rb'
+    - 'spec/features/order_types/new_order_type_spec.rb'
+    - 'spec/features/orders/edit_order_spec.rb'
+    - 'spec/features/orders/new_order_spec.rb'
+    - 'spec/features/users/users_spec.rb'
+    - 'spec/hbw/features/bp_form_disabled_fields_spec.rb'
+    - 'spec/hbw/features/bp_form_dynamic_disable_fields_spec.rb'
+    - 'spec/support/helpers/orders_helper.rb'
+
 # Offense count: 15
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: slashes, arguments
@@ -804,7 +826,7 @@ Style/ExpandPathArguments:
     - 'hbw/hbw.gemspec'
     - 'spec/rails_helper.rb'
 
-# Offense count: 19
+# Offense count: 20
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:
   Exclude:
