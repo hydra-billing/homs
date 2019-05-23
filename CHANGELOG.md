@@ -1,5 +1,9 @@
 v2.5.0 [unreleased]
 -------------------
+### Changes
+Change serialization of disable, read only and hidden fields. Now all values of these fields will not be submitted.
+See [#296](https://github.com/latera/homs/pull/296) for more details.
+
 ### Features
 - [#493](https://github.com/latera/homs/pull/493) Add missing labels for inputs on search order form.
 - [#497](https://github.com/latera/homs/pull/497) Handle connection error when try to print order.

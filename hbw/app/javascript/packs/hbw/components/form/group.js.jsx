@@ -124,6 +124,10 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
     notSerializableFields = () => ['static'];
 
     serialize = () => {
+      if (this.props.hidden) {
+        return null;
+      }
+
       let variables = {};
 
       this.props.params.fields.forEach((field) => {

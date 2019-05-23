@@ -264,7 +264,7 @@ modulejs.define('HBWFormSelectTable',
       };
 
       serialize = () => {
-        if (this.props.params.editable === false || this.props.disabled) {
+        if (this.props.params.editable === false || this.props.disabled || this.props.hidden) {
           return null;
         } else {
           return { [this.props.name]: this.props.params.multi ? JSON.stringify(this.state.value) : this.state.value };
