@@ -113,7 +113,7 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
     };
 
     serialize = () => {
-      if (this.props.params.editable === false || this.props.disabled) {
+      if (this.props.params.editable === false || this.props.disabled || this.props.hidden) {
         return null;
       } else {
         return { [this.props.params.name]: this.state.value ? this.state.value.format() : '' };
