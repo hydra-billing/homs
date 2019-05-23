@@ -286,7 +286,7 @@ modulejs.define('HBWFormSelect',
       };
 
       serialize = () => {
-        if (this.props.params.editable === false || this.props.disabled) {
+        if (this.props.params.editable === false || this.props.disabled || this.props.hidden) {
           return null;
         } else {
           return { [this.props.name]: this.state.value };

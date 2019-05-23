@@ -1378,10 +1378,10 @@ post:
     "variables[homsOrderDataSelect][value][]=125342501":
       - ""
   task/111118/submit-form:
-    "variables[homsOrderAndDisableAfterChanges][value]=and_disabled&variables[homsOrderAndEnableAfterChanges][value]=and_enabled&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrDisableAfterChanges][value]=or_disabled&variables[homsOrderOrEnableAfterChanges][value]=or_enabled":
+    "variables[homsOrderAndDisableAfterChanges][value]=&variables[homsOrderAndEnableAfterChanges][value]=and_enabled&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrDisableAfterChanges][value]=&variables[homsOrderOrEnableAfterChanges][value]=or_enabled":
       - ""
   task/111119/submit-form:
-    "variables[homsOrderAndHiddenAfterChanges][value]=and_hidden&variables[homsOrderAndShownAfterChanges][value]=and_shown&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrHiddenAfterChanges][value]=or_hidden&variables[homsOrderOrShownAfterChanges][value]=or_shown":
+    "variables[homsOrderAndHiddenAfterChanges][value]=&variables[homsOrderAndShownAfterChanges][value]=and_shown&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrHiddenAfterChanges][value]=&variables[homsOrderOrShownAfterChanges][value]=or_shown":
     - ""
   task/count:
     "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":

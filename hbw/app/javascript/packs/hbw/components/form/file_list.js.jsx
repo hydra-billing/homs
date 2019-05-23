@@ -79,9 +79,13 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
     };
 
     serialize = () => {
-      const { links, deletedFiles } = this.state;
+      if (this.props.disabled || this.props.hidden) {
+        return null;
+      } else {
+        const { links, deletedFiles } = this.state;
 
-      return { [this.props.params.name]: JSON.stringify(links.filter(link => !deletedFiles.includes(link.name))) };
+        return { [this.props.params.name]: JSON.stringify(links.filter(link => !deletedFiles.includes(link.name))) };
+      }
     };
   }
 

@@ -1,6 +1,10 @@
 v1.8.0 [unreleased]
 -------------------
 
+### Changes
+Change serialization of disable, read only and hidden fields. Now all values of these fields will not be submitted.   
+See [#296](https://github.com/latera/homs/pull/296) for more details.
+
 ### Features
 - [#283](https://github.com/latera/homs/pull/283) Seed improvements: add env variables for initial values
 - [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
