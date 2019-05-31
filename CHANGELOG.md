@@ -3,6 +3,11 @@ v1.8.0 [unreleased]
 - [#283](https://github.com/latera/homs/pull/283) Seed improvements: add env variables for initial values
 - [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
 
+### Breaking changes
+    
+-   `select_table` with `multi:true` saves all data in JSON format now. It's not possible to open form contains old data with such table.     
+    See [#300](https://github.com/latera/homs/pull/300) for more details.
+
 v1.7.2 [unreleased]
 -------------------
 ### Bugfixes
