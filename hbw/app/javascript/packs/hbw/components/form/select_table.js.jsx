@@ -22,7 +22,7 @@ modulejs.define('HBWFormSelectTable',
 
       getInputValues = (value) => {
         if (this.props.params.multi) {
-          return value || [];
+          return JSON.parse(value) || [];
         } else {
           return value || '';
         }
@@ -266,7 +266,7 @@ modulejs.define('HBWFormSelectTable',
         if (this.props.params.editable === false || this.props.disabled) {
           return null;
         } else {
-          return { [this.props.name]: this.state.value };
+          return { [this.props.name]: this.props.params.multi ? JSON.stringify(this.state.value) : this.state.value };
         }
       };
     }

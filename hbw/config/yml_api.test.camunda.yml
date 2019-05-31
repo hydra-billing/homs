@@ -719,6 +719,28 @@ get:
                   - My favourite region name2
                   - My favourite region code2
                   - 3252349284
+          - name: homsOrderDataStatic
+            type: select_table
+            label: Options
+            css_class: col-xs-12 pre-scrollable
+            nullable: true
+            multi: true
+            rows:
+                - name: Name
+                  type: string
+                  alignment: right
+                - name: Code
+                - name: Arbitrary number
+                  type: number
+                  precision: 2
+                  separator: "."
+                  delimiter: ","
+            choices:
+                -
+                  - 125342501
+                  - My favourite region name3
+                  - My favourite region code3
+                  - 235234521
   "task/111117/deployed-form":
     "": |
       form:
@@ -1184,7 +1206,7 @@ post:
     "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataDisabledEndDate][value]=&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataReason][value]=&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456&variables[homsOrderDataSomeCheckbox][value]=false&variables[homsOrderDataSomeDatetime][value]=&variables[homsOrderDataSomeDisabledCheckbox][value]=false&variables[homsOrderDataSomeDisabledSelect][value]=&variables[homsOrderDataSomeDisabledText][value]=&variables[homsOrderDataSomeSelect][value]=&variables[homsOrderDataSomeStr][value]=&variables[homsOrderDataSomeText][value]=&variables[homsOrderDataWorkAddress][value]=&variables[homsOrderDataWorkPlace][value]=":
       - ""
   task/111116/submit-form:
-    "variables[homsOrderDataSelect][value][]=125342501":
+    "variables[homsOrderDataSelect][value]=[\"125342501\"]&variables[homsOrderDataStatic][value]=[]":
       - ""
   task/count:
     "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
