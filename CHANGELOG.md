@@ -3,6 +3,11 @@ v1.8.0 [unreleased]
 - [#283](https://github.com/latera/homs/pull/283) Seed improvements: add env variables for initial values
 - [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
 
+v1.7.2 [unreleased]
+-------------------
+### Bugfixes
+- [#301](https://github.com/latera/homs/pull/301) Change deprecated `render nothing: true` to `head`.
+
 v1.7.1 [2019-05-17]
 -------------------
 
@@ -132,7 +137,7 @@ v1.5.0 [2018-10-29]
 -   [#177](https://github.com/latera/homs/pull/177) Improve README and docker-compose files.
 -   [#171](https://github.com/latera/homs/pull/171) Migrate from CoffeeScript to ES6 + Webpack.
 -   [#179](https://github.com/latera/homs/pull/179) Replace `jquery-ui` tooltip with `popper.js`.
--   [#184](https://github.com/latera/homs/pull/184) Add `base_url` option to main config provides custom prefix for all paths in app. Fixes [#148](https://github.com/latera/homs/issues/148).    
+-   [#184](https://github.com/latera/homs/pull/184) Add `base_url` option to main config provides custom prefix for all paths in app. Fixes [#148](https://github.com/latera/homs/issues/148).
 -   [#185](https://github.com/latera/homs/pull/185) Speed up docker build.
 -   [#188](https://github.com/latera/homs/pull/188) Use `.env` file in docker-compose.
 -   [#183](https://github.com/latera/homs/pull/183) Replace `Select2` with `react-select` in widget.
