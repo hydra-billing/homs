@@ -56,15 +56,15 @@ module API
     protected
 
     def record_not_found
-      render nothing: true, status: :not_found
+      head :not_found
     end
 
     def record_invalid
-      render nothing: true, status: :unprocessable_entity
+      head :unprocessable_entity
     end
 
     def bad_request
-      render nothing: true, status: :bad_request
+      head :bad_request
     end
 
     def page_params
