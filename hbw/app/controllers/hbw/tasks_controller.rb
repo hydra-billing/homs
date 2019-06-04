@@ -44,7 +44,7 @@ module HBW
       if result
         head :no_content
       else
-        render nothing: true, status: :bad_request
+        head :bad_request
       end
     end
 
