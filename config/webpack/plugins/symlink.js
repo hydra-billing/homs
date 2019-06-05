@@ -10,23 +10,23 @@ class SymlinkAssets {
   }
 
   apply (compiler) {
-    const emit = (compilation, callback) => {
+    const emit = (compilation) => {
       Object.entries(compilation.assets).forEach(([filename, _]) => {
         if (!CHUNKHASH_REGEX.test(filename)) return;
 
         const nonDigestFilename = filename.replace(CHUNKHASH_REGEX, '.');
+        const relativeFileName = nonDigestFilename.replace(/^(js|css)\//, '');
 
-        if (this.filenames.includes(nonDigestFilename)) {
+        if (this.filenames.includes(relativeFileName)) {
           fs.symlinkSync(
             path.join('./packs', filename),
-            path.join(assetsPath, nonDigestFilename))
+            path.join(assetsPath, relativeFileName)
+          );
         }
       });
-
-      callback();
     };
 
-    compiler.plugin('emit', emit);
+    compiler.hooks.afterEmit.tap('SymlinkAssets', emit);
   }
 }
 
