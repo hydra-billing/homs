@@ -15,10 +15,10 @@ var CustomFormatter = {
     var matches = mask.match(templateRegexp);
     var simpleMask = mask;
 
-    for (var i in matches) {
-      var newPart = matches[i].replace('{{', '').replace('}}', '').replace(/9/g, '_');
-      simpleMask = simpleMask.replace(matches[i], newPart);
-    }
+    matches.forEach((_match) => {
+      const newPart = _match.replace('{{', '').replace('}}', '').replace(/9/g, '_');
+      simpleMask = simpleMask.replace(_match, newPart);
+    });
 
     return simpleMask;
   },
@@ -57,11 +57,12 @@ var CustomFormatter = {
     } else {
       var arr = Array.apply(null, {length: position - 1}).map(Number.call, Number).reverse();
 
-      for (var i in arr)
-        if (simpleMask[arr[i]] == '_') {
-          updatedNextVal = updatedNextVal.substr(0, arr[i]) + ' ' + updatedNextVal.substr(arr[i] + 1, updatedNextVal.length);
-          break
+      for (const el of arr) {
+        if (simpleMask[el] === '_') {
+          updatedNextVal = updatedNextVal.substr(0, el) + ' ' + updatedNextVal.substr(el + 1, updatedNextVal.length);
+          break;
         }
+      }
     }
 
     return updatedNextVal
