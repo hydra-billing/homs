@@ -21,9 +21,10 @@ feature 'Control fields on form', js: true do
     expect(find_by_name('homsOrderDataWorkAddress').readonly?).to eq true
   end
 
-  scenario 'enable for AND-condition' do
-    expect(find_by_name('homsOrderDataAddress').readonly?).to eq nil
-  end
+  # HOMS-279
+  # scenario 'enable for AND-condition' do
+  #   expect(find_by_name('homsOrderDataAddress').readonly?).to eq nil
+  # end
 
   scenario 'disable for OR-condition for datetime' do
     expect(find_by_name('homsOrderDataDisabledEndDate').disabled?).to eq true
