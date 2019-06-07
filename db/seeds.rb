@@ -1,8 +1,10 @@
 def seed
-  if ENV['SEED_DB']
+  if ENV['SEED_DB'] == 'true'
     add_admin
     add_initial_order_types
     add_initial_orders
+  else
+    puts 'db was not seeded'
   end
 end
 
