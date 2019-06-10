@@ -168,7 +168,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     notSerializableFields = () => ['static'];
 
     setInitialValuesForm = () => {
-      let variables = {};
+      const variables = {};
 
       this.props.taskVariables.forEach((variable) => {
         variables[variable.name] = variable.value;

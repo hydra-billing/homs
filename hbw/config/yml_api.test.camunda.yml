@@ -1394,16 +1394,16 @@ post:
         id: "111119"
         processDefinitionId: "testProcess:19:19"
   task/816011/submit-form:
-    "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataDisabledEndDate][value]=&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataReason][value]=&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456&variables[homsOrderDataSomeCheckbox][value]=false&variables[homsOrderDataSomeDatetime][value]=&variables[homsOrderDataSomeDisabledCheckbox][value]=false&variables[homsOrderDataSomeDisabledSelect][value]=&variables[homsOrderDataSomeDisabledText][value]=&variables[homsOrderDataSomeSelect][value]=&variables[homsOrderDataSomeStr][value]=&variables[homsOrderDataSomeText][value]=&variables[homsOrderDataWorkAddress][value]=&variables[homsOrderDataWorkPlace][value]=":
+    "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456":
       - ""
   task/111116/submit-form:
     "variables[homsOrderDataSelect][value]=[\"125342501\"]&variables[homsOrderDataStatic][value]=[]":
       - ""
   task/111118/submit-form:
-    "variables[homsOrderAndDisableAfterChanges][value]=&variables[homsOrderAndEnableAfterChanges][value]=and_enabled&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrDisableAfterChanges][value]=&variables[homsOrderOrEnableAfterChanges][value]=or_enabled":
+    "variables[homsOrderAndEnableAfterChanges][value]=and_enabled&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrEnableAfterChanges][value]=or_enabled":
       - ""
   task/111119/submit-form:
-    "variables[homsOrderAndHiddenAfterChanges][value]=&variables[homsOrderAndShownAfterChanges][value]=and_shown&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrHiddenAfterChanges][value]=&variables[homsOrderOrShownAfterChanges][value]=or_shown":
+    "variables[homsOrderAndShownAfterChanges][value]=and_shown&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrShownAfterChanges][value]=or_shown":
     - ""
   task/count:
     "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":

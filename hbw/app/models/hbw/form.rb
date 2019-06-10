@@ -48,7 +48,7 @@ module HBW
     end
 
     def extract_and_coerce_values(values)
-      flatten_fields.select(&:has_value?).select(&:editable?).each_with_object({}) do |field, result|
+      fields_for_submit(values).each_with_object({}) do |field, result|
         result[field.code] = field.coerce(values[field.code])
       end
     end
@@ -57,6 +57,10 @@ module HBW
       fields.flat_map do |field|
         field.type == :group ? field.fields : field
       end
+    end
+
+    def fields_for_submit(values)
+      flatten_fields.select(&:has_value?).select(&:editable?).select { |f| values.key?(f.code) }
     end
   end
 end
