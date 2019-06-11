@@ -4,7 +4,7 @@ import Select from 'react-select';
 import AsyncSelect from 'react-select/lib/Async';
 import Tooltip from 'tooltip.js';
 import {
-  withConditions, withSelect, withCallbacks, withValidations, compose
+  withConditions, withSelect, withCallbacks, withValidations, withErrorBoundary, compose
 } from '../helpers';
 
 modulejs.define('HBWFormSelect',
@@ -295,5 +295,5 @@ modulejs.define('HBWFormSelect',
       };
     }
 
-    return compose(withSelect, withConditions, withCallbacks, withValidations)(FormSelect);
+    return compose(withSelect, withConditions, withCallbacks, withValidations, withErrorBoundary)(FormSelect);
   });

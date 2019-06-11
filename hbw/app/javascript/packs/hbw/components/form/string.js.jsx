@@ -3,7 +3,9 @@
 
 import CustomFormatter from 'formatter';
 import Tooltip from 'tooltip';
-import { withCallbacks, withConditions, compose } from '../helpers';
+import {
+  withCallbacks, withConditions, withErrorBoundary, compose,
+} from '../helpers';
 
 modulejs.define('HBWFormString', ['React'], (React) => {
   class HBWFormString extends React.Component {
@@ -382,5 +384,5 @@ modulejs.define('HBWFormString', ['React'], (React) => {
     serialize = () => ({ [this.props.name]: this.state.value });
   }
 
-  return compose(withCallbacks, withConditions)(HBWFormString);
+  return compose(withCallbacks, withConditions, withErrorBoundary)(HBWFormString);
 });

@@ -1,4 +1,4 @@
-import { withConditions } from '../helpers';
+import { withConditions, withErrorBoundary, compose } from '../helpers';
 
 modulejs.define('HBWFormStatic', ['React'], (React) => {
   const HBWFormStatic = ({ params, hidden }) => {
@@ -11,5 +11,5 @@ modulejs.define('HBWFormStatic', ['React'], (React) => {
     return <div className={cssClass} dangerouslySetInnerHTML={{ __html: params.html }} />;
   };
 
-  return withConditions(HBWFormStatic);
+  return compose(withConditions, withErrorBoundary)(HBWFormStatic);
 });

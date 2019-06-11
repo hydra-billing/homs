@@ -1,4 +1,4 @@
-import { withConditions } from '../helpers';
+import { withConditions, withErrorBoundary, compose } from '../helpers';
 
 modulejs.define('HBWFormCheckbox', ['React'], (React) => {
   class HBWFormCheckbox extends React.Component {
@@ -58,5 +58,5 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
     };
   }
 
-  return withConditions(HBWFormCheckbox);
+  return compose(withConditions, withErrorBoundary)(HBWFormCheckbox);
 });

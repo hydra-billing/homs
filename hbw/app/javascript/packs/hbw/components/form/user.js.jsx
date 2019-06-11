@@ -1,4 +1,6 @@
-modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'HBWFormSelect'], (React, ReactDOM, Select) => (
+import { withErrorBoundary } from '../helpers';
+
+modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'HBWFormSelect'], (React, ReactDOM, Select) => {
   class HBWFormUser extends React.Component {
     componentDidMount () {
       this.props.onRef(this);
@@ -24,4 +26,7 @@ modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'HBWFormSelect'], (React, R
     }
 
     serialize = () => this[`${this.props.name}`].serialize();
-  }));
+  }
+
+  return withErrorBoundary(HBWFormUser);
+});
