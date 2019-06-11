@@ -61,7 +61,7 @@ feature 'Validate form', js: true do
 
     scenario 'with empty required multi select table' do
       click_and_wait 'ORD-16'
-      click_td_by_text 'My favourite region name1'
+      set_select_table_option 'My favourite region name1'
 
       expect(page).to have_content 'Options'
       expect(page).to have_selector "button[type='submit']"
