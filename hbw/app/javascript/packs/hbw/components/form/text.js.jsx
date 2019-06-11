@@ -1,4 +1,4 @@
-import { withConditions } from '../helpers';
+import { withConditions, withErrorBoundary, compose } from '../helpers';
 
 modulejs.define('HBWFormText', ['React'], (React) => {
   class HBWFormText extends React.Component {
@@ -46,5 +46,5 @@ modulejs.define('HBWFormText', ['React'], (React) => {
     serialize = () => ({ [this.props.name]: this.state.value });
   }
 
-  return withConditions(HBWFormText);
+  return compose(withConditions, withErrorBoundary)(HBWFormText);
 });

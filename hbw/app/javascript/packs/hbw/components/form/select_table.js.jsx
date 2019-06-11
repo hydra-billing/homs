@@ -1,6 +1,6 @@
 import Tooltip from 'tooltip';
 import {
-  withConditions, withSelect, withCallbacks, withValidations, compose
+  withConditions, withSelect, withCallbacks, withValidations, withErrorBoundary, compose
 } from '../helpers';
 
 modulejs.define('HBWFormSelectTable',
@@ -271,5 +271,5 @@ modulejs.define('HBWFormSelectTable',
       };
     }
 
-    return compose(withSelect, withConditions, withCallbacks, withValidations)(HBWFormSelectTable);
+    return compose(withSelect, withConditions, withCallbacks, withValidations, withErrorBoundary)(HBWFormSelectTable);
   });

@@ -3,6 +3,7 @@ import withConditions from './conditions';
 import withTasks from './tasks';
 import withSelect from './select';
 import withValidations from './validations';
+import withErrorBoundary from './error_boundary';
 import { compose } from './utils';
 
 export {
@@ -11,5 +12,6 @@ export {
   withTasks,
   withSelect,
   withValidations,
+  withErrorBoundary,
   compose
 };

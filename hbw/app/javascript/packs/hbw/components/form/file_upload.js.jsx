@@ -1,4 +1,6 @@
-import { withCallbacks, withConditions, compose } from '../helpers';
+import {
+  withCallbacks, withConditions, withErrorBoundary, compose
+} from '../helpers';
 
 modulejs.define('HBWFormFileUpload', ['React'], (React) => {
   class HBWFormFileUpload extends React.Component {
@@ -129,5 +131,5 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     serialize = () => ({ [this.props.params.name]: JSON.stringify({ files: this.state.files }) });
   }
 
-  return compose(withCallbacks, withConditions)(HBWFormFileUpload);
+  return compose(withCallbacks, withConditions, withErrorBoundary)(HBWFormFileUpload);
 });

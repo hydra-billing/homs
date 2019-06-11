@@ -1,20 +1,34 @@
-modulejs.define('HBWFormSubmit', ['React'], (React) => {
-  const HBWFormSubmit = ({ formSubmitting, env }) => {
-    let className = 'btn btn-primary';
+import { withCallbacks, withErrorBoundary, compose } from '../helpers';
 
-    if (formSubmitting) {
-      className += ' disabled';
+modulejs.define('HBWFormSubmit', ['React'], (React) => {
+  class HBWFormSubmit extends React.Component {
+    state = {
+      error: false,
     }
 
-    return <div className="form-group">
-      <button type="submit"
-        className={className}
-        disabled={formSubmitting}>
-        <i className="fas fa-check" />
-        {` ${env.translator('submit')}`}
-      </button>
-    </div>;
-  };
+    componentWillMount () {
+      this.props.bind('hbw:have-errors', () => this.setState({ error: true }));
+    }
 
-  return HBWFormSubmit;
+    render () {
+      const { formSubmitting, env } = this.props;
+
+      let className = 'btn btn-primary';
+
+      if (formSubmitting) {
+        className += ' disabled';
+      }
+
+      return <div className="form-group">
+        <button type="submit"
+          className={className}
+          disabled={formSubmitting || this.state.error}>
+          <i className="fas fa-check" />
+          {` ${env.translator('submit')}`}
+        </button>
+      </div>;
+    }
+  }
+
+  return compose(withCallbacks, withErrorBoundary)(HBWFormSubmit);
 });
