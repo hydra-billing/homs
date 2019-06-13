@@ -1,4 +1,4 @@
-v1.7.2 [unreleased]
+v1.7.2 [2019-06-13]
 -------------------
 ### Bugfixes
 - [#301](https://github.com/latera/homs/pull/301) Change deprecated `render nothing: true` to `head`.
