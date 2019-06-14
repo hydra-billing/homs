@@ -20,15 +20,15 @@ feature 'Control dynamic disable string on form', js: true do
 
   scenario 'AND & OR conditions for string' do
     expect(find_by_name('homsOrderAndEnableAfterChanges').readonly?).to  eq true
-    expect(find_by_name('homsOrderAndDisableAfterChanges').readonly?).to eq nil
+    expect(find_by_name('homsOrderAndDisableAfterChanges').readonly?).to eq false
     expect(find_by_name('homsOrderOrEnableAfterChanges').readonly?).to   eq true
-    expect(find_by_name('homsOrderOrDisableAfterChanges').readonly?).to  eq nil
+    expect(find_by_name('homsOrderOrDisableAfterChanges').readonly?).to  eq false
 
     fill_in 'homsOrderCheckingThis', with: '1234'
 
-    expect(find_by_name('homsOrderAndEnableAfterChanges').readonly?).to  eq nil
+    expect(find_by_name('homsOrderAndEnableAfterChanges').readonly?).to  eq false
     expect(find_by_name('homsOrderAndDisableAfterChanges').readonly?).to eq true
-    expect(find_by_name('homsOrderOrEnableAfterChanges').readonly?).to   eq nil
+    expect(find_by_name('homsOrderOrEnableAfterChanges').readonly?).to   eq false
     expect(find_by_name('homsOrderOrDisableAfterChanges').readonly?).to  eq true
 
     expect(page).to have_selector "button[type='submit']"

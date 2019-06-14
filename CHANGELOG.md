@@ -11,6 +11,9 @@ See [#296](https://github.com/latera/homs/pull/296) for more details.
 - [#289](https://github.com/latera/homs/pull/289) Make conditions `disable_if` and `delete_if` dynamic.
 - [#294](https://github.com/latera/homs/pull/294) Add test for dynamic disable and delete.
 
+### Bugfixes
+- [#298](https://github.com/latera/homs/pull/298) Keep BP variables values after submit if they are not on form or disabled.
+
 ### Refactoring
 - [#506](https://github.com/latera/homs/pull/506) Update ruby and js dependencies.
 
