@@ -1,6 +1,6 @@
 /* eslint react/jsx-no-undef: "off" */
 
-import { withConditions } from '../helpers';
+import { withConditions, withErrorBoundary, compose } from '../helpers';
 
 modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
   'HBWFormSubmitSelect', 'HBWFormUser', 'HBWFormSelect',
@@ -133,5 +133,5 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
     };
   }
 
-  return withConditions(HBWFormGroup);
+  return compose(withConditions, withErrorBoundary)(HBWFormGroup);
 });

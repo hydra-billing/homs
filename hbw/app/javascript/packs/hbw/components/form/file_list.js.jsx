@@ -1,4 +1,4 @@
-import { withConditions } from '../helpers';
+import { withConditions, withErrorBoundary, compose } from '../helpers';
 
 modulejs.define('HBWFormFileList', ['React'], (React) => {
   class HBWFormFileList extends React.Component {
@@ -89,5 +89,5 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
     };
   }
 
-  return withConditions(HBWFormFileList);
+  return compose(withConditions, withErrorBoundary)(HBWFormFileList);
 });

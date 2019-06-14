@@ -1,4 +1,4 @@
-import { withConditions } from '../helpers';
+import { withConditions, withErrorBoundary, compose } from '../helpers';
 
 modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (React, ReactDOM, jQuery, moment) => {
   class HBWFormDatetime extends React.Component {
@@ -121,5 +121,5 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
     };
   }
 
-  return withConditions(HBWFormDatetime);
+  return compose(withConditions, withErrorBoundary)(HBWFormDatetime);
 });

@@ -4,7 +4,7 @@ import Select from 'react-select';
 import AsyncSelect from 'react-select/lib/Async';
 import Tooltip from 'tooltip.js';
 import {
-  withConditions, withSelect, withCallbacks, withValidations, compose
+  withConditions, withSelect, withCallbacks, withValidations, withErrorBoundary, compose
 } from '../helpers';
 
 modulejs.define('HBWFormSelect',
@@ -123,7 +123,7 @@ modulejs.define('HBWFormSelect',
       };
 
       customStyles = () => {
-        const bgColor = (state) => {
+        const bgOptionColor = (state) => {
           if (state.isFocused) {
             return '#2C3E50';
           }
@@ -138,11 +138,12 @@ modulejs.define('HBWFormSelect',
         return {
           control: (base, state) => ({
             ...base,
-            minHeight:   45,
-            borderColor: state.isFocused ? 'black' : '#dce4ec',
-            borderWidth: 2,
-            boxShadow:   'none',
-            cursor:      'pointer',
+            minHeight:       45,
+            borderColor:     state.isFocused ? 'black' : '#dce4ec',
+            borderWidth:     2,
+            boxShadow:       'none',
+            cursor:          'pointer',
+            backgroundColor: state.isDisabled ? '#ECF0F1' : 'white',
 
             '&:hover': {
               borderColor: 'inherit',
@@ -152,7 +153,7 @@ modulejs.define('HBWFormSelect',
           option: (base, state) => ({
             ...base,
             color:           (state.isFocused || state.isSelected) ? 'white' : '#2C3E50',
-            backgroundColor: bgColor(state),
+            backgroundColor: bgOptionColor(state),
             cursor:          'pointer',
 
             '&:active': {
@@ -294,5 +295,5 @@ modulejs.define('HBWFormSelect',
       };
     }
 
-    return compose(withSelect, withConditions, withCallbacks, withValidations)(FormSelect);
+    return compose(withSelect, withConditions, withCallbacks, withValidations, withErrorBoundary)(FormSelect);
   });

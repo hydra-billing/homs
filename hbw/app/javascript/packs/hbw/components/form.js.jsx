@@ -1,7 +1,7 @@
 /* eslint no-console: "off" */
 /* eslint no-restricted-syntax: "off" */
 
-import { withCallbacks } from './helpers';
+import { withCallbacks, withErrorBoundary, compose } from './helpers';
 
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect',
@@ -192,5 +192,5 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     };
   }
 
-  return withCallbacks(HBWForm);
+  return compose(withCallbacks, withErrorBoundary)(HBWForm);
 });

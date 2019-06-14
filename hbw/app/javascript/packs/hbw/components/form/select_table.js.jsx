@@ -1,6 +1,6 @@
 import Tooltip from 'tooltip';
 import {
-  withConditions, withSelect, withCallbacks, withValidations, compose
+  withConditions, withSelect, withCallbacks, withValidations, withErrorBoundary, compose
 } from '../helpers';
 
 modulejs.define('HBWFormSelectTable',
@@ -22,7 +22,7 @@ modulejs.define('HBWFormSelectTable',
 
       getInputValues = (value) => {
         if (this.props.params.multi) {
-          return value || [];
+          return JSON.parse(value) || [];
         } else {
           return value || '';
         }
@@ -266,10 +266,10 @@ modulejs.define('HBWFormSelectTable',
         if (this.props.params.editable === false || this.props.disabled || this.props.hidden) {
           return null;
         } else {
-          return { [this.props.name]: this.state.value };
+          return { [this.props.name]: this.props.params.multi ? JSON.stringify(this.state.value) : this.state.value };
         }
       };
     }
 
-    return compose(withSelect, withConditions, withCallbacks, withValidations)(HBWFormSelectTable);
+    return compose(withSelect, withConditions, withCallbacks, withValidations, withErrorBoundary)(HBWFormSelectTable);
   });

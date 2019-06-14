@@ -22,7 +22,7 @@ feature 'Control fields on form', js: true do
   end
 
   scenario 'enable for AND-condition' do
-    expect(find_by_name('homsOrderDataAddress').readonly?).to eq nil
+    expect(find_by_name('homsOrderDataAddress').readonly?).to eq false
   end
 
   scenario 'disable for OR-condition for datetime' do

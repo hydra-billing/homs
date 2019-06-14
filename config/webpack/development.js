@@ -5,4 +5,6 @@ const eslint = require('./loaders/eslint');
 
 config.module.rules.unshift(eslint);
 
+config.devServer.clientLogLevel = 'debug';
+
 module.exports = config;
