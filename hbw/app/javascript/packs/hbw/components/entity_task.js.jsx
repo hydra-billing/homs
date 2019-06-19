@@ -28,10 +28,6 @@ modulejs.define(
       }
 
       render () {
-        let collapseClass = 'panel-collapse collapse';
-        if (!this.state.collapsed) {
-          collapseClass += ' in';
-        }
         let iconClass = 'indicator pull-right fa';
 
         const { task } = this.props;
@@ -47,26 +43,20 @@ modulejs.define(
             <h4 className="panel-title collapsable">
               <a
                 onClick={this.toggleCollapse}
-                data-toggle="collapse"
-                data-target={`#collapse${task.id}`}
-                data-parent={`.${this.props.parentClass}`}
               >
                 {task.name}
               </a>
               <i
                 onClick={this.toggleCollapse}
                 className={iconClass}
-                data-toggle="collapse"
-                data-target={`#collapse${task.id}`}
-                data-parent={`.${this.props.parentClass}`}
               />
             </h4>
           </div>
-          <div id={`collapse${task.id}`} className={collapseClass}>
-            <div className="panel-body">
-              {this.renderForm()}
-            </div>
-          </div>
+          {!this.state.collapsed
+            && (<div className="panel-body">
+                {this.renderForm()}
+                </div>)
+          }
         </div>;
       }
 
