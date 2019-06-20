@@ -9,7 +9,12 @@ v1.8.0 [unreleased]
 - [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
 - [#309](https://github.com/latera/homs/pull/309) Add error boundaries to all form components.
 
-v1.7.2 [unreleased]
+v1.7.3 [unreleased]
+-------------------
+### Bugfixes
+- [#311](https://github.com/latera/homs/pull/311) Fix overflow after form collapsing.
+
+v1.7.2 [2019-06-13]
 -------------------
 ### Bugfixes
 - [#301](https://github.com/latera/homs/pull/301) Change deprecated `render nothing: true` to `head`.
