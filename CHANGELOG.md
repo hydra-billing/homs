@@ -1,4 +1,4 @@
-v1.7.3 [unreleased]
+v1.7.3 [2019-06-28]
 -------------------
 ### Bugfixes
 - [#311](https://github.com/latera/homs/pull/311) Fix overflow after form collapsing.
