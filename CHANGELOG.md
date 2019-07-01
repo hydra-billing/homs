@@ -9,6 +9,11 @@ v1.8.0 [unreleased]
 - [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
 - [#309](https://github.com/latera/homs/pull/309) Add error boundaries to all form components.
 
+v1.7.4 [unreleased]
+-------------------
+### Bugfixes
+- [#315](https://github.com/latera/homs/pull/315) Add additional exceptions for Oracle's date formats.
+
 v1.7.3 [2019-06-28]
 -------------------
 ### Bugfixes
