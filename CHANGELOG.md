@@ -1,3 +1,19 @@
+v1.8.0 [unreleased]
+-------------------
+### Breaking changes
+-  `select_table` with `multi:true` saves all data in JSON format now. It's not possible to open form contains old data with such table.
+    See [#300](https://github.com/latera/homs/pull/300) for more details.
+
+### Features
+- [#283](https://github.com/latera/homs/pull/283) Seed improvements: add env variables for initial values
+- [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
+- [#309](https://github.com/latera/homs/pull/309) Add error boundaries to all form components.
+
+v1.7.4 [unreleased]
+-------------------
+### Bugfixes
+- [#315](https://github.com/latera/homs/pull/315) Add additional exceptions for Oracle's date formats.
+
 v1.7.3 [2019-06-28]
 -------------------
 ### Bugfixes
