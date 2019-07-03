@@ -13,6 +13,7 @@ v1.7.4 [unreleased]
 -------------------
 ### Bugfixes
 - [#315](https://github.com/latera/homs/pull/315) Add additional exceptions for Oracle's date formats.
+- [#316](https://github.com/latera/homs/pull/316) Fix the way ajax request are made in lookup select.
 
 v1.7.3 [2019-06-28]
 -------------------
