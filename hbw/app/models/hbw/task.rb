@@ -21,7 +21,7 @@ module HBW
                        assignee:   assignee(user, email, for_all_users),
                        active:     true,
                        processVariables: [
-                         name:     HBW::Widget.config.fetch(entity_class)[:entity_code_key],
+                         name:     HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key],
                          operator: operation(entity_code),
                          value:    entity_code
                        ],
@@ -37,7 +37,7 @@ module HBW
                      assignee:   assignee(user, email, for_all_users),
                      active:     true,
                      processVariables: [
-                       name:     HBW::Widget.config.fetch(entity_class)[:entity_code_key],
+                       name:     HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key],
                        operator: operation(entity_code),
                        value:    entity_code
                      ])['count']
@@ -101,7 +101,7 @@ module HBW
     end
 
     def entity_code(entity_class)
-      variable(config.fetch(entity_class)[:entity_code_key]).value
+      variable(config[:entities].fetch(entity_class)[:entity_code_key]).value
     end
   end
 end

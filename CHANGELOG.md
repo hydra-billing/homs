@@ -1,13 +1,48 @@
 v1.8.0 [unreleased]
 -------------------
 ### Breaking changes
--  `select_table` with `multi:true` saves all data in JSON format now. It's not possible to open form contains old data with such table.
+- `select_table` with `multi:true` saves all data in JSON format now. It's not possible to open form contains old data with such table.
     See [#300](https://github.com/latera/homs/pull/300) for more details.
+- `hbw.yml` config structure was updated. Entity classes must be moved under key `entities`:
+
+   before:
+   ```
+   hbw:
+     order:
+       entity_code_key: homsOrderCode
+       bp_toolbar:
+         entity_type_buttons: {}
+
+     billing_customer:
+       entity_code_key: billingCustomerId
+       bp_toolbar:
+         common_buttons: []
+         entity_type_buttons: {}
+   ```
+
+   after:
+   ```
+   hbw:
+     entities:
+       order:
+         entity_code_key: homsOrderCode
+         bp_toolbar:
+           common_buttons: []
+           entity_type_buttons: {}
+
+       billing_customer:
+         entity_code_key: billingCustomerId
+         bp_toolbar:
+           common_buttons: []
+           entity_type_buttons: {}
+   ```
+   Look at [#317](https://github.com/latera/homs/pull/317) for details.
 
 ### Features
 - [#283](https://github.com/latera/homs/pull/283) Seed improvements: add env variables for initial values
 - [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
 - [#309](https://github.com/latera/homs/pull/309) Add error boundaries to all form components.
+- [#317](https://github.com/latera/homs/pull/317) Validate `hbw.yml` config.
 
 v1.7.3 [2019-06-28]
 -------------------

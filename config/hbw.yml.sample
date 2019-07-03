@@ -1,43 +1,54 @@
 hbw:
-  adapter: camunda # BPM system adapter
+  entities:
+    order:
+      entity_code_key: homsOrderCode
 
-  order:
-    entity_code_key: homsOrderCode
+      bp_toolbar:
+        entity_type_buttons:
+          vacation_request:                          # Order type code
+            - name: 'Handle Vacation Request'        # Button text
+              title: 'Start handle vacation process' # Button help text
+              class: 'btn btn-default'               # Button container class
+              fa_class: 'fa fa-user'                 # Button icon class
+              bp_code: 'vacationRequestProcess'      # Business process code
+          support_request:
+            - name: 'Handle Support Request'
+              title: 'Start handle support process'
+              class: 'btn btn-default'
+              fa_class: 'fa fa-user'
+              bp_code: 'supportRequestProcess'
+          pizza_order:
+            - name: 'Process Pizza Order'
+              title: 'Start pizza order processing'
+              class: 'btn btn-default'
+              fa_class: 'fa fa-user'
+              bp_code: 'pizzaOrderProcess'
 
-    bp_toolbar:
-      entity_type_buttons:
-        vacation_request:                          # Order type code
-          - name: 'Handle Vacation Request'        # Button text
-            title: 'Start handle vacation process' # Button help text
-            class: 'btn btn-default'               # Button container class
-            fa_class: 'fa fa-user'                 # Button icon class
-            bp_code: 'vacationRequestProcess'      # Business process code
-        support_request:
-          - name: 'Handle Support Request'
-            title: 'Start handle support process'
-            class: 'btn btn-default'
-            fa_class: 'fa fa-user'
-            bp_code: 'supportRequestProcess'
-        pizza_order:
-          - name: 'Process Pizza Order'
-            title: 'Start pizza order processing'
-            class: 'btn btn-default'
-            fa_class: 'fa fa-user'
-            bp_code: 'pizzaOrderProcess'
+    billing_customer:
+      entity_code_key: billingCustomerId
 
-  billing_customer:
-    entity_code_key: billingCustomerId
+      task_list:
+        entity_url: /customers/%s?task_id=%s
+        entity_url_params:
+          - billingCustomerId
+          - id
 
-    bp_toolbar:
-      common_buttons: []
-      entity_type_buttons: {}
+      bp_toolbar:
+        common_buttons: []
+        entity_type_buttons: {}
 
-  crm_account:
-    entity_code_key: crmAccountId
+    crm_account:
+      entity_code_key: crmAccountId
 
-    bp_toolbar:
-      common_buttons: []
-      entity_type_buttons: {}
+      task_list:
+        entity_url: /accounts/%s?task_id=%s
+        entity_url_params:
+          - crmAccountId
+          - id
+
+      bp_toolbar:
+        common_buttons: []
+        entity_type_buttons: {}
 
   use_bpm_stub: false
 
