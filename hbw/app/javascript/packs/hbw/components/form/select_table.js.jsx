@@ -67,7 +67,7 @@ modulejs.define('HBWFormSelectTable',
           selectErrorMessageCss += ' hidden';
         }
 
-        let formGroupCss = 'form-group';
+        let formGroupCss = 'hbw-table form-group';
         if (this.state.error) {
           formGroupCss += ' has-error';
         }

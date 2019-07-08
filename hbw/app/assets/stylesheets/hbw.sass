@@ -244,6 +244,34 @@
   .hidden
     visibility: hidden
 
+  .hbw-table
+    scrollbar-color: grey white
+    overflow-y: auto
+    display: block
+    width: 100%
+    max-height: 700px
+
+    table
+      border-top: 1px
+
+    thead th
+      position: sticky
+      top: 0
+      background: white
+      box-shadow: inset 0 1px 0 #ecf0f1, inset 0 -1px 0 #ecf0f1
+
+    &::-webkit-scrollbar
+      width: 10px
+
+    &::-webkit-scrollbar-track
+      background: transparent
+
+    &::-webkit-scrollbar-thumb
+      background: #888
+
+    &::-webkit-scrollbar-thumb:hover
+      background: #555
+
   table.select-table
     tr
       &.selected
