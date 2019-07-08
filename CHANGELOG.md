@@ -43,6 +43,7 @@ v1.8.0 [unreleased]
 - [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
 - [#309](https://github.com/latera/homs/pull/309) Add error boundaries to all form components.
 - [#317](https://github.com/latera/homs/pull/317) Validate `hbw.yml` config.
+- [#318](https://github.com/latera/homs/pull/318) Improve scroll style in select_table.
 
 v1.7.4 [unreleased]
 -------------------
