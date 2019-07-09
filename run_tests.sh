@@ -14,8 +14,6 @@ echo "sources:
     type: 'static/bpm'
 " > config/sources.yml
 
-echo "  adapter: camunda" >> config/hbw.yml
-
 bundle exec rake db:migrate && bundle exec rake db:seed
 
 # add source billing for tests

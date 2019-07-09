@@ -4,7 +4,7 @@ module HBW
       include HBW::Inject[:api, :config]
 
       def entity_code_key(entity_class)
-        config.fetch(entity_class)[:entity_code_key]
+        config[:entities].fetch(entity_class)[:entity_code_key]
       end
 
       # TODO: cache it until new user is added

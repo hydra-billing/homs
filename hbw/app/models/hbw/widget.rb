@@ -1,7 +1,7 @@
 class HBW::Widget
   class << self
     def entity_type_buttons(entity_type, entity_class)
-      bp_toolbar = config.fetch(entity_class)[:bp_toolbar] || {}
+      bp_toolbar = config[:entities].fetch(entity_class)[:bp_toolbar] || {}
       common_buttons = bp_toolbar[:common_buttons] || []
       entity_type_buttons = bp_toolbar[:entity_type_buttons] || {}
 

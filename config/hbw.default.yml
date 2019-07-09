@@ -1,16 +1,15 @@
 hbw:
-  adapter: camunda
+  entities:
+    order:
+      entity_code_key: homsOrderCode
 
-  order:
-    entity_code_key: homsOrderCode
+      task_list:
+        group_by_var: order_code
+        entity_url: /orders/%s?task_id=%s
+        entity_url_params:
+          - homsOrderCode
+          - id
 
-    task_list:
-      group_by_var: order_code
-      entity_url: /orders/%s?task_id=%s
-      entity_url_params:
-        - homsOrderCode
-        - id
-
-    bp_toolbar:
-      common_buttons: []
-      entity_type_buttons: {}
+      bp_toolbar:
+        common_buttons: []
+        entity_type_buttons: {}
