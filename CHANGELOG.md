@@ -9,11 +9,15 @@ v1.8.0 [unreleased]
 - [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
 - [#309](https://github.com/latera/homs/pull/309) Add error boundaries to all form components.
 
+v1.7.5 [2019-07-11]
+-------------------
+### Bugfixes
+- [#316](https://github.com/latera/homs/pull/316) Fix the way ajax request are made in lookup select.
+
 v1.7.4 [2019-07-04]
 -------------------
 ### Bugfixes
 - [#315](https://github.com/latera/homs/pull/315) Add additional exceptions for Oracle's date formats.
-- [#316](https://github.com/latera/homs/pull/316) Fix the way ajax request are made in lookup select.
 
 v1.7.3 [2019-06-28]
 -------------------
