@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.6.3'
-gem 'rails', '~> 5.1.6'
+gem 'rails', '~> 5.2.3'
 gem 'sass-rails', '~> 5.0.7'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
@@ -21,12 +21,11 @@ gem 'bootswatch-rails'
 gem 'pry-rails'
 gem 'i18n-js', git: 'https://github.com/fnando/i18n-js', ref: '7ed2d2'
 gem 'hbw', path: File.join(File.dirname(__FILE__), 'hbw')
-gem 'asset_symlink'
+gem 'asset_symlink', git: 'https://github.com/fcheung/asset_symlink', ref: 'c300363' # ~> 0.3.1
 gem 'apitome'
 gem 'dry-container'
 gem 'dry-auto_inject'
 gem 'dry-validation', '~> 0.11.1'
-gem 'nokogiri', '~> 1.8.1'
 gem 'aws-sdk', '~> 2'
 gem 'web-console', '~> 2.0', group: :development
 gem 'settingslogic'
