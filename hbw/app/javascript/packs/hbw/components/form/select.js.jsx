@@ -93,7 +93,7 @@ modulejs.define('HBWFormSelect',
       }
 
       validateOnSubmit = () => {
-        this.props.bind('hbw:validate-form', this.onFormSubmit);
+        this.props.bind(`hbw:validate-form-${this.props.id}`, this.onFormSubmit);
       };
 
       onFormSubmit = () => {

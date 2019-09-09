@@ -9,6 +9,11 @@ v1.8.0 [unreleased]
 - [#288](https://github.com/latera/homs/pull/288) Add drag and drop field for file upload.
 - [#309](https://github.com/latera/homs/pull/309) Add error boundaries to all form components.
 
+v1.7.6 [unreleased]
+-------------------
+### Bugfixes
+- [#323](https://github.com/latera/homs/pull/323) Submit each form on it's own button.
+
 v1.7.5 [2019-07-11]
 -------------------
 ### Bugfixes

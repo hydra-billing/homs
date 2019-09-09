@@ -11,12 +11,13 @@ modulejs.define(
         loading:   true,
         pending:   null,
         form:      null,
-        collapsed: this.props.collapsed || false
+        collapsed: this.props.collapsed || false,
+        id:        this.props.getComponentId()
       };
 
       componentDidMount () {
         this.loadForm(this.props.task.id);
-        this.props.bind('hbw:submit-form', this.submitForm);
+        this.props.bind(`hbw:submit-form-${this.state.id}`, this.submitForm);
 
         const e = jQuery(this.rootNode);
         e.on('hidden.bs.collapse', this.choose);
@@ -63,6 +64,7 @@ modulejs.define(
       renderForm = () => {
         if (this.state.form) {
           const opts = {
+            id:        this.state.id,
             form:      this.state.form,
             env:       this.props.env,
             error:     this.state.error,
