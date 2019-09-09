@@ -18,7 +18,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
 
     componentDidMount () {
       jQuery(':input:enabled:visible:first').focus();
-      this.props.bind('hbw:submit-form', () => this.setState({ submitting: true }));
+      this.props.bind(`hbw:submit-form-${this.props.id}`, () => this.setState({ submitting: true }));
       this.props.bind('hbw:form-submitting-failed', () => this.setState({ submitting: false }));
       this.props.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
       this.props.bind('hbw:file-upload-finished', () => this.setState({ fileUploading: false }));
@@ -43,6 +43,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       const opts = {
         name,
         params,
+        id:              this.props.id,
         value:           this.props.variables[name],
         formSubmitting:  this.state.submitting || this.state.fileUploading,
         env:             this.props.env,
@@ -128,10 +129,10 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         return null;
       }
 
-      this.props.trigger('hbw:validate-form');
+      this.props.trigger(`hbw:validate-form-${this.props.id}`);
 
       if (this.isFormValid()) {
-        return this.props.trigger('hbw:submit-form', this.serializeForm());
+        return this.props.trigger(`hbw:submit-form-${this.props.id}`, this.serializeForm());
       }
 
       return null;
