@@ -45,11 +45,20 @@ v1.8.0 [unreleased]
 - [#317](https://github.com/latera/homs/pull/317) Validate `hbw.yml` config.
 - [#318](https://github.com/latera/homs/pull/318) Improve scroll style in select_table.
 
-v1.7.4 [unreleased]
+v1.7.6 [unreleased]
+-------------------
+### Bugfixes
+- [#323](https://github.com/latera/homs/pull/323) Submit each form on it's own button.
+
+v1.7.5 [2019-07-11]
+-------------------
+### Bugfixes
+- [#316](https://github.com/latera/homs/pull/316) Fix the way ajax request are made in lookup select.
+
+v1.7.4 [2019-07-04]
 -------------------
 ### Bugfixes
 - [#315](https://github.com/latera/homs/pull/315) Add additional exceptions for Oracle's date formats.
-- [#316](https://github.com/latera/homs/pull/316) Fix the way ajax request are made in lookup select.
 
 v1.7.3 [2019-06-28]
 -------------------
@@ -60,7 +69,6 @@ v1.7.2 [2019-06-13]
 -------------------
 ### Bugfixes
 - [#301](https://github.com/latera/homs/pull/301) Change deprecated `render nothing: true` to `head`.
-- [#311](https://github.com/latera/homs/pull/311) Fix overflow after form collapsing.
 
 v1.7.1 [2019-05-17]
 -------------------
