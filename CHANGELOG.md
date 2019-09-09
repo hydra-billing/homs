@@ -13,6 +13,7 @@ v1.7.6 [unreleased]
 -------------------
 ### Bugfixes
 - [#323](https://github.com/latera/homs/pull/323) Submit each form on it's own button.
+- [#324](https://github.com/latera/homs/pull/324) Use the email from requests if it has any.
 
 v1.7.5 [2019-07-11]
 -------------------
