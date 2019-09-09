@@ -39,7 +39,7 @@ module HBW
         data['homsOrderDataFileList'] = file_list.to_json
       end
 
-      result = widget.submit(current_user.email, entity_class, task_id, data)
+      result = widget.submit(current_user_identifier, entity_class, task_id, data)
 
       if result
         head :no_content
