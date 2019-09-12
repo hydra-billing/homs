@@ -25,7 +25,9 @@ RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} && apt-get update && apt-
   postgresql-client \
   ruby-dev \
   unzip \
-  yarn
+  yarn \
+  curl \
+  telnet
 
 WORKDIR /opt/oracle
 

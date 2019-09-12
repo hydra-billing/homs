@@ -20,7 +20,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   postgresql-client \
   pkg-config \
   ruby-dev \
-  yarn
+  yarn \
+  curl \
+  telnet
 
 ENV NLS_LANG=AMERICAN_RUSSIA.AL32UTF8
 
