@@ -140,7 +140,7 @@ modulejs.define('HBWFormSelectTable',
 
           [...new Array(this.props.params.row_params.length).keys()].forEach(() => nullChoice.push('-'));
 
-          choices.push(nullChoice);
+          choices.unshift(nullChoice);
         }
       };
 
