@@ -45,7 +45,7 @@ v1.8.0 [unreleased]
 - [#317](https://github.com/latera/homs/pull/317) Validate `hbw.yml` config.
 - [#318](https://github.com/latera/homs/pull/318) Improve scroll style in select_table.
 
-v1.7.6 [unreleased]
+v1.7.6 [2019-09-12]
 -------------------
 ### Bugfixes
 - [#323](https://github.com/latera/homs/pull/323) Submit each form on it's own button.
