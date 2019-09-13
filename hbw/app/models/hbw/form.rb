@@ -7,7 +7,10 @@ module HBW
       def fetch(task, entity_class)
         process_definition = task.process_definition
 
+        variables      = do_request(:get, "task/#{task.id}/variables")
         definition_raw = do_request(:get, "task/#{task.id}/deployed-form")
+
+        task.definition['variables'] = variables.map { |k, v| v.merge('name' => k) }
 
         definition = YAML.load(definition_raw).fetch('form')
         new(definition.merge('processDefinition' => process_definition, 'task' => task, 'entityClass' => entity_class))
@@ -27,7 +30,8 @@ module HBW
     def as_json
       { css_class: css_class,
         processName: process_name,
-        fields: fields.map(&:as_json) }
+        fields: fields.map(&:as_json),
+        variables: task.definition['variables'] }
     end
 
     def fields
@@ -36,7 +40,7 @@ module HBW
       end
     end
 
-    def fetch_fields
+    def fetch_fields!
       fields.each(&:fetch)
     end
 

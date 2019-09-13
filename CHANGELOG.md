@@ -44,6 +44,7 @@ v1.8.0 [unreleased]
 - [#309](https://github.com/latera/homs/pull/309) Add error boundaries to all form components.
 - [#317](https://github.com/latera/homs/pull/317) Validate `hbw.yml` config.
 - [#318](https://github.com/latera/homs/pull/318) Improve scroll style in select_table.
+- [#327](https://github.com/latera/homs/pull/327) Optimize Camunda variables fetching.
 
 v1.7.6 [2019-09-12]
 -------------------

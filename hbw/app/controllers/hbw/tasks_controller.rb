@@ -19,7 +19,7 @@ module HBW
     def edit
       form = find_form(task_id, entity_class)
       if form
-        form.fetch_fields
+        form.fetch_fields!
         render json: form.as_json.merge(csrf_token: csrf_token).to_json
       else
         record_not_found
