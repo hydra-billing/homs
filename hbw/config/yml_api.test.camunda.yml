@@ -896,8 +896,8 @@ get:
                 id_condition: "SELECT 123, 'Some text' FROM DUAL WHERE DUMMY = DUMMY"
                 filter_condition: "SELECT 123, 'Some text' FROM DUAL"
 
-  # process variables
-  process-instance/814972/variables:
+  # task variables
+  task/816011/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -951,7 +951,7 @@ get:
         type: "string"
         value: ""
 
-  process-instance/2/variables:
+  task/53452/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -963,7 +963,7 @@ get:
         type: "string"
         value: '[{"id": "123", "text": "Option Var 1"}, {"id": "321", "text": "Option Var 2"}]'
 
-  process-instance/3/variables:
+  task/111111/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -972,7 +972,7 @@ get:
         type: "select"
         value: null
 
-  process-instance/4/variables:
+  task/222222/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -981,7 +981,7 @@ get:
         type: "select"
         value: null
 
-  process-instance/5/variables:
+  task/333333/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -990,7 +990,7 @@ get:
         type: "select"
         value: null
 
-  process-instance/6/variables:
+  task/444444/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -999,7 +999,7 @@ get:
         type: "select"
         value: null
 
-  process-instance/7/variables:
+  task/555555/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1008,7 +1008,7 @@ get:
         type: "select"
         value: null
 
-  process-instance/8/variables:
+  task/666666/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1017,7 +1017,7 @@ get:
         type: "select"
         value: null
 
-  process-instance/9/variables:
+  task/777777/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1026,7 +1026,7 @@ get:
         type: "select"
         value: null
 
-  process-instance/10/variables:
+  task/888888/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1035,7 +1035,7 @@ get:
         type: "user"
         value: null
 
-  process-instance/11/variables:
+  task/999999/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1044,7 +1044,7 @@ get:
         type: "user"
         value: null
 
-  process-instance/12/variables:
+  task/111112/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1053,7 +1053,7 @@ get:
         type: "select"
         value: null
 
-  process-instance/13/variables:
+  task/111113/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1062,7 +1062,7 @@ get:
         type: "select"
         value: null
 
-  process-instance/14/variables:
+  task/111114/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1071,7 +1071,7 @@ get:
         type: "select_table"
         value: ''
 
-  process-instance/15/variables:
+  task/111115/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1080,7 +1080,7 @@ get:
         type: "file_upload"
         value: null
 
-  process-instance/16/variables:
+  task/111116/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1089,7 +1089,7 @@ get:
         type: "select_table"
         value: null
 
-  process-instance/17/variables:
+  task/111117/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1098,7 +1098,7 @@ get:
         type: "select"
         value: null
 
-  process-instance/18/variables:
+  task/111118/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1107,7 +1107,7 @@ get:
         type: "string"
         value: null
 
-  process-instance/19/variables:
+  task/111119/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1116,7 +1116,7 @@ get:
         type: "string"
         value: null
 
-  process-instance/20/variables:
+  task/111120/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1125,7 +1125,7 @@ get:
         type: "string"
         value: null
 
-  process-instance/21/variables:
+  task/111121/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1134,7 +1134,7 @@ get:
         type: "string"
         value: null
 
-  process-instance/22/variables:
+  task/111122/variables:
     "":
       homsOrderCode:
         type: "string"
@@ -1142,6 +1142,99 @@ get:
       homsOrderDataSelect:
         type: "string"
         value: null
+
+  variable-instance:
+    "processInstanceIdIn[]=814972&processInstanceIdIn[]=2&processInstanceIdIn[]=3&processInstanceIdIn[]=4&processInstanceIdIn[]=5&processInstanceIdIn[]=6&processInstanceIdIn[]=7&processInstanceIdIn[]=8&processInstanceIdIn[]=9&processInstanceIdIn[]=10&processInstanceIdIn[]=11&processInstanceIdIn[]=12&processInstanceIdIn[]=13&processInstanceIdIn[]=14&processInstanceIdIn[]=15&processInstanceIdIn[]=16&processInstanceIdIn[]=17&processInstanceIdIn[]=18&processInstanceIdIn[]=19&processInstanceIdIn[]=20&processInstanceIdIn[]=21&processInstanceIdIn[]=22&variableName=homsOrderCode":
+      - processInstanceId: 814972
+        type: string
+        name: homsOrderCode
+        value: ORD-1
+      - processInstanceId: 2
+        type: string
+        name: homsOrderCode
+        value: ORD-2
+      - processInstanceId: 3
+        type: string
+        name: homsOrderCode
+        value: ORD-3
+      - processInstanceId: 4
+        type: string
+        name: homsOrderCode
+        value: ORD-4
+      - processInstanceId: 5
+        type: string
+        name: homsOrderCode
+        value: ORD-5
+      - processInstanceId: 6
+        type: string
+        name: homsOrderCode
+        value: ORD-6
+      - processInstanceId: 7
+        type: string
+        name: homsOrderCode
+        value: ORD-7
+      - processInstanceId: 8
+        type: string
+        name: homsOrderCode
+        value: ORD-8
+      - processInstanceId: 9
+        type: string
+        name: homsOrderCode
+        value: ORD-9
+      - processInstanceId: 10
+        type: string
+        name: homsOrderCode
+        value: ORD-10
+      - processInstanceId: 11
+        type: string
+        name: homsOrderCode
+        value: ORD-11
+      - processInstanceId: 12
+        type: string
+        name: homsOrderCode
+        value: ORD-12
+      - processInstanceId: 13
+        type: string
+        name: homsOrderCode
+        value: ORD-13
+      - processInstanceId: 14
+        type: string
+        name: homsOrderCode
+        value: ORD-14
+      - processInstanceId: 15
+        type: string
+        name: homsOrderCode
+        value: ORD-15
+      - processInstanceId: 16
+        type: string
+        name: homsOrderCode
+        value: ORD-16
+      - processInstanceId: 17
+        type: string
+        name: homsOrderCode
+        value: ORD-17
+      - processInstanceId: 18
+        type: string
+        name: homsOrderCode
+        value: ORD-18
+      - processInstanceId: 19
+        type: string
+        name: homsOrderCode
+        value: ORD-19
+      - processInstanceId: 20
+        type: string
+        name: homsOrderCode
+        value: ORD-20
+      - processInstanceId: 21
+        type: string
+        name: homsOrderCode
+        value: ORD-21
+      - processInstanceId: 22
+        type: string
+        name: homsOrderCode
+        value: ORD-22
+    variableName=homsOrderCode: []
+
 put: {}
 patch: {}
 post:
@@ -1161,7 +1254,7 @@ post:
         parentTaskId: null
         priority: 50
         processDefinitionId: "testProcess:469:814905"
-        processInstanceId: "814972"
+        processInstanceId: 814972
         taskDefinitionKey: "usertask10"
         caseExecutionId: null
         caseInstanceId: null

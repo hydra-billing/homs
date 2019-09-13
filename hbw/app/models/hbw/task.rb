@@ -14,18 +14,25 @@ module HBW
     class << self
       def fetch(email, entity_code, entity_class, size = 1000, for_all_users = false)
         user = ::HBW::BPMUser.fetch(email)
+        entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
+
         unless user.nil?
-          wrap(
-            do_request(:post,
-                       'task',
-                       assignee:   assignee(user, email, for_all_users),
-                       active:     true,
-                       processVariables: [
-                         name:     HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key],
-                         operator: operation(entity_code),
-                         value:    entity_code
-                       ],
-                       maxResults: size))
+          tasks = do_request(:post,
+                             'task',
+                             assignee:   assignee(user, email, for_all_users),
+                             active:     true,
+                             processVariables: [
+                               name:     entity_code_key,
+                               operator: operation(entity_code),
+                               value:    entity_code
+                             ],
+                             maxResults: size)
+
+          definitions = build_definitions(tasks)
+
+          entity_codes = fetch_variable_for_processes(entity_code_key, tasks.map { |task| task.fetch('processInstanceId') })
+
+          zip(tasks, definitions, entity_codes)
         end
       end
 
@@ -44,20 +51,27 @@ module HBW
         end
       end
 
-      def wrap(tasks)
-        definitions = tasks.map.with_object({}) do |task, d|
-          id = task.fetch('processDefinitionId')
-
-          variables = do_request(:get, "process-instance/#{task.fetch('processInstanceId')}/variables")
-          task.merge!('variables' => variables.map { |k, v| v.merge({ 'name' => k })})
-
-          url = "process-definition/#{id}"
+      def build_definitions(tasks)
+        tasks.map.with_object({}) do |task, d|
+          url = "process-definition/#{task.fetch('processDefinitionId')}"
 
           d[url] ||= ::HBW::ProcessDefinition.fetch(url)
         end
-        tasks.map { |task|
-          new(task.merge('processDefinition' => definitions["process-definition/#{task.fetch('processDefinitionId')}"]))
-        }
+      end
+
+      def zip(tasks, definitions, variables)
+        tasks.map do |task|
+          new(task.merge(
+                'processDefinition' => definitions["process-definition/#{task.fetch('processDefinitionId')}"],
+                'variables' => variables.select { |var| var.fetch('processInstanceId') == task.fetch('processInstanceId') }
+              ))
+        end
+      end
+
+      def fetch_variable_for_processes(name, process_ids)
+        do_request(:get, 'variable-instance',
+                   variableName: name,
+                   processInstanceIdIn: process_ids)
       end
 
       def assignee(user, email, for_all_users)

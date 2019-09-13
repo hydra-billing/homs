@@ -83,9 +83,9 @@ modulejs.define(
         const formVariables = {};
         const formDef = new FormDefinition(this.state.form);
 
-        [...this.props.task.variables].forEach((varHash) => {
-          if (formDef.fieldExist(varHash.name)) {
-            formVariables[varHash.name] = varHash.value;
+        [...this.state.form.variables].forEach(({ name, value }) => {
+          if (formDef.fieldExist(name)) {
+            formVariables[name] = value;
           }
         });
 
