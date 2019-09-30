@@ -6,9 +6,9 @@ class OrderListCell extends React.Component {
       case 'link':
         return <a href={this.props.value.href}>{this.props.value.title}</a>;
       case 'boolean':
-        return this.props.value ? <i className="fa fa-check"></i> : '';
+        return this.props.value ? <i className="fas fa-check"></i> : '';
       case 'state': {
-        const stateIconClass = `fa ${this.props.value.icon}`;
+        const stateIconClass = `fas ${this.props.value.icon}`;
         return <span><i className={stateIconClass}></i> {this.props.value.title}</span>;
       }
       default:

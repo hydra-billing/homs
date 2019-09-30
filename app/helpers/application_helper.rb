@@ -39,7 +39,7 @@ module ApplicationHelper
     title = order_state_title(order)
     icon = order_state_icon(order)
 
-    "<span><i class='fa #{icon}'></i> #{title}</span>".html_safe
+    "<span><i class='#{icon}'></i> #{title}</span>".html_safe
   end
 
   def order_state_title(order)
@@ -48,11 +48,11 @@ module ApplicationHelper
 
   def order_state_icon(order)
     if order.to_execute?
-      'fa-square-o'
+      'far fa-square'
     elsif order.in_progress?
-      'fa-gears'
+      'fas fa-cogs'
     else
-      'fa-check-square-o'
+      'far fa-check-square'
     end
   end
 

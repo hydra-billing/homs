@@ -141,7 +141,7 @@
     return $('<div>', {class: 'col-xs-12 col-sm-12 col-md-6 col-lg-3 custom-field-filter'}).append(
              $('<div>', {class: 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}).append(
                $('<label>', {for: attributeName, class: 'label-overflow'}).text(options.label),
-               $('<i>', class: 'fa fa-times custom-field-filter-close')),
+               $('<i>', class: 'fas fa-times custom-field-filter-close')),
              $('<div>', {class: 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}).append(
                $('<input>', {type: 'text', id: attributeName, name: 'custom_fields[' + attributeName + ']', value: options.value, class: 'form-control'})
              ))
@@ -150,7 +150,7 @@
     return $('<div>', {class: 'col-xs-12 col-sm-12 col-md-6 col-lg-3 custom-field-filter'}).append(
              $('<div>', {class: 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}).append(
                $('<label>', {for: attributeName, class: 'label-overflow'}).text(options.label),
-               $('<i>', class: 'fa fa-times custom-field-filter-close')),
+               $('<i>', class: 'fas fa-times custom-field-filter-close')),
              $('<div>', {class: 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}).append(
                $('<input>', {type: 'number', id: attributeName, name: 'custom_fields[' + attributeName + ']', value: options.value, class: 'form-control'})
              ))
@@ -164,13 +164,13 @@
                    $('<input>', {type: 'checkbox', id: attributeName, name: 'custom_fields[' + attributeName + ']', checked: options.value == '1', value: '1', class: 'custom_boolean'}),
                    $('<span>')
                  )),
-                 $('<i>', class: 'fa fa-times custom-field-filter-close')))
+                 $('<i>', class: 'fas fa-times custom-field-filter-close')))
 
   buildDatetimeInput = (attributeName, options) =>
     return $('<div>', {class: 'col-xs-12 col-sm-12 col-md-12 col-lg-6 custom-field-filter custom-field-filter-date'}).append(
              $('<div>', {id: attributeName, class: 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}).append(
                $('<label>', {for: attributeName, class: 'label-overflow'}).text(options.label),
-               $('<i>', class: 'fa fa-times custom-field-filter-close')),
+               $('<i>', class: 'fas fa-times custom-field-filter-close')),
              $('<div>', {class: 'col-xs-1 col-sm-1 col-md-1 col-lg-1 margin-top-10px'}).append(
                $('<label>').text(I18n.t('js.from'))),
              $('<div>', {class: 'col-xs-4 col-sm-4 col-md-4 col-lg-4'}).append(
