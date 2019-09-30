@@ -9,7 +9,7 @@ class DatetimePickerInput < SimpleForm::Inputs::Base
                                 class: 'form-control iso8601',
                                 value: value.try(:iso8601)) << <<-HTML.html_safe
         <span class="input-group-addon">
-          <span class="fa fa-calendar"></span>
+          <span class="fas fa-calendar"></span>
         </span>
       HTML
     end

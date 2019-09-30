@@ -18,7 +18,7 @@
                         method: :delete,
                         class: 'text-danger',
                         data: { confirm: t('.confirmation', order_type: order_type.name), confirm_title: t('.order_type_removal'), confirm_proceed: t('.yes_remove') }) do
-                %i.fa.fa-trash-o
+                %i.fas.fa-trash-alt
   .col-xs-12.col-sm-12.col-md-6.col-lg-6
     %h5= t('.add')
     = render partial: 'upload'

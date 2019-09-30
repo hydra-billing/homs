@@ -45,6 +45,11 @@ v1.8.0 [unreleased]
 - [#317](https://github.com/latera/homs/pull/317) Validate `hbw.yml` config.
 - [#318](https://github.com/latera/homs/pull/318) Improve scroll style in select_table.
 
+v1.7.7 [unreleased]
+-------------------
+### Bugfixes
+- [#328](https://github.com/latera/homs/pull/328) Use Font Awesome 5 instead of font-awesome-rails v4.
+
 v1.7.6 [2019-09-12]
 -------------------
 ### Bugfixes

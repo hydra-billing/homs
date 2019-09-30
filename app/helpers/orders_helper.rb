@@ -25,7 +25,7 @@ module OrdersHelper
 
   def prettify_boolean(value)
     if value
-      '<i class="fa fa-check"></i>'.html_safe
+      '<i class="fas fa-check"></i>'.html_safe
     else
       ''
     end

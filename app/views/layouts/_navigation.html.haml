@@ -15,22 +15,22 @@
         - if user_signed_in?
           %li
             = link_to orders_path do
-              %span.fa.fa-list
+              %span.fas.fa-list
               = t('.orders')
           - if current_user.admin?
             %li
               = link_to admin_order_types_path do
-                %span.fa.fa-cog
+                %span.fas.fa-cog
                 = t('.setup_order_types')
             %li
               = link_to users_path do
-                %span.fa.fa-users
+                %span.fas.fa-users
                 = t('.users')
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li.dropdown
             = link_to('#', class: 'dropdown-toggle', role: :button, 'data-toggle' => 'dropdown') do
-              %span.fa.fa-user
+              %span.fas.fa-user
               = current_user.name
               %span.caret
             %ul.dropdown-menu{role: :menu}
@@ -38,16 +38,16 @@
               - if link_to_manual.present?
                 %li
                   %a(href="#{link_to_manual}")
-                    %span.fa.fa-question-circle
+                    %span.fas.fa-question-circle
                     = t('.help')
               - if current_user.admin?
                 %li
                   %a(href="#{Apitome.configuration.mount_at}")
-                    %span.fa.fa-info-circle
+                    %span.fas.fa-info-circle
                     = t('.rest_api')
               %li
                 = link_to destroy_user_session_path, :method=>'delete' do
-                  %span.fa.fa-sign-out
+                  %span.fas.fa-sign-out-alt
                   = t('.sign_out')
 
           %li#hbw-tasks-list-button.hbw-styles
