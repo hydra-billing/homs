@@ -26,7 +26,7 @@ feature 'Print', js: true do
     expect(page).to have_content first_order_code
     expect_widget_presence
 
-    click_on_icon 'fa.fa-print'
+    click_on_icon 'fas.fa-print'
 
     expect(page).to have_selector('.print-dropdown .dropdown-menu', visible: true, wait: 5)
 

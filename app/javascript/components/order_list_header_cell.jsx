@@ -8,9 +8,9 @@ class OrderListHeaderCell extends React.Component {
 
     if (this.props.rowCode === this.props.orderRowCode) {
       if (this.props.order === 'desc') {
-        orderIcon = <i className='fa fa-sort-down'/>;
+        orderIcon = <i className='fas fa-sort-down'/>;
       } else {
-        orderIcon = <i className='fa fa-sort-up'/>;
+        orderIcon = <i className='fas fa-sort-up'/>;
       }
     }
 

@@ -24,7 +24,7 @@ feature 'Edit order', js: true do
     expect(page).to have_content order_code
     expect_widget_presence
 
-    click_on_icon 'fa.fa-pencil'
+    click_on_icon 'fas.fa-pencil-alt'
 
     page.has_css?('.order-edit-form', wait: 5, visible: true)
     expect(page).to have_content order_code

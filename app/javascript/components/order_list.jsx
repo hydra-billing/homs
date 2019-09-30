@@ -165,7 +165,7 @@ class OrderList extends React.Component {
       }
 
       showMoreContainer = <div className={cssClass} onClick={this.showMoreOrders}>
-        <i className="fa fa-caret-down fa-lg"/>
+        <i className="fas fa-caret-down fa-lg"/>
       </div>;
     }
 

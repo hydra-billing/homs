@@ -19,7 +19,7 @@ modulejs.define('HBWMenuButton', ['React'], (React) => {
 
       return <a ref={(node) => { this.rootNode = node; }}
                 onClick={this.toggleMenu}
-                className="hbw-menu-button fas fa-reorder">
+                className="hbw-menu-button fas fa-bars">
         {counter}
       </a>;
     }

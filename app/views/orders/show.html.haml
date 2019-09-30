@@ -12,18 +12,18 @@
           %a(data-toggle='collapse' data-target='#order_data' hrev='#')
             = t('.order_data')
           .btn-group.order_data_group.pull-right
-            = link_to('', edit_order_path(@order.code), class: 'fa fa-pencil pull-right', title: t('.edit_title'))
+            = link_to('', edit_order_path(@order.code), class: 'fas fa-pencil-alt pull-right', title: t('.edit_title'))
             - if use_imprint?
               .dropdown.print-dropdown.pull-right
                 - if @order.order_type_print_form_code.present?
-                  %a.fa.fa-print.dropdown-toggle.pull-right(data-toggle='dropdown' title="#{t('.print_title')}")
+                  %a.fas.fa-print.dropdown-toggle.pull-right(data-toggle='dropdown' title="#{t('.print_title')}")
                   %ul.dropdown-menu
                     %li
                       = link_to(t('orders.print'), print_imprint_prints_path(order_code: @order.code, convert_to_pdf: false))
                     %li
                       = link_to(t('orders.print_pdf'), print_imprint_prints_path(order_code: @order.code, convert_to_pdf: true))
                 - else
-                  %a.fa.fa-print.dropdown-toggle.pull-right.disabled(data-toggle='dropdown' title="#{t('.empty_code_title')}")
+                  %a.fas.fa-print.dropdown-toggle.pull-right.disabled(data-toggle='dropdown' title="#{t('.empty_code_title')}")
         .clearfix
       .panel-body.collapse.in#order-data
         = render partial: 'data', locals: { data: @order.data }
