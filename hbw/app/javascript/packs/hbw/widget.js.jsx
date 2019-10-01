@@ -1,5 +1,8 @@
 /* eslint react/no-render-return-value: "off" */
 
+import AvailableTasksButton from './components/claiming/menu_button.js';
+import AvailableTaskList from './components/claiming/task_list.js';
+
 modulejs.define(
   'HBW',
   ['React', 'ReactDOM', 'HBWTaskList', 'HBWMenu', 'HBWMenuButton', 'HBWContainer', 'HBWConnection',
@@ -45,6 +48,9 @@ modulejs.define(
         this.$widgetContainer = jQuery(this.options.widgetContainer);
         this.$tasksMenuContainer = jQuery(this.options.tasksMenuContainer);
         this.$tasksMenuButtonContainer = jQuery(this.options.tasksMenuButtonContainer);
+
+        this.availableTasksButtonContainer = document.querySelector(this.options.availableTasksButtonContainer);
+        this.availableTaskListContainer = document.querySelector(this.options.availableTaskListContainer);
 
         this.env.dispatcher.bind('hbw:task-clicked', 'widget', this.changeTask);
         this.checkBpmUser();
@@ -92,6 +98,14 @@ modulejs.define(
           this.tasksMenu = null;
         }
 
+        if (this.availableTasksButtonContainer) {
+          this.renderClaimingMenuButton();
+        }
+
+        if (this.availableTaskListContainer) {
+          this.renderClaimingTaskList();
+        }
+
         if (this.widget || this.tasksMenu) {
           this.subscribeOnTasks();
         }
@@ -121,6 +135,20 @@ modulejs.define(
         return ReactDOM.render(
           <MenuButton env={this.env} />,
           container
+        );
+      }
+
+      renderClaimingMenuButton () {
+        return ReactDOM.render(
+          <AvailableTasksButton env={this.env} />,
+          this.availableTasksButtonContainer
+        );
+      }
+
+      renderClaimingTaskList () {
+        return ReactDOM.render(
+          <AvailableTaskList env={this.env} />,
+          this.availableTaskListContainer
         );
       }
 

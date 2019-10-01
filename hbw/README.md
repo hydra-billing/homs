@@ -14,7 +14,9 @@ Set up your configuration file. Preferred configuration options are:
 Initialize widget with following options:
 * entity_code (in your configuration file);
 * entity_type (in your configuration file);
-* widgetContainer (DOM identifier of element for placing widget forms and buttons);
+* widgetContainer (DOM selector of element for placing widget forms and buttons);
+* availableTasksButtonContainer (DOM selector of element for placing user available tasks button);
+* availableTaskListContainer (DOM selector of element for placing user available task list);
 * widgetPath (path used by widget for sending HTTP-requests);
 * locale (available values are 'en', 'ru').
 
