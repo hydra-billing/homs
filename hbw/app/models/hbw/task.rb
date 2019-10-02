@@ -51,6 +51,36 @@ module HBW
         end
       end
 
+      def fetch_unassigned_tasks(email, first_result, max_results)
+        user = ::HBW::BPMUser.fetch(email)
+
+        unless user.nil?
+          do_request(:post,
+                     "task?firstResult=#{first_result}&maxResults=#{max_results}",
+                     active:         true,
+                     unassigned:     true,
+                     candidateUser:  user.id,
+                     sorting: [
+                       {
+                         sortBy:    'dueDate',
+                         sortOrder: 'asc'
+                       },
+                       {
+                         sortBy:    'priority',
+                         sortOrder: 'desc'
+                       },
+                       {
+                         sortBy:    'name',
+                         sortOrder: 'asc'
+                       },
+                       {
+                         sortBy:    'created',
+                         sortOrder: 'asc'
+                       }
+                     ])
+        end
+      end
+
       def build_definitions(tasks)
         tasks.map.with_object({}) do |task, d|
           url = "process-definition/#{task.fetch('processDefinitionId')}"
