@@ -12,7 +12,7 @@ module HBW
         @tasks = widget.entity_task_list(current_user_identifier, entity_identifier, entity_class)
       else
         @tasks = widget.task_list(current_user_identifier, entity_class)
-        @task_count = widget.task_count(email: current_user_identifier, entity_class: entity_class)
+        @task_count = widget.task_count(current_user_identifier)
       end
     end
 

@@ -57,4 +57,4 @@ Style/LambdaCall:
   Enabled: false
 
 Metrics/ClassLength:
-  Max: 125
+  Enabled: false
