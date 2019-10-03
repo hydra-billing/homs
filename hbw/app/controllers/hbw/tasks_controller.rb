@@ -16,6 +16,10 @@ module HBW
       end
     end
 
+    def unassigned
+      @tasks = widget.unassigned_task_list(current_user_identifier, entity_class, first_result, max_results)
+    end
+
     def edit
       form = find_form(task_id, entity_class)
       if form
@@ -68,6 +72,14 @@ module HBW
 
     def form_data
       params[:form_data].to_h
+    end
+
+    def first_result
+      params[:first_result]
+    end
+
+    def max_results
+      params[:max_results]
     end
 
     def files

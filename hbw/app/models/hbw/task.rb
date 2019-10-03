@@ -1,6 +1,8 @@
 module HBW
   class Task
     extend HBW::Remote
+    extend HBW::WithDefinitions
+    include HBW::GetIcon
     include HBW::Definition
 
     def method_missing(variable_name)
@@ -24,22 +26,18 @@ module HBW
         entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
 
         with_user(email) do |user|
-          tasks = do_request(:post,
-                             'task',
-                             assignee:   assignee(user, email, for_all_users),
-                             active:     true,
-                             processVariables: [
-                               name:     entity_code_key,
-                               operator: operation(entity_code),
-                               value:    entity_code
-                             ],
-                             maxResults: size)
-
-          definitions = build_definitions(tasks)
-
-          entity_codes = fetch_variable_for_processes(entity_code_key, tasks.map { |task| task.fetch('processInstanceId') })
-
-          zip(tasks, definitions, entity_codes)
+          with_definitions(entity_code_key) do
+            do_request(:post,
+                       'task',
+                       assignee:   assignee(user, email, for_all_users),
+                       active:     true,
+                       processVariables: [
+                         name:     entity_code_key,
+                         operator: operation(entity_code),
+                         value:    entity_code
+                       ],
+                       maxResults: size)
+          end
         end
       end
 
@@ -61,52 +59,18 @@ module HBW
         end
       end
 
-      def fetch_unassigned(email, first_result, max_results)
+      def fetch_unassigned(email, entity_class, first_result, max_results)
+        entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
+
         with_user(email) do |user|
-          do_request(:post,
-                     "task?firstResult=#{first_result}&maxResults=#{max_results}",
-                     active:         true,
-                     candidateUser:  user.id,
-                     sorting: [
-                       {
-                         sortBy:    'dueDate',
-                         sortOrder: 'asc'
-                       },
-                       {
-                         sortBy:    'priority',
-                         sortOrder: 'desc'
-                       },
-                       {
-                         sortBy:    'name',
-                         sortOrder: 'asc'
-                       },
-                       {
-                         sortBy:    'created',
-                         sortOrder: 'asc'
-                       }
-                     ])
+          with_definitions(entity_code_key) do
+            do_request(:post,
+                       "task?firstResult=#{first_result}&maxResults=#{max_results}",
+                       active:         true,
+                       candidateUser:  user.id,
+                       sorting:        sorting_fields)
+          end
         end
-      end
-
-      def build_definitions(tasks)
-        do_request(:get,
-                   'process-definition',
-                   processDefinitionIdIn: tasks.map { |task| task.fetch('processDefinitionId') })
-      end
-
-      def zip(tasks, definitions, variables)
-        tasks.map do |task|
-          new(task.merge(
-                'processDefinition' => ::HBW::ProcessDefinition.new(definitions.find { |d| d['id'] == task.fetch('processDefinitionId') }),
-                'variables' => variables.select { |var| var.fetch('processInstanceId') == task.fetch('processInstanceId') }
-              ))
-        end
-      end
-
-      def fetch_variable_for_processes(name, process_ids)
-        do_request(:get, 'variable-instance',
-                   variableName: name,
-                   processInstanceIdIn: process_ids)
       end
 
       def assignee(user, email, for_all_users)
@@ -122,10 +86,32 @@ module HBW
           :eq
         end
       end
+
+      def sorting_fields
+        [
+          {
+            sortBy:    'dueDate',
+            sortOrder: 'asc'
+          },
+          {
+            sortBy:    'priority',
+            sortOrder: 'desc'
+          },
+          {
+            sortBy:    'name',
+            sortOrder: 'asc'
+          },
+          {
+            sortBy:    'created',
+            sortOrder: 'asc'
+          }
+        ]
+      end
     end
 
     definition_reader :id, :name, :description, :process_instance_id,
-                      :process_definition_id, :process_name, :form_key
+                      :process_definition_id, :process_name, :form_key,
+                      :assignee, :priority, :created
 
     def variables
       @variables ||= Variable.wrap(definition['variables'])
