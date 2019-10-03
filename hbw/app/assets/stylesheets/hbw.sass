@@ -320,6 +320,37 @@
       font-size: 12px
       text-align: center
 
+  .tabs
+    display: flex
+    justify-content: space-between
+    align-items: stretch
+    white-space: nowrap
+    a
+      display: flex
+      outline: none
+      text-decoration: none
+
+      padding: 14px 30px
+
+      border-bottom-color: #d8d8d8
+      border-bottom-style: solid
+      border-bottom-width: 1px
+      color: black
+
+      &:hover
+        border-bottom-color: #50e3c2
+    ul
+      padding: 0
+      li
+        display: inline-block
+
+        &.is-active
+          a
+            padding-bottom: 10px
+            font-weight: bold
+            border-bottom-color: #50e3c2
+            border-bottom-width: 5px
+
 #hbw-tasks
   .hbw-disabled
     visibility: hidden

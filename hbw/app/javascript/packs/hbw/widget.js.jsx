@@ -1,7 +1,7 @@
 /* eslint react/no-render-return-value: "off" */
 
-import AvailableTasksButton from './components/claiming/menu_button.js';
-import AvailableTaskList from './components/claiming/task_list.js';
+import AvailableTasksButton from './components/claiming/menu_button';
+import AvailableTaskList from './components/claiming/task_list';
 
 modulejs.define(
   'HBW',
