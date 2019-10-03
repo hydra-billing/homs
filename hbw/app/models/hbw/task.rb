@@ -89,17 +89,15 @@ module HBW
       end
 
       def build_definitions(tasks)
-        tasks.map.with_object({}) do |task, d|
-          url = "process-definition/#{task.fetch('processDefinitionId')}"
-
-          d[url] ||= ::HBW::ProcessDefinition.fetch(url)
-        end
+        do_request(:get,
+                   'process-definition',
+                   processDefinitionIdIn: tasks.map { |task| task.fetch('processDefinitionId') })
       end
 
       def zip(tasks, definitions, variables)
         tasks.map do |task|
           new(task.merge(
-                'processDefinition' => definitions["process-definition/#{task.fetch('processDefinitionId')}"],
+                'processDefinition' => ::HBW::ProcessDefinition.new(definitions.find { |d| d['id'] == task.fetch('processDefinitionId') }),
                 'variables' => variables.select { |var| var.fetch('processInstanceId') == task.fetch('processInstanceId') }
               ))
         end

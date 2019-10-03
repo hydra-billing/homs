@@ -49,6 +49,7 @@ v1.8.0 [unreleased]
 - [#330](https://github.com/latera/homs/pull/330) Add new available tasks components to mount.
 - [#331](https://github.com/latera/homs/pull/331) Add unassigned tasks count method.
 - [#334](https://github.com/latera/homs/pull/334) Add my/unassigned tasks switch component.
+- [#333](https://github.com/latera/homs/pull/333) Optimize Camunda process definitions fetching.
 
 v1.7.8 [2019-10-03]
 -------------------
