@@ -46,6 +46,7 @@ v1.8.0 [unreleased]
 - [#318](https://github.com/latera/homs/pull/318) Improve scroll style in select_table.
 - [#327](https://github.com/latera/homs/pull/327) Optimize Camunda variables fetching.
 - [#329](https://github.com/latera/homs/pull/329) Add method for getting unassigned tasks from user's group.
+- [#330](https://github.com/latera/homs/pull/330) Add new available tasks components to mount.
 
 v1.7.8 [unreleased]
 -------------------
