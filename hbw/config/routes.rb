@@ -6,6 +6,8 @@ HBW::Engine.routes.draw do
       get :lookup, on: :member
     end
 
+    get 'tasks/unassigned', to: 'tasks#unassigned'
+
     resources :buttons, only: [:index, :create]
 
     resources :users, only: [:index] do

@@ -1,4 +1,5 @@
 import './form';
+import './claiming';
 import './button.js';
 import './buttons.js';
 import './container.js';

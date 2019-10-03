@@ -351,6 +351,64 @@
             border-bottom-color: #50e3c2
             border-bottom-width: 5px
 
+  .claiming-table
+    width: 100%
+
+    .no-tasks, .loader
+      color: black
+      text-align: center
+
+    tr
+      color: black
+
+    thead
+      border-bottom: solid 1px #dbdbdb
+
+      th
+        font-weight: 200
+
+    tbody
+      i
+        color: $claiming-purple
+
+      tr
+        cursor: pointer
+        border-left: 3px solid transparent
+
+        &.chosen, &:hover
+          border-left: 3px solid $claiming-purple
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5)
+
+          .claim-button
+            border: 2px solid $claiming-purple
+
+        .priority
+          text-align: center
+
+        td
+          vertical-align: text-top !important
+          padding-top: 15px !important
+          padding-bottom: 15px !important
+
+          .medium
+            background-color: #17a2b8
+
+          .high
+            background-color: #de8a00
+
+          .urgent
+            background-color: #d0021b
+
+          .claim-button
+            background-color: transparent
+            border: 2px solid transparent
+            color: $claiming-purple
+            font-weight: 550
+
+            &:hover
+              background-color: $claiming-purple
+              color: white
+
 #hbw-tasks
   .hbw-disabled
     visibility: hidden
@@ -517,6 +575,7 @@
   .panel-default,
   .panel-group
     overflow: visible
+
 li.danger
   a
     color: #E74C3C

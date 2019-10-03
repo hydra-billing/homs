@@ -28,3 +28,16 @@ en:
           tabs:
             my: My tasks (%{count})
             unassigned: Unassigned tasks (%{count})
+          table:
+            priority: Priority
+            title: Title
+            type: Task type
+            description: Task description
+            sla: Created
+            claim: Claim
+            empty_description: No description
+            empty_tasks: No tasks
+            priorities:
+              medium: Medium
+              high: High
+              urgent: Urgent
