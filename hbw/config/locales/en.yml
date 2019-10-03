@@ -24,3 +24,7 @@ en:
           enter_more_chars: Please enter 2 or more characters
         file_upload:
           drag_and_drop: Drag and drop files to attach them
+        claiming:
+          tabs:
+            my: My tasks (%{count})
+            unassigned: Unassigned tasks (%{count})
