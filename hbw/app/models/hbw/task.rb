@@ -12,11 +12,18 @@ module HBW
     end
 
     class << self
-      def fetch(email, entity_code, entity_class, size = 1000, for_all_users = false)
+      def with_user(email)
         user = ::HBW::BPMUser.fetch(email)
-        entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
 
         unless user.nil?
+          yield(user)
+        end
+      end
+
+      def fetch(email, entity_code, entity_class, size = 1000, for_all_users = false)
+        entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
+
+        with_user(email) do |user|
           tasks = do_request(:post,
                              'task',
                              assignee:   assignee(user, email, for_all_users),
@@ -36,29 +43,29 @@ module HBW
         end
       end
 
-      def fetch_task_count(email, entity_code, entity_class, for_all_users = false)
-        user = ::HBW::BPMUser.fetch(email)
-        unless user.nil?
+      def fetch_count(email)
+        with_user(email) do |user|
           do_request(:post,
                      'task/count',
-                     assignee:   assignee(user, email, for_all_users),
-                     active:     true,
-                     processVariables: [
-                       name:     HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key],
-                       operator: operation(entity_code),
-                       value:    entity_code
-                     ])['count']
+                     assignee:   user.id,
+                     active:     true)['count']
         end
       end
 
-      def fetch_unassigned_tasks(email, first_result, max_results)
-        user = ::HBW::BPMUser.fetch(email)
+      def fetch_count_unassigned(email)
+        with_user(email) do |user|
+          do_request(:post,
+                     'task/count',
+                     candidateUser: user.id,
+                     active:        true)['count']
+        end
+      end
 
-        unless user.nil?
+      def fetch_unassigned(email, first_result, max_results)
+        with_user(email) do |user|
           do_request(:post,
                      "task?firstResult=#{first_result}&maxResults=#{max_results}",
                      active:         true,
-                     unassigned:     true,
                      candidateUser:  user.id,
                      sorting: [
                        {

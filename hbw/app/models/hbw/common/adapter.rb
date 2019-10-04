@@ -83,9 +83,15 @@ module HBW
         task_list_wrapped(email, '%', entity_class, size)
       end
 
-      def task_count(email:, entity_code: '%', entity_class:, for_all_users: false)
+      def task_count(email)
         HBW::Task.with_connection(api) do
-          HBW::Task.fetch_task_count(email, entity_code, entity_class, for_all_users)
+          HBW::Task.fetch_count(email)
+        end
+      end
+
+      def task_count_unassigned(email)
+        HBW::Task.with_connection(api) do
+          HBW::Task.fetch_count_unassigned(email)
         end
       end
 

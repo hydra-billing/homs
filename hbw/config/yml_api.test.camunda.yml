@@ -1548,8 +1548,8 @@ post:
     "variables[homsOrderDataSelect][value]=123":
       - ""
   task/count:
-    "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
+    "active=true&assignee=demo":
       count: 15
-    "active=true&assignee=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
+    "active=true&assignee=john":
       count: 0
 delete: {}
