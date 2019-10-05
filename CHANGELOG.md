@@ -53,6 +53,7 @@ v1.8.0 [unreleased]
 - [#332](https://github.com/latera/homs/pull/332) Add table for claiming.
 - [#337](https://github.com/latera/homs/pull/337) Add claim button for widget page.
 - [#338](https://github.com/latera/homs/pull/338) Add task overview component.
+- [#336](https://github.com/latera/homs/pull/336) Update React to 16.10.2.
 
 v1.7.8 [2019-10-03]
 -------------------
