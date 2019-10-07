@@ -22,7 +22,7 @@ module HBW
     def do_request(method, *args)
       response = Remote.connection.send(method, *args)
 
-      if response.status == 200
+      if [200, 204].include?(response.status)
         case response.body
         when Array then response.body
         when Hash

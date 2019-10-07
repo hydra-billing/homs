@@ -58,6 +58,10 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
         env:            this.props.env
       };
 
+      if (this.props.disabled) {
+        opts.disabled = true;
+      }
+
       const onRef = { onRef: (i) => { this[`${name}`] = i; } };
 
       switch (params.type) {

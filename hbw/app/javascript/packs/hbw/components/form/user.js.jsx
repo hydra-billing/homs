@@ -22,6 +22,7 @@ modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'HBWFormSelect'], (React, R
         name={this.props.name}
         params={params}
         env={this.props.env}
+        disabled={this.props.disabled}
         onRef={(i) => { this[`${this.props.name}`] = i; }} />;
     }
 

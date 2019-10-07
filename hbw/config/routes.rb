@@ -4,6 +4,7 @@ HBW::Engine.routes.draw do
       get :form, on: :member, action: :edit
       put :form, on: :member, action: :submit
       get :lookup, on: :member
+      post :claim, on: :member, action: :claim
     end
 
     get 'tasks/unassigned', to: 'tasks#unassigned'

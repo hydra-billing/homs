@@ -60,6 +60,10 @@ module HBW
       render json: variants.map { |id, text| {id: id, text: text} }.to_json
     end
 
+    def claim
+      widget.claim_task(current_user_identifier, task_id)
+    end
+
     private
 
     def find_form(task_id, entity_class)

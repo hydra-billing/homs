@@ -101,6 +101,12 @@ module HBW
         end
       end
 
+      def claim_task(email, task_id)
+        HBW::Task.with_connection(api) do
+          HBW::Task.claim_task(email, task_id)
+        end
+      end
+
       def form(user_email, entity_class, task_id)
         task = task_for_email_and_task_id(user_email, entity_class, task_id)
         HBW::Form.with_connection(api) do
@@ -110,7 +116,8 @@ module HBW
 
       def task_list_wrapped(email, entity_code, entity_class, size, for_all_users = false)
         HBW::Task.with_connection(api) do
-          HBW::Task.fetch(email, entity_code, entity_class, size, for_all_users)
+          HBW::Task.fetch(email, entity_code, entity_class, size, for_all_users) +
+            HBW::Task.fetch_unassigned(email, entity_class, 0, 1000)
         end
       end
 

@@ -21,6 +21,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
 
     render () {
       const opts = {
+        disabled: this.props.disabled,
         name:     this.props.params.name,
         onChange: this.onChange
       };

@@ -1323,6 +1323,14 @@ post:
         processDefinitionId: "testProcess:22:22"
     "active=true&assignee=john&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
       []
+
+  "task?firstResult=0&maxResults=1000":
+    "active=true&candidateUser=demo&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=name&sorting[][sortOrder]=asc&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
+      []
+
+    "active=true&candidateUser=john&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=name&sorting[][sortOrder]=asc&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
+      []
+
   process-instance:
     "variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq":
       default_data: &default_process-instances

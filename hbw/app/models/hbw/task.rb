@@ -73,6 +73,14 @@ module HBW
         end
       end
 
+      def claim_task(email, task_id)
+        with_user(email) do |user|
+          do_request(:post,
+                     "task/#{task_id}/claim",
+                     userId: user.id)
+        end
+      end
+
       def assignee(user, email, for_all_users)
         unless for_all_users
           user.try(:id) || email
