@@ -153,7 +153,7 @@ class HBWTasksTable extends Component {
         <td>{row.description || translator('components.claiming.table.empty_description') }</td>
         <td>{'1h ago'}</td>
         {showClaimButton
-          && <td><button className='claim-button'>{translator('components.claiming.table.claim')}</button></td>}
+          && <td><button className='claim-button'>{translator('components.claiming.claim')}</button></td>}
       </tr>
     );
   };

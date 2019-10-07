@@ -1,6 +1,7 @@
 /* eslint no-console: "off" */
 /* eslint no-restricted-syntax: "off" */
 
+import cx from 'classnames';
 import { withCallbacks, withErrorBoundary, compose } from './helpers';
 
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
@@ -13,6 +14,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     state = {
       error:         null,
       submitting:    false,
+      claiming:      false,
       fileUploading: false
     };
 
@@ -32,7 +34,42 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
             {this.iterateControls(this.props.form.fields)}
             {this.submitControl(this.props.form.fields)}
           </form>
+          {!this.props.assignee && this.renderClaimButton()}
         </div>;
+    }
+
+    renderClaimButton = () => {
+      const { claiming } = this.state;
+      const { translator } = this.props.env;
+
+      const buttonCN = cx({
+        btn:            true,
+        'claim-button': true,
+        disabled:       claiming
+      });
+
+      return (
+        <div className='claim'>
+          <button
+            disabled={claiming}
+            className={buttonCN}
+            onClick={this.claimTask}
+          >
+            {translator('components.claiming.claim')}
+          </button>
+        </div>
+      );
+    }
+
+    claimTask = () => {
+      this.setState({ claiming: true });
+
+      this.props.env.connection.request({
+        url:    `${this.props.env.connection.serverURL}/tasks/${this.props.taskId}/claim`,
+        method: 'POST'
+      }).done(() => {
+        console.log('poll');
+      });
     }
 
     iterateControls = fields => [...fields].map(field => (
@@ -49,6 +86,10 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         env:             this.props.env,
         fileListPresent: this.fileListPresent(this.props.form.fields)
       };
+
+      if (!this.props.assignee) {
+        opts.disabled = true;
+      }
 
       const onRef = { onRef: (i) => { this[`${name}`] = i; } };
 

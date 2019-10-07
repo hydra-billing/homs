@@ -65,10 +65,12 @@ modulejs.define(
         if (this.state.form) {
           const opts = {
             id:        this.state.id,
+            taskId:    this.props.task.id,
             form:      this.state.form,
             env:       this.props.env,
             error:     this.state.error,
             pending:   this.state.pending,
+            assignee:  this.props.task.assignee,
             variables: this.formVariablesFromTask(this.props.task)
           };
 

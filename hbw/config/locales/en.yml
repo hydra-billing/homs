@@ -25,6 +25,7 @@ en:
         file_upload:
           drag_and_drop: Drag and drop files to attach them
         claiming:
+          claim: Claim
           tabs:
             my: My tasks (%{count})
             unassigned: Unassigned tasks (%{count})
@@ -34,7 +35,6 @@ en:
             type: Task type
             description: Task description
             sla: Created
-            claim: Claim
             empty_description: No description
             empty_tasks: No tasks
             priorities:

@@ -19,7 +19,7 @@ modulejs.define('HBWTaskGroup', ['React', 'HBWTask'], (React, Task) => {
 
     render () {
       const tasks = [...this.props.tasks.sort((a, b) => a.id - b.id)];
-      const children = tasks.map(task => this.renderTask(task));
+      const children = tasks.filter(t => t.assignee !== null).map(task => this.renderTask(task));
 
       return <div>
         <p className="hbw-task-group-item"><b>{this.props.key}</b></p>
