@@ -69,6 +69,14 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
     markAsFetched () {
       return this.runCallbacks('fetch');
     }
+
+    update = (data) => {
+      this.channel.updateOptions(data);
+    }
+
+    poll = () => {
+      this.channel.poll();
+    }
   }
 
   class Channel {
@@ -203,6 +211,10 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
 
     runCallbacks (kind, args = []) {
       this.eachSubscriptions(s => s.runCallbacks(kind, args));
+    }
+
+    updateOptions = (data) => {
+      this.options.data = data;
     }
   }
 

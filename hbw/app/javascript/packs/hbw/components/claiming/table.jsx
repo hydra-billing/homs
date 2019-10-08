@@ -12,6 +12,7 @@ class HBWTasksTable extends Component {
     createUnassignedSubscription: PropTypes.func.isRequired,
     startUnassignedSubscription:  PropTypes.func.isRequired,
     closeUnassignedSubscription:  PropTypes.func.isRequired,
+    updateUnassignedSubscription: PropTypes.func.isRequired,
   };
 
   state = {
@@ -41,8 +42,8 @@ class HBWTasksTable extends Component {
     this.props.startUnassignedSubscription(subscription);
 
     subscription
-      .fetch(() => this.setState({ fetching: false }))
-      .progress(({ tasks }) => this.setState({ tasks }));
+      .always(() => this.setState({ fetching: false }))
+      .progress(({ tasks }) => this.updateTasks(tasks));
   }
 
   componentWillUnmount () {
@@ -52,11 +53,16 @@ class HBWTasksTable extends Component {
     this.props.closeUnassignedSubscription(this.state.subscription);
   }
 
-  removeCursor = () => this.setState({ cursor: -1 });
+  updateTasks = (tasks) => {
+    const { page } = this.state;
 
-  handleSubscription = () => {
-    console.log('handleSubscription');
-  };
+    this.setState({
+      tasks,
+      lastPage: tasks.length < page * this.perPage
+    });
+  }
+
+  removeCursor = () => this.setState({ cursor: -1 });
 
   moveCursorUp = () => {
     this.setState(prevState => ({ cursor: prevState.cursor - 1 }));
@@ -100,40 +106,19 @@ class HBWTasksTable extends Component {
     }
   };
 
+  isBottom = el => (el.getBoundingClientRect().bottom <= window.innerHeight);
+
   showMore = () => {
-    const { page } = this.state;
+    const { page, subscription } = this.state;
     this.setState(prevState => ({ page: prevState.page + 1, fetching: true }));
 
-    this.props.env.connection.request({
-      url:    `${this.props.url}/tasks/unassigned`,
-      method: 'GET',
-      data:   {
-        entity_class: this.props.env.entity_class,
-        first_result: page * this.perPage,
-        max_results:  this.perPage
-      }
-    }).done((data) => {
-      if (data.tasks.length > 0) {
-        this.setState(prevState => ({
-          tasks:    prevState.tasks.concat(data.tasks),
-          lastPage: data.tasks.length < this.perPage,
-          fetching: false
-        }));
-
-        this.handleSubscription();
-      } else {
-        this.setState({ lastPage: true, fetching: false });
-      }
-    });
+    this.props.updateUnassignedSubscription(subscription, 0, (page + 1) * this.perPage);
   };
 
   trackScrolling = () => {
     const { lastPage, fetching } = this.state;
-    const d = document.documentElement;
-    const offset = d.scrollTop + window.innerHeight;
-    const height = d.offsetHeight;
 
-    if (offset >= height && !lastPage && !fetching) {
+    if (this.isBottom(this.tableBody) && !lastPage && !fetching) {
       this.showMore();
     }
   };
@@ -195,7 +180,7 @@ class HBWTasksTable extends Component {
           </tr>
           </thead>
           <tbody ref={(t) => { this.tableBody = t; }}>
-          {tasks.map((row, index) => this.renderRow(row, index))}
+            {tasks.map((row, index) => this.renderRow(row, index))}
           </tbody>
         </table>
         {this.renderLoader()}
