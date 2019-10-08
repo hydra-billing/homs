@@ -392,6 +392,9 @@
         cursor: pointer
         border-left: 3px solid transparent
 
+        .claim-button
+          border: 2px solid transparent
+
         &.chosen, &:hover
           border-left: 3px solid $claiming-purple
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5)
@@ -407,25 +410,75 @@
           padding-top: 15px !important
           padding-bottom: 15px !important
 
-          .medium
-            background-color: #17a2b8
+  .priority
+    &.medium
+      background-color: #17a2b8
 
-          .high
-            background-color: #de8a00
+    &.high
+      background-color: #de8a00
 
-          .urgent
-            background-color: #d0021b
+    &.urgent
+      background-color: #d0021b
 
-          .claim-button
-            background-color: transparent
-            border: 2px solid transparent
-            color: $claiming-purple
-            font-weight: 550
-            outline: none
+  .claim-button
+    padding: 5px 15px
+    background-color: transparent
+    border: 2px solid $claiming-purple
+    border-radius: 2px
+    outline: none
+    color: $claiming-purple
+    font-weight: 500
+    line-height: 24px
 
-            &:hover
-              background-color: $claiming-purple
-              color: white
+    &:hover
+      background-color: $claiming-purple
+      color: white
+
+  .task-overview
+    display: flex
+    flex-direction: column
+    width: 300px
+
+    .bold
+      font-weight: bold
+
+    .header
+      margin-bottom: 15px
+      font-size: 18px
+
+    .title
+      color: $claiming-purple
+      margin-bottom: 15px
+
+      span
+        padding-right: 7px
+
+    .two-cols
+      display: flex
+      flex-direction: row
+      margin-bottom: 5px
+
+      .name, .value
+        flex-direction: column
+
+        p
+          margin-bottom: 15px
+
+      .name
+        color: #4A4A4A
+
+      .value
+        padding-left: 10px
+
+    .description
+      margin-bottom: 20px
+
+    .buttons
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      justify-content: space-between
+      flex-basis: 100%
 
 #hbw-tasks
   .hbw-disabled

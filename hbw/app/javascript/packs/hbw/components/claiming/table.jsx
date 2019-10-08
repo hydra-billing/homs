@@ -140,14 +140,14 @@ class HBWTasksTable extends Component {
 
   renderRow = (row, index) => {
     const { cursor } = this.state;
-    const { showClaimButton } = this.props;
-    const { translator } = this.props.env;
+    const { showClaimButton, env } = this.props;
+    const { translator } = env;
 
     const chosenCN = cx({ chosen: cursor === index });
 
     return (
       <tr className={chosenCN} key={row.id}>
-        <td className='priority'><Priority translator={translator} priority={row.priority}/></td>
+        <td className='priority'><Priority env={env} priority={row.priority}/></td>
         <td>{row.name}</td>
         <td><i className={row.icon}/>&nbsp;{row.process_name}</td>
         <td>{row.description || translator('components.claiming.table.empty_description') }</td>
