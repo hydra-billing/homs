@@ -53,10 +53,23 @@ export default WrappedComponent => class WithUnssignedTasks extends Component {
       .always(() => this.setState({ syncing: false }));
   };
 
+  updateUnassignedSubscription = (subscription, firstResult, maxResults) => {
+    const data = {
+      entity_class: this.props.env.entity_class,
+      first_result: firstResult,
+      max_results:  maxResults,
+      unassigned:   true
+    };
+
+    subscription.update(data);
+    subscription.poll();
+  }
+
   render () {
     return <WrappedComponent startUnassignedSubscription={this.startUnassignedSubscription}
                              closeUnassignedSubscription={this.closeUnassignedSubscription}
                              createUnassignedSubscription={this.createUnassignedSubscription}
+                             updateUnassignedSubscription={this.updateUnassignedSubscription}
                              {...this.state}
                              {...this.props} />;
   }
