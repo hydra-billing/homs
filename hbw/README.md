@@ -18,6 +18,7 @@ Initialize widget with following options:
 * availableTasksButtonContainer (DOM selector of element for placing user available tasks button);
 * availableTaskListContainer (DOM selector of element for placing user available task list);
 * widgetPath (path used by widget for sending HTTP-requests);
+* taskListPath (relative path to page with task list mounted to `availableTaskListContainer`);
 * locale (available values are 'en', 'ru').
 
 After successful initialization widget would send HTTP-requests to get list of tasks and forms for current entity type.

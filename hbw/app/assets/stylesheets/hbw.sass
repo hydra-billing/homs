@@ -515,6 +515,48 @@
         right: 5px
         cursor: pointer
 
+  .short-list
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    flex-basis: 100%
+    padding: 0 15px
+
+    .row
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      align-items: center
+      padding: 10px 0
+      border-bottom: 1px solid #D8D8D8
+      cursor: pointer
+      &:hover
+        background-color: #f1f1f1
+
+      &.expired
+        color: #BD2025
+        i
+          color: #BD2025
+
+      i
+        padding: 3px 5px
+        color: $claiming-purple
+
+      .left, .right
+        display: flex
+        flex-grow: 1
+      .left
+        justify-content: flex-start
+      .right
+        justify-content: flex-end
+        padding-right: 10px
+
+    .button
+      display: flex
+      flex-direction: row
+      justify-content: center
+      margin-top: 20px
+
 #hbw-tasks
   .hbw-disabled
     visibility: hidden
