@@ -17,6 +17,7 @@
     "bootstrap-multiselect": "^0.9.13-1",
     "bootstrap-sass": "^3.4.1",
     "classnames": "^2.2.6",
+    "date-fns": "^2.4.1",
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
     "expose-loader": "^0.7.5",
     "i18n-js": "^3.0.11",

@@ -1,6 +1,8 @@
 import React from 'react';
 
-const HBWPriority = ({ translator, priority }) => {
+const HBWPriority = ({ env, priority }) => {
+  const { translator: t } = env;
+
   const priorityName = (p) => {
     if (p < 50) {
       return 'medium';
@@ -13,7 +15,7 @@ const HBWPriority = ({ translator, priority }) => {
 
   return (
     <span className={`badge priority ${priorityName(priority)}`}>
-      {translator(`components.claiming.table.priorities.${priorityName(priority)}`)}
+      {t(`components.claiming.table.priorities.${priorityName(priority)}`)}
     </span>
   );
 };

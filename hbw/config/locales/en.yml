@@ -41,3 +41,13 @@ en:
               medium: Medium
               high: High
               urgent: Urgent
+          overview:
+            header: Task overview
+            due: "Due:"
+            created: "Created:"
+            claimed: "Claimed:"
+            priority: "Priority:"
+            description: "Description:"
+            claim_task: Claim task
+            claim_and_open: Claim and go to task
+            go_to_task: Go to task
