@@ -2,6 +2,7 @@ hbw:
   entities:
     order:
       entity_code_key: homsOrderCode
+      bp_name_key: homsProcessName
 
       task_list:
         group_by_var: order_code

@@ -2,6 +2,7 @@ hbw:
   entities:
     order:
       entity_code_key: homsOrderCode
+      bp_name_key: homsProcessName
 
       bp_toolbar:
         entity_type_buttons:
@@ -26,6 +27,7 @@ hbw:
 
     billing_customer:
       entity_code_key: billingCustomerId
+      bp_name_key: billingProcessName
 
       task_list:
         entity_url: /customers/%s?task_id=%s
@@ -39,6 +41,7 @@ hbw:
 
     crm_account:
       entity_code_key: crmAccountId
+      bp_name_key: crmProcessName
 
       task_list:
         entity_url: /accounts/%s?task_id=%s

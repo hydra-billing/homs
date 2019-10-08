@@ -3,6 +3,8 @@ v1.8.0 [unreleased]
 ### Breaking changes
 - `select_table` with `multi:true` saves all data in JSON format now. It's not possible to open form contains old data with such table.
     See [#300](https://github.com/latera/homs/pull/300) for more details.
+- `hbw.yml` has new required field `bp_name_key` – variable name from Camunda's BP, where process name is stored.
+    See [#340](https://github.com/latera/homs/pull/340) for more details.
 - `hbw.yml` config structure was updated. Entity classes must be moved under key `entities`:
 
    before:

@@ -4,6 +4,7 @@ module HBW
   class ConfigValidator
     EntitySchema = Dry::Validation.Schema do
       required(:entity_code_key).filled(:str?)
+      required(:bp_name_key).filled(:str?)
       required(:task_list).schema do
         required(:entity_url).filled(:str?)
         required(:entity_url_params).each(:str?)
