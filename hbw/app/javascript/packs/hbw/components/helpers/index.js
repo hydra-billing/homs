@@ -5,6 +5,7 @@ import withUnassignedTasks from './unassigned_tasks';
 import withSelect from './select';
 import withValidations from './validations';
 import withErrorBoundary from './error_boundary';
+import withDateFormatter from './date_formatter';
 import { compose } from './utils';
 
 export {
@@ -15,5 +16,6 @@ export {
   withSelect,
   withValidations,
   withErrorBoundary,
+  withDateFormatter,
   compose
 };

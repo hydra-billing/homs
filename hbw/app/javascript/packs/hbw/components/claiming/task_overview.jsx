@@ -5,7 +5,7 @@ import Priority from './priority';
 const HBWClaimingTaskOverview = ({
   env, assigned, entityUrl, task
 }) => {
-  const { translator: t, localizeDate: l } = env;
+  const { translator: t, localizer } = env;
 
   const goToTask = () => { window.location.href = entityUrl; };
 
@@ -39,9 +39,9 @@ const HBWClaimingTaskOverview = ({
           <p>{t('components.claiming.overview.priority')}</p>
         </div>
         <div className="value">
-          <p>{task.due && l(task.due)}</p>
-          <p>{l(task.created)}</p>
-          <p>{assigned && l(task.claimed)}</p>
+          <p>{task.due && localizer.localizeDatetime(task.due)}</p>
+          <p>{localizer.localizeDatetime(task.created)}</p>
+          <p>{assigned && localizer.localizeDatetime(task.claimed)}</p>
           <p><Priority env={env} priority={task.priority} /></p>
         </div>
       </div>

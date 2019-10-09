@@ -1,6 +1,6 @@
 /* eslint react/no-render-return-value: "off" */
 
-import { localizeForLocale } from './init/date_localizer';
+import { localizer } from './init/date_localizer';
 import AvailableTasksButton from './components/claiming/menu_button';
 import AvailableTaskList from './components/claiming/task_list';
 
@@ -36,7 +36,7 @@ modulejs.define(
           connection,
           dispatcher:       new Dispatcher(),
           translator:       Translator.getTranslatorForLocale(this.options.locale),
-          localizeDate:     localizeForLocale(this.options.locale),
+          localizer:        localizer(this.options.locale),
           forms:            new Forms(connection, this.options.entity_class),
           locale:           this.options.locale,
           userExist:        true,

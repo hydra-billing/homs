@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { withErrorBoundary, withUnassignedTasks, compose } from '../helpers';
 import Priority from './priority';
+import DueDate from './due_date';
+import CreatedDate from './created_date';
 
 class HBWTasksTable extends Component {
   static propTypes = {
@@ -123,6 +125,16 @@ class HBWTasksTable extends Component {
     }
   };
 
+  renderDate = (created, due) => {
+    const { env } = this.props;
+
+    if (due) {
+      return <span className="deadline"><DueDate env={env} dateISO={due} /></span>;
+    } else {
+      return <span><CreatedDate env={env} dateISO={created} /></span>;
+    }
+  };
+
   renderRow = (row, index) => {
     const { cursor } = this.state;
     const { showClaimButton, env } = this.props;
@@ -136,7 +148,7 @@ class HBWTasksTable extends Component {
         <td>{row.name}</td>
         <td><i className={row.icon}/>&nbsp;{row.process_name}</td>
         <td>{row.description || translator('components.claiming.table.empty_description') }</td>
-        <td>{'1h ago'}</td>
+        <td>{this.renderDate(row.created, row.due)}</td>
         {showClaimButton
           && <td><button className='claim-button'>{translator('components.claiming.claim')}</button></td>}
       </tr>

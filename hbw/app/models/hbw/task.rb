@@ -124,7 +124,7 @@ module HBW
 
     definition_reader :id, :name, :description, :process_instance_id,
                       :process_definition_id, :process_name, :form_key,
-                      :assignee, :priority, :created
+                      :assignee, :priority, :created, :due
 
     def variables
       @variables ||= Variable.wrap(definition['variables'])
