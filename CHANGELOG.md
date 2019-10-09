@@ -57,6 +57,7 @@ v1.8.0 [unreleased]
 - [#338](https://github.com/latera/homs/pull/338) Add task overview component.
 - [#336](https://github.com/latera/homs/pull/336) Update React to 16.10.2.
 - [#339](https://github.com/latera/homs/pull/339) Add polling with pagination for claiming table.
+- [#344](https://github.com/latera/homs/pull/344) Add component for rendering created/deadline date.
 
 v1.7.8 [2019-10-03]
 -------------------

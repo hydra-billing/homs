@@ -51,3 +51,14 @@ en:
             claim_task: Claim task
             claim_and_open: Claim and go to task
             go_to_task: Go to task
+          created:
+            expired: expired
+            to_deadline: to deadline
+            ago: ago
+            periodUnits:
+              minute: m
+              hour: h
+              day: d
+              week: w
+              month: m
+              year: y

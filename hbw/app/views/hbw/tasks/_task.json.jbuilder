@@ -5,6 +5,7 @@ json.set! :icon, task.get_icon(params[:entity_class])
 json.set! :assignee, task.assignee
 json.set! :description, task.description
 json.set! :created, task.created
+json.set! :due, task.due
 json.set! :entity_code, task.entity_code(params[:entity_class].to_sym)
 json.set! :process_instance_id, task.process_instance_id
 json.set! :variables, task.variables.map(&:to_h)
