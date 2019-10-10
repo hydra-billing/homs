@@ -5,30 +5,24 @@ import cx from 'classnames';
 class HBWClaimingTaskTabs extends Component {
   static propTypes = {
     env:      PropTypes.object.isRequired,
-    children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    children: PropTypes.element.isRequired,
     count:    PropTypes.shape({
       my:         PropTypes.number.isRequired,
       unassigned: PropTypes.number.isRequired
     }).isRequired,
+    tab:         PropTypes.number.isRequired,
+    onTabChange: PropTypes.func.isRequired,
   };
 
   tabs = { my: 0, unassigned: 1 };
 
-  state = {
-    tab: this.tabs.my,
-  };
-
-  handleTabChange = (tab) => {
-    if (tab !== this.state.tab) {
-      this.setState({ tab });
-    }
-  };
-
   renderTabs = () => {
-    const { env, count } = this.props;
+    const {
+      env, count, tab: activeTab, onTabChange
+    } = this.props;
 
     const tabCN = tab => cx({
-      'is-active': this.state.tab === tab,
+      'is-active': activeTab === tab,
     });
 
     const tabs = Object.entries(this.tabs)
@@ -38,7 +32,7 @@ class HBWClaimingTaskTabs extends Component {
             role="button"
             tabIndex={0}
             className="tab"
-            onClick={() => this.handleTabChange(tab[1])}
+            onClick={() => onTabChange(tab[1])}
           >
             {env.translator(`components.claiming.tabs.${tab[0]}`, { count: count[tab[0]] })}
           </a>
@@ -56,12 +50,11 @@ class HBWClaimingTaskTabs extends Component {
 
   render () {
     const { children } = this.props;
-    const { tab } = this.state;
 
     return (
       <div>
         {this.renderTabs()}
-        {children[tab]}
+        {children}
       </div>
     );
   }

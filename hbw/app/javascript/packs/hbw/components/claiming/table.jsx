@@ -1,67 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { withErrorBoundary, withUnassignedTasks, compose } from '../helpers';
+import { withErrorBoundary, compose } from '../helpers';
 import Priority from './priority';
 import DueDate from './due_date';
 import CreatedDate from './created_date';
 
 class HBWTasksTable extends Component {
   static propTypes = {
-    showClaimButton:              PropTypes.bool.isRequired,
-    env:                          PropTypes.object.isRequired,
-    url:                          PropTypes.string.isRequired,
-    createUnassignedSubscription: PropTypes.func.isRequired,
-    startUnassignedSubscription:  PropTypes.func.isRequired,
-    closeUnassignedSubscription:  PropTypes.func.isRequired,
-    updateUnassignedSubscription: PropTypes.func.isRequired,
+    env:             PropTypes.object.isRequired,
+    url:             PropTypes.string.isRequired,
+    tasks:           PropTypes.array.isRequired,
+    showClaimButton: PropTypes.bool.isRequired,
+    fetching:        PropTypes.bool.isRequired,
+    lastPage:        PropTypes.bool.isRequired,
+    addPage:         PropTypes.func.isRequired,
   };
 
   state = {
-    tasks:        [],
-    subscription: null,
     cursor:       -1,
-    page:         1,
-    lastPage:     false,
     openOverview: false,
-    fetching:     true
   };
 
-  perPage = 50;
+  tableBody = createRef();
 
   componentDidMount () {
     window.addEventListener('keydown', this.handleKeyDown);
     window.addEventListener('scroll', this.trackScrolling);
-    this.tableBody.addEventListener('mouseenter', this.removeCursor);
 
-    const subscription = this.props.createUnassignedSubscription(0, this.perPage);
-
-    this.setState({
-      fetching: true,
-      subscription
-    });
-
-    this.props.startUnassignedSubscription(subscription);
-
-    subscription
-      .always(() => this.setState({ fetching: false }))
-      .progress(({ tasks }) => this.updateTasks(tasks));
+    this.tableBody.current.addEventListener('mouseenter', this.removeCursor);
   }
 
   componentWillUnmount () {
     window.removeEventListener('keydown', this.handleKeyDown);
     window.removeEventListener('scroll', this.trackScrolling);
-    this.tableBody.removeEventListener('mouseenter', this.removeCursor);
-    this.props.closeUnassignedSubscription(this.state.subscription);
-  }
 
-  updateTasks = (tasks) => {
-    const { page } = this.state;
-
-    this.setState({
-      tasks,
-      lastPage: tasks.length < page * this.perPage
-    });
+    this.tableBody.current.removeEventListener('mouseenter', this.removeCursor);
   }
 
   removeCursor = () => this.setState({ cursor: -1 });
@@ -79,11 +53,12 @@ class HBWTasksTable extends Component {
   };
 
   moveCursorToLast = () => {
-    this.setState({ cursor: this.state.tasks.length - 1 });
+    this.setState({ cursor: this.props.tasks.length - 1 });
   };
 
   handleKeyDown = (e) => {
-    const { cursor, tasks } = this.state;
+    const { tasks } = this.props;
+    const { cursor } = this.state;
 
     if (e.keyCode === 38) {
       e.preventDefault();
@@ -111,16 +86,13 @@ class HBWTasksTable extends Component {
   isBottom = el => (el.getBoundingClientRect().bottom <= window.innerHeight);
 
   showMore = () => {
-    const { page, subscription } = this.state;
-    this.setState(prevState => ({ page: prevState.page + 1, fetching: true }));
-
-    this.props.updateUnassignedSubscription(subscription, 0, (page + 1) * this.perPage);
+    this.props.addPage();
   };
 
   trackScrolling = () => {
-    const { lastPage, fetching } = this.state;
+    const { fetching, lastPage } = this.props;
 
-    if (this.isBottom(this.tableBody) && !lastPage && !fetching) {
+    if (this.isBottom(this.tableBody.current) && !lastPage && !fetching) {
       this.showMore();
     }
   };
@@ -138,7 +110,7 @@ class HBWTasksTable extends Component {
   renderRow = (row, index) => {
     const { cursor } = this.state;
     const { showClaimButton, env } = this.props;
-    const { translator } = env;
+    const { translator: t } = env;
 
     const chosenCN = cx({ chosen: cursor === index });
 
@@ -147,59 +119,47 @@ class HBWTasksTable extends Component {
         <td className='priority'><Priority env={env} priority={row.priority}/></td>
         <td>{row.name}</td>
         <td><i className={row.icon}/>&nbsp;{row.process_name}</td>
-        <td>{row.description || translator('components.claiming.table.empty_description') }</td>
+        <td>{row.description || t('components.claiming.table.empty_description') }</td>
         <td>{this.renderDate(row.created, row.due)}</td>
         {showClaimButton
-          && <td><button className='claim-button'>{translator('components.claiming.claim')}</button></td>}
+          && <td><button className='claim-button'>{t('components.claiming.claim')}</button></td>}
       </tr>
     );
   };
 
-  renderLoader = () => {
-    const { fetching } = this.state;
-
-    return (
-      fetching && <div className='loader'><i className="fas fa-spinner fa-spin fa-2x"></i></div>
-    );
-  };
-
   renderNoTasks = () => {
-    const { tasks, fetching } = this.state;
-    const { translator } = this.props.env;
+    const { translator: t } = this.props.env;
 
     return (
-      !fetching && tasks.length === 0
-        && <div className='no-tasks'><span>{translator('components.claiming.table.empty_tasks')}</span></div>
+      <div className='no-tasks'><span>{t('components.claiming.table.empty_tasks')}</span></div>
     );
   };
 
   render () {
-    const { tasks } = this.state;
-    const { showClaimButton } = this.props;
-    const { translator } = this.props.env;
+    const { showClaimButton, tasks, fetching } = this.props;
+    const { translator: t } = this.props.env;
 
     return (
       <div className='claiming-table'>
         <table className='table'>
           <thead>
-          <tr>
-            <th>{translator('components.claiming.table.priority')}</th>
-            <th>{translator('components.claiming.table.title')}</th>
-            <th>{translator('components.claiming.table.type')} </th>
-            <th>{translator('components.claiming.table.description')}</th>
-            <th>{translator('components.claiming.table.sla')}</th>
-            {showClaimButton && <th></th>}
-          </tr>
+            <tr>
+              <th>{t('components.claiming.table.priority')}</th>
+              <th>{t('components.claiming.table.title')}</th>
+              <th>{t('components.claiming.table.type')} </th>
+              <th>{t('components.claiming.table.description')}</th>
+              <th>{t('components.claiming.table.sla')}</th>
+              {showClaimButton && <th />}
+            </tr>
           </thead>
-          <tbody ref={(t) => { this.tableBody = t; }}>
+          <tbody ref={this.tableBody}>
             {tasks.map((row, index) => this.renderRow(row, index))}
           </tbody>
         </table>
-        {this.renderLoader()}
-        {this.renderNoTasks()}
+        {!fetching && tasks.length === 0 && this.renderNoTasks()}
       </div>
     );
   }
 }
 
-export default compose(withErrorBoundary, withUnassignedTasks)(HBWTasksTable);
+export default compose(withErrorBoundary)(HBWTasksTable);

@@ -83,9 +83,9 @@ module HBW
         task_list_wrapped(email, '%', entity_class, size)
       end
 
-      def unassigned_task_list(email, entity_class, first_result, max_results)
+      def claiming_task_list(email, entity_class, assigned, max_results, search_query)
         HBW::Task.with_connection(api) do
-          HBW::Task.fetch_unassigned(email, entity_class, first_result, max_results)
+          HBW::Task.fetch_for_claiming(email, entity_class, assigned, max_results, search_query)
         end
       end
 

@@ -7,7 +7,7 @@ HBW::Engine.routes.draw do
       post :claim, on: :member, action: :claim
     end
 
-    get 'tasks/unassigned', to: 'tasks#unassigned'
+    get 'tasks/claiming', to: 'tasks#claiming'
 
     resources :buttons, only: [:index, :create]
 
