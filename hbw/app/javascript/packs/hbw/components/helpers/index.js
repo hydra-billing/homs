@@ -1,7 +1,7 @@
 import withCallbacks from './callbacks';
 import withConditions from './conditions';
 import withTasks from './tasks';
-import withUnassignedTasks from './unassigned_tasks';
+import withClaimingTasks from './claiming_tasks';
 import withSelect from './select';
 import withValidations from './validations';
 import withErrorBoundary from './error_boundary';
@@ -12,7 +12,7 @@ export {
   withCallbacks,
   withConditions,
   withTasks,
-  withUnassignedTasks,
+  withClaimingTasks,
   withSelect,
   withValidations,
   withErrorBoundary,

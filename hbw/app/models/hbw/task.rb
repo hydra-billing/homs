@@ -59,6 +59,38 @@ module HBW
         end
       end
 
+      def update_description(id, description)
+        do_request(:put,
+                   "task/#{id}",
+                   description: description)
+      end
+
+      def fetch_for_claiming(email, entity_class, assigned, max_results, search_query)
+        entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
+        bp_name_key = HBW::Widget.config[:entities].fetch(entity_class)[:bp_name_key]
+
+        with_user(email) do |user|
+          with_definitions(entity_code_key) do
+            options = {
+                active:  true,
+                sorting: sorting_fields(bp_name_key)
+            }
+
+            if assigned
+              options.merge!(assignee: user.id)
+            else
+              options.merge!(candidateUser: user.id)
+            end
+
+            if search_query.present?
+              options.merge!(descriptionLike: "%#{search_query}%")
+            end
+
+            do_request(:post, "task?maxResults=#{max_results}", **options)
+          end
+        end
+      end
+
       def fetch_unassigned(email, entity_class, first_result, max_results)
         entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
         bp_name_key = HBW::Widget.config[:entities].fetch(entity_class)[:bp_name_key]

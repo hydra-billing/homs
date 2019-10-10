@@ -149,7 +149,7 @@ modulejs.define(
 
       renderClaimingTaskList () {
         return ReactDOM.render(
-          <AvailableTaskList env={this.env} />,
+          <AvailableTaskList env={this.env} perPage={50} />,
           this.availableTaskListContainer
         );
       }

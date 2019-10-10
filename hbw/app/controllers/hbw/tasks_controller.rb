@@ -16,8 +16,8 @@ module HBW
       end
     end
 
-    def unassigned
-      @tasks = widget.unassigned_task_list(current_user_identifier, entity_class, first_result, max_results)
+    def claiming
+      @tasks = widget.claiming_task_list(current_user_identifier, entity_class, assigned, max_results, search_query)
     end
 
     def edit
@@ -78,12 +78,16 @@ module HBW
       params[:form_data].to_h
     end
 
-    def first_result
-      params[:first_result]
-    end
-
     def max_results
       params[:max_results]
+    end
+
+    def assigned
+      params[:assigned] == 'true'
+    end
+
+    def search_query
+      params[:search_query]
     end
 
     def files

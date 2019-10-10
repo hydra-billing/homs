@@ -484,6 +484,37 @@
       justify-content: space-between
       flex-basis: 100%
 
+  .search-input-with-controls
+    position: relative
+    float: right
+
+    input
+      width: 350px
+      height: 40px
+      padding-left: 30px
+      padding-right: 30px
+      border: 1px solid #D5D5D5
+      border-radius: 3px
+
+    .icon
+      display: inline-flex
+      align-items: center
+      justify-content: center
+      position: absolute
+      top: 0
+      height: 40px
+      width: 30px
+      font-size: small
+      color: $claiming-purple
+
+      &.search
+        left: 5px
+        pointer-events: none
+
+      &.cross
+        right: 5px
+        cursor: pointer
+
 #hbw-tasks
   .hbw-disabled
     visibility: hidden
