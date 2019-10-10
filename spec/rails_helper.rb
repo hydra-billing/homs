@@ -1,5 +1,13 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
+
+if ENV['RAILS_ENV'] == 'test' && ENV['GENERATING_DOC'] != 'true'
+  require 'simplecov'
+  SimpleCov.start 'rails' do
+    add_filter %r{^/spec/}
+  end
+end
+
 ENV['TZ'] = 'UTC'
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
