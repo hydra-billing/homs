@@ -63,6 +63,7 @@ v1.8.0 [unreleased]
 - [#342](https://github.com/latera/homs/pull/342) Create component with counter.
 - [#347](https://github.com/latera/homs/pull/347) Improve claim buttons styles.
 - [#349](https://github.com/latera/homs/pull/349) Change colors of priorities.
+- [#346](https://github.com/latera/homs/pull/346) Add code coverage for backend.
 
 v1.7.8 [2019-10-03]
 -------------------

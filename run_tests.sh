@@ -33,7 +33,10 @@ test_rspec=$?
 rubocop --require rubocop/formatter/junit_formatter --format RuboCop::Formatter::JUnitFormatter --out test-reports/rubocop.xml
 test_rubocop=$?
 
-if [ "$GENERATE_DOC" = 'true' ]; then bundle exec rake docs:generate && zip -r doc.zip public/doc; fi
+if [ "$GENERATE_DOC" = 'true' ]; then
+  export GENERATING_DOC=true
+  bundle exec rake docs:generate && zip -r doc.zip public/doc;
+fi
 
 if [ $test_rspec != 0 ]; then
   exit $test_rspec

@@ -77,4 +77,5 @@ group :test do
   gem 'launchy'
   gem 'capybara-screenshot'
   gem 'rubocop-junit_formatter'
+  gem 'simplecov'
 end
