@@ -20,6 +20,11 @@ module HBW
       @tasks = widget.claiming_task_list(current_user_identifier, entity_class, assigned, max_results, search_query)
     end
 
+    def count
+      @task_count = widget.task_count(current_user_identifier)
+      @task_count_unassigned = widget.task_count_unassigned(current_user_identifier)
+    end
+
     def edit
       form = find_form(task_id, entity_class)
       if form
