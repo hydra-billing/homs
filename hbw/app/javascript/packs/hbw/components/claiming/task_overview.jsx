@@ -54,14 +54,14 @@ const HBWClaimingTaskOverview = ({
           </button>
         )}
         {!assigned && (
-          <button onClick={claimTask}
-                  className='claim-button'>{t('components.claiming.overview.claim_task')}
-          </button>
-        )}
-        {!assigned && (
-          <button onClick={claimAndGo}
-                  className='claim-button'>{t('components.claiming.overview.claim_and_open')}
-          </button>
+          <>
+            <button onClick={claimTask}
+                    className='claim-button'>{t('components.claiming.overview.claim_task')}
+            </button>
+            <button onClick={claimAndGo}
+                    className='claim-button'>{t('components.claiming.overview.claim_and_open')}
+            </button>
+          </>
         )}
       </div>
     </div>

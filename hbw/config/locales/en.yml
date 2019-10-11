@@ -62,3 +62,5 @@ en:
               week: w
               month: m
               year: y
+          short_list:
+            view_all: View all

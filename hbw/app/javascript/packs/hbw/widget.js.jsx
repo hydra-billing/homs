@@ -44,7 +44,8 @@ modulejs.define(
           entity_code:      this.options.entity_code,
           initialVariables: payload.variables,
           fetch_all:        this.options.fetch_all,
-          poll_interval:    this.options.poll_interval
+          poll_interval:    this.options.poll_interval,
+          taskListPath:     this.options.taskListPath,
         };
 
         this.$widgetContainer = jQuery(this.options.widgetContainer);
