@@ -31,7 +31,7 @@ RUN useradd --uid 2004 --home /opt/homs --shell /bin/bash --comment "HOMS" homs
 USER homs
 WORKDIR /opt/homs
 
-COPY Gemfile Gemfile.lock Rakefile config.ru package.json yarn.lock /opt/homs/
+COPY Gemfile Gemfile.lock Rakefile config.ru package.json yarn.lock .eslintrc /opt/homs/
 COPY hbw/*.gemspec /opt/homs/hbw/
 COPY hbw/lib/hbw/ /opt/homs/hbw/lib/hbw/
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
@@ -70,7 +70,7 @@ EXPOSE 3000
 
 USER homs
 
-RUN yarn install && bundle exec rails assets:precompile && rm -rf /opt/homs/node_modules/
+RUN yarn install && yarn lint && bundle exec rails assets:precompile && rm -rf /opt/homs/node_modules/
 
 WORKDIR /opt/homs
 ENTRYPOINT ["/entrypoint.sh"]
