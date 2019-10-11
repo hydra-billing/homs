@@ -8,15 +8,16 @@ class HBWClaimingMenuButton extends Component {
   };
 
   state = {
-    myTasksCount: 0,
+    myTasksCount:         0,
     unassignedTasksCount: 0
-   };
+  };
 
   componentDidMount () {
     const { subscription } = this.props;
 
-    subscription
-      .progress(({ task_count, task_count_unassigned }) => this.setState({ myTasksCount: task_count, unassignedTasksCount: task_count_unassigned }));
+    subscription.progress(({ task_count: myTasksCount, task_count_unassigned: unassignedTasksCount }) => {
+      this.setState({ myTasksCount, unassignedTasksCount });
+    });
   }
 
   render () {
@@ -30,6 +31,6 @@ class HBWClaimingMenuButton extends Component {
       </div>
     );
   }
-};
+}
 
 export default withTasksCount(HBWClaimingMenuButton);
