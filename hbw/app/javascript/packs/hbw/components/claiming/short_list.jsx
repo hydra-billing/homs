@@ -31,7 +31,9 @@ const HBWClaimingShortList = ({ env, tasks }) => {
         </div>
       ))}
       <div className="button">
-        <button onClick={viewAll} className='claim-button'>{t('components.claiming.short_list.view_all')}</button>
+        <button onClick={viewAll} className='claim-button-primary'>
+          {t('components.claiming.short_list.view_all')}
+        </button>
       </div>
     </div>
   );

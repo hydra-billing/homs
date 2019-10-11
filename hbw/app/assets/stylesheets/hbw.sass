@@ -191,19 +191,19 @@
     .claim
       padding-top: 15px
 
-      .claim-button
+      .claim-button-secondary
         padding: 10px 15px
         background-color: transparent
-        border: 2px solid transparent
-        border-radius: 0px
+        border: 1px solid $claiming-purple
+        border-radius: 2px
         color: $claiming-purple
         cursor: pointer
         font-weight: 550
         outline: none
 
         &:hover
-          background-color: $claiming-purple
-          color: white
+          color: $claiming-purple-hover
+          border: 1px solid $claiming-purple-hover
 
   .hbw-menu-button
     position: relative
@@ -392,15 +392,9 @@
         cursor: pointer
         border-left: 3px solid transparent
 
-        .claim-button
-          border: 2px solid transparent
-
         &.chosen, &:hover
           border-left: 3px solid $claiming-purple
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5)
-
-          .claim-button
-            border: 2px solid $claiming-purple
 
         .priority
           text-align: center
@@ -424,10 +418,10 @@
     color: #bd2025
     font-weight: 500
 
-  .claim-button
+  .claim-button-secondary
     padding: 5px 15px
     background-color: transparent
-    border: 2px solid $claiming-purple
+    border: 1px solid $claiming-purple
     border-radius: 2px
     outline: none
     color: $claiming-purple
@@ -435,8 +429,22 @@
     line-height: 24px
 
     &:hover
-      background-color: $claiming-purple
-      color: white
+      color: $claiming-purple-hover
+      border: 1px solid $claiming-purple-hover
+
+  .claim-button-primary
+    padding: 5px 15px
+    background-color: $claiming-purple
+    border: 1px solid $claiming-purple
+    border-radius: 2px
+    outline: none
+    color: white
+    font-weight: 500
+    line-height: 24px
+
+    &:hover
+      background-color: $claiming-purple-hover
+      border: 1px solid $claiming-purple-hover
 
   .task-overview
     display: flex

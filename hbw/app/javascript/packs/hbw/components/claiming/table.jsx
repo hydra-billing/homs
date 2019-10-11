@@ -122,7 +122,7 @@ class HBWTasksTable extends Component {
         <td>{row.description || t('components.claiming.table.empty_description') }</td>
         <td>{this.renderDate(row.created, row.due)}</td>
         {showClaimButton
-          && <td><button className='claim-button'>{t('components.claiming.claim')}</button></td>}
+          && <td><button className='claim-button-secondary'>{t('components.claiming.claim')}</button></td>}
       </tr>
     );
   };
