@@ -61,6 +61,7 @@ v1.8.0 [unreleased]
 - [#345](https://github.com/latera/homs/pull/345) Add task search.
 - [#341](https://github.com/latera/homs/pull/341) Add short tasks list for popup.
 - [#342](https://github.com/latera/homs/pull/342) Create component with counter.
+- [#347](https://github.com/latera/homs/pull/347) Improve claim buttons styles.
 
 v1.7.8 [2019-10-03]
 -------------------
