@@ -8,6 +8,7 @@ HBW::Engine.routes.draw do
     end
 
     get 'tasks/claiming', to: 'tasks#claiming'
+    get 'tasks/count', to: 'tasks#count'
 
     resources :buttons, only: [:index, :create]
 
