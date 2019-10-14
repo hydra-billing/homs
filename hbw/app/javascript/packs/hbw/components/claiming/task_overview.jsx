@@ -27,24 +27,36 @@ const HBWClaimingTaskOverview = ({
       <div className="bold header">
         {t('components.claiming.overview.header')}
       </div>
-      <div className="title">
-        <span className={task.icon} />
-        {task.name}
-      </div>
-      <div className='two-cols'>
-        <div className="name">
-          <p>{task.due && t('components.claiming.overview.due')}</p>
-          <p>{t('components.claiming.overview.created')}</p>
-          <p>{assigned && t('components.claiming.overview.claimed')}</p>
-          <p>{t('components.claiming.overview.priority')}</p>
+      {task.icon && (
+        <div className="title">
+          <span className={task.icon} />
+          {task.name}
         </div>
-        <div className="value">
-          <p>{task.due && localizer.localizeDatetime(task.due)}</p>
-          <p>{localizer.localizeDatetime(task.created)}</p>
-          <p>{assigned && localizer.localizeDatetime(task.claimed)}</p>
-          <p><Priority env={env} priority={task.priority} /></p>
-        </div>
-      </div>
+      )}
+      <table className="two-cols">
+        <tbody>
+          {task.due && (
+            <tr>
+              <td>{t('components.claiming.overview.due')}</td>
+              <td>{localizer.localizeDatetime(task.due)}</td>
+            </tr>
+          )}
+          <tr>
+            <td>{t('components.claiming.overview.created')}</td>
+            <td>{localizer.localizeDatetime(task.created)}</td>
+          </tr>
+          {assigned && (
+            <tr>
+              <td>{t('components.claiming.overview.claimed')}</td>
+              <td>{localizer.localizeDatetime(task.claimed)}</td>
+            </tr>
+          )}
+          <tr>
+            <td>{t('components.claiming.overview.priority')}</td>
+            <td><Priority env={env} priority={task.priority} /></td>
+          </tr>
+        </tbody>
+      </table>
       <div className="bold">{t('components.claiming.overview.description')}</div>
       <div className="description">{task.description}</div>
       <div className="buttons">
@@ -76,9 +88,8 @@ HBWClaimingTaskOverview.propTypes = {
     id:          PropTypes.string.isRequired,
     priority:    PropTypes.number.isRequired,
     name:        PropTypes.string.isRequired,
-    icon:        PropTypes.string.isRequired,
-    processName: PropTypes.string.isRequired,
     created:     PropTypes.string.isRequired,
+    icon:        PropTypes.string,
     claimed:     PropTypes.string,
     due:         PropTypes.string,
     description: PropTypes.string,

@@ -25,6 +25,7 @@ en:
         file_upload:
           drag_and_drop: Drag and drop files to attach them
         claiming:
+          open_tasks: Open tasks
           claim: Claim
           tabs:
             my: My tasks (%{count})

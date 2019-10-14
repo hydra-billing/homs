@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import {
   parseISO, isSameYear, differenceInMinutes,
 } from 'date-fns';
-import { withDateFormatter } from '../helpers';
+import { withDateFormatter } from '../../helpers';
 
 const HBWCreatedDate = ({ dateISO, env, dateFormatter }) => {
   const { translator: t } = env;

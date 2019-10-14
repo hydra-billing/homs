@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import {
   parseISO, isAfter, differenceInMinutes,
 } from 'date-fns';
-import { withDateFormatter } from '../helpers';
+import { withDateFormatter } from '../../helpers';
 
 const HBWDueDate = ({ dateISO, env, dateFormatter }) => {
   const { translator: t } = env;

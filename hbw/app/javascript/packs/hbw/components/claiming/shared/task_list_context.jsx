@@ -24,6 +24,7 @@ const withTaskListContext = (WrappedComponent) => {
       tasks:       [],
       query:       '',
       searchQuery: '',
+      activeTask:  null,
       page:        1,
       lastPage:    false,
     };
@@ -65,10 +66,11 @@ const withTaskListContext = (WrappedComponent) => {
     search = debounce(this.updateSubscription, 350);
 
     onSearch = ({ target }) => {
-      const query = target.value.trim();
+      const { value: query } = target;
+      const searchQuery = query.trim();
 
       this.setState({
-        searchQuery: query.length > 2 ? query : '',
+        searchQuery: searchQuery.length > 2 ? searchQuery : '',
         query,
       }, this.search);
     };
@@ -89,15 +91,21 @@ const withTaskListContext = (WrappedComponent) => {
       }
     };
 
+    openTask = (index) => {
+      this.setState(prevState => ({ activeTask: prevState.tasks[index] }));
+    };
+
     render () {
       const contextValue = {
         ...this.state,
+        tabs:        this.tabs,
         fetching:    this.props.syncing,
         update:      this.updateContext,
         reset:       this.resetContext,
         onSearch:    this.onSearch,
         addPage:     this.addPage,
         switchTabTo: this.switchTabTo,
+        openTask:    this.openTask,
       };
 
       return (
