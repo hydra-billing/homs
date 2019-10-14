@@ -1,31 +1,48 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { withTasksCount } from '../../helpers';
 
 class HBWClaimingTaskTabs extends Component {
   static propTypes = {
-    env:      PropTypes.object.isRequired,
-    children: PropTypes.element.isRequired,
-    count:    PropTypes.shape({
+    env:          PropTypes.object.isRequired,
+    children:     PropTypes.element.isRequired,
+    subscription: PropTypes.object.isRequired,
+    tabs:         PropTypes.shape({
       my:         PropTypes.number.isRequired,
-      unassigned: PropTypes.number.isRequired
+      unassigned: PropTypes.number.isRequired,
     }).isRequired,
-    tab:         PropTypes.number.isRequired,
+    activeTab:   PropTypes.number.isRequired,
     onTabChange: PropTypes.func.isRequired,
   };
 
-  tabs = { my: 0, unassigned: 1 };
+  state = {
+    count: {
+      my:         0,
+      unassigned: 0,
+    }
+  };
+
+  componentDidMount () {
+    const { subscription } = this.props;
+
+    subscription.progress(({ task_count: my, task_count_unassigned: unassigned }) => {
+      this.setState({ count: { my, unassigned } });
+    });
+  }
 
   renderTabs = () => {
     const {
-      env, count, tab: activeTab, onTabChange
+      env, tabs, activeTab, onTabChange
     } = this.props;
+
+    const { count } = this.state;
 
     const tabCN = tab => cx({
       'is-active': activeTab === tab,
     });
 
-    const tabs = Object.entries(this.tabs)
+    const tabsList = Object.entries(tabs)
       .map(tab => (
         <li className={tabCN(tab[1])} key={`${tab[0]}${tab[1]}`}>
           <a
@@ -42,7 +59,7 @@ class HBWClaimingTaskTabs extends Component {
     return (
       <div className="tabs">
         <ul>
-          {tabs}
+          {tabsList}
         </ul>
       </div>
     );
@@ -60,4 +77,4 @@ class HBWClaimingTaskTabs extends Component {
   }
 }
 
-export default HBWClaimingTaskTabs;
+export default withTasksCount(HBWClaimingTaskTabs);

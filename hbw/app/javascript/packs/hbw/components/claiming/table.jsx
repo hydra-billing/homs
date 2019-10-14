@@ -3,23 +3,22 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { withErrorBoundary, compose } from '../helpers';
 import Priority from './priority';
-import DueDate from './due_date';
-import CreatedDate from './created_date';
+import DueDate from './shared/due_date';
+import CreatedDate from './shared/created_date';
 
 class HBWTasksTable extends Component {
   static propTypes = {
     env:             PropTypes.object.isRequired,
-    url:             PropTypes.string.isRequired,
     tasks:           PropTypes.array.isRequired,
     showClaimButton: PropTypes.bool.isRequired,
     fetching:        PropTypes.bool.isRequired,
     lastPage:        PropTypes.bool.isRequired,
     addPage:         PropTypes.func.isRequired,
+    openTask:        PropTypes.func.isRequired,
   };
 
   state = {
-    cursor:       -1,
-    openOverview: false,
+    cursor: -1,
   };
 
   tableBody = createRef();
@@ -57,7 +56,7 @@ class HBWTasksTable extends Component {
   };
 
   handleKeyDown = (e) => {
-    const { tasks } = this.props;
+    const { tasks, openTask } = this.props;
     const { cursor } = this.state;
 
     if (e.keyCode === 38) {
@@ -79,7 +78,7 @@ class HBWTasksTable extends Component {
     } else if (e.keyCode === 13 && cursor >= 0 && cursor <= tasks.length - 1) {
       e.preventDefault();
 
-      this.setState(prevState => ({ openOverview: !prevState.openOverview }));
+      openTask(cursor);
     }
   };
 
@@ -109,20 +108,25 @@ class HBWTasksTable extends Component {
 
   renderRow = (row, index) => {
     const { cursor } = this.state;
-    const { showClaimButton, env } = this.props;
+    const { showClaimButton, env, openTask } = this.props;
     const { translator: t } = env;
 
     const chosenCN = cx({ chosen: cursor === index });
 
     return (
-      <tr className={chosenCN} key={row.id}>
-        <td className='priority'><Priority env={env} priority={row.priority}/></td>
+      <tr className={chosenCN} key={row.id} onClick={() => openTask(index)}>
+        <td className='priority'>
+          <Priority env={env} priority={row.priority} />
+        </td>
         <td>{row.name}</td>
         <td><i className={row.icon}/>&nbsp;{row.process_name}</td>
         <td>{row.description || t('components.claiming.table.empty_description') }</td>
         <td>{this.renderDate(row.created, row.due)}</td>
-        {showClaimButton
-          && <td><button className='claim-button-secondary'>{t('components.claiming.claim')}</button></td>}
+        {showClaimButton && (
+          <td>
+            <button className='claim-button-secondary'>{t('components.claiming.claim')}</button>
+          </td>
+        )}
       </tr>
     );
   };
@@ -131,7 +135,11 @@ class HBWTasksTable extends Component {
     const { translator: t } = this.props.env;
 
     return (
-      <div className='no-tasks'><span>{t('components.claiming.table.empty_tasks')}</span></div>
+      <div className='no-tasks'>
+        <span>
+          {t('components.claiming.table.empty_tasks')}
+        </span>
+      </div>
     );
   };
 

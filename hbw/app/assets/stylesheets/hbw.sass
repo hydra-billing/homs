@@ -342,31 +342,30 @@
     justify-content: space-between
     align-items: stretch
     white-space: nowrap
+    margin-bottom: 30px
     a
       display: flex
       outline: none
       text-decoration: none
-
       padding: 14px 30px
-
-      border-bottom-color: #d8d8d8
-      border-bottom-style: solid
-      border-bottom-width: 1px
       color: black
 
       &:hover
-        border-bottom-color: #50e3c2
+        border-bottom: 1px solid #50e3c2
     ul
       padding: 0
+      width: 100%
+      border-bottom: 1px solid #d8d8d8
+
       li
         display: inline-block
+        margin-bottom: -1px
 
         &.is-active
           a
             padding-bottom: 10px
             font-weight: bold
-            border-bottom-color: #50e3c2
-            border-bottom-width: 5px
+            border-bottom: 5px solid #50e3c2
 
   .claiming-table
     width: 100%
@@ -449,7 +448,6 @@
   .task-overview
     display: flex
     flex-direction: column
-    width: 300px
 
     .bold
       font-weight: bold
@@ -466,21 +464,16 @@
         padding-right: 7px
 
     .two-cols
-      display: flex
-      flex-direction: row
       margin-bottom: 5px
 
-      .name, .value
-        flex-direction: column
+      tr
+        td
+          padding-bottom: 15px
 
-        p
-          margin-bottom: 15px
-
-      .name
-        color: #4A4A4A
-
-      .value
-        padding-left: 10px
+          &:first-child
+            width: 25%
+            padding-right: 20px
+            color: #4A4A4A
 
     .description
       margin-bottom: 20px
@@ -489,8 +482,12 @@
       display: flex
       flex-direction: row
       flex-wrap: wrap
-      justify-content: space-between
+      justify-content: flex-start
       flex-basis: 100%
+
+      button
+        margin-right: 20px
+        margin-bottom: 10px
 
   .search-input-with-controls
     position: relative
@@ -585,6 +582,30 @@
         flex-direction: row
         justify-content: center
         margin-top: 20px
+
+#hbw-claiming-tasks
+  display: flex
+  flex-direction: row
+
+  .table
+    flex-direction: column
+    flex-basis: 70%
+
+  .overview
+    flex-basis: 30%
+    padding-left: 5%
+    padding-top: 170px
+
+  .title-row
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    margin-bottom: 30px
+
+    .title
+      font-size: 26px
+      font-weight: bold
 
 #hbw-tasks
   .hbw-disabled

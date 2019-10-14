@@ -4,6 +4,7 @@ import withTaskListContext, { TaskListContext } from './shared/task_list_context
 import Tabs from './shared/task_tabs';
 import Search from './search';
 import Table from './table';
+import Overview from './task_overview';
 
 class HBWClaimingTaskList extends Component {
   static contextType = TaskListContext;
@@ -16,7 +17,8 @@ class HBWClaimingTaskList extends Component {
     const { env } = this.props;
     const {
       query, onSearch, reset, tasks, fetching, addPage, lastPage,
-      tab, switchTabTo, myTasksCount, unassignedTasksCount,
+      tabs, tab, switchTabTo, myTasksCount, unassignedTasksCount,
+      activeTask, openTask,
     } = this.context;
 
     const count = {
@@ -25,27 +27,45 @@ class HBWClaimingTaskList extends Component {
     };
 
     return (
-      <>
-        <Search env={env}
-                query={query}
-                fetching={fetching}
-                onChange={onSearch}
-                onClear={reset}
-        />
-        <Tabs env={env}
-              count={count}
-              tab={tab}
-              onTabChange={switchTabTo}
-        >
-          <Table env={env}
-                 tasks={tasks}
-                 fetching={fetching}
-                 addPage={addPage}
-                 lastPage={lastPage}
-                 url="http://#"
-                 showClaimButton={true} />
-        </Tabs>
-      </>
+      <div id="hbw-claiming-tasks">
+        <div className="table">
+          <div className="title-row">
+            <div className="title">
+              {env.translator('components.claiming.open_tasks')}
+            </div>
+            <Search env={env}
+                    query={query}
+                    fetching={fetching}
+                    onChange={onSearch}
+                    onClear={reset}
+            />
+          </div>
+          <Tabs env={env}
+                count={count}
+                tabs={tabs}
+                activeTab={tab}
+                onTabChange={switchTabTo}
+          >
+            <Table env={env}
+                   tasks={tasks}
+                   fetching={fetching}
+                   addPage={addPage}
+                   openTask={openTask}
+                   lastPage={lastPage}
+                   showClaimButton={tab === tabs.unassigned}
+            />
+          </Tabs>
+        </div>
+        <div className="overview">
+          {activeTask && (
+            <Overview env={env}
+                      entityUrl="http://"
+                      assigned={tab === tabs.my}
+                      task={activeTask}
+            />
+          )}
+        </div>
+      </div>
     );
   }
 }
