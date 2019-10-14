@@ -65,7 +65,8 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
                      entityCode={props.entityCode}
                      entityTypeCode={props.entityTypeCode}
                      entityClassCode={props.entityClassCode}
-                     collapsed={collapsed} />;
+                     collapsed={collapsed}
+                     pollTasks={this.props.pollTasks} />;
       });
     };
   }

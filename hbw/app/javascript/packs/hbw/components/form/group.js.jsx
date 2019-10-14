@@ -55,7 +55,8 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
         id:             this.props.id,
         value:          this.props.variables[name],
         formSubmitting: this.props.formSubmitting,
-        env:            this.props.env
+        env:            this.props.env,
+        showSubmit:     this.props.showSubmit
       };
 
       if (this.props.disabled) {

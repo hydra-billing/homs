@@ -67,6 +67,7 @@ module HBW
 
     def claim
       widget.claim_task(current_user_identifier, task_id)
+      head :no_content
     end
 
     private

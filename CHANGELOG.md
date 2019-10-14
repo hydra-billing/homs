@@ -65,6 +65,7 @@ v1.8.0 [unreleased]
 - [#349](https://github.com/latera/homs/pull/349) Change colors of priorities.
 - [#346](https://github.com/latera/homs/pull/346) Add code coverage for backend.
 - [#352](https://github.com/latera/homs/pull/352) Wrap task list page together.
+- [#351](https://github.com/latera/homs/pull/351) Improve claim button styles on widget form.
 
 v1.7.8 [2019-10-03]
 -------------------

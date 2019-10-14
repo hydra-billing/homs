@@ -36,7 +36,8 @@ modulejs.define(
                    entityCode={this.props.entityCode}
                    entityTypeCode={this.props.entityTypeCode}
                    entityClassCode={this.props.entityClassCode}
-                   processInstanceId={this.state.processInstanceId} />
+                   processInstanceId={this.state.processInstanceId}
+                   pollTasks={this.props.pollTasks} />
           </div>;
         } else {
           return <div className='hbw-entity-tools'>
