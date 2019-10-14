@@ -20,15 +20,17 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
     }
 
     render () {
-      const cssClass = `col-xs-12 ${this.props.params.css_class}`;
+      const { params, name, showSubmit } = this.props;
+      const cssClass = `col-xs-12 ${params.css_class}`;
       const self = this;
 
-      const buttons = this.props.params.options.map(option => self.buildButton(option));
+      const buttons = params.options.map(option => self.buildButton(option));
 
-      return <div className={cssClass}>
-        <span className="btn-group">{ buttons }</span>
-        <input type="hidden" name={this.props.name} value={this.state.value} />
-      </div>;
+      return showSubmit
+      && <div className={cssClass}>
+          <span className="btn-group">{ buttons }</span>
+          <input type="hidden" name={name} value={this.state.value} />
+        </div>;
     }
 
     buildButton = (option) => {

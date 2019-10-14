@@ -1,7 +1,6 @@
 /* eslint no-console: "off" */
 /* eslint no-restricted-syntax: "off" */
 
-import cx from 'classnames';
 import { withCallbacks, withErrorBoundary, compose } from './helpers';
 
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
@@ -40,36 +39,30 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
 
     renderClaimButton = () => {
       const { claiming } = this.state;
-      const { translator } = this.props.env;
-
-      const buttonCN = cx({
-        btn:            true,
-        'claim-button': true,
-        disabled:       claiming
-      });
+      const { translator: t } = this.props.env;
 
       return (
-        <div className='claim'>
-          <button
-            disabled={claiming}
-            className={buttonCN}
-            onClick={this.claimTask}
-          >
-            {translator('components.claiming.claim')}
-          </button>
-        </div>
+        <button
+          disabled={claiming}
+          className="btn btn-primary"
+          onClick={this.claimTask}
+        >
+          {t('components.claiming.claim')}
+        </button>
       );
     }
 
-    claimTask = () => {
+    claimTask = async () => {
       this.setState({ claiming: true });
 
-      this.props.env.connection.request({
+      await this.props.env.connection.request({
         url:    `${this.props.env.connection.serverURL}/tasks/${this.props.taskId}/claim`,
         method: 'POST'
-      }).done(() => {
-        console.log('poll');
       });
+
+      await this.props.pollTasks();
+
+      this.setState({ claiming: false });
     }
 
     iterateControls = fields => [...fields].map(field => (
@@ -84,7 +77,8 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         value:           this.props.variables[name],
         formSubmitting:  this.state.submitting || this.state.fileUploading,
         env:             this.props.env,
-        fileListPresent: this.fileListPresent(this.props.form.fields)
+        fileListPresent: this.fileListPresent(this.props.form.fields),
+        showSubmit:      !!this.props.assignee
       };
 
       if (!this.props.assignee) {
@@ -98,13 +92,11 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
           return <Group
             {...opts}
             variables={this.props.variables}
-            {...onRef}
-             />;
+            {...onRef} />;
         case 'datetime':
           return <DateTime
             {...opts}
-            {...onRef}
-             />;
+            {...onRef} />;
         case 'select':
           return <Select
             {...opts}
@@ -116,7 +108,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         case 'submit_select':
           return <SubmitSelect
             {...opts}
-            {...onRef}/>;
+            {...onRef} />;
         case 'checkbox':
           return <Checkbox
             {...opts}
@@ -157,7 +149,9 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
           fa_class:  'fas fa-check-square'
         };
 
-        return <Submit params={params} formSubmitting={this.state.submitting || this.state.fileUploading}
+        return <Submit params={params}
+                       formSubmitting={this.state.submitting || this.state.fileUploading}
+                       showSubmit={!!this.props.assignee}
                        env={this.props.env} />;
       }
 

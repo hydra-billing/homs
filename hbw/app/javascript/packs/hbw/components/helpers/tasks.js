@@ -58,10 +58,13 @@ export default WrappedComponent => class WithTasks extends Component {
       .always(() => this.setState({ syncing: false }));
   };
 
+  poll = () => this.state.subscription.poll();
+
   render () {
     return <WrappedComponent setGuid={this.setGuid}
                              getComponentId={this.getComponentId}
                              createSubscription={this.createSubscription}
+                             pollTasks={this.poll}
                              {...this.state}
                              {...this.props} />;
   }

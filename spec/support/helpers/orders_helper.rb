@@ -312,5 +312,13 @@ module Features
     def order_list_table_header(column)
       page.find('.order-list-table').all('th').select { |node| node.text == column }.first
     end
+
+    def find_form
+      page.find("[class='hbw-form']")
+    end
+
+    def find_by_text(text)
+      page.find("[text='#{text}']")
+    end
   end
 end

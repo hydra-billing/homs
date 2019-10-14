@@ -58,3 +58,7 @@ Style/LambdaCall:
 
 Metrics/ClassLength:
   Enabled: false
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*.rb'
