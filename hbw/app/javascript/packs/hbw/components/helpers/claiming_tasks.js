@@ -62,8 +62,22 @@ export default WrappedComponent => class WithClaimingTasks extends Component {
     subscription.poll();
   };
 
+
+  claimAndPollTasks = async (task) => {
+    const { subscription } = this.state;
+    const { connection } = this.props.env;
+
+    await connection.request({
+      url:    `${connection.serverURL}/tasks/${task.id}/claim`,
+      method: 'POST'
+    });
+
+    await subscription.poll();
+  };
+
   render () {
     return <WrappedComponent updateSubscription={this.updateSubscription}
+                             claimAndPollTasks={this.claimAndPollTasks}
                              {...this.state}
                              {...this.props} />;
   }

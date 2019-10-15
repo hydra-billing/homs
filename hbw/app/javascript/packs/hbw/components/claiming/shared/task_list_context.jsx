@@ -11,6 +11,7 @@ const withTaskListContext = (WrappedComponent) => {
     static propTypes = {
       subscription:       PropTypes.object.isRequired,
       updateSubscription: PropTypes.func.isRequired,
+      claimAndPollTasks:  PropTypes.func.isRequired,
       perPage:            PropTypes.number.isRequired,
       syncing:            PropTypes.bool.isRequired,
     };
@@ -21,12 +22,13 @@ const withTaskListContext = (WrappedComponent) => {
     };
 
     stateForReset = {
-      tasks:       [],
-      query:       '',
-      searchQuery: '',
-      activeTask:  null,
-      page:        1,
-      lastPage:    false,
+      tasks:        [],
+      query:        '',
+      searchQuery:  '',
+      activeTask:   null,
+      claimingTask: null,
+      page:         1,
+      lastPage:     false,
     };
 
     state = {
@@ -95,17 +97,36 @@ const withTaskListContext = (WrappedComponent) => {
       this.setState(prevState => ({ activeTask: prevState.tasks[index] }));
     };
 
+    closeTask = () => {
+      this.setState({ activeTask: null });
+    };
+
+    claimAndPollTasks = async (task) => {
+      const { activeTask } = this.state;
+      this.setState({ claimingTask: task });
+
+      await this.props.claimAndPollTasks(task);
+
+      if (activeTask && task.id === activeTask.id) {
+        this.closeTask();
+      }
+
+      this.setState({ claimingTask: null });
+    }
+
     render () {
       const contextValue = {
         ...this.state,
-        tabs:        this.tabs,
-        fetching:    this.props.syncing,
-        update:      this.updateContext,
-        reset:       this.resetContext,
-        onSearch:    this.onSearch,
-        addPage:     this.addPage,
-        switchTabTo: this.switchTabTo,
-        openTask:    this.openTask,
+        tabs:              this.tabs,
+        fetching:          this.props.syncing,
+        update:            this.updateContext,
+        reset:             this.resetContext,
+        onSearch:          this.onSearch,
+        addPage:           this.addPage,
+        switchTabTo:       this.switchTabTo,
+        openTask:          this.openTask,
+        claimAndPollTasks: this.claimAndPollTasks,
+        closeTask:         this.closeTask,
       };
 
       return (

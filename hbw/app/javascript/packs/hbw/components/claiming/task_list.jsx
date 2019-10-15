@@ -18,7 +18,7 @@ class HBWClaimingTaskList extends Component {
     const {
       query, onSearch, reset, tasks, fetching, addPage, lastPage,
       tabs, tab, switchTabTo, myTasksCount, unassignedTasksCount,
-      activeTask, openTask,
+      activeTask, openTask, claimingTask, claimAndPollTasks, closeTask
     } = this.context;
 
     const count = {
@@ -53,15 +53,19 @@ class HBWClaimingTaskList extends Component {
                    openTask={openTask}
                    lastPage={lastPage}
                    showClaimButton={tab === tabs.unassigned}
+                   claimingTask={claimingTask}
+                   claimAndPollTasks={claimAndPollTasks}
             />
           </Tabs>
         </div>
         <div className="overview">
           {activeTask && (
             <Overview env={env}
-                      entityUrl="http://"
+                      entityUrl={activeTask.entity_url}
                       assigned={tab === tabs.my}
                       task={activeTask}
+                      claimAndPollTasks={claimAndPollTasks}
+                      closeTask={closeTask}
             />
           )}
         </div>

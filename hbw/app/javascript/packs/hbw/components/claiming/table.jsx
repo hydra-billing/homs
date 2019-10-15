@@ -1,20 +1,23 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { withErrorBoundary, compose } from '../helpers';
+import { parseISO, isBefore } from 'date-fns';
+import { withErrorBoundary } from '../helpers';
 import Priority from './priority';
 import DueDate from './shared/due_date';
 import CreatedDate from './shared/created_date';
 
 class HBWTasksTable extends Component {
   static propTypes = {
-    env:             PropTypes.object.isRequired,
-    tasks:           PropTypes.array.isRequired,
-    showClaimButton: PropTypes.bool.isRequired,
-    fetching:        PropTypes.bool.isRequired,
-    lastPage:        PropTypes.bool.isRequired,
-    addPage:         PropTypes.func.isRequired,
-    openTask:        PropTypes.func.isRequired,
+    env:               PropTypes.object.isRequired,
+    tasks:             PropTypes.array.isRequired,
+    showClaimButton:   PropTypes.bool.isRequired,
+    fetching:          PropTypes.bool.isRequired,
+    lastPage:          PropTypes.bool.isRequired,
+    addPage:           PropTypes.func.isRequired,
+    openTask:          PropTypes.func.isRequired,
+    claimAndPollTasks: PropTypes.func.isRequired,
+    claimingTask:      PropTypes.object
   };
 
   state = {
@@ -106,12 +109,26 @@ class HBWTasksTable extends Component {
     }
   };
 
+  onClaimClick = async (e, task) => {
+    e.stopPropagation();
+
+    await this.props.claimAndPollTasks(task);
+  }
+
   renderRow = (row, index) => {
     const { cursor } = this.state;
-    const { showClaimButton, env, openTask } = this.props;
+    const {
+      tasks, showClaimButton, env, openTask, claimingTask
+    } = this.props;
     const { translator: t } = env;
 
-    const chosenCN = cx({ chosen: cursor === index });
+    const claiming = claimingTask && claimingTask.id === row.id;
+
+    const chosenCN = cx({
+      chosen:  cursor === index,
+      expired: isBefore(parseISO(row.due), new Date()),
+      claiming
+    });
 
     return (
       <tr className={chosenCN} key={row.id} onClick={() => openTask(index)}>
@@ -124,7 +141,9 @@ class HBWTasksTable extends Component {
         <td>{this.renderDate(row.created, row.due)}</td>
         {showClaimButton && (
           <td>
-            <button className='claim-button-secondary'>{t('components.claiming.claim')}</button>
+            <button className='claim-button-secondary' onClick={e => !claiming && this.onClaimClick(e, tasks[index])}>
+              {t('components.claiming.claim')}
+            </button>
           </td>
         )}
       </tr>
@@ -170,4 +189,4 @@ class HBWTasksTable extends Component {
   }
 }
 
-export default compose(withErrorBoundary)(HBWTasksTable);
+export default withErrorBoundary(HBWTasksTable);
