@@ -395,6 +395,12 @@
           border-left: 3px solid $claiming-purple
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5)
 
+        &.expired
+          color: $deadline-red
+
+        &.claiming
+          background-color: #dbdbdb
+
         .priority
           text-align: center
 
@@ -414,7 +420,7 @@
       background-color: #d0021b
 
   .deadline
-    color: #bd2025
+    color: $deadline-red
     font-weight: 500
 
   .claim-button-secondary

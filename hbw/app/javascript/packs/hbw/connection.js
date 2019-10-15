@@ -74,9 +74,7 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
       this.channel.updateOptions(data);
     }
 
-    poll = () => {
-      this.channel.poll();
-    }
+    poll = () => this.channel.poll();
   }
 
   class Channel {

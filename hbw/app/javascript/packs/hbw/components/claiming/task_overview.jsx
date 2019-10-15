@@ -3,22 +3,19 @@ import PropTypes from 'prop-types';
 import Priority from './priority';
 
 const HBWClaimingTaskOverview = ({
-  env, assigned, entityUrl, task
+  env, assigned, entityUrl, task, claimAndPollTasks, closeTask
 }) => {
   const { translator: t, localizer } = env;
 
   const goToTask = () => { window.location.href = entityUrl; };
 
-  const claimTask = async () => (
-    env.connection.request({
-      url:    `${env.connection.serverURL}/tasks/${task.id}/claim`,
-      method: 'POST'
-    })
-    // Fire event (or call callback) here to change task state in the list
-  );
+  const claimAndClose = async () => {
+    await claimAndPollTasks(task);
+    closeTask();
+  };
 
   const claimAndGo = async () => {
-    await claimTask();
+    await claimAndPollTasks(task);
     goToTask();
   };
 
@@ -67,7 +64,7 @@ const HBWClaimingTaskOverview = ({
         )}
         {!assigned && (
           <>
-            <button onClick={claimTask}
+            <button onClick={claimAndClose}
                     className='claim-button-primary'>{t('components.claiming.overview.claim_task')}
             </button>
             <button onClick={claimAndGo}
@@ -94,6 +91,8 @@ HBWClaimingTaskOverview.propTypes = {
     due:         PropTypes.string,
     description: PropTypes.string,
   }).isRequired,
+  claimAndPollTasks: PropTypes.func.isRequired,
+  closeTask:         PropTypes.func.isRequired,
 };
 
 export default HBWClaimingTaskOverview;

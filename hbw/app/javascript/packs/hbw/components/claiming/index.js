@@ -1,2 +1,1 @@
-import './table';
-import './priority';
+import './task_list';
