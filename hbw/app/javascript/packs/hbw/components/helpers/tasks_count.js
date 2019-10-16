@@ -45,6 +45,6 @@ export default WrappedComponent => class WithTasksCount extends Component {
   }
 
   render () {
-    return <WrappedComponent {...this.state} {...this.props} />;
+    return <WrappedComponent taskCount={this.state} {...this.props} />;
   }
 };

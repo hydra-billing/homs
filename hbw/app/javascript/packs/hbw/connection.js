@@ -104,7 +104,7 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
     }
 
     buildId () {
-      return `${this.options.method} ${this.options.path}`;
+      return this.options.client;
     }
 
     eachSubscriptions (update) {
@@ -123,7 +123,7 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
         throw new Error('Error!');
       } else {
         this.subscriptions[client] = new Subscription(this, {
-          client:   options.client,
+          client,
           fetched:  this.fetched,
           lastPoll: this.lastPoll
         });
@@ -249,7 +249,8 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
       const channel = new Channel(this, {
         path:   options.path,
         data:   options.data || {},
-        method: options.method || 'GET'
+        method: options.method || 'GET',
+        client: options.client
       });
       const { id } = channel;
 

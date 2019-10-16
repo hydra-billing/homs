@@ -1,7 +1,7 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash-es';
-import { withClaimingTasks } from '../../helpers';
+import { withTasksCount, withClaimingTasks } from '../../helpers';
 
 export const TaskListContext = createContext({});
 export const TaskListConsumer = TaskListContext.Consumer;
@@ -9,11 +9,16 @@ export const TaskListConsumer = TaskListContext.Consumer;
 const withTaskListContext = (WrappedComponent) => {
   class TaskListProvider extends Component {
     static propTypes = {
-      subscription:       PropTypes.object.isRequired,
-      updateSubscription: PropTypes.func.isRequired,
-      claimAndPollTasks:  PropTypes.func.isRequired,
-      perPage:            PropTypes.number.isRequired,
-      syncing:            PropTypes.bool.isRequired,
+      claimingTasks: PropTypes.shape({
+        subscription:       PropTypes.object.isRequired,
+        syncing:            PropTypes.bool.isRequired,
+        updateSubscription: PropTypes.func.isRequired,
+        claimAndPollTasks:  PropTypes.func.isRequired,
+      }).isRequired,
+      taskCount: PropTypes.shape({
+        subscription: PropTypes.object.isRequired,
+      }).isRequired,
+      perPage: PropTypes.number.isRequired,
     };
 
     tabs = {
@@ -39,18 +44,22 @@ const withTaskListContext = (WrappedComponent) => {
     };
 
     componentDidMount () {
-      const { subscription, perPage } = this.props;
+      const { taskCount, claimingTasks, perPage } = this.props;
 
-      subscription.progress(({ tasks }) => this.setState(prevState => ({
+      claimingTasks.subscription.progress(({ tasks }) => this.setState(prevState => ({
         tasks,
         lastPage: tasks.length < prevState.page * perPage
       })));
+
+      taskCount.subscription.progress(({ task_count: myTasksCount, task_count_unassigned: unassignedTasksCount }) => {
+        this.setState({ myTasksCount, unassignedTasksCount });
+      });
     }
 
     updateSubscription = () => {
       const { page, searchQuery, tab } = this.state;
 
-      this.props.updateSubscription({
+      this.props.claimingTasks.updateSubscription({
         assigned: tab === this.tabs.my,
         page,
         searchQuery,
@@ -103,9 +112,11 @@ const withTaskListContext = (WrappedComponent) => {
 
     claimAndPollTasks = async (task) => {
       const { activeTask } = this.state;
+      const { claimAndPollTasks } = this.props.claimingTasks;
+
       this.setState({ claimingTask: task });
 
-      await this.props.claimAndPollTasks(task);
+      await claimAndPollTasks(task);
 
       if (activeTask && task.id === activeTask.id) {
         this.closeTask();
@@ -118,7 +129,7 @@ const withTaskListContext = (WrappedComponent) => {
       const contextValue = {
         ...this.state,
         tabs:              this.tabs,
-        fetching:          this.props.syncing,
+        fetching:          this.props.claimingTasks.syncing,
         update:            this.updateContext,
         reset:             this.resetContext,
         onSearch:          this.onSearch,
@@ -137,7 +148,7 @@ const withTaskListContext = (WrappedComponent) => {
     }
   }
 
-  return withClaimingTasks(TaskListProvider);
+  return withTasksCount(withClaimingTasks(TaskListProvider));
 };
 
 export default withTaskListContext;
