@@ -76,9 +76,13 @@ export default WrappedComponent => class WithClaimingTasks extends Component {
   };
 
   render () {
-    return <WrappedComponent updateSubscription={this.updateSubscription}
-                             claimAndPollTasks={this.claimAndPollTasks}
-                             {...this.state}
+    const claimingTasks = {
+      ...this.state,
+      updateSubscription: this.updateSubscription,
+      claimAndPollTasks:  this.claimAndPollTasks
+    };
+
+    return <WrappedComponent claimingTasks={claimingTasks}
                              {...this.props} />;
   }
 };

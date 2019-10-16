@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { withTasksCount } from '../../helpers';
 
 class HBWClaimingTaskTabs extends Component {
   static propTypes = {
-    env:          PropTypes.object.isRequired,
-    children:     PropTypes.element.isRequired,
-    subscription: PropTypes.object.isRequired,
-    tabs:         PropTypes.shape({
+    env:      PropTypes.object.isRequired,
+    children: PropTypes.element.isRequired,
+    tabs:     PropTypes.shape({
       my:         PropTypes.number.isRequired,
       unassigned: PropTypes.number.isRequired,
     }).isRequired,
     activeTab:   PropTypes.number.isRequired,
     onTabChange: PropTypes.func.isRequired,
+    count:       PropTypes.shape({
+      my:         PropTypes.number.isRequired,
+      unassigned: PropTypes.number.isRequired,
+    }).isRequired,
   };
 
   state = {
@@ -23,20 +25,10 @@ class HBWClaimingTaskTabs extends Component {
     }
   };
 
-  componentDidMount () {
-    const { subscription } = this.props;
-
-    subscription.progress(({ task_count: my, task_count_unassigned: unassigned }) => {
-      this.setState({ count: { my, unassigned } });
-    });
-  }
-
   renderTabs = () => {
     const {
-      env, tabs, activeTab, onTabChange
+      env, tabs, activeTab, onTabChange, count
     } = this.props;
-
-    const { count } = this.state;
 
     const tabCN = tab => cx({
       'is-active': activeTab === tab,
@@ -77,4 +69,4 @@ class HBWClaimingTaskTabs extends Component {
   }
 }
 
-export default withTasksCount(HBWClaimingTaskTabs);
+export default HBWClaimingTaskTabs;

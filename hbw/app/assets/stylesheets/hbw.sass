@@ -517,7 +517,7 @@
     height: 60px
     width: 60px
 
-    span
+    .claiming-count
       position: absolute
       padding-left: 3%
       padding-right: 3%
@@ -529,6 +529,21 @@
       border-radius: 5px
       min-width: 50%
       background-color: #00a09d
+
+  .claimimg-popup
+    position: absolute
+    right: 0px
+    width: 600px
+    background-color: white
+    box-shadow: 1px 2px 4px 0 rgba(0,0,0,0.5)
+
+    .tabs
+      margin-bottom: 0
+
+      li
+        width: 50%
+        a
+          justify-content: center
 
     .short-list
       display: flex
@@ -542,7 +557,7 @@
         flex-direction: row
         justify-content: space-between
         align-items: center
-        padding: 10px 0
+        padding: 10px 10px
         border-bottom: 1px solid #D8D8D8
         cursor: pointer
         &:hover
@@ -564,13 +579,14 @@
           justify-content: flex-start
         .right
           justify-content: flex-end
+          text-align: end
           padding-right: 10px
 
       .button
         display: flex
         flex-direction: row
         justify-content: center
-        margin-top: 20px
+        margin: 20px 0
 
 #hbw-claiming-tasks
   display: flex
