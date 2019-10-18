@@ -18,7 +18,7 @@ class HBWClaimingTaskList extends Component {
     const {
       query, onSearch, reset, tasks, fetching, addPage, lastPage,
       tabs, tab, switchTabTo, myTasksCount, unassignedTasksCount,
-      activeTask, openTask, claimingTask, claimAndPollTasks, closeTask
+      activeTask, openTask, claimingTask, claimAndPollTasks, closeTask, fetched
     } = this.context;
 
     const count = {
@@ -55,6 +55,7 @@ class HBWClaimingTaskList extends Component {
                    showClaimButton={tab === tabs.unassigned}
                    claimingTask={claimingTask}
                    claimAndPollTasks={claimAndPollTasks}
+                   fetched={fetched}
             />
           </Tabs>
         </div>

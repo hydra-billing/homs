@@ -1548,4 +1548,8 @@ post:
       count: 15
     "active=true&assignee=john":
       count: 0
+    "active=true&candidateUser=demo":
+      count: 15
+    "active=true&candidateUser=john":
+      count: 0
 delete: {}

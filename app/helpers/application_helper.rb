@@ -95,11 +95,12 @@ module ApplicationHelper
   def hbw_options
     default_options = {
       widgetPath: '/widget',
-      tasksMenuContainer: '#hbw-tasks',
-      tasksMenuButtonContainer: '#hbw-tasks-list-button',
       entity_class: 'order',
       locale: I18n.locale,
-      fetch_all: true
+      fetch_all: true,
+      availableTasksButtonContainer: '#hbw-tasks-list-button',
+      availableTaskListContainer: '#hbw-task-list',
+      taskListPath: 'tasks'
     }
 
     if defined? @hbw_options

@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   get '/orders/list', to: 'orders#list'
 
+  get '/tasks', to: 'tasks#index'
+
   resources :orders, only: [:show, :edit, :update, :index, :new, :create]
 
   resources :profiles, only: [:create, :update]

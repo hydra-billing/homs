@@ -17,7 +17,8 @@ class HBWTasksTable extends Component {
     addPage:           PropTypes.func.isRequired,
     openTask:          PropTypes.func.isRequired,
     claimAndPollTasks: PropTypes.func.isRequired,
-    claimingTask:      PropTypes.object
+    claimingTask:      PropTypes.object,
+    fetched:           PropTypes.bool.isRequired,
   };
 
   state = {
@@ -163,7 +164,7 @@ class HBWTasksTable extends Component {
   };
 
   render () {
-    const { showClaimButton, tasks, fetching } = this.props;
+    const { showClaimButton, tasks, fetched } = this.props;
     const { translator: t } = this.props.env;
 
     return (
@@ -183,7 +184,7 @@ class HBWTasksTable extends Component {
             {tasks.map((row, index) => this.renderRow(row, index))}
           </tbody>
         </table>
-        {!fetching && tasks.length === 0 && this.renderNoTasks()}
+        {fetched && tasks.length === 0 && this.renderNoTasks()}
       </div>
     );
   }

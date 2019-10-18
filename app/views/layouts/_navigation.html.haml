@@ -26,6 +26,10 @@
               = link_to users_path do
                 %span.fas.fa-users
                 = t('.users')
+            %li
+              = link_to tasks_path do
+                %span.fas.fa-tasks
+                = t('.tasks')
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li.dropdown
@@ -50,4 +54,4 @@
                   %span.fas.fa-sign-out-alt
                   = t('.sign_out')
 
-          %li#hbw-tasks-list-button.hbw-styles
+          %li#hbw-tasks-list-button

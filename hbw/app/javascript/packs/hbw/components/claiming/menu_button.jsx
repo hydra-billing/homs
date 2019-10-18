@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PopUp from './pop_up';
 import { withTasksCount } from '../helpers';
+import HydraIcon from './icon';
 
 class HBWClaimingMenuButton extends Component {
   static propTypes = {
@@ -52,8 +53,9 @@ class HBWClaimingMenuButton extends Component {
     };
 
     return (
-      <div ref={this.rootDiv}>
+      <div className="claiming-menu-button-container" ref={this.rootDiv}>
         <div className="claiming-menu-button" onClick={this.handlePopUp}>
+          <HydraIcon />
           <span className="claiming-count">
             {myTasksCount}/{unassignedTasksCount}
           </span>

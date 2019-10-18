@@ -41,6 +41,7 @@ const withTaskListContext = (WrappedComponent) => {
       myTasksCount:         0, // should be filled by separate subscription
       unassignedTasksCount: 0, // and passed to tabs component
       tab:                  this.tabs.my,
+      fetched:              false,
     };
 
     componentDidMount () {
@@ -52,7 +53,7 @@ const withTaskListContext = (WrappedComponent) => {
       })));
 
       taskCount.subscription.progress(({ task_count: myTasksCount, task_count_unassigned: unassignedTasksCount }) => {
-        this.setState({ myTasksCount, unassignedTasksCount });
+        this.setState({ myTasksCount, unassignedTasksCount, fetched: true });
       });
     }
 
