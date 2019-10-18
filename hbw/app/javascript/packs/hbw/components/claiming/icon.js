@@ -1,9 +1,9 @@
 import React from 'react';
 
 const HydraIcon = () => (
-  <svg className="icon-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+  <svg className="hbw-icon-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
     width="241.667px" height="235.5px" viewBox="0 0 241.667 235.5" enableBackground="new 0 0 241.667 235.5">
-    <path className="icon-svg-path" fillRule="evenodd" clipRule="evenodd" fill="#fff"
+    <path className="hbw-icon-svg-path" fillRule="evenodd" clipRule="evenodd" fill="#fff"
       d="M234.784,61.563c1.813,7.728-1.417,15.498-4.867,22.728c-3.307,6.928-7.986,13.285-13.592,18.822
       c-6.42,6.34-13.518,11.819-21.663,15.438c-9.061,4.02-18.448,7.645-28.637,7.521
       c-6.161-0.068-12.348-0.292-18.462-0.982c-3.209-0.363-6.371-1.69-9.405-2.953c-4.578-1.899-8.994-2.459-12.332,2.634
