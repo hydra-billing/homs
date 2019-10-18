@@ -145,6 +145,7 @@ en:
       orders: Orders
       users: Users
       setup_order_types: Order types
+      tasks: Tasks
     form_errors:
       errors: '%{count} prohibited this user from being saved:'
   admin:

@@ -23,14 +23,15 @@ class HBWPopUp extends Component {
   };
 
   state = {
-    tasks: [],
-    tab:   this.tabs.my,
+    tasks:   [],
+    tab:     this.tabs.my,
+    fetched: false,
   };
 
   componentDidMount () {
     const { subscription } = this.props.claimingTasks;
 
-    subscription.progress(({ tasks }) => this.setState({ tasks }));
+    subscription.progress(({ tasks }) => this.setState({ tasks, fetched: true }));
   }
 
   switchTabTo = (tab) => {
@@ -54,7 +55,7 @@ class HBWPopUp extends Component {
 
   render () {
     const { env, count } = this.props;
-    const { tasks, tab } = this.state;
+    const { tasks, tab, fetched } = this.state;
 
     return (
       <div className="claimimg-popup">
@@ -66,6 +67,7 @@ class HBWPopUp extends Component {
         >
           <ShortList env={env}
                      tasks={tasks}
+                     fetched={fetched}
           />
         </Tabs>
       </div>

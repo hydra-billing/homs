@@ -6,7 +6,7 @@ import { parseISO, isPast } from 'date-fns';
 import DueDate from './shared/due_date';
 import CreatedDate from './shared/created_date';
 
-const HBWClaimingShortList = ({ env, tasks }) => {
+const HBWClaimingShortList = ({ env, tasks, fetched }) => {
   const { translator: t, connection, taskListPath } = env;
 
   const viewAll = () => { window.location.href = `${connection.options.host}/${taskListPath}`; };
@@ -27,6 +27,15 @@ const HBWClaimingShortList = ({ env, tasks }) => {
     })
   );
 
+  const renderNoTasks = () => (
+      <div className='no-tasks'>
+        <span>
+          {t('components.claiming.table.empty_tasks')}
+        </span>
+      </div>
+  );
+
+
   return (
     <div className="short-list">
       {tasks.map(({
@@ -42,6 +51,7 @@ const HBWClaimingShortList = ({ env, tasks }) => {
           </div>
         </div>
       ))}
+      {fetched && tasks.length === 0 && renderNoTasks()}
       <div className="button">
         <button onClick={viewAll} className='claim-button-primary'>
           {t('components.claiming.short_list.view_all')}
@@ -52,8 +62,9 @@ const HBWClaimingShortList = ({ env, tasks }) => {
 };
 
 HBWClaimingShortList.propTypes = {
-  env:   PropTypes.object.isRequired,
-  tasks: PropTypes.arrayOf(PropTypes.shape({
+  env:     PropTypes.object.isRequired,
+  fetched: PropTypes.bool.isRequired,
+  tasks:   PropTypes.arrayOf(PropTypes.shape({
     id:         PropTypes.string.isRequired,
     name:       PropTypes.string.isRequired,
     icon:       PropTypes.string.isRequired,

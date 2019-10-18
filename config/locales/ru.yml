@@ -291,6 +291,7 @@ ru:
       orders: Заказы
       users: Пользователи
       setup_order_types: Типы заказов
+      tasks: Задачи
     form_errors:
       errors:
         one: 'Из-за %{count} ошибки профиль не сохранен:'
