@@ -10,6 +10,7 @@ const withDateFormatter = (WrappedComponent) => {
     const { translator: t, localizer } = props.env;
 
     const MINUTES_IN_DAY = 1440;
+    const MINUTES_IN_WEEK = 10080;
     const MINUTES_IN_MONTH = 43200;
     const MINUTES_IN_YEAR = 525600;
 
@@ -29,7 +30,7 @@ const withDateFormatter = (WrappedComponent) => {
       `${differenceInWeeks(dateLeft, dateRight)}${t('components.claiming.created.periodUnits.week')}`;
 
     const inYears = (dateLeft, dateRight) =>
-      `${differenceInYears(dateLeft, dateRight)}${t('components.claiming.created.periodUnits.years')}`;
+      `${differenceInYears(dateLeft, dateRight)}${t('components.claiming.created.periodUnits.year')}`;
 
     const inDayMonth = date => localizer.localizeDayMonth(date.toISOString());
 
@@ -40,6 +41,7 @@ const withDateFormatter = (WrappedComponent) => {
         dateFormatter={{
           MINUTES_IN_DAY,
           MINUTES_IN_MONTH,
+          MINUTES_IN_WEEK,
           MINUTES_IN_YEAR,
           lessThanMinute,
           inMinutes,

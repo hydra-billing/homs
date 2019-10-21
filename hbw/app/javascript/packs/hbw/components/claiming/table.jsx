@@ -103,11 +103,12 @@ class HBWTasksTable extends Component {
 
   renderDate = (created, due) => {
     const { env } = this.props;
+    const now = new Date();
 
     if (due) {
-      return <span className="deadline"><DueDate env={env} dateISO={due} /></span>;
+      return <span className="deadline"><DueDate env={env} dateISO={due} now={now} /></span>;
     } else {
-      return <span><CreatedDate env={env} dateISO={created} /></span>;
+      return <span><CreatedDate env={env} dateISO={created} now={now} /></span>;
     }
   };
 

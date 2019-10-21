@@ -21,7 +21,7 @@ const localizeDayMonth = locale => (
 );
 
 const localizeDayMonthYear = locale => (
-  str => format(parseISO(str), 'dd MMM YYYY', locales[locale])
+  str => format(parseISO(str), 'dd MMM yyyy', locales[locale])
 );
 
 export const localizer = locale => (

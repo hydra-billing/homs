@@ -3,12 +3,13 @@
 import { localizer } from './init/date_localizer';
 import AvailableTasksButton from './components/claiming/menu_button';
 import AvailableTaskList from './components/claiming/task_list';
+import Translator from './translator';
 
 modulejs.define(
   'HBW',
   ['React', 'ReactDOM', 'HBWTaskList', 'HBWMenu', 'HBWMenuButton', 'HBWContainer', 'HBWConnection',
-    'HBWDispatcher', 'HBWForms', 'HBWTranslator', 'jQuery'],
-  (React, ReactDOM, TaskList, Menu, MenuButton, Container, Connection, Dispatcher, Forms, Translator, jQuery) => {
+    'HBWDispatcher', 'HBWForms', 'jQuery'],
+  (React, ReactDOM, TaskList, Menu, MenuButton, Container, Connection, Dispatcher, Forms, jQuery) => {
     class HBW {
       constructor (options) {
         this.changeTask = this.changeTask.bind(this);

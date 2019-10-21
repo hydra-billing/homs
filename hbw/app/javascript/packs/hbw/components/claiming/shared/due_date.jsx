@@ -4,13 +4,14 @@ import {
 } from 'date-fns';
 import { withDateFormatter } from '../../helpers';
 
-const HBWDueDate = ({ dateISO, env, dateFormatter }) => {
+const HBWDueDate = ({
+  dateISO, now, env, dateFormatter,
+}) => {
   const { translator: t } = env;
   const {
     MINUTES_IN_DAY, MINUTES_IN_MONTH, MINUTES_IN_YEAR, lessThanMinute, inMinutes, inHours, inDays, inWeeks, inYears
   } = dateFormatter;
 
-  const now = new Date();
   const date = parseISO(dateISO);
 
   const format = () => {
@@ -44,6 +45,7 @@ const HBWDueDate = ({ dateISO, env, dateFormatter }) => {
 
 HBWDueDate.propTypes = {
   dateISO: PropTypes.string.isRequired,
+  now:     PropTypes.instanceOf(Date).isRequired,
   env:     PropTypes.shape({
     translator: PropTypes.func.isRequired,
   }).isRequired,

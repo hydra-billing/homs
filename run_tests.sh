@@ -33,6 +33,9 @@ test_rspec=$?
 rubocop --require rubocop/formatter/junit_formatter --format RuboCop::Formatter::JUnitFormatter --out test-reports/rubocop.xml
 test_rubocop=$?
 
+JEST_JUNIT_OUTPUT_NAME=./test-reports/jest.xml yarn test --ci --reporters=default --reporters=jest-junit
+test_jest=$?
+
 if [ "$GENERATE_DOC" = 'true' ]; then
   export GENERATING_DOC=true
   bundle exec rake docs:generate && zip -r doc.zip public/doc;
@@ -44,4 +47,8 @@ fi
 
 if [ $test_rubocop != 0 ]; then
   exit $test_rubocop
+fi
+
+if [ $test_jest != 0 ]; then
+  exit $test_jest
 fi

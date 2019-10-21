@@ -34,12 +34,12 @@ RUN chrome_version=$(google-chrome --version | grep -oE '[0-9]{2,}' | head -1) &
     chmod +x /usr/bin/chromedriver
 
 COPY ./run_tests.sh ./.rubocop.yml ./.rubocop_todo.yml /
-COPY ./.rubocop.yml ./.rubocop_todo.yml  /opt/homs/
+COPY ./.rubocop.yml ./.rubocop_todo.yml ./jest.config.js /opt/homs/
 
 RUN chown -R homs:homs /run_tests.sh /opt/homs/config/
 RUN chmod +x /run_tests.sh
 
 USER homs
-RUN bundle --with test --without oracle
+RUN yarn install && bundle --with test --without oracle
 
 ENTRYPOINT ["/run_tests.sh"]
