@@ -1,5 +1,9 @@
 module Features
   module TasksHelper
+    def tasks_count
+      page.find('#hbw-tasks-list-button').text
+    end
+
     def tasks_table
       page.find('div', class: 'claiming-table')
     end
