@@ -115,6 +115,14 @@ get:
       - <<: *default_process-definition
         id: "testProcess:23:23"
         deploymentId: "23"
+    "processDefinitionIdIn[]=testProcess:24:24&processDefinitionIdIn[]=testProcess:23:23":
+      - <<: *default_process-definition
+        id: "testProcess:24:24"
+        deploymentId: "24"
+      - <<: *default_process-definition
+        id: "testProcess:23:23"
+        deploymentId: "23"
+
   # form definitions
   task/816011/deployed-form: &form_with_everything
     "": |
@@ -1207,6 +1215,15 @@ get:
         type: string
         name: homsOrderCode
         value: ORD-23
+    "processInstanceIdIn[]=24&processInstanceIdIn[]=23&variableName=homsOrderCode":
+      - processInstanceId: 24
+        type: string
+        name: homsOrderCode
+        value: ORD-24
+      - processInstanceId: 23
+        type: string
+        name: homsOrderCode
+        value: ORD-23
     variableName=homsOrderCode: []
 
 put: {}
@@ -1219,8 +1236,8 @@ post:
         name: "Check test form"
         assignee: "demo"
         created: "2016-06-30T12:07:59.000+03:00"
-        due: nil
-        followUp: nil
+        due: null
+        followUp: null
         delegationState: null
         description: null
         executionId: "814972"
@@ -1356,6 +1373,36 @@ post:
 
     "active=true&candidateUser=john&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
       []
+
+  task?maxResults=50:
+    "active=true&assignee=demo&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
+      - <<: *default_tasks
+        id: "111124"
+        due: "2016-06-30T12:07:59.000+03:00"
+        priority: 25
+        processInstanceId: 24
+        processDefinitionId: "testProcess:24:24"
+      - <<: *default_tasks
+        id: "111123"
+        formKey: "test_form_with_disabled_buttons.yml"
+        processInstanceId: 23
+        description: 'Some test description'
+        processDefinitionId: "testProcess:23:23"
+    "active=true&candidateUser=demo&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
+      - <<: *default_tasks
+        id: "111124"
+        due: "2016-06-30T12:07:59.000+03:00"
+        priority: 25
+        processInstanceId: 24
+        processDefinitionId: "testProcess:24:24"
+        assignee: null
+      - <<: *default_tasks
+        id: "111123"
+        formKey: "test_form_with_disabled_buttons.yml"
+        processInstanceId: 23
+        description: 'Some test description'
+        processDefinitionId: "testProcess:23:23"
+        assignee: null
 
   process-instance:
     "variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq":
@@ -1543,13 +1590,15 @@ post:
       - ""
   task/111123/claim:
     "userId=demo": null
+  task/111124/claim:
+    "userId=demo": null
   task/count:
     "active=true&assignee=demo":
-      count: 15
+      count: 5
     "active=true&assignee=john":
       count: 0
     "active=true&candidateUser=demo":
-      count: 15
+      count: 10
     "active=true&candidateUser=john":
       count: 0
 delete: {}

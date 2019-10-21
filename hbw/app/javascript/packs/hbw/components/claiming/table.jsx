@@ -114,7 +114,7 @@ class HBWTasksTable extends Component {
     e.stopPropagation();
 
     await this.props.claimAndPollTasks(task);
-  }
+  };
 
   renderRow = (row, index) => {
     const { cursor } = this.state;
