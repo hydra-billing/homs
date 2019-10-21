@@ -12,7 +12,7 @@ You should update CHANGELOG.md.
 Code style
 ------------
 We are following several style guides:
-* [Ruby Style Guide](https://github.com/rubocop-hq/ruby-style-guide)
+* [Ruby Style Guide](https://rubystyle.guide)
 
 * [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
 
