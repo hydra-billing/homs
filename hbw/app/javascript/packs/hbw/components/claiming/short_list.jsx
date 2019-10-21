@@ -13,10 +13,12 @@ const HBWClaimingShortList = ({ env, tasks, fetched }) => {
   const goToTask = (entityUrl) => { window.location.href = entityUrl; };
 
   const renderDate = (created, due) => {
+    const now = new Date();
+
     if (due) {
-      return <span className="deadline"><DueDate env={env} dateISO={due} /></span>;
+      return <span className="deadline"><DueDate env={env} dateISO={due} now={now}/></span>;
     } else {
-      return <span><CreatedDate env={env} dateISO={created} /></span>;
+      return <span><CreatedDate env={env} dateISO={created} now={now} /></span>;
     }
   };
 

@@ -69,6 +69,7 @@ v1.8.0 [unreleased]
 - [#354](https://github.com/latera/homs/pull/354) Wrap task short pop up list page together.
 - [#353](https://github.com/latera/homs/pull/353) Integrate new claiming components.
 - [#356](https://github.com/latera/homs/pull/356) Highlight opened task in table.
+- [#358](https://github.com/latera/homs/pull/358) Add react components unit tests for HBWDueDate and HBWCreatedDate.
 
 v1.7.8 [2019-10-03]
 -------------------
