@@ -1,6 +1,7 @@
 require 'support/helpers/sessions_helper'
 require 'support/helpers/orders_helper'
 require 'support/helpers/tables_helper'
+require 'support/helpers/tasks_helper'
 require 'support/helpers/order_types_helper'
 require 'support/helpers/users_helper'
 require 'support/helpers/wait_for_ajax_helper'
@@ -22,6 +23,7 @@ RSpec.configure do |config|
   config.include Features::OrdersHelper,      type: :feature
   config.include Features::OrderTypesHelper,  type: :feature
   config.include Features::TablesHelper,      type: :feature
+  config.include Features::TasksHelper,       type: :feature
   config.include Features::UsersHelper,       type: :feature
   config.include Features::WaitForAjaxHelper, type: :feature
 end

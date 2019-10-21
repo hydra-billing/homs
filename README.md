@@ -3,7 +3,7 @@
 *homs* is an open source web application for order and business process management.
 
 Application consists of three parts:
-* User interface - managing orders for registered users (Single Page Application).
+* User interface - managing orders and tasks for registered users (Single Page Application).
 * Administrator interface - managing users and order types.
 * REST API - operations with orders and users.
 
