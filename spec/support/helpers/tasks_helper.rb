@@ -52,5 +52,17 @@ module Features
     def check_row_is_not_claiming(row_number)
       tasks_table.all('tr')[row_number].has_no_css?('.claiming')
     end
+
+    def fill_search_field(text)
+      ajax { find('.search-input-with-controls').find('input').set(text) }
+    end
+
+    def search_field_text
+      find('.search-input-with-controls').find('input').value
+    end
+
+    def clear_search_field
+      find('.search-input-with-controls').find('.cross').click
+    end
   end
 end
