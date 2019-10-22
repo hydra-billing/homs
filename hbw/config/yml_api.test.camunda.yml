@@ -1403,6 +1403,13 @@ post:
         description: 'Some test description'
         processDefinitionId: "testProcess:23:23"
         assignee: null
+    "active=true&assignee=demo&descriptionLike=%test%&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
+      - <<: *default_tasks
+        id: "111123"
+        formKey: "test_form_with_disabled_buttons.yml"
+        processInstanceId: 23
+        description: 'Some test description'
+        processDefinitionId: "testProcess:23:23"
   task?maxResults=10:
     "active=true&assignee=demo&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
       - <<: *default_tasks
