@@ -1378,7 +1378,7 @@ post:
     "active=true&assignee=demo&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
       - <<: *default_tasks
         id: "111124"
-        due: "2016-06-30T12:07:59.000+03:00"
+        due: "2016-07-30T12:07:59.000+03:00"
         priority: 25
         processInstanceId: 24
         processDefinitionId: "testProcess:24:24"
@@ -1391,7 +1391,7 @@ post:
     "active=true&candidateUser=demo&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
       - <<: *default_tasks
         id: "111124"
-        due: "2016-06-30T12:07:59.000+03:00"
+        due: "2016-07-30T12:07:59.000+03:00"
         priority: 25
         processInstanceId: 24
         processDefinitionId: "testProcess:24:24"

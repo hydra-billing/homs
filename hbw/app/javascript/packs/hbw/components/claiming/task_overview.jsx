@@ -20,36 +20,40 @@ const HBWClaimingTaskOverview = ({
   };
 
   return (
-    <div className="task-overview">
+    <div data-test="task-overview" className="task-overview">
       <div className="bold header">
         {t('components.claiming.overview.header')}
       </div>
-      {task.icon && (
+      <a data-test="title-link" href={entityUrl}>
         <div className="title">
-          <span className={task.icon} />
+          {task.icon && <span className={task.icon} />}
           {task.name}
         </div>
-      )}
+      </a>
       <table className="two-cols">
         <tbody>
           {task.due && (
             <tr>
-              <td>{t('components.claiming.overview.due')}</td>
-              <td>{localizer.localizeDatetime(task.due)}</td>
+              <td data-test="due-date-label">{t('components.claiming.overview.due')}</td>
+              <td data-test="due-date-value">{localizer.localizeDatetime(task.due)}</td>
             </tr>
           )}
           <tr>
-            <td>{t('components.claiming.overview.created')}</td>
-            <td>{localizer.localizeDatetime(task.created)}</td>
+            <td data-test="created-date-label">{t('components.claiming.overview.created')}</td>
+            <td data-test="created-date-value">{localizer.localizeDatetime(task.created)}</td>
           </tr>
           <tr>
-            <td>{t('components.claiming.overview.priority')}</td>
-            <td><Priority env={env} priority={task.priority} /></td>
+            <td data-test="priority-label">{t('components.claiming.overview.priority')}</td>
+            <td data-test="priority-value"><Priority env={env} priority={task.priority} /></td>
           </tr>
         </tbody>
       </table>
-      <div className="bold">{t('components.claiming.overview.description')}</div>
-      <div className="description">{task.description}</div>
+      {task.description && (
+        <>
+          <div data-test="description-label" className="bold">{t('components.claiming.overview.description')}</div>
+          <div data-test="description-value" className="description">{task.description}</div>
+        </>
+      )}
       <div className="buttons">
         {assigned && (
           <button onClick={goToTask}

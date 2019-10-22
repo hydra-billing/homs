@@ -1,5 +1,19 @@
+Capybara.add_selector(:dt) do
+  css { |value| "*[data-test=#{value}]" }
+end
+
 module Features
   module TasksHelper
+    def find_by_dt(value, context = page)
+      context.find(:dt, value)
+    end
+
+    def miss_by_dt(value, context = page)
+      context.find(:dt, value, wait: 0.1)
+    rescue Capybara::ElementNotFound
+      true
+    end
+
     def tasks_counter
       page.find('#hbw-tasks-list-button')
     end
@@ -37,12 +51,11 @@ module Features
     end
 
     def click_on_tab(text)
-      page.find('a', class: 'tab', text: text).click
-      wait_for_ajax
+      ajax { page.find('a', class: 'tab', text: text).click }
     end
 
     def claim_task(row_number)
-      tasks_table.all('tr')[row_number].find('td', text: 'Claim').click
+      ajax { tasks_table.all('tr')[row_number].find('td', text: 'Claim').click }
     end
 
     def check_row_is_claiming(row_number)
@@ -51,6 +64,10 @@ module Features
 
     def check_row_is_not_claiming(row_number)
       tasks_table.all('tr')[row_number].has_no_css?('.claiming')
+    end
+
+    def click_on_task_table_row(row_number)
+      ajax { tasks_table.all('tr')[row_number].click }
     end
 
     def fill_search_field(text)
