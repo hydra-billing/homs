@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Priority from './priority';
+import Priority from './shared/priority';
 
 const HBWClaimingTaskOverview = ({
   env, assigned, entityUrl, task, claimAndPollTasks, closeTask
