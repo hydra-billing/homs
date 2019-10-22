@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { parseISO, isBefore } from 'date-fns';
 import { withErrorBoundary } from '../helpers';
-import Priority from './priority';
+import Priority from './shared/priority';
 import DueDate from './shared/due_date';
 import CreatedDate from './shared/created_date';
 
