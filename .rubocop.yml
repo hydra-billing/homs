@@ -62,3 +62,6 @@ Metrics/ClassLength:
 Metrics/ModuleLength:
   Exclude:
     - 'spec/**/*.rb'
+
+Rails/DynamicFindBy:
+  Enabled: false
