@@ -56,6 +56,7 @@ class HBWClaimingTaskList extends Component {
                    claimingTask={claimingTask}
                    claimAndPollTasks={claimAndPollTasks}
                    fetched={fetched}
+                   activeTask={activeTask}
             />
           </Tabs>
         </div>
