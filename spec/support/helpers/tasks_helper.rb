@@ -1,7 +1,27 @@
 module Features
   module TasksHelper
+    def tasks_counter
+      page.find('#hbw-tasks-list-button')
+    end
+
     def tasks_count
-      page.find('#hbw-tasks-list-button').text
+      tasks_counter.text
+    end
+
+    def click_on_tasks_counter
+      tasks_counter.click
+    end
+
+    def popup_tasks_list
+      page.find('div', class: 'claimimg-popup').all('div', class: 'row')
+    end
+
+    def popup_tasks_list_content
+      popup_tasks_list.map(&:text)
+    end
+
+    def click_on_task_list_row(row_number)
+      popup_tasks_list[row_number - 1].click
     end
 
     def tasks_table

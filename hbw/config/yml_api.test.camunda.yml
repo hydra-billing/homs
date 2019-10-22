@@ -35,7 +35,7 @@ get:
     "processDefinitionIdIn[]=testProcess:469:814905&processDefinitionIdIn[]=testProcess:2:2&processDefinitionIdIn[]=testProcess:3:3&processDefinitionIdIn[]=testProcess:4:4&processDefinitionIdIn[]=testProcess:5:5&processDefinitionIdIn[]=testProcess:6:6&processDefinitionIdIn[]=testProcess:7:7&processDefinitionIdIn[]=testProcess:8:8&processDefinitionIdIn[]=testProcess:9:9&processDefinitionIdIn[]=testProcess:10:10&processDefinitionIdIn[]=testProcess:11:11&processDefinitionIdIn[]=testProcess:12:12&processDefinitionIdIn[]=testProcess:13:13&processDefinitionIdIn[]=testProcess:14:14&processDefinitionIdIn[]=testProcess:15:15&processDefinitionIdIn[]=testProcess:16:16&processDefinitionIdIn[]=testProcess:17:17&processDefinitionIdIn[]=testProcess:18:18&processDefinitionIdIn[]=testProcess:19:19&processDefinitionIdIn[]=testProcess:20:20&processDefinitionIdIn[]=testProcess:21:21&processDefinitionIdIn[]=testProcess:22:22":
       - &default_process-definition
         id: "testProcess:469:814905"
-        key: "testProcess"
+        key: "supportRequestProcess"
         version: 469
         name: "Test name"
         description: null
@@ -1398,6 +1398,39 @@ post:
         assignee: null
       - <<: *default_tasks
         id: "111123"
+        formKey: "test_form_with_disabled_buttons.yml"
+        processInstanceId: 23
+        description: 'Some test description'
+        processDefinitionId: "testProcess:23:23"
+        assignee: null
+  task?maxResults=10:
+    "active=true&assignee=demo&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
+      - <<: *default_tasks
+        id: "111124"
+        name: "Assigned task for popup"
+        due: "2016-06-30T12:07:59.000+03:00"
+        priority: 25
+        processInstanceId: 24
+        processDefinitionId: "testProcess:24:24"
+      - <<: *default_tasks
+        id: "111123"
+        name: "Other assigned task for popup"
+        formKey: "test_form_with_disabled_buttons.yml"
+        processInstanceId: 23
+        description: 'Some test description'
+        processDefinitionId: "testProcess:23:23"
+    "active=true&candidateUser=demo&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
+      - <<: *default_tasks
+        id: "111124"
+        name: "Unassigned task for popup"
+        due: "2016-06-30T12:07:59.000+03:00"
+        priority: 25
+        processInstanceId: 24
+        processDefinitionId: "testProcess:24:24"
+        assignee: null
+      - <<: *default_tasks
+        id: "111123"
+        name: "Other unassigned task for popup"
         formKey: "test_form_with_disabled_buttons.yml"
         processInstanceId: 23
         description: 'Some test description'
