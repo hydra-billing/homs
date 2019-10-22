@@ -169,6 +169,9 @@ en:
         activated: Order type definition has been activated
       destroy:
         destroyed: Order type deleted
+  tasks:
+    index:
+      title: Tasks
   activerecord:
     models:
       user:
