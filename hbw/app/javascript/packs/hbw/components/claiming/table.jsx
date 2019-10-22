@@ -19,6 +19,7 @@ class HBWTasksTable extends Component {
     claimAndPollTasks: PropTypes.func.isRequired,
     claimingTask:      PropTypes.object,
     fetched:           PropTypes.bool.isRequired,
+    activeTask:        PropTypes.object,
   };
 
   state = {
@@ -119,15 +120,17 @@ class HBWTasksTable extends Component {
   renderRow = (row, index) => {
     const { cursor } = this.state;
     const {
-      tasks, showClaimButton, env, openTask, claimingTask
+      tasks, showClaimButton, env, openTask, claimingTask, activeTask
     } = this.props;
     const { translator: t } = env;
 
     const claiming = claimingTask && claimingTask.id === row.id;
+    const opened = activeTask && activeTask.id === row.id;
 
     const chosenCN = cx({
       chosen:  cursor === index,
       expired: isBefore(parseISO(row.due), new Date()),
+      opened,
       claiming
     });
 
