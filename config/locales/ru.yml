@@ -13,10 +13,6 @@ ru:
   record_not_found: Запись не найдена
   config:
     bad_entity_url: Недопустимый параметр в entity_url '%{variable_name}'
-  time:
-    formats:
-      date: "%d.%m.%Y"
-      datetime: "%d.%m.%Y %H:%M"
   date:
     abbr_day_names:
       - Вс

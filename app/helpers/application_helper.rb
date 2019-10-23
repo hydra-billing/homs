@@ -64,16 +64,16 @@ module ApplicationHelper
 
   def loc_date(date)
     case
-      when Time, DateTime then I18n.l(date, format: :date)
-      when String then I18n.l(DateTime.iso8601(date), format: :date)
+      when Time, DateTime then date.strftime(date_format)
+      when String then DateTime.iso8601(date).strftime(date_format)
       else ''
     end
   end
 
   def loc_datetime(datetime)
     case datetime
-      when Time, DateTime then I18n.l(datetime, format: :datetime)
-      when String then I18n.l(DateTime.iso8601(datetime), format: :datetime)
+      when Time, DateTime then datetime.strftime(datetime_format)
+      when String then DateTime.iso8601(datetime).strftime(datetime_format)
       else ''
     end
   end
@@ -96,11 +96,15 @@ module ApplicationHelper
     default_options = {
       widgetPath: '/widget',
       entity_class: 'order',
-      locale: I18n.locale,
       fetch_all: true,
       availableTasksButtonContainer: '#hbw-tasks-list-button',
       availableTaskListContainer: '#hbw-task-list',
-      taskListPath: 'tasks'
+      taskListPath: 'tasks',
+      locale: {
+        code: I18n.locale,
+        dateTimeFormat: js_datetime_format
+      },
+      poll_interval: -1
     }
 
     if defined? @hbw_options

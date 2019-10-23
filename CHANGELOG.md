@@ -1,4 +1,21 @@
+v2.0.0 [unreleased]
+-------------------
+### Breaking changes
+HBW initialization parameters were changed. Instead of
+```
+locale: 'en'
+```
+you should pass locale like
+```
+locale: {
+    code: 'en',
+    dateTimeFormat: 'MM/dd/yyyy HH:mm aaa'
+}
+```
+See [#367](https://github.com/latera/homs/pull/367) and [HBW readme](https://github.com/latera/homs/blob/master/hbw/README.md) for more details.
+
 v1.8.1 [unreleased]
+-------------------
 
 v1.8.0 [2019-10-24]
 -------------------
