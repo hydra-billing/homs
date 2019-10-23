@@ -13,10 +13,6 @@ en:
   record_not_found: Record not found
   config:
     bad_entity_url: Wrong parameter in entity_url '%{variable_name}'
-  time:
-    formats:
-      date: "%m/%d/%Y"
-      datetime: "%m/%d/%Y %H:%M %p"
   custom_fields:
     definition:
       missing_attribute: Missing attribute '%{attribute_name}'

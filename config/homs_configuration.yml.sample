@@ -1,6 +1,7 @@
 locale:
   code: en
   datetime_format: '%m/%d/%Y %H:%M %p'
+  date_format: '%m/%d/%Y'
 
 sessions:
   token_authentication:

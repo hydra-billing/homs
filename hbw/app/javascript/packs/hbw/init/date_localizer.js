@@ -4,16 +4,16 @@ import ru from 'date-fns/locale/ru';
 
 const locales = { en, ru };
 
-export const localize = (str, locale) => {
+export const localize = (str, locale, dateTimeFormat) => {
   if (str) {
-    return format(parseISO(str), 'dd.MM.yyyy HH:mm', { locale });
+    return format(parseISO(str), dateTimeFormat, { locale });
   }
 
   return null;
 };
 
-const localizeDatetime = locale => (
-  str => localize(str, locales[locale])
+const localizeDatetime = (locale, dateTimeFormat) => (
+  str => localize(str, locales[locale], dateTimeFormat)
 );
 
 const localizeDayMonth = locale => (
@@ -24,9 +24,9 @@ const localizeDayMonthYear = locale => (
   str => format(parseISO(str), 'dd MMM yyyy', locales[locale])
 );
 
-export const localizer = locale => (
+export const localizer = ({ code: locale, dateTimeFormat }) => (
   {
-    localizeDatetime:     localizeDatetime(locale),
+    localizeDatetime:     localizeDatetime(locale, dateTimeFormat),
     localizeDayMonth:     localizeDayMonth(locale),
     localizeDayMonthYear: localizeDayMonthYear(locale)
   }

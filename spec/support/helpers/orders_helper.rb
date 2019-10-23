@@ -1,5 +1,7 @@
 module Features
   module OrdersHelper
+    include DatetimeFormat
+
     def click_on_calendar(class_name)
       page.find(".#{class_name} .input-group-addon").click
       page.find('nav').click
@@ -222,13 +224,13 @@ module Features
 
     def in_current_locale(date)
       if date.present?
-        date.strftime(I18n.t('time.formats.datetime'))
+        date.strftime(datetime_format)
       end
     end
 
     def to_current_locale_date(date)
       if date.present?
-        DateTime.strptime(date, I18n.t('time.formats.datetime'))
+        DateTime.strptime(date, datetime_format)
       end
     end
 
