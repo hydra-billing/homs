@@ -1,4 +1,6 @@
-v1.8.0 [unreleased]
+v1.8.1 [unreleased]
+
+v1.8.0 [2019-10-24]
 -------------------
 ### Breaking changes
 - `select_table` with `multi:true` saves all data in JSON format now. It's not possible to open form contains old data with such table.
