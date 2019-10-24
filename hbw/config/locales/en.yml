@@ -46,7 +46,6 @@ en:
             header: Task overview
             due: "Due:"
             created: "Created:"
-            claimed: "Claimed:"
             priority: "Priority:"
             description: "Description:"
             claim_task: Claim task
