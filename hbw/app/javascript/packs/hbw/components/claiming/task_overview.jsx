@@ -42,12 +42,6 @@ const HBWClaimingTaskOverview = ({
             <td>{t('components.claiming.overview.created')}</td>
             <td>{localizer.localizeDatetime(task.created)}</td>
           </tr>
-          {assigned && (
-            <tr>
-              <td>{t('components.claiming.overview.claimed')}</td>
-              <td>{localizer.localizeDatetime(task.claimed)}</td>
-            </tr>
-          )}
           <tr>
             <td>{t('components.claiming.overview.priority')}</td>
             <td><Priority env={env} priority={task.priority} /></td>
@@ -87,7 +81,6 @@ HBWClaimingTaskOverview.propTypes = {
     name:        PropTypes.string.isRequired,
     created:     PropTypes.string.isRequired,
     icon:        PropTypes.string,
-    claimed:     PropTypes.string,
     due:         PropTypes.string,
     description: PropTypes.string,
   }).isRequired,
