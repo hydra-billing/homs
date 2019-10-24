@@ -23,6 +23,7 @@ services:
       - db_homs:$HOMS_DB_HOST
     environment:
       GENERATE_DOC: $GENERATE_DOC
+      SIMPLE_COV_ENABLED: $SIMPLE_COV_ENABLED
     depends_on:
       - db_homs
     ports:

@@ -36,6 +36,8 @@ test_rubocop=$?
 JEST_JUNIT_OUTPUT_NAME=./test-reports/jest.xml yarn test --ci --reporters=default --reporters=jest-junit
 test_jest=$?
 
+zip -r coverage.zip coverage/
+
 if [ "$GENERATE_DOC" = 'true' ]; then
   export GENERATING_DOC=true
   bundle exec rake docs:generate && zip -r doc.zip public/doc;
