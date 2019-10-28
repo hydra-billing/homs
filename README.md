@@ -1,163 +1,76 @@
-# Hydra Order Management System (homs)
+# Hydra Order Management System (HOMS)
 
-*homs* is an open source web application for order and business process management.
+*HOMS* is an open source web application for order and business process management.
 
 Application consists of three parts:
+
 * User interface - managing orders and tasks for registered users (Single Page Application).
 * Administrator interface - managing users and order types.
 * REST API - operations with orders and users.
 
 Requirements:
+
 * [PostgreSQL](http://www.postgresql.org/) 9.4.x+
 
 Resources:
+
 * Documentation: [http://hydra-oms.com/docs](http://hydra-oms.com/docs)
 * Demo: [http://demo.hydra-oms.com](http://demo.hydra-oms.com)
 * Community: [http://community.hydra-oms.com](http://community.hydra-oms.com)
 * Tickets/Issues: [https://github.com/latera/homs/issues](https://github.com/latera/homs/issues)
 
-
 ## Installation
 
-There are 2 ways to install HOMS.
+The prefered way to install HOMS is to use [Docker](https://www.docker.com/).
 
-The prefered way to install HOMS is to use Docker
-
-### Using [docker](https://www.docker.com/)
-
-#### In production
+### In production
 
 1. Install [docker-compose](https://docs.docker.com/compose/install/).
 2. Download `docker-compose.yml`:
 
-  ```
-  wget https://raw.githubusercontent.com/latera/homs/master/docker-compose.yml
-  ```
+    ```bash
+    wget https://raw.githubusercontent.com/latera/homs/master/docker-compose.yml
+    ```
+
 3. For OS X users: make path to folder with HOMS shared in `Docker -> Preferences... -> File Sharing`.
 
 4. Copy your (or default) `.env` file to your project's directory:
 
-  ```
-  cp .env.sample .env
-  ```
-  
-   All variables are set in `.env` file. There you can change them, if you want to.
+    ```bash
+    cp .env.sample .env
+    ```
 
-5. Add `SECRET_KEY_BASE` variable to your `.env` with uniq id as value. Generate it any way you like. For example:
-  ```
-  SECRET_KEY_BASE=0750fd0eac13032778f0a42e2ab450003eaece477ea881501be0cc438f870a2f498dbbc00ffb7c8379c30c960568a402d315496bb7bc2b3ee324401ba788a
-  ```
- 
-  **Make sure this key is secret and don't share it with anyone**.
+    :pushpin: All variables are set in `.env` file. There you can change them, if you want to.
+
+5. Add `SECRET_KEY_BASE` variable to your `.env` with uniq id as value. You can generate key with `openssl rand -hex 64` command. For example:
+
+    ```bash
+    SECRET_KEY_BASE=0750fd0eac13032778f0a42e2ab450003eaece477ea881501be0cc438f870a2f498dbbc00ffb7c8379c30c960568a402d315496bb7bc2b3ee324401ba788a
+    ```
+
+    :warning: Make sure this key is secret and don't share it with anyone.
 
 6. Change [Minio](https://github.com/minio/minio) credentials in `.env` file.
 
-7. Be sure to update secret key in `/etc/hydra/homs/secrets.yml`. You can generate key with this command:
+7. Run `docker-compose`:
 
-  ```
-  openssl rand -hex 64
-  ```
+    ```bash
+    docker-compose up -d
+    ```
 
-8. Run `docker-compose`:
+8. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
 
-  ```
-  docker-compose up -d
-  ```
+9. Navigate to [Camunda Admin](http://localhost:8080/camunda) and create admin user with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file.
 
-9. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
+10. (Optional) If you want to use demo processes, navigate to [Camunda](http://localhost:8080/camunda/app/admin/default/#/user-create) and create user with `user@example.com` email.
 
-10. Navigate to [Camunda Admin](http://localhost:8080/camunda) and create admin user with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file.
+11. Log in at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
-11. (Optional) If you want to use demo processes navigate to [Camunda](http://localhost:8080/camunda/app/admin/default/#/user-create) and create user with `user@example.com` email.
+### In development
 
-12. Login at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
+* [With Oracle Instant Client](https://github.com/latera/homs/blob/master/WITH_ORACLE.md).
 
-#### In development
-
-If you don't want to use Oracle as source for your HOMS instance:
-
-##### Without Oracle Instant Client
-
-Follow the same steps as for [In production installation](#in-production), but with certain changes:
-
-2. Clone HOMS git repository:
-
-  ```
-  git clone https://github.com/latera/homs.git
-  ```
-
-4.1. Create your own configs from samples:
-
-  ```
-  find config -name '*.sample' | xargs -I{} sh -c 'cp $1 ${1%.*}' -- {}
-  ```
-
-6. Skip this step
-
-7. Add test environment to `config/database.yml`:
-
-  ```
-  development:
-    adapter: postgresql
-    encoding: unicode
-    pool: 5
-    host: <%= ENV['HOMS_DB_HOST'] %>
-    port: <%= ENV['HOMS_DB_PORT'] %>
-    database: <%= ENV['HOMS_DB_NAME'] %>
-    username: <%= ENV['HOMS_DB_USER'] %>
-    password: <%= ENV['HOMS_DB_PASSWORD'] %>
-  ```
-  
-8. Run `docker-compose`: with custom config:
-  ```
-  docker-compose -f docker-compose.dev.yml up -d
-  ```
-
-Or if you want to use Oracle as source for your HOMS instance:
-
-##### With Oracle Instant Client
-
-Follow the same steps as for [without Oracle Instant Client installation](#without-oracle-instant-client), but with certain changes:
-
-5. Download the Oracle Instant Client 11.2 archives from OTN:
-
-http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
-
-The following three ZIPs are required:
-
-- `instantclient-basic-linux.x64-11.2.0.4.0.zip`
-- `instantclient-sdk-linux.x64-11.2.0.4.0.zip`
-- `instantclient-sqlplus-linux.x64-11.2.0.4.0.zip`
-
-5.1. Place the downloaded Oracle Instant Client RPMs in the same directory as the `Dockerfile` and run:
-
-```
-docker build -t latera/homs-with-oracle -f Dockerfile.oracle .
-```
-
-5.2. Create `config/sources.yml` file with database credentials
-
-```
-sources:
-  billing:
-    type: sql/oracle
-    tns_name: dbname
-    username: user
-    password: password
-```
-
-5.3. Add environment variable `$TNSNAMES_PATH` to `.env` file with path to your `tnsnames.ora` file:
-
-```
-TNSNAMES_PATH=/dir/with/tnsnames.ora
-```
-
-for access to host machine OS X users can use special DNS name `host.docker.internal` as host in `tnsnames.ora` ([details](https://docs.docker.com/docker-for-mac/networking))
-
-6. Run `docker-compose`: with custom config:
-  ```
-  docker-compose -f docker-compose.dev.oracle.yml up -d
-  ```
+* [Without Oracle Instant Client](https://github.com/latera/homs/blob/master/WITHOUT_ORACLE.md).
 
 ## Contributing/Development
 
@@ -174,9 +87,9 @@ Issues can be reported by using [GitHub Issues](https://github.com/latera/homs/i
 
 ## Testing
 
-homs uses RSpec for unit/spec tests. You need to set up different testing database. Otherwise your development DB would be erased.
+HOMS uses RSpec for unit/spec tests. You need to set up different testing database. Otherwise your development DB would be erased.
 
-```
+```bash
 # Run all tests
 bundle exec rspec spec
 
@@ -189,4 +102,4 @@ bundle exec rspec spec/PATH/TO/DIR
 
 ## License
 
-Copyright (c) 2018 Latera LLC under the [Apache License](https://github.com/latera/homs/blob/master/LICENSE).
+Copyright (c) 2019 Latera LLC under the [Apache License](https://github.com/latera/homs/blob/master/LICENSE).
