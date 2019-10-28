@@ -103,8 +103,7 @@ module ApplicationHelper
       locale: {
         code: I18n.locale,
         dateTimeFormat: js_datetime_format
-      },
-      poll_interval: -1
+      }
     }
 
     if defined? @hbw_options
