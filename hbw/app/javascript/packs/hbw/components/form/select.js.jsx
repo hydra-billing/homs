@@ -1,7 +1,7 @@
 /* eslint no-console: "off" */
 
 import Select from 'react-select';
-import AsyncSelect from 'react-select/lib/Async';
+import Async from 'react-select/async';
 import Tooltip from 'tooltip.js';
 import {
   withConditions, withSelect, withCallbacks, withValidations, withErrorBoundary, compose
@@ -166,7 +166,7 @@ modulejs.define('HBWFormSelect',
 
       selectComponent = (opts) => {
         if (this.props.params.mode === 'lookup') {
-          return <AsyncSelect loadOptions={this.loadOptions}
+          return <Async loadOptions={this.loadOptions}
                               {...opts} />;
         } else {
           return <Select {...opts} />;

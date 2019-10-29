@@ -160,7 +160,7 @@ class Messenger {
       options = { message: opts };
     }
 
-    const o = Object.assign({}, options);
+    const o = { ...options };
 
     if (!options.title) {
       const title = this.titleFor(options, level);
