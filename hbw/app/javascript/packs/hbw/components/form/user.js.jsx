@@ -11,12 +11,13 @@ modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'HBWFormSelect'], (React, R
     }
 
     render () {
-      const params = Object.assign({}, this.props.params, {
+      const params = {
+        ...this.props.params,
         placeholder: this.props.params.placeholder || 'User',
         mode:        'lookup',
         url:         '/users/lookup',
         choices:     []
-      });
+      };
 
       return <Select
         name={this.props.name}

@@ -26,7 +26,9 @@
     "radix": [2, "as-needed"],
     "react/display-name": 0,
     "react/prop-types": [1, { "skipUndeclared": true }],
-    "space-before-function-paren": [1, "always"]
+    "space-before-function-paren": [1, "always"],
+    "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
+    "max-classes-per-file": ["error", 3]
   },
 
   "globals": {

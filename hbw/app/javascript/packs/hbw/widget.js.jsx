@@ -25,7 +25,7 @@ modulejs.define(
 
         this.options = options;
 
-        const payload = Object.assign({ variables: {} }, this.options.payload);
+        const payload = { variables: {}, ...this.options.payload };
 
         const connection = new Connection({
           path: this.options.widgetPath,
