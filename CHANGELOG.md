@@ -16,6 +16,7 @@ See [#367](https://github.com/latera/homs/pull/367) and [HBW readme](https://git
 
 v1.8.1 [2019-10-24]
 -------------------
+### Bugfixes
 - [#366](https://github.com/latera/homs/pull/366) Remove claimed row in task overview.
 
 v1.8.0 [2019-10-24]
