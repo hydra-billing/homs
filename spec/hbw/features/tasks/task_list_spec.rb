@@ -22,7 +22,7 @@ feature 'Check table with tasks', js: true do
 
       expect(tasks_table_content).to eq(
         [
-          ['Medium', 'Check test form', ' Test name', 'No description', 'expired'],
+          ['Medium', 'Check test form', ' Test name', '—', 'expired'],
           ['High', 'Check test form', ' Test name', 'Some test description', '30 Jun 2016']
         ]
       )
@@ -35,7 +35,7 @@ feature 'Check table with tasks', js: true do
 
       expect(tasks_table_content).to eq(
         [
-          ['Medium', 'Check test form', ' Test name', 'No description', 'expired', 'Claim'],
+          ['Medium', 'Check test form', ' Test name', '—', 'expired', 'Claim'],
           ['High', 'Check test form', ' Test name', 'Some test description', '30 Jun 2016', 'Claim']
         ]
       )
