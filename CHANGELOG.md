@@ -1,4 +1,8 @@
-v2.0.0 [unreleased]
+v2.0.1 [unreleased]
+-------------------
+
+
+v2.0.0 [2019-10-31]
 -------------------
 ### Breaking changes
 HBW initialization parameters were changed. Instead of
