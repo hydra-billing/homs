@@ -28,29 +28,14 @@ echo "sources:
 " > config/sources.yml
 
 bundle exec rspec ./spec --format RspecJunitFormatter --out test-reports/out.xml --format progress
-test_rspec=$?
 
 rubocop --require rubocop/formatter/junit_formatter --format RuboCop::Formatter::JUnitFormatter --out test-reports/rubocop.xml
-test_rubocop=$?
 
 JEST_JUNIT_OUTPUT_NAME=./test-reports/jest.xml yarn test --ci --reporters=default --reporters=jest-junit
-test_jest=$?
 
 zip -r coverage.zip coverage/
 
 if [ "$GENERATE_DOC" = 'true' ]; then
   export GENERATING_DOC=true
   bundle exec rake docs:generate && zip -r doc.zip public/doc;
-fi
-
-if [ $test_rspec != 0 ]; then
-  exit $test_rspec
-fi
-
-if [ $test_rubocop != 0 ]; then
-  exit $test_rubocop
-fi
-
-if [ $test_jest != 0 ]; then
-  exit $test_jest
 fi
