@@ -24,11 +24,12 @@ const HBWClaimingTaskOverview = ({
       <div className="bold header">
         {t('components.claiming.overview.header')}
       </div>
+      <div data-test="type-value" className="title">
+        {task.icon && <span className={task.icon} />}
+        {task.process_name}
+      </div>
       <a data-test="title-link" href={entityUrl}>
-        <div className="title">
-          {task.icon && <span className={task.icon} />}
-          {task.name}
-        </div>
+        {task.name}
       </a>
       <table className="two-cols">
         <tbody>
@@ -80,13 +81,14 @@ HBWClaimingTaskOverview.propTypes = {
   assigned:  PropTypes.bool.isRequired,
   entityUrl: PropTypes.string.isRequired,
   task:      PropTypes.shape({
-    id:          PropTypes.string.isRequired,
-    priority:    PropTypes.number.isRequired,
-    name:        PropTypes.string.isRequired,
-    created:     PropTypes.string.isRequired,
-    icon:        PropTypes.string,
-    due:         PropTypes.string,
-    description: PropTypes.string,
+    id:           PropTypes.string.isRequired,
+    priority:     PropTypes.number.isRequired,
+    name:         PropTypes.string.isRequired,
+    created:      PropTypes.string.isRequired,
+    process_name: PropTypes.string.isRequired,
+    icon:         PropTypes.string,
+    due:          PropTypes.string,
+    description:  PropTypes.string,
   }).isRequired,
   claimAndPollTasks: PropTypes.func.isRequired,
   closeTask:         PropTypes.func.isRequired,
