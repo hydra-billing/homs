@@ -37,7 +37,7 @@ class HBWPopUp extends Component {
   switchTabTo = (tab) => {
     if (tab !== this.state.tab) {
       this.setState(
-        { tasks: [], tab },
+        { tasks: [], fetched: false, tab },
         this.updateSubscription
       );
     }
