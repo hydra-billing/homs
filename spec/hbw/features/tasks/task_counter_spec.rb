@@ -30,7 +30,7 @@ feature 'Check available tasks counter', js: true do
       expect(popup_tasks_list_content).to eq(
         [
           "Assigned task for popup\nexpired",
-          "Other assigned task for popup\n30 Jun 2016"
+          "Other assigned task for popup\nSome test description\n30 Jun 2016"
         ]
       )
 
@@ -39,7 +39,7 @@ feature 'Check available tasks counter', js: true do
       expect(popup_tasks_list_content).to eq(
         [
           "Unassigned task for popup\nexpired",
-          "Other unassigned task for popup\n30 Jun 2016"
+          "Other unassigned task for popup\nSome test description\n30 Jun 2016"
         ]
       )
 
