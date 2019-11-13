@@ -34,6 +34,7 @@ const withTaskListContext = (WrappedComponent) => {
       claimingTask: null,
       page:         1,
       lastPage:     false,
+      fetched:      false,
     };
 
     state = {
@@ -41,7 +42,6 @@ const withTaskListContext = (WrappedComponent) => {
       myTasksCount:         0, // should be filled by separate subscription
       unassignedTasksCount: 0, // and passed to tabs component
       tab:                  this.tabs.my,
-      fetched:              false,
     };
 
     componentDidMount () {

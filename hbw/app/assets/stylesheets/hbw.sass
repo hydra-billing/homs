@@ -608,7 +608,18 @@
           flex-grow: 1
         .left
           justify-content: flex-start
+          overflow: hidden
+          padding-right: 5px
+          .title, .description
+            overflow: hidden
+            text-overflow: ellipsis
+            white-space: nowrap
+          .description
+            flex: 1
+            color: #bdbdbd
+            padding-left: 5px
         .right
+          flex: 0 0 auto
           justify-content: flex-end
           text-align: end
           padding-right: 10px
