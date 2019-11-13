@@ -1,6 +1,11 @@
+v2.1.0 [unreleased]
+-------------------
+
 v2.0.1 [unreleased]
 -------------------
 
+### Features
+- [#373](https://github.com/latera/homs/pull/373) Add description in popup task list.
 
 v2.0.0 [2019-10-31]
 -------------------

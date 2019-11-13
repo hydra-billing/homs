@@ -37,16 +37,16 @@ const HBWClaimingShortList = ({ env, tasks, fetched }) => {
       </div>
   );
 
-
   return (
     <div className="short-list">
       {tasks.map(({
-        id, icon, name, due, created, entity_url
+        id, icon, name, due, created, entity_url, description
       }) => (
         <div onClick={() => goToTask(entity_url)} key={id} className={rowCN(due)}>
           <div className="left">
             <i className={icon} />
             <span className="title">{name}</span>
+            <span title={description} className="description">{description}</span>
           </div>
           <div className="right">
             {renderDate(created, due)}

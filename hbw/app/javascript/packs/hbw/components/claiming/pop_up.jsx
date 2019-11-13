@@ -46,6 +46,7 @@ class HBWPopUp extends Component {
   updateSubscription = () => {
     const { tab } = this.state;
     const { claimingTasks } = this.props;
+    this.setState({ fetched: false });
 
     claimingTasks.updateSubscription({
       assigned: tab === this.tabs.my,
