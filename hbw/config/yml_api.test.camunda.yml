@@ -1119,113 +1119,6 @@ get:
         type: "string"
         value: null
 
-  variable-instance:
-    "processInstanceIdIn[]=814972&processInstanceIdIn[]=2&processInstanceIdIn[]=3&processInstanceIdIn[]=4&processInstanceIdIn[]=5&processInstanceIdIn[]=6&processInstanceIdIn[]=7&processInstanceIdIn[]=8&processInstanceIdIn[]=9&processInstanceIdIn[]=10&processInstanceIdIn[]=11&processInstanceIdIn[]=12&processInstanceIdIn[]=13&processInstanceIdIn[]=14&processInstanceIdIn[]=15&processInstanceIdIn[]=16&processInstanceIdIn[]=17&processInstanceIdIn[]=18&processInstanceIdIn[]=19&processInstanceIdIn[]=20&processInstanceIdIn[]=21&processInstanceIdIn[]=22&variableName=homsOrderCode":
-      - processInstanceId: 814972
-        type: string
-        name: homsOrderCode
-        value: ORD-1
-      - processInstanceId: 2
-        type: string
-        name: homsOrderCode
-        value: ORD-2
-      - processInstanceId: 3
-        type: string
-        name: homsOrderCode
-        value: ORD-3
-      - processInstanceId: 4
-        type: string
-        name: homsOrderCode
-        value: ORD-4
-      - processInstanceId: 5
-        type: string
-        name: homsOrderCode
-        value: ORD-5
-      - processInstanceId: 6
-        type: string
-        name: homsOrderCode
-        value: ORD-6
-      - processInstanceId: 7
-        type: string
-        name: homsOrderCode
-        value: ORD-7
-      - processInstanceId: 8
-        type: string
-        name: homsOrderCode
-        value: ORD-8
-      - processInstanceId: 9
-        type: string
-        name: homsOrderCode
-        value: ORD-9
-      - processInstanceId: 10
-        type: string
-        name: homsOrderCode
-        value: ORD-10
-      - processInstanceId: 11
-        type: string
-        name: homsOrderCode
-        value: ORD-11
-      - processInstanceId: 12
-        type: string
-        name: homsOrderCode
-        value: ORD-12
-      - processInstanceId: 13
-        type: string
-        name: homsOrderCode
-        value: ORD-13
-      - processInstanceId: 14
-        type: string
-        name: homsOrderCode
-        value: ORD-14
-      - processInstanceId: 15
-        type: string
-        name: homsOrderCode
-        value: ORD-15
-      - processInstanceId: 16
-        type: string
-        name: homsOrderCode
-        value: ORD-16
-      - processInstanceId: 17
-        type: string
-        name: homsOrderCode
-        value: ORD-17
-      - processInstanceId: 18
-        type: string
-        name: homsOrderCode
-        value: ORD-18
-      - processInstanceId: 19
-        type: string
-        name: homsOrderCode
-        value: ORD-19
-      - processInstanceId: 20
-        type: string
-        name: homsOrderCode
-        value: ORD-20
-      - processInstanceId: 21
-        type: string
-        name: homsOrderCode
-        value: ORD-21
-      - processInstanceId: 22
-        type: string
-        name: homsOrderCode
-        value: ORD-22
-
-    "processInstanceIdIn[]=23&variableName=homsOrderCode":
-      - processInstanceId: 23
-        type: string
-        name: homsOrderCode
-        value: ORD-23
-    "processInstanceIdIn[]=24&processInstanceIdIn[]=23&variableName=homsOrderCode":
-      - processInstanceId: 24
-        type: string
-        name: homsOrderCode
-        value: ORD-24
-      - processInstanceId: 23
-        type: string
-        name: homsOrderCode
-        value: ORD-23
-    variableName=homsOrderCode: []
-
 put: {}
 patch: {}
 post:
@@ -1641,4 +1534,112 @@ post:
       count: 10
     "active=true&candidateUser=john":
       count: 0
+
+  variable-instance:
+    "processInstanceIdIn[]=814972&processInstanceIdIn[]=2&processInstanceIdIn[]=3&processInstanceIdIn[]=4&processInstanceIdIn[]=5&processInstanceIdIn[]=6&processInstanceIdIn[]=7&processInstanceIdIn[]=8&processInstanceIdIn[]=9&processInstanceIdIn[]=10&processInstanceIdIn[]=11&processInstanceIdIn[]=12&processInstanceIdIn[]=13&processInstanceIdIn[]=14&processInstanceIdIn[]=15&processInstanceIdIn[]=16&processInstanceIdIn[]=17&processInstanceIdIn[]=18&processInstanceIdIn[]=19&processInstanceIdIn[]=20&processInstanceIdIn[]=21&processInstanceIdIn[]=22&variableName=homsOrderCode":
+      - processInstanceId: 814972
+        type: string
+        name: homsOrderCode
+        value: ORD-1
+      - processInstanceId: 2
+        type: string
+        name: homsOrderCode
+        value: ORD-2
+      - processInstanceId: 3
+        type: string
+        name: homsOrderCode
+        value: ORD-3
+      - processInstanceId: 4
+        type: string
+        name: homsOrderCode
+        value: ORD-4
+      - processInstanceId: 5
+        type: string
+        name: homsOrderCode
+        value: ORD-5
+      - processInstanceId: 6
+        type: string
+        name: homsOrderCode
+        value: ORD-6
+      - processInstanceId: 7
+        type: string
+        name: homsOrderCode
+        value: ORD-7
+      - processInstanceId: 8
+        type: string
+        name: homsOrderCode
+        value: ORD-8
+      - processInstanceId: 9
+        type: string
+        name: homsOrderCode
+        value: ORD-9
+      - processInstanceId: 10
+        type: string
+        name: homsOrderCode
+        value: ORD-10
+      - processInstanceId: 11
+        type: string
+        name: homsOrderCode
+        value: ORD-11
+      - processInstanceId: 12
+        type: string
+        name: homsOrderCode
+        value: ORD-12
+      - processInstanceId: 13
+        type: string
+        name: homsOrderCode
+        value: ORD-13
+      - processInstanceId: 14
+        type: string
+        name: homsOrderCode
+        value: ORD-14
+      - processInstanceId: 15
+        type: string
+        name: homsOrderCode
+        value: ORD-15
+      - processInstanceId: 16
+        type: string
+        name: homsOrderCode
+        value: ORD-16
+      - processInstanceId: 17
+        type: string
+        name: homsOrderCode
+        value: ORD-17
+      - processInstanceId: 18
+        type: string
+        name: homsOrderCode
+        value: ORD-18
+      - processInstanceId: 19
+        type: string
+        name: homsOrderCode
+        value: ORD-19
+      - processInstanceId: 20
+        type: string
+        name: homsOrderCode
+        value: ORD-20
+      - processInstanceId: 21
+        type: string
+        name: homsOrderCode
+        value: ORD-21
+      - processInstanceId: 22
+        type: string
+        name: homsOrderCode
+        value: ORD-22
+
+    "processInstanceIdIn[]=23&variableName=homsOrderCode":
+      - processInstanceId: 23
+        type: string
+        name: homsOrderCode
+        value: ORD-23
+    "processInstanceIdIn[]=24&processInstanceIdIn[]=23&variableName=homsOrderCode":
+      - processInstanceId: 24
+        type: string
+        name: homsOrderCode
+        value: ORD-24
+      - processInstanceId: 23
+        type: string
+        name: homsOrderCode
+        value: ORD-23
+    variableName=homsOrderCode: []
+
 delete: {}

@@ -26,9 +26,10 @@ module HBW
     end
 
     def fetch_variable_for_processes(name, process_ids)
-      do_request(:get, 'variable-instance',
+      do_request(:post,
+                 'variable-instance',
                  variableName: name,
-                 processInstanceIdIn: process_ids)
+                 processInstanceIdIn: process_ids.uniq)
     end
   end
 end
