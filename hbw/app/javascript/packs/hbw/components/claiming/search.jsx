@@ -16,6 +16,7 @@ class HBWClaimingSearch extends Component {
     const {
       query, fetching, onChange, onClear
     } = this.props;
+    const { translator: t } = this.props.env;
 
     const searchIconCN = fetching ? 'fa-sync-alt fa-spin' : 'fa-search';
 
@@ -24,7 +25,7 @@ class HBWClaimingSearch extends Component {
         <input
           ref={this.input}
           type="text"
-          placeholder="Task description"
+          placeholder={t('components.claiming.table.description')}
           value={query}
           onChange={onChange}
         />
