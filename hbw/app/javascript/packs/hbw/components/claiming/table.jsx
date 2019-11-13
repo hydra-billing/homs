@@ -135,6 +135,12 @@ class HBWTasksTable extends Component {
       claiming
     });
 
+    const buttonCN = cx({
+      btn:           true,
+      'btn-primary': opened,
+      'btn-default': !opened,
+    });
+
     return (
       <tr className={chosenCN} key={row.id} onClick={() => openTask(index)}>
         <td className='priority'>
@@ -146,7 +152,7 @@ class HBWTasksTable extends Component {
         <td>{this.renderDate(row.created, row.due)}</td>
         {showClaimButton && (
           <td>
-            <button className='claim-button-secondary' onClick={e => !claiming && this.onClaimClick(e, tasks[index])}>
+            <button className={buttonCN} onClick={e => !claiming && this.onClaimClick(e, tasks[index])}>
               {t('components.claiming.claim')}
             </button>
           </td>

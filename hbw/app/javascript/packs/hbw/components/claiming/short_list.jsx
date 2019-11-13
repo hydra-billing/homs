@@ -55,7 +55,7 @@ const HBWClaimingShortList = ({ env, tasks, fetched }) => {
       ))}
       {fetched && tasks.length === 0 && renderNoTasks()}
       <div className="button">
-        <button onClick={viewAll} className='claim-button-primary'>
+        <button onClick={viewAll} className='btn btn-primary'>
           {t('components.claiming.short_list.view_all')}
         </button>
       </div>
