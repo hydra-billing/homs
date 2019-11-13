@@ -11,7 +11,6 @@ const withTaskListContext = (WrappedComponent) => {
     static propTypes = {
       claimingTasks: PropTypes.shape({
         subscription:       PropTypes.object.isRequired,
-        syncing:            PropTypes.bool.isRequired,
         updateSubscription: PropTypes.func.isRequired,
         claimAndPollTasks:  PropTypes.func.isRequired,
       }).isRequired,
@@ -35,6 +34,7 @@ const withTaskListContext = (WrappedComponent) => {
       page:         1,
       lastPage:     false,
       fetched:      false,
+      fetching:     false,
     };
 
     state = {
@@ -49,7 +49,8 @@ const withTaskListContext = (WrappedComponent) => {
 
       claimingTasks.subscription.progress(({ tasks }) => this.setState(prevState => ({
         tasks,
-        lastPage: tasks.length < prevState.page * perPage
+        lastPage: tasks.length < prevState.page * perPage,
+        fetching: false,
       })));
 
       taskCount.subscription.progress(({ task_count: myTasksCount, task_count_unassigned: unassignedTasksCount }) => {
@@ -75,16 +76,24 @@ const withTaskListContext = (WrappedComponent) => {
       this.setState(this.stateForReset, this.updateSubscription);
     };
 
-    search = debounce(this.updateSubscription, 350);
+    search = () => {
+      this.setState({ fetching: true });
+
+      return debounce(this.updateSubscription, 350);
+    };
 
     onSearch = ({ target }) => {
       const { value: query } = target;
       const searchQuery = query.trim();
 
-      this.setState({
-        searchQuery: searchQuery.length > 2 ? searchQuery : '',
-        query,
-      }, this.search);
+      if (this.state.searchQuery.length < 3 && searchQuery.length < 3) {
+        this.setState({ query });
+      } else {
+        this.setState({
+          searchQuery: searchQuery.length > 2 ? searchQuery : '',
+          query,
+        }, this.search());
+      }
     };
 
     addPage = () => {
@@ -130,7 +139,7 @@ const withTaskListContext = (WrappedComponent) => {
       const contextValue = {
         ...this.state,
         tabs:              this.tabs,
-        fetching:          this.props.claimingTasks.syncing,
+        fetching:          this.state.fetching,
         update:            this.updateContext,
         reset:             this.resetContext,
         onSearch:          this.onSearch,

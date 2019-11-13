@@ -27,15 +27,12 @@ export default WrappedComponent => class WithClaimingTasks extends Component {
       path:   'tasks/claiming',
       data
     })
-      .syncing(() => this.setState({ syncing: true }))
       .progress(() => this.setState({ error: null }))
-      .fail(response => this.setState({ error: response }))
-      .always(() => this.setState({ syncing: false }));
+      .fail(response => this.setState({ error: response }));
   };
 
   state = {
     subscription: this.createSubscription(),
-    syncing:      false,
     error:        null
   };
 
