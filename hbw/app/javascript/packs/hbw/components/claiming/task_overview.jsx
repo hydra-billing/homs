@@ -24,13 +24,12 @@ const HBWClaimingTaskOverview = ({
       <div className="bold header">
         {t('components.claiming.overview.header')}
       </div>
-      <div data-test="type-value" className="title">
-        {task.icon && <span className={task.icon} />}
-        {task.process_name}
+      <div className="title">
+        <a data-test="title-link" href={entityUrl}>
+          {task.icon && <span className={task.icon} />}
+          {task.process_name} — {task.name}
+        </a>
       </div>
-      <a data-test="title-link" href={entityUrl}>
-        {task.name}
-      </a>
       <table className="two-cols">
         <tbody>
           {task.due && (
@@ -58,16 +57,16 @@ const HBWClaimingTaskOverview = ({
       <div className="buttons">
         {assigned && (
           <button onClick={goToTask}
-                  className='claim-button-secondary'>{t('components.claiming.overview.go_to_task')}
+                  className='btn btn-default'>{t('components.claiming.overview.go_to_task')}
           </button>
         )}
         {!assigned && (
           <>
             <button onClick={claimAndClose}
-                    className='claim-button-primary'>{t('components.claiming.overview.claim_task')}
+                    className='btn btn-primary'>{t('components.claiming.overview.claim_task')}
             </button>
             <button onClick={claimAndGo}
-                    className='claim-button-secondary'>{t('components.claiming.overview.claim_and_open')}
+                    className='btn btn-default'>{t('components.claiming.overview.claim_and_open')}
             </button>
           </>
         )}

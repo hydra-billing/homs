@@ -59,8 +59,7 @@ feature 'Check table with tasks', js: true do
 
       task_overview = find_by_dt('task-overview')
 
-      expect(find_by_dt('type-value', task_overview).text).to         eq 'Test name'
-      expect(find_by_dt('title-link', task_overview).text).to         eq 'Check test form'
+      expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Check test form'
       expect(find_by_dt('due-date-value', task_overview).text).to     eq '07/30/2016 09:07 AM'
       expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 AM'
       expect(find_by_dt('priority-value', task_overview).text).to     eq 'Medium'
@@ -71,8 +70,7 @@ feature 'Check table with tasks', js: true do
       expect(page).to have_content 'Task overview'
       task_overview = find_by_dt('task-overview')
 
-      expect(find_by_dt('type-value', task_overview).text).to         eq 'Test name'
-      expect(find_by_dt('title-link', task_overview).text).to         eq 'Check test form'
+      expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Check test form'
       expect(miss_by_dt('due-date-value', task_overview)).to          eq true
       expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 AM'
       expect(find_by_dt('priority-value', task_overview).text).to     eq 'High'
@@ -98,8 +96,7 @@ feature 'Check table with tasks', js: true do
 
       task_overview = find_by_dt('task-overview')
 
-      expect(find_by_dt('type-value', task_overview).text).to         eq 'Test name'
-      expect(find_by_dt('title-link', task_overview).text).to         eq 'Check test form'
+      expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Check test form'
       expect(miss_by_dt('due-date-value', task_overview)).to          eq true
       expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 AM'
       expect(find_by_dt('priority-value', task_overview).text).to     eq 'High'

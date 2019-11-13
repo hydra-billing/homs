@@ -334,11 +334,11 @@
       color: black
 
       &:hover
-        border-bottom: 1px solid #50e3c2
+        border-bottom: 1px solid $brand-success
     ul
       padding: 0
       width: 100%
-      border-bottom: 1px solid #d8d8d8
+      border-bottom: 1px solid $gray-lighter
 
       li
         display: inline-block
@@ -348,7 +348,7 @@
           a
             padding-bottom: 10px
             font-weight: bold
-            border-bottom: 5px solid #50e3c2
+            border-bottom: 5px solid $brand-success
 
   .claiming-table
     width: 100%
@@ -363,24 +363,25 @@
     thead
       border-bottom: solid 1px #dbdbdb
 
-      th
-        font-weight: 200
-
     tbody
-      i
-        color: $claiming-purple
-
       tr
         cursor: pointer
         border-left: 3px solid transparent
 
         &.chosen, &:hover
-          border-left: 3px solid $claiming-purple
+          border-left: 3px solid $text-color
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5)
 
+          button
+            color: $btn-primary-color
+            border-color: $btn-primary-border
+            &:hover
+              border-color: $btn-primary-border
+              background-color: $btn-primary-color
+
         &.opened
-          border-left: 3px solid $claiming-purple
-          background-color: #f2f1f1
+          border-left: 3px solid $text-color
+          background-color: $gray-lighter
 
         &.expired
           color: $deadline-red
@@ -407,42 +408,14 @@
       background-color: #926902
 
     &.high
-      background-color: #bc851c
+      background-color: $brand-warning
 
     &.urgent
-      background-color: #d0021b
+      background-color: $brand-danger
 
   .deadline
     color: $deadline-red
     font-weight: 500
-
-  .claim-button-secondary
-    padding: 5px 15px
-    background-color: transparent
-    border: 1px solid $claiming-purple
-    border-radius: 2px
-    outline: none
-    color: $claiming-purple
-    font-weight: 500
-    line-height: 24px
-
-    &:hover
-      color: $claiming-purple-hover
-      border: 1px solid $claiming-purple-hover
-
-  .claim-button-primary
-    padding: 5px 15px
-    background-color: $claiming-purple
-    border: 1px solid $claiming-purple
-    border-radius: 2px
-    outline: none
-    color: white
-    font-weight: 500
-    line-height: 24px
-
-    &:hover
-      background-color: $claiming-purple-hover
-      border: 1px solid $claiming-purple-hover
 
   .task-overview
     display: flex
@@ -458,19 +431,13 @@
       font-size: 18px
 
     a
-      text-decoration: none
-      color: $claiming-purple
       margin-bottom: 15px
-
-      &:hover
-        color: $claiming-purple-hover
 
     .title
       margin-bottom: 15px
 
       span
         padding-right: 7px
-        color: $claiming-purple
 
     .two-cols
       margin-bottom: 5px
@@ -519,7 +486,6 @@
       height: 40px
       width: 30px
       font-size: small
-      color: $claiming-purple
 
       &.search
         left: 5px
@@ -545,26 +511,28 @@
       .hbw-icon-svg
         height: 40%
 
-      &:hover
-        .hbw-icon-svg-path
-          fill: #18bc9c
-
       .claiming-count
         position: absolute
         padding-left: 3%
         padding-right: 3%
-        top: 25%
+        top: 55%
         right: 0
         text-align: center
-        color: white
+        color: $text-color
         font-size: .7em
         border-radius: 5px
         min-width: 50%
-        background-color: #00a09d
+        background-color: white
+
+      &:hover
+        .claiming-count
+          background-color: $brand-success
+        .hbw-icon-svg-path
+          fill: $brand-success
 
   .claimimg-popup
     position: absolute
-    right: 0px
+    right: 0
     width: 600px
     background-color: white
     box-shadow: 1px 2px 4px 0 rgba(0,0,0,0.5)
@@ -595,10 +563,10 @@
         justify-content: space-between
         align-items: center
         padding: 10px 10px
-        border-bottom: 1px solid #D8D8D8
+        border-bottom: 1px solid $gray-lighter
         cursor: pointer
         &:hover
-          background-color: #f1f1f1
+          background-color: $table-bg-hover
 
         &.expired
           color: #BD2025
@@ -607,7 +575,6 @@
 
         i
           padding: 3px 5px
-          color: $claiming-purple
 
         .left, .right
           display: flex
