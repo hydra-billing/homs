@@ -35,7 +35,7 @@ en:
             title: Title
             type: Task type
             description: Task description
-            sla: Created
+            sla: Created/Due
             empty_description: —
             empty_tasks: No tasks
             priorities:
@@ -53,6 +53,7 @@ en:
             go_to_task: Go to task
           created:
             expired: expired
+            past_due: past due
             to_deadline: to deadline
             ago: ago
             periodUnits:

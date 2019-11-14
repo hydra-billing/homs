@@ -14,7 +14,7 @@ const HBWDueDate = ({
 
   const date = parseISO(dateISO);
 
-  const format = () => {
+  const formatAfter = () => {
     const minutes = differenceInMinutes(date, now);
 
     if (minutes < 1) {
@@ -32,13 +32,31 @@ const HBWDueDate = ({
     }
   };
 
+  const formatBefore = () => {
+    const minutes = differenceInMinutes(now, date);
+
+    if (minutes < 1) {
+      return lessThanMinute();
+    } else if (minutes < 60) {
+      return inMinutes(minutes);
+    } else if (minutes < MINUTES_IN_DAY) {
+      return inHours(now, date);
+    } else if (minutes < MINUTES_IN_MONTH) {
+      return inDays(now, date);
+    } else if (minutes < MINUTES_IN_YEAR) {
+      return inWeeks(now, date);
+    } else {
+      return inYears(now, date);
+    }
+  };
+
   if (isAfter(date, now)) {
     return (
-      `${format()} ${t('components.claiming.created.to_deadline')}`
+      `${formatAfter()} ${t('components.claiming.created.to_deadline')}`
     );
   } else {
     return (
-      t('components.claiming.created.expired')
+      `${t('components.claiming.created.expired')} (${formatBefore()} ${t('components.claiming.created.past_due')})`
     );
   }
 };
