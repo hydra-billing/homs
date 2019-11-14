@@ -44,7 +44,6 @@ modulejs.define(
           entity_class:     this.options.entity_class,
           entity_code:      this.options.entity_code,
           initialVariables: payload.variables,
-          fetch_all:        this.options.fetch_all,
           poll_interval:    this.options.poll_interval,
           taskListPath:     this.options.taskListPath,
         };

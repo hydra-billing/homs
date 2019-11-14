@@ -38,6 +38,7 @@ feature 'Check task claiming', js: true do
     scenario 'does not have "Claim" button if assigned' do
       click_and_wait 'ORD-1'
 
+      expect(page).not_to have_content 'Orders list'
       expect(page).not_to have_content 'Claim'
     end
   end

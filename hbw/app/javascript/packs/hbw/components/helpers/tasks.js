@@ -34,18 +34,10 @@ export default WrappedComponent => class WithTasks extends Component {
   }
 
   createSubscription = () => {
-    let data;
-
-    if (this.props.env.fetch_all) {
-      data = {
-        entity_class: this.props.env.entity_class
-      };
-    } else {
-      data = {
-        entity_class: this.props.env.entity_class,
-        entity_code:  this.props.env.entity_code
-      };
-    }
+    const data = {
+      entity_class: this.props.env.entity_class,
+      entity_code:  this.props.env.entity_code
+    };
 
     return this.props.env.connection.subscribe({
       client: this.getComponentId(),
