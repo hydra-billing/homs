@@ -22,7 +22,12 @@ describe('DueDate should render correctly', () => {
   const weeks = addWeeks(days, 5);
   const years = addYears(weeks, 6);
 
-  const expired = addMinutes(now, -1234);
+  const expiredSec = addSeconds(now, -30);
+  const expiredMinutes = addMinutes(now, -2);
+  const expiredHours = addHours(now, -3);
+  const expiredDays = addDays(now, -4);
+  const expiredWeeks = addWeeks(now, -5);
+  const expiredYears = addYears(now, -6);
 
   const shallowComponent = date => (
     shallow(<DueDate env={fakeEnv} dateISO={date.toISOString()} now={now} />)
@@ -52,7 +57,27 @@ describe('DueDate should render correctly', () => {
     expect(shallowComponent(sec).html()).toEqual('&lt;1m to deadline');
   });
 
-  it('with expired', () => {
-    expect(shallowComponent(expired).html()).toEqual('expired');
+  it('with expired (years past due)', () => {
+    expect(shallowComponent(expiredYears).html()).toEqual('expired (6y past due)');
+  });
+
+  it('with expired (weeks past due)', () => {
+    expect(shallowComponent(expiredWeeks).html()).toEqual('expired (5w past due)');
+  });
+
+  it('with expired (days past due)', () => {
+    expect(shallowComponent(expiredDays).html()).toEqual('expired (4d past due)');
+  });
+
+  it('with expired (hours past due)', () => {
+    expect(shallowComponent(expiredHours).html()).toEqual('expired (3h past due)');
+  });
+
+  it('with expired (minutes past due)', () => {
+    expect(shallowComponent(expiredMinutes).html()).toEqual('expired (2m past due)');
+  });
+
+  it('with expired (seconds past due)', () => {
+    expect(shallowComponent(expiredSec).html()).toEqual('expired (&lt;1m past due)');
   });
 });
