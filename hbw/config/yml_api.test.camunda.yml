@@ -31,9 +31,7 @@ get:
 
   # process definitions
   "process-definition":
-    "": []
-
-    "processDefinitionIdIn[]=testProcess:469:814905":
+    "":
       - &default_process-definition
         id: "testProcess:469:814905"
         key: "supportRequestProcess"
@@ -48,115 +46,6 @@ get:
         suspended: false
         versionTag: null
         historyTimeToLive: null
-
-    "processDefinitionIdIn[]=testProcess:2:2":
-      - <<: *default_process-definition
-        id: "testProcess:2:2"
-        deploymentId: "2"
-
-    "processDefinitionIdIn[]=testProcess:3:3":
-      - <<: *default_process-definition
-        id: "testProcess:3:3"
-        deploymentId: "3"
-
-    "processDefinitionIdIn[]=testProcess:4:4":
-      - <<: *default_process-definition
-        id: "testProcess:4:4"
-        deploymentId: "4"
-
-    "processDefinitionIdIn[]=testProcess:5:5":
-      - <<: *default_process-definition
-        id: "testProcess:5:5"
-        deploymentId: "5"
-
-    "processDefinitionIdIn[]=testProcess:6:6":
-      - <<: *default_process-definition
-        id: "testProcess:6:6"
-        deploymentId: "6"
-
-    "processDefinitionIdIn[]=testProcess:7:7":
-      - <<: *default_process-definition
-        id: "testProcess:7:7"
-        deploymentId: "7"
-
-    "processDefinitionIdIn[]=testProcess:8:8":
-      - <<: *default_process-definition
-        id: "testProcess:8:8"
-        deploymentId: "8"
-
-    "processDefinitionIdIn[]=testProcess:9:9":
-      - <<: *default_process-definition
-        id: "testProcess:9:9"
-        deploymentId: "9"
-
-    "processDefinitionIdIn[]=testProcess:10:10":
-      - <<: *default_process-definition
-        id: "testProcess:10:10"
-        deploymentId: "10"
-
-    "processDefinitionIdIn[]=testProcess:11:11":
-      - <<: *default_process-definition
-        id: "testProcess:11:11"
-        deploymentId: "11"
-
-    "processDefinitionIdIn[]=testProcess:12:12":
-      - <<: *default_process-definition
-        id: "testProcess:12:12"
-        deploymentId: "12"
-
-    "processDefinitionIdIn[]=testProcess:13:13":
-      - <<: *default_process-definition
-        id: "testProcess:13:13"
-        deploymentId: "13"
-
-    "processDefinitionIdIn[]=testProcess:14:14":
-      - <<: *default_process-definition
-        id: "testProcess:14:14"
-        deploymentId: "14"
-
-    "processDefinitionIdIn[]=testProcess:15:15":
-      - <<: *default_process-definition
-        id: "testProcess:15:15"
-        deploymentId: "15"
-
-    "processDefinitionIdIn[]=testProcess:16:16":
-      - <<: *default_process-definition
-        id: "testProcess:16:16"
-        deploymentId: "16"
-
-    "processDefinitionIdIn[]=testProcess:17:17":
-      - <<: *default_process-definition
-        id: "testProcess:17:17"
-        deploymentId: "17"
-
-    "processDefinitionIdIn[]=testProcess:18:18":
-      - <<: *default_process-definition
-        id: "testProcess:18:18"
-        deploymentId: "18"
-
-    "processDefinitionIdIn[]=testProcess:19:19":
-      - <<: *default_process-definition
-        id: "testProcess:19:19"
-        deploymentId: "19"
-
-    "processDefinitionIdIn[]=testProcess:20:20":
-      - <<: *default_process-definition
-        id: "testProcess:20:20"
-        deploymentId: "20"
-
-    "processDefinitionIdIn[]=testProcess:21:21":
-      - <<: *default_process-definition
-        id: "testProcess:21:21"
-        deploymentId: "21"
-
-    "processDefinitionIdIn[]=testProcess:22:22":
-      - <<: *default_process-definition
-        id: "testProcess:22:22"
-        deploymentId: "22"
-
-
-    "processDefinitionIdIn[]=testProcess:469:814905&processDefinitionIdIn[]=testProcess:2:2&processDefinitionIdIn[]=testProcess:3:3&processDefinitionIdIn[]=testProcess:4:4&processDefinitionIdIn[]=testProcess:5:5&processDefinitionIdIn[]=testProcess:6:6&processDefinitionIdIn[]=testProcess:7:7&processDefinitionIdIn[]=testProcess:8:8&processDefinitionIdIn[]=testProcess:9:9&processDefinitionIdIn[]=testProcess:10:10&processDefinitionIdIn[]=testProcess:11:11&processDefinitionIdIn[]=testProcess:12:12&processDefinitionIdIn[]=testProcess:13:13&processDefinitionIdIn[]=testProcess:14:14&processDefinitionIdIn[]=testProcess:15:15&processDefinitionIdIn[]=testProcess:16:16&processDefinitionIdIn[]=testProcess:17:17&processDefinitionIdIn[]=testProcess:18:18&processDefinitionIdIn[]=testProcess:19:19&processDefinitionIdIn[]=testProcess:20:20&processDefinitionIdIn[]=testProcess:21:21&processDefinitionIdIn[]=testProcess:22:22":
-      - <<: *default_process-definition
       - <<: *default_process-definition
         id: "testProcess:2:2"
         deploymentId: "2"
@@ -220,18 +109,12 @@ get:
       - <<: *default_process-definition
         id: "testProcess:22:22"
         deploymentId: "22"
-
-    "processDefinitionIdIn[]=testProcess:23:23":
       - <<: *default_process-definition
         id: "testProcess:23:23"
         deploymentId: "23"
-    "processDefinitionIdIn[]=testProcess:24:24&processDefinitionIdIn[]=testProcess:23:23":
       - <<: *default_process-definition
         id: "testProcess:24:24"
         deploymentId: "24"
-      - <<: *default_process-definition
-        id: "testProcess:23:23"
-        deploymentId: "23"
 
   # form definitions
   task/816011/deployed-form: &form_with_everything

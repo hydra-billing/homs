@@ -5,7 +5,11 @@ v2.0.1 [unreleased]
 -------------------
 ### Features
 - [#374](https://github.com/latera/homs/pull/374) Add description to popup task list.
+
+### Performance
 - [#380](https://github.com/latera/homs/pull/380) Optimize getting current task.
+- [#379](https://github.com/latera/homs/pull/379) Cache process definitions fetched from Camunda. Add `MEMCAHED_URL` field to `.env`. 
+    - Notice: if you want to add new business process type you have to restart application.
 
 ### Bugfixes
 - [#375](https://github.com/latera/homs/pull/375) Adjust new elements with existent style.
