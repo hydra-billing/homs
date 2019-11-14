@@ -40,7 +40,7 @@ module HBW
       # TODO: Think of suspended process instances
       def bp_running?(entity_code, entity_class, current_user_identifier)
         !process_instances(entity_code, entity_class).empty? ||
-          !task_list_wrapped(current_user_identifier, entity_code, entity_class, 1000, true).empty?
+          !task_list_wrapped(current_user_identifier, entity_code, entity_class, 1000).empty?
       end
 
       def get_variables(_, _, _, _)
@@ -75,15 +75,11 @@ module HBW
         ids.reject { |e| e }.empty?
       end
 
-      def entity_task_list(user_email, entity_code, entity_class, size = 1000)
-        task_list_wrapped(user_email, entity_code, entity_class, size)
+      def entity_tasks(email, entity_code, entity_class, size = 1000)
+        task_list_wrapped(email, entity_code, entity_class, size)
       end
 
-      def task_list(email, entity_class, size = 1000)
-        task_list_wrapped(email, '%', entity_class, size)
-      end
-
-      def claiming_task_list(email, entity_class, assigned, max_results, search_query)
+      def task_list(email, entity_class, assigned, max_results, search_query)
         HBW::Task.with_connection(api) do
           HBW::Task.fetch_for_claiming(email, entity_class, assigned, max_results, search_query)
         end
@@ -107,22 +103,23 @@ module HBW
         end
       end
 
-      def form(user_email, entity_class, task_id)
-        task = task_for_email_and_task_id(user_email, entity_class, task_id)
+      def form(task_id, entity_class)
+        task = task_for_email_and_task_id(task_id, entity_class)
         HBW::Form.with_connection(api) do
           HBW::Form.fetch(task, entity_class)
         end
       end
 
-      def task_list_wrapped(email, entity_code, entity_class, size, for_all_users = false)
+      def task_list_wrapped(email, entity_code, entity_class, size)
         HBW::Task.with_connection(api) do
-          HBW::Task.fetch(email, entity_code, entity_class, size, for_all_users) +
-            HBW::Task.fetch_unassigned(email, entity_class, 0, 1000)
+          HBW::Task.fetch(email, entity_code, entity_class, size)
         end
       end
 
-      def task_for_email_and_task_id(user_email, entity_class, task_id)
-        task_list(user_email, entity_class).find { |task| task.id == task_id }
+      def task_for_email_and_task_id(task_id, entity_class)
+        HBW::Task.with_connection(api) do
+          HBW::Task.fetch_by_id(task_id, entity_class)
+        end
       end
 
       def process_instance_from(proc_inst_id)

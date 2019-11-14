@@ -96,7 +96,6 @@ module ApplicationHelper
     default_options = {
       widgetPath: '/widget',
       entity_class: 'order',
-      fetch_all: true,
       availableTasksButtonContainer: '#hbw-tasks-list-button',
       availableTaskListContainer: '#hbw-task-list',
       taskListPath: 'tasks',

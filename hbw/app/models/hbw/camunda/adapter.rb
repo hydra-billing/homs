@@ -15,8 +15,8 @@ module HBW
       end
 
 
-      def submit(user_email, entity_class, task_id, form_data)
-        form_definition = form(user_email, entity_class, task_id)
+      def submit(entity_class, task_id, form_data)
+        form_definition = form(task_id, entity_class)
 
         variables = form_definition.extract_and_coerce_values(form_data).map do |key, value|
           { name: key, value: value }

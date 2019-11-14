@@ -8,16 +8,11 @@ module HBW
     inject['minio_adapter']
 
     def index
-      if entity_identifier.present?
-        @tasks = widget.entity_task_list(current_user_identifier, entity_identifier, entity_class)
-      else
-        @tasks = widget.task_list(current_user_identifier, entity_class)
-        @task_count = widget.task_count(current_user_identifier)
-      end
+      @tasks = widget.entity_tasks(current_user_identifier, entity_identifier, entity_class)
     end
 
     def claiming
-      @tasks = widget.claiming_task_list(current_user_identifier, entity_class, assigned, max_results, search_query)
+      @tasks = widget.task_list(current_user_identifier, entity_class, assigned, max_results, search_query)
     end
 
     def count
@@ -48,7 +43,7 @@ module HBW
         data['homsOrderDataFileList'] = file_list.to_json
       end
 
-      result = widget.submit(current_user_identifier, entity_class, task_id, data)
+      result = widget.submit(entity_class, task_id, data)
 
       if result
         head :no_content
@@ -73,7 +68,7 @@ module HBW
     private
 
     def find_form(task_id, entity_class)
-      widget.form(current_user_identifier, entity_class, task_id)
+      widget.form(task_id, entity_class)
     end
 
     def task_id
