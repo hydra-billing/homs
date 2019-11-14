@@ -18,11 +18,11 @@ feature 'Check table with tasks', js: true do
 
   describe 'task list rendered' do
     it 'for tasks assigned to current user' do
-      expect(tasks_table_header).to eq ['Priority', 'Title', 'Task type', 'Task description', 'Created']
+      expect(tasks_table_header).to eq ['Priority', 'Title', 'Task type', 'Task description', 'Created/Due']
 
       expect(tasks_table_content).to eq(
         [
-          ['Medium', 'Check test form', ' Test name', '—', 'expired'],
+          ['Medium', 'Check test form', ' Test name', '—', 'expired (3y past due)'],
           ['High', 'Check test form', ' Test name', 'Some test description', '30 Jun 2016']
         ]
       )
@@ -31,11 +31,11 @@ feature 'Check table with tasks', js: true do
     it 'for unassigned tasks' do
       click_on_tab 'Unassigned tasks (10)'
 
-      expect(tasks_table_header).to eq ['Priority', 'Title', 'Task type', 'Task description', 'Created', '']
+      expect(tasks_table_header).to eq ['Priority', 'Title', 'Task type', 'Task description', 'Created/Due', '']
 
       expect(tasks_table_content).to eq(
         [
-          ['Medium', 'Check test form', ' Test name', '—', 'expired', 'Claim'],
+          ['Medium', 'Check test form', ' Test name', '—', 'expired (3y past due)', 'Claim'],
           ['High', 'Check test form', ' Test name', 'Some test description', '30 Jun 2016', 'Claim']
         ]
       )
