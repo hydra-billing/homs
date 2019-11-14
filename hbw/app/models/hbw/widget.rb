@@ -12,9 +12,9 @@ class HBW::Widget
   class_attribute :config, instance_writer: false
 
   extend Forwardable
-  def_delegators :@adapter, :task_list, :entity_task_list,
+  def_delegators :@adapter, :entity_tasks, :task_list,
                  :form, :submit, :users, :users_lookup, :user_exist?, :task_count,
-                 :task_count_unassigned, :claiming_task_list, :claim_task
+                 :task_count_unassigned, :claim_task
 
   include HBW::Inject[:adapter]
 

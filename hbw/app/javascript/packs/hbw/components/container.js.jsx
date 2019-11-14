@@ -15,13 +15,10 @@ modulejs.define(
       componentDidMount () {
         this.props.subscription
           .fetch(() => this.setState({ tasksFetched: true }))
-          .progress((data) => {
-            const tasks = data.tasks.filter(t => t.entity_code === this.props.entityCode);
-            return this.setState({
-              tasks,
-              processStarted: this.state.processStarted && (tasks.length === 0)
-            });
-          });
+          .progress(({ tasks }) => this.setState({
+            tasks,
+            processStarted: this.state.processStarted && (tasks.length === 0)
+          }));
 
         this.props.bind('hbw:form-submitted', this.onFormSubmit);
         this.props.bind('hbw:process-started', () => this.setState({ processStarted: true }));

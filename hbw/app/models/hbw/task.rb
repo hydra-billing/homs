@@ -22,23 +22,41 @@ module HBW
         end
       end
 
-      def fetch(email, entity_code, entity_class, size = 1000, for_all_users = false)
+      def fetch(email, entity_code, entity_class, size = 1000)
         entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
 
         with_user(email) do |user|
           with_definitions(entity_code_key) do
             do_request(:post,
                        'task',
-                       assignee:   assignee(user, email, for_all_users),
-                       active:     true,
+                       assignee: user.id,
+                       active:   true,
                        processVariables: [
                          name:     entity_code_key,
-                         operator: operation(entity_code),
+                         operator: :eq,
                          value:    entity_code
                        ],
-                       maxResults: size)
+                       maxResults: size) +
+              do_request(:post,
+                         'task',
+                         candidateUser: user.id,
+                         active:     true,
+                         processVariables: [
+                           name:     entity_code_key,
+                           operator: :eq,
+                           value:    entity_code
+                         ],
+                         maxResults: size)
           end
         end
+      end
+
+      def fetch_by_id(task_id, entity_class)
+        entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
+
+        with_definitions(entity_code_key) do
+          [do_request(:get, "task/#{task_id}")]
+        end[0]
       end
 
       def fetch_count(email)
@@ -117,14 +135,6 @@ module HBW
       def assignee(user, email, for_all_users)
         unless for_all_users
           user.try(:id) || email
-        end
-      end
-
-      def operation(entity_code)
-        if entity_code == '%'
-          :like
-        else
-          :eq
         end
       end
 
