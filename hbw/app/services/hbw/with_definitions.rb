@@ -3,23 +3,23 @@ module HBW
     def with_definitions(entity_code_key)
       tasks = yield
 
-      definitions = build_definitions(tasks)
-
       entity_codes = fetch_variable_for_processes(entity_code_key, tasks.map { |task| task.fetch('processInstanceId') })
 
-      zip(tasks, definitions, entity_codes)
+      zip(tasks, process_definitions, entity_codes)
     end
 
-    def build_definitions(tasks)
-      do_request(:get,
-                 'process-definition',
-                 processDefinitionIdIn: tasks.map { |task| task.fetch('processDefinitionId') })
+    def process_definitions
+      Rails.cache.fetch(:process_definitions) do
+        do_request(:get, 'process-definition').map do |definition|
+          ::HBW::ProcessDefinition.new(definition)
+        end
+      end
     end
 
     def zip(tasks, definitions, variables)
       tasks.map do |task|
         new(task.merge(
-              'processDefinition' => ::HBW::ProcessDefinition.new(definitions.find { |d| d['id'] == task.fetch('processDefinitionId') }),
+              'processDefinition' => definitions.find { |d| d.id == task.fetch('processDefinitionId') },
               'variables' => variables.select { |var| var.fetch('processInstanceId') == task.fetch('processInstanceId') }
             ))
       end

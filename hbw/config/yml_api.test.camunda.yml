@@ -31,8 +31,7 @@ get:
 
   # process definitions
   "process-definition":
-    "": []
-    "processDefinitionIdIn[]=testProcess:469:814905&processDefinitionIdIn[]=testProcess:2:2&processDefinitionIdIn[]=testProcess:3:3&processDefinitionIdIn[]=testProcess:4:4&processDefinitionIdIn[]=testProcess:5:5&processDefinitionIdIn[]=testProcess:6:6&processDefinitionIdIn[]=testProcess:7:7&processDefinitionIdIn[]=testProcess:8:8&processDefinitionIdIn[]=testProcess:9:9&processDefinitionIdIn[]=testProcess:10:10&processDefinitionIdIn[]=testProcess:11:11&processDefinitionIdIn[]=testProcess:12:12&processDefinitionIdIn[]=testProcess:13:13&processDefinitionIdIn[]=testProcess:14:14&processDefinitionIdIn[]=testProcess:15:15&processDefinitionIdIn[]=testProcess:16:16&processDefinitionIdIn[]=testProcess:17:17&processDefinitionIdIn[]=testProcess:18:18&processDefinitionIdIn[]=testProcess:19:19&processDefinitionIdIn[]=testProcess:20:20&processDefinitionIdIn[]=testProcess:21:21&processDefinitionIdIn[]=testProcess:22:22":
+    "":
       - &default_process-definition
         id: "testProcess:469:814905"
         key: "supportRequestProcess"
@@ -110,18 +109,12 @@ get:
       - <<: *default_process-definition
         id: "testProcess:22:22"
         deploymentId: "22"
-
-    "processDefinitionIdIn[]=testProcess:23:23":
       - <<: *default_process-definition
         id: "testProcess:23:23"
         deploymentId: "23"
-    "processDefinitionIdIn[]=testProcess:24:24&processDefinitionIdIn[]=testProcess:23:23":
       - <<: *default_process-definition
         id: "testProcess:24:24"
         deploymentId: "24"
-      - <<: *default_process-definition
-        id: "testProcess:23:23"
-        deploymentId: "23"
 
   # form definitions
   task/816011/deployed-form: &form_with_everything

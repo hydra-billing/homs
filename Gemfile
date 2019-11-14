@@ -30,6 +30,7 @@ gem 'web-console', '~> 2.0', group: :development
 gem 'settingslogic'
 gem 'webpacker', '~> 4.0'
 gem 'rack', '~> 2.0.6'
+gem 'dalli'
 
 group :oracle do
   gem 'ruby-oci8', '2.2.3'
