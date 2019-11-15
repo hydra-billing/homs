@@ -1577,6 +1577,9 @@ post:
         description: 'Some test description'
         processDefinitionId: "testProcess:23:23"
         assignee: null
+  task?maxResults=400:
+    "active=true&assignee=demo&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc": []
+    "active=true&assignee=john&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc": []
 
   process-instance:
     "variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq":

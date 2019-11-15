@@ -5,6 +5,7 @@ v2.0.1 [unreleased]
 -------------------
 ### Features
 - [#374](https://github.com/latera/homs/pull/374) Add description to popup task list.
+- [#381](https://github.com/latera/homs/pull/381) Notify user about new assigned tasks.
 
 ### Performance
 - [#380](https://github.com/latera/homs/pull/380) Optimize getting current task.
