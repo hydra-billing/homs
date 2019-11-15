@@ -17,6 +17,10 @@ en:
         file_list_field_required: Field of "file_list" type with name "homsOrderDataFileList" required
         field_is_required: Field is required
 
+      notifications:
+        new_assigned_task: New task was assigned to you
+        new_assigned_task_plural: '%{count} new tasks were assigned to you'
+
       components:
         select:
           searching: Searching...
