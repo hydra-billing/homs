@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import PopUp from './pop_up';
 import { withTasksCount } from '../helpers';
 import HydraIcon from './icon';
+import ClaimingNotifier from './notifier';
 
 class HBWClaimingMenuButton extends Component {
   static propTypes = {
@@ -45,6 +46,7 @@ class HBWClaimingMenuButton extends Component {
   };
 
   render () {
+    const { env } = this.props;
     const { myTasksCount, unassignedTasksCount, isOpen } = this.state;
 
     const count = {
@@ -53,15 +55,18 @@ class HBWClaimingMenuButton extends Component {
     };
 
     return (
-      <div className="claiming-menu-button-container" ref={this.rootDiv}>
-        <div className="claiming-menu-button" onClick={this.handlePopUp}>
-          <HydraIcon />
-          <span className="claiming-count">
-            {myTasksCount}/{unassignedTasksCount}
-          </span>
+      <>
+        <div className="claiming-menu-button-container" ref={this.rootDiv}>
+          <div className="claiming-menu-button" onClick={this.handlePopUp}>
+            <HydraIcon />
+            <span className="claiming-count">
+              {myTasksCount}/{unassignedTasksCount}
+            </span>
+          </div>
+          {isOpen && <PopUp perPage={10} env={this.props.env} count={count} />}
         </div>
-        {isOpen && <PopUp perPage={10} env={this.props.env} count={count} />}
-      </div>
+        <ClaimingNotifier perPage={400} env={env} />
+      </>
     );
   }
 }
