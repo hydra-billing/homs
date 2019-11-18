@@ -102,11 +102,11 @@ modulejs.define(
         }
 
         if (this.availableTasksButtonContainer) {
-          this.renderClaimingMenuButton();
+          this.renderClaimingMenuButton(this.availableTasksButtonContainer);
         }
 
         if (this.availableTaskListContainer) {
-          this.renderClaimingTaskList();
+          this.renderClaimingTaskList(this.availableTaskListContainer);
         }
 
         if (this.widget || this.tasksMenu) {
@@ -141,17 +141,17 @@ modulejs.define(
         );
       }
 
-      renderClaimingMenuButton () {
+      renderClaimingMenuButton (container) {
         return ReactDOM.render(
           <AvailableTasksButton env={this.env} />,
-          this.availableTasksButtonContainer
+          container
         );
       }
 
-      renderClaimingTaskList () {
+      renderClaimingTaskList (container) {
         return ReactDOM.render(
           <AvailableTaskList env={this.env} perPage={50} />,
-          this.availableTaskListContainer
+          container
         );
       }
 
@@ -182,6 +182,16 @@ modulejs.define(
             this.env.userExist = false;
           }
         });
+      }
+
+      setEntityCode = (code) => {
+        this.options.entity_code = code;
+        this.env.options = this.options;
+      }
+
+      setEntityType = (type) => {
+        this.options.entity_type = type;
+        this.env.options = this.options;
       }
     }
 
