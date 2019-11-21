@@ -1,5 +1,7 @@
 v2.1.1 [unreleased]
 -------------------
+### Performance
+- [#384](https://github.com/latera/homs/pull/384) Remove redundant requests on lookup search.
 
 v2.1.0 [2019-11-21]
 -------------------
