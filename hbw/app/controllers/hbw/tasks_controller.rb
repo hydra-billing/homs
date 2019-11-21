@@ -53,7 +53,7 @@ module HBW
     end
 
     def lookup
-      form = find_form(task_id, entity_class)
+      form = widget.form_definition(task_id, entity_class)
       field = form.field(params[:name])
       variants = field.lookup_values(params[:q])
 

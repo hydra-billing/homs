@@ -110,6 +110,14 @@ module HBW
         end
       end
 
+      def form_definition(task_id, entity_class)
+        task = HBW::Task.new('id' => task_id, 'processDefinition' => nil)
+
+        HBW::Form.with_connection(api) do
+          HBW::Form.fetch(task, entity_class)
+        end
+      end
+
       def task_list_wrapped(email, entity_code, entity_class, size)
         HBW::Task.with_connection(api) do
           HBW::Task.fetch(email, entity_code, entity_class, size)
