@@ -16,8 +16,8 @@ module HBW
     end
 
     def count
-      @task_count = widget.task_count(current_user_identifier)
-      @task_count_unassigned = widget.task_count_unassigned(current_user_identifier)
+      @task_count = widget.task_count(current_user_identifier, entity_class)
+      @task_count_unassigned = widget.task_count_unassigned(current_user_identifier, entity_class)
     end
 
     def edit
