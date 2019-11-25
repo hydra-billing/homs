@@ -16,7 +16,7 @@ module HBW
       end
 
       class_attribute :default_data_type, instance_writer: false
-      definition_reader :name, :type, :task, :label, :entity_class
+      definition_reader :name, :type, :task_id, :label, :entity_class, :variables
 
       def css_class
         definition['css_class']
@@ -26,8 +26,7 @@ module HBW
         definition['label_css']
       end
 
-      def fetch
-      end
+      def fetch; end
 
       def data_type
         definition.fetch('data_type', default_data_type).to_sym

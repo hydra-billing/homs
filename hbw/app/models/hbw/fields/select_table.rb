@@ -6,9 +6,7 @@ module HBW
       self.default_data_type = :string
 
       attr_reader :choices, :rows
-      definition_reader :sql
-      definition_reader :variable
-      definition_reader :entity_class
+      definition_reader :sql, :variable, :entity_class
 
       class << self
         def schema
@@ -65,7 +63,7 @@ module HBW
           delimiter: delimiter?,
           delete_if: delete_if,
           disable_if: disable_if,
-          variables: task.definition['variables'],
+          variables: variables,
           current_value: value,
           url: url,
           multi: multi }
@@ -80,9 +78,9 @@ module HBW
               config = rows[idx - 1]
 
               case config[:type]
-                when 'number' then prepare_number(item, config)
-                when 'date' then prepare_date(item, config)
-                else item
+              when 'number' then prepare_number(item, config)
+              when 'date' then prepare_date(item, config)
+              else item
               end
             else
               item.to_i
@@ -120,7 +118,7 @@ module HBW
         end
 
         unless self.class.schema.(rows).success?
-          raise Exception.new('Wrong config for select table')
+          raise Exception, 'Wrong config for select table'
         end
       end
 

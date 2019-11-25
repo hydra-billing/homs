@@ -3,7 +3,9 @@ module HBW
     class Group < Base
       def fields
         @fields ||= definition.fetch('fields').map do |field|
-          Base.wrap(field.merge('task' => task, 'entityClass' => entity_class))
+          Base.wrap(field.merge('variables'   => variables,
+                                'taskId'      => task_id,
+                                'entityClass' => entity_class))
         end
       end
 
@@ -15,7 +17,7 @@ module HBW
           fields: fields.map(&:as_json),
           delete_if: delete_if,
           disable_if: disable_if,
-          variables: task.definition['variables'] }
+          variables: variables }
       end
 
       def fetch

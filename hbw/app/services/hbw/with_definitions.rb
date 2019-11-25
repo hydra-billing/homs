@@ -20,7 +20,7 @@ module HBW
       tasks.map do |task|
         new(task.merge(
               'processDefinition' => definitions.find { |d| d.id == task.fetch('processDefinitionId') },
-              'variables' => variables.select { |var| var.fetch('processInstanceId') == task.fetch('processInstanceId') }
+              'variables' => HBW::Variable.wrap(variables.select { |var| var.fetch('processInstanceId') == task.fetch('processInstanceId') })
             ))
       end
     end

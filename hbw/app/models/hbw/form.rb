@@ -4,24 +4,19 @@ module HBW
     include HBW::Definition
 
     class << self
-      def fetch(task, entity_class)
-        process_definition = task.process_definition
-
-        variables      = do_request(:get, "task/#{task.id}/variables")
-        definition_raw = do_request(:get, "task/#{task.id}/deployed-form")
-
-        task.definition['variables'] = variables.map { |k, v| v.merge('name' => k) }
+      def fetch(task_id, entity_class)
+        variables      = do_request(:get, "task/#{task_id}/variables")
+        definition_raw = do_request(:get, "task/#{task_id}/deployed-form")
 
         definition = YAML.load(definition_raw).fetch('form')
-        new(definition.merge('processDefinition' => process_definition, 'task' => task, 'entityClass' => entity_class))
+
+        new(definition.merge('variables'   => variables.map { |k, v| v.merge('name' => k) },
+                             'taskId'      => task_id,
+                             'entityClass' => entity_class)).tap(&:fetch_fields!)
       end
     end
 
-    definition_reader :process_definition, :task, :entity_class
-
-    def process_name
-      process_definition.name
-    end
+    definition_reader :variables, :task_id, :entity_class
 
     def css_class
       definition.fetch('css_class', '')
@@ -29,14 +24,15 @@ module HBW
 
     def as_json
       { css_class: css_class,
-        processName: process_name,
         fields: fields.map(&:as_json),
-        variables: task.definition['variables'] }
+        variables: variables }
     end
 
     def fields
       @fields ||= definition.fetch('fields').map do |field|
-        Fields::Base.wrap(field.merge('task' => task, 'entityClass' => entity_class))
+        Fields::Base.wrap(field.merge('variables'   => variables,
+                                      'taskId'      => task_id,
+                                      'entityClass' => entity_class))
       end
     end
 
@@ -47,6 +43,7 @@ module HBW
     def field(name)
       flatten_fields.find do |field|
         next if field.type == 'group'
+
         field.name == name
       end
     end

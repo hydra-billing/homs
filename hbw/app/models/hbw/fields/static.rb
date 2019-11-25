@@ -14,7 +14,7 @@ module HBW
       end
 
       def prepare_value(str)
-        variable = task.definition['variables'].find { |v| v['name'] == str.gsub('$', '') }
+        variable = variables.find { |v| v['name'] == str.gsub('$', '') }
 
         if variable.nil?
           str

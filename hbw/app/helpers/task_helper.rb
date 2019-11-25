@@ -8,4 +8,8 @@ module TaskHelper
 
     widget.config[:entities].fetch(entity_class)[:task_list][:entity_url] % entity_url_params
   end
+
+  def csrf_token
+    session['_csrf_token'] ||= form_authenticity_token
+  end
 end

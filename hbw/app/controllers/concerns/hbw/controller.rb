@@ -27,9 +27,5 @@ module HBW
     def initial_variables
       params[:initial_variables].to_h
     end
-
-    def csrf_token
-      session['_csrf_token'] ||= form_authenticity_token
-    end
   end
 end
