@@ -89,15 +89,15 @@ module HBW
         end
       end
 
-      def task_count(email)
+      def task_count(email, entity_class)
         HBW::Task.with_connection(api) do
-          HBW::Task.fetch_count(email)
+          HBW::Task.fetch_count(email, entity_class)
         end
       end
 
-      def task_count_unassigned(email)
+      def task_count_unassigned(email, entity_class)
         HBW::Task.with_connection(api) do
-          HBW::Task.fetch_count_unassigned(email)
+          HBW::Task.fetch_count_unassigned(email, entity_class)
         end
       end
 

@@ -2,6 +2,7 @@ module HBW
   class Task
     extend HBW::Remote
     extend HBW::WithDefinitions
+    extend HBW::TaskHelper
     include HBW::GetIcon
     include HBW::Definition
 
@@ -23,7 +24,7 @@ module HBW
       end
 
       def fetch(email, entity_code, entity_class, size = 1000, for_all_users = false)
-        entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
+        entity_code_key = entity_code_key(entity_class)
 
         with_user(email) do |user|
           with_definitions(entity_code_key) do
@@ -41,21 +42,31 @@ module HBW
         end
       end
 
-      def fetch_count(email)
+      def fetch_count(email, entity_class)
         with_user(email) do |user|
           do_request(:post,
                      'task/count',
                      assignee: user.id,
-                     active:   true)['count']
+                     active:   true,
+                     processVariables: [
+                       name:     entity_code_key(entity_class),
+                       operator: :like,
+                       value:    '%'
+                     ])['count']
         end
       end
 
-      def fetch_count_unassigned(email)
+      def fetch_count_unassigned(email, entity_class)
         with_user(email) do |user|
           do_request(:post,
                      'task/count',
                      candidateUser: user.id,
-                     active:        true)['count']
+                     active:        true,
+                     processVariables: [
+                       name:     entity_code_key(entity_class),
+                       operator: :like,
+                       value:    '%'
+                     ])['count']
         end
       end
 
@@ -66,14 +77,18 @@ module HBW
       end
 
       def fetch_for_claiming(email, entity_class, assigned, max_results, search_query)
-        entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
-        bp_name_key = HBW::Widget.config[:entities].fetch(entity_class)[:bp_name_key]
+        entity_code_key = entity_code_key(entity_class)
 
         with_user(email) do |user|
           with_definitions(entity_code_key) do
             options = {
                 active:  true,
-                sorting: sorting_fields(bp_name_key)
+                sorting: sorting_fields(entity_class),
+                processVariables: [
+                  name:     entity_code_key,
+                  operator: :like,
+                  value:    '%'
+                ]
             }
 
             if assigned
@@ -128,7 +143,7 @@ module HBW
         end
       end
 
-      def sorting_fields(bp_name_key)
+      def sorting_fields(entity_class)
         [
           {
             sortBy:    'dueDate',
@@ -142,7 +157,7 @@ module HBW
             sortBy:    'processVariable',
             sortOrder: 'asc',
             parameters: {
-              variable: bp_name_key,
+              variable: bp_name_key(entity_class),
               type:     'String'
             }
           },
