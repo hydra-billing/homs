@@ -6,7 +6,13 @@ module HBW
       end
 
       def value
-        task.variables_hash[name.to_sym]
+        variables_hash[name.to_sym]
+      end
+
+      def variables_hash
+        variables.map.with_object({}) do |variable, h|
+          h[variable['name'].to_sym] = variable['value']
+        end
       end
     end
   end

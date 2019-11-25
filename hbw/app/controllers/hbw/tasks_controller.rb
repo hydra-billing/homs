@@ -20,25 +20,15 @@ module HBW
       @task_count_unassigned = widget.task_count_unassigned(current_user_identifier)
     end
 
-    def edit
-      form = find_form(task_id, entity_class)
-      if form
-        form.fetch_fields!
-        render json: form.as_json.merge(csrf_token: csrf_token).to_json
-      else
-        record_not_found
-      end
-    end
-
     def submit
-      data = form_data.select{ |key, value| fields_for_save.include?(key) }
+      data = form_data.select { |key| fields_for_save.include?(key) }
 
       if files.present?
         file_list = JSON.parse(data['homsOrderDataFileList'])
 
         saved_files = minio_adapter.save_file(files)
 
-        file_list = file_list + saved_files
+        file_list += saved_files
 
         data['homsOrderDataFileList'] = file_list.to_json
       end
@@ -53,7 +43,7 @@ module HBW
     end
 
     def lookup
-      form = widget.form_definition(task_id, entity_class)
+      form = widget.form(task_id, entity_class)
       field = form.field(params[:name])
       variants = field.lookup_values(params[:q])
 
@@ -66,10 +56,6 @@ module HBW
     end
 
     private
-
-    def find_form(task_id, entity_class)
-      widget.form(task_id, entity_class)
-    end
 
     def task_id
       params.require(:id)

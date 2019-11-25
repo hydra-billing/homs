@@ -5,9 +5,7 @@ module HBW
 
       include HBW::Engine.routes.url_helpers
       attr_reader :choices
-      definition_reader :sql
-      definition_reader :variable
-      definition_reader :entity_class
+      definition_reader :sql, :variable, :entity_class
 
       MAX_ROW_COUNT = 20
 
@@ -26,8 +24,10 @@ module HBW
         def load(limit = nil)
           values = source.select(condition, variables, limit)
 
-          logger.debug { "Retrieved values for %s\nfrom source %s\ncondition: %s\nvariables: %s.\nResult: %s" %
-                           [name, source, condition, variables, values.to_s] }
+          logger.debug do
+            "Retrieved values for %s\nfrom source %s\ncondition: %s\nvariables: %s.\nResult: %s" %
+              [name, source, condition, variables, values.to_s]
+          end
 
           values
         end
@@ -41,7 +41,7 @@ module HBW
         end
 
         if @choices.nil?
-          raise ArgumentError.new('Choices for %s are not specified' % name)
+          raise ArgumentError, 'Choices for %s are not specified' % name
         end
 
         @choices
@@ -61,7 +61,7 @@ module HBW
           delimiter: delimiter?,
           delete_if: delete_if,
           disable_if: disable_if,
-          variables: task.definition['variables'],
+          variables: variables,
           url: url }
       end
 
@@ -79,7 +79,7 @@ module HBW
 
       def url
         if lookup?
-          lookup_task_path(task.id, name: name, entity_class: entity_class)
+          lookup_task_path(task_id, name: name, entity_class: entity_class)
         end
       end
 
@@ -101,10 +101,10 @@ module HBW
 
       def coerce(value)
         case data_type
-          when :string
-            value.presence
-          else
-            fail_unsupported_coercion(value)
+        when :string
+          value.presence
+        else
+          fail_unsupported_coercion(value)
         end
       end
 
@@ -113,13 +113,13 @@ module HBW
       end
 
       def lookup_values(query)
-        choices_to_array(loader(lookup_sql, task.variables_hash.merge(value: query)).load(MAX_ROW_COUNT).uniq)
+        choices_to_array(loader(lookup_sql, variables_hash.merge(value: query)).load(MAX_ROW_COUNT).uniq)
       end
 
       private
 
       def load_choices
-        choices_to_array(loader(options_condition, task.variables_hash).load)
+        choices_to_array(loader(options_condition, variables_hash).load)
       end
 
       def choices_to_array(choices)
@@ -137,7 +137,7 @@ module HBW
       end
 
       def load_lookup_value
-        choices_to_array(loader(lookup_value_sql, task.variables_hash.merge(value: value)).load)
+        choices_to_array(loader(lookup_value_sql, variables_hash.merge(value: value)).load)
       end
 
       def lookup_value_sql

@@ -76,7 +76,13 @@ module HBW
       end
 
       def entity_tasks(email, entity_code, entity_class, size = 1000)
-        task_list_wrapped(email, entity_code, entity_class, size)
+        tasks = task_list_wrapped(email, entity_code, entity_class, size)
+
+        tasks.each do |task|
+          task.form = form(task.id, entity_class)
+        end
+
+        tasks
       end
 
       def task_list(email, entity_class, assigned, max_results, search_query)
@@ -104,29 +110,14 @@ module HBW
       end
 
       def form(task_id, entity_class)
-        task = task_for_email_and_task_id(task_id, entity_class)
         HBW::Form.with_connection(api) do
-          HBW::Form.fetch(task, entity_class)
-        end
-      end
-
-      def form_definition(task_id, entity_class)
-        task = HBW::Task.new('id' => task_id, 'processDefinition' => nil)
-
-        HBW::Form.with_connection(api) do
-          HBW::Form.fetch(task, entity_class)
+          HBW::Form.fetch(task_id, entity_class)
         end
       end
 
       def task_list_wrapped(email, entity_code, entity_class, size)
         HBW::Task.with_connection(api) do
           HBW::Task.fetch(email, entity_code, entity_class, size)
-        end
-      end
-
-      def task_for_email_and_task_id(task_id, entity_class)
-        HBW::Task.with_connection(api) do
-          HBW::Task.fetch_by_id(task_id, entity_class)
         end
       end
 
