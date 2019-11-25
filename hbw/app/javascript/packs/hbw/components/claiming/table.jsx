@@ -182,7 +182,7 @@ class HBWTasksTable extends Component {
         <table className='table'>
           <thead>
             <tr>
-              <th>{t('components.claiming.table.priority')}</th>
+              <th className="priority-header">{t('components.claiming.table.priority')}</th>
               <th>{t('components.claiming.table.title')}</th>
               <th>{t('components.claiming.table.type')} </th>
               <th>{t('components.claiming.table.description')}</th>
