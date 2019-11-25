@@ -9,7 +9,7 @@ class Task
 end
 
 describe HBW::TasksController, type: :controller do
-  include TaskHelper
+  include HBW::TaskHelper
 
   let(:widget) { HBW::Widget }
   let(:task)   { Task.new }
