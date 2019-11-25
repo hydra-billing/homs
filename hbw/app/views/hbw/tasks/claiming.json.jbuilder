@@ -1,3 +1,3 @@
 json.tasks do
-  json.partial! partial: 'hbw/tasks/task', collection: @tasks, as: :task
+  json.partial! partial: 'hbw/tasks/claiming_task', collection: @tasks, as: :task
 end

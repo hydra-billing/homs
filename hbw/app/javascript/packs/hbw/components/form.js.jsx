@@ -5,10 +5,10 @@ import { withCallbacks, withErrorBoundary, compose } from './helpers';
 
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect',
-  'HBWFormUser', 'HBWPending', 'HBWFormString', 'HBWFormText',
-  'HBWFormCheckbox', 'HBWFormStatic', 'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload'],
+  'HBWFormUser', 'HBWFormString', 'HBWFormText', 'HBWFormCheckbox',
+  'HBWFormStatic', 'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload'],
 (React, jQuery, Error, DateTime, Group, Select, Submit, SubmitSelect,
-  User, Pending, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload) => {
+  User, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload) => {
   class HBWForm extends React.Component {
     state = {
       error:         null,
@@ -28,7 +28,6 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     render () {
       return <div className='hbw-form'>
           <Error error={this.state.error || this.props.error} env={this.props.env} />
-          <span>{this.props.pending}</span>
           <form method="POST" ref={(form) => { this.form = form; }} onSubmit={this.submit}>
             {this.iterateControls(this.props.form.fields)}
             {this.submitControl(this.props.form.fields)}

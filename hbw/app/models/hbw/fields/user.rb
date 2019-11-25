@@ -5,7 +5,7 @@ module HBW
 
       def as_json
         json = super.dup
-        json[:variables] = task.definition['variables']
+        json[:variables] = variables
         json
       end
     end

@@ -329,8 +329,6 @@ $(() => {
 
   widget.env.dispatcher.bind('hbw:go-to-entity', 'host', (payload) => { window.location = payload.task.entity_url; });
 
-  widget.env.dispatcher.bind('hbw:form-loaded', 'widget', payload => Application.updateOrderForm(payload.entityCode));
-
   widget.env.dispatcher.bind('hbw:bpm-user-not-found', 'widget',
     () => Application.messenger.warn(I18n.t('js.user_not_found')));
 
