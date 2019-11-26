@@ -17,6 +17,11 @@ v2.1.0 [2019-11-21]
 ### Bugfixes
 - [#375](https://github.com/latera/homs/pull/375) Adjust new elements with existent style.
 
+v2.0.1 [unreleased]
+-------------------
+### Bugfixes
+- [#388](https://github.com/latera/homs/pull/388) Fix widget mounting in integrations.
+
 v2.0.0 [2019-10-31]
 -------------------
 ### Breaking changes

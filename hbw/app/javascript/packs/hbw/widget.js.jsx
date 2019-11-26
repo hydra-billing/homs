@@ -186,12 +186,16 @@ modulejs.define(
 
       setEntityCode = (code) => {
         this.options.entity_code = code;
-        this.env.options = this.options;
+        this.env.entity_code = code;
       }
 
       setEntityType = (type) => {
         this.options.entity_type = type;
-        this.env.options = this.options;
+        this.env.entity_type = type;
+      }
+
+      setWidgetContainer = (container) => {
+        this.$widgetContainer = [container];
       }
     }
 
