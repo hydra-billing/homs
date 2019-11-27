@@ -26,16 +26,16 @@ module HBW
       end
 
       def fetch(email, entity_code, entity_class, size = 1000)
-        entity_code_key = entity_code_key(entity_class)
+        entity_code_variable_name = entity_code_key(entity_class)
 
         with_user(email) do |user|
-          with_definitions(entity_code_key) do
+          with_definitions(entity_code_variable_name) do
             do_request(:post,
                        'task',
                        assignee: user.id,
                        active:   true,
                        processVariables: [
-                         name:     entity_code_key,
+                         name:     entity_code_variable_name,
                          operator: :eq,
                          value:    entity_code
                        ],
@@ -45,7 +45,7 @@ module HBW
                          candidateUser: user.id,
                          active:     true,
                          processVariables: [
-                           name:     entity_code_key,
+                           name:     entity_code_variable_name,
                            operator: :eq,
                            value:    entity_code
                          ],
@@ -89,15 +89,15 @@ module HBW
       end
 
       def fetch_for_claiming(email, entity_class, assigned, max_results, search_query)
-        entity_code_key = entity_code_key(entity_class)
+        entity_code_variable_name = entity_code_key(entity_class)
 
         with_user(email) do |user|
-          with_definitions(entity_code_key) do
+          with_definitions(entity_code_variable_name) do
             options = {
                 active:  true,
                 sorting: sorting_fields(entity_class),
                 processVariables: [
-                  name:     entity_code_key,
+                  name:     entity_code_variable_name,
                   operator: :like,
                   value:    '%'
                 ]
