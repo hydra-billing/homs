@@ -5,8 +5,11 @@ import cx from 'classnames';
 import { parseISO, isPast } from 'date-fns';
 import DueDate from './shared/due_date';
 import CreatedDate from './shared/created_date';
+import Pending from '../pending';
 
-const HBWClaimingShortList = ({ env, tasks, fetched }) => {
+const HBWClaimingShortList = ({
+  env, tasks, fetched, fetching
+}) => {
   const { translator: t, connection, taskListPath } = env;
 
   const viewAll = () => { window.location.href = `${connection.options.host}/${taskListPath}`; };
@@ -53,6 +56,7 @@ const HBWClaimingShortList = ({ env, tasks, fetched }) => {
           </div>
         </div>
       ))}
+      {fetching && <Pending />}
       {fetched && tasks.length === 0 && renderNoTasks()}
       <div className="button">
         <button onClick={viewAll} className='btn btn-primary'>
@@ -64,9 +68,10 @@ const HBWClaimingShortList = ({ env, tasks, fetched }) => {
 };
 
 HBWClaimingShortList.propTypes = {
-  env:     PropTypes.object.isRequired,
-  fetched: PropTypes.bool.isRequired,
-  tasks:   PropTypes.arrayOf(PropTypes.shape({
+  env:      PropTypes.object.isRequired,
+  fetched:  PropTypes.bool.isRequired,
+  fetching: PropTypes.bool.isRequired,
+  tasks:    PropTypes.arrayOf(PropTypes.shape({
     id:         PropTypes.string.isRequired,
     name:       PropTypes.string.isRequired,
     icon:       PropTypes.string.isRequired,

@@ -2,6 +2,7 @@
 /* eslint consistent-return: "off" */
 
 import { withCallbacks } from './helpers';
+import Pending from './pending';
 
 modulejs.define(
   'HBWButtons',
@@ -84,11 +85,10 @@ modulejs.define(
       render () {
         if (this.props.env.userExist) {
           if (this.props.showSpinner || !this.state.fetched) {
-            return <div className="hbw-spinner"><i className="fas fa-spinner fa-spin fa-2x"></i></div>;
+            return <div className="hbw-spinner"><Pending /></div>;
           } else if (this.state.bpRunning) {
             return <div className="hbw-spinner">
-              <i className="fas fa-spinner fa-spin fa-2x"></i>
-              <h5 className="hbw-spinner-text">{this.props.env.translator('bp_running')}</h5>
+              <Pending text={this.props.env.translator('bp_running')} />
             </div>;
           } else {
             const buttons = this.state.buttons.map((button, index) => {

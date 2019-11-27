@@ -2,6 +2,9 @@ v2.1.1 [unreleased]
 -------------------
 Removed `tasks/form` enrtypoint. Entrypoint `tasks` returns tasks with form.
 
+### Features
+- [#390](https://github.com/latera/homs/pull/390) Add spinner on tasks loading.
+
 ### Performance
 - [#384](https://github.com/latera/homs/pull/384) Remove redundant requests on lookup search.
 - [#387](https://github.com/latera/homs/pull/387) Get form from backend with tasks.
