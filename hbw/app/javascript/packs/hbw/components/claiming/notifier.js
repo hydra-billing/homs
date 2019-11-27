@@ -34,9 +34,14 @@ class HBWClaimingNotifier extends Component {
     const diff = this.calcDiff(tasks);
 
     if (diff.length === 1) {
-      Application.messenger.notice(t('notifications.new_assigned_task'));
+      Application.messenger.notice(t('notifications.new_assigned_task', {
+        task_name: diff[0].name
+      }));
     } else if (diff.length > 1) {
-      Application.messenger.notice(t('notifications.new_assigned_task_plural', { count: diff.length }));
+      Application.messenger.notice(t('notifications.new_assigned_task_plural', {
+        count:      diff.length,
+        task_names: diff.map(({ name }) => name).join(', '),
+      }));
     }
   };
 
