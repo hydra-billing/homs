@@ -18,8 +18,8 @@ en:
         field_is_required: Field is required
 
       notifications:
-        new_assigned_task: New task was assigned to you
-        new_assigned_task_plural: '%{count} new tasks were assigned to you'
+        new_assigned_task: 'New assigned task: %{task_name}'
+        new_assigned_task_plural: '%{count} new tasks were assigned: %{task_names}'
 
       components:
         select:
