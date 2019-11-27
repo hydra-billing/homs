@@ -2,10 +2,11 @@
 /* eslint no-cond-assign: "off" */
 
 import { withCallbacks, withTasks, compose } from './helpers';
+import Pending from './pending';
 
 modulejs.define('HBWTaskList',
-  ['React', 'HBWTaskGroup', 'HBWError', 'HBWPending'],
-  (React, TaskGroup, Error, Pending) => {
+  ['React', 'HBWTaskGroup'],
+  (React, TaskGroup) => {
     class HBWTaskList extends React.Component {
       state = {
         tasks:      [],

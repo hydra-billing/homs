@@ -216,11 +216,6 @@
     height: 45px
     margin-bottom: 15px
 
-  .hbw-spinner-text
-    display: inline-block
-    margin-left: 1em
-    padding-top: 0.5em
-
   .btn.disabled
     background-size: 40px 40px
     @include gradient-striped
@@ -357,7 +352,7 @@
   .claiming-table
     width: 100%
 
-    .no-tasks, .loader
+    .no-tasks, .pending
       color: black
       text-align: center
 
@@ -556,7 +551,7 @@
       flex-basis: 100%
       padding: 0 15px
 
-      .no-tasks
+      .no-tasks, .pending
         color: black
         text-align: center
         margin-top: 1.5em
