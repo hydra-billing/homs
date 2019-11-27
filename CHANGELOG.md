@@ -1,3 +1,8 @@
+v2.2.0 [unreleased]
+-------------------
+### Refactoring
+- [#391](https://github.com/latera/homs/pull/391) Remove side menu with tasks.
+
 v2.1.1 [unreleased]
 -------------------
 Removed `tasks/form` enrtypoint. Entrypoint `tasks` returns tasks with form.

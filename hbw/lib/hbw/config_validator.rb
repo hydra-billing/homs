@@ -8,7 +8,6 @@ module HBW
       required(:task_list).schema do
         required(:entity_url).filled(:str?)
         required(:entity_url_params).each(:str?)
-        optional(:group_by_var).filled(:str?)
       end
       optional(:bp_toolbar).schema do
         optional(:entity_type_buttons).schema
