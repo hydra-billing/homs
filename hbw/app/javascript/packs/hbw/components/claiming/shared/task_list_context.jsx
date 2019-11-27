@@ -33,8 +33,8 @@ const withTaskListContext = (WrappedComponent) => {
       claimingTask: null,
       page:         1,
       lastPage:     false,
-      fetched:      false,
-      fetching:     false,
+      fetching:     true,
+      searching:    false,
     };
 
     state = {
@@ -49,12 +49,13 @@ const withTaskListContext = (WrappedComponent) => {
 
       claimingTasks.subscription.progress(({ tasks }) => this.setState(prevState => ({
         tasks,
-        lastPage: tasks.length < prevState.page * perPage,
-        fetching: false,
+        lastPage:  tasks.length < prevState.page * perPage,
+        fetching:  false,
+        searching: false
       })));
 
       taskCount.subscription.progress(({ task_count: myTasksCount, task_count_unassigned: unassignedTasksCount }) => {
-        this.setState({ myTasksCount, unassignedTasksCount, fetched: true });
+        this.setState({ myTasksCount, unassignedTasksCount });
       });
     }
 
@@ -77,7 +78,7 @@ const withTaskListContext = (WrappedComponent) => {
     };
 
     search = () => {
-      this.setState({ fetching: true });
+      this.setState({ searching: true });
 
       return debounce(this.updateSubscription, 350);
     };
@@ -139,7 +140,6 @@ const withTaskListContext = (WrappedComponent) => {
       const contextValue = {
         ...this.state,
         tabs:              this.tabs,
-        fetching:          this.state.fetching,
         update:            this.updateContext,
         reset:             this.resetContext,
         onSearch:          this.onSearch,

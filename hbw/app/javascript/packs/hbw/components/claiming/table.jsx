@@ -6,6 +6,7 @@ import { withErrorBoundary } from '../helpers';
 import Priority from './shared/priority';
 import DueDate from './shared/due_date';
 import CreatedDate from './shared/created_date';
+import Pending from '../pending';
 
 class HBWTasksTable extends Component {
   static propTypes = {
@@ -18,7 +19,6 @@ class HBWTasksTable extends Component {
     openTask:          PropTypes.func.isRequired,
     claimAndPollTasks: PropTypes.func.isRequired,
     claimingTask:      PropTypes.object,
-    fetched:           PropTypes.bool.isRequired,
     activeTask:        PropTypes.object,
   };
 
@@ -173,8 +173,12 @@ class HBWTasksTable extends Component {
     );
   };
 
+
   render () {
-    const { showClaimButton, tasks, fetched } = this.props;
+    const {
+      showClaimButton, tasks, fetching
+    } = this.props;
+
     const { translator: t } = this.props.env;
 
     return (
@@ -194,7 +198,8 @@ class HBWTasksTable extends Component {
             {tasks.map((row, index) => this.renderRow(row, index))}
           </tbody>
         </table>
-        {fetched && tasks.length === 0 && this.renderNoTasks()}
+        {fetching && <Pending />}
+        {!fetching && tasks.length === 0 && this.renderNoTasks()}
       </div>
     );
   }

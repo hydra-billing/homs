@@ -16,9 +16,9 @@ class HBWClaimingTaskList extends Component {
   render () {
     const { env } = this.props;
     const {
-      query, onSearch, reset, tasks, fetching, addPage, lastPage,
+      query, onSearch, reset, tasks, searching, addPage, lastPage,
       tabs, tab, switchTabTo, myTasksCount, unassignedTasksCount,
-      activeTask, openTask, claimingTask, claimAndPollTasks, closeTask, fetched
+      activeTask, openTask, claimingTask, claimAndPollTasks, closeTask, fetching
     } = this.context;
 
     const count = {
@@ -35,7 +35,7 @@ class HBWClaimingTaskList extends Component {
             </div>
             <Search env={env}
                     query={query}
-                    fetching={fetching}
+                    fetching={searching}
                     onChange={onSearch}
                     onClear={reset}
             />
@@ -55,7 +55,6 @@ class HBWClaimingTaskList extends Component {
                    showClaimButton={tab === tabs.unassigned}
                    claimingTask={claimingTask}
                    claimAndPollTasks={claimAndPollTasks}
-                   fetched={fetched}
                    activeTask={activeTask}
             />
           </Tabs>

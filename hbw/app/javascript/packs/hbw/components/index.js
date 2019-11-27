@@ -9,7 +9,7 @@ import './error.js';
 import './form.js';
 import './menu.js';
 import './menu_button.js';
-import './pending.js';
+import './pending';
 import './task.js';
 import './task_group.js';
 import './task_list.js';
