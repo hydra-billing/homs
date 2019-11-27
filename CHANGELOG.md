@@ -1,3 +1,8 @@
+v2.1.3 [unreleased]
+-------------------
+### Refactoring
+- [#391](https://github.com/latera/homs/pull/391) Remove side menu with tasks.
+
 v2.1.2 [2019-12-12]
 -------------------
 ### Features

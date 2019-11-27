@@ -5,7 +5,6 @@ hbw:
       bp_name_key: homsProcessName
 
       task_list:
-        group_by_var: order_code
         entity_url: /orders/%s?task_id=%s
         entity_url_params:
           - homsOrderCode

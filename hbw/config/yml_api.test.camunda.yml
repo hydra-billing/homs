@@ -1,5 +1,4 @@
 get:
-  group_by_var: null
   tasks: {}
   user:
     "email=c.johnson@example.com":
