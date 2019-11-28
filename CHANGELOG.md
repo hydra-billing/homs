@@ -3,7 +3,7 @@ v1.8.2 [2019-11-22]
 ### Bugfixes
 - [#363](https://github.com/latera/homs/pull/363) Test task overview.
 
-v1.8.2 [unreleased]
+v1.8.3 [unreleased]
 -------------------
 ### Bugfixes
 - [#386](https://github.com/latera/homs/pull/386) List tasks for current entity class only.
