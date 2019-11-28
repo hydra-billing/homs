@@ -44,7 +44,7 @@ locale: {
 ```
 See [#367](https://github.com/latera/homs/pull/367) and [HBW readme](https://github.com/latera/homs/blob/master/hbw/README.md) for more details.
 
-v1.8.2 [unreleased]
+v1.8.3 [unreleased]
 -------------------
 ### Bugfixes
 - [#386](https://github.com/latera/homs/pull/386) List tasks for current entity class only.
