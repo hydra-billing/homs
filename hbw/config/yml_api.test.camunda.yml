@@ -1363,7 +1363,7 @@ post:
       []
 
   "task?firstResult=0&maxResults=1000":
-    "active=true&candidateUser=demo&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
+    "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
       - <<: *default_tasks
         id: "111123"
         formKey: "test_form_with_disabled_buttons.yml"
