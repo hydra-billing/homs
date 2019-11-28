@@ -107,16 +107,20 @@ module HBW
       end
 
       def fetch_unassigned(email, entity_class, first_result, max_results)
-        entity_code_key = HBW::Widget.config[:entities].fetch(entity_class)[:entity_code_key]
-        bp_name_key = HBW::Widget.config[:entities].fetch(entity_class)[:bp_name_key]
+        entity_code_variable_name = entity_code_key(entity_class)
 
         with_user(email) do |user|
-          with_definitions(entity_code_key) do
+          with_definitions(entity_code_variable_name) do
             do_request(:post,
                        "task?firstResult=#{first_result}&maxResults=#{max_results}",
                        active:        true,
                        candidateUser: user.id,
-                       sorting:       sorting_fields(bp_name_key))
+                       sorting:       sorting_fields(entity_class),
+                       processVariables: [
+                         name:     entity_code_variable_name,
+                         operator: :like,
+                         value:    '%'
+                       ])
           end
         end
       end
