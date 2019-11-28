@@ -1,4 +1,4 @@
-v2.1.1 [unreleased]
+v2.1.1 [2019-11-28]
 -------------------
 Removed `tasks/form` enrtypoint. Entrypoint `tasks` returns tasks with form.
 
