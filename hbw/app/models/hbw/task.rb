@@ -153,7 +153,6 @@ module HBW
         end
       end
 
-
       def sorting_fields(entity_class)
         [
           {
