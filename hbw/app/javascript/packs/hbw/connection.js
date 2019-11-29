@@ -233,7 +233,14 @@ modulejs.define('HBWConnection', ['jQuery'], (jQuery) => {
 
       this.serverURL = this.options.host + this.options.path;
       this.channels = {};
+
+      window.onblur = this.stopPolling;
+      window.onfocus = this.startPolling;
     }
+
+    stopPolling = () => Object.values(this.channels).forEach(c => c.stop());
+
+    startPolling = () => Object.values(this.channels).forEach(c => c.start())
 
     request (opts) {
       return jQuery.ajax({
