@@ -2,6 +2,7 @@ v2.1.2 [unreleased]
 -------------------
 ### Features
 - [#392](https://github.com/latera/homs/pull/392) Stop polling on window blur.
+- [#393](https://github.com/latera/homs/pull/393) Invalidate cache if no definition found.
 
 v2.1.1 [2019-11-28]
 -------------------
