@@ -19,9 +19,20 @@ module HBW
     def zip(tasks, definitions, variables)
       tasks.map do |task|
         new(task.merge(
-              'processDefinition' => definitions.find { |d| d.id == task.fetch('processDefinitionId') },
+              'processDefinition' => fetch_definition(definitions, task.fetch('processDefinitionId')),
               'variables' => HBW::Variable.wrap(variables.select { |var| var.fetch('processInstanceId') == task.fetch('processInstanceId') })
             ))
+      end
+    end
+
+    def fetch_definition(definitions, id)
+      definition = definitions.find { |d| d.id == id }
+
+      if definition.nil?
+        Rails.cache.delete(:process_definitions)
+        process_definitions.find { |d| d.id == id }
+      else
+        definition
       end
     end
 
