@@ -1,4 +1,4 @@
-v2.1.2 [unreleased]
+v2.1.2 [2019-12-12]
 -------------------
 ### Features
 - [#392](https://github.com/latera/homs/pull/392) Stop polling on window blur.
