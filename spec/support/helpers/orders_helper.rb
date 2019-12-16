@@ -277,8 +277,7 @@ module Features
     end
 
     def click_and_wait(text)
-      click_on(text)
-      wait_for_ajax
+      ajax { click_on(text) }
     end
 
     def multiselect_by_id(id)
