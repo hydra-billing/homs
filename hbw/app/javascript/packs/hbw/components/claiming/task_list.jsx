@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import withTaskListContext, { TaskListContext } from './shared/task_list_context';
-import Tabs from './shared/task_tabs';
+import withTaskListContext, { TaskListContext } from 'shared/context/task_list_context';
+import Tabs from 'shared/element/task_tabs';
 import Search from './search';
 import Table from './table';
 import Overview from './task_overview';

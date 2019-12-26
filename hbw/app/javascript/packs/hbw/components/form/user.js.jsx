@@ -1,4 +1,4 @@
-import { withErrorBoundary } from '../helpers';
+import { withErrorBoundary } from 'shared/hoc';
 
 modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'HBWFormSelect'], (React, ReactDOM, Select) => {
   class HBWFormUser extends React.Component {

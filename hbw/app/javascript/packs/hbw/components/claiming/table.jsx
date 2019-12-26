@@ -2,10 +2,10 @@ import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { parseISO, isBefore } from 'date-fns';
-import { withErrorBoundary } from '../helpers';
-import Priority from './shared/priority';
-import DueDate from './shared/due_date';
-import CreatedDate from './shared/created_date';
+import { withErrorBoundary } from 'shared/hoc';
+import Priority from 'shared/element/priority';
+import DueDate from 'shared/element/due_date';
+import CreatedDate from 'shared/element/created_date';
 import Pending from '../pending';
 
 class HBWTasksTable extends Component {

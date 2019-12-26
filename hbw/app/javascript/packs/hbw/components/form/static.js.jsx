@@ -1,4 +1,5 @@
-import { withConditions, withErrorBoundary, compose } from '../helpers';
+import compose from 'shared/utils/compose';
+import { withConditions, withErrorBoundary } from 'shared/hoc';
 
 modulejs.define('HBWFormStatic', ['React'], (React) => {
   const HBWFormStatic = ({ params, hidden }) => {

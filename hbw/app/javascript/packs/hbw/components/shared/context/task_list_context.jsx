@@ -1,7 +1,7 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash-es';
-import { withTasksCount, withClaimingTasks } from '../../helpers';
+import { withTasksCount, withClaimingTasks } from 'shared/hoc';
 
 export const TaskListContext = createContext({});
 export const TaskListConsumer = TaskListContext.Consumer;

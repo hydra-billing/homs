@@ -1,7 +1,8 @@
 /* eslint no-console: "off" */
 /* eslint no-restricted-syntax: "off" */
 
-import { withCallbacks, withErrorBoundary, compose } from './helpers';
+import compose from 'shared/utils/compose';
+import { withCallbacks, withErrorBoundary } from 'shared/hoc';
 
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect',

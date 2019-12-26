@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withTasksCount } from 'shared/hoc';
+import HydraIcon from 'shared/element/icon';
 import PopUp from './pop_up';
-import { withTasksCount } from '../helpers';
-import HydraIcon from './icon';
 import ClaimingNotifier from './notifier';
 
 class HBWClaimingMenuButton extends Component {

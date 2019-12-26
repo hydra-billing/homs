@@ -1,4 +1,5 @@
-import { withCallbacks, withErrorBoundary, compose } from '../helpers';
+import compose from 'shared/utils/compose';
+import { withCallbacks, withErrorBoundary } from 'shared/hoc';
 
 modulejs.define('HBWFormSubmit', ['React'], (React) => {
   class HBWFormSubmit extends React.Component {

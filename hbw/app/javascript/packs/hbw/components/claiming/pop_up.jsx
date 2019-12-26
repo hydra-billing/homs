@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Tabs from './shared/task_tabs';
+import { withClaimingTasks } from 'shared/hoc';
+import Tabs from 'shared/element/task_tabs';
 import ShortList from './short_list';
-import { withClaimingTasks } from '../helpers';
 
 class HBWPopUp extends Component {
   static propTypes = {

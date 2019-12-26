@@ -3,9 +3,10 @@
 import Select from 'react-select';
 import Async from 'react-select/async';
 import Tooltip from 'tooltip.js';
+import compose from 'shared/utils/compose';
 import {
-  withConditions, withSelect, withCallbacks, withValidations, withErrorBoundary, compose
-} from '../helpers';
+  withConditions, withSelect, withCallbacks, withValidations, withErrorBoundary
+} from 'shared/hoc';
 
 modulejs.define('HBWFormSelect',
   ['React'],

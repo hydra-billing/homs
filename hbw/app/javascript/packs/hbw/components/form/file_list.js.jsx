@@ -1,4 +1,5 @@
-import { withConditions, withErrorBoundary, compose } from '../helpers';
+import compose from 'shared/utils/compose';
+import { withConditions, withErrorBoundary } from 'shared/hoc';
 
 modulejs.define('HBWFormFileList', ['React'], (React) => {
   class HBWFormFileList extends React.Component {
