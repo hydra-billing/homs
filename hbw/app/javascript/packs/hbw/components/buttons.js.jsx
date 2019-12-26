@@ -1,7 +1,7 @@
 /* eslint no-console: "off" */
 /* eslint consistent-return: "off" */
 
-import { withCallbacks } from './helpers';
+import { withCallbacks } from 'shared/hoc';
 import Pending from './pending';
 
 modulejs.define(

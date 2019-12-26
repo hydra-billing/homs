@@ -1,4 +1,5 @@
-import { withCallbacks, withTasks, compose } from './helpers';
+import compose from 'shared/utils/compose';
+import { withCallbacks, withTasks } from 'shared/hoc';
 
 modulejs.define(
   'HBWContainer',

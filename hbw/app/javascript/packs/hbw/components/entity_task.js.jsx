@@ -1,4 +1,4 @@
-import { withCallbacks } from './helpers';
+import { withCallbacks } from 'shared/hoc';
 
 modulejs.define(
   'HBWEntityTask',

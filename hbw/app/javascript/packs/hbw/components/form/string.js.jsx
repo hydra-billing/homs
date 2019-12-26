@@ -3,9 +3,8 @@
 
 import CustomFormatter from 'formatter';
 import Tooltip from 'tooltip';
-import {
-  withCallbacks, withConditions, withErrorBoundary, compose,
-} from '../helpers';
+import compose from 'shared/utils/compose';
+import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
 
 modulejs.define('HBWFormString', ['React'], (React) => {
   class HBWFormString extends React.Component {

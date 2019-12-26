@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withClaimingTasks } from '../helpers';
+import { withClaimingTasks } from 'shared/hoc';
 
 class HBWClaimingNotifier extends Component {
   static propTypes = {

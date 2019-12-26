@@ -1,7 +1,8 @@
 import Tooltip from 'tooltip';
+import compose from 'shared/utils/compose';
 import {
-  withConditions, withSelect, withCallbacks, withValidations, withErrorBoundary, compose
-} from '../helpers';
+  withConditions, withSelect, withCallbacks, withValidations, withErrorBoundary
+} from 'shared/hoc';
 
 modulejs.define('HBWFormSelectTable',
   ['React'],

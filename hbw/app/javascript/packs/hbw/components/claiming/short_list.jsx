@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { parseISO, isPast } from 'date-fns';
-import DueDate from './shared/due_date';
-import CreatedDate from './shared/created_date';
+import DueDate from 'shared/element/due_date';
+import CreatedDate from 'shared/element/created_date';
 import Pending from '../pending';
 
 const HBWClaimingShortList = ({
