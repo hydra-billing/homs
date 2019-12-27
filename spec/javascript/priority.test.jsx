@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Priority from 'hbw/components/claiming/shared/priority';
+import Priority from 'hbw/components/shared/element/priority';
 import Translator from 'hbw/translator';
 
 describe('Priority label should be rendered properly', () => {

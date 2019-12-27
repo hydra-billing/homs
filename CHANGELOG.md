@@ -2,6 +2,7 @@ v2.2.0 [unreleased]
 -------------------
 ### Refactoring
 - [#391](https://github.com/latera/homs/pull/391) Remove side menu with tasks.
+- [#401](https://github.com/latera/homs/pull/401) Wrap all widget parts to single app with store context & render app parts as portals.
 
 v2.1.2 [2019-12-12]
 -------------------

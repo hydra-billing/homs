@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import {
   addSeconds, addMinutes, addHours, addDays, addWeeks, addYears,
 } from 'date-fns';
-import DueDate from 'hbw/components/claiming/shared/due_date';
+import DueDate from 'hbw/components/shared/element/due_date';
 import Translator from 'hbw/translator';
 import { localizer } from 'hbw/init/date_localizer';
 
