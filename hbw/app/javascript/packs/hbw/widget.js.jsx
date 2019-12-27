@@ -1,22 +1,20 @@
 /* eslint react/no-render-return-value: "off" */
 
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { localizer } from './init/date_localizer';
+import App from './components/app';
 import AvailableTasksButton from './components/claiming/menu_button';
 import AvailableTaskList from './components/claiming/task_list';
 import Translator from './translator';
 
 modulejs.define(
   'HBW',
-  ['React', 'ReactDOM', 'HBWContainer', 'HBWConnection',
+  ['HBWContainer', 'HBWConnection',
     'HBWDispatcher', 'HBWForms', 'jQuery'],
-  (React, ReactDOM, Container, Connection, Dispatcher, Forms, jQuery) => {
+  (Container, Connection, Dispatcher, HBWForms, jQuery) => {
     class HBW {
       constructor (options) {
-        this.changeTask = this.changeTask.bind(this);
-        this.render = this.render.bind(this);
-        this.renderWidget = this.renderWidget.bind(this);
-        this.checkBpmUser = this.checkBpmUser.bind(this);
-
         this.widget = null;
 
         this.options = options;
@@ -34,7 +32,7 @@ modulejs.define(
           dispatcher:       new Dispatcher(),
           translator:       Translator.getTranslatorForLocale(this.options.locale.code),
           localizer:        localizer(this.options.locale),
-          forms:            new Forms(connection, this.options.entity_class),
+          forms:            new HBWForms(connection, this.options.entity_class),
           locale:           this.options.locale,
           userExist:        true,
           entity_class:     this.options.entity_class,
@@ -50,67 +48,71 @@ modulejs.define(
         this.availableTaskListContainer = document.querySelector(this.options.availableTaskListContainer);
 
         this.env.dispatcher.bind('hbw:task-clicked', 'widget', this.changeTask);
+
+        this.renderApp();
         this.checkBpmUser();
       }
 
-      changeTask (task) {
+      Forms = ({ taskId }) => <Container entityCode={this.options.entity_code}
+                                         entityTypeCode={this.options.entity_type}
+                                         entityClassCode={this.options.entity_class}
+                                         chosenTaskID={taskId}
+                                         env={this.env} />;
+
+      Button = () => <AvailableTasksButton env={this.env} />;
+
+      TaskList = () => <AvailableTaskList env={this.env} perPage={50} />;
+
+      changeTask = (task) => {
         if (task.entity_code === this.options.entity_code) {
-          this.widget = this.renderWidget(this.$widgetContainer[0], task.id);
+          this.env.dispatcher.trigger('hbw:set-current-task', 'widget', task.id);
         } else {
           this.env.dispatcher.trigger('hbw:go-to-entity', 'widget', {
             code: task.entity_code,
             task
           });
         }
-      }
+      };
 
-      render () {
-        if (this.options.entity_code) {
-          this.widget = this.renderWidget(this.$widgetContainer[0], this.options.task_id);
-        } else {
-          this.widget = null;
-        }
+      render = () => {
+        const formsContainer = this.options.entity_code ? this.$widgetContainer[0] : null;
+        const taskId = this.options.entity_code ? this.options.task_id : null;
 
-        if (this.availableTasksButtonContainer) {
-          this.renderClaimingMenuButton(this.availableTasksButtonContainer);
-        }
+        this.renderClaimingMenuButton(this.availableTasksButtonContainer);
+        this.renderClaimingTaskList(this.availableTaskListContainer);
+        this.renderWidget(formsContainer, taskId);
+      };
 
-        if (this.availableTaskListContainer) {
-          this.renderClaimingTaskList(this.availableTaskListContainer);
-        }
-      }
-
-      renderWidget (container, taskId) {
-        return ReactDOM.render(
-          <Container entityCode={this.options.entity_code}
-            entityTypeCode={this.options.entity_type}
-            entityClassCode={this.options.entity_class}
-            chosenTaskID={taskId}
-            env={this.env} />,
-          container
+      renderApp = () => {
+        ReactDOM.render(
+          <App env={this.env}
+               Forms={this.Forms}
+               Button={this.Button}
+               TaskList={this.TaskList} />,
+          document.createElement('div')
         );
-      }
+      };
 
-      renderClaimingMenuButton (container) {
-        return ReactDOM.render(
-          <AvailableTasksButton env={this.env} />,
-          container
-        );
-      }
+      renderWidget = (container, taskId) => {
+        this.env.dispatcher.trigger('hbw:set-forms-container', 'widget', container);
+        this.env.dispatcher.trigger('hbw:set-current-task', 'widget', taskId);
+      };
 
-      renderClaimingTaskList (container) {
-        return ReactDOM.render(
-          <AvailableTaskList env={this.env} perPage={50} />,
-          container
-        );
-      }
+      renderClaimingMenuButton = (container) => {
+        this.env.dispatcher.trigger('hbw:set-button-container', 'widget', container);
+      };
 
-      unmountWidget () {
+      renderClaimingTaskList = (container) => {
+        this.env.dispatcher.trigger('hbw:set-task-list-container', 'widget', container);
+      };
+
+      unmountWidget = () => {
         this.env.connection.unsubscribe();
-        ReactDOM.unmountComponentAtNode(this.$widgetContainer[0]);
-      }
+        this.env.dispatcher.trigger('hbw:set-forms-container', 'widget', null);
+        this.env.dispatcher.trigger('hbw:set-current-task', 'widget', null);
+      };
 
-      checkBpmUser () {
+      checkBpmUser = () => {
         this.env.connection.request({
           url:    `${this.env.connection.serverURL}/users/check`,
           method: 'GET',
@@ -121,17 +123,17 @@ modulejs.define(
             this.env.userExist = false;
           }
         });
-      }
+      };
 
       setEntityCode = (code) => {
         this.options.entity_code = code;
         this.env.entity_code = code;
-      }
+      };
 
       setEntityType = (type) => {
         this.options.entity_type = type;
         this.env.entity_type = type;
-      }
+      };
 
       setWidgetContainer = (container) => {
         this.$widgetContainer = [container];
