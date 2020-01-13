@@ -1185,6 +1185,11 @@ acorn@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.1.0.tgz#949d36f2c292535da602283586c2477c57eb2d6c"
 
+actioncable@^5.2.4-1:
+  version "5.2.4-1"
+  resolved "https://registry.yarnpkg.com/actioncable/-/actioncable-5.2.4-1.tgz#e47d1a238a5bacba920a4644a87ee720920e3fc2"
+  integrity sha512-wOc5U5Y2w9taG/kkPcBixUlsrDrq2uxnxKDFNH8JQe+QCVj/p921hBslE0NS4ybJpUNZfO1NKDPlqp2oqkR03Q==
+
 aggregate-error@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/aggregate-error/-/aggregate-error-3.0.1.tgz#db2fe7246e536f40d9b5442a39e117d7dd6a24e0"
