@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 import React, { Component, createContext } from 'react';
+import ActionCable from 'actioncable';
 
 export const StoreContext = createContext({});
 export const { Consumer: StoreConsumer } = StoreContext;
@@ -9,11 +11,22 @@ const withStoreContext = (WrappedComponent) => {
       tasks:    [],
       fetching: true,
       ready:    false,
+      socket:   null
     };
 
-    // componentDidMount () {
-    //   fetch initial state here
-    // }
+    componentDidMount () {
+      const ws = ActionCable.createConsumer('ws://127.0.0.1:3000/cable');
+      ws.subscriptions.create({ channel: 'TaskChannel' }, {
+        connected: () => {
+          console.log('Connected!');
+        },
+        received: (data) => {
+          console.log(data);
+        }
+      });
+
+      this.setState({ socket: ws });
+    }
 
     updateContext = (...state) => {
       this.setState(...state);
