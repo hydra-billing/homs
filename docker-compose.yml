@@ -59,6 +59,7 @@ services:
       - camunda
       - minio
       - memcached
+      - redis
     ports:
       - $HOMS_PORT:3000
     networks:
@@ -86,6 +87,15 @@ services:
     image: memcached
     container_name: memcached
     hostname: memcached
+    networks:
+      - custom_network
+  redis:
+    image: redis
+    hostname: redis
+    container_name: redis
+    restart: always
+    environment:
+      TZ: Europe/Moscow
     networks:
       - custom_network
 networks:
