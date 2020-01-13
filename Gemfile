@@ -31,6 +31,7 @@ gem 'settingslogic'
 gem 'webpacker', '~> 4.0'
 gem 'rack', '~> 2.0.6'
 gem 'dalli'
+gem 'redis'
 
 group :oracle do
   gem 'ruby-oci8', '2.2.3'
@@ -50,6 +51,7 @@ group :development do
   gem 'rails_layout'
   gem 'spring-commands-rspec'
   gem 'ruby_parser'
+  gem 'puma'
 end
 
 group :development, :test, :staging do
