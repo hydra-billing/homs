@@ -11,8 +11,13 @@ module HBW
       @tasks = widget.entity_tasks(current_user_identifier, entity_identifier, entity_class)
     end
 
+    # TODO: remove this action with views and used methods in https://dev.latera.ru/browse/HBW-255
     def claiming
-      @tasks = widget.task_list(current_user_identifier, entity_class, assigned, max_results, search_query)
+      @tasks = widget.task_list_restricted(current_user_identifier, entity_class, assigned, max_results, search_query)
+    end
+
+    def list
+      @tasks = widget.task_list(current_user_identifier, entity_class)
     end
 
     def count
