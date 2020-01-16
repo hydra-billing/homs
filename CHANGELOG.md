@@ -5,7 +5,7 @@ v2.2.0 [unreleased]
 - [#403](https://github.com/latera/homs/pull/403) Add `ActionCable` and `Redis`.
 - [#405](https://github.com/latera/homs/pull/405) Add WebSocket.
 
-v2.1.3 [unreleased]
+v2.1.3 [2020-01-16]
 -------------------
 ### Refactoring
 - [#391](https://github.com/latera/homs/pull/391) Remove side menu with tasks.
