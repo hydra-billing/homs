@@ -30,26 +30,18 @@ module HBW
 
         with_user(email) do |user|
           with_definitions(entity_code_variable_name) do
-            do_request(:post,
-                       'task',
-                       assignee: user.id,
-                       active:   true,
-                       processVariables: [
-                         name:     entity_code_variable_name,
-                         operator: :eq,
-                         value:    entity_code
-                       ],
-                       maxResults: size) +
-              do_request(:post,
-                         'task',
-                         candidateUser: user.id,
-                         active:     true,
-                         processVariables: [
-                           name:     entity_code_variable_name,
-                           operator: :eq,
-                           value:    entity_code
-                         ],
-                         maxResults: size)
+            options = {
+              active:   true,
+              processVariables: [
+                name:     entity_code_variable_name,
+                operator: :eq,
+                value:    entity_code
+              ],
+              maxResults: size
+            }
+
+            do_request(:post, 'task', **options.merge(assignee: user.id)) +
+              do_request(:post, 'task', **options.merge(candidateUser: user.id))
           end
         end
       end
@@ -114,6 +106,26 @@ module HBW
             end
 
             do_request(:post, "task?maxResults=#{max_results}", **options)
+          end
+        end
+      end
+
+      def list(email, entity_class)
+        entity_code_variable_name = entity_code_key(entity_class)
+
+        with_user(email) do |user|
+          with_definitions(entity_code_variable_name) do
+            options = {
+                active:  true,
+                processVariables: [
+                  name:     entity_code_variable_name,
+                  operator: :like,
+                  value:    '%'
+                ]
+            }
+
+            do_request(:post, 'task', **options.merge(assignee: user.id)) +
+              do_request(:post, 'task', **options.merge(candidateUser: user.id))
           end
         end
       end

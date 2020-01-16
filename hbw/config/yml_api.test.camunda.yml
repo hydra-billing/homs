@@ -1314,6 +1314,10 @@ put: {}
 patch: {}
 post:
   task:
+    "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%": []
+    "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%": []
+    "active=true&assignee=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%": []
+    "active=true&candidateUser=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%": []
     "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-1":
       - <<: *default_tasks
     "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-1": []
