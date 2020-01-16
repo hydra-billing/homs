@@ -25,6 +25,10 @@ module HBW
         end
       end
 
+      def get_task_by_id(id)
+        do_request(:get, "task/#{id}")
+      end
+
       def fetch(email, entity_code, entity_class, size = 1000)
         entity_code_variable_name = entity_code_key(entity_class)
 

@@ -121,9 +121,21 @@ module HBW
         end
       end
 
+      def get_form_by_task_id(task_id)
+        HBW::Form.with_connection(api) do
+          HBW::Form.get_form_by_task_id(task_id)
+        end
+      end
+
       def task_list_wrapped(email, entity_code, entity_class, size)
         HBW::Task.with_connection(api) do
           HBW::Task.fetch(email, entity_code, entity_class, size)
+        end
+      end
+
+      def get_task_by_id(task_id)
+        HBW::Task.with_connection(api) do
+          HBW::Task.get_task_by_id(task_id)
         end
       end
 
