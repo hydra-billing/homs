@@ -2,15 +2,18 @@ v2.2.0 [unreleased]
 -------------------
 ### Breaking changes
 
-**HBW**: 
-- Endpoint `GET /tasks/claiming` to be proxied by the host system with parameters `max_results`, `entity_class`, `search_query`, `assigned` should be replaced with `GET /tasks/list` with single parameter `entity_class`. 
+**HBW**:
+- Endpoint `GET /tasks/claiming` to be proxied by the host system with parameters `max_results`, `entity_class`, `search_query`, `assigned` should be replaced with `GET /tasks/list` with single parameter `entity_class`.
 
 ### Refactoring
 - [#401](https://github.com/latera/homs/pull/401) Wrap all widget parts to single app with store context & render app parts as portals.
+
+### Features
 - [#403](https://github.com/latera/homs/pull/403) Add `ActionCable` and `Redis`.
 - [#405](https://github.com/latera/homs/pull/405) Add WebSocket.
 - [#404](https://github.com/latera/homs/pull/404) Initialize store context with full task list.
 - [#408](https://github.com/latera/homs/pull/408) Remove capistrano.
+- [#406](https://github.com/latera/homs/pull/406) Add hooks callback.
 
 v2.1.3 [2020-01-16]
 -------------------

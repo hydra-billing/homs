@@ -14,6 +14,10 @@ module HBW
                              'taskId'      => task_id,
                              'entityClass' => entity_class)).tap(&:fetch_fields!)
       end
+
+      def get_form_by_task_id(task_id)
+        fetch(task_id, '')
+      end
     end
 
     definition_reader :variables, :task_id, :entity_class
