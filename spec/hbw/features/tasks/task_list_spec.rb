@@ -12,8 +12,8 @@ feature 'Check table with tasks', js: true do
     click_on 'Tasks'
     expect_widget_presence
     expect(page).to have_content 'Open tasks'
-    expect(page).to have_content 'My tasks (5)'
-    expect(page).to have_content 'Unassigned tasks (10)'
+    expect(page).to have_content 'My tasks (2)'
+    expect(page).to have_content 'Unassigned tasks (2)'
   end
 
   describe 'task list rendered' do
@@ -22,21 +22,21 @@ feature 'Check table with tasks', js: true do
 
       expect(tasks_table_content).to eq(
         [
-          ['Medium', 'Check test form', ' Test name', '—', 'expired (3y past due)'],
-          ['High', 'Check test form', ' Test name', 'Some test description', '30 Jun 2016']
+          ['Medium', 'Assigned task', ' Test name', '—', 'expired (3y past due)'],
+          ['High', 'Other assigned task', ' Test name', 'Some test description', '30 Jun 2016']
         ]
       )
     end
 
     it 'for unassigned tasks' do
-      click_on_tab 'Unassigned tasks (10)'
+      click_on_tab 'Unassigned tasks (2)'
 
       expect(tasks_table_header).to eq ['Priority', 'Title', 'Task type', 'Task description', 'Created/Due', '']
 
       expect(tasks_table_content).to eq(
         [
-          ['Medium', 'Check test form', ' Test name', '—', 'expired (3y past due)', 'Claim'],
-          ['High', 'Check test form', ' Test name', 'Some test description', '30 Jun 2016', 'Claim']
+          ['Medium', 'Unassigned task', ' Test name', '—', 'expired (3y past due)', 'Claim'],
+          ['High', 'Other unassigned task', ' Test name', 'Some test description', '30 Jun 2016', 'Claim']
         ]
       )
     end
@@ -59,7 +59,7 @@ feature 'Check table with tasks', js: true do
 
       task_overview = find_by_dt('task-overview')
 
-      expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Check test form'
+      expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Assigned task'
       expect(find_by_dt('due-date-value', task_overview).text).to     eq '07/30/2016 09:07 AM'
       expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 AM'
       expect(find_by_dt('priority-value', task_overview).text).to     eq 'Medium'
@@ -70,7 +70,7 @@ feature 'Check table with tasks', js: true do
       expect(page).to have_content 'Task overview'
       task_overview = find_by_dt('task-overview')
 
-      expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Check test form'
+      expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Other assigned task'
       expect(miss_by_dt('due-date-value', task_overview)).to          eq true
       expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 AM'
       expect(find_by_dt('priority-value', task_overview).text).to     eq 'High'
@@ -83,7 +83,7 @@ feature 'Check table with tasks', js: true do
     end
 
     it 'for unassigned task' do
-      click_on_tab 'Unassigned tasks (10)'
+      click_on_tab 'Unassigned tasks (2)'
 
       expect(tasks_table_content.length).to eq(2)
 
@@ -96,7 +96,7 @@ feature 'Check table with tasks', js: true do
 
       task_overview = find_by_dt('task-overview')
 
-      expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Check test form'
+      expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Other unassigned task'
       expect(miss_by_dt('due-date-value', task_overview)).to          eq true
       expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 AM'
       expect(find_by_dt('priority-value', task_overview).text).to     eq 'High'
@@ -111,7 +111,7 @@ feature 'Check table with tasks', js: true do
 
   describe 'table row disabled' do
     it 'for claimed task' do
-      click_on_tab 'Unassigned tasks (10)'
+      click_on_tab 'Unassigned tasks (2)'
 
       claim_task(1)
 

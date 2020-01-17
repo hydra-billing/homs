@@ -51,7 +51,7 @@ module Features
     end
 
     def click_on_tab(text)
-      ajax { page.find('a', class: 'tab', text: text).click }
+      page.find('a', class: 'tab', text: text).click
     end
 
     def claim_task(row_number)
@@ -71,7 +71,7 @@ module Features
     end
 
     def fill_search_field(text)
-      ajax { find('.search-input-with-controls').find('input').set(text) }
+      find('.search-input-with-controls').find('input').set(text)
     end
 
     def search_field_text
