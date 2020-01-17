@@ -14,6 +14,8 @@ module HBW
       render json: buttons.to_json
     end
 
+    private
+
     def buttons
       widget.bp_buttons(entity_identifier, entity_type, entity_class, current_user_identifier)
     end

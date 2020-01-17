@@ -61,7 +61,7 @@ modulejs.define(
 
       Button = () => <AvailableTasksButton env={this.env} />;
 
-      TaskList = () => <AvailableTaskList env={this.env} perPage={50} />;
+      TaskList = () => <AvailableTaskList env={this.env} />;
 
       changeTask = (task) => {
         if (task.entity_code === this.options.entity_code) {
