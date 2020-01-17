@@ -17,7 +17,7 @@ const withStoreContext = (WrappedComponent) => {
     };
 
     componentDidMount () {
-      const ws = ActionCable.createConsumer('ws://127.0.0.1:3000/cable');
+      const ws = ActionCable.createConsumer('ws://127.0.0.1:3000/widget/cable');
       ws.subscriptions.create({ channel: 'TaskChannel' }, {
         connected: () => {
           console.log('Connected!');
