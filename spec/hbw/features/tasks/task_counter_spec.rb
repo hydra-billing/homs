@@ -13,7 +13,7 @@ feature 'Check available tasks counter', js: true do
 
   describe 'when rendered' do
     it 'should contain assigned/unassigned tasks count' do
-      expect(tasks_count).to eq '5/10'
+      expect(tasks_count).to eq '2/2'
     end
   end
 
@@ -24,29 +24,29 @@ feature 'Check available tasks counter', js: true do
     end
 
     it 'should contain two tabs with list' do
-      expect(page).to have_content 'My tasks (5)'
-      expect(page).to have_content 'Unassigned tasks (10)'
+      expect(page).to have_content 'My tasks (2)'
+      expect(page).to have_content 'Unassigned tasks (2)'
 
       expect(popup_tasks_list_content).to eq(
         [
-          "Assigned task for popup\nexpired (3y past due)",
-          "Other assigned task for popup\nSome test description\n30 Jun 2016"
+          "Assigned task\nexpired (3y past due)",
+          "Other assigned task\nSome test description\n30 Jun 2016"
         ]
       )
 
-      click_on_tab 'Unassigned tasks (10)'
+      click_on_tab 'Unassigned tasks (2)'
 
       expect(popup_tasks_list_content).to eq(
         [
-          "Unassigned task for popup\nexpired (3y past due)",
-          "Other unassigned task for popup\nSome test description\n30 Jun 2016"
+          "Unassigned task\nexpired (3y past due)",
+          "Other unassigned task\nSome test description\n30 Jun 2016"
         ]
       )
 
       click_on_tasks_counter
 
-      expect(page).not_to have_content 'My tasks (5)'
-      expect(page).not_to have_content 'Unassigned tasks (10)'
+      expect(page).not_to have_content 'My tasks (2)'
+      expect(page).not_to have_content 'Unassigned tasks (2)'
 
       expect_widget_presence
     end
@@ -60,7 +60,7 @@ feature 'Check available tasks counter', js: true do
     end
 
     it 'should allow to navigate to task' do
-      expect(page).to have_content 'Assigned task for popup'
+      expect(page).to have_content 'Assigned task'
 
       click_on_task_list_row(2)
 

@@ -1314,8 +1314,38 @@ put: {}
 patch: {}
 post:
   task:
-    "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%": []
-    "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%": []
+    "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
+      - <<: *default_tasks
+        id: "111124"
+        name: "Assigned task"
+        due: "2016-07-30T12:07:59.000+03:00"
+        priority: 25
+        processInstanceId: 24
+        processDefinitionId: "testProcess:24:24"
+      - <<: *default_tasks
+        id: "111123"
+        name: "Other assigned task"
+        formKey: "test_form_with_disabled_buttons.yml"
+        processInstanceId: 23
+        description: 'Some test description'
+        processDefinitionId: "testProcess:23:23"
+    "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
+      - <<: *default_tasks
+        id: "111124"
+        name: "Unassigned task"
+        due: "2016-07-30T12:07:59.000+03:00"
+        priority: 25
+        processInstanceId: 24
+        processDefinitionId: "testProcess:24:24"
+        assignee: null
+      - <<: *default_tasks
+        id: "111123"
+        name: "Other unassigned task"
+        formKey: "test_form_with_disabled_buttons.yml"
+        processInstanceId: 23
+        description: 'Some test description'
+        processDefinitionId: "testProcess:23:23"
+        assignee: null
     "active=true&assignee=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%": []
     "active=true&candidateUser=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%": []
     "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-1":
@@ -1499,87 +1529,6 @@ post:
         assignee: null
     "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-23": []
 
-  "task?firstResult=0&maxResults=1000":
-    "active=true&candidateUser=demo&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
-      - <<: *default_tasks
-        id: "111123"
-        formKey: "test_form_with_disabled_buttons.yml"
-        processInstanceId: 23
-        processDefinitionId: "testProcess:23:23"
-        assignee: null
-
-    "active=true&candidateUser=john&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
-      []
-
-  task?maxResults=50:
-    "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
-      - <<: *default_tasks
-        id: "111124"
-        due: "2016-07-30T12:07:59.000+03:00"
-        priority: 25
-        processInstanceId: 24
-        processDefinitionId: "testProcess:24:24"
-      - <<: *default_tasks
-        id: "111123"
-        formKey: "test_form_with_disabled_buttons.yml"
-        processInstanceId: 23
-        description: 'Some test description'
-        processDefinitionId: "testProcess:23:23"
-    "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
-      - <<: *default_tasks
-        id: "111124"
-        due: "2016-07-30T12:07:59.000+03:00"
-        priority: 25
-        processInstanceId: 24
-        processDefinitionId: "testProcess:24:24"
-        assignee: null
-      - <<: *default_tasks
-        id: "111123"
-        formKey: "test_form_with_disabled_buttons.yml"
-        processInstanceId: 23
-        description: 'Some test description'
-        processDefinitionId: "testProcess:23:23"
-        assignee: null
-    "active=true&assignee=demo&descriptionLike=%test%&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
-      - <<: *default_tasks
-        id: "111123"
-        formKey: "test_form_with_disabled_buttons.yml"
-        processInstanceId: 23
-        description: 'Some test description'
-        processDefinitionId: "testProcess:23:23"
-  task?maxResults=10:
-    "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
-      - <<: *default_tasks
-        id: "111124"
-        name: "Assigned task for popup"
-        due: "2016-06-30T12:07:59.000+03:00"
-        priority: 25
-        processInstanceId: 24
-        processDefinitionId: "testProcess:24:24"
-      - <<: *default_tasks
-        id: "111123"
-        name: "Other assigned task for popup"
-        formKey: "test_form_with_disabled_buttons.yml"
-        processInstanceId: 23
-        description: 'Some test description'
-        processDefinitionId: "testProcess:23:23"
-    "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc":
-      - <<: *default_tasks
-        id: "111124"
-        name: "Unassigned task for popup"
-        due: "2016-06-30T12:07:59.000+03:00"
-        priority: 25
-        processInstanceId: 24
-        processDefinitionId: "testProcess:24:24"
-        assignee: null
-      - <<: *default_tasks
-        id: "111123"
-        name: "Other unassigned task for popup"
-        formKey: "test_form_with_disabled_buttons.yml"
-        processInstanceId: 23
-        description: 'Some test description'
-        processDefinitionId: "testProcess:23:23"
-        assignee: null
   task?maxResults=400:
     "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc": []
     "active=true&assignee=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc": []
@@ -1772,15 +1721,6 @@ post:
     "userId=demo": null
   task/111124/claim:
     "userId=demo": null
-  task/count:
-    "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
-      count: 5
-    "active=true&assignee=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
-      count: 0
-    "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
-      count: 10
-    "active=true&candidateUser=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
-      count: 0
 
   variable-instance:
     "processInstanceIdIn[]=814972&variableName=homsOrderCode":
