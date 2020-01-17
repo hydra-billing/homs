@@ -1,34 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withTasksCount } from 'shared/hoc';
+import { StoreContext } from 'shared/context/store';
 import HydraIcon from 'shared/element/icon';
 import PopUp from './pop_up';
 import ClaimingNotifier from './notifier';
 
 class HBWClaimingMenuButton extends Component {
+  static contextType = StoreContext;
+
   static propTypes = {
-    taskCount: PropTypes.shape({
-      subscription: PropTypes.object.isRequired,
-    }).isRequired,
     env: PropTypes.object.isRequired,
   };
 
   state = {
-    myTasksCount:         0,
-    unassignedTasksCount: 0,
-    isOpen:               false
+    isOpen: false
   };
 
   rootDiv = React.createRef();
 
   componentDidMount () {
-    const { subscription } = this.props.taskCount;
-
     window.addEventListener('mousedown', this.handleClickOutside);
-
-    subscription.progress(({ task_count: myTasksCount, task_count_unassigned: unassignedTasksCount }) => {
-      this.setState({ myTasksCount, unassignedTasksCount });
-    });
   }
 
   componentWillUnmount () {
@@ -47,12 +38,8 @@ class HBWClaimingMenuButton extends Component {
 
   render () {
     const { env } = this.props;
-    const { myTasksCount, unassignedTasksCount, isOpen } = this.state;
-
-    const count = {
-      my:         myTasksCount,
-      unassigned: unassignedTasksCount,
-    };
+    const { count } = this.context;
+    const { isOpen } = this.state;
 
     return (
       <>
@@ -60,10 +47,10 @@ class HBWClaimingMenuButton extends Component {
           <div className="claiming-menu-button" onClick={this.handlePopUp}>
             <HydraIcon />
             <span className="claiming-count">
-              {myTasksCount}/{unassignedTasksCount}
+              {count.my}/{count.unassigned}
             </span>
           </div>
-          {isOpen && <PopUp perPage={10} env={this.props.env} count={count} />}
+          {isOpen && <PopUp env={env}/>}
         </div>
         <ClaimingNotifier perPage={400} env={env} />
       </>
@@ -71,4 +58,4 @@ class HBWClaimingMenuButton extends Component {
   }
 }
 
-export default withTasksCount(HBWClaimingMenuButton);
+export default HBWClaimingMenuButton;

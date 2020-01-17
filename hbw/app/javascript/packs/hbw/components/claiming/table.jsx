@@ -10,16 +10,16 @@ import Pending from '../pending';
 
 class HBWTasksTable extends Component {
   static propTypes = {
-    env:               PropTypes.object.isRequired,
-    tasks:             PropTypes.array.isRequired,
-    showClaimButton:   PropTypes.bool.isRequired,
-    fetching:          PropTypes.bool.isRequired,
-    lastPage:          PropTypes.bool.isRequired,
-    addPage:           PropTypes.func.isRequired,
-    openTask:          PropTypes.func.isRequired,
-    claimAndPollTasks: PropTypes.func.isRequired,
-    claimingTask:      PropTypes.object,
-    activeTask:        PropTypes.object,
+    env:             PropTypes.object.isRequired,
+    tasks:           PropTypes.array.isRequired,
+    showClaimButton: PropTypes.bool.isRequired,
+    fetching:        PropTypes.bool.isRequired,
+    lastPage:        PropTypes.bool.isRequired,
+    addPage:         PropTypes.func.isRequired,
+    openTask:        PropTypes.func.isRequired,
+    claim:           PropTypes.func.isRequired,
+    claimingTask:    PropTypes.object,
+    activeTask:      PropTypes.object,
   };
 
   state = {
@@ -83,7 +83,7 @@ class HBWTasksTable extends Component {
     } else if (e.keyCode === 13 && cursor >= 0 && cursor <= tasks.length - 1) {
       e.preventDefault();
 
-      openTask(cursor);
+      openTask(tasks[cursor]);
     }
   };
 
@@ -115,7 +115,7 @@ class HBWTasksTable extends Component {
   onClaimClick = async (e, task) => {
     e.stopPropagation();
 
-    await this.props.claimAndPollTasks(task);
+    await this.props.claim(task);
   };
 
   renderRow = (row, index) => {
@@ -142,7 +142,7 @@ class HBWTasksTable extends Component {
     });
 
     return (
-      <tr className={chosenCN} key={row.id} onClick={() => openTask(index)}>
+      <tr className={chosenCN} key={row.id} onClick={() => openTask(row)}>
         <td className='priority'>
           <Priority env={env} priority={row.priority} />
         </td>

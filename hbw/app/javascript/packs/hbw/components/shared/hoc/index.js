@@ -2,7 +2,6 @@ import withCallbacks from './callbacks';
 import withConditions from './conditions';
 import withTasks from './tasks';
 import withClaimingTasks from './claiming_tasks';
-import withTasksCount from './tasks_count';
 import withSelect from './select';
 import withValidations from './validations';
 import withErrorBoundary from './error_boundary';
@@ -13,7 +12,6 @@ export {
   withConditions,
   withTasks,
   withClaimingTasks,
-  withTasksCount,
   withSelect,
   withValidations,
   withErrorBoundary,

@@ -2,6 +2,7 @@
 import React, { Component, createContext } from 'react';
 import ActionCable from 'actioncable';
 import orderBy from 'lodash-es/orderBy';
+import partition from 'lodash-es/partition';
 import { parseISO } from 'date-fns';
 
 export const StoreContext = createContext({});
@@ -17,6 +18,11 @@ const withStoreContext = (WrappedComponent) => {
     };
 
     componentDidMount () {
+      this.initSocket();
+      this.initStore();
+    }
+
+    initSocket = () => {
       const ws = ActionCable.createConsumer('ws://127.0.0.1:3000/widget/cable');
       ws.subscriptions.create({ channel: 'TaskChannel' }, {
         connected: () => {
@@ -28,11 +34,9 @@ const withStoreContext = (WrappedComponent) => {
       });
 
       this.setState({ socket: ws });
+    };
 
-      this.initContext();
-    }
-
-    initContext = async () => {
+    initStore = async () => {
       const { env } = this.props;
 
       const { tasks } = await env.connection.request({
@@ -43,7 +47,7 @@ const withStoreContext = (WrappedComponent) => {
       });
 
       this.setState({
-        tasks:    this.orderTasks(tasks),
+        tasks:    (this.orderTasks(tasks)),
         fetching: false,
         ready:    true
       });
@@ -65,8 +69,17 @@ const withStoreContext = (WrappedComponent) => {
     };
 
     render () {
+      const [unassignedTasks, myTasks] = partition(this.state.tasks, { assignee: null });
+      const count = {
+        my:         myTasks.length,
+        unassigned: unassignedTasks.length,
+      };
+
       const contextValue = {
         ...this.state,
+        myTasks,
+        unassignedTasks,
+        count,
         update: this.updateContext,
       };
 
