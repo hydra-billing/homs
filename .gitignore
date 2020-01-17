@@ -103,7 +103,6 @@ config/homs_configuration.yml
 config/deploy.rb
 config/imprint.yml
 
-lib/capistrano/
 /public/assets/packs
 /public/assets/packs-test
 /node_modules

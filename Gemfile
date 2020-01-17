@@ -40,13 +40,6 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'capistrano', '~> 3.1'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano-postgresql'
-  gem 'capistrano-rails-console'
-  gem 'capistrano-db-tasks', require: false
-  gem 'capistrano-rvm', '~> 0.1.1'
   gem 'html2haml'
   gem 'rails_layout'
   gem 'spring-commands-rspec'

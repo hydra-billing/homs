@@ -10,6 +10,7 @@ v2.2.0 [unreleased]
 - [#403](https://github.com/latera/homs/pull/403) Add `ActionCable` and `Redis`.
 - [#405](https://github.com/latera/homs/pull/405) Add WebSocket.
 - [#404](https://github.com/latera/homs/pull/404) Initialize store context with full task list.
+- [#408](https://github.com/latera/homs/pull/408) Remove capistrano.
 
 v2.1.3 [2020-01-16]
 -------------------
