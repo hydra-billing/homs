@@ -29,6 +29,20 @@ module HBW
         do_request(:get, "task/#{id}")
       end
 
+      def get_task_with_definition(id, entity_class, cache_key)
+        entity_code_variable_name = entity_code_key(entity_class)
+
+        if cache_key && Rails.cache.exist?(cache_key)
+          task = Rails.cache.read(cache_key)[:task]
+
+          with_cached_definition(task, entity_code_variable_name, cache_key)
+        else
+          task = get_task_by_id(id)
+
+          with_definition(task, entity_code_variable_name)
+        end
+      end
+
       def fetch(email, entity_code, entity_class, size = 1000)
         entity_code_variable_name = entity_code_key(entity_class)
 

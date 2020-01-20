@@ -14,7 +14,8 @@ class HBW::Widget
   extend Forwardable
   def_delegators :@adapter, :entity_tasks, :task_list, :task_list_restricted,
                  :form, :submit, :users, :users_lookup, :user_exist?, :task_count,
-                 :task_count_unassigned, :claim_task, :get_task_by_id, :get_form_by_task_id
+                 :task_count_unassigned, :claim_task, :get_task_by_id, :get_form_by_task_id,
+                 :get_task_with_definition
 
   include HBW::Inject[:adapter]
 

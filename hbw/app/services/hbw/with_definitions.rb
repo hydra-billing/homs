@@ -5,7 +5,19 @@ module HBW
 
       entity_codes = fetch_variable_for_processes(entity_code_key, tasks.map { |task| task.fetch('processInstanceId') })
 
-      zip(tasks, process_definitions, entity_codes)
+      zip_many(tasks, process_definitions, entity_codes)
+    end
+
+    def with_definition(task, entity_code_key)
+      entity_code = fetch_variable_for_process(entity_code_key, task.fetch('processInstanceId'))
+
+      zip_one(task, process_definitions, entity_code)
+    end
+
+    def with_cached_definition(task, entity_code_key, cache_key)
+      entity_code = fetch_cached_variable(entity_code_key, cache_key)
+
+      zip_one(task, process_definitions, entity_code)
     end
 
     def process_definitions
@@ -16,7 +28,14 @@ module HBW
       end
     end
 
-    def zip(tasks, definitions, variables)
+    def zip_one(task, definitions, variable)
+      new(task.merge(
+            'processDefinition' => fetch_definition(definitions, task.fetch('processDefinitionId')),
+            'variables' => [HBW::Variable.new(variable)]
+          ))
+    end
+
+    def zip_many(tasks, definitions, variables)
       tasks.map do |task|
         new(task.merge(
               'processDefinition' => fetch_definition(definitions, task.fetch('processDefinitionId')),
@@ -41,6 +60,20 @@ module HBW
                  'variable-instance',
                  variableName: name,
                  processInstanceIdIn: process_ids.uniq)
+    end
+
+    def fetch_variable_for_process(name, process_id)
+      do_request(:get,
+                 'variable-instance',
+                 variableName: name,
+                 processInstanceId: process_id).first
+    end
+
+    def fetch_cached_variable(name, cache_key)
+      Rails.cache
+           .read(cache_key)[:form]
+           .variables
+           .find { |var| var.fetch('name') == name }
     end
   end
 end

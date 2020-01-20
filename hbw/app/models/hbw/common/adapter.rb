@@ -139,6 +139,12 @@ module HBW
         end
       end
 
+      def get_task_with_definition(task_id, entity_class, cache_key)
+        HBW::Task.with_connection(api) do
+          HBW::Task.get_task_with_definition(task_id, entity_class, cache_key)
+        end
+      end
+
       def process_instance_from(proc_inst_id)
         response = api.get("runtime/process-instances/#{proc_inst_id}")
         response.body if response.status == 200

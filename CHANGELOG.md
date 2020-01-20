@@ -15,6 +15,7 @@ v2.2.0 [unreleased]
 - [#408](https://github.com/latera/homs/pull/408) Remove capistrano.
 - [#406](https://github.com/latera/homs/pull/406) Add hooks callback.
 - [#410](https://github.com/latera/homs/pull/410) Use stored full task list instead of partially fetched one.
+- [#413](https://github.com/latera/homs/pull/413) Add endpoint with one task able to use cache.
 
 v2.1.3 [2020-01-16]
 -------------------
