@@ -22,6 +22,58 @@ const withStoreContext = (WrappedComponent) => {
       this.initStore();
     }
 
+    getTaskById = async (taskId, cacheKey) => {
+      const { env } = this.props;
+      const incomingTask = await env.connection.request({
+        url:  `${env.connection.serverURL}/tasks/${taskId}`,
+        data: {
+          cache_key:    cacheKey,
+          entity_class: env.entity_class,
+        },
+      });
+
+      const tasks = this.state.tasks.filter(task => task.id !== incomingTask.id);
+      this.setState({
+        tasks: (this.orderTasks([...tasks, incomingTask]))
+      });
+
+      return incomingTask;
+    };
+
+    onCreated = (taskId, cacheKey) => {
+      this.getTaskById(taskId, cacheKey);
+    };
+
+    onAssigned = async (taskId, cacheKey) => {
+      const { translator: t } = this.props.env;
+      const { name } = await this.getTaskById(taskId, cacheKey);
+
+      Application.messenger.notice(t('notifications.new_assigned_task', {
+        task_name: name
+      }));
+    };
+
+    onComplete = (taskId) => {
+      const tasks = this.state.tasks.filter(task => task.id !== taskId);
+      this.setState({ tasks });
+    };
+
+    onReceived = (data) => {
+      const { task_id: taskId, cache_key: cacheKey } = data;
+
+      if (data.event_name === 'create') {
+        this.onCreated(taskId, cacheKey);
+      }
+
+      if (data.event_name === 'assignment') {
+        this.onAssigned(taskId, cacheKey);
+      }
+
+      if (['complete', 'delete'].includes(data.event_name)) {
+        this.onComplete(taskId);
+      }
+    };
+
     initSocket = () => {
       const ws = ActionCable.createConsumer('ws://127.0.0.1:3000/widget/cable');
       ws.subscriptions.create({ channel: 'TaskChannel' }, {
@@ -29,7 +81,7 @@ const withStoreContext = (WrappedComponent) => {
           console.log('Connected!');
         },
         received: (data) => {
-          console.log(data);
+          this.onReceived(JSON.parse(data));
         }
       });
 
