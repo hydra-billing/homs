@@ -11,6 +11,10 @@ module HBW
       @tasks = widget.entity_tasks(current_user_identifier, entity_identifier, entity_class)
     end
 
+    def show
+      @task = widget.get_task_with_definition(task_id, entity_class, cache_key)
+    end
+
     # TODO: remove this action with views and used methods in https://dev.latera.ru/browse/HBW-260
     def claiming
       @tasks = widget.task_list_restricted(current_user_identifier, entity_class, assigned, max_results, search_query)
@@ -80,6 +84,10 @@ module HBW
 
     def search_query
       params[:search_query]
+    end
+
+    def cache_key
+      params[:cache_key]
     end
 
     def files
