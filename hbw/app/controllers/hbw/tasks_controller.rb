@@ -24,11 +24,6 @@ module HBW
       @tasks = widget.task_list(current_user_identifier, entity_class)
     end
 
-    def count
-      @task_count = widget.task_count(current_user_identifier, entity_class)
-      @task_count_unassigned = widget.task_count_unassigned(current_user_identifier, entity_class)
-    end
-
     def submit
       data = form_data.select { |key| fields_for_save.include?(key) }
 
