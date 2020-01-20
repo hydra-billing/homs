@@ -44,7 +44,6 @@ group :development do
   gem 'rails_layout'
   gem 'spring-commands-rspec'
   gem 'ruby_parser'
-  gem 'puma'
 end
 
 group :development, :test, :staging do
@@ -59,6 +58,10 @@ group :development, :test, :staging do
   gem 'debbie'
   gem 'pry-byebug'
   gem 'rspec_junit_formatter'
+end
+
+group :development, :test do
+  gem 'puma'
 end
 
 group :production, :staging do

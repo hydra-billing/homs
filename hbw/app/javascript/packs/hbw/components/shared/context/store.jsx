@@ -75,7 +75,12 @@ const withStoreContext = (WrappedComponent) => {
     };
 
     initSocket = () => {
-      const ws = ActionCable.createConsumer('ws://127.0.0.1:3000/widget/cable');
+      const { host, protocol } = new URL(this.props.env.connection.serverURL);
+      const socketUrl = protocol === 'https:'
+        ? `wss://${host}/widget/cable`
+        : `ws://${host}/widget/cable`;
+
+      const ws = ActionCable.createConsumer(socketUrl);
       ws.subscriptions.create({ channel: 'TaskChannel' }, {
         connected: () => {
           console.log('Connected!');
