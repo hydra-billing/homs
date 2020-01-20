@@ -9,6 +9,7 @@ NODE_ENV=test
 cp config/bpm.yml.sample config/bpm.yml
 cp config/database.yml.sample config/database.yml
 cp config/secrets.yml.sample config/secrets.yml
+cp config/cable.yml.sample config/cable.yml
 echo "sources:
   bpmanagementsystem:
     type: 'static/bpm'
