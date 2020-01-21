@@ -1,6 +1,5 @@
 import withCallbacks from './callbacks';
 import withConditions from './conditions';
-import withTasks from './tasks';
 import withClaimingTasks from './claiming_tasks';
 import withSelect from './select';
 import withValidations from './validations';
@@ -10,7 +9,6 @@ import withDateFormatter from './date_formatter';
 export {
   withCallbacks,
   withConditions,
-  withTasks,
   withClaimingTasks,
   withSelect,
   withValidations,

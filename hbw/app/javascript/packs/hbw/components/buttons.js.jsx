@@ -11,14 +11,10 @@ modulejs.define(
     class HBWButtons extends React.Component {
       constructor (props, context) {
         super(props, context);
-        props.setGuid();
 
         this.state = {
           buttons:       [],
-          subscription:  this.createSubscription(),
-          pollInterval:  this.props.env.poll_interval,
-          syncing:       false,
-          syncError:     null,
+          fetchError:    null,
           submitError:   null,
           errorHeader:   '',
           disabled:      false,
@@ -28,33 +24,6 @@ modulejs.define(
           fileUploading: false
         };
       }
-
-      createSubscription = () => {
-        const subscription = this.props.env.connection.subscribe({
-          client: this.props.getComponentId(),
-          path:   '/buttons',
-
-          data: {
-            entity_code:  this.props.entityCode,
-            entity_type:  this.props.entityTypeCode,
-            entity_class: this.props.entityClassCode
-          }
-        });
-
-        return subscription
-          .syncing(() => this.setState({ syncing: true }))
-          .fetch(() => this.setState({ fetched: true }))
-          .always(() => this.setState({ syncing: false }))
-          .fail(response => this.setState({
-            syncError:   response,
-            errorHeader: this.props.env.translator('errors.cannot_obtain_available_actions')
-          }))
-          .progress(data => this.setState({
-            buttons:   data.buttons,
-            syncError: null,
-            bpRunning: data.bp_running
-          }));
-      };
 
       submitButton = businessProcessCode => this.props.env.connection.request({
         url:    this.buttonsURL(),
@@ -69,17 +38,41 @@ modulejs.define(
         }
       });
 
+      fetchInitialState = () => {
+        const {
+          entityCode, entityTypeCode, entityClassCode, env
+        } = this.props;
+
+        const data = {
+          entity_code:  entityCode,
+          entity_type:  entityTypeCode,
+          entity_class: entityClassCode
+        };
+
+        return env.connection.request({
+          url:    this.buttonsURL(),
+          method: 'GET',
+          data
+        })
+          .done(response => this.setState({
+            fetched:    true,
+            fetchError: null,
+            buttons:    response.buttons,
+            bpRunning:  response.bp_running
+          }))
+          .fail(response => this.setState({
+            fetchError:  response,
+            errorHeader: env.translator('errors.cannot_obtain_available_actions')
+          }));
+      }
+
       buttonsURL = () => `${this.props.env.connection.serverURL}/buttons`;
 
       componentDidMount () {
-        this.state.subscription.start(this.state.pollInterval);
+        this.fetchInitialState();
         this.props.bind('hbw:button-activated', this.onButtonActivation);
         this.props.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
         this.props.bind('hbw:file-upload-finished', () => this.setState({ fileUploading: false }));
-      }
-
-      componentWillUnmount () {
-        this.state.subscription.close();
       }
 
       render () {
@@ -100,7 +93,7 @@ modulejs.define(
             });
 
             return <div className='hbw-bp-control-buttons btn-group'>
-              <Error error={this.state.submitError || this.state.syncError} errorHeader={this.state.errorHeader}
+              <Error error={this.state.submitError || this.state.fetchError} errorHeader={this.state.errorHeader}
                      env={this.props.env}/>
               {buttons}
             </div>;
@@ -112,10 +105,7 @@ modulejs.define(
 
       onButtonActivation = (button) => {
         console.log(`Clicked button[${button.title}], submitting`);
-        this.setState({
-          syncing:    true,
-          submitting: true
-        });
+        this.setState({ submitting: true });
 
         this.submitButton(button.bp_code)
           .done(data => this.setState({
@@ -128,8 +118,7 @@ modulejs.define(
             submitError: response,
             submitting:  false,
             errorHeader: this.props.env.translator('errors.cannot_start_process')
-          }))
-          .always(() => this.setState({ syncing: false }));
+          }));
       };
 
       triggerBPStart = (button) => {
