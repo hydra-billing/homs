@@ -1,5 +1,4 @@
-import compose from 'shared/utils/compose';
-import { withCallbacks, withTasks } from 'shared/hoc';
+import { withCallbacks } from 'shared/hoc';
 
 modulejs.define(
   'HBWContainer',
@@ -7,23 +6,40 @@ modulejs.define(
   (React, Buttons, Tasks, Error) => {
     class Container extends React.Component {
       state = {
-        buttons:        [],
         tasks:          [],
         tasksFetched:   false,
-        processStarted: false
+        processStarted: false,
+        error:          null
       };
 
       componentDidMount () {
-        this.props.subscription
-          .fetch(() => this.setState({ tasksFetched: true }))
-          .progress(({ tasks }) => this.setState({
-            tasks,
-            processStarted: this.state.processStarted && (tasks.length === 0)
-          }));
+        this.fetchInitialState();
 
         this.props.bind('hbw:form-submitted', this.onFormSubmit);
         this.props.bind('hbw:process-started', () => this.setState({ processStarted: true }));
       }
+
+      fetchInitialState = () => {
+        const { env } = this.props;
+        const { processStarted } = this.state;
+
+        const data = {
+          entity_class: env.entity_class,
+          entity_code:  env.entity_code
+        };
+
+        return env.connection.request({
+          url:    `${env.connection.serverURL}/tasks`,
+          method: 'GET',
+          data
+        })
+          .done(({ tasks }) => this.setState({
+            tasks,
+            processStarted: processStarted && (tasks.length === 0),
+            tasksFetched:   true
+          }))
+          .fail(response => this.setState({ error: response }));
+      };
 
       render () {
         if ((this.state.tasks.length > 0) && this.state.tasksFetched) {
@@ -57,6 +73,6 @@ modulejs.define(
       };
     }
 
-    return compose(withTasks, withCallbacks)(Container);
+    return withCallbacks(Container);
   }
 );
