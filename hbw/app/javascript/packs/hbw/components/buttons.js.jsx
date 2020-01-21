@@ -64,7 +64,7 @@ modulejs.define(
             fetchError:  response,
             errorHeader: env.translator('errors.cannot_obtain_available_actions')
           }));
-      }
+      };
 
       buttonsURL = () => `${this.props.env.connection.serverURL}/buttons`;
 
