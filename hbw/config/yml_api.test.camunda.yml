@@ -1529,10 +1529,6 @@ post:
         assignee: null
     "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-23": []
 
-  task?maxResults=400:
-    "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc": []
-    "active=true&assignee=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%&sorting[][sortBy]=dueDate&sorting[][sortOrder]=asc&sorting[][sortBy]=priority&sorting[][sortOrder]=desc&sorting[][sortBy]=processVariable&sorting[][sortOrder]=asc&sorting[][parameters][variable]=homsProcessName&sorting[][parameters][type]=String&sorting[][sortBy]=created&sorting[][sortOrder]=asc": []
-
   process-instance:
     "variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq":
       default_data: &default_process-instances

@@ -1,1 +1,1 @@
-json.partial! partial: 'hbw/tasks/claiming_task', locals: { task: @task }
+json.partial! partial: 'hbw/tasks/task_without_form', locals: { task: @task }

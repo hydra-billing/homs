@@ -12,7 +12,8 @@ class HBW::Widget
   class_attribute :config, instance_writer: false
 
   extend Forwardable
-  def_delegators :@adapter, :entity_tasks, :task_list, :task_list_restricted,
+
+  def_delegators :@adapter, :entity_tasks, :task_list,
                  :form, :submit, :users, :users_lookup, :user_exist?,
                  :claim_task, :get_task_by_id, :get_form_by_task_id,
                  :get_task_with_definition

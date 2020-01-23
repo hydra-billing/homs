@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { StoreContext } from 'shared/context/store';
 import HydraIcon from 'shared/element/icon';
 import PopUp from './pop_up';
-import ClaimingNotifier from './notifier';
 
 class HBWClaimingMenuButton extends Component {
   static contextType = StoreContext;
@@ -52,7 +51,6 @@ class HBWClaimingMenuButton extends Component {
           </div>
           {isOpen && <PopUp env={env}/>}
         </div>
-        <ClaimingNotifier perPage={400} env={env} />
       </>
     );
   }
