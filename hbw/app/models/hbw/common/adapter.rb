@@ -91,12 +91,6 @@ module HBW
         end
       end
 
-      def task_list_restricted(email, entity_class, assigned, max_results, search_query)
-        HBW::Task.with_connection(api) do
-          HBW::Task.fetch_for_claiming(email, entity_class, assigned, max_results, search_query)
-        end
-      end
-
       def claim_task(email, task_id)
         HBW::Task.with_connection(api) do
           HBW::Task.claim_task(email, task_id)

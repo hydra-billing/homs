@@ -98,36 +98,6 @@ module HBW
                    description: description)
       end
 
-      def fetch_for_claiming(email, entity_class, assigned, max_results, search_query)
-        entity_code_variable_name = entity_code_key(entity_class)
-
-        with_user(email) do |user|
-          with_definitions(entity_code_variable_name) do
-            options = {
-                active:  true,
-                sorting: sorting_fields(entity_class),
-                processVariables: [
-                  name:     entity_code_variable_name,
-                  operator: :like,
-                  value:    '%'
-                ]
-            }
-
-            if assigned
-              options[:assignee] = user.id
-            else
-              options[:candidateUser] = user.id
-            end
-
-            if search_query.present?
-              options[:descriptionLike] = "%#{search_query}%"
-            end
-
-            do_request(:post, "task?maxResults=#{max_results}", **options)
-          end
-        end
-      end
-
       def list(email, entity_class)
         entity_code_variable_name = entity_code_key(entity_class)
 
