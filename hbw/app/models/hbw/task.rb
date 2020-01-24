@@ -29,67 +29,20 @@ module HBW
         do_request(:get, "task/#{id}")
       end
 
-      def get_task_with_definition(id, entity_class, cache_key)
+      def get_task_with_form(id, entity_class, cache_key)
         entity_code_variable_name = entity_code_key(entity_class)
 
         if cache_key && Rails.cache.exist?(cache_key)
-          task = Rails.cache.read(cache_key)[:task]
+          cache = Rails.cache.read(cache_key)
 
-          with_cached_definition(task, entity_code_variable_name, cache_key)
+          task = with_cached_definition(cache[:task], entity_code_variable_name, cache_key)
+          task.form = cache[:form]
         else
-          task = get_task_by_id(id)
-
-          with_definition(task, entity_code_variable_name)
+          task = with_definition(get_task_by_id(id), entity_code_variable_name)
+          task.form = Form.fetch(id, entity_class)
         end
-      end
 
-      def fetch(email, entity_code, entity_class, size = 1000)
-        entity_code_variable_name = entity_code_key(entity_class)
-
-        with_user(email) do |user|
-          with_definitions(entity_code_variable_name) do
-            options = {
-              active:   true,
-              processVariables: [
-                name:     entity_code_variable_name,
-                operator: :eq,
-                value:    entity_code
-              ],
-              maxResults: size
-            }
-
-            do_request(:post, 'task', **options.merge(assignee: user.id)) +
-              do_request(:post, 'task', **options.merge(candidateUser: user.id))
-          end
-        end
-      end
-
-      def fetch_count(email, entity_class)
-        with_user(email) do |user|
-          do_request(:post,
-                     'task/count',
-                     assignee: user.id,
-                     active:   true,
-                     processVariables: [
-                       name:     entity_code_key(entity_class),
-                       operator: :like,
-                       value:    '%'
-                     ])['count']
-        end
-      end
-
-      def fetch_count_unassigned(email, entity_class)
-        with_user(email) do |user|
-          do_request(:post,
-                     'task/count',
-                     candidateUser: user.id,
-                     active:        true,
-                     processVariables: [
-                       name:     entity_code_key(entity_class),
-                       operator: :like,
-                       value:    '%'
-                     ])['count']
-        end
+        task
       end
 
       def update_description(id, description)

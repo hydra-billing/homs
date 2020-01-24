@@ -3,7 +3,8 @@ v2.2.0 [unreleased]
 ### Breaking changes
 
 **HBW**:
-- Endpoint `GET /tasks/claiming` to be proxied by the host system with parameters `max_results`, `entity_class`, `search_query`, `assigned` should be replaced with `GET /tasks/list` with single parameter `entity_class`.
+- Endpoint `GET /widget/tasks` to be proxied by the host system with parameters `entity_class`, `entity_code` now should be proxied with single parameter `entity_class`.
+- New endpoint `GET /widget/tasks/:task_id` should be proxied by the host system with parameters `entity_class`, `cache_key`.
 
 ### Refactoring
 - [#401](https://github.com/latera/homs/pull/401) Wrap all widget parts to single app with store context & render app parts as portals.
@@ -20,6 +21,7 @@ v2.2.0 [unreleased]
 - [#411](https://github.com/latera/homs/pull/410) Fetch task from cache.
 - [#413](https://github.com/latera/homs/pull/413) Add endpoint with one task able to use cache.
 - [#416](https://github.com/latera/homs/pull/416) One-time request initial data instead of polling.
+- [#420](https://github.com/latera/homs/pull/420) Initialize store with all data & use it in BP components.
 
 v2.1.3 [2020-01-16]
 -------------------

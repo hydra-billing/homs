@@ -13,7 +13,8 @@ const withStoreContext = (WrappedComponent) => {
       tasks:    [],
       fetching: true,
       ready:    false,
-      socket:   null
+      socket:   null,
+      error:    null,
     };
 
     componentDidMount () {
@@ -35,23 +36,25 @@ const withStoreContext = (WrappedComponent) => {
       const tasks = this.state.tasks.filter(task => task.id !== incomingTask.id);
 
       this.setState({
-        tasks: (this.orderTasks([...tasks, incomingTask]))
+        tasks: this.orderTasks([...tasks, incomingTask])
       });
 
       return incomingTask;
     };
 
-    onCreated = (taskId, cacheKey) => {
+    onCreate = (taskId, cacheKey) => {
       this.getTaskById(taskId, cacheKey);
     };
 
-    onAssigned = async (taskId, cacheKey) => {
+    onAssignment = async (taskId, cacheKey) => {
       const { translator: t } = this.props.env;
-      const { name } = await this.getTaskById(taskId, cacheKey);
+      const { name, assignee } = await this.getTaskById(taskId, cacheKey);
 
-      Application.messenger.notice(t('notifications.new_assigned_task', {
-        task_name: name
-      }));
+      if (assignee !== null) {
+        Application.messenger.notice(t('notifications.new_assigned_task', {
+          task_name: name
+        }));
+      }
     };
 
     onComplete = (taskId) => {
@@ -59,18 +62,22 @@ const withStoreContext = (WrappedComponent) => {
       this.setState({ tasks });
     };
 
-    onReceived = ({ task_id: taskId, cache_key: cacheKey, event_name: eventName }) => {
+    onReceive = ({ task_id: taskId, cache_key: cacheKey, event_name: eventName }) => {
+      this.setState({ fetching: true });
+
       if (eventName === 'create') {
-        this.onCreated(taskId, cacheKey);
+        this.onCreate(taskId, cacheKey);
       }
 
       if (eventName === 'assignment') {
-        this.onAssigned(taskId, cacheKey);
+        this.onAssignment(taskId, cacheKey);
       }
 
       if (['complete', 'delete'].includes(eventName)) {
         this.onComplete(taskId);
       }
+
+      this.setState({ fetching: false });
     };
 
     initSocket = () => {
@@ -83,7 +90,7 @@ const withStoreContext = (WrappedComponent) => {
 
       ws.subscriptions.create({ channel: 'TaskChannel' }, {
         received: (data) => {
-          this.onReceived(JSON.parse(data));
+          this.onReceive(JSON.parse(data));
         }
       });
 
@@ -93,18 +100,23 @@ const withStoreContext = (WrappedComponent) => {
     initStore = async () => {
       const { env } = this.props;
 
-      const { tasks } = await env.connection.request({
-        url:  `${env.connection.serverURL}/tasks/list`,
-        data: {
-          entity_class: env.entity_class,
-        },
-      });
+      try {
+        const { tasks } = await env.connection.request({
+          url:  `${env.connection.serverURL}/tasks`,
+          data: {
+            entity_class: env.entity_class,
+          },
+        });
 
-      this.setState({
-        tasks:    (this.orderTasks(tasks)),
-        fetching: false,
-        ready:    true
-      });
+        this.setState({ tasks: this.orderTasks(tasks) });
+      } catch (error) {
+        this.setState({ error });
+      } finally {
+        this.setState({
+          fetching: false,
+          ready:    true
+        });
+      }
     };
 
     orderTasks = tasks => orderBy(

@@ -60,8 +60,6 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         method: 'POST'
       });
 
-      await this.props.pollTasks();
-
       this.setState({ claiming: false });
     };
 

@@ -69,8 +69,7 @@ modulejs.define(
             env:       this.props.env,
             error:     this.state.error,
             assignee:  this.props.task.assignee,
-            variables: this.formVariablesFromTask(this.props.task),
-            pollTasks: this.props.pollTasks
+            variables: this.formVariablesFromTask(this.props.task)
           };
 
           return <Form {...opts}/>;

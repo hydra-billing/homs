@@ -3,14 +3,16 @@ module HBW
     class Adapter < ::HBW::Common::Adapter
       include HBW::Inject[:api, :config]
 
-      def process_instances(entity_code, entity_class)
+      def active_process_instances(entity_code, entity_class)
         response = api.post(
             'process-instance',
+            active:    true,
             variables: [
               name:     entity_code_key(entity_class),
               value:    entity_code,
               operator: :eq
             ])
+
         response.status == 200 && response.body || []
       end
 

@@ -28,7 +28,7 @@ module HBW
         end
       end
 
-      def process_instances(_, _)
+      def active_process_instances(_, _)
         raise NotImplementedError
       end
 
@@ -38,9 +38,8 @@ module HBW
 
       # TODO: How to distinguish between running process instance and done
       # TODO: Think of suspended process instances
-      def bp_running?(entity_code, entity_class, current_user_identifier)
-        !process_instances(entity_code, entity_class).empty? ||
-          !task_list_wrapped(current_user_identifier, entity_code, entity_class, 1000).empty?
+      def bp_running?(entity_code, entity_class)
+        active_process_instances(entity_code, entity_class).present?
       end
 
       def get_variables(_, _, _, _)
@@ -66,28 +65,15 @@ module HBW
         response.status == 201
       end
 
-      def drop_processes(entity_code, entity_class)
-        ids = process_instances(entity_code, entity_class).map { |i| i['id'] }
-        ids.map do |id|
-          response = api.delete("runtime/process-instances/#{id}")
-          response.status == 204
-        end
-        ids.reject { |e| e }.empty?
-      end
-
-      def entity_tasks(email, entity_code, entity_class, size = 1000)
-        tasks = task_list_wrapped(email, entity_code, entity_class, size)
-
-        tasks.each do |task|
-          task.form = form(task.id, entity_class)
-        end
-
-        tasks
-      end
-
       def task_list(email, entity_class)
         HBW::Task.with_connection(api) do
-          HBW::Task.list(email, entity_class)
+          tasks = HBW::Task.list(email, entity_class)
+
+          tasks.each do |task|
+            task.form = form(task.id, entity_class)
+          end
+
+          tasks
         end
       end
 
@@ -109,21 +95,15 @@ module HBW
         end
       end
 
-      def task_list_wrapped(email, entity_code, entity_class, size)
-        HBW::Task.with_connection(api) do
-          HBW::Task.fetch(email, entity_code, entity_class, size)
-        end
-      end
-
       def get_task_by_id(task_id)
         HBW::Task.with_connection(api) do
           HBW::Task.get_task_by_id(task_id)
         end
       end
 
-      def get_task_with_definition(task_id, entity_class, cache_key)
+      def get_task_with_form(task_id, entity_class, cache_key)
         HBW::Task.with_connection(api) do
-          HBW::Task.get_task_with_definition(task_id, entity_class, cache_key)
+          HBW::Task.get_task_with_form(task_id, entity_class, cache_key)
         end
       end
 
