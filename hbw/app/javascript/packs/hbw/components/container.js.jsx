@@ -1,75 +1,68 @@
 import { withCallbacks } from 'shared/hoc';
+import { StoreContext } from 'shared/context/store';
 
 modulejs.define(
   'HBWContainer',
   ['React', 'HBWButtons', 'HBWEntityTasks', 'HBWError'],
   (React, Buttons, Tasks, Error) => {
     class Container extends React.Component {
+      static contextType = StoreContext;
+
       state = {
-        tasks:          [],
-        tasksFetched:   false,
-        processStarted: false,
-        error:          null
+        error:             null,
+        processInstanceId: null
       };
 
       componentDidMount () {
-        this.fetchInitialState();
-
         this.props.bind('hbw:form-submitted', this.onFormSubmit);
-        this.props.bind('hbw:process-started', () => this.setState({ processStarted: true }));
       }
 
-      fetchInitialState = () => {
-        const { env } = this.props;
-        const { processStarted } = this.state;
+      tasks = () => {
+        const { entityCode } = this.props;
+        const { tasks } = this.context;
 
-        const data = {
-          entity_class: env.entity_class,
-          entity_code:  env.entity_code
-        };
+        return tasks.filter(task => task.entity_code === entityCode).reverse();
+      };
 
-        return env.connection.request({
-          url:    `${env.connection.serverURL}/tasks`,
-          method: 'GET',
-          data
-        })
-          .done(({ tasks }) => this.setState({
-            tasks,
-            processStarted: processStarted && (tasks.length === 0),
-            tasksFetched:   true
-          }))
-          .fail(response => this.setState({ error: response }));
+      resetProcess = () => {
+        this.setState({ processInstanceId: null });
       };
 
       render () {
-        if ((this.state.tasks.length > 0) && this.state.tasksFetched) {
+        const {
+          env, chosenTaskID, entityCode, entityTypeCode, entityClassCode
+        } = this.props;
+        const { fetching, error } = this.context;
+        const { processInstanceId } = this.state;
+
+        if (this.tasks().length > 0) {
           return <div className='hbw-entity-tools'>
-            <Tasks tasks={this.state.tasks}
-                   env={this.props.env}
-                   chosenTaskID={this.props.chosenTaskID}
-                   entityCode={this.props.entityCode}
-                   entityTypeCode={this.props.entityTypeCode}
-                   entityClassCode={this.props.entityClassCode}
-                   processInstanceId={this.state.processInstanceId}
-                   pollTasks={this.props.pollTasks} />
-          </div>;
+              <Tasks tasks={this.tasks()}
+                     env={env}
+                     chosenTaskID={chosenTaskID}
+                     entityCode={entityCode}
+                     entityTypeCode={entityTypeCode}
+                     entityClassCode={entityClassCode}
+                     processInstanceId={processInstanceId}
+              />
+            </div>;
         } else {
           return <div className='hbw-entity-tools'>
-            <Error error={this.props.error} env={this.props.env} />
-            <Buttons entityCode={this.props.entityCode}
-                     entityTypeCode={this.props.entityTypeCode}
-                     entityClassCode={this.props.entityClassCode}
-                     tasksFetched={this.state.tasksFetched}
-                     showSpinner={!this.state.tasksFetched || this.state.processStarted}
-                     env={this.props.env} />
-          </div>;
+              <Error error={error} env={env} />
+              <Buttons entityCode={entityCode}
+                       entityTypeCode={entityTypeCode}
+                       entityClassCode={entityClassCode}
+                       showSpinner={fetching}
+                       env={env}
+                       resetProcess={this.resetProcess}/>
+            </div>;
         }
       }
 
       onFormSubmit = (task) => {
         // remember execution id of the last submitted form to open next form if
         // task with the same processInstanceId will be loaded
-        this.setState({ processInstanceId: task.processInstanceId });
+        this.setState({ processInstanceId: task.process_instance_id });
       };
     }
 

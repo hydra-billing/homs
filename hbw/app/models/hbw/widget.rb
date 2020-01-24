@@ -13,17 +13,16 @@ class HBW::Widget
 
   extend Forwardable
 
-  def_delegators :@adapter, :entity_tasks, :task_list,
-                 :form, :submit, :users, :users_lookup, :user_exist?,
-                 :claim_task, :get_task_by_id, :get_form_by_task_id,
-                 :get_task_with_definition
+  def_delegators :@adapter, :task_list, :get_task_with_form, :form,
+                 :submit, :users, :users_lookup, :user_exist?,
+                 :claim_task, :get_task_by_id, :get_form_by_task_id
 
   include HBW::Inject[:adapter]
 
   def bp_buttons(entity_identifier, entity_type, entity_class, current_user_identifier)
     if !@adapter.user_exist?(current_user_identifier)
       {}
-    elsif @adapter.bp_running?(entity_identifier, entity_class, current_user_identifier)
+    elsif @adapter.bp_running?(entity_identifier, entity_class)
       {buttons: [], bp_running: true}
     else
       buttons = self.class.entity_type_buttons(entity_type, entity_class).map do |button_params|

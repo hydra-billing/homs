@@ -854,6 +854,7 @@ get:
                 id_condition: "SELECT 123, 'Some text' FROM DUAL WHERE DUMMY = DUMMY"
                 filter_condition: "SELECT 123, 'Some text' FROM DUAL"
   task/111123/deployed-form: *form_with_everything
+  task/111124/deployed-form: *form_with_everything
 
   # task variables
   task/816011/variables:
@@ -1111,6 +1112,15 @@ get:
         type: "string"
         value: null
 
+  task/111124/variables:
+    "":
+      homsOrderCode:
+        type: "string"
+        value: "ORD-24"
+      homsOrderDataSelect:
+        type: "string"
+        value: null
+
   task/816011:
     "": &default_tasks
       id: "816011"
@@ -1316,6 +1326,118 @@ post:
   task:
     "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
       - <<: *default_tasks
+      - <<: *default_tasks
+        id: "53452"
+        formKey: "test_form_with_data_source.yml"
+        processInstanceId: 2
+        processDefinitionId: "testProcess:2:2"
+      - <<: *default_tasks
+        id: "111111"
+        formKey: "test_form.yml"
+        processInstanceId: 3
+        processDefinitionId: "testProcess:3:3"
+      - <<: *default_tasks
+        id: "222222"
+        formKey: "test_form.yml"
+        processInstanceId: 4
+        processDefinitionId: "testProcess:4:4"
+      - <<: *default_tasks
+        id: "333333"
+        formKey: "test_form.yml"
+        processInstanceId: 5
+        processDefinitionId: "testProcess:5:5"
+      - <<: *default_tasks
+        id: "444444"
+        formKey: "test_form.yml"
+        processInstanceId: 6
+        processDefinitionId: "testProcess:6:6"
+      - <<: *default_tasks
+        id: "555555"
+        formKey: "test_form.yml"
+        processInstanceId: 7
+        processDefinitionId: "testProcess:7:7"
+      - <<: *default_tasks
+        id: "666666"
+        formKey: "test_form.yml"
+        processInstanceId: 8
+        processDefinitionId: "testProcess:8:8"
+      - <<: *default_tasks
+        id: "777777"
+        formKey: "test_form.yml"
+        processInstanceId: 9
+        processDefinitionId: "testProcess:9:9"
+      - <<: *default_tasks
+        id: "888888"
+        formKey: "test_form.yml"
+        processInstanceId: 10
+        processDefinitionId: "testProcess:10:10"
+      - <<: *default_tasks
+        id: "999999"
+        formKey: "test_form.yml"
+        processInstanceId: 11
+        processDefinitionId: "testProcess:11:11"
+      - <<: *default_tasks
+        id: "111112"
+        formKey: "test_form.yml"
+        processInstanceId: 12
+        processDefinitionId: "testProcess:12:12"
+      - <<: *default_tasks
+        id: "111113"
+        formKey: "test_form_with_data_source.yml"
+        processInstanceId: 13
+        processDefinitionId: "testProcess:13:13"
+      - <<: *default_tasks
+        id: "111114"
+        formKey: "test_form_with_select_table.yml"
+        processInstanceId: 14
+        processDefinitionId: "testProcess:14:14"
+      - <<: *default_tasks
+        id: "111115"
+        formKey: "file_upload_without_file_list.yml"
+        processInstanceId: 15
+        processDefinitionId: "testProcess:15:15"
+      - <<: *default_tasks
+        id: "111116"
+        formKey: "test_form_with_select_table_multi.yml"
+        processInstanceId: 16
+        processDefinitionId: "testProcess:16:16"
+      - <<: *default_tasks
+        id: "111117"
+        formKey: "test_form_with_select_table_multi.yml"
+        processInstanceId: 17
+        processDefinitionId: "testProcess:17:17"
+      - <<: *default_tasks
+        id: "111118"
+        formKey: "test_form_with_select_table.yml"
+        processInstanceId: 18
+        processDefinitionId: "testProcess:18:18"
+      - <<: *default_tasks
+        id: "111119"
+        formKey: "test_form_with_select_table.yml"
+        processInstanceId: 19
+        processDefinitionId: "testProcess:19:19"
+      - <<: *default_tasks
+        id: "111120"
+        formKey: "test_form_with_select_table.yml"
+        processInstanceId: 20
+        processDefinitionId: "testProcess:20:20"
+      - <<: *default_tasks
+        id: "111121"
+        formKey: "test_form_with_select_table.yml"
+        processInstanceId: 21
+        processDefinitionId: "testProcess:21:21"
+      - <<: *default_tasks
+        id: "111122"
+        formKey: "test_form_with_required_select_lookup.yml"
+        processInstanceId: 22
+        processDefinitionId: "testProcess:22:22"
+      - <<: *default_tasks
+        id: "111123"
+        formKey: "test_form_with_disabled_buttons.yml"
+        processInstanceId: 23
+        processDefinitionId: "testProcess:23:23"
+        assignee: null
+      - <<: *default_tasks
         id: "111124"
         name: "Assigned task"
         due: "2016-07-30T12:07:59.000+03:00"
@@ -1325,6 +1447,7 @@ post:
       - <<: *default_tasks
         id: "111123"
         name: "Other assigned task"
+        due: "2017-07-30T12:07:59.000+03:00"
         formKey: "test_form_with_disabled_buttons.yml"
         processInstanceId: 23
         description: 'Some test description'
@@ -1341,6 +1464,7 @@ post:
       - <<: *default_tasks
         id: "111123"
         name: "Other unassigned task"
+        due: "2017-07-30T12:07:59.000+03:00"
         formKey: "test_form_with_disabled_buttons.yml"
         processInstanceId: 23
         description: 'Some test description'
@@ -1348,189 +1472,9 @@ post:
         assignee: null
     "active=true&assignee=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%": []
     "active=true&candidateUser=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%": []
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-1":
-      - <<: *default_tasks
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-1": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-2":
-      - <<: *default_tasks
-        id: "53452"
-        formKey: "test_form_with_data_source.yml"
-        processInstanceId: 2
-        processDefinitionId: "testProcess:2:2"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-2": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-3":
-      - <<: *default_tasks
-        id: "111111"
-        formKey: "test_form.yml"
-        processInstanceId: 3
-        processDefinitionId: "testProcess:3:3"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-3": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-4":
-      - <<: *default_tasks
-        id: "222222"
-        formKey: "test_form.yml"
-        processInstanceId: 4
-        processDefinitionId: "testProcess:4:4"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-4": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-5":
-      - <<: *default_tasks
-        id: "333333"
-        formKey: "test_form.yml"
-        processInstanceId: 5
-        processDefinitionId: "testProcess:5:5"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-5": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-6":
-      - <<: *default_tasks
-        id: "444444"
-        formKey: "test_form.yml"
-        processInstanceId: 6
-        processDefinitionId: "testProcess:6:6"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-6": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-7":
-      - <<: *default_tasks
-        id: "555555"
-        formKey: "test_form.yml"
-        processInstanceId: 7
-        processDefinitionId: "testProcess:7:7"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-7": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-8":
-      - <<: *default_tasks
-        id: "666666"
-        formKey: "test_form.yml"
-        processInstanceId: 8
-        processDefinitionId: "testProcess:8:8"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-8": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-9":
-      - <<: *default_tasks
-        id: "777777"
-        formKey: "test_form.yml"
-        processInstanceId: 9
-        processDefinitionId: "testProcess:9:9"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-9": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-10":
-      - <<: *default_tasks
-        id: "888888"
-        formKey: "test_form.yml"
-        processInstanceId: 10
-        processDefinitionId: "testProcess:10:10"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-10": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-11":
-      - <<: *default_tasks
-        id: "999999"
-        formKey: "test_form.yml"
-        processInstanceId: 11
-        processDefinitionId: "testProcess:11:11"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-11": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-12":
-      - <<: *default_tasks
-        id: "111112"
-        formKey: "test_form.yml"
-        processInstanceId: 12
-        processDefinitionId: "testProcess:12:12"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-12": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-13":
-      - <<: *default_tasks
-        id: "111113"
-        formKey: "test_form_with_data_source.yml"
-        processInstanceId: 13
-        processDefinitionId: "testProcess:13:13"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-13": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-14":
-      - <<: *default_tasks
-        id: "111114"
-        formKey: "test_form_with_select_table.yml"
-        processInstanceId: 14
-        processDefinitionId: "testProcess:14:14"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-14": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-15":
-      - <<: *default_tasks
-        id: "111115"
-        formKey: "file_upload_without_file_list.yml"
-        processInstanceId: 15
-        processDefinitionId: "testProcess:15:15"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-15": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-16":
-      - <<: *default_tasks
-        id: "111116"
-        formKey: "test_form_with_select_table_multi.yml"
-        processInstanceId: 16
-        processDefinitionId: "testProcess:16:16"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-16": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-17":
-      - <<: *default_tasks
-        id: "111117"
-        formKey: "test_form_with_select_table_multi.yml"
-        processInstanceId: 17
-        processDefinitionId: "testProcess:17:17"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-17": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-18":
-      - <<: *default_tasks
-        id: "111118"
-        formKey: "test_form_with_select_table.yml"
-        processInstanceId: 18
-        processDefinitionId: "testProcess:18:18"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-18": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-19":
-      - <<: *default_tasks
-        id: "111119"
-        formKey: "test_form_with_select_table.yml"
-        processInstanceId: 19
-        processDefinitionId: "testProcess:19:19"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-19": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-20":
-      - <<: *default_tasks
-        id: "111120"
-        formKey: "test_form_with_select_table.yml"
-        processInstanceId: 20
-        processDefinitionId: "testProcess:20:20"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-20": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-21":
-      - <<: *default_tasks
-        id: "111121"
-        formKey: "test_form_with_select_table.yml"
-        processInstanceId: 21
-        processDefinitionId: "testProcess:21:21"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-21": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-22":
-      - <<: *default_tasks
-        id: "111122"
-        formKey: "test_form_with_required_select_lookup.yml"
-        processInstanceId: 22
-        processDefinitionId: "testProcess:22:22"
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-22": []
-
-    "active=true&assignee=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-23":
-      - <<: *default_tasks
-        id: "111123"
-        formKey: "test_form_with_disabled_buttons.yml"
-        processInstanceId: 23
-        processDefinitionId: "testProcess:23:23"
-        assignee: null
-    "active=true&candidateUser=demo&maxResults=1000&processVariables[][name]=homsOrderCode&processVariables[][operator]=eq&processVariables[][value]=ORD-23": []
 
   process-instance:
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq":
       default_data: &default_process-instances
         id: "111111"
         businessKey: null
@@ -1578,112 +1522,112 @@ post:
         - <<: *default_process-instances
           id: "111113"
           processDefinitionId: "testProcess:13:13"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-2&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-2&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "53452"
           processDefinitionId: "testProcess:2:2"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-3&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-3&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111111"
           processDefinitionId: "testProcess:3:3"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-4&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-4&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "222222"
           processDefinitionId: "testProcess:4:4"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-5&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-5&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "333333"
           processDefinitionId: "testProcess:5:5"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-6&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-6&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "444444"
           processDefinitionId: "testProcess:6:6"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-7&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-7&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "555555"
           processDefinitionId: "testProcess:7:7"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-8&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-8&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "666666"
           processDefinitionId: "testProcess:8:8"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-9&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-9&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "777777"
           processDefinitionId: "testProcess:9:9"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-10&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-10&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "888888"
           processDefinitionId: "testProcess:10:10"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-11&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-11&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "999999"
           processDefinitionId: "testProcess:11:11"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-12&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-12&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111112"
           processDefinitionId: "testProcess:12:12"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-13&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-13&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111113"
           processDefinitionId: "testProcess:13:13"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-14&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-14&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111114"
           processDefinitionId: "testProcess:14:14"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-15&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-15&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111115"
           processDefinitionId: "testProcess:15:15"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-16&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-16&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111116"
           processDefinitionId: "testProcess:16:16"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-17&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-17&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111117"
           processDefinitionId: "testProcess:17:17"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-18&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-18&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111118"
           processDefinitionId: "testProcess:18:18"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-19&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-19&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111119"
           processDefinitionId: "testProcess:19:19"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-20&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-20&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111120"
           processDefinitionId: "testProcess:20:20"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-21&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-21&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111121"
           processDefinitionId: "testProcess:22:22"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-22&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-22&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111122"
           processDefinitionId: "testProcess:22:22"
-    "variables[][name]=homsOrderCode&variables[][value]=ORD-23&variables[][operator]=eq":
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-23&variables[][operator]=eq":
       data:
         - <<: *default_process-instances
           id: "111123"
@@ -1719,243 +1663,103 @@ post:
     "userId=demo": null
 
   variable-instance:
-    "processInstanceIdIn[]=814972&variableName=homsOrderCode":
+    "processInstanceIdIn[]=814972&processInstanceIdIn[]=2&processInstanceIdIn[]=3&processInstanceIdIn[]=4&processInstanceIdIn[]=5&processInstanceIdIn[]=6&processInstanceIdIn[]=7&processInstanceIdIn[]=8&processInstanceIdIn[]=9&processInstanceIdIn[]=10&processInstanceIdIn[]=11&processInstanceIdIn[]=12&processInstanceIdIn[]=13&processInstanceIdIn[]=14&processInstanceIdIn[]=15&processInstanceIdIn[]=16&processInstanceIdIn[]=17&processInstanceIdIn[]=18&processInstanceIdIn[]=19&processInstanceIdIn[]=20&processInstanceIdIn[]=21&processInstanceIdIn[]=22&processInstanceIdIn[]=23&processInstanceIdIn[]=24&variableName=homsOrderCode":
       - processInstanceId: 814972
         type: string
         name: homsOrderCode
         value: ORD-1
-
-    "processInstanceIdIn[]=2&variableName=homsOrderCode":
       - processInstanceId: 2
         type: string
         name: homsOrderCode
         value: ORD-2
-
-    "processInstanceIdIn[]=3&variableName=homsOrderCode":
       - processInstanceId: 3
         type: string
         name: homsOrderCode
         value: ORD-3
-
-    "processInstanceIdIn[]=4&variableName=homsOrderCode":
       - processInstanceId: 4
         type: string
         name: homsOrderCode
         value: ORD-4
-
-    "processInstanceIdIn[]=5&variableName=homsOrderCode":
       - processInstanceId: 5
         type: string
         name: homsOrderCode
         value: ORD-5
-
-    "processInstanceIdIn[]=6&variableName=homsOrderCode":
       - processInstanceId: 6
         type: string
         name: homsOrderCode
         value: ORD-6
-
-    "processInstanceIdIn[]=7&variableName=homsOrderCode":
       - processInstanceId: 7
         type: string
         name: homsOrderCode
         value: ORD-7
-
-    "processInstanceIdIn[]=8&variableName=homsOrderCode":
       - processInstanceId: 8
         type: string
         name: homsOrderCode
         value: ORD-8
-
-    "processInstanceIdIn[]=9&variableName=homsOrderCode":
       - processInstanceId: 9
         type: string
         name: homsOrderCode
         value: ORD-9
-
-    "processInstanceIdIn[]=10&variableName=homsOrderCode":
       - processInstanceId: 10
         type: string
         name: homsOrderCode
         value: ORD-10
-
-    "processInstanceIdIn[]=11&variableName=homsOrderCode":
       - processInstanceId: 11
         type: string
         name: homsOrderCode
         value: ORD-11
-
-    "processInstanceIdIn[]=12&variableName=homsOrderCode":
       - processInstanceId: 12
         type: string
         name: homsOrderCode
         value: ORD-12
-
-    "processInstanceIdIn[]=13&variableName=homsOrderCode":
       - processInstanceId: 13
         type: string
         name: homsOrderCode
         value: ORD-13
-
-    "processInstanceIdIn[]=14&variableName=homsOrderCode":
       - processInstanceId: 14
         type: string
         name: homsOrderCode
         value: ORD-14
-
-    "processInstanceIdIn[]=15&variableName=homsOrderCode":
       - processInstanceId: 15
         type: string
         name: homsOrderCode
         value: ORD-15
-
-    "processInstanceIdIn[]=16&variableName=homsOrderCode":
       - processInstanceId: 16
         type: string
         name: homsOrderCode
         value: ORD-16
-
-    "processInstanceIdIn[]=17&variableName=homsOrderCode":
       - processInstanceId: 17
         type: string
         name: homsOrderCode
         value: ORD-17
-
-    "processInstanceIdIn[]=18&variableName=homsOrderCode":
       - processInstanceId: 18
         type: string
         name: homsOrderCode
         value: ORD-18
-
-    "processInstanceIdIn[]=19&variableName=homsOrderCode":
       - processInstanceId: 19
         type: string
         name: homsOrderCode
         value: ORD-19
-
-    "processInstanceIdIn[]=20&variableName=homsOrderCode":
       - processInstanceId: 20
         type: string
         name: homsOrderCode
         value: ORD-20
-
-    "processInstanceIdIn[]=21&variableName=homsOrderCode":
       - processInstanceId: 21
         type: string
         name: homsOrderCode
         value: ORD-21
-
-    "processInstanceIdIn[]=22&variableName=homsOrderCode":
       - processInstanceId: 22
         type: string
         name: homsOrderCode
         value: ORD-22
-
-    "processInstanceIdIn[]=23&variableName=homsOrderCode":
       - processInstanceId: 23
         type: string
         name: homsOrderCode
         value: ORD-23
-
-    "processInstanceIdIn[]=24&processInstanceIdIn[]=23&variableName=homsOrderCode":
       - processInstanceId: 24
         type: string
         name: homsOrderCode
         value: ORD-24
-      - processInstanceId: 23
-        type: string
-        name: homsOrderCode
-        value: ORD-23
-
-    "processInstanceIdIn[]=814972&processInstanceIdIn[]=2&processInstanceIdIn[]=3&processInstanceIdIn[]=4&processInstanceIdIn[]=5&processInstanceIdIn[]=6&processInstanceIdIn[]=7&processInstanceIdIn[]=8&processInstanceIdIn[]=9&processInstanceIdIn[]=10&processInstanceIdIn[]=11&processInstanceIdIn[]=12&processInstanceIdIn[]=13&processInstanceIdIn[]=14&processInstanceIdIn[]=15&processInstanceIdIn[]=16&processInstanceIdIn[]=17&processInstanceIdIn[]=18&processInstanceIdIn[]=19&processInstanceIdIn[]=20&processInstanceIdIn[]=21&processInstanceIdIn[]=22&variableName=homsOrderCode":
-      - processInstanceId: 814972
-        type: string
-        name: homsOrderCode
-        value: ORD-1
-      - processInstanceId: 2
-        type: string
-        name: homsOrderCode
-        value: ORD-2
-      - processInstanceId: 3
-        type: string
-        name: homsOrderCode
-        value: ORD-3
-      - processInstanceId: 4
-        type: string
-        name: homsOrderCode
-        value: ORD-4
-      - processInstanceId: 5
-        type: string
-        name: homsOrderCode
-        value: ORD-5
-      - processInstanceId: 6
-        type: string
-        name: homsOrderCode
-        value: ORD-6
-      - processInstanceId: 7
-        type: string
-        name: homsOrderCode
-        value: ORD-7
-      - processInstanceId: 8
-        type: string
-        name: homsOrderCode
-        value: ORD-8
-      - processInstanceId: 9
-        type: string
-        name: homsOrderCode
-        value: ORD-9
-      - processInstanceId: 10
-        type: string
-        name: homsOrderCode
-        value: ORD-10
-      - processInstanceId: 11
-        type: string
-        name: homsOrderCode
-        value: ORD-11
-      - processInstanceId: 12
-        type: string
-        name: homsOrderCode
-        value: ORD-12
-      - processInstanceId: 13
-        type: string
-        name: homsOrderCode
-        value: ORD-13
-      - processInstanceId: 14
-        type: string
-        name: homsOrderCode
-        value: ORD-14
-      - processInstanceId: 15
-        type: string
-        name: homsOrderCode
-        value: ORD-15
-      - processInstanceId: 16
-        type: string
-        name: homsOrderCode
-        value: ORD-16
-      - processInstanceId: 17
-        type: string
-        name: homsOrderCode
-        value: ORD-17
-      - processInstanceId: 18
-        type: string
-        name: homsOrderCode
-        value: ORD-18
-      - processInstanceId: 19
-        type: string
-        name: homsOrderCode
-        value: ORD-19
-      - processInstanceId: 20
-        type: string
-        name: homsOrderCode
-        value: ORD-20
-      - processInstanceId: 21
-        type: string
-        name: homsOrderCode
-        value: ORD-21
-      - processInstanceId: 22
-        type: string
-        name: homsOrderCode
-        value: ORD-22
 
     variableName=homsOrderCode: []
 

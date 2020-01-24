@@ -45,14 +45,21 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
 
     iterateTasks = (tasks) => {
       let taskAlreadyExpanded = false; // only one task should show its form - to be expanded
-      const { props } = this;
+      const {
+        env, processInstanceId, chosenTaskID, entityCode, entityTypeCode, entityClassCode
+      } = this.props;
+
+      const isTaskCollapsed = task => (
+        processInstanceId && (task.id !== chosenTaskID) && (task.process_instance_id !== processInstanceId)
+      );
 
       return tasks.map((task) => {
         let collapsed;
+
         if (taskAlreadyExpanded) {
           collapsed = true;
         } else {
-          collapsed = ((task.id !== this.props.chosenTaskID) && (task.processInstanceId !== props.processInstanceId));
+          collapsed = isTaskCollapsed(task);
           taskAlreadyExpanded = !collapsed;
         }
 
@@ -60,13 +67,12 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
                      key={`task_id_${task.id}`}
                      task={task}
                      parentClass={this.PANEL_CLASS}
-                     env={props.env}
+                     env={env}
                      taskId={task.id}
-                     entityCode={props.entityCode}
-                     entityTypeCode={props.entityTypeCode}
-                     entityClassCode={props.entityClassCode}
-                     collapsed={collapsed}
-                     pollTasks={this.props.pollTasks} />;
+                     entityCode={entityCode}
+                     entityTypeCode={entityTypeCode}
+                     entityClassCode={entityClassCode}
+                     collapsed={collapsed} />;
       });
     };
   }

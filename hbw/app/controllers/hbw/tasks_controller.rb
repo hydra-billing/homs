@@ -8,15 +8,11 @@ module HBW
     inject['minio_adapter']
 
     def index
-      @tasks = widget.entity_tasks(current_user_identifier, entity_identifier, entity_class)
+      @tasks = widget.task_list(current_user_identifier, entity_class)
     end
 
     def show
-      @task = widget.get_task_with_definition(task_id, entity_class, cache_key)
-    end
-
-    def list
-      @tasks = widget.task_list(current_user_identifier, entity_class)
+      @task = widget.get_task_with_form(task_id, entity_class, cache_key)
     end
 
     def submit
