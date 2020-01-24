@@ -1,5 +1,3 @@
-/* eslint react/no-render-return-value: "off" */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { localizer } from './init/date_localizer';
@@ -7,12 +5,12 @@ import App from './components/app';
 import AvailableTasksButton from './components/claiming/menu_button';
 import AvailableTaskList from './components/claiming/task_list';
 import Translator from './translator';
+import Connection from './connection';
 
 modulejs.define(
   'HBW',
-  ['HBWContainer', 'HBWConnection',
-    'HBWDispatcher', 'HBWForms', 'jQuery'],
-  (Container, Connection, Dispatcher, HBWForms, jQuery) => {
+  ['HBWContainer', 'HBWDispatcher', 'HBWForms', 'jQuery'],
+  (Container, Dispatcher, HBWForms, jQuery) => {
     class HBW {
       constructor (options) {
         this.widget = null;
@@ -38,7 +36,6 @@ modulejs.define(
           entity_class:     this.options.entity_class,
           entity_code:      this.options.entity_code,
           initialVariables: payload.variables,
-          poll_interval:    this.options.poll_interval,
           taskListPath:     this.options.taskListPath,
         };
 
@@ -107,7 +104,6 @@ modulejs.define(
       };
 
       unmountWidget = () => {
-        this.env.connection.unsubscribe();
         this.env.dispatcher.trigger('hbw:set-forms-container', 'widget', null);
         this.env.dispatcher.trigger('hbw:set-current-task', 'widget', null);
       };

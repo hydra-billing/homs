@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { Component, createContext } from 'react';
 import ActionCable from 'actioncable';
 import orderBy from 'lodash-es/orderBy';
@@ -24,6 +23,7 @@ const withStoreContext = (WrappedComponent) => {
 
     getTaskById = async (taskId, cacheKey) => {
       const { env } = this.props;
+
       const incomingTask = await env.connection.request({
         url:  `${env.connection.serverURL}/tasks/${taskId}`,
         data: {
@@ -33,6 +33,7 @@ const withStoreContext = (WrappedComponent) => {
       });
 
       const tasks = this.state.tasks.filter(task => task.id !== incomingTask.id);
+
       this.setState({
         tasks: (this.orderTasks([...tasks, incomingTask]))
       });
@@ -58,18 +59,16 @@ const withStoreContext = (WrappedComponent) => {
       this.setState({ tasks });
     };
 
-    onReceived = (data) => {
-      const { task_id: taskId, cache_key: cacheKey } = data;
-
-      if (data.event_name === 'create') {
+    onReceived = ({ task_id: taskId, cache_key: cacheKey, event_name: eventName }) => {
+      if (eventName === 'create') {
         this.onCreated(taskId, cacheKey);
       }
 
-      if (data.event_name === 'assignment') {
+      if (eventName === 'assignment') {
         this.onAssigned(taskId, cacheKey);
       }
 
-      if (['complete', 'delete'].includes(data.event_name)) {
+      if (['complete', 'delete'].includes(eventName)) {
         this.onComplete(taskId);
       }
     };
@@ -81,10 +80,8 @@ const withStoreContext = (WrappedComponent) => {
         : `ws://${host}/widget/cable`;
 
       const ws = ActionCable.createConsumer(socketUrl);
+
       ws.subscriptions.create({ channel: 'TaskChannel' }, {
-        connected: () => {
-          console.log('Connected!');
-        },
         received: (data) => {
           this.onReceived(JSON.parse(data));
         }

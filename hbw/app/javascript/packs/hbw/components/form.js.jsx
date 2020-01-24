@@ -50,7 +50,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
           {t('components.claiming.claim')}
         </button>
       );
-    }
+    };
 
     claimTask = async () => {
       this.setState({ claiming: true });
@@ -63,7 +63,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       await this.props.pollTasks();
 
       this.setState({ claiming: false });
-    }
+    };
 
     iterateControls = fields => [...fields].map(field => (
       <div key={field.name} className="row">{this.formControl(field.name, field)}</div>
