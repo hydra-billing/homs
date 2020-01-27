@@ -3,8 +3,8 @@ module HBW
     include Controller
     include HttpBasicAuthentication
     include HBW::Logger
-    before_action :start
-    after_action :log
+    before_action :start, unless: -> { Rails.env.test? }
+    after_action :log, unless: -> { Rails.env.test? }
 
     protected
 
