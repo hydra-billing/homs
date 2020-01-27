@@ -1320,6 +1320,66 @@ get:
       processInstanceId: 23
       processDefinitionId: "testProcess:23:23"
 
+  task/111124:
+    "":
+      <<: *default_tasks
+      id: "111124"
+      formKey: "test_form_with_required_select_lookup.yml"
+      processInstanceId: 24
+      processDefinitionId: "testProcess:24:24"
+
+  variable-instance:
+    processInstanceId=23&variableName=homsOrderCode:
+      - processInstanceId: 23
+        type: string
+        name: homsOrderCode
+        value: ORD-23
+    processInstanceId=24&variableName=homsOrderCode:
+      - processInstanceId: 24
+        type: string
+        name: homsOrderCode
+        value: ORD-24
+    processInstanceId=814972&variableName=homsOrderCode:
+      - processInstanceId: 814972
+        type: string
+        name: homsOrderCode
+        value: ORD-814972
+    processInstanceId=16&variableName=homsOrderCode:
+      - processInstanceId: 16
+        type: string
+        name: homsOrderCode
+        value: ORD-16
+    processInstanceId=22&variableName=homsOrderCode:
+      - processInstanceId: 22
+        type: string
+        name: homsOrderCode
+        value: ORD-22
+    processInstanceId=17&variableName=homsOrderCode:
+      - processInstanceId: 17
+        type: string
+        name: homsOrderCode
+        value: ORD-17
+    processInstanceId=18&variableName=homsOrderCode:
+      - processInstanceId: 18
+        type: string
+        name: homsOrderCode
+        value: ORD-18
+    processInstanceId=19&variableName=homsOrderCode:
+      - processInstanceId: 19
+        type: string
+        name: homsOrderCode
+        value: ORD-19
+    processInstanceId=20&variableName=homsOrderCode:
+      - processInstanceId: 20
+        type: string
+        name: homsOrderCode
+        value: ORD-20
+    processInstanceId=21&variableName=homsOrderCode:
+      - processInstanceId: 21
+        type: string
+        name: homsOrderCode
+        value: ORD-21
+
 put: {}
 patch: {}
 post:
