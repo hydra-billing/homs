@@ -102,6 +102,7 @@ config/secrets.yml
 config/homs_configuration.yml
 config/deploy.rb
 config/imprint.yml
+config/cable.yml
 
 lib/capistrano/
 /public/assets/packs
