@@ -11,4 +11,6 @@ if [[ ! -a seed.lock ]]; then
     touch seed.lock
 fi
 
+rm -rf /tmp/unicorn.pid
+
 bundle exec unicorn -E production -c config/unicorn.rb
