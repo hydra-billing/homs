@@ -53,6 +53,7 @@ class HBWClaimingTaskList extends Component {
   claim = async (task) => {
     const { activeTask } = this.state;
     const { connection } = this.props.env;
+    const { refreshTask } = this.context;
 
     this.setState({ claimingTask: task });
 
@@ -60,6 +61,8 @@ class HBWClaimingTaskList extends Component {
       url:    `${connection.serverURL}/tasks/${task.id}/claim`,
       method: 'POST'
     });
+
+    await refreshTask(task.id);
 
     if (activeTask && task.id === activeTask.id) {
       this.closeTask();
