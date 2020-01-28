@@ -108,17 +108,17 @@ modulejs.define(
         this.env.dispatcher.trigger('hbw:set-current-task', 'widget', null);
       };
 
-      checkBpmUser = () => {
-        this.env.connection.request({
+      checkBpmUser = async () => {
+        const { user_exist: userExist } = await this.env.connection.request({
           url:    `${this.env.connection.serverURL}/users/check`,
           method: 'GET',
           async:  false
-        }).done((data) => {
-          if (!data.user_exist) {
-            this.env.dispatcher.trigger('hbw:bpm-user-not-found');
-            this.env.userExist = false;
-          }
-        });
+        }).then(data => data.json());
+
+        if (!userExist) {
+          this.env.dispatcher.trigger('hbw:bpm-user-not-found');
+          this.env.userExist = false;
+        }
       };
 
       setEntityCode = (code) => {

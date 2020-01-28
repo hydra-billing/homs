@@ -198,25 +198,25 @@ modulejs.define('HBWFormSelect',
         }
       };
 
-      fetchOptionsAsync = (inputValue, callback) => {
-        this.props.env.connection.request({
+      fetchOptionsAsync = async (inputValue, callback) => {
+        const response = await this.props.env.connection.request({
           url:    this.props.params.url,
           method: 'GET',
           data:   {
             q: inputValue
           }
-        }).done((response) => {
-          const res = response.map(({ text, id }) => ({
-            label: text,
-            value: id
-          }));
+        }).then(res => res.json())
+          .catch((error) => {
+            console.error(error);
+            callback();
+          });
 
-          callback(res);
-        }).fail((error) => {
-          console.error(error);
+        const res = response.map(({ text, id }) => ({
+          label: text,
+          value: id
+        }));
 
-          callback();
-        });
+        callback(res);
       };
 
       getDefaultValue = () => {

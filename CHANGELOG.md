@@ -10,6 +10,7 @@ v2.2.0 [unreleased]
 - [#401](https://github.com/latera/homs/pull/401) Wrap all widget parts to single app with store context & render app parts as portals.
 - [#415](https://github.com/latera/homs/pull/415) Remove unused endpoint for getting tasks number.
 - [#419](https://github.com/latera/homs/pull/419) Remove unused long polling supporting code.
+- [#423](https://github.com/latera/homs/pull/423) Replace jquery with fetch api.
 
 ### Features
 - [#403](https://github.com/latera/homs/pull/403) Add `ActionCable` and `Redis`.
