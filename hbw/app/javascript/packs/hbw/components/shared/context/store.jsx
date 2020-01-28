@@ -22,7 +22,7 @@ const withStoreContext = (WrappedComponent) => {
       this.initStore();
     }
 
-    refreshTaskById = async (taskId, cacheKey) => {
+    getTaskById = async (taskId, cacheKey) => {
       const { env } = this.props;
 
       const incomingTask = await env.connection.request({
@@ -43,12 +43,12 @@ const withStoreContext = (WrappedComponent) => {
     };
 
     onCreate = (taskId, cacheKey) => {
-      this.refreshTaskById(taskId, cacheKey);
+      this.getTaskById(taskId, cacheKey);
     };
 
     onAssignment = async (taskId, cacheKey) => {
       const { translator: t } = this.props.env;
-      const { name, assignee } = await this.refreshTaskById(taskId, cacheKey);
+      const { name, assignee } = await this.getTaskById(taskId, cacheKey);
 
       if (assignee !== null) {
         Application.messenger.notice(t('notifications.new_assigned_task', {
@@ -146,8 +146,7 @@ const withStoreContext = (WrappedComponent) => {
         myTasks,
         unassignedTasks,
         count,
-        update:      this.updateContext,
-        refreshTask: this.onAssignment
+        update: this.updateContext,
       };
 
       return (

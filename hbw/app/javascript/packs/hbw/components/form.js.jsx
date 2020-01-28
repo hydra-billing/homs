@@ -3,7 +3,6 @@
 
 import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
-import { StoreContext } from 'shared/context/store';
 
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect',
@@ -12,8 +11,6 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
 (React, jQuery, Error, DateTime, Group, Select, Submit, SubmitSelect,
   User, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload) => {
   class HBWForm extends React.Component {
-    static contextType = StoreContext;
-
     state = {
       error:         null,
       submitting:    false,
@@ -56,15 +53,12 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     };
 
     claimTask = async () => {
-      const { refreshTask } = this.context;
       this.setState({ claiming: true });
 
       await this.props.env.connection.request({
         url:    `${this.props.env.connection.serverURL}/tasks/${this.props.taskId}/claim`,
         method: 'POST'
       });
-
-      await refreshTask(this.props.taskId);
 
       this.setState({ claiming: false });
     };
