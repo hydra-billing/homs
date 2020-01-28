@@ -80,7 +80,7 @@ modulejs.define(
       };
 
       resetBPStateChecker = () => {
-        clearTimeout(this.state.fetcher);
+        clearTimeout(this.state.BPStateChecker);
       };
 
       buttonsURL = () => `${this.props.env.connection.serverURL}/buttons`;
