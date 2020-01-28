@@ -22,16 +22,17 @@ const withStoreContext = (WrappedComponent) => {
       this.initStore();
     }
 
-    getTaskById = async (taskId, cacheKey) => {
+    getTaskById = async (taskId, cacheKey = null) => {
       const { env } = this.props;
 
       const incomingTask = await env.connection.request({
-        url:  `${env.connection.serverURL}/tasks/${taskId}`,
-        data: {
+        url:    `${env.connection.serverURL}/tasks/${taskId}`,
+        method: 'GET',
+        data:   {
           cache_key:    cacheKey,
           entity_class: env.entity_class,
         },
-      });
+      }).then(response => response.json());
 
       const tasks = this.state.tasks.filter(task => task.id !== incomingTask.id);
 
@@ -99,14 +100,16 @@ const withStoreContext = (WrappedComponent) => {
 
     initStore = async () => {
       const { env } = this.props;
-
       try {
-        const { tasks } = await env.connection.request({
-          url:  `${env.connection.serverURL}/tasks`,
-          data: {
+        const result = await env.connection.request({
+          url:    `${env.connection.serverURL}/tasks`,
+          method: 'GET',
+          data:   {
             entity_class: env.entity_class,
           },
         });
+
+        const { tasks } = await result.json();
 
         this.setState({ tasks: this.orderTasks(tasks) });
       } catch (error) {

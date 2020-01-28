@@ -97,9 +97,11 @@ modulejs.define(
           variables,
           token:  this.props.task.form.csrf_token
         })
-          .done(() => this.setState({ error: null }))
-          .done(() => this.props.trigger('hbw:form-submitted', this.props.task))
-          .fail((response) => {
+          .then(() => {
+            this.setState({ error: null });
+            this.props.trigger('hbw:form-submitted', this.props.task);
+          })
+          .catch((response) => {
             this.setState({ error: response });
             return this.props.trigger('hbw:form-submitting-failed', {
               response,

@@ -37,7 +37,7 @@ modulejs.define(
         }
       });
 
-      fetchButtons = () => {
+      fetchButtons = async () => {
         const {
           entityCode, entityTypeCode, entityClassCode, resetProcess, env
         } = this.props;
@@ -48,29 +48,28 @@ modulejs.define(
           entity_class: entityClassCode
         };
 
-        return env.connection.request({
+        const { bp_running: bpRunning, buttons } = await env.connection.request({
           url:    this.buttonsURL(),
           method: 'GET',
           data
-        })
-          .done((response) => {
-            if (response.bp_running) {
-              this.setBPStateChecker();
-            } else {
-              resetProcess();
-            }
-
-            return this.setState({
-              fetched:    true,
-              fetchError: null,
-              buttons:    response.buttons,
-              bpRunning:  response.bp_running,
-            });
-          })
-          .fail(response => this.setState({
+        }).then(response => response.json())
+          .catch(response => this.setState({
             fetchError:  response,
             errorHeader: env.translator('errors.cannot_obtain_available_actions')
           }));
+
+        if (bpRunning) {
+          this.setBPStateChecker();
+        } else {
+          resetProcess();
+        }
+
+        return this.setState({
+          fetched:    true,
+          fetchError: null,
+          buttons,
+          bpRunning,
+        });
       };
 
       setBPStateChecker = () => {
@@ -135,21 +134,23 @@ modulejs.define(
         }
       }
 
-      onButtonActivation = (button) => {
+      onButtonActivation = async (button) => {
         console.log(`Clicked button[${button.title}], submitting`);
         this.setState({ submitting: true });
 
-        this.submitButton(button.bp_code)
-          .done(data => this.setState({
-            submitError: null,
-            buttons:     data.buttons,
-            bpRunning:   data.bp_running
-          }))
-          .fail(response => this.setState({
+        const { bp_running: bpRunning, buttons } = await this.submitButton(button.bp_code)
+          .then(data => data.json())
+          .catch(response => this.setState({
             submitError: response,
             submitting:  false,
             errorHeader: this.props.env.translator('errors.cannot_start_process')
           }));
+
+        this.setState({
+          submitError: null,
+          buttons,
+          bpRunning
+        });
       };
     }
 
