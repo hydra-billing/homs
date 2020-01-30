@@ -57,7 +57,7 @@ export default WrappedComponent => class WithConditions extends Component {
     return this.every(result);
   };
 
-  componentWillMount () {
+  componentDidMount () {
     this.hidden = this.deleteIf();
     this.disabled = this.disableIf();
   }

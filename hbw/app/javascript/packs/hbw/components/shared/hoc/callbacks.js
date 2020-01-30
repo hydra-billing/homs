@@ -1,28 +1,18 @@
 import React, { Component } from 'react';
 
 export default WrappedComponent => class WithCallbacks extends Component {
-  setGuid = () => {
-    this.guid = `hbw-${Math.floor(Math.random() * 0xFFFF)}`;
-  };
-
-  getComponentId = () => this.guid;
-
-  componentWillMount () {
-    if (!this.guid) {
-      this.setGuid();
-    }
-  }
+  guid = `hbw-${Math.floor(Math.random() * 0xFFFF)}`;
 
   bind = (event, clbk) => {
-    this.props.env.dispatcher.bind(event, this.getComponentId(), clbk);
+    this.props.env.dispatcher.bind(event, this.guid, clbk);
   };
 
   unbind = (event) => {
-    this.props.env.dispatcher.unbind(event, this.getComponentId());
+    this.props.env.dispatcher.unbind(event, this.guid);
   };
 
   componentWillUnmount () {
-    this.props.env.dispatcher.unbindAll(this.getComponentId());
+    this.props.env.dispatcher.unbindAll(this.guid);
   }
 
   trigger = (event, payload = null) => {
@@ -30,8 +20,7 @@ export default WrappedComponent => class WithCallbacks extends Component {
   };
 
   render () {
-    return <WrappedComponent setGuid={this.setGuid}
-                             getComponentId={this.getComponentId}
+    return <WrappedComponent guid={this.guid}
                              bind={this.bind}
                              unbind={this.unbind}
                              trigger={this.trigger}

@@ -7,7 +7,7 @@ modulejs.define('HBWFormSubmit', ['React'], (React) => {
       error: false,
     }
 
-    componentWillMount () {
+    componentDidMount () {
       this.props.bind('hbw:have-errors', () => this.setState({ error: true }));
     }
 
