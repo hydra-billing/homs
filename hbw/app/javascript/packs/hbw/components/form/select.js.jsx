@@ -24,6 +24,8 @@ modulejs.define('HBWFormSelect',
       }
 
       componentDidMount () {
+        this.fetchOptionsAsync = this.debounce(this.fetchOptionsAsync, 250);
+
         this.tooltip = new Tooltip(this.select, {
           title:     this.props.env.translator('errors.field_is_required'),
           container: this.tooltipContainer,
@@ -185,10 +187,6 @@ modulejs.define('HBWFormSelect',
       };
 
       loadingMessage = () => this.props.env.translator('components.select.searching');
-
-      componentWillMount () {
-        this.fetchOptionsAsync = this.debounce(this.fetchOptionsAsync, 250);
-      }
 
       loadOptions = (inputValue, callback) => {
         if (inputValue && inputValue.length >= 2) {

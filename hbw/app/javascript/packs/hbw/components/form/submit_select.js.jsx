@@ -8,12 +8,9 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
       error: false
     };
 
-    componentWillMount () {
-      this.props.bind('hbw:have-errors', () => this.setState({ error: true }));
-    }
-
     componentDidMount () {
       this.props.onRef(this);
+      this.props.bind('hbw:have-errors', () => this.setState({ error: true }));
     }
 
     componentWillUnmount () {

@@ -23,7 +23,7 @@ hbw:
               title: 'Start pizza order processing'
               class: 'btn btn-default'
               fa_class: 'fas fa-user'
-              bp_code: 'pizzaOrderProcess'
+              bp_code: 'pizza_order'
 
     billing_customer:
       entity_code_key: billingCustomerId

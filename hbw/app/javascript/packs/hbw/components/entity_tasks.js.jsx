@@ -4,8 +4,10 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
   class HBWEntityTasks extends React.Component {
     PANEL_CLASS = 'hbw-entity-task-list-panel';
 
-    componentWillReceiveProps (nextProps) {
-      this.setState({ chosenTaskID: nextProps.chosenTaskID });
+    static getDerivedStateFromProps (nextProps) {
+      return {
+        chosenTaskID: nextProps.chosenTaskID
+      };
     }
 
     selectFirstTaskId = () => {

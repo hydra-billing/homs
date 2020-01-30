@@ -88,12 +88,6 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       this.props.onRef(undefined);
     }
 
-    componentWillMount () {
-      if (!this.guid) {
-        this.props.setGuid();
-      }
-    }
-
     validateOnSubmit = () => {
       this.props.bind(`hbw:validate-form-${this.props.id}`, this.onFormSubmit);
     };

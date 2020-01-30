@@ -7,12 +7,11 @@ modulejs.define(
     class HBWEntityTask extends React.Component {
       state = {
         error:     null,
-        collapsed: this.props.collapsed || false,
-        id:        this.props.getComponentId()
+        collapsed: this.props.collapsed || false
       };
 
       componentDidMount () {
-        this.props.bind(`hbw:submit-form-${this.state.id}`, this.submitForm);
+        this.props.bind(`hbw:submit-form-${this.props.guid}`, this.submitForm);
 
         const e = jQuery(this.rootNode);
         e.on('hidden.bs.collapse', this.choose);
@@ -63,7 +62,7 @@ modulejs.define(
           return <Error error={this.state.error} env={this.props.env} />;
         } else {
           const opts = {
-            id:        this.state.id,
+            id:        this.props.guid,
             taskId:    this.props.task.id,
             form,
             env:       this.props.env,
