@@ -27,7 +27,9 @@ modulejs.define(
       submitButton = businessProcessCode => this.props.env.connection.request({
         url:    this.buttonsURL(),
         method: 'POST',
-
+        headers: {
+          'Content-Type': 'application/json'
+        },
         data: {
           entity_code:       this.props.entityCode,
           entity_type:       this.props.entityTypeCode,
