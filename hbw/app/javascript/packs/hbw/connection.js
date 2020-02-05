@@ -1,3 +1,5 @@
+import qs from 'qs';
+
 export default class Connection {
   constructor (options) {
     this.options = options;
@@ -16,12 +18,16 @@ export default class Connection {
   request = (opts) => {
     if (opts.method.toLowerCase() === 'get') {
       const url = new URL(opts.url, window.location);
-      const params = url.searchParams;
-      if (opts.data) {
-        Object.entries(opts.data).forEach((entry) => {
-          params.append(entry[0], entry[1]);
-        });
-      }
+
+      const searchParams = [...url.searchParams]
+        .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+
+      url.search = qs.stringify({
+        ...searchParams,
+        ...(opts.data || {}),
+        payload: this.options.payload
+      });
+
       return fetch(url.href);
     } else {
       return fetch(opts.url, {
