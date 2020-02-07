@@ -54,4 +54,35 @@ module OrdersHelper
       ''
     end
   end
+
+  def prepare_order_list(orders)
+    orders.map do |order|
+      static_fields = {
+          code: {title: order.code, href: order_path(order.code)},
+          order_type_code: order.order_type_name,
+          state: {title: order_state_title(order), icon: order_state_icon(order)},
+          created_at: loc_datetime(order.created_at),
+          user: order.user_full_name,
+          ext_code: order.ext_code,
+          archived: order.archived,
+          estimated_exec_date: loc_datetime(order.estimated_exec_date),
+          options: {class: expired_class(order)}
+      }
+
+      fields_definition = order.order_type.fields.with_indifferent_access
+
+      custom_fields = order.data.each_with_object({}) do |(key, value), fields|
+        fields[key] = format_custom_field(value, fields_definition[key]['type'])
+      end
+
+      static_fields.merge(custom_fields)
+    end
+  end
+
+  def format_custom_field(value, type)
+    case type
+    when 'datetime' then loc_datetime(value)
+    else value
+    end
+  end
 end
