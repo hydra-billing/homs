@@ -4,6 +4,7 @@ HBW::Engine.routes.draw do
       put :form, on: :member, action: :submit
       get :lookup, on: :member
       post :claim, on: :member, action: :claim
+      get :forms, on: :collection
     end
 
     resources :buttons, only: [:index, :create]

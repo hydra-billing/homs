@@ -23,6 +23,7 @@ v2.2.0 [unreleased]
 - [#413](https://github.com/latera/homs/pull/413) Add endpoint with one task able to use cache.
 - [#416](https://github.com/latera/homs/pull/416) One-time request initial data instead of polling.
 - [#420](https://github.com/latera/homs/pull/420) Initialize store with all data & use it in BP components.
+- [#429](https://github.com/latera/homs/pull/429) Get task forms by entities lazy.
 
 ### Bugfixes
 - [#430](https://github.com/latera/homs/pull/430) Apply events received while store initialization in turn.

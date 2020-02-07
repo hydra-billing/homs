@@ -67,6 +67,54 @@ const withStoreContext = (WrappedComponent) => {
       }
     };
 
+    mergeFormsToTasks = (prevTasks, fetchedForms) => {
+      const tasks = prevTasks;
+      const forms = fetchedForms;
+
+      Object.values(tasks).forEach((value) => {
+        const fetchedForm = forms.find(form => form.task_id === value.id);
+
+        if (fetchedForm !== undefined) {
+          value.form = fetchedForm;
+        }
+      });
+
+      return tasks;
+    };
+
+    getFormsForTasks = async (tasks) => {
+      const emptyFormTasks = this.getEmptyFormEntityTasks(tasks);
+      const { connection } = this.props.env;
+
+      if (emptyFormTasks.length > 0) {
+        const { forms } = await connection.request({
+          url:    `${connection.serverURL}/tasks/forms`,
+          method: 'GET',
+          data:   {
+            entity_tasks: JSON.stringify(emptyFormTasks)
+          }
+        }).then(data => data.json());
+
+        this.addFormsToTasks(forms);
+      }
+    };
+
+    getEmptyFormEntityTasks = (entityTasks) => {
+      const entityClass = this.props.env.entity_class;
+
+      const emptyFormEntityTasks = entityTasks.filter(
+        task => (task.form === undefined)
+      );
+
+      return Object.values(emptyFormEntityTasks).map(task => ({ task_id: task.id, entity_class: entityClass }));
+    };
+
+    addFormsToTasks = (fetchedForms) => {
+      this.setState(prevState => ({
+        tasks: this.mergeFormsToTasks(prevState.tasks, fetchedForms)
+      }));
+    };
+
     onComplete = async (taskId) => {
       this.removeTaskFromList(taskId);
     };
@@ -159,7 +207,7 @@ const withStoreContext = (WrappedComponent) => {
       this.setState({ tasks });
 
       this.closeTaskOverview(taskId);
-    }
+    };
 
     orderTasks = tasks => orderBy(
       tasks,
@@ -204,9 +252,10 @@ const withStoreContext = (WrappedComponent) => {
         myTasks,
         unassignedTasks,
         count,
-        update:    this.updateContext,
-        openTask:  this.openTaskOverview,
-        closeTask: this.closeTaskOverview,
+        update:           this.updateContext,
+        openTask:         this.openTaskOverview,
+        closeTask:        this.closeTaskOverview,
+        getFormsForTasks: this.getFormsForTasks
       };
 
       return (

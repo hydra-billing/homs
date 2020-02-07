@@ -32,10 +32,12 @@ modulejs.define(
         const {
           env, chosenTaskID, entityCode, entityTypeCode, entityClassCode
         } = this.props;
-        const { fetching, error } = this.context;
+        const { fetching, error, getFormsForTasks } = this.context;
         const { processInstanceId } = this.state;
 
         if (this.tasks().length > 0) {
+          getFormsForTasks(this.tasks());
+
           return <div className='hbw-entity-tools'>
               <Tasks tasks={this.tasks()}
                      env={env}

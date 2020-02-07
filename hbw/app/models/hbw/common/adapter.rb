@@ -69,10 +69,6 @@ module HBW
         HBW::Task.with_connection(api) do
           tasks = HBW::Task.list(email, entity_class)
 
-          tasks.each do |task|
-            task.form = form(task.id, entity_class)
-          end
-
           tasks
         end
       end
@@ -86,6 +82,17 @@ module HBW
       def form(task_id, entity_class)
         HBW::Form.with_connection(api) do
           HBW::Form.fetch(task_id, entity_class)
+        end
+      end
+
+      def get_forms_for_task_list(tasks)
+        HBW::Task.with_connection(api) do
+          forms = JSON.parse(tasks).map do |task|
+            {form_fields: form(task['task_id'], task['entity_class']),
+             task_id: task['task_id']}
+          end
+
+          forms
         end
       end
 

@@ -50,6 +50,10 @@ module HBW
       head :no_content
     end
 
+    def forms
+      @forms = widget.get_forms_for_task_list(entity_tasks)
+    end
+
     private
 
     def task_id
@@ -74,6 +78,10 @@ module HBW
 
     def cache_key
       params[:cache_key]
+    end
+
+    def entity_tasks
+      params[:entity_tasks]
     end
 
     def files
