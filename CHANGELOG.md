@@ -24,6 +24,9 @@ v2.2.0 [unreleased]
 - [#416](https://github.com/latera/homs/pull/416) One-time request initial data instead of polling.
 - [#420](https://github.com/latera/homs/pull/420) Initialize store with all data & use it in BP components.
 
+### Bugfixes
+- [#430](https://github.com/latera/homs/pull/430) Apply events received while store initialization in turn.
+
 v2.1.3 [2020-01-16]
 -------------------
 ### Refactoring

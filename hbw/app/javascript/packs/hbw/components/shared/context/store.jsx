@@ -1,3 +1,6 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
+
 import React, { Component, createContext } from 'react';
 import ActionCable from 'actioncable';
 import orderBy from 'lodash-es/orderBy';
@@ -11,6 +14,7 @@ const withStoreContext = (WrappedComponent) => {
   class StoreProvider extends Component {
     state = {
       tasks:    [],
+      events:   [],
       fetching: true,
       ready:    false,
       socket:   null,
@@ -43,8 +47,8 @@ const withStoreContext = (WrappedComponent) => {
       return incomingTask;
     };
 
-    onCreate = (taskId, cacheKey) => {
-      this.getTaskById(taskId, cacheKey);
+    onCreate = async (taskId, cacheKey) => {
+      await this.getTaskById(taskId, cacheKey);
     };
 
     onAssignment = async (taskId, cacheKey) => {
@@ -58,27 +62,41 @@ const withStoreContext = (WrappedComponent) => {
       }
     };
 
-    onComplete = (taskId) => {
+    onComplete = async (taskId) => {
       const tasks = this.state.tasks.filter(task => task.id !== taskId);
       this.setState({ tasks });
     };
 
-    onReceive = ({ task_id: taskId, cache_key: cacheKey, event_name: eventName }) => {
+    onReceive = async ({ task_id: taskId, cache_key: cacheKey, event_name: eventName }) => {
       this.setState({ fetching: true });
 
       if (eventName === 'create') {
-        this.onCreate(taskId, cacheKey);
+        await this.onCreate(taskId, cacheKey);
       }
 
       if (eventName === 'assignment') {
-        this.onAssignment(taskId, cacheKey);
+        await this.onAssignment(taskId, cacheKey);
       }
 
       if (['complete', 'delete'].includes(eventName)) {
-        this.onComplete(taskId);
+        await this.onComplete(taskId);
       }
 
       this.setState({ fetching: false });
+    };
+
+    defer = (callback) => {
+      this.setState(prevState => ({ events: [...prevState.events, callback] }));
+    };
+
+    executeDeferred = async () => {
+      const { events } = this.state;
+
+      for (const e of events) {
+        await e();
+      }
+
+      this.setState({ events: [] });
     };
 
     initSocket = () => {
@@ -91,7 +109,15 @@ const withStoreContext = (WrappedComponent) => {
 
       ws.subscriptions.create({ channel: 'TaskChannel' }, {
         received: (data) => {
-          this.onReceive(JSON.parse(data));
+          const callback = async () => {
+            await this.onReceive(JSON.parse(data));
+          };
+
+          if (this.state.ready) {
+            callback();
+          } else {
+            this.defer(callback);
+          }
         }
       });
 
@@ -118,7 +144,7 @@ const withStoreContext = (WrappedComponent) => {
         this.setState({
           fetching: false,
           ready:    true
-        });
+        }, this.executeDeferred);
       }
     };
 
