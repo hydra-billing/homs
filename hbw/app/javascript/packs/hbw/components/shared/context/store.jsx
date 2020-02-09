@@ -82,7 +82,7 @@ const withStoreContext = (WrappedComponent) => {
     };
 
     initSocket = () => {
-      const { host, protocol } = new URL(this.props.env.connection.serverURL);
+      const { host, protocol } = new URL(this.props.env.widgetURL);
       const socketUrl = protocol === 'https:'
         ? `wss://${host}/widget/cable`
         : `ws://${host}/widget/cable`;

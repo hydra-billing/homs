@@ -19,14 +19,17 @@ modulejs.define(
 
         const payload = { variables: {}, ...this.options.payload };
 
+        const { widgetURL, widgetPath, widgetHost } = this.options;
+
         const connection = new Connection({
-          path: this.options.widgetPath,
-          host: this.options.widgetHost,
-          payload
+          path: widgetPath,
+          host: widgetHost,
+          payload,
         });
 
         this.env = {
           connection,
+          widgetURL,
           dispatcher:       new Dispatcher(),
           translator:       Translator.getTranslatorForLocale(this.options.locale.code),
           localizer:        localizer(this.options.locale),

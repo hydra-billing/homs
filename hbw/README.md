@@ -18,6 +18,7 @@ Initialize widget with following options:
 * `availableTasksButtonContainer` (DOM selector of element for placing user available tasks button);
 * `availableTaskListContainer` (DOM selector of element for placing user available task list);
 * `widgetPath` (path used by widget for sending HTTP-requests);
+* `widgetURL` (URL used to WebSocket connection with widget backend);
 * `taskListPath` (relative path to page with task list mounted to `availableTaskListContainer`);
 * `locale` (object):
     * `code` (available values are 'en', 'ru')

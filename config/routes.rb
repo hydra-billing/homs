@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get '/sign_in_by_token/:token' => 'sessions#sign_in_by_token'
 
-  root to: 'orders#index', as: :list_orders
+  root to: 'orders#index'
 
   resources :users do
     post :add, on: :collection

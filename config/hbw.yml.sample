@@ -61,3 +61,7 @@ hbw:
     secret_access_key: <%= ENV['MINIO_SECRET_KEY'] %>
     bucket: <%= ENV['MINIO_BUCKET_NAME'] %>
     region: 'us-east-1'
+
+  allowed_request_origins:
+    - http://*
+    - https://*
