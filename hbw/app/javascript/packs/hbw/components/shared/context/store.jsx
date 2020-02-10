@@ -51,23 +51,28 @@ const withStoreContext = (WrappedComponent) => {
       await this.getTaskById(taskId, cacheKey);
     };
 
-    onAssignment = async (taskId, cacheKey) => {
+    onAssignment = async (taskId, cacheKey, assignedToMe) => {
       const { translator: t } = this.props.env;
       const { name, assignee } = await this.getTaskById(taskId, cacheKey);
 
       if (assignee !== null) {
-        Application.messenger.notice(t('notifications.new_assigned_task', {
-          task_name: name
-        }));
+        if (assignedToMe) {
+          Application.messenger.notice(t('notifications.new_assigned_task', {
+            task_name: name
+          }));
+        } else {
+          this.removeTaskFromList(taskId);
+        }
       }
     };
 
     onComplete = async (taskId) => {
-      const tasks = this.state.tasks.filter(task => task.id !== taskId);
-      this.setState({ tasks });
+      this.removeTaskFromList(taskId);
     };
 
-    onReceive = async ({ task_id: taskId, cache_key: cacheKey, event_name: eventName }) => {
+    onReceive = async ({
+      task_id: taskId, cache_key: cacheKey, event_name: eventName, assigned_to_me: assignedToMe
+    }) => {
       this.setState({ fetching: true });
 
       if (eventName === 'create') {
@@ -75,7 +80,7 @@ const withStoreContext = (WrappedComponent) => {
       }
 
       if (eventName === 'assignment') {
-        await this.onAssignment(taskId, cacheKey);
+        await this.onAssignment(taskId, cacheKey, assignedToMe);
       }
 
       if (['complete', 'delete'].includes(eventName)) {
@@ -147,6 +152,11 @@ const withStoreContext = (WrappedComponent) => {
         }, this.executeDeferred);
       }
     };
+
+    removeTaskFromList = async (taskId) => {
+      const tasks = this.state.tasks.filter(task => task.id !== taskId);
+      this.setState({ tasks });
+    }
 
     orderTasks = tasks => orderBy(
       tasks,

@@ -1,7 +1,7 @@
 module HBW
   class TaskNotifier
     class << self
-      def call(widget, task_id, event_name, users = [])
+      def call(widget, task_id, event_name, assignee, users = [])
         message = {
           task_id: task_id,
           event_name: event_name
@@ -22,6 +22,8 @@ module HBW
         end
 
         users.each do |user|
+          message[:assigned_to_me] = event_name == 'assignment' && user == assignee
+
           ActionCable.server.broadcast("task_channel_#{user}", message.to_json)
         end
       end
