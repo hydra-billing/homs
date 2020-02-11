@@ -16,6 +16,7 @@ en:
         cannot_start_process: Cannot start process
         file_list_field_required: Field of "file_list" type with name "homsOrderDataFileList" required
         field_is_required: Field is required
+        task_already_claimed: 'Task %{task_name} already claimed'
 
       notifications:
         new_assigned_task: 'New assigned task: %{task_name}'

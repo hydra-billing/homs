@@ -24,7 +24,6 @@ class HBWClaimingTaskList extends Component {
     tab:          this.tabs.my,
     page:         1,
     lastPage:     false,
-    activeTask:   null,
     claimingTask: null,
     query:        '',
     searchQuery:  null,
@@ -38,32 +37,24 @@ class HBWClaimingTaskList extends Component {
     }));
   };
 
-  openTask = (task) => {
-    const { activeTask } = this.state;
-
-    if (!activeTask || task.id !== activeTask.id) {
-      this.setState({ activeTask: task });
-    }
-  };
-
-  closeTask = () => {
-    this.setState({ activeTask: null });
-  };
-
   claim = async (task) => {
-    const { activeTask } = this.state;
-    const { connection } = this.props.env;
+    const { connection, translator: t } = this.props.env;
+    const { closeTask } = this.context;
 
     this.setState({ claimingTask: task });
 
-    await connection.request({
+    const { ok } = await connection.request({
       url:    `${connection.serverURL}/tasks/${task.id}/claim`,
       method: 'POST'
     });
 
-    if (activeTask && task.id === activeTask.id) {
-      this.closeTask();
+    if (!ok) {
+      Application.messenger.error(t('errors.task_already_claimed', {
+        task_name: task.name
+      }));
     }
+
+    closeTask(task.id);
 
     this.setState({ claimingTask: null });
   };
@@ -85,8 +76,11 @@ class HBWClaimingTaskList extends Component {
   };
 
   switchTabTo = (tab) => {
+    const { closeTask } = this.context;
+
     if (tab !== this.state.tab) {
-      this.setState({ tab, activeTask: null });
+      this.setState({ tab });
+      closeTask();
       this.clearSearch();
     }
   };
@@ -113,9 +107,11 @@ class HBWClaimingTaskList extends Component {
 
   render () {
     const { env } = this.props;
-    const { fetching, count } = this.context;
     const {
-      tab, lastPage, activeTask, claimingTask, query, searching
+      fetching, count, openTask, activeTask
+    } = this.context;
+    const {
+      tab, lastPage, claimingTask, query, searching
     } = this.state;
 
     return (
@@ -142,7 +138,7 @@ class HBWClaimingTaskList extends Component {
                    tasks={this.tasksForRender()}
                    fetching={fetching}
                    addPage={this.addPage}
-                   openTask={this.openTask}
+                   openTask={openTask}
                    lastPage={lastPage}
                    showClaimButton={!this.isMyTab()}
                    claimingTask={claimingTask}

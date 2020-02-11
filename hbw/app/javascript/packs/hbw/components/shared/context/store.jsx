@@ -13,12 +13,13 @@ export const { Consumer: StoreConsumer } = StoreContext;
 const withStoreContext = (WrappedComponent) => {
   class StoreProvider extends Component {
     state = {
-      tasks:    [],
-      events:   [],
-      fetching: true,
-      ready:    false,
-      socket:   null,
-      error:    null,
+      tasks:      [],
+      events:     [],
+      fetching:   true,
+      ready:      false,
+      socket:     null,
+      error:      null,
+      activeTask: null,
     };
 
     componentDidMount () {
@@ -156,6 +157,8 @@ const withStoreContext = (WrappedComponent) => {
     removeTaskFromList = async (taskId) => {
       const tasks = this.state.tasks.filter(task => task.id !== taskId);
       this.setState({ tasks });
+
+      this.closeTaskOverview(taskId);
     }
 
     orderTasks = tasks => orderBy(
@@ -168,6 +171,22 @@ const withStoreContext = (WrappedComponent) => {
       ],
       ['asc', 'desc', 'asc', 'asc']
     );
+
+    openTaskOverview = (task) => {
+      const { activeTask } = this.state;
+
+      if (!activeTask || task.id !== activeTask.id) {
+        this.setState({ activeTask: task });
+      }
+    };
+
+    closeTaskOverview = (taskId) => {
+      const { activeTask } = this.state;
+
+      if ((activeTask && taskId === activeTask.id) || !taskId) {
+        this.setState({ activeTask: null });
+      }
+    };
 
     updateContext = (...state) => {
       this.setState(...state);
@@ -185,7 +204,9 @@ const withStoreContext = (WrappedComponent) => {
         myTasks,
         unassignedTasks,
         count,
-        update: this.updateContext,
+        update:    this.updateContext,
+        openTask:  this.openTaskOverview,
+        closeTask: this.closeTaskOverview,
       };
 
       return (
