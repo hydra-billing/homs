@@ -1,4 +1,5 @@
 import { withCallbacks } from 'shared/hoc';
+import Pending from './pending';
 
 modulejs.define(
   'HBWEntityTask',
@@ -58,20 +59,24 @@ modulejs.define(
       renderForm = () => {
         const { form } = this.props.task;
 
-        if (this.state.error) {
-          return <Error error={this.state.error} env={this.props.env} />;
-        } else {
-          const opts = {
-            id:        this.props.guid,
-            taskId:    this.props.task.id,
-            form,
-            env:       this.props.env,
-            error:     this.state.error,
-            assignee:  this.props.task.assignee,
-            variables: this.formVariablesFromTask(this.props.task)
-          };
+        if (form !== undefined) {
+          if (this.state.error) {
+            return <Error error={this.state.error} env={this.props.env}/>;
+          } else {
+            const opts = {
+              id:        this.props.guid,
+              taskId:    this.props.task.id,
+              form,
+              env:       this.props.env,
+              error:     this.state.error,
+              assignee:  this.props.task.assignee,
+              variables: this.formVariablesFromTask(this.props.task)
+            };
 
-          return <Form {...opts}/>;
+            return <Form {...opts}/>;
+          }
+        } else {
+          return <div className="hbw-spinner"><Pending /></div>;
         }
       };
 
