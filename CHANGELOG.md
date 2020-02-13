@@ -1,10 +1,10 @@
-v2.2.0 [unreleased]
+v2.2.0 [2020-02-13]
 -------------------
 ### Breaking changes
 
 **HBW**:
-- Endpoint `GET /widget/tasks` to be proxied by the host system with parameters `entity_class`, `entity_code` now should be proxied with single parameter `entity_class`.
-- New endpoint `GET /widget/tasks/:task_id` should be proxied by the host system with parameters `entity_class`, `cache_key`.
+- Long polling has been replaced by WebSocket channels based on webhooks from Camunda BPMN.
+  It uses task events (create, assignment, complete and delete) to notify HBW that new data should be fetched.
 
 ### Refactoring
 - [#401](https://github.com/latera/homs/pull/401) Wrap all widget parts to single app with store context & render app parts as portals.
