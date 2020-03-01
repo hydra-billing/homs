@@ -71,7 +71,7 @@ const withStoreContext = (WrappedComponent) => {
       const tasks = prevTasks;
       const forms = fetchedForms;
 
-      Object.values(tasks).forEach((value) => {
+      Object.entries(tasks).forEach(([, value]) => {
         const fetchedForm = forms.find(form => form.task_id === value.id);
 
         if (fetchedForm !== undefined) {
@@ -106,7 +106,7 @@ const withStoreContext = (WrappedComponent) => {
         task => (task.form === undefined)
       );
 
-      return Object.values(emptyFormEntityTasks).map(task => ({ task_id: task.id, entity_class: entityClass }));
+      return Object.entries(emptyFormEntityTasks).map(([, task]) => ({ task_id: task.id, entity_class: entityClass }));
     };
 
     addFormsToTasks = (fetchedForms) => {
