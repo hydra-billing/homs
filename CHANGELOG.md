@@ -1,3 +1,8 @@
+v2.2.1 [2020-03-01]
+-------------------
+### Bugfixes
+- [#db74749](https://github.com/latera/homs/commit/db74749) HBW-277 `Use Object.entries` returns only own object properties instead of `Object.values`.
+
 v2.2.0 [2020-02-13]
 -------------------
 ### Breaking changes
