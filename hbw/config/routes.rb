@@ -17,5 +17,9 @@ HBW::Engine.routes.draw do
     end
 
     post 'file_upload', to: 'files#upload'
+
+    namespace :events do
+      resources :tasks, only: [:update]
+    end
   end
 end
