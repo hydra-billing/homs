@@ -33,10 +33,15 @@ v2.2.0 [2020-02-13]
 ### Bugfixes
 - [#430](https://github.com/latera/homs/pull/430) Apply events received while store initialization in turn.
 
-v2.1.4 [unreleased]
+v2.1.5 [unreleased]
 -------------------
 ### Bugfixes
 - [#435](https://github.com/latera/homs/pull/435) Add endpoint for events from Camunda.
+
+v2.1.4 [2020-01-30]
+-------------------
+### Bugfixes
+- [#435](https://github.com/latera/homs/pull/421) Remove pid file on app start
 
 v2.1.3 [2020-01-16]
 -------------------
