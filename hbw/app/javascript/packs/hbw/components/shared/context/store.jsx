@@ -5,6 +5,7 @@ import React, { Component, createContext } from 'react';
 import ActionCable from 'actioncable';
 import orderBy from 'lodash-es/orderBy';
 import partition from 'lodash-es/partition';
+import Messenger from 'messenger';
 import { parseISO } from 'date-fns';
 
 export const StoreContext = createContext({});
@@ -58,7 +59,7 @@ const withStoreContext = (WrappedComponent) => {
 
       if (assignee !== null) {
         if (assignedToMe) {
-          Application.messenger.notice(t('notifications.new_assigned_task', {
+          Messenger.notice(t('notifications.new_assigned_task', {
             task_name: name
           }));
         } else {
