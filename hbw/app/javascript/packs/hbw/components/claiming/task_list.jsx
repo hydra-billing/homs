@@ -94,7 +94,7 @@ class HBWClaimingTaskList extends Component {
   };
 
   filterTasks = () => this.tasksForCurrentTab().filter(({ description }) => (
-    description && description.includes(this.state.searchQuery)
+    description && description.toLowerCase().includes(this.state.searchQuery.toLowerCase())
   ));
 
   tasksForRender = () => {
