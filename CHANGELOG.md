@@ -1,4 +1,4 @@
-v2.1.5 [unreleased]
+v2.1.5 [2020-03-05]
 -------------------
 ### Bugfixes
 - [#435](https://github.com/latera/homs/pull/435) Add endpoint for events from Camunda.
