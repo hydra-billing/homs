@@ -31,6 +31,7 @@ config.resolve.alias = {
   tooltip:                    'tooltip.js/dist/umd/tooltip.js',
   'bootstrap-datetimepicker': 'eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker',
   shared:                     path.resolve(__dirname, '../../hbw/app/javascript/packs/hbw/components/shared'),
+  messenger:                  path.resolve(__dirname, '../../app/javascript/utils/messenger'),
 };
 
 module.exports = config;
