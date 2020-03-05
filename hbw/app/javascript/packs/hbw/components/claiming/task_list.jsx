@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Messenger from 'messenger';
 import { StoreContext } from 'shared/context/store';
 import Tabs from 'shared/element/task_tabs';
 import Search from './search';
@@ -49,7 +50,7 @@ class HBWClaimingTaskList extends Component {
     });
 
     if (!ok) {
-      Application.messenger.error(t('errors.task_already_claimed', {
+      Messenger.error(t('errors.task_already_claimed', {
         task_name: task.name
       }));
     }

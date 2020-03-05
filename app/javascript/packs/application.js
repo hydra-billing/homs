@@ -10,7 +10,6 @@ import '../init/translations';
 import 'jquery-ujs';
 import 'select2/select2.full';
 import 'select2/i18n/ru';
-import { Growl } from 'jquery.growl';
 import 'bootstrap-sass';
 import 'fileinput';
 import 'bootstrap-datetimepicker';
@@ -18,6 +17,7 @@ import 'confirm';
 import 'bootstrap-multiselect';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Messenger from 'messenger';
 import OrderList from '../components/order_list';
 
 $(() => $('body').on('dp.change', (evt) => {
@@ -124,88 +124,9 @@ $(() => $('.show-hidden-order-data').on('click', 'a', function () {
 }));
 
 const defaultExport = {};
-class Messenger {
-  constructor () {
-    this.durations = {
-      default: 5,
-      success: 5,
-      warning: 15,
-      error:   20000
-    };
-
-    this.typeMap = {
-      default: ['info', 'notice'],
-      success: ['success'],
-      warning: ['warn'],
-      error:   ['error']
-    };
-
-    this.stylesMap = { success: 'notice' };
-
-    Object.keys(this.typeMap).forEach((key) => {
-      const aliases = this.typeMap[key];
-
-      this[key] = (_key => options => this.inform(options, _key))(key);
-
-      [...aliases].forEach((alias) => {
-        this[alias] = this[key];
-      });
-    });
-  }
-
-  inform = (opts, level) => {
-    let options = opts;
-
-    if ($.type(opts) === 'string') {
-      options = { message: opts };
-    }
-
-    const o = { ...options };
-
-    if (!options.title) {
-      const title = this.titleFor(options, level);
-      o.title = (title != null) ? title : '';
-    }
-
-    o.style = this.stylesMap[level] || level;
-    o.message = $('<div/>').text(options.message).html();
-    o.duration = this.durations[level] * 1000;
-    o.size = 'large';
-
-    $.growl(o);
-  };
-
-  titleFor = (options, level) => {
-    if (level === 'error') {
-      return I18n.t('js.error');
-    }
-    return null;
-  };
-
-  show = messages => (() => {
-    const result = [];
-
-    [...messages].forEach((message) => {
-      const messageType = message[0];
-
-      if (this[messageType]) {
-        if ($.type(message[1]) === 'array') {
-          result.push([...message[1]].map(msg => this[message[0]](msg)));
-        } else {
-          result.push(this[message[0]](message[1]));
-        }
-      } else {
-        result.push(undefined);
-      }
-    });
-
-    return result;
-  })();
-}
-defaultExport.Messenger = Messenger;
 
 class Homs {
-  messenger = new Messenger();
+  messenger = Messenger;
 
   enableDateTimePicker = (allowClear = false) => {
     $('.datetime-picker').each(function () {
@@ -292,34 +213,7 @@ $(() => {
   Application.enableOrderAttributePicker(false);
 });
 
-class PatchedGrowl extends Growl {
-  constructor (...args) {
-    super(...args);
-
-    this.stopped = false;
-  }
-
-  static growl (settings = {}) {
-    this.initialize();
-    return new PatchedGrowl(settings);
-  }
-
-  click = () => {
-    this.$growl().stop(true, true);
-    this.stopped = true;
-  };
-
-  mouseLeave = () => {
-    if (!this.stopped) {
-      this.waitAndDismiss();
-    }
-  };
-}
 export default defaultExport;
-
-$.growl = function (options = {}) {
-  return PatchedGrowl.growl(options);
-};
 
 $(() => {
   if (!('HBWidget' in window)) {

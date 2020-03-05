@@ -1,7 +1,11 @@
 v2.2.2 [unreleased]
 -------------------
+### Refactoring
+- [#442](https://github.com/latera/homs/pull/442) Turn Messenger class to importable module.
+
 ### Bugfixes
 - [#441](https://github.com/latera/homs/pull/441) Make task search case insensitive.
+
 
 v2.2.1 [2020-03-01]
 -------------------
