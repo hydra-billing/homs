@@ -24,6 +24,7 @@ services:
     environment:
       GENERATE_DOC: $GENERATE_DOC
       SIMPLE_COV_ENABLED: $SIMPLE_COV_ENABLED
+      SEED_DB: $HOMS_DB_SEED
     depends_on:
       - db_homs
       - memcached
