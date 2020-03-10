@@ -10,7 +10,8 @@ Application consists of three parts:
 
 Requirements:
 
-* [PostgreSQL](http://www.postgresql.org/) 9.4.x+
+* [Docker](https://docker.com/)
+* [docker-compose](https://docs.docker.com/compose/install/)
 
 Resources:
 
@@ -25,26 +26,18 @@ The prefered way to install HOMS is to use [Docker](https://www.docker.com/).
 
 ### In production
 
-1. Install [docker-compose](https://docs.docker.com/compose/install/).
-2. Download `docker-compose.yml`:
+1. Download `docker-compose.yml` and default `.env` config file:
 
     ```bash
     wget https://raw.githubusercontent.com/latera/homs/master/docker-compose.yml
-    ```
-
-3. For OS X users: make path to folder with HOMS shared in `Docker -> Preferences... -> File Sharing`.
-
-4. Copy your (or default) `.env` file to your project's directory:
-
-    ```bash
-    cp .env.sample .env
+    wget https://raw.githubusercontent.com/latera/homs/master/.env.sample -O .env
     ```
 
     :pushpin: All variables are set in `.env` file. There you can change them, if you want to.
+    
+2. For OS X users: make path to folder with config shared in `Docker -> Preferences... -> File Sharing`.
 
-5. Set `HOMS_PATH` variable to your `.env` with path to your HOMS source directory.
-
-6. Add `SECRET_KEY_BASE` variable to your `.env` with uniq id as value. You can generate key with `openssl rand -hex 64` command. For example:
+3. Set `SECRET_KEY_BASE` variable in your `.env` with uniq id as value. You can generate key with `openssl rand -hex 64` command. For example:
 
     ```bash
     SECRET_KEY_BASE=0750fd0eac13032778f0a42e2ab450003eaece477ea881501be0cc438f870a2f498dbbc00ffb7c8379c30c960568a402d315496bb7bc2b3ee324401ba788a
@@ -52,21 +45,19 @@ The prefered way to install HOMS is to use [Docker](https://www.docker.com/).
 
     :warning: Make sure this key is secret and don't share it with anyone.
 
-7. Change [Minio](https://github.com/minio/minio) credentials in `.env` file. Generate `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` values with any credentials generator, e.g. `pwgen 32 2`.
+4. Change [Minio](https://github.com/minio/minio) credentials in `.env` file. Generate `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` values with any credentials generator, e.g. `pwgen 32 2`.
 
-8. Run `docker-compose`:
+5. Run `docker-compose`:
 
     ```bash
     docker-compose up -d
     ```
 
-9. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
+6. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
 
-10. Navigate to [Camunda Admin](http://localhost:8766/camunda) and create admin user with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file.
+7. Login to [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*. Now you are able to start Pizza Order demo process.
 
-11. (Optional) If you want to use demo processes, navigate to [Camunda](http://localhost:8766/camunda/app/admin/default/#/user-create) and create user with `user@example.com` email.
-
-12. Log in at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
+You can login to [Camunda Admin inteface](http://localhost:8766/camunda) with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file (`user/changeme` if these variables aren't set).
 
 ### In development
 
