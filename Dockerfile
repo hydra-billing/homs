@@ -35,6 +35,7 @@ COPY Gemfile Gemfile.lock Rakefile config.ru package.json yarn.lock .eslintrc /o
 COPY hbw/*.gemspec /opt/homs/hbw/
 COPY hbw/lib/hbw/ /opt/homs/hbw/lib/hbw/
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
+ENV MEMCACHED_URL memcached
 
 RUN gem install bundler
 RUN bundle config --global frozen 1
