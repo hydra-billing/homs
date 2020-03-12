@@ -1,6 +1,6 @@
 HBW::Engine.routes.draw do
   defaults format: :json do
-    resources :tasks, only: [:index, :show] do
+    resources :tasks, only: [:index, :show, :destroy] do
       put :form, on: :member, action: :submit
       get :lookup, on: :member
       post :claim, on: :member, action: :claim

@@ -15,6 +15,16 @@ module HBW
       @task = widget.get_task_with_form(task_id, entity_class, cache_key)
     end
 
+    def destroy
+      result = widget.cancel_process(params[:id])
+
+      if result
+        head :no_content
+      else
+        head :bad_request
+      end
+    end
+
     def submit
       data = form_data.select { |key| fields_for_save.include?(key) }
 

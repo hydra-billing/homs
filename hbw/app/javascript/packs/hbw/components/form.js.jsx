@@ -3,6 +3,7 @@
 
 import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
+import HBWFormCancelProcess from './form/cancel_process_button.js';
 
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect',
@@ -32,6 +33,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
           <form method="POST" ref={(form) => { this.form = form; }} onSubmit={this.submit}>
             {this.iterateControls(this.props.form.fields)}
             {this.submitControl(this.props.form.fields)}
+            {this.deleteControl()}
           </form>
           {!this.props.assignee && this.renderClaimButton()}
         </div>;
@@ -154,6 +156,17 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       }
 
       return null;
+    };
+
+    deleteControl = () => {
+      const { form, env, processInstanceId } = this.props;
+
+      if (!form.hide_delete_button) {
+        return <HBWFormCancelProcess env={env}
+                                     processInstanceId={processInstanceId} />;
+      } else {
+        return null;
+      }
     };
 
     submit = (e) => {
