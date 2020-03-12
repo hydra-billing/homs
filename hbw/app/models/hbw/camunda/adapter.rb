@@ -16,6 +16,11 @@ module HBW
         response.status == 200 && response.body || []
       end
 
+      def cancel_process(id)
+        response = api.delete("process-instance/#{id}")
+        response.status == 204
+      end
+
 
       def submit(entity_class, task_id, form_data)
         form_definition = form(task_id, entity_class)

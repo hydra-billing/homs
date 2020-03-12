@@ -1763,4 +1763,10 @@ post:
 
     variableName=homsOrderCode: []
 
-delete: {}
+delete:
+  process-instance/15:
+    "":
+      status: 204
+  widget/tasks/15:
+    "":
+      status: 200

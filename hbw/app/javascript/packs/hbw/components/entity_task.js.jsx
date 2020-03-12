@@ -64,13 +64,14 @@ modulejs.define(
             return <Error error={this.state.error} env={this.props.env}/>;
           } else {
             const opts = {
-              id:        this.props.guid,
-              taskId:    this.props.task.id,
+              id:                this.props.guid,
+              taskId:            this.props.task.id,
+              processInstanceId: this.props.task.process_instance_id,
               form,
-              env:       this.props.env,
-              error:     this.state.error,
-              assignee:  this.props.task.assignee,
-              variables: this.formVariablesFromTask(this.props.task)
+              env:               this.props.env,
+              error:             this.state.error,
+              assignee:          this.props.task.assignee,
+              variables:         this.formVariablesFromTask(this.props.task)
             };
 
             return <Form {...opts}/>;

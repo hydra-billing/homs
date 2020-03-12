@@ -2,6 +2,8 @@ en:
   hbw:
     js:
       submit: Submit
+      cancel: Cancel process
+      confirm_cancel: Сomplete the process?
       error: Error
       more: More
       no_tasks: No tasks

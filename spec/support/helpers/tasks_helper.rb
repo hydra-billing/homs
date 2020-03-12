@@ -81,5 +81,9 @@ module Features
     def clear_search_field
       find('.search-input-with-controls').find('.cross').click
     end
+
+    def confirm_dialog_box
+      ajax { page.driver.browser.switch_to.alert.accept }
+    end
   end
 end

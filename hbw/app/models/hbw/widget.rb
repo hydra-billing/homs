@@ -16,7 +16,7 @@ class HBW::Widget
   def_delegators :@adapter, :task_list, :get_task_with_form, :form,
                  :submit, :users, :users_lookup, :user_exist?,
                  :claim_task, :get_task_by_id, :get_form_by_task_id,
-                 :get_forms_for_task_list
+                 :get_forms_for_task_list, :cancel_process
 
   include HBW::Inject[:adapter]
 

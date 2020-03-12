@@ -11,3 +11,4 @@ import './submit.js';
 import './submit_select.js';
 import './text.js';
 import './user.js';
+import './cancel_process_button.js';
