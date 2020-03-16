@@ -143,7 +143,11 @@ en:
       setup_order_types: Order types
       tasks: Tasks
     form_errors:
-      errors: '%{count} prohibited this user from being saved:'
+      errors:
+        one: '%{count} prohibited this user from being saved:'
+        few: '%{count} prohibited this user from being saved:'
+        many: '%{count} prohibited this user from being saved:'
+        other: '%{count} prohibited this user from being saved:'
   admin:
     order_types:
       index:
