@@ -21,6 +21,7 @@
       "multiLine": { "beforeColon": false,"afterColon": true, "align": "value" }
     }],
     "max-len": [1, { "code": 121, "ignoreComments": true }],
+    "no-alert": 0,
     "no-underscore-dangle": 0,
     "no-else-return": 0,
     "no-param-reassign": ["error", { "props": false }],

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class HBWFormCancelProcess extends Component {
   state = {
     error: false,
-  }
+  };
 
   componentDidMount () {
     this.props.bind('hbw:have-errors', () => this.setState({ error: true }));
@@ -20,7 +20,7 @@ class HBWFormCancelProcess extends Component {
         async:  false
       });
     }
-  }
+  };
 
   render () {
     const { env } = this.props;

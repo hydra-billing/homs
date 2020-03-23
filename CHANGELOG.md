@@ -11,6 +11,7 @@ v2.2.2 [unreleased]
 
 ### Bugfixes
 - [#441](https://github.com/latera/homs/pull/441) Make task search case insensitive.
+- [#450](https://github.com/latera/homs/pull/450) Force react-select menu to overlay bootstrap form controls.
 
 
 v2.2.1 [2020-03-01]
@@ -47,6 +48,11 @@ v2.2.0 [2020-02-13]
 
 ### Bugfixes
 - [#430](https://github.com/latera/homs/pull/430) Apply events received while store initialization in turn.
+
+v2.1.6 [unreleased]
+-------------------
+### Bugfixes
+- [#450](https://github.com/latera/homs/pull/450) Force react-select menu to overlay bootstrap form controls.
 
 v2.1.5 [2020-03-05]
 -------------------
