@@ -1,3 +1,8 @@
+v2.1.6 [unreleased]
+-------------------
+### Bugfixes
+- [#450](https://github.com/latera/homs/pull/450) Force react-select menu to overlay bootstrap form controls.
+
 v2.1.5 [2020-03-05]
 -------------------
 ### Bugfixes

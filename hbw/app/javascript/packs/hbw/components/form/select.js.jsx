@@ -160,6 +160,10 @@ modulejs.define('HBWFormSelect',
               color:           'white',
               backgroundColor: '#2C3E50'
             }
+          }),
+          menu: base => ({
+            ...base,
+            'z-index': 99,
           })
         };
       };
