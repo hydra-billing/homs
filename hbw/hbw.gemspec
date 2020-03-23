@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*']
 
-  s.add_dependency 'rails', '~> 5.2.3'
+  s.add_dependency 'rails', '~> 5.2.4'
   s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'faraday'
   s.add_dependency 'faraday_middleware'

@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 ruby '2.6.5'
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 5.2.4'
 gem 'sass-rails', '~> 5.0.7'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.10'
 gem 'coderay', '~> 1.1'
 gem 'kaminari', '~> 0.16'  # adds pagination to ActiveModels
 gem 'bootstrap-sass'
@@ -28,8 +28,8 @@ gem 'dry-validation', '~> 0.11.1'
 gem 'aws-sdk', '~> 2'
 gem 'web-console', '~> 2.0', group: :development
 gem 'settingslogic'
-gem 'webpacker', '~> 4.0'
-gem 'rack', '~> 2.0.6'
+gem 'webpacker', '~> 5.0'
+gem 'rack', '~> 2.2.2'
 gem 'dalli'
 gem 'redis'
 
