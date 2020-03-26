@@ -4,7 +4,7 @@ v2.3.0 [unreleased]
 - [#446](https://github.com/latera/homs/pull/446) Add cancel process button to all forms by default.
 
 
-v2.2.2 [unreleased]
+v2.2.2 [2020-03-26]
 -------------------
 ### Refactoring
 - [#442](https://github.com/latera/homs/pull/442) Turn Messenger class to importable module.
@@ -49,7 +49,7 @@ v2.2.0 [2020-02-13]
 ### Bugfixes
 - [#430](https://github.com/latera/homs/pull/430) Apply events received while store initialization in turn.
 
-v2.1.6 [unreleased]
+v2.1.6 [2020-03-26]
 -------------------
 ### Bugfixes
 - [#450](https://github.com/latera/homs/pull/450) Force react-select menu to overlay bootstrap form controls.
