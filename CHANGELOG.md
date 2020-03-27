@@ -1,4 +1,4 @@
-v2.3.0 [unreleased]
+v2.3.0 [2020-03-27]
 -------------------
 ### Features
 - [#446](https://github.com/latera/homs/pull/446) Add cancel process button to all forms by default.
