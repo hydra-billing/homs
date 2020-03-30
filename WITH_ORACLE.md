@@ -66,8 +66,13 @@ If you want to use Oracle as source for your HOMS instance.
     ```
 
     :pushpin: For access to host machine OS X users can use special DNS name `host.docker.internal` as host in `tnsnames.ora` ([details](https://docs.docker.com/docker-for-mac/networking)).
+11. Add environment variable `$HOMS_URL` to `.env` file with URL to your HOMS:
 
-11. Add test environment to `config/database.yml`:
+    ```bash
+        HOMS_URL=http://docker.for.mac.localhost:3000/api
+    ```
+
+12. Add test environment to `config/database.yml`:
 
     ```yml
     development:
@@ -81,14 +86,10 @@ If you want to use Oracle as source for your HOMS instance.
       password: <%= ENV['HOMS_DB_PASSWORD'] %>
     ```
 
-12. Run `docker-compose` with custom config:
+13. Run `docker-compose` with custom config:
 
     ```bash
-    docker-compose -f docker-compose.dev.oracle.yml up -d
+    docker-compose -f docker-compose.dev.yml up -d
     ```
 
-13. Navigate to [Camunda Admin](http://localhost:8080/camunda) and create admin user with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file.
-
-14. (Optional) If you want to use demo processes, navigate to [Camunda](http://localhost:8080/camunda/app/admin/default/#/user-create) and create user with `user@example.com` email.
-
-15. Log in at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
+14. You can login to [Camunda Admin inteface](http://localhost:8766/camunda) with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file (`user/changeme` if these variables aren't set).
