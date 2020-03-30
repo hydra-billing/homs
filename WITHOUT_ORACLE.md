@@ -20,19 +20,27 @@ If you don't want to use Oracle as source for your HOMS instance.
 
     :pushpin: All variables are set in `.env` file. There you can change them, if you want to.
 
-5. Create your own configs from samples:
+5. Add environment variable `$HOMS_URL` to `.env` file with URL to your HOMS:
+
+    :pushpin: For access to host machine OS X users can use special DNS name `host.docker.internal` as host in `tnsnames.ora` ([details](https://docs.docker.com/docker-for-mac/networking)).
+
+    ```bash
+        HOMS_URL=http://docker.for.mac.localhost:3000/api
+    ```
+
+6. Create your own configs from samples:
 
     ```bash
     find config -name '*.sample' | xargs -I{} sh -c 'cp $1 ${1%.*}' -- {}
     ```
 
-6. Be sure to update secret key in `config/secrets.yml`. You can generate key with this command:
+7. Be sure to update secret key in `config/secrets.yml`. You can generate key with this command:
 
     ```bash
     openssl rand -hex 64
     ```
 
-7. Add test environment to `config/database.yml`:
+8. Add test environment to `config/database.yml`:
 
     ```yml
     development:
@@ -46,14 +54,10 @@ If you don't want to use Oracle as source for your HOMS instance.
       password: <%= ENV['HOMS_DB_PASSWORD'] %>
     ```
 
-8. Run `docker-compose` with custom config:
+9. Run `docker-compose` with custom config:
 
     ```bash
     docker-compose -f docker-compose.dev.yml up -d
     ```
 
-9. Navigate to [Camunda Admin](http://localhost:8080/camunda) and create admin user with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file.
-
-10. (Optional) If you want to use demo processes, navigate to [Camunda](http://localhost:8080/camunda/app/admin/default/#/user-create) and create user with `user@example.com` email.
-
-11. Log in at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
+10. You can login to [Camunda Admin inteface](http://localhost:8766/camunda) with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file (`user/changeme` if these variables aren't set).

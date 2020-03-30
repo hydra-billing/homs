@@ -60,10 +60,20 @@ The prefered way to install HOMS is to use [Docker](https://www.docker.com/).
 You can login to [Camunda Admin inteface](http://localhost:8766/camunda) with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file (`user/changeme` if these variables aren't set).
 
 ### In development
+1. Follow the instructions below:
+    * [With Oracle Instant Client](https://github.com/latera/homs/blob/master/WITH_ORACLE.md).
 
-* [With Oracle Instant Client](https://github.com/latera/homs/blob/master/WITH_ORACLE.md).
+    * [Without Oracle Instant Client](https://github.com/latera/homs/blob/master/WITHOUT_ORACLE.md).
 
-* [Without Oracle Instant Client](https://github.com/latera/homs/blob/master/WITHOUT_ORACLE.md).
+2. Start `webpack-dev-server` in source directory:
+    ```bash
+    bin/webpack-dev-server
+    ```
+3. Start HOMS application in another console tab:
+    ```bash
+    rails s
+    ```
+5. Log in at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
 ## Contributing/Development
 

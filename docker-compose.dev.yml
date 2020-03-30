@@ -65,30 +65,6 @@ services:
       - ./data/minio:/opt/minio
     ports:
       - $MINIO_PORT:9000
-  homs:
-    image: latera/homs
-    container_name: homs
-    restart: always
-    env_file:
-      - ".env"
-    environment:
-      ADMIN_EMAIL: $HOMS_USER
-      ADMIN_PASSWORD: $HOMS_PASSWORD
-      ADMIN_API_TOKEN: $HOMS_TOKEN
-      SEED_DB: $HOMS_DB_SEED
-    links:
-      - db_homs:$HOMS_DB_HOST
-      - camunda:$BPM_HOST
-    volumes:
-      - $HOMS_PATH:/opt/homs
-    depends_on:
-      - db_homs
-      - camunda
-      - memcached
-    ports:
-      - $HOMS_PORT:3000
-    networks:
-      - custom_network
   memcached:
     image: memcached
     container_name: memcached
