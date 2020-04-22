@@ -20,6 +20,7 @@ Initialize widget with following options:
 * `widgetPath` (path used by widget for sending HTTP-requests);
 * `widgetURL` (URL used to WebSocket connection with widget backend);
 * `taskListPath` (relative path to page with task list mounted to `availableTaskListContainer`);
+* `userIdentifier` (email of user in HOMS);
 * `locale` (object):
     * `code` (available values are 'en', 'ru')
     * `dateTimeFormat` (format for dates according to [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table))
