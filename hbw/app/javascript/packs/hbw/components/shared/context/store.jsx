@@ -155,14 +155,16 @@ const withStoreContext = (WrappedComponent) => {
     };
 
     initSocket = () => {
-      const { host, protocol } = new URL(this.props.env.widgetURL);
+      const { userIdentifier, widgetURL } = this.props.env;
+      const { host, protocol } = new URL(widgetURL);
+
       const socketUrl = protocol === 'https:'
         ? `wss://${host}/widget/cable`
         : `ws://${host}/widget/cable`;
 
       const ws = ActionCable.createConsumer(socketUrl);
 
-      ws.subscriptions.create({ channel: 'TaskChannel' }, {
+      ws.subscriptions.create({ channel: 'TaskChannel', user_identifier: userIdentifier }, {
         received: (data) => {
           const callback = async () => {
             await this.onReceive(JSON.parse(data));

@@ -1,5 +1,5 @@
 class TaskChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "task_channel_#{current_user.email}"
+    stream_from "task_channel_#{params[:user_identifier]}"
   end
 end

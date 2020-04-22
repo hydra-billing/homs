@@ -1,8 +1,18 @@
+v2.3.1 [unreleased]
+-------------------
+### Bugfixes
+- [#452](https://github.com/latera/homs/pull/452) Pass user e-mail explicitly on websocket channel subscription create.
+
 v2.3.0 [2020-03-27]
 -------------------
 ### Features
 - [#446](https://github.com/latera/homs/pull/446) Add cancel process button to all forms by default.
 
+
+v2.2.3 [unreleased]
+-------------------
+### Bugfixes
+- [#452](https://github.com/latera/homs/pull/452) Pass user e-mail explicitly on websocket channel subscription create.
 
 v2.2.2 [2020-03-26]
 -------------------

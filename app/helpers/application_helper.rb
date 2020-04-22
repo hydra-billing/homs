@@ -96,6 +96,7 @@ module ApplicationHelper
 
   def hbw_options
     default_options = {
+      userIdentifier: current_user.email,
       widgetURL: root_url,
       widgetPath: '/widget',
       entity_class: 'order',
