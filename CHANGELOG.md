@@ -1,4 +1,4 @@
-v2.2.3 [unreleased]
+v2.2.3 [2020-04-24]
 -------------------
 ### Bugfixes
 - [#452](https://github.com/latera/homs/pull/452) Pass user e-mail explicitly on websocket channel subscription create.
