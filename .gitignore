@@ -89,6 +89,7 @@ Session.vim
 Capfile
 
 .rvmrc
+.ruby-version
 .screenrc
 .ackrc
 .irb_history
