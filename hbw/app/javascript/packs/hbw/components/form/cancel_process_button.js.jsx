@@ -11,11 +11,12 @@ class HBWFormCancelProcess extends Component {
   }
 
   onClick = () => {
-    const result = window.confirm(this.props.env.translator('confirm_cancel'));
+    const { env, processInstanceId } = this.props;
+    const result = window.confirm(env.translator('confirm_cancel'));
 
     if (result) {
-      this.props.env.connection.request({
-        url:    `${this.props.env.connection.serverURL}/tasks/${this.props.processInstanceId}`,
+      env.connection.request({
+        url:    `${env.connection.serverURL}/tasks/${processInstanceId}`,
         method: 'DELETE',
         async:  false
       });
@@ -25,18 +26,13 @@ class HBWFormCancelProcess extends Component {
   render () {
     const { env } = this.props;
 
-    const className = 'btn btn-primary';
-
-    return <div className="row">
-             <div className="tab-panel form-group col-xs-12 delete-process-btn">
-               <button className={className}
-                       type="button"
-                       onClick={this.onClick}>
-                 <i className="fas fa-trash" />
-                   {`${env.translator('cancel')}`}
-               </button>
-             </div>
-           </div>;
+    return (
+      <button className="btn btn-primary"
+              type="button"
+              onClick={this.onClick}>
+        {`${env.translator('cancel')}`}
+      </button>
+    );
   }
 }
 

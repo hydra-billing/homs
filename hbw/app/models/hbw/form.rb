@@ -20,13 +20,13 @@ module HBW
       end
     end
 
-    definition_reader :variables, :task_id, :entity_class, :hide_delete_button
+    definition_reader :variables, :task_id, :entity_class, :hide_cancel_button
 
     def css_class
       definition.fetch('css_class', '')
     end
 
-    def hide_delete_button
+    def hide_cancel_button
       definition.fetch('hide_delete_button', '')
     end
 
@@ -34,7 +34,7 @@ module HBW
       { css_class: css_class,
         fields: fields.map(&:as_json),
         variables: variables,
-        hide_delete_button: hide_delete_button }
+        hide_cancel_button: hide_cancel_button }
     end
 
     def fields
