@@ -3,7 +3,7 @@ en:
     js:
       submit: Submit
       cancel: Cancel process
-      confirm_cancel: Сomplete the process?
+      confirm_cancel: Cancel the process?
       error: Error
       more: More
       no_tasks: No tasks
