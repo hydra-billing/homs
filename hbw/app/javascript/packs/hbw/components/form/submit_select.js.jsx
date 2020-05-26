@@ -1,5 +1,6 @@
 import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
+import CancelProcessButton from './cancel_process_button.js';
 
 modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
   class HBWFormSubmitSelect extends React.Component {
@@ -18,7 +19,10 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
     }
 
     render () {
-      const { params, name, showSubmit } = this.props;
+      const {
+        params, name, showSubmit, showCancelButton
+      } = this.props;
+
       const cssClass = `col-xs-12 ${params.css_class}`;
       const self = this;
 
@@ -26,7 +30,10 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
 
       return showSubmit
       && <div className={cssClass}>
-          <span className="btn-group">{ buttons }</span>
+          <div className="control-buttons">
+            { showCancelButton && this.renderCancelButton() }
+            { buttons }
+          </div>
           <input type="hidden" name={name} value={this.state.value} />
         </div>;
     }
@@ -53,6 +60,13 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
         <i className={faClass} />
         {` ${option.name}`}
       </button>;
+    };
+
+    renderCancelButton = () => {
+      const { env, processInstanceId } = this.props;
+
+      return <CancelProcessButton processInstanceId={processInstanceId}
+                                  env={env} />;
     };
 
     serialize = () => {

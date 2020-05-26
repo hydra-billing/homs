@@ -3,7 +3,6 @@
 
 import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
-import HBWFormCancelProcess from './form/cancel_process_button.js';
 
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect',
@@ -28,14 +27,18 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     }
 
     render () {
-      return <div className='hbw-form'>
-          <Error error={this.state.error || this.props.error} env={this.props.env} />
-          <form method="POST" ref={(form) => { this.form = form; }} onSubmit={this.submit}>
-            {this.iterateControls(this.props.form.fields)}
-            {this.submitControl(this.props.form.fields)}
-            {this.deleteControl()}
+      const { env, form, assignee } = this.props;
+
+      return <div className="hbw-form">
+          <Error error={this.state.error || this.props.error}
+                 env={env} />
+          <form method="POST"
+                ref={(f) => { this.form = f; }}
+                onSubmit={this.submit}>
+            {this.iterateControls(form.fields)}
+            {!!assignee && this.submitControl(form.fields)}
           </form>
-          {!this.props.assignee && this.renderClaimButton()}
+          {!assignee && this.renderClaimButton()}
         </div>;
     }
 
@@ -70,15 +73,20 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     ));
 
     formControl = (name, params) => {
+      const { submitting, fileUploading } = this.state;
+      const {
+        id, variables, env, form, assignee, processInstanceId
+      } = this.props;
+
       const opts = {
         name,
         params,
-        id:              this.props.id,
-        value:           this.props.variables[name],
-        formSubmitting:  this.state.submitting || this.state.fileUploading,
-        env:             this.props.env,
-        fileListPresent: this.fileListPresent(this.props.form.fields),
-        showSubmit:      !!this.props.assignee
+        id,
+        env,
+        value:           variables[name],
+        formSubmitting:  submitting || fileUploading,
+        fileListPresent: this.fileListPresent(form.fields),
+        showSubmit:      !!assignee
       };
 
       if (!this.props.assignee) {
@@ -91,7 +99,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         case 'group':
           return <Group
             {...opts}
-            variables={this.props.variables}
+            variables={variables}
             {...onRef} />;
         case 'datetime':
           return <DateTime
@@ -108,6 +116,8 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         case 'submit_select':
           return <SubmitSelect
             {...opts}
+            showCancelButton={!form.hide_cancel_button}
+            processInstanceId={processInstanceId}
             {...onRef} />;
         case 'checkbox':
           return <Checkbox
@@ -140,33 +150,18 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     };
 
     submitControl = (fields) => {
+      const { submitting, fileUploading } = this.state;
+      const { form, env, processInstanceId } = this.props;
       const last = fields[fields.length - 1];
-      if (last.type !== 'submit_select') {
-        // Draw default form submit button
-        const params = {
-          title:     'Submit the form',
-          css_class: 'btn btn-primary',
-          fa_class:  'fas fa-check-square'
-        };
 
-        return <Submit params={params}
-                       formSubmitting={this.state.submitting || this.state.fileUploading}
-                       showSubmit={!!this.props.assignee}
-                       env={this.props.env} />;
+      if (last.type !== 'submit_select') {
+        return <Submit formSubmitting={submitting || fileUploading}
+                       showCancelButton={!form.hide_cancel_button}
+                       processInstanceId={processInstanceId}
+                       env={env} />;
       }
 
       return null;
-    };
-
-    deleteControl = () => {
-      const { form, env, processInstanceId } = this.props;
-
-      if (!form.hide_delete_button) {
-        return <HBWFormCancelProcess env={env}
-                                     processInstanceId={processInstanceId} />;
-      } else {
-        return null;
-      }
     };
 
     submit = (e) => {
