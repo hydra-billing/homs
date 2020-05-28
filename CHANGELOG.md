@@ -1,4 +1,4 @@
-v2.3.2 [unreleased]
+v2.3.2 [2020-05-28]
 -------------------
 ### Features
 - [#462](https://github.com/latera/homs/pull/462) Restyle form control buttons.
