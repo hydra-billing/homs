@@ -103,6 +103,12 @@ bundle exec rspec spec/PATH/TO/FILE_spec.rb
 bundle exec rspec spec/PATH/TO/DIR
 ```
 
+## Links
+
+1. [Repo with helper classes for BPMN development](https://github.com/latera/camunda-ext).
+
+2. [Example of creating a demo business process](https://github.com/latera/camunda-ext/tree/master/demo_processes).
+
 ## License
 
 Copyright (c) 2019 Latera LLC under the [Apache License](https://github.com/latera/homs/blob/master/LICENSE).
