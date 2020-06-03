@@ -1,3 +1,8 @@
+v2.4.0 [unreleased]
+-------------------
+### Features
+- [#465](https://github.com/latera/homs/pull/465) Add SymlinkAssets in development mode and clean assets before every build.
+
 v2.3.2 [2020-05-28]
 -------------------
 ### Features
@@ -13,7 +18,6 @@ v2.3.0 [2020-03-27]
 ### Features
 - [#446](https://github.com/latera/homs/pull/446) Add cancel process button to all forms by default.
 
-
 v2.2.3 [2020-04-24]
 -------------------
 ### Bugfixes
@@ -27,7 +31,6 @@ v2.2.2 [2020-03-26]
 ### Bugfixes
 - [#441](https://github.com/latera/homs/pull/441) Make task search case insensitive.
 - [#450](https://github.com/latera/homs/pull/450) Force react-select menu to overlay bootstrap form controls.
-
 
 v2.2.1 [2020-03-01]
 -------------------

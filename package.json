@@ -19,6 +19,7 @@
     "bootstrap-multiselect": "0.9.13-1",
     "bootstrap-sass": "^3.4.1",
     "classnames": "^2.2.6",
+    "clean-webpack-plugin": "^3.0.0",
     "date-fns": "^2.11.0",
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
     "expose-loader": "^0.7.5",
