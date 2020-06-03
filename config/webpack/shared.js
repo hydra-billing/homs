@@ -1,11 +1,14 @@
 const path = require('path');
 const { environment } = require('@rails/webpacker');
 const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const babel = require('./loaders/babel');
 const yaml = require('./loaders/yaml');
 const I18n = require('./loaders/I18n');
 const modulejs = require('./loaders/modulejs');
 const tooltip = require('./loaders/tooltip');
+
+const assetsPath = path.resolve(__dirname, '../../public/assets/');
 
 environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
   $:      'jquery',
@@ -14,6 +17,10 @@ environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
 }));
 
 environment.plugins.prepend('moment', new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru/));
+
+environment.plugins.prepend('clean', new CleanWebpackPlugin({
+  cleanOnceBeforeBuildPatterns: [assetsPath]
+}));
 
 environment.loaders.append('yaml', yaml);
 environment.loaders.append('babel', babel);
