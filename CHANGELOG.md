@@ -1,3 +1,8 @@
+v2.3.3 [unreleased]
+-------------------
+### Bugfixes
+- [#469](https://github.com/latera/homs/pull/469) Calculate delete_if/disable_if values before dependent component renders.
+
 v2.3.2 [2020-05-28]
 -------------------
 ### Features
