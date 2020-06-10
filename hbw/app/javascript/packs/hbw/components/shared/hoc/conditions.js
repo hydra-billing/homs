@@ -57,18 +57,15 @@ export default WrappedComponent => class WithConditions extends Component {
     return this.every(result);
   };
 
-  componentDidMount () {
-    this.hidden = this.deleteIf();
-    this.disabled = this.disableIf();
-  }
-
   every = results => results.every(el => el !== false);
 
   some = results => results.some(el => el === true);
 
   render () {
-    return <WrappedComponent hidden={this.hidden}
-                             disabled={this.disabled}
+    const [hidden, disabled] = [this.deleteIf(), this.disableIf()];
+
+    return <WrappedComponent hidden={hidden}
+                             disabled={disabled}
                              {...this.state}
                              {...this.props} />;
   }
