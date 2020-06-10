@@ -3,6 +3,11 @@ v2.4.0 [unreleased]
 ### Features
 - [#465](https://github.com/latera/homs/pull/465) Add SymlinkAssets in development mode and clean assets before every build.
 
+v2.3.3 [unreleased]
+-------------------
+### Bugfixes
+- [#469](https://github.com/latera/homs/pull/469) Calculate delete_if/disable_if values before dependent component renders.
+
 v2.3.2 [2020-05-28]
 -------------------
 ### Features
