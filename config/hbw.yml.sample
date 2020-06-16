@@ -6,24 +6,24 @@ hbw:
 
       bp_toolbar:
         entity_type_buttons:
-          vacation_request:                          # Order type code
-            - name: 'Handle Vacation Request'        # Button text
-              title: 'Start handle vacation process' # Button help text
-              class: 'btn btn-default'               # Button container class
-              fa_class: 'fas fa-user'                # Button icon class
-              bp_code: 'vacationRequestProcess'      # Business process code
-          support_request:
-            - name: 'Handle Support Request'
-              title: 'Start handle support process'
+          pizza_order:                              # Order type code
+            - name: 'Process Pizza Order'           # Button text
+              title: 'Start pizza order processing' # Button help text
+              class: 'btn btn-default'              # Button container class
+              fa_class: 'fas fa-user'               # Button icon class
+              bp_code: 'pizza_order'                # Business process code
+          new_customer:
+            - name: 'New Customer'
+              title: 'Start Creating Customer'
+              class: 'btn btn-success'
+              fa_class: 'fa fa-user'
+              bp_code: 'new_customer'
+          relocate_customer:
+            - name: 'Relocate Customer'
+              title: 'Start Relocating Customer'
               class: 'btn btn-default'
-              fa_class: 'fas fa-user'
-              bp_code: 'supportRequestProcess'
-          pizza_order:
-            - name: 'Process Pizza Order'
-              title: 'Start pizza order processing'
-              class: 'btn btn-default'
-              fa_class: 'fas fa-user'
-              bp_code: 'pizza_order'
+              fa_class: 'fa fa-suitcase-rolling'
+              bp_code: 'relocate_customer'
 
     billing_customer:
       entity_code_key: billingCustomerId
@@ -37,7 +37,19 @@ hbw:
 
       bp_toolbar:
         common_buttons: []
-        entity_type_buttons: {}
+        entity_type_buttons:
+          operator:
+            - name: 'New Customer'
+              title: 'Start Creating Customer'
+              class: 'btn btn-success'
+              fa_class: 'fa fa-user'
+              bp_code: 'new_customer'
+          SUBJ_TYPE_Person:
+            - name: 'Relocate Customer'
+              title: 'Start Relocating Customer'
+              class: 'btn btn-default'
+              fa_class: 'fa fa-suitcase-rolling'
+              bp_code: 'relocate_customer'
 
     crm_account:
       entity_code_key: crmAccountId

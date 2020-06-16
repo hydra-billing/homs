@@ -2,6 +2,7 @@ v2.4.0 [unreleased]
 -------------------
 ### Features
 - [#465](https://github.com/latera/homs/pull/465) Add SymlinkAssets in development mode and clean assets before every build.
+- [#470](https://github.com/latera/homs/pull/470) Add new type of processes.
 
 v2.3.2 [2020-05-28]
 -------------------

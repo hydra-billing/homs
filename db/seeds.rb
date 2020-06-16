@@ -33,69 +33,113 @@ end
 
 def add_initial_order_types
   [
-"common: &common
-  label: ''
-  type: string
-
+"
 order_type:
-  code: vacation_request
-  name: Vacation Request
+  code: relocate_customer
+  name: Relocate Customer
   fields:
-    employeeFirstName:
-      <<: *common
-      label: First Name
-    employeeLastName:
-      <<: *common
-      label: Last Name
-    employeeEmail:
-      <<: *common
-      label: E-mail
-    beginDate:
-      <<: *common
-      label: Begin Date
-      type: datetime
-    endDate:
-      <<: *common
-      label: End Date
-      type: datetime
-    motivationText:
-      <<: *common
-      label: Motivation Text
-    resolution:
-      <<: *common
-      label: Resolution
-    resolutionText:
-      <<: *common
-      label: Resolution Text
-    adjustResult:
-      <<: *common
-      label: Adjust Result",
-"common: &common
-  label: ''
-  type: string
+    customerCity:
+      type: string
+      label: Customer City
+    customerStreet:
+      type: string
+      label: Customer Street
+    customerHouse:
+      type: string
+      label: Customer House
+    customerEntrance:
+      type: string
+      label: Customer House
+    addressIsAvailable:
+      type: boolean
+      label: Customer address is available
 
+    changePlan:
+      type: boolean
+      label: Change Plan
+
+    planId:
+      type: number
+      label: Customer Plan
+    planComment:
+      type: string
+      label: Comment to plan
+
+    customerName:
+      type: string
+      label: Customer Name
+    customerSurname:
+      type: string
+      label: Customer Surname
+    customerPhone:
+      type: string
+      label: Customer Phone
+    customerEmail:
+      type: string
+      label: Customer Email
+    installDate:
+      type: datetime
+      label: Install Date",
+"
 order_type:
-  code: support_request
-  name: Support Request
+  code: new_customer
+  name: New Customer
   fields:
-    requesterName:
-      <<: *common
-      label: Requester Name
-    requesterPhone:
-      <<: *common
-      label: Requester Phone
-    subject:
-      <<: *common
-      label: Subject
-    description:
-      <<: *common
-      label: Description
-    resolution:
-      <<: *common
-      label: Resolution
-    resolutionText:
-      <<: *common
-      label: Resolution Text",
+    customerCity:
+      type: string
+      label: Customer City
+    customerStreet:
+      type: string
+      label: Customer Street
+    customerHouse:
+      type: string
+      label: Customer House
+    customerEntrance:
+      type: string
+      label: Customer House
+    addressIsAvailable:
+      type: boolean
+      label: Customer address is available
+    planId:
+      type: number
+      label: Customer Plan
+    planComment:
+      type: string
+      label: Comment to plan
+    customerName:
+      type: string
+      label: Customer Name
+    customerSurname:
+      type: string
+      label: Customer Surname
+    customerPhone:
+      type: string
+      label: Customer Phone
+    customerEmail:
+      type: string
+      label: Customer Email
+    installDate:
+      type: datetime
+      label: Install Date
+    fromFriends:
+      type: boolean
+      label: Friends
+    fromTV:
+      type: boolean
+      label: TV
+    fromFacebookAds:
+      type: boolean
+      label: Facebook Ads
+    fromOther:
+      type: string
+      label: Other
+    fileList:
+      type: json
+      label: Attached files
+    uploadedFile:
+      type: json
+      label: Attach file",
+
 "common: &common
   label: ''
   type: string
@@ -161,36 +205,25 @@ def add_initial_orders
     OrderSequenceService.new.create
   end
 
-  # vacation request order
-  unless Order.exists?(order_type_id: OrderType.find_by(code: 'vacation_request').id)
-    order = Order.new(order_type_id: OrderType.find_by(code: 'vacation_request').id)
+  unless Order.exists?(order_type_id: OrderType.find_by(code: 'new_customer'))
+    order = Order.new(order_type_id: OrderType.find_by(code: 'new_customer').id)
 
     order.data = {
-      employeeFirstName: 'James',
-      employeeLastName:  'Carter',
-      employeeEmail:     'james@example.com',
-      beginDate:         (Time.zone.now + 3.months).iso8601,
-      endDate:           (Time.zone.now + 3.months + 1.day).iso8601,
-      motivationText:    'I had a lot of work last 7 years'
+      customerCity: 'Omsk'
     }
     order.save
   end
 
-  # support request order
-  unless Order.exists?(order_type_id: OrderType.find_by(code: 'support_request').id)
-    order = Order.new(order_type_id: OrderType.find_by(code: 'support_request').id)
+  unless Order.exists?(order_type_id: OrderType.find_by(code: 'relocate_customer'))
+    order = Order.new(order_type_id: OrderType.find_by(code: 'relocate_customer').id)
 
     order.data = {
-      requesterName:  'Peter Park',
-      requesterPhone: '12345678900',
-      subject:        'The printer does not work',
-      description:    "I don't know what happened, but the printer in the kitchen doesn't work. Help, please..."
+      customerCity: 'Moscow'
     }
     order.save
   end
 
-  # pizza order
-  unless Order.exists?(order_type_id: OrderType.find_by(code: 'pizza_order').id)
+  unless Order.exists?(order_type_id: OrderType.find_by(code: 'pizza_order'))
     order = Order.new(order_type_id: OrderType.find_by(code: 'pizza_order').id)
 
     order.data = {
