@@ -21,7 +21,7 @@ modulejs.define('HBWFormSubmit', ['React'], (React) => {
     };
 
     renderSubmitButton = () => {
-      const { formSubmitting, env } = this.props;
+      const { formSubmitting, submitButtonName, env } = this.props;
 
       const buttonCN = cx({
         btn:           true,
@@ -34,7 +34,7 @@ modulejs.define('HBWFormSubmit', ['React'], (React) => {
                 className={buttonCN}
                 disabled={formSubmitting || this.state.error}>
           <i className="fas fa-check" />
-          {` ${env.translator('submit')}`}
+          {` ${submitButtonName || env.translator('submit')}`}
         </button>
       );
     };

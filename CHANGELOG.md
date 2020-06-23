@@ -3,6 +3,7 @@ v2.4.0 [unreleased]
 ### Features
 - [#465](https://github.com/latera/homs/pull/465) Add SymlinkAssets in development mode and clean assets before every build.
 - [#470](https://github.com/latera/homs/pull/470) Add new type of processes.
+- [#471](https://github.com/latera/homs/pull/471) Customize submit button name.
 
 v2.3.3 [unreleased]
 -------------------

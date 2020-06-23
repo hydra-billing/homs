@@ -54,7 +54,7 @@ feature 'Validate form', js: true do
       expect(page).to have_content 'Options'
       expect(page).to have_selector "button[type='submit']"
 
-      click_and_wait 'Submit'
+      click_and_wait 'Custom submit button name'
 
       expect(page).to have_content 'Field is required'
     end

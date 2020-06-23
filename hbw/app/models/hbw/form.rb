@@ -27,7 +27,11 @@ module HBW
     end
 
     def hide_cancel_button
-      definition.fetch('hide_delete_button', '')
+      definition.fetch('hide_delete_button', false)
+    end
+
+    def submit_button_name
+      definition['submit_button_name']
     end
 
     def as_json
