@@ -1,0 +1,18 @@
+$button-types: default primary danger info success warning
+
+.btn
+  padding: var(--btn-padding, var(--base-btn-padding))
+  border: var(--btn-border, var(--base-btn-border))
+  border-radius: var(--btn-border-radius, var(--base-btn-border-radius))
+
+  @each $type in $button-types
+    &.btn-#{$type}
+      color: var(--btn-#{$type}-color, var(--base-btn-#{$type}-color))
+      border-color: var(--btn-#{$type}-color, var(--base-btn-#{$type}-color))
+
+      &.disabled
+        @include progress-bar-variant(var(--btn-#{$type}-color, var(--base-btn-#{$type}-color)))
+
+      &:hover:not(.disabled)
+        color: var(--base-body-bg-color, var(--body-bg-color))
+        background-color: var(--btn-#{$type}-color, var(--base-btn-#{$type}-color))

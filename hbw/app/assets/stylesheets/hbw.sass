@@ -5,16 +5,18 @@
 @import url("https://use.fontawesome.com/releases/v5.7.1/css/fontawesome.css")
 
 @import 'jquery.growl'
+@import 'hbw/variables'
+@import 'hbw/brand_variables'
 
 .hbw-styles
-  @import 'hbw/variables'
-
   @import 'bootstrap'
   @import 'bootswatch/flatly/bootswatch'
   @import 'select2_bootstrap3'
   @import 'bootstrap-datetimepicker'
 
   @import 'tooltip'
+
+  @import 'hbw/branding'
 
   .growl-message
     max-height: 90px
@@ -153,36 +155,6 @@
   .edit-order-button
     margin-top: 1em
 
-  .btn-default:hover:not(.disabled)
-    background-color: $btn-default-border
-    border-color: $btn-default-border
-    color: $body-bg
-
-  .btn-primary:hover:not(.disabled)
-    background-color: $btn-primary-border
-    border-color: $btn-primary-border
-    color: $body-bg
-
-  .btn-success:hover:not(.disabled)
-    background-color: $btn-success-border
-    border-color: $btn-success-border
-    color: $body-bg
-
-  .btn-info:hover:not(.disabled)
-    background-color: $btn-info-border
-    border-color: $btn-info-border
-    color: $body-bg
-
-  .btn-warning:hover:not(.disabled)
-    background-color: $btn-warning-border
-    border-color: $btn-warning-border
-    color: $body-bg
-
-  .btn-danger:hover:not(.disabled)
-    background-color: $btn-danger-border
-    border-color: $btn-danger-border
-    color: $body-bg
-
   .clear-both
     clear: both
 
@@ -208,24 +180,6 @@
     @include gradient-striped
     @include animation(progress-bar-stripes 2s linear infinite)
     color: white
-
-    &.btn-primary
-      @include progress-bar-variant($btn-primary-border)
-
-    &.btn-success
-      @include progress-bar-variant($btn-success-border)
-
-    &.btn-info
-      @include progress-bar-variant($btn-info-border)
-
-    &.btn-warning
-      @include progress-bar-variant($btn-warning-border)
-
-    &.btn-danger
-      @include progress-bar-variant($btn-danger-border)
-
-    &.btn-default
-      @include progress-bar-variant($btn-default-border)
 
   .hidden
     visibility: hidden
