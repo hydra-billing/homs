@@ -55,7 +55,6 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
         className={cssClass}
         title={option.title}
         onClick={onClick}
-        href="#"
         disabled={disabled}>
         <i className={faClass} />
         {` ${option.name}`}
