@@ -157,6 +157,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       if (last.type !== 'submit_select') {
         return <Submit formSubmitting={submitting || fileUploading}
                        showCancelButton={!form.hide_cancel_button}
+                       submitButtonName={form.submit_button_name}
                        processInstanceId={processInstanceId}
                        env={env} />;
       }

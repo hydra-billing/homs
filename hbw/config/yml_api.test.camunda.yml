@@ -622,6 +622,7 @@ get:
       form:
         name: Test form with options
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+        submit_button_name: Custom submit button name
         fields:
         - name: group1
           type: group
