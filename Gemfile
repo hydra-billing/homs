@@ -29,7 +29,7 @@ gem 'aws-sdk', '~> 2'
 gem 'web-console', '~> 2.0', group: :development
 gem 'settingslogic'
 gem 'webpacker', '~> 5.0'
-gem 'rack', '~> 2.2.2'
+gem 'rack', '~> 2.2.3'
 gem 'dalli'
 gem 'redis'
 
