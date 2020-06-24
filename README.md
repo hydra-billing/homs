@@ -34,7 +34,7 @@ The prefered way to install HOMS is to use [Docker](https://www.docker.com/).
     ```
 
     :pushpin: All variables are set in `.env` file. There you can change them, if you want to.
-    
+
 2. For OS X users: make path to folder with config shared in `Docker -> Preferences... -> File Sharing`.
 
 3. Set `SECRET_KEY_BASE` variable in your `.env` with uniq id as value. You can generate key with `openssl rand -hex 64` command. For example:
@@ -72,6 +72,12 @@ You can login to [Camunda Admin inteface](http://localhost:8766/camunda) with cr
 3. Start HOMS application in another console tab:
     ```bash
     rails s
+    ```
+4. Create and seed the database:
+    ```bash
+    rake db:migrate
+    export SEED_DB=true
+    rake db:seed
     ```
 5. Log in at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
