@@ -22,7 +22,6 @@ const withErrorBoundary = (WrappedComponent) => {
 
 export default withErrorBoundary;
 
-
 class ErrorBoundary extends Component {
   state = {
     error: false,

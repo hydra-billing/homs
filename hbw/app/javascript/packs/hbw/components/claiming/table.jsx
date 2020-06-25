@@ -173,7 +173,6 @@ class HBWTasksTable extends Component {
     );
   };
 
-
   render () {
     const {
       showClaimButton, tasks, fetching
