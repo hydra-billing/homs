@@ -11,7 +11,6 @@
 .hbw-styles
   @import 'bootstrap'
   @import 'bootswatch/flatly/bootswatch'
-  @import 'select2_bootstrap3'
   @import 'bootstrap-datetimepicker'
 
   @import 'tooltip'
@@ -39,7 +38,10 @@
     background-color: $gray-light
 
   .has-error
-    @include validation-state-focus($btn-danger-color)
+    border: 2px solid red
+
+    .table
+      margin-bottom: 0px
 
   .tab-content
     border-bottom: 1px solid #ecf0f1
@@ -139,15 +141,6 @@
 
   header > nav > .container > .navbar-collapse
     margin-left: -15px
-
-  .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice
-    background-color: white
-
-  .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field
-    width: 100% !important
-
-  .select2-container--bootstrap .select2-selection--single .select2-selection__placeholder
-    color: darken(#acb6c0, 20%)
 
   .show-hidden-order-data
     margin-top: .5em

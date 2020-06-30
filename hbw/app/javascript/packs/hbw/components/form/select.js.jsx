@@ -79,16 +79,10 @@ modulejs.define('HBWFormSelect',
           className={`${!this.state.valid && 'tooltip-red'}`}
         />;
 
-        let formGroupCss = 'form-group';
-
-        if (this.state.error) {
-          formGroupCss += ' has-error';
-        }
-
         return <div className={cssClass} title={tooltip}>
           <span className={labelCss}>{label}</span>
           <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
-          <div className={formGroupCss} ref={(i) => { this.select = i; }}>
+          <div className='form-group' ref={(i) => { this.select = i; }}>
             {this.selectComponent(opts)}
           </div>
           {errorTooltip}
@@ -138,11 +132,23 @@ modulejs.define('HBWFormSelect',
           return 'white';
         };
 
+        const borderColor = (isFocused) => {
+          if (this.state.error) {
+            return 'red';
+          }
+
+          if (isFocused) {
+            return 'black';
+          }
+
+          return '#dce4ec';
+        };
+
         return {
           control: (base, state) => ({
             ...base,
             minHeight:       45,
-            borderColor:     state.isFocused ? 'black' : '#dce4ec',
+            borderColor:     borderColor(state.isFocused),
             borderWidth:     2,
             boxShadow:       'none',
             cursor:          'pointer',
