@@ -5,6 +5,9 @@ v2.4.0 [unreleased]
 - [#470](https://github.com/latera/homs/pull/470) Add new type of processes.
 - [#471](https://github.com/latera/homs/pull/471) Customize submit button name.
 
+### Bugfixes
+- [#476](https://github.com/latera/homs/pull/476) Fix symlinking dev assets.
+
 v2.3.3 [2020-06-25]
 -------------------
 ### Bugfixes
