@@ -9,6 +9,9 @@ v2.4.0 [unreleased]
 - [#476](https://github.com/latera/homs/pull/476) Fix symlinking dev assets.
 - [#475](https://github.com/latera/homs/pull/475) Fix displaying errors in `select` and `select_table`.
 
+### Refactoring
+- [#481](https://github.com/latera/homs/pull/481) Use css variables for all colors
+
 v2.3.3 [2020-06-25]
 -------------------
 ### Bugfixes

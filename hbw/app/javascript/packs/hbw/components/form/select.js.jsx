@@ -122,26 +122,42 @@ modulejs.define('HBWFormSelect',
       customStyles = () => {
         const bgOptionColor = (state) => {
           if (state.isFocused) {
-            return '#2C3E50';
+            return 'var(--hbw-pickled-bluewood, var(--base-hbw-pickled-bluewood))';
           }
 
           if (state.isSelected) {
-            return '#445C72';
+            return 'var(--hbw-selected-element, var(--base-hbw-selected-element))';
           }
 
-          return 'white';
+          return 'var(--hbw-white, var(--base-hbw-white))';
         };
 
         const borderColor = (isFocused) => {
           if (this.state.error) {
-            return 'red';
+            return 'var(--hbw-red, var(--base-hbw-red))';
           }
 
           if (isFocused) {
-            return 'black';
+            return 'var(--hbw-black, var(--base-hbw-black))';
           }
 
-          return '#dce4ec';
+          return 'var(--hbw-mystic, var(--base-hbw-mystic))';
+        };
+
+        const controlBackgroundColor = (isDisabled) => {
+          if (isDisabled) {
+            return 'var(--hbw-select-control-bg-color, var(--base-hbw-select-control-bg-color))';
+          } else {
+            return 'var(--hbw-white, var(--base-hbw-white))';
+          }
+        };
+
+        const optionColor = (isFocusedOrSelected) => {
+          if (isFocusedOrSelected) {
+            return 'var(--hbw-white, var(--base-hbw-white))';
+          } else {
+            return 'var(--hbw-pickled-bluewood, var(--base-hbw-pickled-bluewood))';
+          }
         };
 
         return {
@@ -152,7 +168,7 @@ modulejs.define('HBWFormSelect',
             borderWidth:     2,
             boxShadow:       'none',
             cursor:          'pointer',
-            backgroundColor: state.isDisabled ? '#ECF0F1' : 'white',
+            backgroundColor: controlBackgroundColor(state.isDisabled),
 
             '&:hover': {
               borderColor: 'inherit',
@@ -161,13 +177,13 @@ modulejs.define('HBWFormSelect',
           }),
           option: (base, state) => ({
             ...base,
-            color:           (state.isFocused || state.isSelected) ? 'white' : '#2C3E50',
+            color:           optionColor(state.isFocused || state.isSelected),
             backgroundColor: bgOptionColor(state),
             cursor:          'pointer',
 
             '&:active': {
-              color:           'white',
-              backgroundColor: '#2C3E50'
+              color:           'var(--hbw-white, var(--base-hbw-white))',
+              backgroundColor: 'var(--hbw-pickled-bluewood, var(--base-hbw-pickled-bluewood))'
             }
           }),
           menu: base => ({
