@@ -14,5 +14,176 @@ $button-types: default primary danger info success warning
         @include progress-bar-variant(var(--btn-#{$type}-color, var(--base-btn-#{$type}-color)))
 
       &:hover:not(.disabled)
-        color: var(--base-body-bg-color, var(--body-bg-color))
+        color: var(--body-bg-color, var(--base-body-bg-color))
         background-color: var(--btn-#{$type}-color, var(--base-btn-#{$type}-color))
+
+.tab-content
+  border-bottom: var(--hbw-border-light-gray, var(--base-hbw-border-light-gray))
+  border-left: var(--hbw-border-light-gray, var(--base-hbw-border-light-gray))
+  border-right: var(--hbw-border-light-gray, var(--base-hbw-border-light-gray))
+
+.hbw-inactive-task:hover
+  background-color: var(--hbw-inactive-task-hover-color, var(--base-hbw-inactive-task-hover-color))
+
+.has-error
+    border: 2px solid var(--hbw-red, var(--base-hbw-red))
+
+.form-group
+  .invalid
+      border-color: var(--hbw-red, var(--base-hbw-red))
+  .tooltip-red
+    .tooltip
+      background-color: var(--hbw-red, var(--base-hbw-red))
+
+      &[x-placement^="top"] .tooltip-arrow
+        border-top-color: var(--hbw-red, var(--base-hbw-red))
+
+      &[x-placement^="bottom"] .tooltip-arrow
+        border-bottom-color: var(--hbw-red, var(--base-hbw-red))
+
+      &[x-placement^="right"] .tooltip-arrow
+        border-right-color: var(--hbw-red, var(--base-hbw-red))
+
+      &[x-placement^="left"] .tooltip-arrow
+        border-left-color: var(--hbw-red, var(--base-hbw-red))
+
+.btn.disabled
+  color: var(--hbw-white, var(--base-hbw-white))
+
+.hbw-table
+  scrollbar-color: var(--hbw-scrollbar-color, var(--base-hbw-scrollbar-color))
+  thead th
+    background: var(--hbw-white, var(--base-hbw-white))
+    box-shadow: inset 0 1px 0 var(--hbw-light-gray, var(--base-hbw-light-gray)),inset 0 -1px 0 var(--hbw-light-gray, var(--base-hbw-light-gray))
+  &::-webkit-scrollbar-thumb
+    background: var(--hbw-webkit-scrollbar-thumb-color, var(--base-hbw-webkit-scrollbar-thumb-color))
+  &::-webkit-scrollbar-thumb:hover
+    background: var(--hbw-webkit-scrollbar-thumb-hover-color, var(--base-hbw-webkit-scrollbar-thumb-hover-color))
+
+table.select-table
+  tr
+    &.selected
+      background-color: var(--hbw-selected-element, var(--base-hbw-selected-element))
+      color: var(--hbw-white, var(--base-hbw-white))
+    &:hover
+      td
+        background-color: var(--hbw-pickled-bluewood, var(--base-hbw-pickled-bluewood))
+        color: var(--hbw-white, var(--base-hbw-white))
+
+table.disabled
+  background-color: var(--hbw-table-disabled-color, var(--base-hbw-table-disabled-color))
+
+.attacher
+  border: 1px solid var(--hbw-attacher-color, var(--base-hbw-attacher-color))
+  color: var(--hbw-attacher-color, var(--base-hbw-attacher-color))
+  &.activated
+    border: 2px dashed var(--hbw-mystic, var(--base-hbw-mystic))
+    .drop_text
+      color: var(--hbw-pickled-bluewood, var(--base-hbw-pickled-bluewood))
+
+.tabs
+  a
+    color: var(--hbw-black, var(--base-hbw-black))
+    &:hover
+      border-bottom: 1px solid var(--hbw-brand-success, var(--base-hbw-brand-success))
+  ul
+    border-bottom: 1px solid var(--hbw-gray-lighter, var(--base-hbw-gray-lighter))
+    li
+      &.is-active
+        a
+          border-bottom: 5px solid var(--hbw-brand-success, var(--base-hbw-brand-success))
+
+.claiming-table
+  .no-tasks, .pending
+    color: var(--hbw-black, var(--base-hbw-black))
+  tr
+    color: var(--hbw-black, var(--base-hbw-black))
+  thead
+      border-bottom: solid 1px var(--hbw-alto, var(--base-hbw-alto))
+  tbody
+    tr
+      &.chosen, &:hover
+        border-left: 3px solid var(--hbw-text-color, var(--base-hbw-text-color))
+        button
+          color: var(--btn-primary-color, var(--base-btn-primary-color))
+          border-color: var(--btn-primary-color, var(--base-btn-primary-color))
+          &:hover
+            border-color: var(--btn-primary-color, var(--base-btn-primary-color))
+            background-color: var(--btn-primary-color, var(--base-btn-primary-color))
+      &.opened
+        border-left: 3px solid var(--hbw-text-color, var(--base-hbw-text-color))
+        background-color: var(--hbw-gray-lighter, var(--base-hbw-gray-lighter))
+      &.claiming
+        background-color: var(--hbw-alto, var(--base-hbw-alto))
+.priority
+  &.medium
+    background-color: var(--hbw-priority-medium-color, var(--base-hbw-priority-medium-color))
+
+  &.high
+    background-color: var(--hbw-brand-priority-high-color, var(--base-hbw-priority-high-color))
+
+  &.urgent
+    background-color: var(--hbw-urgent-color, var(--base-hbw-urgent-color))
+
+.deadline
+  color: var(--hbw-urgent-color, var(--base-hbw-urgent-color))
+
+.task-overview
+  .two-cols
+    tr
+      td
+        &:first-child
+          color: var(--hbw-task-overview-first-child-color, var(--base-hbw-task-overview-first-child-color))
+
+.search-input-with-controls
+  input
+    border: 1px solid (--hbw-alto, var(--base-hbw-alto))
+
+.claiming-menu-button-container
+  .claiming-menu-button
+    .claiming-count
+      color: var(--hbw-text-color, var(--base-hbw-text-color))
+      background-color: var(--hbw-white, var(--base-hbw-white))
+
+    &:hover
+      .claiming-count
+        background-color: var(--hbw-brand-success, var(--base-hbw-brand-success))
+      .hbw-icon-svg-path
+        fill: var(--hbw-brand-success, var(--base-hbw-brand-success))
+
+.claimimg-popup
+  background-color: var(--hbw-white, var(--base-hbw-white))
+
+  .short-list
+    .no-tasks, .pending
+      color: var(--hbw-black, var(--base-hbw-black))
+
+    .row
+      border-bottom: 1px solid var(--hbw-gray-lighter, var(--base-hbw-gray-lighter))
+      &:hover
+        background-color: var(--hbw-short-list-row-hover, var(--base-hbw-short-list-row-hover))
+
+      &.expired
+        color: var(--hbw-short-list-expired-color, var(--base-hbw-short-list-expired-color))
+        i
+          color: var(--hbw-short-list-expired-color, var(--base-hbw-short-list-expired-color))
+
+      .left
+        .description
+          color: var(--hbw-claimimg-popup-description-color, var(--base-hbw-claimimg-popup-description-color))
+
+#hbw-bp-control-buttons-container
+  .hbw-error
+    .show-more
+      color: var(--hbw-white, var(--base-hbw-white))
+
+li.danger
+  a
+    color: var(--hbw-li-danger, var(--base-hbw-li-danger))
+    &:focus
+      color: var(--hbw-li-danger, var(--base-hbw-li-danger))
+
+input.hbw-checkbox
+  &[type=checkbox]:disabled
+    + span:before
+      color: (--hbw-alto, var(--base-hbw-alto))

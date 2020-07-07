@@ -34,20 +34,12 @@
   .hbw-inactive-task
     font-weight: normal
 
-  .hbw-inactive-task:hover
-    background-color: $gray-light
-
   .has-error
-    border: 2px solid red
-
     .table
       margin-bottom: 0px
 
   .tab-content
-    border-bottom: 1px solid #ecf0f1
-    border-left: 1px solid #ecf0f1
     border-radius: 0 0 4px 4px
-    border-right: 1px solid #ecf0f1
     padding: 10px
     overflow: visible
 
@@ -55,27 +47,8 @@
     display: table
     width: 100%
 
-    .invalid
-      border-color: red
-
     .tooltip.right
       z-index: 1010
-
-    .tooltip-red
-      .tooltip
-        background-color: red
-
-        &[x-placement^="top"] .tooltip-arrow
-          border-top-color: red
-
-        &[x-placement^="bottom"] .tooltip-arrow
-          border-bottom-color: red
-
-        &[x-placement^="right"] .tooltip-arrow
-          border-right-color: red
-
-        &[x-placement^="left"] .tooltip-arrow
-          border-left-color: red
 
   .hbw-checkbox-label
     display: table-cell
@@ -172,13 +145,11 @@
     background-size: 40px 40px
     @include gradient-striped
     @include animation(progress-bar-stripes 2s linear infinite)
-    color: white
 
   .hidden
     visibility: hidden
 
   .hbw-table
-    scrollbar-color: grey white
     overflow-y: auto
     display: block
     width: 100%
@@ -190,8 +161,6 @@
     thead th
       position: sticky
       top: 0
-      background: white
-      box-shadow: inset 0 1px 0 #ecf0f1, inset 0 -1px 0 #ecf0f1
 
     &::-webkit-scrollbar
       width: 10px
@@ -199,22 +168,11 @@
     &::-webkit-scrollbar-track
       background: transparent
 
-    &::-webkit-scrollbar-thumb
-      background: #888
-
-    &::-webkit-scrollbar-thumb:hover
-      background: #555
-
   table.select-table
     tr
-      &.selected
-        background-color: #445C72
-        color: white
       &:hover
         td
           cursor: pointer
-          background-color: #2C3E50
-          color: white
 
     .text-align-left
       text-align: left
@@ -223,22 +181,16 @@
     .text-align-right
       text-align: right
 
-  table.disabled
-    background-color: #eeeeee
-
   .attacher
     align-items: center
     justify-content: center
     display: flex
     margin-top: 5px
-    border: 1px solid #ccc
     border-radius: 7px
     width: 150px
     padding: 8px
-    color: #ccc
 
     &.activated
-      border: 2px dashed #dce4ec
       width: auto
       max-width: 480px
       height: 115px
@@ -246,7 +198,6 @@
 
       .drop_text
         font-size: 16px
-        color: #2C3E50
 
     .drop_text
       pointer-events: none
@@ -264,14 +215,9 @@
       outline: none
       text-decoration: none
       padding: 14px 30px
-      color: black
-
-      &:hover
-        border-bottom: 1px solid $brand-success
     ul
       padding: 0
       width: 100%
-      border-bottom: 1px solid $gray-lighter
 
       li
         display: inline-block
@@ -281,20 +227,12 @@
           a
             padding-bottom: 10px
             font-weight: bold
-            border-bottom: 5px solid $brand-success
 
   .claiming-table
     width: 100%
 
     .no-tasks, .pending
-      color: black
       text-align: center
-
-    tr
-      color: black
-
-    thead
-      border-bottom: solid 1px #dbdbdb
 
     tbody
       tr
@@ -302,25 +240,10 @@
         border-left: 3px solid transparent
 
         &.chosen, &:hover
-          border-left: 3px solid $text-color
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5)
-
-          button
-            color: $btn-primary-color
-            border-color: $btn-primary-border
-            &:hover
-              border-color: $btn-primary-border
-              background-color: $btn-primary-color
-
-        &.opened
-          border-left: 3px solid $text-color
-          background-color: $gray-lighter
 
         &.expired
           color: $deadline-red
-
-        &.claiming
-          background-color: #dbdbdb
 
         .priority
           text-align: center
@@ -336,18 +259,7 @@
           padding-top: 15px !important
           padding-bottom: 15px !important
 
-  .priority
-    &.medium
-      background-color: #926902
-
-    &.high
-      background-color: $brand-warning
-
-    &.urgent
-      background-color: $brand-danger
-
   .deadline
-    color: $deadline-red
     font-weight: 500
 
   .task-overview
@@ -382,7 +294,6 @@
           &:first-child
             width: 25%
             padding-right: 20px
-            color: #4A4A4A
 
     .description
       margin-bottom: 20px
@@ -407,7 +318,6 @@
       height: 40px
       padding-left: 30px
       padding-right: 30px
-      border: 1px solid #D5D5D5
       border-radius: 3px
 
     .icon
@@ -451,17 +361,9 @@
         top: 55%
         right: 0
         text-align: center
-        color: $text-color
         font-size: .7em
         border-radius: 5px
         min-width: 50%
-        background-color: white
-
-      &:hover
-        .claiming-count
-          background-color: $brand-success
-        .hbw-icon-svg-path
-          fill: $brand-success
 
   .claimimg-popup
     position: absolute
@@ -496,15 +398,7 @@
         justify-content: space-between
         align-items: center
         padding: 10px 10px
-        border-bottom: 1px solid $gray-lighter
         cursor: pointer
-        &:hover
-          background-color: $table-bg-hover
-
-        &.expired
-          color: #BD2025
-          i
-            color: #BD2025
 
         i
           padding: 3px 5px
@@ -522,7 +416,6 @@
             white-space: nowrap
           .description
             flex: 1
-            color: #bdbdbd
             padding-left: 5px
         .right
           flex: 0 0 auto
@@ -536,99 +429,87 @@
         justify-content: center
         margin: 20px 0
 
-#hbw-claiming-tasks
-  display: flex
-  flex-direction: row
-
-  .table
-    flex-direction: column
-    flex-basis: 70%
-
-  .overview
-    flex-basis: 30%
-    padding-left: 5%
-    padding-top: 170px
-
-  .title-row
+  #hbw-claiming-tasks
     display: flex
     flex-direction: row
-    justify-content: space-between
-    align-items: center
-    margin-bottom: 30px
 
-    .title
-      font-size: 26px
-      font-weight: bold
+    .table
+      flex-direction: column
+      flex-basis: 70%
 
-#hbw-task-list
-  margin-top: 2em
+    .overview
+      flex-basis: 30%
+      padding-left: 5%
+      padding-top: 170px
 
-#hbw-tasks-list-button
-  width: 50px
-  height: 60px
+    .title-row
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      align-items: center
+      margin-bottom: 30px
 
-#hbw-bp-control-buttons-container
-  .process-name
-    font-size: 1.5em
-    margin-bottom: .7em
+      .title
+        font-size: 26px
+        font-weight: bold
 
-  .hbw-bp-control-buttons
-    margin-bottom: 1em
-    display: flex
-    flex-direction: row
-    flex-wrap: wrap
-    align-items: flex-start
+  #hbw-task-list
+    margin-top: 2em
 
-    .hbw-button
-      margin-right: 5px
-      margin-bottom: 5px
+  #hbw-tasks-list-button
+    width: 50px
+    height: 60px
 
-  .hbw-error
-    .show-more
-      font-size: .8em
-      color: white
+  #hbw-bp-control-buttons-container
+    .process-name
+      font-size: 1.5em
+      margin-bottom: .7em
 
-  .collapsable
-    a
-      cursor: pointer
-    i
-      cursor: pointer
+    .hbw-bp-control-buttons
+      margin-bottom: 1em
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      align-items: flex-start
 
-  .panel-default,
-  .panel-group
-    overflow: visible
+      .hbw-button
+        margin-right: 5px
+        margin-bottom: 5px
 
-li.danger
-  a
-    color: #E74C3C
-    &:focus
-      color: #E74C3C
+    .hbw-error
+      .show-more
+        font-size: .8em
 
-input.hbw-checkbox
-  &[type=checkbox]
-    display: none
+    .collapsable
+      a
+        cursor: pointer
+      i
+        cursor: pointer
 
-input.hbw-checkbox
-  &[type=checkbox]
-    + span:before
-      font-family: "Font Awesome 5 Free"
-      display: inline-block
+    .panel-default,
+    .panel-group
+      overflow: visible
 
-input.hbw-checkbox
-  &[type=checkbox]:checked
-    + span:before
-      content: "\f14a"
+  input.hbw-checkbox
+    &[type=checkbox]
+      display: none
 
-input.hbw-checkbox
-  &[type=checkbox]:disabled
-    + span:before
-      color: #D3D3D3
+  input.hbw-checkbox
+    &[type=checkbox]
+      + span:before
+        font-family: "Font Awesome 5 Free"
+        display: inline-block
 
-input.hbw-checkbox
-  &[type=checkbox]
-    + span:before
-      content: "\f0c8"
+  input.hbw-checkbox
+    &[type=checkbox]:checked
+      + span:before
+        content: "\f14a"
 
-.btn-group
-  .btn
-    margin-right: -1px
+  input.hbw-checkbox
+    &[type=checkbox]
+      + span:before
+        content: "\f0c8"
+
+  .btn-group
+    .btn
+      margin-right: -1px
