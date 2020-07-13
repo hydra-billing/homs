@@ -56,7 +56,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
               onDragOver={e => e.preventDefault()}
               onDrop={e => this.onDrop(e)}
             >
-              <div className={'drop_text'}>{this.props.env.translator('components.file_upload.drag_and_drop')}</div>
+              <div className='drop_text'>{this.props.env.translator('components.file_upload.drag_and_drop')}</div>
             </div>
           </div>
         </div>
