@@ -1,5 +1,8 @@
 $button-types: default primary danger info success warning
 
+body
+  font-size: var(--font-size, var(--base-font-size))
+
 .btn
   padding: var(--btn-padding, var(--base-btn-padding))
   border: var(--btn-border, var(--base-btn-border))
@@ -115,6 +118,7 @@ table.disabled
         background-color: var(--hbw-gray-lighter, var(--base-hbw-gray-lighter))
       &.claiming
         background-color: var(--hbw-alto, var(--base-hbw-alto))
+
 .priority
   &.medium
     background-color: var(--hbw-priority-medium-color, var(--base-hbw-priority-medium-color))
