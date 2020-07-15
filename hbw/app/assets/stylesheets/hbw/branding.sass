@@ -25,9 +25,6 @@ body
   border-left: var(--hbw-border-light-gray, var(--base-hbw-border-light-gray))
   border-right: var(--hbw-border-light-gray, var(--base-hbw-border-light-gray))
 
-.hbw-inactive-task:hover
-  background-color: var(--hbw-inactive-task-hover-color, var(--base-hbw-inactive-task-hover-color))
-
 .has-error
     border: 2px solid var(--hbw-red, var(--base-hbw-red))
 
@@ -49,6 +46,10 @@ body
 
       &[x-placement^="left"] .tooltip-arrow
         border-left-color: var(--hbw-red, var(--base-hbw-red))
+
+.field_with_errors
+  .form-control
+    color: var(--hbw-white, var(--base-hbw-white))
 
 .btn.disabled
   color: var(--hbw-white, var(--base-hbw-white))
@@ -116,6 +117,8 @@ table.disabled
       &.opened
         border-left: 3px solid var(--hbw-text-color, var(--base-hbw-text-color))
         background-color: var(--hbw-gray-lighter, var(--base-hbw-gray-lighter))
+      &.expired
+        color: var(--hbw-expired-color, var(--base-hbw-expired-color))
       &.claiming
         background-color: var(--hbw-alto, var(--base-hbw-alto))
 
@@ -132,16 +135,9 @@ table.disabled
 .deadline
   color: var(--hbw-urgent-color, var(--base-hbw-urgent-color))
 
-.task-overview
-  .two-cols
-    tr
-      td
-        &:first-child
-          color: var(--hbw-task-overview-first-child-color, var(--base-hbw-task-overview-first-child-color))
-
 .search-input-with-controls
   input
-    border: 1px solid (--hbw-alto, var(--base-hbw-alto))
+    border: 1px solid var(--hbw-alto, var(--base-hbw-alto))
 
 .claiming-menu-button-container
   .claiming-menu-button
@@ -168,9 +164,9 @@ table.disabled
         background-color: var(--hbw-short-list-row-hover, var(--base-hbw-short-list-row-hover))
 
       &.expired
-        color: var(--hbw-short-list-expired-color, var(--base-hbw-short-list-expired-color))
+        color: var(--hbw-expired-color, var(--base-hbw-expired-color))
         i
-          color: var(--hbw-short-list-expired-color, var(--base-hbw-short-list-expired-color))
+          color: var(--hbw-expired-color, var(--base-hbw-expired-color))
 
       .left
         .description
@@ -190,4 +186,4 @@ li.danger
 input.hbw-checkbox
   &[type=checkbox]:disabled
     + span:before
-      color: (--hbw-alto, var(--base-hbw-alto))
+      color: var(--hbw-alto, var(--base-hbw-alto))

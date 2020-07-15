@@ -24,16 +24,6 @@
   .pre-scrollable
     overflow-y: auto
 
-  .hbw-active-task
-    font-weight: bold
-
-  .hbw-active-task:hover
-    text-decoration: none
-    cursor: default
-
-  .hbw-inactive-task
-    font-weight: normal
-
   .has-error
     .table
       margin-bottom: 0px
@@ -56,8 +46,6 @@
 
   .field_with_errors
     @extend .has-error
-    .form-control
-      color: $state-danger-text
 
   // make all images responsive by default
   img
@@ -239,9 +227,6 @@
         &.chosen, &:hover
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5)
 
-        &.expired
-          color: $deadline-red
-
         .priority
           text-align: center
 
@@ -366,7 +351,6 @@
     position: absolute
     right: 0
     width: 600px
-    background-color: white
     box-shadow: 1px 2px 4px 0 rgba(0,0,0,0.5)
 
     .tabs
@@ -385,7 +369,6 @@
       padding: 0 15px
 
       .no-tasks, .pending
-        color: black
         text-align: center
         margin-top: 1.5em
 

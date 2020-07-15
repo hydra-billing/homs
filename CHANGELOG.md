@@ -12,6 +12,7 @@ v2.4.0 [unreleased]
 ### Refactoring
 - [#481](https://github.com/latera/homs/pull/481) Use css variables for all colors.
 - [#480](https://github.com/latera/homs/pull/480) Make `font-size` relative to the base.
+- [#482](https://github.com/latera/homs/pull/482) Replace similar colors.
 
 v2.3.3 [2020-06-25]
 -------------------
