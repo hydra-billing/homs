@@ -10,7 +10,7 @@ en:
       tasks: Tasks
       loading: Loading
       hide_widget: Hide
-      bp_running: The business process is running
+      bp_running: The business process is running or assigned to another user
 
       errors:
         field_not_defined_in_bp: "Field with name %{field_name} not defined in BP variables"
