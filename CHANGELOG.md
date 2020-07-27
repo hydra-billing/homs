@@ -22,6 +22,7 @@ v2.2.4 [unreleased]
 -------------------
 ### Bugfixes
 - [#486](https://github.com/latera/homs/pull/486) Fix horizontal scroll in `select_table` nested to `group`.
+- [#487](https://github.com/latera/homs/pull/487) Do not crash widget when translation is missing.
 
 v2.2.3 [2020-04-24]
 -------------------
