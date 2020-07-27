@@ -8,13 +8,21 @@ const HBWTranslator = {
   translate (key, locale = 'en', vars = {}) {
     let current = allTranslations[locale].hbw.js;
 
-    key.split('.').forEach((part) => {
-      if (typeof current === 'object' && part in current) {
-        current = this.interpolateString(current[part], vars);
+    try {
+      key.split('.').forEach((part) => {
+        if (typeof current === 'object' && part in current) {
+          current = this.interpolateString(current[part], vars);
+        } else {
+          throw new Error(`Cannot find ${key} in translations`);
+        }
+      });
+    } catch {
+      if (locale === 'en') {
+        current = `translation is missing: ${key}`;
       } else {
-        throw new Error(`Cannot find ${key} in translations`);
+        current = this.translate(key, 'en', vars);
       }
-    });
+    }
 
     return current;
   },
