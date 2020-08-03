@@ -41,7 +41,7 @@ class HBWClaimingMenuButton extends Component {
     const { isOpen } = this.state;
 
     return (
-      <>
+      <div className="hbw-body">
         <div className="claiming-menu-button-container" ref={this.rootDiv}>
           <div className="claiming-menu-button" onClick={this.handlePopUp}>
             <HydraIcon />
@@ -51,7 +51,7 @@ class HBWClaimingMenuButton extends Component {
           </div>
           {isOpen && <PopUp env={env}/>}
         </div>
-      </>
+      </div>
     );
   }
 }

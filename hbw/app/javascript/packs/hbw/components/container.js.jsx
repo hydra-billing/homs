@@ -38,7 +38,7 @@ modulejs.define(
         if (this.tasks().length > 0) {
           getFormsForTasks(this.tasks());
 
-          return <div className='hbw-entity-tools'>
+          return <div className='hbw-body'>
               <Tasks tasks={this.tasks()}
                      env={env}
                      chosenTaskID={chosenTaskID}
@@ -49,7 +49,7 @@ modulejs.define(
               />
             </div>;
         } else {
-          return <div className='hbw-entity-tools'>
+          return <div className='hbw-body'>
               <Error error={error} env={env} />
               <Buttons entityCode={entityCode}
                        entityTypeCode={entityTypeCode}
