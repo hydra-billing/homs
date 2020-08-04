@@ -1,8 +1,11 @@
 feature 'Check searching in table with tasks', js: true do
+  let(:first_task_due_date)  { DateTime.parse('2016-07-30T12:07:59').in_time_zone }
+  let(:second_task_due_date) { DateTime.parse('2017-07-30T12:07:59').in_time_zone }
+
   let(:initial_tasks) do
     [
-      ['Medium', 'Assigned task', ' Test name', '—', 'expired (3y past due)'],
-      ['High', 'Other assigned task', ' Test name', 'Some test description', 'expired (2y past due)'],
+      ['Medium', 'Assigned task', ' Test name', '—', "expired (#{years_since(first_task_due_date)}y past due)"],
+      ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due)"],
       *Array.new(22) { ['High', 'Check test form', ' Test name', '—', '30 Jun 2016'] }
     ]
   end
@@ -36,7 +39,7 @@ feature 'Check searching in table with tasks', js: true do
       expect(search_field_text).to eq('test')
       expect(tasks_table_content).to eq(
         [
-          ['High', 'Other assigned task', ' Test name', 'Some test description', 'expired (2y past due)']
+          ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due)"]
         ]
       )
 

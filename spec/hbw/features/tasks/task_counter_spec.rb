@@ -18,6 +18,9 @@ feature 'Check available tasks counter', js: true do
   end
 
   describe 'when expanded to pop up' do
+    let(:first_task_due_date)  { DateTime.parse('2016-07-30T12:07:59').in_time_zone }
+    let(:second_task_due_date) { DateTime.parse('2017-07-30T12:07:59').in_time_zone }
+
     before(:each) do
       click_on_tasks_counter
       wait_for_ajax
@@ -29,8 +32,8 @@ feature 'Check available tasks counter', js: true do
 
       expect(popup_tasks_list_content).to eq(
         [
-          "Assigned task\nexpired (3y past due)",
-          "Other assigned task\nSome test description\nexpired (2y past due)",
+          "Assigned task\nexpired (#{years_since(first_task_due_date)}y past due)",
+          "Other assigned task\nSome test description\nexpired (#{years_since(second_task_due_date)}y past due)",
           "Check test form\n30 Jun 2016",
           "Check test form\n30 Jun 2016",
           "Check test form\n30 Jun 2016",
@@ -46,8 +49,8 @@ feature 'Check available tasks counter', js: true do
 
       expect(popup_tasks_list_content).to eq(
         [
-          "Unassigned task\nexpired (3y past due)",
-          "Other unassigned task\nSome test description\nexpired (2y past due)",
+          "Unassigned task\nexpired (#{years_since(first_task_due_date)}y past due)",
+          "Other unassigned task\nSome test description\nexpired (#{years_since(second_task_due_date)}y past due)",
           "Check test form\n30 Jun 2016"
         ]
       )
