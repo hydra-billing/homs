@@ -38,23 +38,3 @@ We are following several style guides:
     Else-return is allowed.
 
 * [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
-
-    With some notes:
-
-    * [React.createClass](https://github.com/airbnb/javascript/tree/master/react#class-vs-reactcreateclass-vs-stateless):
-
-        Until we use ReactJS < `15.5.0` and mixins we have to use
-
-        ```javascript
-        const Listing = React.createClass({
-        // ...
-        })
-        ```
-
-        instead of
-
-        ```javasript
-        class Listing extends React.Component {
-        // ...
-        }
-        ```
