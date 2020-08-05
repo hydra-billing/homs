@@ -81,5 +81,9 @@ module Features
     def clear_search_field
       find('.search-input-with-controls').find('.cross').click
     end
+
+    def years_since(date)
+      ((DateTime.now.in_time_zone - date) / 1.year).floor
+    end
   end
 end
