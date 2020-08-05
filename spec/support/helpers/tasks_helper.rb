@@ -85,5 +85,9 @@ module Features
     def confirm_dialog_box
       ajax { page.driver.browser.switch_to.alert.accept }
     end
+
+    def years_since(date)
+      ((DateTime.now.in_time_zone - date) / 1.year).floor
+    end
   end
 end
