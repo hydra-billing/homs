@@ -40,7 +40,7 @@ v2.3.0 [2020-03-27]
 ### Features
 - [#446](https://github.com/latera/homs/pull/446) Add cancel process button to all forms by default.
 
-v2.2.4 [unreleased]
+v2.2.4 [2020-08-07]
 -------------------
 ### Bugfixes
 - [#486](https://github.com/latera/homs/pull/486) Fix horizontal scroll in `select_table` nested to `group`.
