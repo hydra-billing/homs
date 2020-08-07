@@ -1,4 +1,4 @@
-v2.2.4 [unreleased]
+v2.2.4 [2020-08-07]
 -------------------
 ### Bugfixes
 - [#486](https://github.com/latera/homs/pull/486) Fix horizontal scroll in `select_table` nested to `group`.
