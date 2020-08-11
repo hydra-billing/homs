@@ -146,7 +146,7 @@ modulejs.define('HBWFormSelect',
 
         const controlBackgroundColor = (isDisabled) => {
           if (isDisabled) {
-            return 'var(--hbw-select-control-bg-color, var(--base-hbw-select-control-bg-color))';
+            return 'var(--hbw-light-gray, var(--base-hbw-light-gray))';
           } else {
             return 'var(--hbw-white, var(--base-hbw-white))';
           }
@@ -163,17 +163,26 @@ modulejs.define('HBWFormSelect',
         return {
           control: (base, state) => ({
             ...base,
-            minHeight:       45,
+            minHeight:       'var(--form-control-height, var(--base-form-control-height))',
+            height:          'var(--form-control-height, var(--base-form-control-height))',
             borderColor:     borderColor(state.isFocused),
-            borderWidth:     2,
+            borderWidth:     'var(--form-control-border-width, var(--base-form-control-border-width))',
             boxShadow:       'none',
             cursor:          'pointer',
             backgroundColor: controlBackgroundColor(state.isDisabled),
 
             '&:hover': {
               borderColor: 'inherit',
-              borderWidth: 2
+              borderWidth: 'var(--form-control-border-width, var(--base-form-control-border-width))'
             }
+          }),
+          indicatorsContainer: base => ({
+            ...base,
+            height: 'var(--form-control-height, var(--base-form-control-height))'
+          }),
+          valueContainer: base => ({
+            ...base,
+            height: 'var(--form-control-height, var(--base-form-control-height))'
           }),
           option: (base, state) => ({
             ...base,
