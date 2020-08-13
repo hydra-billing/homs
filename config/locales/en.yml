@@ -12,25 +12,28 @@ en:
   user_deleted: User deleted
   record_not_found: Record not found
   config:
-    bad_entity_url: Wrong parameter in entity_url '%{variable_name}'
+    bad_entity_url: "Wrong parameter in entity_url '%{variable_name}'"
   custom_fields:
     definition:
-      missing_attribute: Missing attribute '%{attribute_name}'
-      unknown_type: Unknown type '%{type}'
-      invalid_type: Attribute '%{attribute_name}' should be of %{type} type
-      undefined_field: Field '%{field_name}' is not defined in order type
-      max_length: Attribute '%{attribute_name}' should be up to %{max_length} chars long
-      no_known_fields: There left no fields after ignoring unknown ones
-      invalid_value: Attribute '%{attribute_name}' with value '%{value}' should be of %{type} type
-      at_least: Attribute '%{attribute_name}' should have defined at least %{min_value} element(s) in %{in}
-      not_in_set: Attribute '%{attribute_name}' with value '%{value}' should be one of %{set}
-      invalid: Attribute '%{attribute_name}' has invalid value '%{value}'
-      incorrect_format: Attribute '%{attribute_name}' has invalid value '%{value}'. Not a valid JSON.
+      missing_attribute: "Missing attribute '%{attribute_name}'"
+      unknown_type: "Unknown type '%{type}'"
+      invalid_type: "Attribute '%{attribute_name}' should be of the %{type} type"
+      undefined_field: "Field '%{field_name}' is not defined in the order type"
+      max_length: "Attribute '%{attribute_name}' must not exceed %{max_length} characters"
+      no_known_fields: No fields left after ignoring unknown ones
+      invalid_value: "Attribute '%{attribute_name}' with the value '%{value}' should\
+        \ be of the %{type} type"
+      at_least: "Attribute '%{attribute_name}' must have at least %{min_value} value(s)\
+        \ in %{in}"
+      not_in_set: "Attribute '%{attribute_name}' with the value '%{value}' must have\
+        \ a value from the list %{set}"
+      invalid: "Attribute '%{attribute_name}' has the invalid value '%{value}'"
+      incorrect_format: Attribute %{attribute_name} has invalid value %{value}. Not a valid JSON.
   devise:
     passwords:
       new:
         title: "Forgot your password?"
-        description: "We'll send password reset instructions"
+        description: "We'll send you instructions on how to reset your password"
         submit: "Reset password"
       edit:
         title: "Change password"
@@ -42,11 +45,13 @@ en:
         title: "Sign up"
         submit: "Sign up"
       edit:
-        title: "Edit User"
-        leave_description: "Leave these fields blank if you don't want to change your password."
+        title: "Edit user"
+        leave_description: "Leave these fields blank if you don't want to change your\
+          \ password."
         new_password: "New password"
-        currently_waiting: "Currently waiting confirmation for"
-        current_password_description: "You must enter your current password to make changes."
+        currently_waiting: "Awaiting confirmation"
+        current_password_description: "You must enter your current password to make\
+          \ changes."
         submit: "Update"
     sessions:
       new:
@@ -57,56 +62,56 @@ en:
         submit: "Sign in"
   helpers:
     enter_state: Order status
-    enter_user: User name
+    enter_user: User
     enter_order_type: Order type
     enter_archived: Archived
-    creation_date: Creation date
-    estimated_exec_date: Estimated execution date
-    from: From
-    to: To
+    creation_date: Created at
+    estimated_exec_date: Due date
+    from: from
+    to: to
     yes_no:
       'yes': 'Yes'
       'no': 'No'
     custom_fields_filter:
-      title: Order attributes
-      add: Add filter by attribute
-      placeholder: Select order attribute
+      title: Order custom fields
+      add: Filter by custom fields
+      placeholder: Select field
   users:
     new:
-      title: Add a user
+      title: Add user
     edit:
       title: User profile
     index:
-      title: User list
+      title: Users
     add:
       added: User added
     show:
       title: User profile
       generate_api_token: Generate API token
       renew_api_token: Renew API token
-      renew_api_token_warning: New API token will replace the existing one. Are you sure?
-      clear_api_token: Clear API token
-      clear_api_token_warning: Existing API token is about to be cleared. Are you sure?
-      yes_clear: 'Yes, clear'
+      renew_api_token_warning: New API token will replace the current one. Are you sure?
+      clear_api_token: Delete API token
+      clear_api_token_warning: Current API token will be deleted. Are you sure?
+      yes_clear: 'Yes, delete'
       yes_renew: 'Yes, renew'
     empty: Empty
   orders:
     new:
-      title: Adding order
+      title: Add order
       label: Order type
     states:
-      to_execute: To execute
+      to_execute: New
       in_progress: In progress
-      done: Done
-    search_by_not_found: Order not found for %{criteria}
+      done: Completed
+    search_by_not_found: Order not found with %{criteria}
     index:
-      title: Orders list
+      title: Orders
       archived: Archived
       ext_code: Ext. code
       no_orders_found: No orders found
     search_form:
-      filter_records: Filter orders
-      search_for_record: Search for an order
+      filter_records: Orders list
+      search_for_record: Find order
     search_by:
       search: Search
       code: Order code
@@ -116,21 +121,23 @@ en:
       print: Print
     show:
       order_data: Order data
-      edit_title: Edit order
+      edit_title: Edit order data
       print_title: Print order data
-      empty_code_title: For printing set print form code for order type
+      empty_code_title: To print, please enter a print template code in the order type
     print: Print
     print_pdf: Print PDF
     print_tasks:
-      started: "Print task %{print_task_id} processing started. Check e-mail for result."
+      started: "Print task %{print_task_id} processing started. Please check your\
+        \ email for result."
       errors:
-        multiple_types: "Orders are of multiple order types. Select orders of one type for printing."
-        internal_error: "Print task processing is not started due to internal error."
+        multiple_types: "Selected orders have different types. To print, please select\
+          \ orders of the same type."
+        internal_error: "Print task processing failed due to internal error."
     total_items: "Orders found:"
   user_role:
     user: User
     vip: Power user
-    admin: Admin
+    admin: Administrator
   layouts:
     navigation:
       sign_in: Sign in
@@ -144,29 +151,30 @@ en:
       tasks: Tasks
     form_errors:
       errors:
-        one: '%{count} prohibited this user from being saved:'
-        few: '%{count} prohibited this user from being saved:'
-        many: '%{count} prohibited this user from being saved:'
-        other: '%{count} prohibited this user from being saved:'
+        one: '%{count} error prevented the profile from being saved:'
+        few: '%{count} errors prevented the profile from being saved:'
+        many: '%{count} errors prevented the profile from being saved:'
+        other: '%{count} errors prevented the profile from being saved:'
   admin:
     order_types:
       index:
-        title: Available order types definitions
-        add: Upload order type definition from YAML file
+        title: Order types
+        add: Load order type from YAML file
         order_type_removal: Delete order type
-        confirmation: "Are you sure you want delete order type «%{order_type}»? Existing orders won't be affected."
+        confirmation: "Are you sure you want to delete the order type «%{order_type}»\
+          ? Existing orders won't be affected."
         yes_remove: "Yes, delete"
       show:
-        activate_dismiss: Activate that order if it's correct or dismiss it
-        activated: That order type is active
+        activate_dismiss: Activate the order type if correct, or dismiss it
+        activated: Order type activated
         back: Back to list
       create:
-        uploaded: Order type definition has been uploaded successfully
-        equal_exists: An equal order type already exists
+        uploaded: Order type successfully loaded
+        equal_exists: The identical order type already exists
       dismiss:
-        dismissed: Order type definition has been dismissed
+        dismissed: Order type dismissed
       activate:
-        activated: Order type definition has been activated
+        activated: Order type activated
       destroy:
         destroyed: Order type deleted
   tasks:
@@ -186,20 +194,20 @@ en:
         order_type_code: Order type
         ext_code: External code
         user: User
-        bp_id: Business process id
-        bp_state: Business process state
+        bp_id: Business process ID
+        bp_state: Business process status
         state: Status
         done_at: Completed at
         archived: Archived
         data: Custom fields
         created_at: Created at
         updated_at: Updated at
-        print_form_code: Print form template
-        estimated_exec_date: Estimated execution date
+        print_form_code: Print template code
+        estimated_exec_date: Due date
       order_type:
         code: Code
-        file: Uploaded YAML file content
-        fields: Custom fileds definitions
+        file: Loaded YAML file content
+        fields: Custom fileds
         active: Active
       user:
         name: First name
@@ -219,14 +227,16 @@ en:
         order_type:
           attributes:
             base:
-              cannot_delete_as_orders_exist: Cannot delete as attached orders exist
+              cannot_delete_as_orders_exist: Cannot be deleted because associated orders exist
             file:
-              invalid: file parsing error
+              invalid: File parsing error
         order:
           attributes:
             data:
-              fields_definition_invalid: Order type this order was created with has invalid fields definition. This is Fatal Error. Call admin.
-              form_key_missed_in_task: 'Form with key «%{form_key}» is not found in current task'
+              fields_definition_invalid: 'Fatal error: the type of this order has
+                invalid custom fields. Please contact your administrator.'
+              form_key_missed_in_task: 'Form with key «%{form_key}» is not found in
+                current task'
         user:
           blank: is not specified
           attributes:
@@ -245,26 +255,24 @@ en:
               blank: is not specified
               too_short: is too short
             password_confirmation:
-              confirmation: is not completed
-
+              confirmation: is blank
   js:
     cancel: Cancel
     error: Error
     remove: Remove
-    'yes': Yes
+    'yes': 'Yes'
     not_selected: Not selected
     select2:
       not_set: Empty
-    user_not_found: Current user not found in Camunda
-    columns_settings: Columns settings
-    from: From
-    to: To
-
+    user_not_found: Current user is not found in Camunda
+    columns_settings: Display fields
+    from: from
+    to: to
   doc:
     common:
       cases:
         list: List
-        show: Show
+        show: Get
         create: Create
         update: Update
         delete: Delete
@@ -277,26 +285,26 @@ en:
       resource: Orders
       cases:
         update_data: Update custom fields
-        update_base_fields: Update base fields
+        update_base_fields: Update basic fields
         update_user_email: Update user email
       explanations:
         update: This method updates passed fields only, others remain unchanged.
       parameters:
         code: Order code
-        data: Custom fields by order type
-        user_email: Responsible user's email
+        data: Custom fields
+        user_email: User email
         order_type_code: Order type code
         ext_code: External order code
         bp_id: Business process ID
-        bp_state: Business process state
+        bp_state: Business process status
         state: Order state
-        done_at: Order done datetime
-        estimated_exec_date: Estimated execution date
+        done_at: Completed at
+        estimated_exec_date: Due date
         archived: Archived
     users:
       resource: Users
       parameters:
-        email: E-mail
+        email: Email
         first_name: First name
         middle_name: Middle name
         last_name: Last name
@@ -309,9 +317,9 @@ en:
         password_salt: Password salt
         encrypted_password: Encrypted password
     profiles:
-      resource: Profiles
+      resource: Filter profiles
       parameters:
         id: Profile ID
-        data: Found orders fields display settings
-        user_email: User's email
+        data: Order custom fields
+        user_email: User email
         order_type_code: Order type code
