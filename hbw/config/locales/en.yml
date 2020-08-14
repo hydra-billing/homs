@@ -12,16 +12,15 @@ en:
       hide_widget: Hide
       bp_running: The business process is already running or assigned to another user
       errors:
-        field_not_defined_in_bp: "Field with the name %{field_name} is not defined\
-          \ in BP variables"
+        field_not_defined_in_bp: Field with the name %{field_name} is not defined in BP variables
         cannot_obtain_available_actions: Unable to obtain available actions
         cannot_start_process: Unable to start the process
         file_list_field_required: To load files please add a field of file_list type with the name homsOrderDataFileList
         field_is_required: Field is required
-        task_already_claimed: 'Task %{task_name} is already claimed'
+        task_already_claimed: Task %{task_name} is already claimed
       notifications:
         new_assigned_task: 'New assigned task: %{task_name}'
-        new_assigned_task_plural: '%{count} new tasks were assigned: %{task_names}'
+        new_assigned_task_plural: "%{count} new tasks were assigned: %{task_names}"
       components:
         select:
           searching: Searching...
@@ -41,7 +40,7 @@ en:
             type: Task type
             description: Task description
             sla: Created/Due
-            empty_description: —
+            empty_description: "—"
             empty_tasks: No tasks
             priorities:
               medium: Medium
@@ -49,10 +48,10 @@ en:
               urgent: Urgent
           overview:
             header: Task overview
-            due: "Due date:"
-            created: "Created at:"
-            priority: "Priority:"
-            description: "Description:"
+            due: 'Due date:'
+            created: 'Created at:'
+            priority: 'Priority:'
+            description: 'Description:'
             claim_task: Claim task
             claim_and_open: Claim and go to task
             go_to_task: Go to task
