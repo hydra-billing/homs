@@ -1,6 +1,6 @@
 ru:
   logo: Hydra OMS
-  hello: "Привет, мир"
+  hello: Привет, мир
   add: Добавить
   access_denied: Доступ запрещен
   edit: Изменить
@@ -12,55 +12,49 @@ ru:
   user_deleted: Пользователь удален
   record_not_found: Запись не найдена
   config:
-    bad_entity_url: "Недопустимый параметр в entity_url '%{variable_name}'"
+    bad_entity_url: Недопустимый параметр в entity_url '%{variable_name}'
   custom_fields:
     definition:
-      missing_attribute: "Отсутствует атрибут '%{attribute_name}'"
-      unknown_type: "Неизвестный тип '%{type}'"
-      invalid_type: "Атрибут '%{attribute_name}' должен быть типа %{type}"
-      undefined_field: "Поле '%{field_name}' не описано в типе заказа"
-      max_length: "Длина атрибута '%{attribute_name}' не должна превышать %{max_length}\
-        \ символов"
+      missing_attribute: Отсутствует атрибут '%{attribute_name}'
+      unknown_type: Неизвестный тип '%{type}'
+      invalid_type: Атрибут '%{attribute_name}' должен быть типа %{type}
+      undefined_field: Поле '%{field_name}' не описано в типе заказа
+      max_length: Длина атрибута '%{attribute_name}' не должна превышать %{max_length} символов
       no_known_fields: Нет известных полей
-      invalid_value: "Атрибут '%{attribute_name}' со значением '%{value}' должен б\
-        ыть типа %{type}"
-      at_least: "Атрибут '%{attribute_name}' должен иметь минимум %{min_value} зна\
-        чений в %{in}"
-      not_in_set: "Атрибут '%{attribute_name}' со значением '%{value}' должен имет\
-        ь значение из списка %{set}"
-      invalid: "Атрибут '%{attribute_name}' имеет недопустимое значение '%{value}'"
+      invalid_value: Атрибут '%{attribute_name}' со значением '%{value}' должен быть типа %{type}
+      at_least: Атрибут '%{attribute_name}' должен иметь минимум %{min_value} значений в %{in}
+      not_in_set: Атрибут '%{attribute_name}' со значением '%{value}' должен иметь значение из списка %{set}
+      invalid: Атрибут '%{attribute_name}' имеет недопустимое значение '%{value}'
       incorrect_format: У атрибута %{attribute_name} недопустимое значение %{value}. Неверный JSON.
   devise:
     passwords:
       new:
-        title: "Забыли пароль?"
-        description: "Мы вышлем вам письмо с инструкцией по сбросу пароля"
-        submit: "Сбросить пароль"
+        title: Забыли пароль?
+        description: Мы вышлем вам письмо с инструкцией по сбросу пароля
+        submit: Сбросить пароль
       edit:
-        title: "Изменить пароль"
-        new_password: "Новый пароль"
-        confirm_new_password: "Повторите новый пароль"
-        submit: "Сохранить новый пароль"
+        title: Изменить пароль
+        new_password: Новый пароль
+        confirm_new_password: Повторите новый пароль
+        submit: Сохранить новый пароль
     registrations:
       new:
-        title: "Зарегистрироваться"
-        submit: "Зарегистрироваться"
+        title: Зарегистрироваться
+        submit: Зарегистрироваться
       edit:
-        title: "Редактирование пользователя"
-        leave_description: "Оставьте эти поля пустыми, если не хотите менять парол\
-          ь."
-        new_password: "Новый пароль"
-        currently_waiting: "Ожидается подтверждение"
-        current_password_description: "Чтобы сохранить изменения, введите текущий\
-          \ пароль."
-        submit: "Сохранить"
+        title: Редактирование пользователя
+        leave_description: Оставьте эти поля пустыми, если не хотите менять пароль.
+        new_password: Новый пароль
+        currently_waiting: Ожидается подтверждение
+        current_password_description: Чтобы сохранить изменения, введите текущий пароль.
+        submit: Сохранить
     sessions:
       new:
-        title: "Вход"
-        sign_up: "Зарегистрироваться"
-        forgot_password: "Забыли пароль?"
-        remember_me: "Запомнить меня"
-        submit: "Войти"
+        title: Вход
+        sign_up: Зарегистрироваться
+        forgot_password: Забыли пароль?
+        remember_me: Запомнить меня
+        submit: Войти
   helpers:
     enter_state: Состояние заказа
     enter_user: Пользователь
@@ -71,8 +65,8 @@ ru:
     from: с
     to: по
     yes_no:
-      'yes': 'Да'
-      'no': 'Нет'
+      'yes': Да
+      'no': Нет
     custom_fields_filter:
       title: Настраиваемые поля заказа
       add: Фильтр по настраиваемым полям
@@ -93,8 +87,8 @@ ru:
       renew_api_token_warning: Новый API-токен заменит текущий. Продолжить?
       clear_api_token: Удалить API-токен
       clear_api_token_warning: Текущий API-токен будет удален. Продолжить?
-      yes_clear: 'Да, удалить'
-      yes_renew: 'Да, пересоздать'
+      yes_clear: Да, удалить
+      yes_renew: Да, пересоздать
     empty: Не указан
   orders:
     new:
@@ -128,13 +122,11 @@ ru:
     print: Напечатать
     print_pdf: Напечатать в PDF
     print_tasks:
-      started: "Задание на печать %{print_task_id} выполняется. Проверьте вашу поч\
-        ту."
+      started: Задание на печать %{print_task_id} выполняется. Проверьте вашу почту.
       errors:
-        multiple_types: "У выбранных заказов разные типы. Для печати выберите зака\
-          зы одинакового типа."
-        internal_error: "Печать не выполнена из-за внутренней ошибки."
-    total_items: "Найдено заказов:"
+        multiple_types: У выбранных заказов разные типы. Для печати выберите заказы одинакового типа.
+        internal_error: Печать не выполнена из-за внутренней ошибки.
+    total_items: 'Найдено заказов:'
   user_role:
     user: Пользователь
     vip: Привилегированный пользователь
@@ -162,9 +154,8 @@ ru:
         title: Типы заказов
         add: Загрузить тип заказов из YAML-файла
         order_type_removal: Удалить тип заказов
-        confirmation: "Вы действительно хотите удалить тип заказов «%{order_type}»\
-          ? Удаление не повлияет на существующие заказы."
-        yes_remove: "Да, удалить"
+        confirmation: Вы действительно хотите удалить тип заказов «%{order_type}»? Удаление не повлияет на существующие заказы.
+        yes_remove: Да, удалить
       show:
         activate_dismiss: Активируйте тип заказов, если его определение корректно, или отклоните его
         activated: Тип заказов активирован
@@ -234,8 +225,7 @@ ru:
         order:
           attributes:
             data:
-              fields_definition_invalid: 'Критическая ошибка: тип данного заказа содержит
-                ошибки в настраиваемых полях. Пожалуйста, обратитесь к администратору.'
+              fields_definition_invalid: 'Критическая ошибка: тип данного заказа содержит ошибки в настраиваемых полях. Пожалуйста, обратитесь к администратору.'
         user:
           blank: не указан
           attributes:

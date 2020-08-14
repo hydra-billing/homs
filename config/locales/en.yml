@@ -1,6 +1,6 @@
 en:
   logo: Hydra OMS
-  hello: "Hello world"
+  hello: Hello world
   add: Add
   access_denied: Access denied
   edit: Edit
@@ -12,54 +12,49 @@ en:
   user_deleted: User deleted
   record_not_found: Record not found
   config:
-    bad_entity_url: "Wrong parameter in entity_url '%{variable_name}'"
+    bad_entity_url: Wrong parameter in entity_url '%{variable_name}'
   custom_fields:
     definition:
-      missing_attribute: "Missing attribute '%{attribute_name}'"
-      unknown_type: "Unknown type '%{type}'"
-      invalid_type: "Attribute '%{attribute_name}' should be of the %{type} type"
-      undefined_field: "Field '%{field_name}' is not defined in the order type"
-      max_length: "Attribute '%{attribute_name}' must not exceed %{max_length} characters"
+      missing_attribute: Missing attribute '%{attribute_name}'
+      unknown_type: Unknown type '%{type}'
+      invalid_type: Attribute '%{attribute_name}' should be of the %{type} type
+      undefined_field: Field '%{field_name}' is not defined in the order type
+      max_length: Attribute '%{attribute_name}' must not exceed %{max_length} characters
       no_known_fields: No fields left after ignoring unknown ones
-      invalid_value: "Attribute '%{attribute_name}' with the value '%{value}' should\
-        \ be of the %{type} type"
-      at_least: "Attribute '%{attribute_name}' must have at least %{min_value} value(s)\
-        \ in %{in}"
-      not_in_set: "Attribute '%{attribute_name}' with the value '%{value}' must have\
-        \ a value from the list %{set}"
-      invalid: "Attribute '%{attribute_name}' has the invalid value '%{value}'"
+      invalid_value: Attribute '%{attribute_name}' with the value '%{value}' should be of the %{type} type
+      at_least: Attribute '%{attribute_name}' must have at least %{min_value} value(s) in %{in}
+      not_in_set: Attribute '%{attribute_name}' with the value '%{value}' must have a value from the list %{set}
+      invalid: Attribute '%{attribute_name}' has the invalid value '%{value}'
       incorrect_format: Attribute %{attribute_name} has invalid value %{value}. Not a valid JSON.
   devise:
     passwords:
       new:
-        title: "Forgot your password?"
-        description: "We'll send you instructions on how to reset your password"
-        submit: "Reset password"
+        title: Forgot your password?
+        description: We'll send you instructions on how to reset your password
+        submit: Reset password
       edit:
-        title: "Change password"
-        new_password: "New password"
-        confirm_new_password: "Confirm new password"
-        submit: "Save new password"
+        title: Change password
+        new_password: New password
+        confirm_new_password: Confirm new password
+        submit: Save new password
     registrations:
       new:
-        title: "Sign up"
-        submit: "Sign up"
+        title: Sign up
+        submit: Sign up
       edit:
-        title: "Edit user"
-        leave_description: "Leave these fields blank if you don't want to change your\
-          \ password."
-        new_password: "New password"
-        currently_waiting: "Awaiting confirmation"
-        current_password_description: "You must enter your current password to make\
-          \ changes."
-        submit: "Update"
+        title: Edit user
+        leave_description: Leave these fields blank if you don't want to change your password.
+        new_password: New password
+        currently_waiting: Awaiting confirmation
+        current_password_description: You must enter your current password to make changes.
+        submit: Update
     sessions:
       new:
-        title: "Sign in"
-        sign_up: "Sign up"
-        forgot_password: "Forgot password?"
-        remember_me: "Remember me"
-        submit: "Sign in"
+        title: Sign in
+        sign_up: Sign up
+        forgot_password: Forgot password?
+        remember_me: Remember me
+        submit: Sign in
   helpers:
     enter_state: Order status
     enter_user: User
@@ -92,8 +87,8 @@ en:
       renew_api_token_warning: New API token will replace the current one. Are you sure?
       clear_api_token: Delete API token
       clear_api_token_warning: Current API token will be deleted. Are you sure?
-      yes_clear: 'Yes, delete'
-      yes_renew: 'Yes, renew'
+      yes_clear: Yes, delete
+      yes_renew: Yes, renew
     empty: Empty
   orders:
     new:
@@ -127,13 +122,11 @@ en:
     print: Print
     print_pdf: Print PDF
     print_tasks:
-      started: "Print task %{print_task_id} processing started. Please check your\
-        \ email for result."
+      started: Print task %{print_task_id} processing started. Please check your email for result.
       errors:
-        multiple_types: "Selected orders have different types. To print, please select\
-          \ orders of the same type."
-        internal_error: "Print task processing failed due to internal error."
-    total_items: "Orders found:"
+        multiple_types: Selected orders have different types. To print, please select orders of the same type.
+        internal_error: Print task processing failed due to internal error.
+    total_items: 'Orders found:'
   user_role:
     user: User
     vip: Power user
@@ -151,19 +144,18 @@ en:
       tasks: Tasks
     form_errors:
       errors:
-        one: '%{count} error prevented the profile from being saved:'
-        few: '%{count} errors prevented the profile from being saved:'
-        many: '%{count} errors prevented the profile from being saved:'
-        other: '%{count} errors prevented the profile from being saved:'
+        one: "%{count} error prevented the profile from being saved:"
+        few: "%{count} errors prevented the profile from being saved:"
+        many: "%{count} errors prevented the profile from being saved:"
+        other: "%{count} errors prevented the profile from being saved:"
   admin:
     order_types:
       index:
         title: Order types
         add: Load order type from YAML file
         order_type_removal: Delete order type
-        confirmation: "Are you sure you want to delete the order type «%{order_type}»\
-          ? Existing orders won't be affected."
-        yes_remove: "Yes, delete"
+        confirmation: Are you sure you want to delete the order type «%{order_type}»? Existing orders won't be affected.
+        yes_remove: Yes, delete
       show:
         activate_dismiss: Activate the order type if correct, or dismiss it
         activated: Order type activated
@@ -233,10 +225,8 @@ en:
         order:
           attributes:
             data:
-              fields_definition_invalid: 'Fatal error: the type of this order has
-                invalid custom fields. Please contact your administrator.'
-              form_key_missed_in_task: 'Form with key «%{form_key}» is not found in
-                current task'
+              fields_definition_invalid: 'Fatal error: the type of this order has invalid custom fields. Please contact your administrator.'
+              form_key_missed_in_task: Form with key «%{form_key}» is not found in current task
         user:
           blank: is not specified
           attributes:
