@@ -1,4 +1,4 @@
-v2.4.0 [unreleased]
+v2.4.0 [2020-08-14]
 -------------------
 ### Features
 - [#465](https://github.com/latera/homs/pull/465) Add SymlinkAssets in development mode and clean assets before every build.
