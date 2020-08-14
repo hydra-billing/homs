@@ -1,9 +1,9 @@
 en:
   simple_form:
-    'yes': 'Yes'
-    'no': 'No'
+    "yes": 'Yes'
+    "no": 'No'
     required:
-      text: required
-      mark: "*"
+      text: 'required'
+      mark: '*'
     error_notification:
-      default_message: 'Please review the problems below:'
+      default_message: "Please review the problems below:"
