@@ -99,7 +99,7 @@ feature 'Check select', js: true do
 
       expect(page).to have_content 'ORD-9'
       expect_r_select_presence('homsOrderNotInVBPVariables')
-      expect(page).to have_content 'Field with name homsOrderNotInVBPVariables not defined in BP variables'
+      expect(page).to have_content 'Field with the name homsOrderNotInVBPVariables is not defined in BP variables'
       expect_widget_presence
     end
 

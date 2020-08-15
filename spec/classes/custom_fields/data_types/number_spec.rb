@@ -29,7 +29,7 @@ module CustomFields
             let(:errors) do
               {
                   'my_number' => [
-                      "Attribute 'my_number' has invalid value 'just not a number'"
+                      "Attribute 'my_number' has the invalid value 'just not a number'"
                   ]
               }
             end

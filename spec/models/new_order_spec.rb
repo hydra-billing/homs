@@ -6,21 +6,21 @@ describe 'create new order' do
     it 'number field' do
       order[:data]['contractNumber'] = 'not a number'
       expect(order.valid?).to eq(false)
-      expect(order.errors[:data][0]['contractNumber'][0]).to eq("Attribute 'contractNumber' has invalid value 'not a number'")
+      expect(order.errors[:data][0]['contractNumber'][0]).to eq("Attribute 'contractNumber' has the invalid value 'not a number'")
       order[:data]['contractNumber'] = nil
     end
 
     it 'datetime field' do
       order[:data]['creationDate'] = 'bad date'
       expect(order.valid?).to eq(false)
-      expect(order.errors[:data][0]['creationDate'][0]).to eq("Attribute 'creationDate' with value 'bad date' should be of DateTime type")
+      expect(order.errors[:data][0]['creationDate'][0]).to eq("Attribute 'creationDate' with the value 'bad date' should be of the DateTime type")
       order[:data]['creationDate'] = nil
     end
 
     it 'boolean field' do
       order[:data]['callBack'] = 'qwerty'
       expect(order.valid?).to eq(false)
-      expect(order.errors[:data][0]['callBack'][0]).to eq("Attribute 'callBack' with value 'qwerty' should be one of [\"true\", \"false\", \"on\", \"off\", \"1\", \"0\"]")
+      expect(order.errors[:data][0]['callBack'][0]).to eq("Attribute 'callBack' with the value 'qwerty' must have a value from the list [\"true\", \"false\", \"on\", \"off\", \"1\", \"0\"]")
       order[:data]['callBack'] = nil
     end
   end

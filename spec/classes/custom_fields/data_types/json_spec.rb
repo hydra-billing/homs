@@ -29,7 +29,7 @@ module CustomFields
             let(:errors) do
               {
                   'my_json' => [
-                      "Attribute 'my_json' has invalid value 'just not a json'. Not a valid JSON."
+                      'Attribute my_json has invalid value just not a json. Not a valid JSON.'
                   ]
               }
             end

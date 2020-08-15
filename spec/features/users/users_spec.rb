@@ -7,18 +7,18 @@ feature 'User is', js: true do
     signin(admin.email, admin.password)
 
     click_on 'Users'
-    expect(page).to have_content 'User list'
+    expect(page).to have_content 'Users'
     expect_widget_presence
 
     users = [
-        ['Blocked Doe', 'b.j.doe@example.com', 'Admin', 'Marketing', 'LLC Tools', ''],
+        ['Blocked Doe', 'b.j.doe@example.com', 'Administrator', 'Marketing', 'LLC Tools', ''],
         ['John Doe', 'j.doe@example.com', 'User', 'Marketing', 'LLC Tools', ''],
-        ['Christopher Johnson', 'c.johnson@example.com', 'Admin', 'Administrators', 'LLC Tools', '']
+        ['Christopher Johnson', 'c.johnson@example.com', 'Administrator', 'Administrators', 'LLC Tools', '']
     ]
     expect(table_lines).to eq users
 
     button.click
-    expect(header3.text).to                        eq 'Add a user'
+    expect(header3.text).to                        eq 'Add user'
     expect(label_node('user_name').text).to        eq 'First name'
     expect(label_node('user_middle_name').text).to eq 'Middle name'
     expect(label_node('user_last_name').text).to   eq 'Last name'
@@ -30,7 +30,7 @@ feature 'User is', js: true do
     expect(label_node('user_password_confirmation').text).to eq 'Password confirmation'
 
     button.click
-    expect(validation_errors_container.find('.alert').text).to eq '6 prohibited this user from being saved:'
+    expect(validation_errors_container.find('.alert').text).to eq '6 errors prevented the user from being saved:'
     expect(validation_errors_container.all('li').map(&:text)).to eq [
                                                                         'Email is not specified',
                                                                         'Password is not specified',
@@ -59,14 +59,14 @@ feature 'User is', js: true do
 
     input_by_label('user_email').set('testtest')
     button.click
-    expect(validation_errors_container.find('.alert').text).to eq '6 prohibited this user from being saved:'
+    expect(validation_errors_container.find('.alert').text).to eq '6 errors prevented the user from being saved:'
     expect(input_error_text('user_email')).to                  eq 'is invalid'
 
     input_by_label('user_password').set('q')
     button.click
-    expect(validation_errors_container.find('.alert').text).to eq '7 prohibited this user from being saved:'
+    expect(validation_errors_container.find('.alert').text).to eq '7 errors prevented the user from being saved:'
     expect(input_error_text('user_password')).to               eq 'is too short'
-    expect(input_error_text('user_password_confirmation')).to  eq 'is not completed'
+    expect(input_error_text('user_password_confirmation')).to  eq 'is blank'
 
     input_by_label('user_name').set                  'Mark'
     input_by_label('user_middle_name').set           'Jay'
@@ -80,10 +80,10 @@ feature 'User is', js: true do
     button.click
 
     users = [
-        ['Blocked Doe', 'b.j.doe@example.com', 'Admin', 'Marketing', 'LLC Tools', ''],
+        ['Blocked Doe', 'b.j.doe@example.com', 'Administrator', 'Marketing', 'LLC Tools', ''],
         ['John Doe', 'j.doe@example.com', 'User', 'Marketing', 'LLC Tools', ''],
-        ['Mark Jenkins', 'm.jenkins@example.com', 'Admin', 'Administrators', 'LLC Tools', ''],
-        ['Christopher Johnson', 'c.johnson@example.com', 'Admin', 'Administrators', 'LLC Tools', '']
+        ['Mark Jenkins', 'm.jenkins@example.com', 'Administrator', 'Administrators', 'LLC Tools', ''],
+        ['Christopher Johnson', 'c.johnson@example.com', 'Administrator', 'Administrators', 'LLC Tools', '']
     ]
     expect(table_lines).to eq users
 
@@ -100,7 +100,7 @@ feature 'User is', js: true do
     signin(admin.email, admin.password)
 
     click_on 'Users'
-    expect(page).to have_content 'User list'
+    expect(page).to have_content 'Users'
     expect_widget_presence
 
     expect(admin.api_token).to be_nil
@@ -112,7 +112,7 @@ feature 'User is', js: true do
     expect(user_data).to eq [
                                 'Full name: Christopher Johnson',
                                 'Email: c.johnson@example.com',
-                                'Role: Admin',
+                                'Role: Administrator',
                                 'Company: LLC Tools',
                                 'Department: Administrators',
                                 'API token:'
@@ -123,37 +123,37 @@ feature 'User is', js: true do
     expect(is_button_red?("/users/#{admin.id}/generate_api_token")).to be true
 
     admin.reload
-    expect(user_clear_api_token(admin).text).to eq 'Clear API token'
+    expect(user_clear_api_token(admin).text).to eq 'Delete API token'
     expect(is_button_red?("/users/#{admin.id}/clear_api_token")).to be true
     expect(admin.api_token).not_to be_nil
     expect(user_data).to eq [
                                 'Full name: Christopher Johnson',
                                 'Email: c.johnson@example.com',
-                                'Role: Admin',
+                                'Role: Administrator',
                                 'Company: LLC Tools',
                                 'Department: Administrators',
                                 "API token: #{admin.api_token}"
                             ]
 
     user_clear_api_token(admin).click
-    expect(active_modal_dialog_body.text).to    eq 'Existing API token is about to be cleared. Are you sure?'
+    expect(active_modal_dialog_body.text).to    eq 'Current API token will be deleted. Are you sure?'
     expect(active_modal_dialog_cancel.text).to  eq 'Cancel'
-    expect(active_modal_dialog_proceed.text).to eq 'Yes, clear'
+    expect(active_modal_dialog_proceed.text).to eq 'Yes, delete'
 
     active_modal_dialog_cancel.click
     expect(active_modal_dialogs.length).to eq 0
 
     user_clear_api_token(admin).click
-    expect(active_modal_dialog_body.text).to    eq 'Existing API token is about to be cleared. Are you sure?'
+    expect(active_modal_dialog_body.text).to    eq 'Current API token will be deleted. Are you sure?'
     expect(active_modal_dialog_cancel.text).to  eq 'Cancel'
-    expect(active_modal_dialog_proceed.text).to eq 'Yes, clear'
+    expect(active_modal_dialog_proceed.text).to eq 'Yes, delete'
 
     active_modal_dialog_proceed.click
     expect(active_modal_dialogs.length).to eq 0
     expect(user_data).to eq [
                                 'Full name: Christopher Johnson',
                                 'Email: c.johnson@example.com',
-                                'Role: Admin',
+                                'Role: Administrator',
                                 'Company: LLC Tools',
                                 'Department: Administrators',
                                 'API token:'
@@ -172,14 +172,14 @@ feature 'User is', js: true do
     expect(user_data).to eq [
                                 'Full name: Christopher Johnson',
                                 'Email: c.johnson@example.com',
-                                'Role: Admin',
+                                'Role: Administrator',
                                 'Company: LLC Tools',
                                 'Department: Administrators',
                                 "API token: #{admin.api_token}"
                             ]
 
     user_generate_api_token(admin).click
-    expect(active_modal_dialog_body.text).to    eq 'New API token will replace the existing one. Are you sure?'
+    expect(active_modal_dialog_body.text).to    eq 'New API token will replace the current one. Are you sure?'
     expect(active_modal_dialog_cancel.text).to  eq 'Cancel'
     expect(active_modal_dialog_proceed.text).to eq 'Yes, renew'
 
@@ -187,7 +187,7 @@ feature 'User is', js: true do
     expect(active_modal_dialogs.length).to eq 0
 
     user_generate_api_token(admin).click
-    expect(active_modal_dialog_body.text).to    eq 'New API token will replace the existing one. Are you sure?'
+    expect(active_modal_dialog_body.text).to    eq 'New API token will replace the current one. Are you sure?'
     expect(active_modal_dialog_cancel.text).to  eq 'Cancel'
     expect(active_modal_dialog_proceed.text).to eq 'Yes, renew'
 
@@ -200,7 +200,7 @@ feature 'User is', js: true do
     expect(user_data).to eq [
                                 'Full name: Christopher Johnson',
                                 'Email: c.johnson@example.com',
-                                'Role: Admin',
+                                'Role: Administrator',
                                 'Company: LLC Tools',
                                 'Department: Administrators',
                                 "API token: #{admin.api_token}"
@@ -211,7 +211,7 @@ feature 'User is', js: true do
     signin(admin.email, admin.password)
 
     click_on 'Users'
-    expect(page).to have_content 'User list'
+    expect(page).to have_content 'Users'
     expect_widget_presence
 
     link_by_href("/users/#{john.id}").click
@@ -254,9 +254,9 @@ feature 'User is', js: true do
     button.click
 
     users = [
-        ['Blocked Doe', 'b.j.doe@example.com', 'Admin', 'Marketing', 'LLC Tools', ''],
-        ['Mark Jenkins', 'm.jenkins@example.com', 'Admin', 'Administrators', 'LLC Tools', ''],
-        ['Christopher Johnson', 'c.johnson@example.com', 'Admin', 'Administrators', 'LLC Tools', '']
+        ['Blocked Doe', 'b.j.doe@example.com', 'Administrator', 'Marketing', 'LLC Tools', ''],
+        ['Mark Jenkins', 'm.jenkins@example.com', 'Administrator', 'Administrators', 'LLC Tools', ''],
+        ['Christopher Johnson', 'c.johnson@example.com', 'Administrator', 'Administrators', 'LLC Tools', '']
     ]
     expect(table_lines).to eq users
 
@@ -275,7 +275,7 @@ feature 'User is', js: true do
   scenario 'inaccessible for ordinary user' do
     signin(john.email, john.password)
 
-    expect(page).not_to have_content 'User list'
+    expect(page).not_to have_content 'Users'
   end
 
   scenario 'inaccessible for blocked user' do

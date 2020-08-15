@@ -3,7 +3,7 @@ feature 'Validate form', js: true do
     user = FactoryBot.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
-    expect(page).to     have_content 'Orders list'
+    expect(page).to     have_content 'Orders'
 
     order_type = FactoryBot.create(:order_type, :support_request)
     FactoryBot.create(:order, order_type: order_type)
@@ -14,7 +14,7 @@ feature 'Validate form', js: true do
   describe 'form is not submitted' do
     before(:each) do
       click_on 'Orders'
-      expect(page).to have_content 'Orders list'
+      expect(page).to have_content 'Orders'
       expect_widget_presence
     end
 

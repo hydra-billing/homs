@@ -51,7 +51,7 @@ EOS
         it_behaves_like 'has errors' do
           let(:errors) do
             {
-                my_field3: ["Attribute 'my_field3' should be of Hash type"]
+                my_field3: ["Attribute 'my_field3' should be of the Hash type"]
             }
           end
         end
@@ -83,7 +83,7 @@ EOS
       it_behaves_like 'has validate value errors' do
         let(:errors) do
           {
-              an_undefined_field: ['There left no fields after ignoring unknown ones']
+              an_undefined_field: ['No fields left after ignoring unknown ones']
           }
         end
       end
