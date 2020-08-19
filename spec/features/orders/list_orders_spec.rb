@@ -271,7 +271,7 @@ feature 'List orders', js: true do
 
   scenario 'with correct search by code' do
     tab('Search for an order').click
-    input_by_placeholder('Order code').set(vacation_request_order.code)
+    input_by_label('code').set(vacation_request_order.code)
 
     search_button_by_action('/orders/search_by/code').click
     wait_for_ajax
@@ -280,7 +280,7 @@ feature 'List orders', js: true do
 
   scenario 'with correct search by ext code' do
     tab('Search for an order').click
-    input_by_placeholder('Order external code').set(vacation_request_order.ext_code)
+    input_by_label('ext_code').set(vacation_request_order.ext_code)
 
     search_button_by_action('/orders/search_by/ext_code').click
     wait_for_ajax

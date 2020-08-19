@@ -30,10 +30,6 @@ module Features
       page.all('a[data-toggle="tab"]').select{|x| x.text == text}.first
     end
 
-    def input_by_placeholder(placeholder)
-      page.find("input[placeholder='#{placeholder}']")
-    end
-
     def expect_widget_presence
       expect(page.find('#hbw-tasks-list-button').all('*')).not_to be_empty
     end
