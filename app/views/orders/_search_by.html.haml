@@ -1,5 +1,9 @@
 = form_tag(path, method: :get, class: 'form-inline') do
   .form-group
-    = label_tag field, t('.search'), class: 'sr-only'
-    = text_field_tag :value, field_value, placeholder: t(".#{field}"), class: 'form-control'
-    = submit_tag t('.search'), class: 'btn btn-primary'
+    .labeled-input
+      %div
+        = label_tag field, t(".#{field}"), class: 'label-input'
+        = text_field_tag :value, field_value, placeholder: t(".#{field}"), class: 'form-control'
+
+      .search
+        = submit_tag t('.search'), class: 'btn btn-primary'
