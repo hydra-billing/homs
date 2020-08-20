@@ -196,6 +196,10 @@ table.disabled
     color: var(--hbw-text-color, var(--base-hbw-text-color))
     border: var(--form-control-border-width, var(--base-form-control-border-width)) solid var(--hbw-mystic, var(--base-hbw-mystic))
 
+  .textarea
+    @extend .form-control
+    height: auto
+
   .datetime-picker
     .input-group-addon
       font-size: var(--font-size, var(--base-font-size))
