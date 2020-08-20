@@ -1,3 +1,9 @@
+v2.4.1 [unreleased]
+-------------------
+### Bugfixes
+- [#494](https://github.com/latera/homs/pull/494) Fix textarea height and icon in template.
+- [#495](https://github.com/latera/homs/pull/495) Add cursor pointer for checkboxes.
+
 v2.4.0 [2020-08-14]
 -------------------
 ### Features
@@ -9,7 +15,6 @@ v2.4.0 [2020-08-14]
 ### Bugfixes
 - [#476](https://github.com/latera/homs/pull/476) Fix symlinking dev assets.
 - [#475](https://github.com/latera/homs/pull/475) Fix displaying errors in `select` and `select_table`.
-- [#494](https://github.com/latera/homs/pull/494) Fix textarea height and icon in template.
 
 ### Refactoring
 - [#481](https://github.com/latera/homs/pull/481) Use css variables for all colors.
