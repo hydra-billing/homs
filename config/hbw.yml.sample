@@ -48,7 +48,7 @@ hbw:
             - name: 'Relocate Customer'
               title: 'Start Relocating Customer'
               class: 'btn btn-default'
-              fa_class: 'fa fa-suitcase-rolling'
+              fa_class: 'fas fa-suitcase-rolling'
               bp_code: 'relocate_customer'
 
     crm_account:

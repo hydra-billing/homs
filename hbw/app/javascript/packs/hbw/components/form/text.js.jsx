@@ -22,7 +22,7 @@ modulejs.define('HBWFormText', ['React'], (React) => {
     render () {
       const opts = {
         name:      this.props.name,
-        className: 'form-control',
+        className: 'textarea',
         rows:      this.props.params.rows,
         readOnly:  this.props.params.editable === false || this.props.disabled
       };
