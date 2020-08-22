@@ -41,16 +41,14 @@ class HBWClaimingMenuButton extends Component {
     const { isOpen } = this.state;
 
     return (
-      <div className="hbw-body">
-        <div className="claiming-menu-button-container" ref={this.rootDiv}>
-          <div className="claiming-menu-button" onClick={this.handlePopUp}>
-            <HydraIcon />
-            <span className="claiming-count">
-              {count.my}/{count.unassigned}
-            </span>
-          </div>
-          {isOpen && <PopUp env={env}/>}
+      <div className="claiming-menu-button-container hbw-body" ref={this.rootDiv}>
+        <div className="claiming-menu-button" onClick={this.handlePopUp}>
+          <HydraIcon />
+          <span className="claiming-count">
+            {count.my}/{count.unassigned}
+          </span>
         </div>
+        {isOpen && <PopUp env={env}/>}
       </div>
     );
   }

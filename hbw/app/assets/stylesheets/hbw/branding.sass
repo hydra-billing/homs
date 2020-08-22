@@ -27,26 +27,7 @@ $button-types: default primary danger info success warning
   border-right: var(--hbw-border-light-gray, var(--base-hbw-border-light-gray))
 
 .has-error
-    border: 2px solid var(--hbw-red, var(--base-hbw-red))
-
-.form-group
-  .invalid
-      border-color: var(--hbw-red, var(--base-hbw-red))
-  .tooltip-red
-    .tooltip
-      background-color: var(--hbw-red, var(--base-hbw-red))
-
-      &[x-placement^="top"] .tooltip-arrow
-        border-top-color: var(--hbw-red, var(--base-hbw-red))
-
-      &[x-placement^="bottom"] .tooltip-arrow
-        border-bottom-color: var(--hbw-red, var(--base-hbw-red))
-
-      &[x-placement^="right"] .tooltip-arrow
-        border-right-color: var(--hbw-red, var(--base-hbw-red))
-
-      &[x-placement^="left"] .tooltip-arrow
-        border-left-color: var(--hbw-red, var(--base-hbw-red))
+  border: var(--form-control-border-width, var(--base-form-control-border-width)) solid var(--hbw-red, var(--base-hbw-red))
 
 .field_with_errors
   .form-control
@@ -58,7 +39,7 @@ $button-types: default primary danger info success warning
 .hbw-table
   scrollbar-color: var(--hbw-scrollbar-color, var(--base-hbw-scrollbar-color))
   thead th
-    background: var(--hbw-white, var(--base-hbw-white))
+    background: var(--thead-bg-color, var(--base-thead-bg-color))
     box-shadow: inset 0 1px 0 var(--hbw-light-gray, var(--base-hbw-light-gray)),inset 0 -1px 0 var(--hbw-light-gray, var(--base-hbw-light-gray))
   &::-webkit-scrollbar-thumb
     background: var(--hbw-webkit-scrollbar-thumb-color, var(--base-hbw-webkit-scrollbar-thumb-color))
@@ -68,15 +49,16 @@ $button-types: default primary danger info success warning
 table.select-table
   tr
     &.selected
-      background-color: var(--hbw-selected-element, var(--base-hbw-selected-element))
-      color: var(--hbw-white, var(--base-hbw-white))
+      td
+        background-color: var(--hbw-selected-element, var(--base-hbw-selected-element))
+        color: var(--hbw-white, var(--base-hbw-white))
     &:hover
       td
         background-color: var(--hbw-pickled-bluewood, var(--base-hbw-pickled-bluewood))
         color: var(--hbw-white, var(--base-hbw-white))
 
 table.disabled
-  background-color: var(--hbw-table-disabled-color, var(--base-hbw-table-disabled-color))
+  background-color: var(--hbw-light-gray, var(--base-hbw-light-gray))
 
 .attacher
   border: 1px solid var(--hbw-attacher-color, var(--base-hbw-attacher-color))
@@ -92,7 +74,7 @@ table.disabled
     &:hover
       border-bottom: 1px solid var(--hbw-brand-success, var(--base-hbw-brand-success))
   ul
-    border-bottom: 1px solid var(--hbw-gray-lighter, var(--base-hbw-gray-lighter))
+    border-bottom: 1px solid var(--hbw-light-gray, var(--base-hbw-light-gray))
     li
       &.is-active
         a
@@ -104,7 +86,7 @@ table.disabled
   tr
     color: var(--hbw-black, var(--base-hbw-black))
   thead
-      border-bottom: solid 1px var(--hbw-alto, var(--base-hbw-alto))
+    border-bottom: solid 1px var(--hbw-alto, var(--base-hbw-alto))
   tbody
     tr
       &.chosen, &:hover
@@ -117,7 +99,7 @@ table.disabled
             background-color: var(--btn-primary-color, var(--base-btn-primary-color))
       &.opened
         border-left: 3px solid var(--hbw-text-color, var(--base-hbw-text-color))
-        background-color: var(--hbw-gray-lighter, var(--base-hbw-gray-lighter))
+        background-color: var(--hbw-light-gray, var(--base-hbw-light-gray))
       &.expired
         color: var(--hbw-expired-color, var(--base-hbw-expired-color))
       &.claiming
@@ -160,9 +142,9 @@ table.disabled
       color: var(--hbw-black, var(--base-hbw-black))
 
     .row
-      border-bottom: 1px solid var(--hbw-gray-lighter, var(--base-hbw-gray-lighter))
+      border-bottom: 1px solid var(--hbw-light-gray, var(--base-hbw-light-gray))
       &:hover
-        background-color: var(--hbw-short-list-row-hover, var(--base-hbw-short-list-row-hover))
+        background-color: var(--hbw-light-gray, var(--base-hbw-light-gray))
 
       &.expired
         color: var(--hbw-expired-color, var(--base-hbw-expired-color))
@@ -173,10 +155,56 @@ table.disabled
         .description
           color: var(--hbw-claimimg-popup-description-color, var(--base-hbw-claimimg-popup-description-color))
 
-#hbw-bp-control-buttons-container
+.hbw-body
+  label
+    font-size: var(--font-size, var(--base-font-size))
+
+  .panel
+    .panel-heading
+      background-color: var(--hbw-light-gray, var(--base-hbw-light-gray))
+      border-color: var(--hbw-light-gray, var(--base-hbw-light-gray))
+
+  .alert-danger
+    background-color: var(--hbw-red, var(--base-hbw-red))
   .hbw-error
     .show-more
       color: var(--hbw-white, var(--base-hbw-white))
+
+  .form-group
+    .invalid
+      border-color: var(--hbw-red, var(--base-hbw-red))
+    .tooltip-red
+      .tooltip
+        background-color: var(--hbw-red, var(--base-hbw-red))
+
+        &[x-placement^="top"] .tooltip-arrow
+          border-top-color: var(--hbw-red, var(--base-hbw-red))
+
+        &[x-placement^="bottom"] .tooltip-arrow
+          border-bottom-color: var(--hbw-red, var(--base-hbw-red))
+
+        &[x-placement^="right"] .tooltip-arrow
+          border-right-color: var(--hbw-red, var(--base-hbw-red))
+
+        &[x-placement^="left"] .tooltip-arrow
+          border-left-color: var(--hbw-red, var(--base-hbw-red))
+
+  .form-control
+    padding: var(--form-control-padding, var(--base-form-control-padding))
+    height: var(--form-control-height, var(--base-form-control-height))
+    font-size: var(--font-size, var(--base-font-size))
+    color: var(--hbw-text-color, var(--base-hbw-text-color))
+    border: var(--form-control-border-width, var(--base-form-control-border-width)) solid var(--hbw-mystic, var(--base-hbw-mystic))
+
+  .datetime-picker
+    .input-group-addon
+      font-size: var(--font-size, var(--base-font-size))
+      height: var(--form-control-height, var(--base-form-control-height))
+      padding: var(--dtpicker-padding, var(--base-dtpicker-padding))
+      background-color: var(--dtpicker-bg-color, var(--base-dtpicker-bg-color))
+
+      &:hover
+        background-color: var(--dtpicker-bg-color-hover, var(--base-dtpicker-bg-color-hover))
 
 li.danger
   a
