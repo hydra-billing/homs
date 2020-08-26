@@ -9,20 +9,63 @@ ru:
       no_tasks: Нет задач
       tasks: Задачи
       loading: Загрузка
-      hide_widget: Закрыть
+      hide_widget: Скрыть
       bp_running: Бизнес-процесс выполняется или назначен на другого пользователя
-
       errors:
-        field_not_defined_in_bp: "Поле с именем %{field_name} отсутствует в переменных бизнес-процесса"
+        field_not_defined_in_bp: Поле с именем %{field_name} отсутствует в переменных бизнес-процесса
         cannot_obtain_available_actions: Не удалось получить список доступных действий
         cannot_start_process: Не удалось начать процесс
-        file_list_field_required: Для загрузки файлов необходимо добавить поле типа "file_list" с именем "homsOrderDataFileList"
+        file_list_field_required: Для загрузки файлов необходимо добавить поле типа file_list с именем homsOrderDataFileList
         field_is_required: Обязательное поле
-
+        task_already_claimed: Задача «%{task_name}» уже взята в работу
+      notifications:
+        new_assigned_task: 'Новая назначенная задача: %{task_name}'
+        new_assigned_task_plural: 'Назначено %{count} новых задач: %{task_names}'
       components:
         select:
           searching: Поиск...
-          no_results_found: Совпадений не найдено
+          no_results_found: Ничего не найдено
           enter_more_chars: Пожалуйста, введите больше одного символа
         file_upload:
           drag_and_drop: Перетащите файлы, чтобы прикрепить их
+        claiming:
+          open_tasks: Открытые задачи
+          claim: Взять в работу
+          tabs:
+            my: Мои задачи (%{count})
+            unassigned: Неназначенные задачи (%{count})
+          table:
+            priority: Приоритет
+            title: Название
+            type: Тип задачи
+            description: Описание
+            sla: Создана/Срок
+            empty_description: "—"
+            empty_tasks: Нет задач
+            priorities:
+              medium: Обычный
+              high: Высокий
+              urgent: Срочный
+          overview:
+            header: Сведения о задаче
+            due: 'Срок выполнения:'
+            created: 'Дата создания:'
+            priority: 'Приоритет:'
+            description: 'Описание:'
+            claim_task: Взять в работу
+            claim_and_open: Взять в работу и перейти к задаче
+            go_to_task: Перейти к задаче
+          created:
+            expired: просрочена
+            past_due: позже срока
+            to_deadline: до срока
+            ago: назад
+            periodUnits:
+              minute: " мин"
+              hour: " ч"
+              day: " д."
+              week: " н."
+              month: " мес."
+              year: " г."
+          short_list:
+            view_all: Посмотреть все

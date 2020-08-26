@@ -4,8 +4,8 @@ feature 'Check searching in table with tasks', js: true do
 
   let(:initial_tasks) do
     [
-      ['Medium', 'Assigned task', ' Test name', '—', "expired (#{years_since(first_task_due_date)}y past due)"],
-      ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due)"],
+      ['Medium', 'Assigned task', ' Test name', '—', "expired (#{years_since(first_task_due_date)}y past due date)"],
+      ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due date)"],
       *Array.new(22) { ['High', 'Check test form', ' Test name', '—', '30 Jun 2016'] }
     ]
   end
@@ -39,7 +39,7 @@ feature 'Check searching in table with tasks', js: true do
       expect(search_field_text).to eq('test')
       expect(tasks_table_content).to eq(
         [
-          ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due)"]
+          ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due date)"]
         ]
       )
 
@@ -53,7 +53,7 @@ feature 'Check searching in table with tasks', js: true do
       fill_search_field('test')
       expect(search_field_text).to eq('test')
 
-      click_on_tab 'Unassigned tasks (3)'
+      click_on_tab 'Unclaimed tasks (3)'
 
       expect(search_field_text).to eq('')
     end

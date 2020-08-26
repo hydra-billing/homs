@@ -26,7 +26,7 @@ feature 'Create new order', js: true do
       expect_widget_presence
 
       click_on 'Add'
-      expect(page).to have_content 'Adding order'
+      expect(page).to have_content 'Add order'
       expect_widget_presence
     end
 
@@ -92,7 +92,7 @@ feature 'Create new order', js: true do
     expect_widget_presence
 
     click_on 'Add'
-    expect(page).to have_content 'Adding order'
+    expect(page).to have_content 'Add order'
     expect_widget_presence
 
     fill_in('order[data][contractNumber]', with: invalid_contract_number)
@@ -100,7 +100,7 @@ feature 'Create new order', js: true do
     click_on 'Add'
 
     expect_widget_presence
-    expect(page.find('#error_explanation')).to have_content "Attribute 'contractNumber' has invalid value '#{invalid_contract_number}'"
+    expect(page.find('#error_explanation')).to have_content "Attribute 'contractNumber' has the invalid value '#{invalid_contract_number}'"
   end
 
   scenario 'denied' do

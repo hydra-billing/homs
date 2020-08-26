@@ -17,8 +17,8 @@ feature 'List orders', js: true do
   end
 
   scenario 'with correct filter defaults' do
-    # "Filter orders" tab is active by default
-    expect(active_tab 'Filter orders').not_to be_nil
+    # "Orders list" tab is active by default
+    expect(active_tab 'Orders list').not_to be_nil
 
     # "Order type" select
     expect(label('order_type_id')).to                eq('Order type')
@@ -32,9 +32,9 @@ feature 'List orders', js: true do
     expect(label('state')).to                eq('Order status')
     expect(placeholder('state')).to          eq('Order status')
     expect(select2_default_text('state')).to eq('Order status')
-    expect(select_options('state')).to       eq(['To execute',
+    expect(select_options('state')).to       eq(['New',
                                                  'In progress',
-                                                 'Done'])
+                                                 'Completed'])
 
     # "Archived" select
     expect(label('archived')).to          eq('Archived')
@@ -42,28 +42,28 @@ feature 'List orders', js: true do
     expect(select2_text('archived')).to   eq("\nNo")
     expect(select_options('archived')).to eq(%w(Yes No))
 
-    # "User name" multiple select
-    expect(label('user_id')).to                   eq('User name')
-    expect(placeholder('user_id[]')).to           eq('User name')
+    # "User" multiple select
+    expect(label('user_id')).to                   eq('User')
+    expect(placeholder('user_id[]')).to           eq('User')
     expect(select2_multiple_text('user_id[]')).to eq([user.full_name, 'Empty'])
     expect(select_options('user_id[]')).to        eq([user.full_name, 'Empty'])
     # enter 2 symbols in lookup and find users
     expect(success_select_search('user_id[]', 'Jo')).to eq([john.full_name, user.full_name])
 
-    # Calendar "From"
-    expect(label('created_at_from')).to          eq('From')
+    # Calendar "from"
+    expect(label('created_at_from')).to          eq('from')
     expect(calendar_value('created_at_from')).to eq(in_current_locale((DateTime.now - 1.day).beginning_of_day))
 
-    # Calendar "To"
-    expect(label('created_at_to')).to          eq('To')
+    # Calendar "to"
+    expect(label('created_at_to')).to          eq('to')
     expect(calendar_value('created_at_to')).to eq(in_current_locale((DateTime.now).end_of_day))
 
-    # Estimated execution date "From"
-    expect(label('estimated_exec_date_from')).to          eq('From')
+    # Estimated execution date "from"
+    expect(label('estimated_exec_date_from')).to          eq('from')
     expect(calendar_value('estimated_exec_date_from')).to be_nil
 
-    # Estimated execution date "To"
-    expect(label('estimated_exec_date_to')).to          eq('To')
+    # Estimated execution date "to"
+    expect(label('estimated_exec_date_to')).to          eq('to')
     expect(calendar_value('estimated_exec_date_to')).to be_nil
   end
 
@@ -94,7 +94,7 @@ feature 'List orders', js: true do
     expect(orders_list).to eq(current_orders_list)
 
     # "Order status"
-    change_select2_value('state', 'To execute')
+    change_select2_value('state', 'New')
     search_button.click
     wait_for_ajax
     expect(empty_order_list).not_to eq(nil)
@@ -158,13 +158,13 @@ feature 'List orders', js: true do
     wait_for_ajax
     expect(orders_list).to eq(current_orders_list)
 
-    # "User name"
+    # "User"
     select2_cross('user_id[]', 'Empty').click
     search_button.click
     wait_for_ajax
     expect(empty_order_list).not_to eq(nil)
 
-    # Filter by user name isn't set
+    # Filter by User isn't set
     select2_cross('user_id[]', 'Christopher Johnson').click
     search_button.click
     wait_for_ajax
@@ -177,9 +177,9 @@ feature 'List orders', js: true do
                            in_current_locale(support_request_order.estimated_exec_date)]]
 
     # default state
-    expect(label('custom_field_select')).to                eq('Add filter by attribute')
-    expect(placeholder('custom_field_select')).to          eq('Select order attribute')
-    expect(select2_default_text('custom_field_select')).to eq('Select order attribute')
+    expect(label('custom_field_select')).to                eq('Filter by custom fields')
+    expect(placeholder('custom_field_select')).to          eq('Select field')
+    expect(select2_default_text('custom_field_select')).to eq('Select field')
     expect(select_options('custom_field_select')).to       eq([])
 
     # activate custom field filter selector
@@ -260,8 +260,8 @@ feature 'List orders', js: true do
     # order type removing should clear all custom field filters
     select2_clear_cross('order_type_id').click
 
-    expect(placeholder('custom_field_select')).to          eq('Select order attribute')
-    expect(select2_default_text('custom_field_select')).to eq('Select order attribute')
+    expect(placeholder('custom_field_select')).to          eq('Select field')
+    expect(select2_default_text('custom_field_select')).to eq('Select field')
     expect(select_options('custom_field_select')).to       eq([])
     expect(page).not_to have_selector('[name="custom_fields[problemDescription]"]')
     expect(page).not_to have_selector('[name="custom_fields[callBack]"]')
@@ -270,7 +270,7 @@ feature 'List orders', js: true do
   end
 
   scenario 'with correct search by code' do
-    tab('Search for an order').click
+    tab('Find order').click
     input_by_label('code').set(vacation_request_order.code)
 
     search_button_by_action('/orders/search_by/code').click
@@ -279,7 +279,7 @@ feature 'List orders', js: true do
   end
 
   scenario 'with correct search by ext code' do
-    tab('Search for an order').click
+    tab('Find order').click
     input_by_label('ext_code').set(vacation_request_order.ext_code)
 
     search_button_by_action('/orders/search_by/ext_code').click
@@ -291,7 +291,7 @@ feature 'List orders', js: true do
     common_fields = %w(code order_type_code state created_at user ext_code archived estimated_exec_date)
     custom_fields = %w(creationDate problemDescription callBack contractNumber)
 
-    scenario 'columns settings hidden if order type not set' do
+    scenario 'display fields hidden if order type not set' do
       expect(label('order_type_id')).to        eq('Order type')
       expect(placeholder('order_type_id')).to  eq('Order type')
       expect(select2_text('order_type_id')).to eq('Order type')
@@ -299,15 +299,15 @@ feature 'List orders', js: true do
       search_button.click
       wait_for_ajax
 
-      expect(page).not_to have_content('Columns settings')
+      expect(page).not_to have_content('Display fields')
     end
 
-    scenario 'edit columns settings' do
+    scenario 'edit display fields' do
       change_select2_value('order_type_id', 'Support request')
 
       search_button.click
       wait_for_ajax
-      expect(page).to have_content('Columns settings')
+      expect(page).to have_content('Display fields')
       expect(checked_multiselect_options('column-settings')).to eq(common_fields)
       wait_for_ajax
       expect(order_list_table_cols).not_to include('Creation date', 'Problem description', 'Callback', 'Contract number')

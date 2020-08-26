@@ -61,8 +61,8 @@ module CustomFields
             it_behaves_like 'has validate value errors' do
               let(:errors) do
                 {
-                    'my_checkbox' => ["Attribute 'my_checkbox' with value 'Some string' should be \
-one of [\"true\", \"false\", \"on\", \"off\", \"1\", \"0\"]"]
+                    'my_checkbox' => ["Attribute 'my_checkbox' with the value 'Some string' must have a value \
+from the list [\"true\", \"false\", \"on\", \"off\", \"1\", \"0\"]"]
                 }
               end
             end

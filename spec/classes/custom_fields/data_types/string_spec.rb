@@ -36,7 +36,7 @@ module CustomFields
           it_behaves_like 'has errors' do
             let(:errors) do
               {
-                  :default => ["Attribute 'default' should be up to #{max_length} chars long"]
+                  :default => ["Attribute 'default' must not exceed #{max_length} characters"]
               }
 
             end
@@ -65,8 +65,8 @@ module CustomFields
           it_behaves_like 'has errors' do
             let(:errors) do
               {
-                  :max_length => ["Attribute 'max_length' should be up to " \
-               "#{max_length} chars long"]
+                  :max_length => ["Attribute 'max_length' must not exceed " \
+               "#{max_length} characters"]
               }
             end
           end
@@ -104,7 +104,7 @@ module CustomFields
             let(:errors) do
               {
                   'my_string' => [
-                      "Attribute 'my_string' should be up to #{max_length} chars long"
+                      "Attribute 'my_string' must not exceed #{max_length} characters"
                   ]
               }
             end

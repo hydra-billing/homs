@@ -55,7 +55,7 @@ feature 'Print', js: true do
 
     click_and_wait('Print')
 
-    expect(page).to have_content 'Print task 123 processing started. Check e-mail for result.'
+    expect(page).to have_content 'Print task 123 processing started. Please check your email for result.'
   end
 
   scenario 'denied' do

@@ -16,7 +16,7 @@ feature 'Check table with tasks', js: true do
     expect_widget_presence
     expect(page).to have_content 'Open tasks'
     expect(page).to have_content 'My tasks (24)'
-    expect(page).to have_content 'Unassigned tasks (3)'
+    expect(page).to have_content 'Unclaimed tasks (3)'
   end
 
   describe 'task list rendered' do
@@ -25,22 +25,22 @@ feature 'Check table with tasks', js: true do
 
       expect(tasks_table_content).to eq(
         [
-          ['Medium', 'Assigned task', ' Test name', '—', "expired (#{years_since(first_task_due_date)}y past due)"],
-          ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due)"],
+          ['Medium', 'Assigned task', ' Test name', '—', "expired (#{years_since(first_task_due_date)}y past due date)"],
+          ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due date)"],
           *Array.new(22) { ['High', 'Check test form', ' Test name', '—', '30 Jun 2016'] }
         ]
       )
     end
 
-    it 'for unassigned tasks' do
-      click_on_tab 'Unassigned tasks (3)'
+    it 'for unclaimed tasks' do
+      click_on_tab 'Unclaimed tasks (3)'
 
       expect(tasks_table_header).to eq ['Priority', 'Title', 'Task type', 'Task description', 'Created/Due', '']
 
       expect(tasks_table_content).to eq(
         [
-          ['Medium', 'Unassigned task', ' Test name', '—', "expired (#{years_since(first_task_due_date)}y past due)", 'Claim'],
-          ['High', 'Other unassigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due)", 'Claim'],
+          ['Medium', 'Unassigned task', ' Test name', '—', "expired (#{years_since(first_task_due_date)}y past due date)", 'Claim'],
+          ['High', 'Other unassigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due date)", 'Claim'],
           ['High', 'Check test form', ' Test name', '—', '30 Jun 2016', 'Claim']
         ]
       )
@@ -88,7 +88,7 @@ feature 'Check table with tasks', js: true do
     end
 
     it 'for unassigned task' do
-      click_on_tab 'Unassigned tasks (3)'
+      click_on_tab 'Unclaimed tasks (3)'
 
       expect(tasks_table_content.length).to eq(3)
 
@@ -116,7 +116,7 @@ feature 'Check table with tasks', js: true do
 
   describe 'table row disabled' do
     it 'for claimed task' do
-      click_on_tab 'Unassigned tasks (3)'
+      click_on_tab 'Unclaimed tasks (3)'
 
       claim_task(1)
 

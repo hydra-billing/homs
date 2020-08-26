@@ -1,7 +1,7 @@
 feature 'Check datetime picker with', js: true do
   let(:order_code) { 'ORD-1' }
   let(:nav_button) { 'Orders' }
-  let(:title)      { 'Orders list' }
+  let(:title)      { 'Orders' }
 
   before(:each) do
     user = FactoryBot.create(:user)

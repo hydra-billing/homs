@@ -7,7 +7,7 @@ feature 'Create new order type', js: true do
     expect(page).to     have_content 'Orders list'
 
     click_on 'Order types'
-    expect(page).to have_content 'Available order types definition'
+    expect(page).to have_content 'Order types'
     expect_widget_presence
   end
 
@@ -20,7 +20,7 @@ feature 'Create new order type', js: true do
 
     click_on 'Upload'
     expect(page).to have_content 'Support Request'
-    expect(page).to have_css     '.growl-notice', text: 'Order type definition has been uploaded successfully'
+    expect(page).to have_css     '.growl-notice', text: 'Order type successfully loaded'
     expect(page).to have_css     '.btn-danger',   text: 'Activate'
     expect(page).to have_css     '.btn-primary',  text: 'Dismiss'
     expect_widget_presence
@@ -28,14 +28,14 @@ feature 'Create new order type', js: true do
     expect(page).to have_content(YAML.load(fixture('order_types/support_request.yml'))['order_type']['code'])
 
     click_on 'Activate'
-    expect(page).to have_css     '.growl-notice', text: 'Order type definition has been activated'
-    expect(page).to have_content 'Available order types definition'
+    expect(page).to have_css     '.growl-notice', text: 'Order type activated'
+    expect(page).to have_content 'Order types'
     expect(page).to have_content 'Support Request'
     expect_widget_presence
     expect(OrderType.find_by_code('support_request').active).to be_truthy
 
     delete_order_type('Support Request')
-    expect(page).to have_css '.modal-body', text: 'Are you sure you want delete order type «Support Request»? Existing orders won\'t be affected.'
+    expect(page).to have_css '.modal-body', text: 'Are you sure you want to delete the order type «Support Request»? Existing orders won\'t be affected.'
 
     click_on 'Cancel'
     expect(page).to have_no_css '.confirmation_dialog'
@@ -95,7 +95,7 @@ feature 'Create new order type', js: true do
 
     click_on 'Upload'
     expect(page).to have_css        '.growl-title',   text: 'Error'
-    expect(page).to have_css        '.growl-message', text: "Uploaded YAML file content [\"creationDate: Unknown type 'undefined'\"]"
+    expect(page).to have_css        '.growl-message', text: "Loaded YAML file contents [\"creationDate: Unknown type 'undefined'\"]"
     expect(page).to have_no_css     '.btn-danger',    text: 'Activate'
     expect(page).to have_no_css     '.btn-primary',   text: 'Dismiss'
     expect(page).to have_no_content 'Support Request'
@@ -112,7 +112,7 @@ feature 'Create new order type', js: true do
 
     click_on 'Upload'
     expect(page).to have_css        '.growl-title',   text: 'Error'
-    expect(page).to have_css        '.growl-message', text: "Uploaded YAML file content [\"Missing attribute 'order_type'\"]"
+    expect(page).to have_css        '.growl-message', text: "Loaded YAML file contents [\"Missing attribute 'order_type'\"]"
     expect(page).to have_no_css     '.btn-danger',    text: 'Activate'
     expect(page).to have_no_css     '.btn-primary',   text: 'Dismiss'
     expect(page).to have_no_content 'Support Request'

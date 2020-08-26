@@ -20,7 +20,7 @@ feature 'Check file upload field with', js: true do
 
     expect(page).to have_content  'ORD-15'
     expect(page).to have_selector "[name='homsOrderDataUploadedFile']"
-    expect(page).to have_content  'Field of "file_list" type with name "homsOrderDataFileList" required'
+    expect(page).to have_content  'To load files please add a field of file_list type with the name homsOrderDataFileList'
     expect_widget_presence
   end
 end

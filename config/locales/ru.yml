@@ -1,157 +1,18 @@
 ru:
   logo: Hydra OMS
+  hello: Привет, мир
   add: Добавить
   access_denied: Доступ запрещен
-  edit: Править
+  edit: Изменить
   save: Сохранить
-  remove: Удалить
   activate: Активировать
   dismiss: Отклонить
   user: Пользователь
-  user_updated: Профиль изменен
-  user_deleted: Профиль удален
+  user_updated: Пользователь обновлен
+  user_deleted: Пользователь удален
   record_not_found: Запись не найдена
   config:
     bad_entity_url: Недопустимый параметр в entity_url '%{variable_name}'
-  date:
-    abbr_day_names:
-      - Вс
-      - Пн
-      - Вт
-      - Ср
-      - Чт
-      - Пт
-      - Сб
-    abbr_month_names:
-      -
-      - янв.
-      - февр.
-      - марта
-      - апр.
-      - мая
-      - июня
-      - июля
-      - авг.
-      - сент.
-      - окт.
-      - нояб.
-      - дек.
-    standalone_abbr_month_names:
-      -
-      - янв.
-      - февр.
-      - март
-      - апр.
-      - май
-      - июнь
-      - июль
-      - авг.
-      - сент.
-      - окт.
-      - нояб.
-      - дек.
-    day_names:
-      - воскресенье
-      - понедельник
-      - вторник
-      - среда
-      - четверг
-      - пятница
-      - суббота
-    formats:
-      default: ! '%d.%m.%Y'
-      long: ! '%-d %B %Y'
-      short: ! '%-d %b'
-    month_names:
-      -
-      - января
-      - февраля
-      - марта
-      - апреля
-      - мая
-      - июня
-      - июля
-      - августа
-      - сентября
-      - октября
-      - ноября
-      - декабря
-    standalone_month_names:
-      -
-      - Январь
-      - Февраль
-      - Март
-      - Апрель
-      - Май
-      - Июнь
-      - Июль
-      - Август
-      - Сентябрь
-      - Октябрь
-      - Ноябрь
-      - Декабрь
-    order:
-      - :day
-      - :month
-      - :year
-  datetime:
-    distance_in_words:
-      about_x_hours:
-        few: около %{count} часов
-        many: около %{count} часов
-        one: около %{count} часа
-        other: около %{count} часа
-      about_x_months:
-        few: около %{count} месяцев
-        many: около %{count} месяцев
-        one: около %{count} месяца
-        other: около %{count} месяца
-      about_x_years:
-        few: около %{count} лет
-        many: около %{count} лет
-        one: около %{count} года
-        other: около %{count} лет
-      almost_x_years:
-        one: почти 1 год
-        few: почти %{count} года
-        many: почти %{count} лет
-        other: почти %{count} лет
-      half_a_minute: меньше минуты
-      less_than_x_minutes:
-        few: меньше %{count} минут
-        many: меньше %{count} минут
-        one: меньше %{count} минуты
-        other: меньше %{count} минуты
-      less_than_x_seconds:
-        few: меньше %{count} секунд
-        many: меньше %{count} секунд
-        one: меньше %{count} секунды
-        other: меньше %{count} секунды
-      over_x_years:
-        few: больше %{count} лет
-        many: больше %{count} лет
-        one: больше %{count} года
-        other: больше %{count} лет
-      x_days:
-        few: ! '%{count} дня'
-        many: ! '%{count} дней'
-        one: ! '%{count} день'
-        other: ! '%{count} дня'
-      x_minutes:
-        few: ! '%{count} минуты'
-        many: ! '%{count} минут'
-        one: ! '%{count} минуту'
-        other: ! '%{count} минуты'
-      x_months:
-        few: ! '%{count} месяца'
-        many: ! '%{count} месяцев'
-        one: ! '%{count} месяц'
-        other: ! '%{count} месяца'
-      x_seconds:
-        few: ! '%{count} секунды'
-        many: ! '%{count} секунд'
-        one: ! '%{count} секундy'
-        other: ! '%{count} секунды'
   custom_fields:
     definition:
       missing_attribute: Отсутствует атрибут '%{attribute_name}'
@@ -162,82 +23,72 @@ ru:
       no_known_fields: Нет известных полей
       invalid_value: Атрибут '%{attribute_name}' со значением '%{value}' должен быть типа %{type}
       at_least: Атрибут '%{attribute_name}' должен иметь минимум %{min_value} значений в %{in}
-      not_in_set: Атрибут '%{attribute_name}' со значением '%{value}' должен иметь одно значение из %{set}
-      invalid: Атрибут '%{attribute_name}' имеет ошибочное значение '%{value}'
+      not_in_set: Атрибут '%{attribute_name}' со значением '%{value}' должен иметь значение из списка %{set}
+      invalid: Атрибут '%{attribute_name}' имеет недопустимое значение '%{value}'
+      incorrect_format: У атрибута %{attribute_name} недопустимое значение %{value}. Неверный JSON.
   devise:
     passwords:
       new:
-        title: "Забыли ваш пароль?"
-        description: "Мы вышлем вам письмо с инструкциями по сбросу пароля"
-        submit: "Сбросить пароль"
+        title: Забыли пароль?
+        description: Мы вышлем вам письмо с инструкцией по сбросу пароля
+        submit: Сбросить пароль
       edit:
-        title: "Изменить пароль"
-        new_password: "Новый пароль"
-        confirm_new_password: "Подтвердите новый пароль"
-        submit: "Сохранить новый пароль"
+        title: Изменить пароль
+        new_password: Новый пароль
+        confirm_new_password: Повторите новый пароль
+        submit: Сохранить новый пароль
     registrations:
       new:
-        title: "Зарегистрироваться"
-        submit: "Сохранить"
+        title: Зарегистрироваться
+        submit: Зарегистрироваться
       edit:
-        title: "Профиль"
-        leave_description: "Оставьте эти поля незаполненными, если вам не нужно менять пароль."
-        new_password: "Новый пароль"
-        currently_waiting: "Ожидается подтверждение"
-        current_password_description: "Чтобы сохранить изменения, вы должны ввести текущий пароль."
-        submit: "Сохранить"
+        title: Редактирование пользователя
+        leave_description: Оставьте эти поля пустыми, если не хотите менять пароль.
+        new_password: Новый пароль
+        currently_waiting: Ожидается подтверждение
+        current_password_description: Чтобы сохранить изменения, введите текущий пароль.
+        submit: Сохранить
     sessions:
       new:
-        title: "Вход"
-        sign_up: "Зарегистрироваться"
-        forgot_password: "Забыли пароль?"
-        remember_me: "Запомнить меня"
-        submit: "Войти"
+        title: Вход
+        sign_up: Зарегистрироваться
+        forgot_password: Забыли пароль?
+        remember_me: Запомнить меня
+        submit: Войти
   helpers:
-    enter_state: Состояние
+    enter_state: Состояние заказа
     enter_user: Пользователь
-    enter_order_type: Тип
-    enter_archived: Признак архивности
+    enter_order_type: Тип заказа
+    enter_archived: Архивный
     creation_date: Дата создания
-    estimated_exec_date: Ожидаемый срок выполнения
+    estimated_exec_date: Срок выполнения
     from: с
     to: по
-    archived: Архивирован
-    not_archived: Не архивирован
-    doesnt_matter: Не важно
     yes_no:
       'yes': Да
       'no': Нет
-    submit:
-      create: Добавить
-      update: Сохранить
-      delete: Удалить
-      submit: Сохранить
     custom_fields_filter:
-      title: Атрибуты заказа
-      add: Добавить фильтр по атрибуту заказа
-      placeholder: Выберите тип атрибута
-
+      title: Настраиваемые поля заказа
+      add: Фильтр по настраиваемым полям
+      placeholder: Выберите поле
   users:
-    enew:
-      title: Добавить пользователя
+    new:
+      title: Добавление пользователя
     edit:
       title: Профиль пользователя
     index:
-      title: Список пользователей
+      title: Пользователи
     add:
-      added: Профиль добавлен
-    new:
-      title: Добавление пользователя
+      added: Пользователь добавлен
     show:
       title: Профиль пользователя
       generate_api_token: Создать API-токен
       renew_api_token: Пересоздать API-токен
-      renew_api_token_warning: Новый API-токен заместит текущий. Подтверждаете?
+      renew_api_token_warning: Новый API-токен заменит текущий. Продолжить?
       clear_api_token: Удалить API-токен
-      clear_api_token_warning: Текущий API-токен будет удален. Подтверждаете?
-      yes_renew: Пересоздать токен
-      yes_clear: Удалить токен
+      clear_api_token_warning: Текущий API-токен будет удален. Продолжить?
+      yes_clear: Да, удалить
+      yes_renew: Да, пересоздать
     empty: Не указан
   orders:
     new:
@@ -246,32 +97,36 @@ ru:
     states:
       to_execute: Новый
       in_progress: В обработке
-      done: Обработан
+      done: Выполнен
     search_by_not_found: Заказ не найден по запросу %{criteria}
     index:
-      title: Список заказов
-      archived: Арх.
-      ext_code: Вн. код
+      title: Заказы
+      archived: Архивирован
+      ext_code: Внешний код
       no_orders_found: Заказов не найдено
     search_form:
-      filter_records: Фильтр
-      search_for_record: Найти заказ
+      filter_records: Список заказов
+      search_for_record: Поиск заказа
     search_by:
       search: Найти
-      code: Код
-      ext_code: Внешний код
+      code: Код заказа
+      ext_code: Внешний код заказа
     filter_by:
       search: Найти
-      print: Печать
+      print: Напечатать
     show:
-      order_data: Информация о заказе
-      show_more: Показать остальное
-      edit_title: Редактирование заказа
-      print_title: Печать информации о заказе
-      empty_code_title: Для печати необходимо задать код шаблона печатной формы для типа заказа
-    print: Печать
-    print_pdf: Печать PDF
-    total_items: "Найдено заказов:"
+      order_data: Данные заказа
+      edit_title: Редактировать данные заказа
+      print_title: Напечатать данные заказа
+      empty_code_title: Для печати укажите код шаблона печатной формы в типе заказа
+    print: Напечатать
+    print_pdf: Напечатать в PDF
+    print_tasks:
+      started: Задание на печать %{print_task_id} выполняется. Проверьте вашу почту.
+      errors:
+        multiple_types: У выбранных заказов разные типы. Для печати выберите заказы одинакового типа.
+        internal_error: Печать не выполнена из-за внутренней ошибки.
+    total_items: 'Найдено заказов:'
   user_role:
     user: Пользователь
     vip: Привилегированный пользователь
@@ -282,7 +137,6 @@ ru:
       sign_up: Зарегистрироваться
       help: Справка
       sign_out: Выйти
-      rest_api: REST API
       edit_account: Профиль
       orders: Заказы
       users: Пользователи
@@ -290,32 +144,34 @@ ru:
       tasks: Задачи
     form_errors:
       errors:
-        one: 'Из-за %{count} ошибки профиль не сохранен:'
-        few: 'Из-за %{count} ошибок профиль не сохранен:'
-        many: 'Из-за %{count} ошибок профиль не сохранен:'
-        other: 'Из-за %{count} ошибок профиль не сохранен:'
-
+        one: 'Из-за %{count} ошибки учетная запись не сохранена:'
+        few: 'Из-за %{count} ошибок учетная запись не сохранена:'
+        many: 'Из-за %{count} ошибок учетная запись не сохранена:'
+        other: 'Из-за %{count} ошибок учетная запись не сохранена:'
   admin:
     order_types:
       index:
         title: Типы заказов
-        add: Загрузить определение типа заказа из YAML-файла
-        order_type_removal: Удаление типа заказа
-        confirmation: Вы действительно хотите удалить тип заказа «%{order_type}»? Процедура не затронет существующие заказы.
+        add: Загрузить тип заказов из YAML-файла
+        order_type_removal: Удалить тип заказов
+        confirmation: Вы действительно хотите удалить тип заказов «%{order_type}»? Удаление не повлияет на существующие заказы.
         yes_remove: Да, удалить
       show:
-        activate_dismiss: Активируйте тип заказа, если его определение корректно, или отклоните его
-        activated: Тип заказа активирован
+        activate_dismiss: Активируйте тип заказов, если его определение корректно, или отклоните его
+        activated: Тип заказов активирован
         back: Вернуться к списку
       create:
-        uploaded: Определение типа заказа успешно загружено
-        equal_exists: Тип заказа с таким определением уже имеется
+        uploaded: Тип заказов успешно загружен
+        equal_exists: Такой же тип заказов уже существует
       dismiss:
-        dismissed: Тип заказа отклонен
+        dismissed: Тип заказов отклонен
       activate:
-        activated: Тип заказа активирован
+        activated: Тип заказов активирован
       destroy:
-        destroyed: Тип заказа удален
+        destroyed: Тип заказов удален
+  tasks:
+    index:
+      title: Задачи
   activerecord:
     models:
       user:
@@ -327,12 +183,10 @@ ru:
     attributes:
       order:
         code: Код
-        name: Наименование
         order_type_code: Тип заказа
-        order_type_name: Тип заказа
         ext_code: Внешний код
         user: Пользователь
-        bp_id: Ид. бизнес-процесса
+        bp_id: Идентификатор бизнес-процесса
         bp_state: Состояние бизнес-процесса
         state: Состояние
         done_at: Дата выполнения
@@ -340,23 +194,22 @@ ru:
         data: Настраиваемые поля
         created_at: Дата создания
         updated_at: Дата изменения
-        print_form_code: Код шаблона
-        estimated_exec_date: Ожидаемый срок выполнения
+        print_form_code: Код шаблона для печати
+        estimated_exec_date: Срок выполнения
       order_type:
         code: Код
-        name: Наименование
         file: Содержимое загруженного YAML файла
-        fields: Определение настраиваемых полей заказа
+        fields: Настраиваемые поля
         active: Действует
       user:
         name: Имя
-        email: E-mail
+        email: Электронная почта
         role: Роль
         middle_name: Отчество
         last_name: Фамилия
-        full_name: ФИО
+        full_name: Ф. И. О.
         company: Компания
-        department: Подразделение
+        department: Отдел
         api_token: API-токен
         password: Пароль
         password_confirmation: Подтверждение пароля
@@ -366,40 +219,34 @@ ru:
         order_type:
           attributes:
             base:
-              cannot_delete_as_orders_exist: Удалить нельзя, т.к. имеются заказы
+              cannot_delete_as_orders_exist: Невозможно удалить, т. к. есть связанные заказы
             file:
-              invalid: Ошибка синтаксиса файла
+              invalid: Ошибка при разборе файла
         order:
           attributes:
             data:
-              fields_definition_invalid: 'Критическая ошибка: Тип заказа данного заказа имеет ошибки в определении настраиваемых полей! Обратитесь к администратору.'
-              form_key_missed_in_task: 'Форма с ключом «%{form_key}» не найдена в текущем бизнес-процессе'
-            order_type_id:
-              blank: не задан
+              fields_definition_invalid: 'Критическая ошибка: тип данного заказа содержит ошибки в настраиваемых полях. Пожалуйста, обратитесь к администратору.'
         user:
-          blank: не задан
+          blank: не указан
           attributes:
             email:
-              invalid: неправильно задан
+              invalid: неверный
               taken: уже используется
             name:
-              blank: не задано
+              blank: не указано
             last_name:
-              blank: не задана
+              blank: не указана
             company:
-              blank: не задана
+              blank: не указана
             department:
-              blank: не задано
+              blank: не указан
             password:
               blank: не задан
               too_short: слишком короткий
             password_confirmation:
-              confirmation: не выполнено
-      types:
-        undefined: Неизвестный тип поля
-
+              confirmation: не заполнено
   js:
-    cancel: Отмена
+    cancel: Отменить
     error: Ошибка
     remove: Удалить
     'yes': Да
@@ -407,6 +254,61 @@ ru:
     select2:
       not_set: Не указан
     user_not_found: Текущий пользователь не найден в Camunda
-    columns_settings: Управление столбцами
+    columns_settings: Отображаемые поля
     from: с
     to: по
+  doc:
+    common:
+      cases:
+        list: Список
+        show: Получить
+        create: Создать
+        update: Обновить
+        delete: Удалить
+      parameters:
+        default: По умолчанию
+        allowed_values: Допустимые значения
+        page_size: Элементов на странице
+        page: Текущая страница
+    orders:
+      resource: Заказы
+      cases:
+        update_data: Обновить настраиваемые поля
+        update_base_fields: Обновить основные поля
+        update_user_email: Обновить электронную почту пользователя
+      explanations:
+        update: Метод обновляет только переданные поля, остальные поля остаются без изменений.
+      parameters:
+        code: Код заказа
+        data: Настраиваемые поля
+        user_email: Электронная почта пользователя
+        order_type_code: Код типа заказа
+        ext_code: Внешний код заказа
+        bp_id: Идентификатор бизнес-процесса
+        bp_state: Состояние бизнес-процесса
+        state: Состояние заказа
+        done_at: Дата выполнения
+        estimated_exec_date: Срок выполнения
+        archived: Архивный
+    users:
+      resource: Пользователи
+      parameters:
+        email: Электронная почта
+        first_name: Имя
+        middle_name: Отчество
+        last_name: Фамилия
+        user_role: Роль пользователя
+        company: Название компании
+        department: Название отдела
+        password: Пароль
+        blocked: Заблокирован
+        external: Внешний
+        password_salt: Соль для пароля
+        encrypted_password: Зашифрованный пароль
+    profiles:
+      resource: Профили фильтрации
+      parameters:
+        id: Идентификатор профиля
+        data: Настраиваемые поля заказа
+        user_email: Электронная почта пользователя
+        order_type_code: Код типа заказов

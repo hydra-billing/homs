@@ -76,7 +76,7 @@ describe CustomFields::FieldDef do
     expect(fd.valid?).to be false
     expect(fd.errors)
       .to eq Hash(
-                 name: ["Attribute 'name' should be of String type"]
+                 name: ["Attribute 'name' should be of the String type"]
              )
   end
 
