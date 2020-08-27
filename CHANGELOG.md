@@ -8,6 +8,7 @@ v2.4.1 [unreleased]
 ### Bugfixes
 - [#494](https://github.com/latera/homs/pull/494) Fix textarea height and icon in template.
 - [#495](https://github.com/latera/homs/pull/495) Add cursor pointer for checkboxes.
+- [#496](https://github.com/latera/homs/pull/496) Fix panel title font color and remove box shadow.
 
 v2.4.0 [2020-08-14]
 -------------------
