@@ -15,7 +15,7 @@ hbw:
           new_customer:
             - name: 'New Customer'
               title: 'Start Creating Customer'
-              class: 'btn btn-success'
+              class: 'btn btn-primary'
               fa_class: 'fa fa-user'
               bp_code: 'new_customer'
           relocate_customer:
