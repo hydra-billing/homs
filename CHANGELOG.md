@@ -2,6 +2,7 @@ v2.5.0 [unreleased]
 -------------------
 ### Features
 - [#493](https://github.com/latera/homs/pull/493) Add missing labels for inputs on search order form.
+- [#497](https://github.com/latera/homs/pull/497) Handle connection error when try to print order.
 
 v2.4.1 [unreleased]
 -------------------
