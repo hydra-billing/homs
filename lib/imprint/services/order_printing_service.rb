@@ -36,7 +36,10 @@ module Imprint
         else
           response = imprint_adapter.print_multiple_files(orders_or_error[:print_form_code],
                                                           orders_or_error[:orders])
-          if response.body.has_key?('task_id')
+
+          if response.nil?
+            {error: I18n.t('orders.print_tasks.errors.internal_error')}
+          elsif response.body.has_key?('task_id')
             {success: I18n.t('orders.print_tasks.started', print_task_id: response.body['task_id'])}
           elsif response.body.has_key?('errors')
             {error: response.body['errors'].to_s}

@@ -12,11 +12,13 @@ module Imprint
 
     %w(get put patch post delete).each do |method|
       define_method method do |url, *params|
-        @conn.send(method, url, *params) do |request|
-          request.headers['Content-type']          = 'application/json'
-          request.headers['X_IMPRINT_API_VERSION'] = config[:api_version]
-          request.headers['Accept']                = 'application/json'
-          request.headers['X_IMPRINT_API_TOKEN']   = config[:auth_token]
+        with_connection_failed do
+          @conn.send(method, url, *params) do |request|
+            request.headers['Content-type']          = 'application/json'
+            request.headers['X_IMPRINT_API_VERSION'] = config[:api_version]
+            request.headers['Accept']                = 'application/json'
+            request.headers['X_IMPRINT_API_TOKEN']   = config[:auth_token]
+          end
         end
       end
     end
@@ -36,6 +38,14 @@ module Imprint
       def load
         Imprint::API.config = Settings::Imprint[Rails.env].deep_symbolize_keys
       end
+    end
+
+    private
+
+    def with_connection_failed
+      yield
+    rescue Faraday::ConnectionFailed
+      nil
     end
   end
 end
