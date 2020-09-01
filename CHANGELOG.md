@@ -4,6 +4,9 @@ v2.4.1 [unreleased]
 - [#494](https://github.com/latera/homs/pull/494) Fix textarea height and icon in template.
 - [#495](https://github.com/latera/homs/pull/495) Add cursor pointer for checkboxes.
 
+### Refactoring
+- [#498](https://github.com/latera/homs/pull/498) Add css variable for text color when element is focused/selected.
+
 v2.4.0 [2020-08-14]
 -------------------
 ### Features
