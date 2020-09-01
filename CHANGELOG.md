@@ -11,6 +11,9 @@ v2.4.1 [unreleased]
 - [#495](https://github.com/latera/homs/pull/495) Add cursor pointer for checkboxes.
 - [#496](https://github.com/latera/homs/pull/496) Fix panel title font color and remove box shadow.
 
+### Refactoring
+- [#498](https://github.com/latera/homs/pull/498) Add css variable for text color when element is focused/selected.
+
 v2.4.0 [2020-08-14]
 -------------------
 ### Features
