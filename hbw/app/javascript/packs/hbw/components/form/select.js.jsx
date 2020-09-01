@@ -154,9 +154,9 @@ modulejs.define('HBWFormSelect',
 
         const optionColor = (isFocusedOrSelected) => {
           if (isFocusedOrSelected) {
-            return 'var(--hbw-white, var(--base-hbw-white))';
+            return 'var(--hbw-focused-text-color, var(--base-hbw-focused-text-color))';
           } else {
-            return 'var(--hbw-pickled-bluewood, var(--base-hbw-pickled-bluewood))';
+            return 'var(--hbw-text-color, var(--base-hbw-text-color))';
           }
         };
 
