@@ -4,6 +4,7 @@ v2.4.1 [unreleased]
 - [#494](https://github.com/latera/homs/pull/494) Fix textarea height and icon in template.
 - [#495](https://github.com/latera/homs/pull/495) Add cursor pointer for checkboxes.
 - [#496](https://github.com/latera/homs/pull/496) Fix panel title font color and remove box shadow.
+- [#500](https://github.com/latera/homs/pull/500) Make datetime addon border color customizable.
 
 ### Refactoring
 - [#498](https://github.com/latera/homs/pull/498) Add css variable for text color when element is focused/selected.
