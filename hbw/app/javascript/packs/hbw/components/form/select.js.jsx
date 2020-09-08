@@ -138,7 +138,7 @@ modulejs.define('HBWFormSelect',
           }
 
           if (isFocused) {
-            return 'var(--hbw-black, var(--base-hbw-black))';
+            return 'var(--select-border-color-focus-hover, var(--base-select-border-color-focus-hover))';
           }
 
           return 'var(--hbw-mystic, var(--base-hbw-mystic))';
@@ -160,6 +160,14 @@ modulejs.define('HBWFormSelect',
           }
         };
 
+        const dropdownIndicatorColor = (isFocused) => {
+          if (isFocused) {
+            return 'var(--select-dropdown-indicator-color-focus, var(--base-select-dropdown-indicator-color-focus))';
+          } else {
+            return 'var(--select-dropdown-indicator-color, var(--base-select-dropdown-indicator-color))';
+          }
+        };
+
         return {
           control: (base, state) => ({
             ...base,
@@ -167,18 +175,32 @@ modulejs.define('HBWFormSelect',
             height:          'var(--form-control-height, var(--base-form-control-height))',
             borderColor:     borderColor(state.isFocused),
             borderWidth:     'var(--form-control-border-width, var(--base-form-control-border-width))',
+            borderRadius:    'var(--form-control-border-radius, var(--base-form-control-border-radius))',
             boxShadow:       'none',
             cursor:          'pointer',
             backgroundColor: controlBackgroundColor(state.isDisabled),
 
             '&:hover': {
-              borderColor: 'inherit',
+              borderColor: 'var(--select-border-color-focus-hover, var(--base-select-border-color-focus-hover))',
               borderWidth: 'var(--form-control-border-width, var(--base-form-control-border-width))'
             }
           }),
           indicatorsContainer: base => ({
             ...base,
             height: 'var(--form-control-height, var(--base-form-control-height))'
+          }),
+          dropdownIndicator: (base, state) => ({
+            ...base,
+            color: dropdownIndicatorColor(state.isFocused),
+            width: 'var(--select-dropdown-indicator-width, var(--base-select-dropdown-indicator-width))',
+
+            '&:hover': {
+              color: 'var(--select-dropdown-indicator-color-hover, var(--base-select-dropdown-indicator-color-hover))'
+            }
+          }),
+          indicatorSeparator: base => ({
+            ...base,
+            display: 'var(--select-separator-display, var(--base-select-separator-display))'
           }),
           valueContainer: base => ({
             ...base,
