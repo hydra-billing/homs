@@ -152,6 +152,14 @@ modulejs.define('HBWFormSelect',
           }
         };
 
+        const controlCursor = (isDisabled) => {
+          if (isDisabled) {
+            return 'not-allowed';
+          } else {
+            return 'pointer';
+          }
+        };
+
         const optionColor = (isFocusedOrSelected) => {
           if (isFocusedOrSelected) {
             return 'var(--hbw-focused-text-color, var(--base-hbw-focused-text-color))';
@@ -177,7 +185,6 @@ modulejs.define('HBWFormSelect',
             borderWidth:     'var(--form-control-border-width, var(--base-form-control-border-width))',
             borderRadius:    'var(--form-control-border-radius, var(--base-form-control-border-radius))',
             boxShadow:       'none',
-            cursor:          'pointer',
             backgroundColor: controlBackgroundColor(state.isDisabled),
 
             '&:hover': {
@@ -185,6 +192,13 @@ modulejs.define('HBWFormSelect',
               borderWidth: 'var(--form-control-border-width, var(--base-form-control-border-width))'
             }
           }),
+          singleValue: (base, state) => ({
+            ...base,
+            cursor:        controlCursor(state.isDisabled),
+            pointerEvents: 'all',
+            color:         'var(--hbw-text-color, var(--base-hbw-text-color))'
+          }),
+
           indicatorsContainer: base => ({
             ...base,
             height: 'var(--form-control-height, var(--base-form-control-height))'
