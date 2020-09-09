@@ -2,6 +2,7 @@ $button-types: default primary danger info success warning
 
 .hbw-body
   font-size: var(--font-size, var(--base-font-size))
+  color: var(--hbw-text-color, var(--base-hbw-text-color))
 
 .btn
   font-size: var(--font-size, var(--base-font-size))
@@ -225,3 +226,7 @@ input.hbw-checkbox
   &[type=checkbox]:disabled
     + span:before
       color: var(--hbw-alto, var(--base-hbw-alto))
+
+.nav-tabs
+  li > a
+      color: var(--hbw-text-color, var(--base-hbw-text-color)) !important
