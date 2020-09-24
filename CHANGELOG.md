@@ -5,7 +5,7 @@ v2.5.0 [unreleased]
 - [#497](https://github.com/latera/homs/pull/497) Handle connection error when try to print order.
 - [#499](https://github.com/latera/homs/pull/499) Increase memory limit for worker.
 
-v2.4.1 [unreleased]
+v2.4.1 [2020-09-24]
 -------------------
 ### Bugfixes
 - [#494](https://github.com/latera/homs/pull/494) Fix textarea height and icon in template.
