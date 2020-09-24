@@ -1,4 +1,4 @@
-v2.4.1 [unreleased]
+v2.4.1 [2020-09-24]
 -------------------
 ### Bugfixes
 - [#494](https://github.com/latera/homs/pull/494) Fix textarea height and icon in template.
