@@ -44,8 +44,8 @@
     "yaml-loader": "^0.6.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.11.5",
     "@babel/preset-env": "^7.6.3",
-    "babel-eslint": "^10.0.1",
     "babel-jest": "^26.1.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",

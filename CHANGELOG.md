@@ -5,6 +5,9 @@ v2.5.0 [unreleased]
 - [#497](https://github.com/latera/homs/pull/497) Handle connection error when try to print order.
 - [#499](https://github.com/latera/homs/pull/499) Increase memory limit for worker.
 
+### Refactoring
+- [#506](https://github.com/latera/homs/pull/506) Update ruby and js dependencies.
+
 v2.4.1 [2020-09-24]
 -------------------
 ### Bugfixes

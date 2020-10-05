@@ -5,7 +5,10 @@ const eslint = require('./loaders/eslint');
 
 config.module.rules.unshift(eslint);
 
-config.devServer.clientLogLevel = 'debug';
-config.devServer.writeToDisk = true;
+config.devServer = {
+  ...config.devServer,
+  clientLogLevel: 'debug',
+  writeToDisk: true
+}
 
 module.exports = config;
