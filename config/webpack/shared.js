@@ -2,7 +2,6 @@ const path = require('path');
 const { environment } = require('@rails/webpacker');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const babel = require('./loaders/babel');
 const yaml = require('./loaders/yaml');
 const I18n = require('./loaders/I18n');
 const modulejs = require('./loaders/modulejs');
@@ -20,7 +19,6 @@ environment.plugins.prepend('moment', new webpack.ContextReplacementPlugin(/mome
 environment.plugins.prepend('clean', new CleanWebpackPlugin());
 
 environment.loaders.append('yaml', yaml);
-environment.loaders.append('babel', babel);
 
 // Expose libs called from haml templates
 environment.loaders.append('modulejs', modulejs);
