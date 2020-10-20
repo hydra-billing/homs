@@ -876,9 +876,9 @@ get:
                 css_class: col-xs-6 col-sm-4 col-md-3
                 label: Reason
                 type: string
-              - name: homsOrderOrEnableAfterChanges
+              - name: homsOrderOrEnabledAfterChanges
                 type: string
-                label: Will be enable after changes
+                label: Will be enabled after changes
                 css_class: col-xs-6 col-sm-4 col-md-3
                 dynamic: true
                 disable_if:
@@ -888,9 +888,9 @@ get:
                   -
                     - variable: homsOrderCheckingThis
                       condition: parseInt($var) == 666
-              - name: homsOrderAndEnableAfterChanges
+              - name: homsOrderAndEnabledAfterChanges
                 type: string
-                label: Will be enable after changes
+                label: Will be enabled after changes
                 css_class: col-xs-6 col-sm-4 col-md-3
                 dynamic: true
                 disable_if:
@@ -898,9 +898,9 @@ get:
                     condition: $var == 0
                   - variable: homsOrderCheckingThis
                     condition: parseInt($var) == 666
-              - name: homsOrderOrDisableAfterChanges
+              - name: homsOrderOrDisabledAfterChanges
                 type: string
-                label: OR Will be disable after changes
+                label: OR Will be disabled after changes
                 css_class: col-xs-6 col-sm-4 col-md-3
                 dynamic: true
                 disable_if:
@@ -910,9 +910,9 @@ get:
                   -
                     - variable: homsOrderCheckingThis
                       condition: parseInt($var) == 1234
-              - name: homsOrderAndDisableAfterChanges
+              - name: homsOrderAndDisabledAfterChanges
                 type: string
-                label: AND Will be disable after changes
+                label: AND Will be disabled after changes
                 css_class: col-xs-6 col-sm-4 col-md-3
                 dynamic: true
                 disable_if:
@@ -1255,16 +1255,16 @@ get:
       homsOrderCheckingThis:
         type: "number"
         value: 666
-      homsOrderOrEnableAfterChanges:
+      homsOrderOrEnabledAfterChanges:
         type: "string"
         value: "or_enabled"
-      homsOrderAndEnableAfterChanges:
+      homsOrderAndEnabledAfterChanges:
         type: "string"
         value: "and_enabled"
-      homsOrderOrDisableAfterChanges:
+      homsOrderOrDisabledAfterChanges:
         type: "string"
         value: "or_disabled"
-      homsOrderAndDisableAfterChanges:
+      homsOrderAndDisabledAfterChanges:
         type: "string"
         value: "and_disabled"
 
@@ -1865,10 +1865,10 @@ post:
     "variables[homsOrderDataSelect][value]=123":
       - ""
   task/111125/submit-form:
-    "variables[homsOrderAndDisableAfterChanges][value]=and_disabled&variables[homsOrderAndEnableAfterChanges][value]=and_enabled&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrDisableAfterChanges][value]=or_disabled&variables[homsOrderOrEnableAfterChanges][value]=or_enabled":
+    "variables[homsOrderAndEnabledAfterChanges][value]=and_enabled&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrEnabledAfterChanges][value]=or_enabled":
       - ""
   task/111126/submit-form:
-    "variables[homsOrderAndHiddenAfterChanges][value]=and_hidden&variables[homsOrderAndShownAfterChanges][value]=and_shown&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrHiddenAfterChanges][value]=or_hidden&variables[homsOrderOrShownAfterChanges][value]=or_shown":
+    "variables[homsOrderAndShownAfterChanges][value]=and_shown&variables[homsOrderCheckingThis][value]=1234&variables[homsOrderOrShownAfterChanges][value]=or_shown":
       - ""
   task/111123/claim:
     "userId=demo": null

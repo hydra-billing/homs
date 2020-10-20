@@ -20,13 +20,13 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     };
 
     componentDidMount () {
-      this.setInitialValuesForm();
+      this.setInitialFormValues();
       jQuery(':input:enabled:visible:first').focus();
       this.props.bind(`hbw:submit-form-${this.props.id}`, () => this.setState({ submitting: true }));
       this.props.bind('hbw:form-submitting-failed', () => this.setState({ submitting: false }));
       this.props.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
       this.props.bind('hbw:file-upload-finished', () => this.setState({ fileUploading: false }));
-      this.props.bind('hbw:update-value', data => this.updateFormValues(data));
+      this.props.bind(`hbw:update-value-${this.props.id}`, data => this.updateFormValues(data));
     }
 
     render () {
@@ -210,12 +210,11 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
 
     notSerializableFields = () => ['static'];
 
-    setInitialValuesForm = () => {
-      const variables = {};
-
-      this.props.taskVariables.forEach((variable) => {
-        variables[variable.name] = variable.value;
-      });
+    setInitialFormValues = () => {
+      const variables = this.props.taskVariables.reduce((result, variable) => {
+        result[variable.name] = variable.value;
+        return result;
+      }, {});
 
       this.setState({ formValues: variables });
     };

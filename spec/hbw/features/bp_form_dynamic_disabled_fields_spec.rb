@@ -19,17 +19,17 @@ feature 'Control dynamic disable string on form', js: true do
   end
 
   scenario 'AND & OR conditions for string' do
-    expect(find_by_name('homsOrderAndEnableAfterChanges').readonly?).to  eq true
-    expect(find_by_name('homsOrderAndDisableAfterChanges').readonly?).to eq false
-    expect(find_by_name('homsOrderOrEnableAfterChanges').readonly?).to   eq true
-    expect(find_by_name('homsOrderOrDisableAfterChanges').readonly?).to  eq false
+    expect(readonly?('homsOrderAndEnabledAfterChanges')).to  eq true
+    expect(readonly?('homsOrderAndDisabledAfterChanges')).to eq false
+    expect(readonly?('homsOrderOrEnabledAfterChanges')).to   eq true
+    expect(readonly?('homsOrderOrDisabledAfterChanges')).to  eq false
 
     fill_in 'homsOrderCheckingThis', with: '1234'
 
-    expect(find_by_name('homsOrderAndEnableAfterChanges').readonly?).to  eq false
-    expect(find_by_name('homsOrderAndDisableAfterChanges').readonly?).to eq true
-    expect(find_by_name('homsOrderOrEnableAfterChanges').readonly?).to   eq false
-    expect(find_by_name('homsOrderOrDisableAfterChanges').readonly?).to  eq true
+    expect(readonly?('homsOrderAndEnabledAfterChanges')).to  eq false
+    expect(readonly?('homsOrderAndDisabledAfterChanges')).to eq true
+    expect(readonly?('homsOrderOrEnabledAfterChanges')).to   eq false
+    expect(readonly?('homsOrderOrDisabledAfterChanges')).to  eq true
 
     expect(page).to have_selector "button[type='submit']"
     click_and_wait 'Submit'

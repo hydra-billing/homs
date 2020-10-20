@@ -70,7 +70,7 @@ export default WrappedComponent => class WithConditions extends Component {
   some = results => results.some(el => el === true);
 
   fireFieldValueUpdate = (name, value) => {
-    this.props.trigger('hbw:update-value', { name, value });
+    this.props.trigger(`hbw:update-value-${this.props.id}`, { name, value });
   };
 
   render () {

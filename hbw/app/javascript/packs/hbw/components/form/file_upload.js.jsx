@@ -129,7 +129,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     };
 
     serialize = () => {
-      if (this.props.hidden) {
+      if (this.props.disabled || this.props.hidden) {
         return null;
       } else {
         return { [this.props.params.name]: JSON.stringify({ files: this.state.files }) };
