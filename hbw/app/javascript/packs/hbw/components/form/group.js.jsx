@@ -24,11 +24,12 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
       } = this.props;
 
       const inputCSS = cx('tab-panel', 'form-group', params.css_class, { hidden });
+      const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       return <div className={inputCSS}>
         <ul className='nav nav-tabs' role='tablist'>
           <li className='active' role='presentation' title={params.tooltip}>
-            <a role='tab'>{params.label}</a>
+            <a role='tab'>{label}</a>
           </li>
         </ul>
         <div className='tab-content' title={params.tooltip}>
@@ -56,6 +57,7 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
         name,
         params,
         id:             this.props.id,
+        task:           this.props.task,
         value:          this.props.variables[name],
         formSubmitting: this.props.formSubmitting,
         env:            this.props.env,

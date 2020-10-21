@@ -123,7 +123,7 @@ class HBWTasksTable extends Component {
     const {
       tasks, showClaimButton, env, openTask, claimingTask, activeTask
     } = this.props;
-    const { translator: t } = env;
+    const { translator: t, bpTranslator } = env;
 
     const claiming = claimingTask && claimingTask.id === row.id;
     const opened = activeTask && activeTask.id === row.id;
@@ -141,13 +141,16 @@ class HBWTasksTable extends Component {
       'btn-default': !opened,
     });
 
+    const taskLabel = bpTranslator(`${row.process_key}.${row.key}.label`, {}, row.name);
+    const processLabel = bpTranslator(`${row.process_key}.label`, {}, row.process_name);
+
     return (
       <tr className={chosenCN} key={row.id} onClick={() => openTask(row)}>
         <td className='priority'>
           <Priority env={env} priority={row.priority} />
         </td>
-        <td>{row.name}</td>
-        <td><i className={row.icon}/>&nbsp;{row.process_name}</td>
+        <td>{taskLabel}</td>
+        <td><i className={row.icon}/>&nbsp;{processLabel}</td>
         <td className='description'>{row.description || t('components.claiming.table.empty_description') }</td>
         <td>{this.renderDate(row.created, row.due)}</td>
         {showClaimButton && (

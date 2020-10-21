@@ -59,8 +59,7 @@ modulejs.define('HBWFormSelectTable',
 
         const selectErrorMessage = env.translator('errors.field_not_defined_in_bp', { field_name: name });
 
-        const selectErrorMessage = this.props.env.translator('errors.field_not_defined_in_bp',
-          { field_name: this.props.name });
+        const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
         const cssClass = cx(params.css_class, { hidden });
         const selectErrorMessageCss = cx('alert', 'alert-danger', { hidden: !missFieldInVariables() });
@@ -70,7 +69,7 @@ modulejs.define('HBWFormSelectTable',
         });
 
         return <div className={cssClass} title={params.tooltip}>
-          <span className={params.label_css} ref={(i) => { this.label = i; }}>{params.label}</span>
+          <span className={params.label_css} ref={(i) => { this.label = i; }}>{label}</span>
           <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
           <div className={formGroupCss}>
             {errorTooltip}

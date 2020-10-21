@@ -58,10 +58,11 @@ modulejs.define('HBWFormString', ['React'], (React) => {
 
       const rootCSS = cx(params.css_class, { hidden });
       const inputCSS = cx('form-control', { invalid: !valid });
+      const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       return <div className={rootCSS} title={params.tooltip}>
         <div className="form-group">
-          <span className={params.label_css}>{params.label}</span>
+          <span className={params.label_css}>{label}</span>
           <input {...opts}
                  ref={(i) => { this.input = i; }}
                  className={inputCSS}

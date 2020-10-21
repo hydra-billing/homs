@@ -1,12 +1,12 @@
-import allTranslations from './init/translations';
+import HBWTranslations from './init/translations';
 
 const HBWTranslator = {
-  getTranslatorForLocale (locale) {
-    return (key, vars) => this.translate(key, locale, vars);
+  getTranslatorForLocale (locale, translations = HBWTranslations) {
+    return (key, vars, fallback) => this.translate(translations, key, locale, vars, fallback);
   },
 
-  translate (key, locale = 'en', vars = {}) {
-    let current = allTranslations[locale].hbw.js;
+  translate (translations, key, locale = 'en', vars = {}, fallback) {
+    let current = translations[locale];
 
     try {
       key.split('.').forEach((part) => {
@@ -17,10 +17,12 @@ const HBWTranslator = {
         }
       });
     } catch {
-      if (locale === 'en') {
+      if (fallback !== undefined) {
+        current = fallback;
+      } else if (locale === 'en') {
         current = `translation is missing: ${key}`;
       } else {
-        current = this.translate(key, 'en', vars);
+        current = this.translate(translations, key, 'en', vars);
       }
     }
 
@@ -29,8 +31,9 @@ const HBWTranslator = {
 
   interpolateString (str, vars) {
     if (typeof str === 'string') {
-      return str.replace(/%{([^{}]*)}/g, (fullMatch, varName) => {
+      return str.replace(/%{([^{}]*)}/g, (_, varName) => {
         const subst = vars[varName];
+
         if ((typeof subst !== 'string') && (typeof subst !== 'number')) {
           throw new Error(`Undefined variable ${varName}`);
         }

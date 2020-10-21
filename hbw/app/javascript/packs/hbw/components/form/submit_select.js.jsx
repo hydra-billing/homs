@@ -47,6 +47,7 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
       const cssClass = cx(option.css_class, { disabled });
       const faClass = cx(option.fa_class, { disabled });
 
+      const label = env.bpTranslator(`${task.process_key}.${task.key}.${option.name}`, {}, option.label);
 
       return (
         <button key={option.name}
@@ -56,7 +57,7 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
                 onClick={onClick}
                 disabled={error || disabled}>
           <i className={faClass} />
-          {` ${option.name}`}
+          {` ${label}`}
         </button>
       );
     };

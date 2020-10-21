@@ -42,7 +42,7 @@ module Homs
 
     config.action_controller.permit_all_parameters = true
 
-    config.cache_store = :dalli_store, ENV['MEMCACHED_URL'] || '127.0.0.1'
+    config.cache_store = :mem_cache_store, ENV['MEMCACHED_URL'] || '127.0.0.1'
 
     require Rails.root.join('lib/homs_config')
     config.app = HomsConfig.load(%w(config/homs_configuration.default.yml

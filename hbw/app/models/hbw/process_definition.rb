@@ -9,6 +9,6 @@ module HBW
       end
     end
 
-    definition_reader :id, :name, :deployment_id
+    definition_reader :id, :name, :key, :deployment_id
   end
 end

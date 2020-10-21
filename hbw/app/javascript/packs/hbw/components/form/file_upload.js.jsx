@@ -35,11 +35,11 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       const cssClass = cx(params.css_class, { hidden });
       const errorMessage = env.translator('errors.file_list_field_required');
       const errorMessageCss = cx('alert', 'alert-danger', { hidden: fileListPresent });
-      const hiddenValue = JSON.stringify({ files: this.state.files });
+      const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       return (
         <div className={cssClass}>
-          <span className={params.label_css}>{params.label}</span>
+          <span className={params.label_css}>{label}</span>
           <div className={errorMessageCss}>{errorMessage}</div>
           <div className="form-group">
             <input {...opts} type="file" multiple></input>
