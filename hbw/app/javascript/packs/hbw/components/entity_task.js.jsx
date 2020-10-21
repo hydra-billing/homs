@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import { withCallbacks } from 'shared/hoc';
 import Pending from './pending';
 
@@ -24,15 +25,13 @@ modulejs.define(
       }
 
       render () {
-        let iconClass = 'indicator pull-right fa';
+        const { task, env } = this.props;
+        const { collapsed } = this.state;
 
-        const { task } = this.props;
-
-        if (this.state.collapsed) {
-          iconClass += ' fa-chevron-down';
-        } else {
-          iconClass += ' fa-chevron-up';
-        }
+        const iconClass = cx('indicator', 'pull-right', 'fa', {
+          'fa-chevron-down': collapsed,
+          'fa-chevron-up':   !collapsed,
+        });
 
         return <div className="panel panel-default" ref={(node) => { this.rootNode = node; }}>
           <div className="panel-heading">
@@ -48,31 +47,29 @@ modulejs.define(
               />
             </h4>
           </div>
-          {!this.state.collapsed
-            && (<div className="panel-body">
-                {this.renderForm()}
-                </div>)
-          }
+          {!collapsed && (
+            <div className="panel-body">
+              {this.renderForm()}
+            </div>
+          )}
         </div>;
       }
 
       renderForm = () => {
-        const { form } = this.props.task;
+        const { guid, task, env } = this.props;
+        const { error } = this.state;
 
-        if (form !== undefined) {
-          if (this.state.error) {
-            return <Error error={this.state.error} env={this.props.env}/>;
+        if (task.form !== undefined) {
+          if (error) {
+            return <Error error={error} env={env}/>;
           } else {
             const opts = {
-              id:                this.props.guid,
-              taskId:            this.props.task.id,
-              processInstanceId: this.props.task.process_instance_id,
-              form,
-              env:               this.props.env,
-              error:             this.state.error,
-              assignee:          this.props.task.assignee,
-              variables:         this.formVariablesFromTask(this.props.task),
-              taskVariables:     form.variables
+              task,
+              env,
+              error,
+              id:            guid,
+              variables:     this.formVariablesFromTask(task),
+              taskVariables: task.form.variables
             };
 
             return <Form {...opts}/>;

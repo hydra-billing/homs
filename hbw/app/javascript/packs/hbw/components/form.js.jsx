@@ -30,7 +30,8 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     }
 
     render () {
-      const { env, form, assignee } = this.props;
+      const { env } = this.props;
+      const { form, assignee } = this.props.task;
 
       return <div className="hbw-form">
           <Error error={this.state.error || this.props.error}
@@ -64,7 +65,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       this.setState({ claiming: true });
 
       await this.props.env.connection.request({
-        url:    `${this.props.env.connection.serverURL}/tasks/${this.props.taskId}/claim`,
+        url:    `${this.props.env.connection.serverURL}/tasks/${this.props.task.id}/claim`,
         method: 'POST'
       });
 
@@ -78,13 +79,15 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     formControl = (name, params) => {
       const { submitting, fileUploading, formValues } = this.state;
       const {
-        id, variables, env, form, assignee, processInstanceId
+        id, variables, task, env
       } = this.props;
+      const { form, assignee } = task;
 
       const opts = {
         name,
         params,
         id,
+        task,
         env,
         formValues,
         value:           variables[name],
@@ -93,7 +96,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         showSubmit:      !!assignee
       };
 
-      if (!this.props.assignee) {
+      if (!assignee) {
         opts.disabled = true;
       }
 
@@ -121,7 +124,6 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
           return <SubmitSelect
             {...opts}
             showCancelButton={!form.hide_cancel_button}
-            processInstanceId={processInstanceId}
             {...onRef} />;
         case 'checkbox':
           return <Checkbox
@@ -155,14 +157,14 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
 
     submitControl = (fields) => {
       const { submitting, fileUploading } = this.state;
-      const { form, env, processInstanceId } = this.props;
+      const { task, env } = this.props;
       const last = fields[fields.length - 1];
 
       if (last.type !== 'submit_select') {
         return <Submit formSubmitting={submitting || fileUploading}
-                       showCancelButton={!form.hide_cancel_button}
-                       submitButtonName={form.submit_button_name}
-                       processInstanceId={processInstanceId}
+                       showCancelButton={!task.form.hide_cancel_button}
+                       submitButtonName={task.submit_button_name}
+                       processInstanceId={task.process_instance_id}
                        env={env} />;
       }
 
@@ -246,7 +248,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     serializeForm = () => {
       let variables = {};
 
-      this.props.form.fields.forEach((field) => {
+      this.props.task.form.fields.forEach((field) => {
         if (!this.notSerializableFields().includes(field.type)) {
           variables = { ...variables, ...this[`${field.name}`].serialize() };
         }

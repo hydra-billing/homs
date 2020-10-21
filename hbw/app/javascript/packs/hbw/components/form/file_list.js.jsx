@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
 
@@ -18,22 +19,21 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
     }
 
     render () {
-      const { links } = this.state;
-      let cssClass = this.props.params.css_class;
+      const {
+        name, params, hidden, task, env
+      } = this.props;
+      const { links, deletedFiles } = this.state;
 
-      if (this.props.hidden) {
-        cssClass += ' hidden';
-      }
+      const cssClass = cx(params.css_class, { hidden });
 
-      const { label } = this.props.params;
-      const labelCSS = `hbw-checkbox-label ${this.props.params.label_css || ''}`;
+      const labelCSS = cx('hbw-checkbox-label', params.label_css);
 
-      const hiddenValue = JSON.stringify(links.filter(link => !this.state.deletedFiles.includes(link.name)));
+      const hiddenValue = JSON.stringify(links.filter(link => !deletedFiles.includes(link.name)));
 
       return <div className={cssClass}>
-        <input name={this.props.params.name} value={hiddenValue} type="hidden"/>
+        <input name={params.name} value={hiddenValue} type="hidden"/>
         <label className={labelCSS}>
-          <span>{` ${label}`}</span>
+          <span>{` ${params.label}`}</span>
           <ul>
             {this.files(links)}
           </ul>

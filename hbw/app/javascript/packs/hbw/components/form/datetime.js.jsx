@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
 
@@ -28,35 +29,30 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
     }
 
     render () {
-      let isoValue;
+      const {
+        name, params, disabled, hidden, task, env
+      } = this.props;
+      const { defaultValue, value } = this.state;
 
       const opts = {
-        type:         'text',
-        defaultValue: this.state.defaultValue,
-        name:         this.props.params.name
+        name,
+        defaultValue,
+        type: 'text'
       };
 
-      if (this.props.params.editable === false || this.props.disabled) {
+      if (params.editable === false || disabled) {
         opts.disabled = 'disabled';
       }
 
-      if (this.state.value) {
-        isoValue = this.state.value.format();
-      } else {
-        isoValue = '';
-      }
+      const isoValue = value ? value.format() : '';
+      const inputCSS = cx(params.css_class, { hidden });
 
-      let inputCSS = this.props.params.css_class;
-      if (this.props.hidden) {
-        inputCSS += ' hidden';
-      }
-
-      return <div className={inputCSS} title={this.props.params.tooltip} ref={(node) => { this.rootNode = node; }}>
+      return <div className={inputCSS} title={params.tooltip} ref={(node) => { this.rootNode = node; }}>
         <div className="form-group">
-          <span className={this.props.params.label_css}>{this.props.params.label}</span>
+          <span className={params.label_css}>{params.label}</span>
           <div className="input-group date datetime-picker">
             <input {...opts} className="form-control" />
-            <input name={this.props.params.name} type="hidden" value={isoValue} />
+            <input name={name} type="hidden" value={isoValue} />
             <span className="input-group-addon">
               <span className="fas fa-calendar" />
             </span>
