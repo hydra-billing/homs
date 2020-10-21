@@ -1,5 +1,6 @@
 /* eslint react/jsx-no-undef: "off" */
 
+import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
 
@@ -18,20 +19,21 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
     }
 
     render () {
-      let inputCSS = `tab-panel form-group ${this.props.params.css_class}`;
-      if (this.props.hidden) {
-        inputCSS += ' hidden';
-      }
+      const {
+        name, params, hidden, task, env
+      } = this.props;
+
+      const inputCSS = cx('tab-panel', 'form-group', params.css_class, { hidden });
 
       return <div className={inputCSS}>
         <ul className='nav nav-tabs' role='tablist'>
-          <li className='active' role='presentation' title={this.props.params.tooltip}>
-            <a role='tab'>{this.props.params.label}</a>
+          <li className='active' role='presentation' title={params.tooltip}>
+            <a role='tab'>{params.label}</a>
           </li>
         </ul>
-        <div className='tab-content' title={this.props.params.tooltip}>
+        <div className='tab-content' title={params.tooltip}>
           <div className='row'>
-            {this.iterateControls(this.props.params.fields)}
+            {this.iterateControls(params.fields)}
           </div>
         </div>
       </div>;

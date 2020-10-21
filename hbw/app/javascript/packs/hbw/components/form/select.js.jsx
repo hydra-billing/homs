@@ -1,5 +1,6 @@
 /* eslint no-console: "off" */
 
+import cx from 'classnames';
 import Select from 'react-select';
 import Async from 'react-select/async';
 import Tooltip from 'tooltip.js';
@@ -42,13 +43,17 @@ modulejs.define('HBWFormSelect',
       }
 
       render () {
+        const {
+          name, task, params, disabled, hidden, env, missFieldInVariables
+        } = this.props;
+
         const opts = {
-          name:             this.props.name,
+          name,
           options:          this.buildOptions(),
           defaultValue:     this.getDefaultValue(),
-          placeholder:      this.props.params.placeholder || '',
-          isClearable:      this.props.params.nullable,
-          isDisabled:       this.props.params.editable === false || this.props.disabled,
+          placeholder:      params.placeholder || '',
+          isClearable:      params.nullable,
+          isDisabled:       params.editable === false || disabled,
           noOptionsMessage: this.noOptionsMessage,
           loadingMessage:   this.loadingMessage,
           className:        'react-select-container',
@@ -57,30 +62,19 @@ modulejs.define('HBWFormSelect',
           onChange:         opt => this.setValue(opt)
         };
 
-        let cssClass = this.props.params.css_class;
-        if (this.props.hidden) {
-          cssClass += ' hidden';
-        }
+        const labelCss = params.label_css;
+        const cssClass = cx(params.css_class, { hidden });
 
-        const { tooltip } = this.props.params;
-        const { label } = this.props.params;
-        const labelCss = this.props.params.label_css;
-
-        const selectErrorMessage = this.props.env.translator('errors.field_not_defined_in_bp',
-          { field_name: this.props.name });
-        let selectErrorMessageCss = 'alert alert-danger';
-
-        if (!this.props.missFieldInVariables()) {
-          selectErrorMessageCss += ' hidden';
-        }
+        const selectErrorMessage = env.translator('errors.field_not_defined_in_bp', { field_name: name });
+        const selectErrorMessageCss = cx('alert', 'alert-danger', { hidden: !missFieldInVariables() });
 
         const errorTooltip = <div
           ref={(t) => { this.tooltipContainer = t; }}
           className={`${!this.state.valid && 'tooltip-red'}`}
         />;
 
-        return <div className={cssClass} title={tooltip}>
-          <span className={labelCss}>{label}</span>
+        return <div className={cssClass} title={params.tooltip}>
+          <span className={labelCss}>{params.label}</span>
           <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
           <div className='form-group' ref={(i) => { this.select = i; }}>
             {this.selectComponent(opts)}

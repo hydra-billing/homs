@@ -11,20 +11,25 @@ modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'HBWFormSelect'], (React, R
     }
 
     render () {
-      const params = {
-        ...this.props.params,
-        placeholder: this.props.params.placeholder || 'User',
+      const {
+        name, params, disabled, task, env
+      } = this.props;
+
+      const selectParams = {
+        ...params,
+        placeholder: params.placeholder || 'User',
         mode:        'lookup',
         url:         '/users/lookup',
         choices:     []
       };
 
       return <Select
-        name={this.props.name}
-        params={params}
-        env={this.props.env}
-        disabled={this.props.disabled}
-        onRef={(i) => { this[`${this.props.name}`] = i; }} />;
+        name={name}
+        params={selectParams}
+        task={task}
+        env={env}
+        disabled={disabled}
+        onRef={(i) => { this[`${name}`] = i; }} />;
     }
 
     serialize = () => this[`${this.props.name}`].serialize();

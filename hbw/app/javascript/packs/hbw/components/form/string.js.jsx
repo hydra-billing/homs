@@ -1,6 +1,7 @@
 /* eslint no-useless-escape: "off" */
 /* eslint no-cond-assign: ["error", "except-parens"] */
 
+import cx from 'classnames';
 import CustomFormatter from 'formatter';
 import Tooltip from 'tooltip';
 import compose from 'shared/utils/compose';
@@ -35,36 +36,37 @@ modulejs.define('HBWFormString', ['React'], (React) => {
     templateRegexp = new RegExp('{{([^}]+)}}', 'g');
 
     render () {
+      const {
+        name, params, disabled, hidden, task, env
+      } = this.props;
+
+      const { valid, value, visualValue } = this.state;
+
       const opts = {
-        name:      this.props.name,
+        name,
         type:      'text',
         onKeyUp:   this.onChange,
         onKeyDown: this.onKeyDown,
         onChange:  this.onChange,
         onBlur:    this.onBlur,
         onFocus:   this.onFocus,
-        readOnly:  this.props.params.editable === false || this.props.disabled
+        readOnly:  params.editable === false || disabled
       };
 
-      const errorTooltip = <div
-        ref={(t) => { this.tooltipContainer = t; }}
-        className={`${!this.state.valid && 'tooltip-red'}`}
-      />;
+      const errorTooltip = <div ref={(t) => { this.tooltipContainer = t; }}
+                                className={`${!valid && 'tooltip-red'}`}/>;
 
-      let inputCSS = this.props.params.css_class;
+      const rootCSS = cx(params.css_class, { hidden });
+      const inputCSS = cx('form-control', { invalid: !valid });
 
-      if (this.props.hidden) {
-        inputCSS += ' hidden';
-      }
-
-      return <div className={inputCSS} title={this.props.params.tooltip}>
+      return <div className={rootCSS} title={params.tooltip}>
         <div className="form-group">
-          <span className={this.props.params.label_css}>{this.props.params.label}</span>
+          <span className={params.label_css}>{params.label}</span>
           <input {...opts}
                  ref={(i) => { this.input = i; }}
-                 className={`form-control ${!this.state.valid && ' invalid'}`}
-                 value={this.state.visualValue} />
-          {!opts.readOnly && <input name={this.props.name} value={this.state.value} type="hidden" />}
+                 className={inputCSS}
+                 value={visualValue} />
+          {!opts.readOnly && <input name={name} value={value} type="hidden" />}
           {errorTooltip}
         </div>
       </div>;

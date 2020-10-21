@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import Tooltip from 'tooltip';
 import compose from 'shared/utils/compose';
 import {
@@ -46,42 +47,33 @@ modulejs.define('HBWFormSelectTable',
       }
 
       render () {
-        let cssClass = this.props.params.css_class;
+        const {
+          name, params, disabled, hidden, task, env, missFieldInVariables
+        } = this.props;
+        const {
+          choices, value, valid, error
+        } = this.state;
 
-        if (this.props.hidden) {
-          cssClass += ' hidden';
-        }
+        const errorTooltip = <div ref={(t) => { this.tooltipContainer = t; }}
+                                  className={cx({ 'tooltip-red': !valid })} />;
 
-        const { tooltip, label } = this.props.params;
-        const labelCss = this.props.params.label_css;
+        const selectErrorMessage = env.translator('errors.field_not_defined_in_bp', { field_name: name });
 
         const selectErrorMessage = this.props.env.translator('errors.field_not_defined_in_bp',
           { field_name: this.props.name });
 
-        const errorTooltip = <div
-          ref={(t) => { this.tooltipContainer = t; }}
-          className={`${!this.state.valid && 'tooltip-red'}`}
-        />;
+        const cssClass = cx(params.css_class, { hidden });
+        const selectErrorMessageCss = cx('alert', 'alert-danger', { hidden: !missFieldInVariables() });
+        const formGroupCss = cx('hbw-table', 'form-group', { 'has-error': error });
+        const tableCss = cx('select-table', 'table', 'table-striped', 'table-bordered', {
+          disabled: params.editable === false || disabled
+        });
 
-        let selectErrorMessageCss = 'alert alert-danger';
-        if (!this.props.missFieldInVariables()) {
-          selectErrorMessageCss += ' hidden';
-        }
-
-        let formGroupCss = 'hbw-table form-group';
-        if (this.state.error) {
-          formGroupCss += ' has-error';
-        }
-
-        let tableCss = 'select-table table table-striped table-bordered';
-        if (this.props.params.editable === false || this.props.disabled) {
-          tableCss += ' disabled';
-        }
-
-        return <div className={cssClass} title={tooltip}>
-          <span className={labelCss} ref={(i) => { this.label = i; }}>{label}</span>
+        return <div className={cssClass} title={params.tooltip}>
+          <span className={params.label_css} ref={(i) => { this.label = i; }}>{params.label}</span>
           <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
           <div className={formGroupCss}>
+            {errorTooltip}
             <table className={tableCss}>
               <thead className='thead-inverse'>
               <tr>
@@ -89,9 +81,8 @@ modulejs.define('HBWFormSelectTable',
               </tr>
               </thead>
               <tbody>
-              {this.buildTableBody(this.state.choices, this.props.name, this.state.value)}
+              {this.buildTableBody(choices, name, value)}
               </tbody>
-              {errorTooltip}
             </table>
           </div>
         </div>;

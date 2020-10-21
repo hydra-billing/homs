@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
 
@@ -20,26 +21,24 @@ modulejs.define('HBWFormText', ['React'], (React) => {
     };
 
     render () {
+      const {
+        name, params, disabled, hidden, task, env
+      } = this.props;
+      const { value } = this.state;
+
       const opts = {
-        name:      this.props.name,
+        name,
         className: 'textarea',
-        rows:      this.props.params.rows,
-        readOnly:  this.props.params.editable === false || this.props.disabled
+        rows:      params.rows,
+        readOnly:  params.editable === false || disabled
       };
 
-      const title = this.props.params.tooltip;
-      const { label } = this.props.params;
-      const labelCss = this.props.params.label_css;
-      let cssClass = this.props.params.css_class;
+      const cssClass = cx(params.css_class, { hidden });
 
-      if (this.props.hidden) {
-        cssClass += ' hidden';
-      }
-
-      return <div className={cssClass} title={title}>
+      return <div className={cssClass} title={params.tooltip}>
         <div className='form-group'>
-          <span className={labelCss}>{label}</span>
-          <textarea {...opts} value={this.state.value} onChange={this.handleChange} />
+          <span className={params.label_css}>{params.label}</span>
+          <textarea {...opts} value={value || ''} onChange={this.handleChange} />
         </div>
       </div>;
     }

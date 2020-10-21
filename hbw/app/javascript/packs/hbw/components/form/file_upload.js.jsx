@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
 
@@ -19,44 +20,38 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     }
 
     render () {
+      const {
+        name, params, disabled, hidden, fileListPresent, task, env
+      } = this.props;
+      const { files, dragStyleClass } = this.state;
+
       const opts = {
-        disabled: this.props.disabled,
-        name:     this.props.params.name,
+        disabled,
+        name,
         onChange: this.onChange
       };
 
+      const hiddenValue = JSON.stringify({ files });
+      const cssClass = cx(params.css_class, { hidden });
+      const errorMessage = env.translator('errors.file_list_field_required');
+      const errorMessageCss = cx('alert', 'alert-danger', { hidden: fileListPresent });
       const hiddenValue = JSON.stringify({ files: this.state.files });
-
-      let cssClass = this.props.params.css_class;
-      if (this.props.hidden) {
-        cssClass += ' hidden';
-      }
-
-      const errorMessage = this.props.env.translator('errors.file_list_field_required');
-      let errorMessageCss = 'alert alert-danger';
-
-      if (this.props.fileListPresent) {
-        errorMessageCss += ' hidden';
-      }
-
-      const { label } = this.props.params;
-      const labelCss = this.props.params.label_css;
 
       return (
         <div className={cssClass}>
-          <span className={labelCss}>{label}</span>
+          <span className={params.label_css}>{params.label}</span>
           <div className={errorMessageCss}>{errorMessage}</div>
           <div className="form-group">
             <input {...opts} type="file" multiple></input>
-            <input name={this.props.params.name} value={hiddenValue} type="hidden"/>
+            <input name={name} value={hiddenValue} type="hidden"/>
             <div
-              className={this.state.dragStyleClass}
+              className={dragStyleClass}
               onDragEnter={e => this.onDragEnter(e)}
               onDragLeave={e => this.onDragLeave(e)}
               onDragOver={e => e.preventDefault()}
               onDrop={e => this.onDrop(e)}
             >
-              <div className='drop_text'>{this.props.env.translator('components.file_upload.drag_and_drop')}</div>
+              <div className='drop_text'>{env.translator('components.file_upload.drag_and_drop')}</div>
             </div>
           </div>
         </div>

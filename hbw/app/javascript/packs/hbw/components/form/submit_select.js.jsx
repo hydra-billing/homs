@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
 import CancelProcessButton from './cancel_process_button.js';
@@ -23,13 +24,11 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
         params, name, showSubmit, showCancelButton
       } = this.props;
 
-      const cssClass = `col-xs-12 ${params.css_class}`;
       const self = this;
-
       const buttons = params.options.map(option => self.buildButton(option));
 
       return showSubmit
-      && <div className={cssClass}>
+      && <div className={cx('col-xs-12', params.css_class)}>
           <div className="control-buttons">
             { showCancelButton && this.renderCancelButton() }
             { buttons }
@@ -39,32 +38,33 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
     }
 
     buildButton = (option) => {
+      const disabled = this.props.disabled || this.props.formSubmitting;
+      const { task, env } = this.props;
+      const { error } = this.state;
+
       const onClick = () => this.setState({ value: option.value });
-      let cssClass = option.css_class;
-      let faClass = option.fa_class;
-      let disabled = false || this.state.error;
 
-      if (this.props.disabled || this.props.formSubmitting) {
-        cssClass += ' disabled';
-        faClass += ' disabled';
-        disabled = true;
-      }
+      const cssClass = cx(option.css_class, { disabled });
+      const faClass = cx(option.fa_class, { disabled });
 
-      return <button key={option.name}
-        type="submit"
-        className={cssClass}
-        title={option.title}
-        onClick={onClick}
-        disabled={disabled}>
-        <i className={faClass} />
-        {` ${option.name}`}
-      </button>;
+
+      return (
+        <button key={option.name}
+                type="submit"
+                className={cssClass}
+                title={option.title}
+                onClick={onClick}
+                disabled={error || disabled}>
+          <i className={faClass} />
+          {` ${option.name}`}
+        </button>
+      );
     };
 
     renderCancelButton = () => {
-      const { env, processInstanceId } = this.props;
+      const { env, task } = this.props;
 
-      return <CancelProcessButton processInstanceId={processInstanceId}
+      return <CancelProcessButton processInstanceId={task.process_instance_id}
                                   env={env} />;
     };
 
