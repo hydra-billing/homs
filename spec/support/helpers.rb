@@ -5,6 +5,8 @@ require 'support/helpers/tasks_helper'
 require 'support/helpers/order_types_helper'
 require 'support/helpers/users_helper'
 require 'support/helpers/wait_for_ajax_helper'
+require 'support/helpers/bp_form_helper'
+require 'support/helpers/i18n_helper'
 
 FIXTURES_PATH = File.join(__FILE__, '..', '..', '..', 'fixtures')
 
@@ -26,4 +28,6 @@ RSpec.configure do |config|
   config.include Features::TasksHelper,       type: :feature
   config.include Features::UsersHelper,       type: :feature
   config.include Features::WaitForAjaxHelper, type: :feature
+  config.include Features::BPFormHelper,      type: :feature
+  config.include Features::I18nHelper,        type: :feature
 end

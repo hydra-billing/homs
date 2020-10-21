@@ -13,7 +13,7 @@ feature 'Check available tasks counter', js: true do
 
   describe 'when rendered' do
     it 'should contain assigned/unassigned tasks count' do
-      expect(tasks_count).to eq '31/3'
+      expect(tasks_count).to eq '32/3'
     end
   end
 
@@ -27,14 +27,14 @@ feature 'Check available tasks counter', js: true do
     end
 
     it 'should contain two tabs with list' do
-      expect(page).to have_content 'My tasks (31)'
+      expect(page).to have_content 'My tasks (32)'
       expect(page).to have_content 'Unclaimed tasks (3)'
 
       expect(popup_tasks_list_content).to eq(
         [
           "Assigned task\nexpired (#{years_since(first_task_due_date)}y past due date)",
           "Other assigned task\nSome test description\nexpired (#{years_since(second_task_due_date)}y past due date)",
-          "Check test form\n30 Jun 2016",
+          "Enter customer's address\n30 Jun 2016",
           "Check test form\n30 Jun 2016",
           "Check test form\n30 Jun 2016",
           "Check test form\n30 Jun 2016",
@@ -57,7 +57,7 @@ feature 'Check available tasks counter', js: true do
 
       click_on_tasks_counter
 
-      expect(page).not_to have_content 'My tasks (31)'
+      expect(page).not_to have_content 'My tasks (32)'
       expect(page).not_to have_content 'Unclaimed tasks (3)'
 
       expect_widget_presence

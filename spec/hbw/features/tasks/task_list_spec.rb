@@ -15,7 +15,7 @@ feature 'Check table with tasks', js: true do
     click_on 'Tasks'
     expect_widget_presence
     expect(page).to have_content 'Open tasks'
-    expect(page).to have_content 'My tasks (31)'
+    expect(page).to have_content 'My tasks (32)'
     expect(page).to have_content 'Unclaimed tasks (3)'
   end
 
@@ -27,6 +27,7 @@ feature 'Check table with tasks', js: true do
         [
           ['Medium', 'Assigned task', ' Test name', '—', "expired (#{years_since(first_task_due_date)}y past due date)"],
           ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due date)"],
+          ['High', "Enter customer's address", ' New Customer', '—', '30 Jun 2016'],
           *Array.new(29) { ['High', 'Check test form', ' Test name', '—', '30 Jun 2016'] }
         ]
       )
@@ -53,7 +54,7 @@ feature 'Check table with tasks', js: true do
     end
 
     it 'for assigned task' do
-      expect(tasks_table_content.length).to eq(31)
+      expect(tasks_table_content.length).to eq(32)
 
       click_on_task_table_row(1)
 
