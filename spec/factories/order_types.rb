@@ -79,5 +79,65 @@ FactoryBot.define do
           label: 'Contract number',
           description: 'Contract number'})
     end
+
+    trait :new_customer do
+      active true
+      code 'New customer'
+      fields(
+        customerCity: {
+          type: 'string',
+          label: 'Customer City'},
+        customerStreet: {
+          type: 'string',
+          label: 'Customer Street'},
+        customerHouse: {
+          type: 'string',
+          label: 'Customer House'},
+        customerEntrance: {
+          type: 'string',
+          label: 'Customer Entrance'},
+        addressIsAvailable: {
+          type: 'boolean',
+          label: 'Customer address is available'},
+        planId: {
+          type: 'number',
+          label: 'Customer Plan'},
+        planComment: {
+          type: 'string',
+          label: 'Comment to plan'},
+        customerName: {
+          type: 'string',
+          label: 'Customer Name'},
+        customerSurname: {
+          type: 'string',
+          label: 'Customer Surname'},
+        customerPhone: {
+          type: 'string',
+          label: 'Customer Phone'},
+        customerEmail: {
+          type: 'string',
+          label: 'Customer Email'},
+        installDate: {
+          type: 'datetime',
+          label: 'Install date'},
+        fromFriends: {
+          type: 'boolean',
+          label: 'Friends'},
+        fromTV: {
+          type: 'boolean',
+          label: 'TV'},
+        fromFacebookAds: {
+          type: 'boolean',
+          label: 'Facebook Ads'},
+        fromOther: {
+          type: 'boolean',
+          label: 'Other'},
+        fileList: {
+          type: 'json',
+          label: 'Attached files'},
+        uploadedFile: {
+          type: 'json',
+          label: 'Attach file'})
+    end
   end
 end
