@@ -1,0 +1,37 @@
+ru:
+  relocate_customer:
+    label: Изменение адреса абонента
+    Activity_1jedmqv:
+      label: Заполните адрес абонента
+      homsOrderDataCustomerCity: Город
+      homsOrderDataCustomerStreet: Улица
+      homsOrderDataCustomerHouse: Дом
+      homsOrderDataCustomerEntrance: Подъезд
+    Activity_1u3vwq1:
+      label: Подключение
+      group1: Контактная информация
+      homsOrderDataCustomerName: Имя
+      homsOrderDataCustomerSurname: Фамилия
+      homsOrderDataCustomerPhone: Телефон
+      homsOrderDataCustomerEmail: Email
+      homsOrderDataInstallDate: Дата подключения
+      group2: Смена тарифа
+      homsOrderDataChangePlan: Требуется смена тарифа
+    Activity_08wwoqp:
+      label: Выбор нового тарифа
+      homsOrderDataPlanId: Тариф
+      homsOrderDataPlanComment: Комментарий для абонента
+    Activity_0dhj8f6:
+      label: Подтверждение
+      group1: Новый адрес
+      homsOrderDataCustomerCity: Город
+      homsOrderDataCustomerStreet: Улица
+      homsOrderDataCustomerHouse: Дом
+      homsOrderDataCustomerEntrance: Подъезд
+      group2: Контактная информация
+      homsOrderDataCustomerName: Имя
+      homsOrderDataCustomerSurname: Фамилия
+      homsOrderDataCustomerPhone: Телефон
+      homsOrderDataCustomerEmail: Email
+      homsOrderDataInstallDate: Дата подключения
+      group3: Новый тариф

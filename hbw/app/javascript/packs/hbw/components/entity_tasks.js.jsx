@@ -26,8 +26,10 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
     };
 
     getProcessName = () => {
-      if (this.props.tasks.length > 0) {
-        return this.props.tasks[0].process_name;
+      const { env, tasks } = this.props;
+
+      if (tasks.length > 0) {
+        return env.translator(`${tasks[0].process_key}.label`, {}, tasks[0].process_name);
       } else {
         return null;
       }

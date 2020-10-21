@@ -5,7 +5,7 @@ import Priority from 'shared/element/priority';
 const HBWClaimingTaskOverview = ({
   env, assigned, entityUrl, task, claim
 }) => {
-  const { translator: t, localizer } = env;
+  const { translator: t, bpTranslator, localizer } = env;
 
   const goToTask = () => { window.location.href = entityUrl; };
 
@@ -13,6 +13,9 @@ const HBWClaimingTaskOverview = ({
     await claim(task);
     goToTask();
   };
+
+  const taskLabel = bpTranslator(`${task.process_key}.${task.key}.label`, {}, task.name);
+  const processLabel = bpTranslator(`${task.process_key}.label`, {}, task.process_name);
 
   return (
     <div data-test="task-overview" className="task-overview">
@@ -22,7 +25,7 @@ const HBWClaimingTaskOverview = ({
       <div className="title">
         <a data-test="title-link" href={entityUrl}>
           {task.icon && <span className={task.icon} />}
-          {task.process_name} — {task.name}
+          {processLabel} — {taskLabel}
         </a>
       </div>
       <table className="two-cols">
@@ -76,6 +79,8 @@ HBWClaimingTaskOverview.propTypes = {
   entityUrl: PropTypes.string.isRequired,
   task:      PropTypes.shape({
     id:           PropTypes.string.isRequired,
+    key:          PropTypes.string.isRequired,
+    process_key:  PropTypes.string.isRequired,
     priority:     PropTypes.number.isRequired,
     name:         PropTypes.string.isRequired,
     created:      PropTypes.string.isRequired,

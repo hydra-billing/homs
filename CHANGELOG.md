@@ -12,14 +12,15 @@ See [#296](https://github.com/latera/homs/pull/296) for more details.
 - [#499](https://github.com/latera/homs/pull/499) Increase memory limit for worker.
 - [#289](https://github.com/latera/homs/pull/289) Make conditions `disable_if` and `delete_if` dynamic.
 - [#289](https://github.com/latera/homs/pull/512) Add dynamic `disable_if` and `delete_if` options for select.
+- [#510](https://github.com/latera/homs/pull/510) Add i18n for business processes.
 
 ### Bugfixes
 - [#298](https://github.com/latera/homs/pull/298) Keep BP variables values after submit if they are not on form or disabled.
 - [#289](https://github.com/latera/homs/pull/512) Fix setting not-nullable select's value with blank variable.
 
 ### Refactoring
-- [#506](https://github.com/latera/homs/pull/506) Update ruby and js dependencies.
-- [#511](https://github.com/latera/homs/pull/511) Update ruby and js dependencies.
+- [#506](https://github.com/latera/homs/pull/506), [#511](https://github.com/latera/homs/pull/511) Update ruby and js dependencies.
+- [#510](https://github.com/latera/homs/pull/510) Refactor render() of form field components.
 
 v2.4.1 [2020-09-24]
 -------------------

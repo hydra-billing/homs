@@ -1,0 +1,50 @@
+ru:
+  new_customer:
+    label: Подключение абонента
+    Activity_1jedmqv:
+      label: Заполните адрес абонента
+      homsOrderDataCustomerCity: Город
+      homsOrderDataCustomerStreet: Улица
+      homsOrderDataCustomerHouse: Дом
+      homsOrderDataCustomerEntrance: Подъезд
+    Activity_1pk04of:
+      label: Адрес недоступен
+    Activity_1u3vwq1:
+      label: Выбор тарифа
+      homsOrderDataPlanId: Тариф
+      homsOrderDataPlanComment: Комментарий для абонента
+    Activity_08wwoqp:
+      label: Ввод данных абонента
+      group1: Персональные данные абонента
+      homsOrderDataCustomerName: Имя
+      homsOrderDataCustomerSurname: Фамилия
+      homsOrderDataCustomerPhone: Телефон
+      homsOrderDataCustomerEmail: Email
+      homsOrderDataInstallDate: Дата подключения
+      group2: Документы абонента
+      homsOrderDataUploadedFile: Прикрепить документы
+      homsOrderDataFileList: Прикрепленные файлы
+      group3: Откуда вы узнали о нас
+      homsOrderDataFromFriends: Друзья
+      homsOrderDataFromTV: TV
+      homsOrderDataFromFacebookAds: Реклама на Facebook
+      homsOrderDataFromOther: Другое
+    Activity_0dhj8f6:
+      label: Подтверждение
+      group1: Данные абонента
+      homsOrderDataCustomerName: Имя
+      homsOrderDataCustomerSurname: Фамилия
+      homsOrderDataCustomerPhone: Телефон
+      homsOrderDataCustomerEmail: Email
+      homsOrderDataInstallDate: Дата подключения
+      group2: Тариф
+      group3: Адрес
+      homsOrderDataCustomerCity: Город
+      homsOrderDataCustomerStreet: Улица
+      homsOrderDataCustomerHouse: Дом
+      homsOrderDataCustomerEntrance: Подъезд
+      group5: Откуда вы узнали о нас
+      homsOrderDataFromFriends: Друзья
+      homsOrderDataFromTV: TV
+      homsOrderDataFromFacebookAds: Реклама на Facebook
+      homsOrderDataFromOther: Другое

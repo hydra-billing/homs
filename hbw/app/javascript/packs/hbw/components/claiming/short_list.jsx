@@ -10,7 +10,9 @@ import Pending from '../pending';
 const HBWClaimingShortList = ({
   env, tasks, fetched, fetching
 }) => {
-  const { translator: t, connection, taskListPath } = env;
+  const {
+    translator: t, bpTranslator, connection, taskListPath
+  } = env;
 
   const viewAll = () => { window.location.href = `${connection.options.host}/${taskListPath}`; };
   const goToTask = (entityUrl) => { window.location.href = entityUrl; };
@@ -43,12 +45,12 @@ const HBWClaimingShortList = ({
   return (
     <div className="short-list">
       {tasks.map(({
-        id, icon, name, due, created, entity_url, description
+        id, key, process_key, icon, name, due, created, entity_url, description
       }) => (
         <div onClick={() => goToTask(entity_url)} key={id} className={rowCN(due)}>
           <div className="left">
             <i className={icon} />
-            <span className="title">{name}</span>
+            <span className="title">{bpTranslator(`${process_key}.${key}.label`, {}, name)}</span>
             <span title={description} className="description">{description}</span>
           </div>
           <div className="right">

@@ -105,9 +105,14 @@ module HBW
       end
     end
 
-    definition_reader :id, :name, :description, :process_instance_id,
-                      :process_definition_id, :process_name, :form_key,
-                      :assignee, :priority, :created, :due, :variables
+    definition_reader :id, :key, :name, :description, :process_instance_id,
+                      :process_definition_id, :process_name, :process_key,
+                      :form_key, :assignee, :priority, :created, :due,
+                      :variables
+
+    def key
+      @definition.fetch('taskDefinitionKey')
+    end
 
     def variable(name)
       variables.find { |variable| variable.name == name }
@@ -115,6 +120,10 @@ module HBW
 
     def process_name
       process_definition.name
+    end
+
+    def process_key
+      process_definition.key
     end
 
     def process_definition

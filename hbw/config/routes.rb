@@ -14,6 +14,8 @@ HBW::Engine.routes.draw do
       get :check, on: :collection, action: :check_user
     end
 
+    resources :translations, only: [:index]
+
     post 'file_upload', to: 'files#upload'
 
     namespace :events do

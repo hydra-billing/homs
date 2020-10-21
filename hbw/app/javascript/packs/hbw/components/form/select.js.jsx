@@ -62,6 +62,7 @@ modulejs.define('HBWFormSelect',
           onChange:         opt => this.setValue(opt)
         };
 
+        const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
         const labelCss = params.label_css;
         const cssClass = cx(params.css_class, { hidden });
 
@@ -74,7 +75,7 @@ modulejs.define('HBWFormSelect',
         />;
 
         return <div className={cssClass} title={params.tooltip}>
-          <span className={labelCss}>{params.label}</span>
+          <span className={labelCss}>{label}</span>
           <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
           <div className='form-group' ref={(i) => { this.select = i; }}>
             {this.selectComponent(opts)}

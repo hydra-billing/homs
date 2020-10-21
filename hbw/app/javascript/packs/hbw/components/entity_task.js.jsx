@@ -36,10 +36,8 @@ modulejs.define(
         return <div className="panel panel-default" ref={(node) => { this.rootNode = node; }}>
           <div className="panel-heading">
             <h4 className="panel-title collapsable">
-              <a
-                onClick={this.toggleCollapse}
-              >
-                {task.name}
+              <a onClick={this.toggleCollapse}>
+                {env.bpTranslator(`${task.process_key}.${task.key}.label`, {}, task.name)}
               </a>
               <i
                 onClick={this.toggleCollapse}

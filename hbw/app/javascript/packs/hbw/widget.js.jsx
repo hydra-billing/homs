@@ -77,7 +77,12 @@ modulejs.define(
         }
       };
 
-      render = () => {
+      render = async () => {
+        await this.fetchBPTranslations();
+        this.renderPortals();
+      }
+
+      renderPortals = () => {
         const formsContainer = this.options.entity_code ? this.$widgetContainer[0] : null;
         const taskId = this.options.entity_code ? this.options.task_id : null;
 
@@ -126,6 +131,15 @@ modulejs.define(
           this.env.userExist = false;
         }
       };
+
+      fetchBPTranslations = async () => {
+        const bpTranslations = await this.env.connection.request({
+          url:    `${this.env.connection.serverURL}/translations`,
+          method: 'GET'
+        }).then(data => data.json());
+
+        this.env.bpTranslator = Translator.getTranslatorForLocale(this.options.locale.code, bpTranslations, 1);
+      }
 
       setEntityCode = (code) => {
         this.options.entity_code = code;
