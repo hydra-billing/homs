@@ -1,7 +1,9 @@
 v2.5.0 [unreleased]
 -------------------
-### Changes
-Change serialization of disable, read only and hidden fields. Now all values of these fields will not be submitted.
+### Breaking changes
+
+**HBW**:
+Change serialization of disabled, read-only and hidden fields. Now all values of these fields will not be submitted.
 See [#296](https://github.com/latera/homs/pull/296) for more details.
 
 ### Features

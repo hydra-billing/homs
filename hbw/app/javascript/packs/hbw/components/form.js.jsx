@@ -76,7 +76,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     ));
 
     formControl = (name, params) => {
-      const { submitting, fileUploading } = this.state;
+      const { submitting, fileUploading, formValues } = this.state;
       const {
         id, variables, env, form, assignee, processInstanceId
       } = this.props;
@@ -86,11 +86,11 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         params,
         id,
         env,
+        formValues,
         value:           variables[name],
         formSubmitting:  submitting || fileUploading,
         fileListPresent: this.fileListPresent(form.fields),
-        showSubmit:      !!assignee,
-        formValues:      this.state.formValues
+        showSubmit:      !!assignee
       };
 
       if (!this.props.assignee) {
@@ -211,8 +211,8 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     notSerializableFields = () => ['static'];
 
     setInitialFormValues = () => {
-      const variables = this.props.taskVariables.reduce((result, variable) => {
-        result[variable.name] = variable.value;
+      const variables = this.props.taskVariables.reduce((result, { name, value }) => {
+        result[name] = value;
         return result;
       }, {});
 

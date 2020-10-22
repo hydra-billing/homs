@@ -124,7 +124,7 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
     notSerializableFields = () => ['static'];
 
     serialize = () => {
-      if (this.props.hidden || this.props.disabled) {
+      if (this.props.hidden) {
         return null;
       }
 
