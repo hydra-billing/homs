@@ -17,6 +17,7 @@ module HBW
           fields: fields.map(&:as_json),
           delete_if: delete_if,
           disable_if: disable_if,
+          dynamic: dynamic,
           variables: variables }
       end
 

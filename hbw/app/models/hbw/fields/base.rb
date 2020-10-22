@@ -64,6 +64,10 @@ module HBW
         definition.fetch('disable_if', [])
       end
 
+      def dynamic
+        definition.fetch('dynamic', false)
+      end
+
       private
 
       def fail_unsupported_coercion(value)

@@ -44,7 +44,13 @@ modulejs.define('HBWFormText', ['React'], (React) => {
       </div>;
     }
 
-    serialize = () => ({ [this.props.name]: this.state.value });
+    serialize = () => {
+      if (this.props.params.editable === false || this.props.disabled || this.props.hidden) {
+        return null;
+      } else {
+        return { [this.props.name]: this.state.value };
+      }
+    };
   }
 
   return compose(withConditions, withErrorBoundary)(HBWFormText);

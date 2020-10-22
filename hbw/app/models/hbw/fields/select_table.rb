@@ -63,6 +63,7 @@ module HBW
           delimiter: delimiter?,
           delete_if: delete_if,
           disable_if: disable_if,
+          dynamic: dynamic,
           variables: variables,
           current_value: value,
           url: url,

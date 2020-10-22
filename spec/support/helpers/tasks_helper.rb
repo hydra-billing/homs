@@ -89,5 +89,9 @@ module Features
     def years_since(date)
       ((DateTime.now.in_time_zone - date) / 1.year).floor
     end
+
+    def readonly?(name)
+      find_by_name(name).readonly?
+    end
   end
 end

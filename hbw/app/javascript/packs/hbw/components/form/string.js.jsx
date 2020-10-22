@@ -265,6 +265,8 @@ modulejs.define('HBWFormString', ['React'], (React) => {
           visualValue: $el.value
         });
       }
+
+      this.props.fireFieldValueUpdate(this.props.name, this.state.value);
     };
 
     buildExtractRegexp = (pattern) => {
@@ -374,7 +376,13 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       }
     };
 
-    serialize = () => ({ [this.props.name]: this.state.value });
+    serialize = () => {
+      if (this.props.params.editable === false || this.props.disabled || this.props.hidden) {
+        return null;
+      } else {
+        return { [this.props.name]: this.state.value };
+      }
+    };
   }
 
   return compose(withCallbacks, withConditions, withErrorBoundary)(HBWFormString);

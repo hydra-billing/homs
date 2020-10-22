@@ -15,15 +15,18 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       error:         null,
       submitting:    false,
       claiming:      false,
-      fileUploading: false
+      fileUploading: false,
+      formValues:    {}
     };
 
     componentDidMount () {
+      this.setInitialFormValues();
       jQuery(':input:enabled:visible:first').focus();
       this.props.bind(`hbw:submit-form-${this.props.id}`, () => this.setState({ submitting: true }));
       this.props.bind('hbw:form-submitting-failed', () => this.setState({ submitting: false }));
       this.props.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
       this.props.bind('hbw:file-upload-finished', () => this.setState({ fileUploading: false }));
+      this.props.bind(`hbw:update-value-${this.props.id}`, data => this.updateFormValues(data));
     }
 
     render () {
@@ -73,7 +76,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     ));
 
     formControl = (name, params) => {
-      const { submitting, fileUploading } = this.state;
+      const { submitting, fileUploading, formValues } = this.state;
       const {
         id, variables, env, form, assignee, processInstanceId
       } = this.props;
@@ -83,6 +86,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         params,
         id,
         env,
+        formValues,
         value:           variables[name],
         formSubmitting:  submitting || fileUploading,
         fileListPresent: this.fileListPresent(form.fields),
@@ -200,7 +204,20 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       return false;
     };
 
+    updateFormValues = ({ name, value }) => {
+      this.setState(prevState => ({ formValues: { ...prevState.formValues, [name]: value } }));
+    };
+
     notSerializableFields = () => ['static'];
+
+    setInitialFormValues = () => {
+      const variables = this.props.taskVariables.reduce((result, { name, value }) => {
+        result[name] = value;
+        return result;
+      }, {});
+
+      this.setState({ formValues: variables });
+    };
 
     serializeForm = () => {
       let variables = {};

@@ -49,7 +49,15 @@ export default WrappedComponent => class WithConditions extends Component {
     }
   };
 
-  evaluateAndCondition = data => eval(data.condition.replace('$var', this.variableByName(data.variable)));
+  evaluateAndCondition = data => eval(data.condition.replace('$var', this.getValue(data.variable)));
+
+  getValue = (name) => {
+    if (this.props.params.dynamic === true) {
+      return this.props.formValues[name];
+    } else {
+      return this.variableByName(name);
+    }
+  };
 
   evaluateOrCondition = (data) => {
     const result = [...data].map(innerCondition => this.evaluateAndCondition(innerCondition));
@@ -61,11 +69,16 @@ export default WrappedComponent => class WithConditions extends Component {
 
   some = results => results.some(el => el === true);
 
+  fireFieldValueUpdate = (name, value) => {
+    this.props.trigger(`hbw:update-value-${this.props.id}`, { name, value });
+  };
+
   render () {
     const [hidden, disabled] = [this.deleteIf(), this.disableIf()];
 
     return <WrappedComponent hidden={hidden}
                              disabled={disabled}
+                             fireFieldValueUpdate={this.fireFieldValueUpdate}
                              {...this.state}
                              {...this.props} />;
   }

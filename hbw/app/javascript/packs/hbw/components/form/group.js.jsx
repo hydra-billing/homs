@@ -57,7 +57,8 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
         value:          this.props.variables[name],
         formSubmitting: this.props.formSubmitting,
         env:            this.props.env,
-        showSubmit:     this.props.showSubmit
+        showSubmit:     this.props.showSubmit,
+        formValues:     this.props.formValues
       };
 
       if (this.props.disabled) {
@@ -123,6 +124,10 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
     notSerializableFields = () => ['static'];
 
     serialize = () => {
+      if (this.props.hidden) {
+        return null;
+      }
+
       let variables = {};
 
       this.props.params.fields.forEach((field) => {

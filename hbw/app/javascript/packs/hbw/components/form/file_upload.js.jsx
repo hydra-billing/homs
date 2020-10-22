@@ -128,7 +128,13 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       return fileReader.readAsBinaryString(file);
     };
 
-    serialize = () => ({ [this.props.params.name]: JSON.stringify({ files: this.state.files }) });
+    serialize = () => {
+      if (this.props.disabled || this.props.hidden) {
+        return null;
+      } else {
+        return { [this.props.params.name]: JSON.stringify({ files: this.state.files }) };
+      }
+    };
   }
 
   return compose(withCallbacks, withConditions, withErrorBoundary)(HBWFormFileUpload);

@@ -1,9 +1,19 @@
 v2.5.0 [unreleased]
 -------------------
+### Breaking changes
+
+**HBW**:
+Change serialization of disabled, read-only and hidden fields. Now all values of these fields will not be submitted.
+See [#296](https://github.com/latera/homs/pull/296) for more details.
+
 ### Features
 - [#493](https://github.com/latera/homs/pull/493) Add missing labels for inputs on search order form.
 - [#497](https://github.com/latera/homs/pull/497) Handle connection error when try to print order.
 - [#499](https://github.com/latera/homs/pull/499) Increase memory limit for worker.
+- [#289](https://github.com/latera/homs/pull/289) Make conditions `disable_if` and `delete_if` dynamic.
+
+### Bugfixes
+- [#298](https://github.com/latera/homs/pull/298) Keep BP variables values after submit if they are not on form or disabled.
 
 ### Refactoring
 - [#506](https://github.com/latera/homs/pull/506) Update ruby and js dependencies.
