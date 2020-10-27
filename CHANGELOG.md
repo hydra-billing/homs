@@ -17,6 +17,7 @@ See [#296](https://github.com/latera/homs/pull/296) for more details.
 
 ### Refactoring
 - [#506](https://github.com/latera/homs/pull/506) Update ruby and js dependencies.
+- [#511](https://github.com/latera/homs/pull/511) Update ruby and js dependencies.
 
 v2.4.1 [2020-09-24]
 -------------------
