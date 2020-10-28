@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default WrappedComponent => class WithSelect extends Component {
   getChosenValue = () => {
     if (this.props.params.mode === 'select') {
-      if (this.props.value === null) {
+      if (this.isEqual(this.props.value, null)) {
         if (this.props.params.nullable) {
           return null;
         } else if (this.props.params.choices.length) {
