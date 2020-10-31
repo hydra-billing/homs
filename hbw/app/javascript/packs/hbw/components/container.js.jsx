@@ -32,6 +32,7 @@ modulejs.define(
         const {
           env, chosenTaskID, entityCode, entityTypeCode, entityClassCode
         } = this.props;
+
         const { fetching, error, getFormsForTasks } = this.context;
         const { processInstanceId } = this.state;
 

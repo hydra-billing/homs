@@ -2,7 +2,7 @@ feature 'BP form with existing russian translation', js: true do
   before(:each) do
     user = FactoryBot.create(:user)
     order_type = FactoryBot.create(:order_type, :new_customer)
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-30')
+    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-32')
 
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
@@ -19,9 +19,9 @@ feature 'BP form with existing russian translation', js: true do
     let(:locale) { :ru }
 
     scenario 'should be translated to russian' do
-      click_and_wait 'ORD-30'
+      click_and_wait 'ORD-32'
 
-      expect(page).to     have_content 'ORD-30'
+      expect(page).to     have_content 'ORD-32'
       expect(page).to     have_content 'Заполните адрес абонента'
       expect(page).not_to have_content 'Enter customer\'s address'
 
@@ -40,9 +40,9 @@ feature 'BP form with existing russian translation', js: true do
     let(:locale) { :en }
 
     scenario 'should not be translated to russian' do
-      click_and_wait 'ORD-30'
+      click_and_wait 'ORD-32'
 
-      expect(page).to     have_content 'ORD-30'
+      expect(page).to     have_content 'ORD-32'
       expect(page).to     have_content 'Enter customer\'s address'
       expect(page).not_to have_content 'Заполните адрес абонента'
 

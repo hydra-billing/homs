@@ -22,6 +22,7 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
       const {
         name, params, hidden, task, env
       } = this.props;
+
       const { links, deletedFiles } = this.state;
 
       const cssClass = cx(params.css_class, { hidden });

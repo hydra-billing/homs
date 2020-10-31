@@ -123,6 +123,7 @@ class HBWTasksTable extends Component {
     const {
       tasks, showClaimButton, env, openTask, claimingTask, activeTask
     } = this.props;
+
     const { translator: t, bpTranslator } = env;
 
     const claiming = claimingTask && claimingTask.id === row.id;

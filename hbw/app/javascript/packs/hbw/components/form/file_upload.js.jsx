@@ -23,6 +23,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       const {
         name, params, disabled, hidden, fileListPresent, task, env
       } = this.props;
+
       const { files, dragStyleClass } = this.state;
 
       const opts = {

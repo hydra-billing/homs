@@ -43,6 +43,7 @@ modulejs.define('HBWFormSelect',
       }
 
       render () {
+        const { valid } = this.state;
         const {
           name, task, params, disabled, hidden, env, missFieldInVariables
         } = this.props;
@@ -71,7 +72,7 @@ modulejs.define('HBWFormSelect',
 
         const errorTooltip = <div
           ref={(t) => { this.tooltipContainer = t; }}
-          className={`${!this.state.valid && 'tooltip-red'}`}
+          className={`${cx({ 'tooltip-red': !valid })}`}
         />;
 
         return <div className={cssClass} title={params.tooltip}>
