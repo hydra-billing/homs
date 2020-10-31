@@ -54,7 +54,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       };
 
       const errorTooltip = <div ref={(t) => { this.tooltipContainer = t; }}
-                                className={`${!valid && 'tooltip-red'}`}/>;
+                                className={cx({ 'tooltip-red': !valid })}/>;
 
       const rootCSS = cx(params.css_class, { hidden });
       const inputCSS = cx('form-control', { invalid: !valid });

@@ -24,6 +24,7 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
       const {
         name, params, disabled, hidden, task, env
       } = this.props;
+
       const { value } = this.state;
 
       const opts = {

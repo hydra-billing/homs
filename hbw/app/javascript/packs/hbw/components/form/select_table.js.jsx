@@ -50,6 +50,7 @@ modulejs.define('HBWFormSelectTable',
         const {
           name, params, disabled, hidden, task, env, missFieldInVariables
         } = this.props;
+
         const {
           choices, value, valid, error
         } = this.state;

@@ -81,6 +81,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
       const {
         id, variables, task, env
       } = this.props;
+
       const { form, assignee } = task;
 
       const opts = {
@@ -243,7 +244,9 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         .map(({ name, choices }) => ({ selectName: name, defaultValue: choices[0] }))
     );
 
-    getFlattenFields = () => this.props.form.fields.flatMap(field => (field.type === 'group' ? field.fields : field));
+    getFlattenFields = () => this.props.task.form.fields.flatMap(
+      field => (field.type === 'group' ? field.fields : field)
+    );
 
     serializeForm = () => {
       let variables = {};
