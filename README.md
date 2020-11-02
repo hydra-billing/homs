@@ -13,6 +13,10 @@ Requirements:
 * [Docker](https://docker.com/)
 * [docker-compose](https://docs.docker.com/compose/install/)
 
+Compatibility:
+
+* [Camunda 7.9.0 compatible](https://docs.camunda.org/manual/7.9/introduction/supported-environments/#supported-database-products) with PostgreSQL 9.1 / 9.3 / 9.4 / 9.6
+
 Resources:
 
 * Documentation: [http://hydra-oms.com/docs](http://hydra-oms.com/docs)

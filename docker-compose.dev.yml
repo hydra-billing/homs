@@ -1,7 +1,7 @@
 version: '2'
 services:
   db_camunda:
-    image: postgres:11.0
+    image: postgres:9.6
     hostname: postgres-camunda
     container_name: postgres-camunda
     restart: always
