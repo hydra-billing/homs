@@ -310,6 +310,8 @@ modulejs.define('HBWFormSelect',
           choices: this.getChoices(newValue),
           error:   (!this.props.hasValueInChoices(newValue) && newValue) || this.props.missFieldInVariables()
         });
+
+        this.props.fireFieldValueUpdate(this.props.name, newValue);
       };
 
       buildOptions = () => this.state.choices.map((variant) => {
@@ -366,5 +368,5 @@ modulejs.define('HBWFormSelect',
       };
     }
 
-    return compose(withSelect, withConditions, withCallbacks, withValidations, withErrorBoundary)(FormSelect);
+    return compose(withSelect, withCallbacks, withConditions, withValidations, withErrorBoundary)(FormSelect);
   });

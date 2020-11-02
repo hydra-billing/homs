@@ -211,13 +211,37 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     notSerializableFields = () => ['static'];
 
     setInitialFormValues = () => {
+      const selectFieldsWithDefaults = this.getSelectFieldsWithDefaults();
+      const isSelect = fieldName => selectFieldsWithDefaults.map(({ selectName }) => selectName).includes(fieldName);
+
       const variables = this.props.taskVariables.reduce((result, { name, value }) => {
-        result[name] = value;
+        if (isSelect(name) && this.isEmpty(value)) {
+          const { defaultValue } = selectFieldsWithDefaults.find(({ selectName }) => selectName === name);
+
+          result[name] = Array.isArray(defaultValue) ? defaultValue[0] : defaultValue;
+        } else {
+          result[name] = value;
+        }
+
         return result;
       }, {});
 
       this.setState({ formValues: variables });
     };
+
+    isEmpty = value => value === null || value === '';
+
+    getSelectFieldsWithDefaults = () => (
+      this.getFlattenFields()
+        .filter(({
+          type, mode, nullable, choices
+        }) => (
+          type === 'select' && mode === 'select' && nullable === false && choices.length > 0
+        ))
+        .map(({ name, choices }) => ({ selectName: name, defaultValue: choices[0] }))
+    );
+
+    getFlattenFields = () => this.props.form.fields.flatMap(field => (field.type === 'group' ? field.fields : field));
 
     serializeForm = () => {
       let variables = {};
