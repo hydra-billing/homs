@@ -30,7 +30,8 @@
     "react/prop-types": [1, { "skipUndeclared": true }],
     "space-before-function-paren": [1, "always"],
     "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
-    "max-classes-per-file": ["error", 3]
+    "max-classes-per-file": ["error", 3],
+    "prefer-destructuring": ["error", {"object": true, "array": false}]
   },
 
   "globals": {

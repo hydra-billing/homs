@@ -6,7 +6,7 @@ export default WrappedComponent => class WithSelect extends Component {
       if (this.isEqual(this.props.value, null)) {
         if (this.props.params.nullable) {
           return null;
-        } else if (this.props.params.choices.length) {
+        } else if (this.props.params.choices.length > 0) {
           const first = this.props.params.choices[0];
 
           if (Array.isArray(first)) {
