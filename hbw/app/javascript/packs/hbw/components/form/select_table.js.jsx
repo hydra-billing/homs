@@ -46,17 +46,23 @@ modulejs.define('HBWFormSelectTable',
         this.props.onRef(undefined);
       }
 
+      componentDidUpdate () {
+        const hideTooltip = !this.props.isAvailable || this.state.valid;
+
+        this.controlValidationTooltip(hideTooltip);
+      }
+
       render () {
         const {
           name, params, disabled, hidden, task, env, missFieldInVariables
         } = this.props;
 
         const {
-          choices, value, valid, error
+          choices, value, error
         } = this.state;
 
         const errorTooltip = <div ref={(t) => { this.tooltipContainer = t; }}
-                                  className={cx({ 'tooltip-red': !valid })} />;
+                                  className='tooltip-red' />;
 
         const selectErrorMessage = env.translator('errors.field_not_defined_in_bp', { field_name: name });
 
@@ -101,7 +107,6 @@ modulejs.define('HBWFormSelectTable',
           el.classList.add('invalid');
 
           this.setValidationState();
-          this.controlValidationTooltip(this.props.isValid(this.state.value));
           this.props.trigger('hbw:form-submitting-failed');
         }
       };
@@ -147,13 +152,8 @@ modulejs.define('HBWFormSelectTable',
         return result;
       };
 
-      controlValidation = () => {
-        this.setValidationState();
-        this.controlValidationTooltip(this.props.isValid(this.state.value));
-      };
-
       onClick = (event) => {
-        if (this.props.params.editable === false) {
+        if (this.props.params.editable === false || this.props.disabled) {
           return;
         }
 
@@ -162,12 +162,12 @@ modulejs.define('HBWFormSelectTable',
         if (this.props.params.multi) {
           if (this.state.value.includes(newValue)) {
             const index = this.state.value.indexOf(newValue);
-            this.setState((prevState) => { prevState.value.splice(index, 1); }, this.controlValidation);
+            this.setState((prevState) => { prevState.value.splice(index, 1); }, this.setValidationState);
           } else {
-            this.setState((prevState) => { prevState.value.push(newValue); }, this.controlValidation);
+            this.setState((prevState) => { prevState.value.push(newValue); }, this.setValidationState);
           }
         } else {
-          this.setState({ value: newValue }, this.controlValidation);
+          this.setState({ value: newValue }, this.setValidationState);
         }
       };
 

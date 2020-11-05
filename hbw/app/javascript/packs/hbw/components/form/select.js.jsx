@@ -20,7 +20,8 @@ modulejs.define('HBWFormSelect',
         this.state = {
           value,
           choices: this.getChoices(value),
-          error:   (!props.hasValueInChoices(value) && value) || props.missFieldInVariables()
+          error:   (!props.hasValueInChoices(value) && value) || props.missFieldInVariables(),
+          valid:   true
         };
       }
 
@@ -42,8 +43,13 @@ modulejs.define('HBWFormSelect',
         this.props.onRef(undefined);
       }
 
+      componentDidUpdate () {
+        const hideTooltip = !this.props.isAvailable || this.state.valid;
+
+        this.controlValidationTooltip(hideTooltip);
+      }
+
       render () {
-        const { valid } = this.state;
         const {
           name, task, params, disabled, hidden, env, missFieldInVariables
         } = this.props;
@@ -72,7 +78,7 @@ modulejs.define('HBWFormSelect',
 
         const errorTooltip = <div
           ref={(t) => { this.tooltipContainer = t; }}
-          className={`${cx({ 'tooltip-red': !valid })}`}
+          className='tooltip-red'
         />;
 
         return <div className={cssClass} title={params.tooltip}>
@@ -98,7 +104,6 @@ modulejs.define('HBWFormSelect',
           el.classList.add('invalid');
 
           this.setValidationState();
-          this.controlValidationTooltip(this.props.isValid(this.state.value));
           this.props.trigger('hbw:form-submitting-failed');
         }
       };
