@@ -1,23 +1,18 @@
 feature 'Validate form', js: true do
   before(:each) do
-    user = FactoryBot.create(:user)
-    signin(user.email, user.password)
-    expect(page).not_to have_content 'Sign in'
-    expect(page).to     have_content 'Orders'
-
     order_type = FactoryBot.create(:order_type, :support_request)
     FactoryBot.create(:order, order_type: order_type)
     FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-14')
     FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-16')
+    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-33')
+    user = FactoryBot.create(:user)
+
+    signin(user.email, user.password)
+    expect(page).not_to have_content 'Sign in'
+    expect(page).to     have_content 'Orders'
   end
 
-  describe 'form is not submitted' do
-    before(:each) do
-      click_on 'Orders'
-      expect(page).to have_content 'Orders'
-      expect_widget_presence
-    end
-
+  describe 'form should not be submitted' do
     scenario 'with invalid regex field' do
       click_and_wait 'ORD-1'
 
@@ -69,6 +64,25 @@ feature 'Validate form', js: true do
       click_and_wait 'Submit'
 
       expect(page).not_to have_content 'Field is required'
+    end
+  end
+
+  describe 'form should be submitted' do
+    scenario 'with hidden and disabled not valid fields' do
+      click_and_wait 'ORD-33'
+
+      fill_in 'submittedString', with: 'act'
+
+      expect(page).not_to have_content 'Hidden string'
+      expect(page).not_to have_content 'Hidden select'
+      expect(page).not_to have_content 'Hidden select_table'
+
+      expect(readonly?('disabledString')).to         be true
+      expect(page.find('.disabled-select')).to       have_selector '.react-select--is-disabled'
+      expect(page.find('.disabled-select-table')).to have_selector '.disabled'
+
+      expect(page).to have_selector "button[type='submit']"
+      click_and_wait 'Submit'
     end
   end
 end

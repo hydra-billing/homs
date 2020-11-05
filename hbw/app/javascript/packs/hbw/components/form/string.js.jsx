@@ -54,10 +54,10 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       };
 
       const errorTooltip = <div ref={(t) => { this.tooltipContainer = t; }}
-                                className={cx({ 'tooltip-red': !valid })}/>;
+                                className='tooltip-red'/>;
 
       const rootCSS = cx(params.css_class, { hidden });
-      const inputCSS = cx('form-control', { invalid: !valid });
+      const inputCSS = cx('form-control', { invalid: this.isAvailable() && !valid });
       const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       return <div className={rootCSS} title={params.tooltip}>
@@ -91,6 +91,12 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       this.props.onRef(undefined);
     }
 
+    componentDidUpdate () {
+      const hideTooltip = !this.isAvailable() || this.state.valid;
+
+      this.controlValidationTooltip(hideTooltip);
+    }
+
     validateOnSubmit = () => {
       this.props.bind(`hbw:validate-form-${this.props.id}`, this.onFormSubmit);
     };
@@ -114,7 +120,6 @@ modulejs.define('HBWFormString', ['React'], (React) => {
           el.classList.add('invalid');
 
           this.setValidationState();
-          this.controlValidationTooltip(this.isValid());
           this.props.trigger('hbw:form-submitting-failed');
         }
       }
@@ -122,7 +127,6 @@ modulejs.define('HBWFormString', ['React'], (React) => {
 
     onLoadValidation = () => {
       if (this.validationRequired() && this.isFilled()) {
-        this.controlValidationTooltip(this.isValid());
         this.setValidationState();
       }
     };
@@ -131,17 +135,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       this.updateValue(event.target, false);
 
       if (this.validationRequired()) {
-        this.runValidation();
-      }
-    };
-
-    runValidation = () => {
-      if (!this.state.valid) {
-        this.controlValidationTooltip(this.isValid());
-
-        if (this.validationRequired()) {
-          this.setValidationState();
-        }
+        this.setValidationState();
       }
     };
 
@@ -159,27 +153,23 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       }
 
       if (this.validationRequired()) {
-        this.runValidation();
+        this.setValidationState();
       }
     };
 
     onBlur = () => {
-      this.controlValidationTooltip(true);
-
-      if (this.validationRequired()) {
+      if (this.validationRequired() && !this.isValid()) {
         this.setValidationState();
       }
     };
 
     onFocus = () => {
-      if (!this.state.valid) {
-        this.controlValidationTooltip(this.isValid());
-
-        if (this.validationRequired() && !this.isValid()) {
-          this.setValidationState();
-        }
+      if (this.validationRequired() && !this.isValid()) {
+        this.setValidationState();
       }
     };
+
+    isAvailable = () => !this.props.hidden && !this.props.disabled;
 
     setValidationState = () => {
       this.setState({ valid: this.isValid() });
@@ -194,6 +184,10 @@ modulejs.define('HBWFormString', ['React'], (React) => {
     };
 
     isValid = () => {
+      if (!this.isAvailable()) {
+        return true;
+      }
+
       const requiredOK = !this.props.params.required || this.isFilled();
       const regexOK = !this.props.params.regex || this.regexMatched();
 
