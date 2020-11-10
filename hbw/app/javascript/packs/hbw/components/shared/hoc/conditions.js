@@ -52,12 +52,19 @@ export default WrappedComponent => class WithConditions extends Component {
   evaluateAndCondition = data => eval(data.condition.replace('$var', this.getValue(data.variable)));
 
   getValue = (name) => {
-    if (this.props.params.dynamic === true) {
-      return this.props.formValues[name];
-    } else {
-      return this.variableByName(name);
-    }
+    const value = this.props.params.dynamic === true
+      ? this.props.formValues[name]
+      : this.variableByName(name);
+
+    return typeof value === 'string'
+      ? this.escapeQuotesAndBackslashes(value)
+      : value;
   };
+
+  escapeQuotesAndBackslashes = string => string
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/"/g, '\\"');
 
   evaluateOrCondition = (data) => {
     const result = [...data].map(innerCondition => this.evaluateAndCondition(innerCondition));
