@@ -153,6 +153,9 @@ get:
       - <<: *default_process-definition
         id: "testProcess:33:33"
         deploymentId: "33"
+      - <<: *default_process-definition
+        id: "testProcess:34:34"
+        deploymentId: "34"
 
   # form definitions
   task/816011/deployed-form: &form_with_everything
@@ -1849,6 +1852,38 @@ get:
                     condition: >
                       "$var" == "act"
 
+  task/111134/deployed-form:
+    "": |
+      form:
+        css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+        fields:
+          - name: controlString
+            type: string
+            label: Control string
+            css_class: col-xs-6 col-sm-4 col-md-3
+          - name: stringWithQuotes
+            type: string
+            label: String with quotes
+            css_class: col-xs-6 col-sm-4 col-md-3
+            dynamic: true
+            delete_if:
+              - variable: controlString
+                condition: >
+                  "$var" == "ООО \"ЛАТЕРА\""
+            disable_if:
+              - variable: controlString
+                condition: >
+                  '$var' == 'Some \'text\''
+          - name: stringWithBackslash
+            type: string
+            label: String with backslash
+            css_class: col-xs-6 col-sm-4 col-md-3
+            dynamic: true
+            disable_if:
+              - variable: controlString
+                condition: >
+                  "$var" == "Account-45673\\\RTK"
+
   # task variables
   task/816011/variables:
     "":
@@ -2327,6 +2362,21 @@ get:
         type: "select_table"
         value: ""
 
+  task/111134/variables:
+    "":
+      homsOrderCode:
+        type: "string"
+        value: "ORD-34"
+      controlString:
+        type: "string"
+        value: ""
+      stringWithQuotes:
+        type: "string"
+        value: ""
+      stringWithBackslash:
+        type: "string"
+        value: ""
+
   task/816011:
     "": &default_tasks
       id: "816011"
@@ -2590,6 +2640,14 @@ get:
       processInstanceId: 33
       processDefinitionId: "testProcess:33:33"
 
+  task/111134:
+    "":
+      <<: *default_tasks
+      id: "111134"
+      formKey: "test_form_validation.yml"
+      processInstanceId: 34
+      processDefinitionId: "testProcess:34:34"
+
 put: {}
 patch: {}
 post:
@@ -2769,6 +2827,11 @@ post:
         formKey: "test_form_validation.yml"
         processInstanceId: 33
         processDefinitionId: "testProcess:33:33"
+      - <<: *default_tasks
+        id: "111134"
+        formKey: "test_form_with_dynamic_conditions.yml"
+        processInstanceId: 34
+        processDefinitionId: "testProcess:34:34"
     "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
       - <<: *default_tasks
         id: "111124"
@@ -2994,6 +3057,11 @@ post:
         - <<: *default_process-instances
           id: "111133"
           processDefinitionId: "testProcess:33:33"
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-34&variables[][operator]=eq":
+      data:
+        - <<: *default_process-instances
+          id: "111134"
+          processDefinitionId: "testProcess:34:34"
 
   task/816011/submit-form:
     "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456":
@@ -3034,7 +3102,7 @@ post:
     "userId=demo": null
 
   variable-instance:
-    "processInstanceIdIn[]=814972&processInstanceIdIn[]=2&processInstanceIdIn[]=3&processInstanceIdIn[]=4&processInstanceIdIn[]=5&processInstanceIdIn[]=6&processInstanceIdIn[]=7&processInstanceIdIn[]=8&processInstanceIdIn[]=9&processInstanceIdIn[]=10&processInstanceIdIn[]=11&processInstanceIdIn[]=12&processInstanceIdIn[]=13&processInstanceIdIn[]=14&processInstanceIdIn[]=15&processInstanceIdIn[]=16&processInstanceIdIn[]=17&processInstanceIdIn[]=18&processInstanceIdIn[]=19&processInstanceIdIn[]=20&processInstanceIdIn[]=21&processInstanceIdIn[]=22&processInstanceIdIn[]=23&processInstanceIdIn[]=24&processInstanceIdIn[]=25&processInstanceIdIn[]=26&processInstanceIdIn[]=27&processInstanceIdIn[]=28&processInstanceIdIn[]=29&processInstanceIdIn[]=30&processInstanceIdIn[]=31&processInstanceIdIn[]=32&processInstanceIdIn[]=33&variableName=homsOrderCode":
+    "processInstanceIdIn[]=814972&processInstanceIdIn[]=2&processInstanceIdIn[]=3&processInstanceIdIn[]=4&processInstanceIdIn[]=5&processInstanceIdIn[]=6&processInstanceIdIn[]=7&processInstanceIdIn[]=8&processInstanceIdIn[]=9&processInstanceIdIn[]=10&processInstanceIdIn[]=11&processInstanceIdIn[]=12&processInstanceIdIn[]=13&processInstanceIdIn[]=14&processInstanceIdIn[]=15&processInstanceIdIn[]=16&processInstanceIdIn[]=17&processInstanceIdIn[]=18&processInstanceIdIn[]=19&processInstanceIdIn[]=20&processInstanceIdIn[]=21&processInstanceIdIn[]=22&processInstanceIdIn[]=23&processInstanceIdIn[]=24&processInstanceIdIn[]=25&processInstanceIdIn[]=26&processInstanceIdIn[]=27&processInstanceIdIn[]=28&processInstanceIdIn[]=29&processInstanceIdIn[]=30&processInstanceIdIn[]=31&processInstanceIdIn[]=32&processInstanceIdIn[]=33&processInstanceIdIn[]=34&variableName=homsOrderCode":
       - processInstanceId: 814972
         type: string
         name: homsOrderCode
@@ -3167,6 +3235,10 @@ post:
         type: string
         name: homsOrderCode
         value: ORD-33
+      - processInstanceId: 34
+        type: string
+        name: homsOrderCode
+        value: ORD-34
 
     variableName=homsOrderCode: []
 

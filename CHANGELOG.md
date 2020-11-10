@@ -19,6 +19,7 @@ See [#296](https://github.com/latera/homs/pull/296) for more details.
 - [#289](https://github.com/latera/homs/pull/512) Fix setting not-nullable select's value with blank variable.
 - [#513](https://github.com/latera/homs/pull/513) Fix Camunda/PostgreSQL compatibility.
 - [#514](https://github.com/latera/homs/pull/514) Don't validate hidden and disabled fields.
+- [#515](https://github.com/latera/homs/pull/515) Escape single quotes, double quotes and backslashes in conditions.
 
 ### Refactoring
 - [#506](https://github.com/latera/homs/pull/506), [#511](https://github.com/latera/homs/pull/511) Update ruby and js dependencies.
