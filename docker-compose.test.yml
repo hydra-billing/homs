@@ -4,8 +4,10 @@ services:
     image: postgres:11.0
     hostname: postgres-homs
     container_name: postgres-homs
+    env_file:
+      - ".env"
     environment:
-      PGDATA: $HOMS_DB_PATH/homs
+      PGDATA: $HOMS_DB_PATH
       POSTGRES_DB: $HOMS_DB_NAME
       POSTGRES_USER: $HOMS_DB_USER
       POSTGRES_PASSWORD: $HOMS_DB_PASSWORD

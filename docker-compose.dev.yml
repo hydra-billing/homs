@@ -4,9 +4,12 @@ services:
     image: postgres:9.6
     hostname: postgres-camunda
     container_name: postgres-camunda
+    command: postgres -c idle_in_transaction_session_timeout=$BPM_DB_IDLE_SESSION_TIMEOUT
     restart: always
+    env_file:
+      - ".env"
     environment:
-      PGDATA: $BPM_DB_PATH/camunda
+      PGDATA: $BPM_DB_PATH
       POSTGRES_DB: $BPM_DB_NAME
       POSTGRES_USER: $BPM_DB_USER
       POSTGRES_PASSWORD: $BPM_DB_PASSWORD
@@ -22,8 +25,10 @@ services:
     hostname: postgres-homs
     container_name: postgres-homs
     restart: always
+    env_file:
+      - ".env"
     environment:
-      PGDATA: $HOMS_DB_PATH/homs
+      PGDATA: $HOMS_DB_PATH
       POSTGRES_DB: $HOMS_DB_NAME
       POSTGRES_USER: $HOMS_DB_USER
       POSTGRES_PASSWORD: $HOMS_DB_PASSWORD
