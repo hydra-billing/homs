@@ -1,4 +1,4 @@
-v2.5.0 [unreleased]
+v2.5.0 [2020-12-14]
 -------------------
 ### Breaking changes
 
