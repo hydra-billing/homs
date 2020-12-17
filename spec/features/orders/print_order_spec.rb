@@ -17,32 +17,31 @@ feature 'Print', js: true do
     FactoryBot.create(:order, order_type: order_type)
   end
 
-  # HOMS-288
-  # scenario 'single file' do
-  #   click_on 'Orders'
-  #   expect(page).to have_content 'Orders list'
-  #   expect_widget_presence
-  #
-  #   click_and_wait(first_order_code)
-  #   expect(page).to have_content first_order_code
-  #   expect_widget_presence
-  #
-  #   click_on_icon 'fas.fa-print'
-  #
-  #   expect(page).to have_selector('.print-dropdown .dropdown-menu', visible: true, wait: 5)
-  #
-  #   click_and_wait('Print')
-  #   wait_for_download
-  #
-  #   aggregate_failures 'check downloaded file' do
-  #     expect(downloads.count).to eq 1
-  #     expect(download.include?('test_1.txt')).to be_truthy
-  #     expect(download_content).to eq 'substitution 1'
-  #   end
-  #
-  #   page.driver.go_back
-  #   expect_widget_presence
-  # end
+  scenario 'single file' do
+    click_on 'Orders'
+    expect(page).to have_content 'Orders list'
+    expect_widget_presence
+
+    click_and_wait(first_order_code)
+    expect(page).to have_content first_order_code
+    expect_widget_presence
+
+    click_on_icon 'fas.fa-print'
+
+    expect(page).to have_selector('.print-dropdown .dropdown-menu', visible: true, wait: 5)
+
+    click_and_wait('Print')
+    wait_for_download
+
+    aggregate_failures 'check downloaded file' do
+      expect(downloads.count).to eq 1
+      expect(download.include?('test_1.txt')).to be_truthy
+      expect(download_content).to eq 'substitution 1'
+    end
+
+    page.driver.go_back
+    expect_widget_presence
+  end
 
   scenario 'multiple files' do
     click_on 'Orders'
