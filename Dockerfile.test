@@ -34,8 +34,8 @@ RUN wget -O google-chrome.deb $CHROME_DEB_LINK && \
 RUN chrome_version=$(google-chrome --version | grep -oE '[0-9]{2,}' | head -1) && \
   chromedriver_version=$(wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$chrome_version) && \
   wget https://chromedriver.storage.googleapis.com/$chromedriver_version/chromedriver_linux64.zip && \
-  unzip chromedriver_linux64.zip chromedriver -d /usr/bin/ && \
-  chmod +x /usr/bin/chromedriver
+  unzip chromedriver_linux64.zip chromedriver -d /usr/local/bin/ && \
+  chmod +x /usr/local/bin/chromedriver
 
 COPY --chown=homs ./run_tests.sh ./.rubocop.yml ./.rubocop_todo.yml /
 COPY --chown=homs ./.rubocop.yml ./.rubocop_todo.yml ./jest.config.js /opt/homs/
