@@ -28,12 +28,14 @@ ENV NLS_LANG=AMERICAN_RUSSIA.AL32UTF8
 
 RUN useradd --uid 2004 --home /opt/homs --shell /bin/bash --comment "HOMS" homs
 
+RUN chown homs:homs /opt/homs
+
 USER homs
 WORKDIR /opt/homs
 
-COPY Gemfile Gemfile.lock Rakefile config.ru package.json yarn.lock .eslintrc /opt/homs/
-COPY hbw/*.gemspec /opt/homs/hbw/
-COPY hbw/lib/hbw/ /opt/homs/hbw/lib/hbw/
+COPY --chown=homs:homs Gemfile Gemfile.lock Rakefile config.ru package.json yarn.lock .eslintrc /opt/homs/
+COPY --chown=homs:homs hbw/*.gemspec /opt/homs/hbw/
+COPY --chown=homs:homs hbw/lib/hbw/ /opt/homs/hbw/lib/hbw/
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 ENV MEMCACHED_URL memcached
 
@@ -41,18 +43,18 @@ RUN gem install bundler
 RUN bundle config --global frozen 1
 RUN bundle --without oracle test
 
-COPY app/      /opt/homs/app/
-COPY bin/      /opt/homs/bin/
-COPY config/   /opt/homs/config/
-COPY db/       /opt/homs/db/
-COPY fixtures/ /opt/homs/fixtures/
-COPY lib/      /opt/homs/lib/
-COPY public/   /opt/homs/public/
-COPY spec/     /opt/homs/spec/
-COPY vendor/   /opt/homs/vendor/
-COPY hbw/      /opt/homs/hbw/
+COPY --chown=homs:homs app/      /opt/homs/app/
+COPY --chown=homs:homs bin/      /opt/homs/bin/
+COPY --chown=homs:homs config/   /opt/homs/config/
+COPY --chown=homs:homs db/       /opt/homs/db/
+COPY --chown=homs:homs fixtures/ /opt/homs/fixtures/
+COPY --chown=homs:homs lib/      /opt/homs/lib/
+COPY --chown=homs:homs public/   /opt/homs/public/
+COPY --chown=homs:homs spec/     /opt/homs/spec/
+COPY --chown=homs:homs vendor/   /opt/homs/vendor/
+COPY --chown=homs:homs hbw/      /opt/homs/hbw/
 
-COPY ./entrypoint.sh ./wait_for_postgres.sh /
+COPY --chown=homs:homs ./entrypoint.sh ./wait_for_postgres.sh /
 
 USER root
 
