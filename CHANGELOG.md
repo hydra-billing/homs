@@ -1,3 +1,9 @@
+v2.4.2 [2021-01-15]
+-------------------
+### Bugfixes
+- [#513](https://github.com/latera/homs/pull/513) Fix Camunda/PostgreSQL compatibility.
+- [#518](https://github.com/latera/homs/pull/518) Set default value for idle_in_transaction_session_timeout PG parameter.
+
 v2.4.1 [2020-09-24]
 -------------------
 ### Bugfixes
