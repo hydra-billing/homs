@@ -2,7 +2,7 @@ module HasSequencedColumn
   extend ActiveSupport::Concern
 
   module ClassMethods
-    # rubocop:disable Style/PredicateName
+    # rubocop:disable Naming/PredicateName
     def has_sequenced_column(column = :code)
       class_attribute :sequenced_column
 
@@ -12,6 +12,6 @@ module HasSequencedColumn
         self[column] = Sequence.nextval(self.class)
       end
     end
-    # rubocop:enable Style/PredicateName
+    # rubocop:enable Naming/PredicateName
   end
 end
