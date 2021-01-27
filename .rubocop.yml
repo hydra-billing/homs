@@ -2,6 +2,7 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   TargetRubyVersion: 2.6.6
+  NewCops: enable
   Exclude:
   - 'db/schema.rb'
   - 'db/seeds.rb'
@@ -10,8 +11,10 @@ AllCops:
   - 'vendor/bundle/**/*'
   - 'node_modules/**/*'
 
-Rails:
-  Enabled: true
+Layout/LineLength:
+  Max: 150
+  Exclude:
+    - 'spec/**/*.rb'
 
 Style/Documentation:
   Enabled: false
@@ -25,6 +28,9 @@ Style/PercentLiteralDelimiters:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+Metrics/MethodLength:
+  CountAsOne: ['array', 'hash']
+
 Metrics/BlockLength:
   Exclude:
   - 'spec/**/*.rb'
@@ -36,9 +42,6 @@ Style/FormatStringToken:
   Enabled: false
 
 Style/FormatString:
-  Enabled: false
-
-Performance/StringReplacement:
   Enabled: false
 
 Style/IfUnlessModifier:
@@ -63,5 +66,12 @@ Metrics/ModuleLength:
   Exclude:
     - 'spec/**/*.rb'
 
-Rails/DynamicFindBy:
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Layout/SpaceAroundMethodCallOperator:
   Enabled: false
