@@ -4,7 +4,7 @@ module API
       include HttpBasicAuthentication if !Rails.env.development? || ENV['HOMS_API_USE_AUTH']
 
       PARAMS_ATTRIBUTES = [:order_type_code, :user_email, :ext_code, :bp_id,
-                           :bp_state, :state, :done_at, :archived, :estimated_exec_date]
+                           :bp_state, :state, :done_at, :archived, :estimated_exec_date].freeze
 
       private
 
@@ -29,7 +29,8 @@ module API
 
       def replace_order_type_code!(params)
         order_type_id = OrderType.id_from_code params[:order_type_code]
-        fail ActiveRecord::RecordNotFound unless order_type_id
+        raise ActiveRecord::RecordNotFound unless order_type_id
+
         replace!(params, :order_type_code, :order_type_id, order_type_id)
       end
 

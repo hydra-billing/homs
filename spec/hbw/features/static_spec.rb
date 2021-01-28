@@ -1,5 +1,4 @@
 feature 'Check static field', js: true do
-
   before(:each) do
     user = FactoryBot.create(:user)
 

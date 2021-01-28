@@ -89,7 +89,7 @@ module HBW
         HBW::Task.with_connection(api) do
           forms = JSON.parse(tasks).map do |task|
             {form_fields: form(task['task_id'], task['entity_class']),
-             task_id: task['task_id']}
+             task_id:     task['task_id']}
           end
 
           forms

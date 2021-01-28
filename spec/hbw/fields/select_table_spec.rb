@@ -40,7 +40,6 @@ choices:
                                             [125342601, 'Internet search name', 'Internet search code', '7,000.00', '2017']])
   end
 
-
   let(:field_multi) do
     definition = YAML.load '
 name: homsOrderDataMarketingSource
@@ -82,7 +81,6 @@ choices:
     expect(field.processed_choices). to eq([[125342501, 'Friends recommendation name', 'Friends recommendation code', '5,000.00', '2018'],
                                             [125342601, 'Internet search name', 'Internet search code', '7,000.00', '2017']])
   end
-
 
   let(:field_with_wrong_type) do
     definition = YAML.load '
@@ -134,7 +132,6 @@ choices:
     field.fetch
     expect { field_with_wrong_type_multi.processed_choices }.to raise_error(Exception, 'Wrong config for select table')
   end
-
 
   let(:field_with_wrong_option_from_number_for_string) do
     definition = YAML.load '

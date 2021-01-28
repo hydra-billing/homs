@@ -18,20 +18,20 @@ module CustomFields
       def validate_value(attribute_name, value)
         return true if value.nil?
 
-        should_have_key?(attribute_name, in: { attribute_name => value },
-                                        as: ::String) &&
+        should_have_key?(attribute_name, in: {attribute_name => value},
+                                         as: ::String) &&
           (value.length <= MAX_LENGTH ||
             add_max_length_error(attribute_name, MAX_LENGTH))
       end
 
       def coerce_value(value)
         case value
-          when ::String then value
-          when ::Numeric then value.to_s
-          when ::Time, ::Date then value.iso8601
-          when ::Array then value.map { |v| coerce_value(v) }
-          else
-            raise NotImplementedError
+        when ::String then value
+        when ::Numeric then value.to_s
+        when ::Time, ::Date then value.iso8601
+        when ::Array then value.map { |v| coerce_value(v) }
+        else
+          raise NotImplementedError
         end
       end
     end

@@ -1,5 +1,5 @@
-HBW_FORMAT = ' [HBW] %s'
-HBW_DURATION = 'DURATION'
+HBW_FORMAT = ' [HBW] %s'.freeze
+HBW_DURATION = 'DURATION'.freeze
 
 class HBWFormatterProduction < Logger::Formatter
   include ActiveSupport::TaggedLogging::Formatter
@@ -21,11 +21,11 @@ module HBWLogger
   include ActiveSupport::TaggedLogging
 
   def self.new(logger)
-    if Rails.env.production?
-      logger.formatter = HBWFormatterProduction.new
-    else
-      logger.formatter = HBWFormatter.new
-    end
+    logger.formatter = if Rails.env.production?
+                         HBWFormatterProduction.new
+                       else
+                         HBWFormatter.new
+                       end
 
     logger.extend(self)
   end

@@ -1,5 +1,5 @@
 module CustomFields
-  module  HashValidationMethods
+  module HashValidationMethods
     protected
 
     # error messages
@@ -36,7 +36,7 @@ module CustomFields
       errors[attribute_name] ||= []
       errors[attribute_name] << t('max_length',
                                   attribute_name: attribute_name,
-                                  max_length: max_length)
+                                  max_length:     max_length)
       false
     end
 
@@ -44,7 +44,7 @@ module CustomFields
     def key_value_should_be_of_certain_type(key, options)
       if options[:as].is_a?(Array)
         options[:as].any? { |klass| options[:in][key].is_a?(klass) }
-      elsif options[:in][key].kind_of?(Array)
+      elsif options[:in][key].is_a?(Array)
         options[:in][key].map do |e|
           e.is_a?(options[:as])
         end

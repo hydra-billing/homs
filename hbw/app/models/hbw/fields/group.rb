@@ -10,15 +10,15 @@ module HBW
       end
 
       def as_json
-        { name: name,
-          type: type,
-          label: label,
-          css_class: css_class,
-          fields: fields.map(&:as_json),
-          delete_if: delete_if,
-          disable_if: disable_if,
-          dynamic: dynamic,
-          variables: variables }
+        {name:       name,
+         type:       type,
+         label:      label,
+         css_class:  css_class,
+         fields:     fields.map(&:as_json),
+         delete_if:  delete_if,
+         disable_if: disable_if,
+         dynamic:    dynamic,
+         variables:  variables}
       end
 
       def fetch

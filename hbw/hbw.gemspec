@@ -1,4 +1,4 @@
-$:.push File.expand_path('../lib', __FILE__)
+$:.push File.expand_path('lib', __dir__)
 
 require 'hbw/version'
 
@@ -14,9 +14,9 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*']
 
-  s.add_dependency 'rails', '~> 5.2.4'
   s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'faraday'
-  s.add_dependency 'faraday_middleware'
   s.add_dependency 'faraday-detailed_logger'
+  s.add_dependency 'faraday_middleware'
+  s.add_dependency 'rails', '~> 5.2.4'
 end

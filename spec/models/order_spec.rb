@@ -34,17 +34,17 @@ describe Order do
 
   it '#data should have default nil values for all defined fields' do
     expect(order_vacation_request.data).to eq('vacationLeaveDate' => nil,
-                                              'vacationBackDate' => nil,
-                                              'employee' => nil,
-                                              'approver' => nil)
+                                              'vacationBackDate'  => nil,
+                                              'employee'          => nil,
+                                              'approver'          => nil)
   end
 
   it '#data=(value) should merge the value, not overwrite with it' do
-    order_vacation_request.data = { approver: 'kermit' }
+    order_vacation_request.data = {approver: 'kermit'}
     expect(order_vacation_request.data).to eq('vacationLeaveDate' => nil,
-                                              'vacationBackDate' => nil,
-                                              'employee' => nil,
-                                              'approver' => 'kermit')
+                                              'vacationBackDate'  => nil,
+                                              'employee'          => nil,
+                                              'approver'          => 'kermit')
   end
   # <-
 end

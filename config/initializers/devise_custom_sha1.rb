@@ -10,11 +10,9 @@ module Devise
         # incoming password.
         def self.digest(password, stretches, salt, pepper)
           digest = pepper
-          stretches.times { digest = self.secure_digest(salt, digest, password, pepper) }
+          stretches.times { digest = secure_digest(salt, digest, password, pepper) }
           digest
         end
-
-        private
 
         # Generate a SHA1 digest joining args. Generated token is something like
         def self.secure_digest(*tokens)

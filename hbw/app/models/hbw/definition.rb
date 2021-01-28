@@ -16,6 +16,7 @@ module HBW
     end
 
     attr_reader :definition
+
     delegate :config, to: 'HBW::Widget'
 
     def initialize(definition)

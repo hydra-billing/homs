@@ -10,8 +10,7 @@ class OrdersController < API::BaseController
 
   before_action :set_order, only: [:new, :create]
 
-  def show
-  end
+  def show; end
 
   # GET /orders/search_by/{:code | :ext_code}/
   def search_by
@@ -31,8 +30,7 @@ class OrdersController < API::BaseController
     render 'orders/list', locals: {orders: list_filter.list_orders.page(page_params[:page]).per(page_params[:page_size])}
   end
 
-  def edit
-  end
+  def edit; end
 
   def new
     if request.xml_http_request?
@@ -83,17 +81,17 @@ class OrdersController < API::BaseController
     instance_variable_get("@#{resource_name}")
   end
 
-  helper_method \
   def list_filter
     @filter ||= order_printing_service.build_filter(current_user, params)
   end
+  helper_method :list_filter
 
   def record_not_found
-    if @criteria.nil?
-      flash[:error] = t('record_not_found')
-    else
-      flash[:error] = t('orders.search_by_not_found', criteria: @criteria)
-    end
+    flash[:error] = if @criteria.nil?
+                      t('record_not_found')
+                    else
+                      t('orders.search_by_not_found', criteria: @criteria)
+                    end
 
     redirect_to orders_path
   end

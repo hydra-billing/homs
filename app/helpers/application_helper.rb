@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def localize_date_range(date_range)
-    date_range.reduce({}) { |range, (k,v)| range[k] = DateTime.iso8601(v).strftime(datetime_format) if v.present?; range }
+    date_range.each_with_object({}) { |(k, v), range| range[k] = DateTime.iso8601(v).strftime(datetime_format) if v.present?; }
   end
 
   def boolean_indicator(boolean)
@@ -64,19 +64,11 @@ module ApplicationHelper
     end
   end
 
-  def loc_date(date)
-    case
-      when Time, DateTime then date.strftime(date_format)
-      when String then DateTime.iso8601(date).strftime(date_format)
-      else ''
-    end
-  end
-
   def loc_datetime(datetime)
     case datetime
-      when Time, DateTime then datetime.strftime(datetime_format)
-      when String then DateTime.iso8601(datetime).strftime(datetime_format)
-      else ''
+    when Time, DateTime then datetime.strftime(datetime_format)
+    when String then DateTime.iso8601(datetime).strftime(datetime_format)
+    else ''
     end
   end
 
@@ -96,15 +88,15 @@ module ApplicationHelper
 
   def hbw_options
     default_options = {
-      userIdentifier: current_user.email,
-      widgetURL: root_url,
-      widgetPath: '/widget',
-      entity_class: 'order',
+      userIdentifier:                current_user.email,
+      widgetURL:                     root_url,
+      widgetPath:                    '/widget',
+      entity_class:                  'order',
       availableTasksButtonContainer: '#hbw-tasks-list-button',
-      availableTaskListContainer: '#hbw-task-list',
-      taskListPath: 'tasks',
-      locale: {
-        code: I18n.locale,
+      availableTaskListContainer:    '#hbw-task-list',
+      taskListPath:                  'tasks',
+      locale:                        {
+        code:           I18n.locale,
         dateTimeFormat: js_datetime_format
       }
     }

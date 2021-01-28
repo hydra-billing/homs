@@ -5,10 +5,10 @@ module HBW
 
       def coerce(value)
         case data_type
-          when :boolean
-            value == 'on'
-          else
-            fail_unsupported_coercion(value)
+        when :boolean
+          value == 'on'
+        else
+          fail_unsupported_coercion(value)
         end
       end
     end

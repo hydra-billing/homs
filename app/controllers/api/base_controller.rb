@@ -26,8 +26,8 @@ module API
     def index(resource_scope = resource_class.all)
       plural_resource_name = "@#{resource_name.pluralize}"
       resources = resource_scope.where(query_params)
-                  .page(page_params[:page])
-                  .per(page_params[:page_size])
+                                .page(page_params[:page])
+                                .per(page_params[:page_size])
 
       instance_variable_set(plural_resource_name, resources)
       respond_with instance_variable_get(plural_resource_name)
@@ -49,7 +49,7 @@ module API
       if resource_class.respond_to? :lookup
         respond_with resource_class.lookup(params[:q]).to_json
       else
-        respond_with([{ id: 0, text: 'not implemented' }].to_json)
+        respond_with([{id: 0, text: 'not implemented'}].to_json)
       end
     end
 

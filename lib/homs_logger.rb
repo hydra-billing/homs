@@ -1,4 +1,4 @@
-HOMS_FORMAT = '[HOMS] %s'
+HOMS_FORMAT = '[HOMS] %s'.freeze
 
 class HomsFormatterProduction < Logger::Formatter
   include ActiveSupport::TaggedLogging::Formatter
@@ -20,11 +20,11 @@ module HomsLogger
   include ActiveSupport::TaggedLogging
 
   def self.new(logger)
-    if Rails.env.production?
-      logger.formatter = HomsFormatterProduction.new
-    else
-      logger.formatter = HomsFormatter.new
-    end
+    logger.formatter = if Rails.env.production?
+                         HomsFormatterProduction.new
+                       else
+                         HomsFormatter.new
+                       end
 
     logger.extend(self)
   end

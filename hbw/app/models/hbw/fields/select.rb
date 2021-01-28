@@ -5,6 +5,7 @@ module HBW
 
       include HBW::Engine.routes.url_helpers
       attr_reader :choices
+
       definition_reader :sql, :variable, :entity_class
 
       MAX_ROW_COUNT = 20
@@ -48,22 +49,22 @@ module HBW
       end
 
       def as_json
-        { name: name,
-          type: type,
-          mode: mode,
-          label: label,
-          css_class: css_class,
-          placeholder: placeholder,
-          label_css: label_css,
-          choices: choices,
-          nullable: nullable?,
-          editable: editable?,
-          delimiter: delimiter?,
-          delete_if: delete_if,
-          disable_if: disable_if,
-          dynamic: dynamic,
-          variables: variables,
-          url: url }
+        {name:        name,
+         type:        type,
+         mode:        mode,
+         label:       label,
+         css_class:   css_class,
+         placeholder: placeholder,
+         label_css:   label_css,
+         choices:     choices,
+         nullable:    nullable?,
+         editable:    editable?,
+         delimiter:   delimiter?,
+         delete_if:   delete_if,
+         disable_if:  disable_if,
+         dynamic:     dynamic,
+         variables:   variables,
+         url:         url}
       end
 
       def mode

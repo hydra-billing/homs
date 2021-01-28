@@ -37,8 +37,8 @@ module HBW
       else
         raise RemoteError.new(args[0], 'response code: %s, body: %s' % [response.status, response.body])
       end
-    rescue => error
-      raise RemoteError.new(args[0], error.message, error.backtrace)
+    rescue StandardError => e
+      raise RemoteError.new(args[0], e.message, e.backtrace)
     end
   end
 
@@ -53,5 +53,5 @@ module HBW
     end
   end
 
-  Remote.send(:prepend, RemoteWithConnection)
+  Remote.prepend RemoteWithConnection
 end

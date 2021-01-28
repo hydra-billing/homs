@@ -25,7 +25,7 @@ module Imprint
         end
       end
 
-      class OrderMultipleTypesException < Exception
+      class OrderMultipleTypesException < RuntimeError
       end
 
       def process_print_task(current_user, params)
@@ -56,17 +56,15 @@ module Imprint
       private
 
       def filter_and_prepare(current_user, params)
-        begin
-          serialize_orders(check_same_type(filter_orders(current_user, params)))
-        rescue OrderMultipleTypesException
-          {error: I18n.t('orders.print_tasks.errors.multiple_types')}
-        end
+        serialize_orders(check_same_type(filter_orders(current_user, params)))
+      rescue OrderMultipleTypesException
+        {error: I18n.t('orders.print_tasks.errors.multiple_types')}
       end
 
       def serialize_orders(orders)
         {
-            orders: orders.map { |order| order.attributes },
-            print_form_code: orders.first.try(:order_type_print_form_code)
+          orders:          orders.map { |order| order.attributes },
+          print_form_code: orders.first.try(:order_type_print_form_code)
         }
       end
 
@@ -97,9 +95,10 @@ module Imprint
           end
 
           result_data.reverse_merge(
-              user_id: user_ids,
-              archived: false,
-              state: nil)
+            user_id:  user_ids,
+            archived: false,
+            state:    nil
+          )
         end
       end
     end

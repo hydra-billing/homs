@@ -4,9 +4,9 @@ class OrderType < ActiveRecord::Base
       s = q.mb_chars.downcase.to_s
 
       active.where('lower(name) like ?', "%#{s}%")
-        .select('id, name')
-        .order(name: :asc)
-        .map { |e| { id: e.id, text: e.name } }
+            .select('id, name')
+            .order(name: :asc)
+            .map { |e| {id: e.id, text: e.name} }
     end
 
     def id_from_code(code)
@@ -35,6 +35,7 @@ class OrderType < ActiveRecord::Base
   def save_if_differs!
     last_one = self.class.code(code).last
     return false if self == last_one
+
     save!
   end
 

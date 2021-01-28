@@ -9,8 +9,8 @@ module Features
 
     def set_date(class_name, day)
       page.find(".#{class_name} .fa-calendar").click
-      expect(page.find(".#{class_name} .day", :text => "#{day}").text).to have_content(day)
-      page.find(".#{class_name} .day", :text => "#{day}").click
+      expect(page.find(".#{class_name} .day", text: day.to_s).text).to have_content(day)
+      page.find(".#{class_name} .day", text: day.to_s).click
       page.find('nav').click
     end
 
@@ -23,11 +23,11 @@ module Features
     end
 
     def active_tab(text)
-      page.all('li.active').find{ |node| node.find('a', text: text) }
+      page.all('li.active').find { |node| node.find('a', text: text) }
     end
 
     def tab(text)
-      page.all('a[data-toggle="tab"]').select{|x| x.text == text}.first
+      page.all('a[data-toggle="tab"]').select { |x| x.text == text }.first
     end
 
     def expect_widget_presence
@@ -67,7 +67,7 @@ module Features
     end
 
     def select2_multiple_text(name)
-      select2_text_node(name).all('li[title]').map{|node| node.text.sub('×', '')}
+      select2_text_node(name).all('li[title]').map { |node| node.text.sub('×', '') }
     end
 
     def select2_value(name)
@@ -92,7 +92,7 @@ module Features
     end
 
     def choose_select2_option(value)
-      select2_options.select{|node| node.text == value}.first
+      select2_options.select { |node| node.text == value }.first
     end
 
     def success_select_search(name, search)
@@ -169,12 +169,12 @@ module Features
       r_select = parent_node(hidden_input)
 
       {
-          label: r_select.find('.react-select__single-value').text,
-          value: hidden_input.value
+        label: r_select.find('.react-select__single-value').text,
+        value: hidden_input.value
       }
     end
 
-    def r_select_placeholder(name, params={})
+    def r_select_placeholder(name, params = {})
       r_select_container(name).find('.react-select__placeholder', **params).text
     end
 
@@ -206,7 +206,7 @@ module Features
       to_current_locale_date(page.evaluate_script("jQuery('[name=\"#{name}\"]').val()"))
     end
 
-    def is_element(name, disabled=false)
+    def is_element(name, disabled = false)
       page.evaluate_script("jQuery('[name=\"#{name}\"]#{disabled ? ':disabled' : ''}').length") > 0
     end
 
@@ -281,7 +281,7 @@ module Features
     end
 
     def multiselect_button_by_id(id)
-      multiselect_by_id(id).find(:xpath,  '//div[contains(@class, "btn-group")]')
+      multiselect_by_id(id).find(:xpath, '//div[contains(@class, "btn-group")]')
     end
 
     def click_on_multiselect(id)

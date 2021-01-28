@@ -3,7 +3,7 @@ module HBW
     class << self
       def call(widget, task_id, event_name, assignee, users = [])
         message = {
-          task_id: task_id,
+          task_id:    task_id,
           event_name: event_name
         }
 

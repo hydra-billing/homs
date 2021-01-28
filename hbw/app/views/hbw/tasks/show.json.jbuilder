@@ -1,1 +1,1 @@
-json.partial! partial: 'hbw/tasks/task', locals: { task: @task }
+json.partial! partial: 'hbw/tasks/task', locals: {task: @task}

@@ -25,7 +25,7 @@ describe OrdersController, type: :controller do
       order[:data]['callBack']       = '1'
 
       post 'create', params: {order: {data: order[:data]}, order_type_id: order_type.id}
-      expect(response.body).to match /has the invalid value/im
+      expect(response.body).to(match(/has the invalid value/im))
     end
 
     it 'update success' do

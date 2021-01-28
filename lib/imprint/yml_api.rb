@@ -29,4 +29,3 @@ module Imprint
     end
   end
 end
-

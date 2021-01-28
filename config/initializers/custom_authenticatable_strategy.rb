@@ -8,7 +8,7 @@ module Devise
 
         if user && user.blocked
           @user = nil
-          fail(:blocked)
+          raise(:blocked)
         end
       end
     end

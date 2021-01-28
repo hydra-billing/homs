@@ -2,16 +2,16 @@ module OrdersHelper
   EMPTY_VALUE = '—'.freeze
 
   def prettify_value(value, field = {})
-    if value.kind_of?(Array)
+    if value.is_a?(Array)
       return value.map { |v| prettify_value(v, field) }.join(', ')
     end
 
     case field[:type]
-      when 'datetime'
-        prettify_date(value)
-      when 'boolean'
-        prettify_boolean(value)
-      else value.to_s.presence || EMPTY_VALUE
+    when 'datetime'
+      prettify_date(value)
+    when 'boolean'
+      prettify_boolean(value)
+    else value.to_s.presence || EMPTY_VALUE
     end
   end
 
@@ -33,7 +33,8 @@ module OrdersHelper
 
   def split_data(data, index = 10)
     data = (data.presence || {})
-    visible, hidden = data.keys[0...index], data.keys[index..-1]
+    visible = data.keys[0...index]
+    hidden = data.keys[index..-1]
     [data.slice(*visible), data.slice(*hidden)]
   end
 
@@ -58,15 +59,15 @@ module OrdersHelper
   def prepare_order_list(orders)
     orders.map do |order|
       static_fields = {
-          code: {title: order.code, href: order_path(order.code)},
-          order_type_code: order.order_type_name,
-          state: {title: order_state_title(order), icon: order_state_icon(order)},
-          created_at: loc_datetime(order.created_at),
-          user: order.user_full_name,
-          ext_code: order.ext_code,
-          archived: order.archived,
-          estimated_exec_date: loc_datetime(order.estimated_exec_date),
-          options: {class: expired_class(order)}
+        code:                {title: order.code, href: order_path(order.code)},
+        order_type_code:     order.order_type_name,
+        state:               {title: order_state_title(order), icon: order_state_icon(order)},
+        created_at:          loc_datetime(order.created_at),
+        user:                order.user_full_name,
+        ext_code:            order.ext_code,
+        archived:            order.archived,
+        estimated_exec_date: loc_datetime(order.estimated_exec_date),
+        options:             {class: expired_class(order)}
       }
 
       fields_definition = order.order_type.fields.with_indifferent_access

@@ -13,10 +13,10 @@ describe API::V1::ProfilesController, type: :request do
 
       profile = Profile.new(order_type_id: order_type.id, user_id: john.id)
       profile.data = {
-          contractNumber:     {type: 'number',   label: 'Contract number',     show: true},
-          problemDescription: {type: 'string',   label: 'Problem description', show: true},
-          creationDate:       {type: 'datetime', label: 'Creation date',       show: true},
-          callBack:           {type: 'boolean',  label: 'Callback',            show: true}
+        contractNumber:     {type: 'number', label: 'Contract number', show: true},
+        problemDescription: {type: 'string',   label: 'Problem description', show: true},
+        creationDate:       {type: 'datetime', label: 'Creation date',       show: true},
+        callBack:           {type: 'boolean',  label: 'Callback',            show: true}
       }
       profile.save
     end
@@ -39,16 +39,16 @@ describe API::V1::ProfilesController, type: :request do
 
         profile = (JSON response_body)['profiles'].first
         expect(profile).to eq({
-                                'id'                  => Profile.by_order_type_and_user(order_type.id, john.id).id,
-                                'data'                => {
-                                    'contractNumber'     => {'type' => 'number',   'label' => 'Contract number',     'show'=> true},
-                                    'problemDescription' => {'type' => 'string',   'label' => 'Problem description', 'show'=> true},
-                                    'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show'=> true},
-                                    'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show'=> true}
+                                'id'              => Profile.by_order_type_and_user(order_type.id, john.id).id,
+                                'data'            => {
+                                  'contractNumber'     => {'type' => 'number', 'label' => 'Contract number', 'show' => true},
+                                  'problemDescription' => {'type' => 'string',   'label' => 'Problem description', 'show' => true},
+                                  'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show' => true},
+                                  'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show' => true}
                                 },
-                                'order_type_code'     => 'Support Request',
-                                'user_email'          => 'j.doe@example.com'
-                            })
+                                'order_type_code' => 'Support Request',
+                                'user_email'      => 'j.doe@example.com'
+                              })
       end
     end
 
@@ -64,17 +64,17 @@ describe API::V1::ProfilesController, type: :request do
         profile = (JSON response_body)
         expect(profile).to eq({
                                 'profile' => {
-                                    'id'                  => id,
-                                    'data'                => {
-                                        'contractNumber'     => {'type' => 'number',   'label' => 'Contract number',     'show'=> true},
-                                        'problemDescription' => {'type' => 'string',   'label' => 'Problem description', 'show'=> true},
-                                        'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show'=> true},
-                                        'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show'=> true}
-                                    },
-                                    'order_type_code'     => 'Support Request',
-                                    'user_email'          => 'j.doe@example.com'
+                                  'id'              => id,
+                                  'data'            => {
+                                    'contractNumber'     => {'type' => 'number', 'label' => 'Contract number', 'show' => true},
+                                    'problemDescription' => {'type' => 'string',   'label' => 'Problem description', 'show' => true},
+                                    'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show' => true},
+                                    'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show' => true}
+                                  },
+                                  'order_type_code' => 'Support Request',
+                                  'user_email'      => 'j.doe@example.com'
                                 }
-                            })
+                              })
       end
     end
 
@@ -94,10 +94,10 @@ describe API::V1::ProfilesController, type: :request do
       let(:order_type_code) { order_type.code }
       let(:data) do
         {
-            'contractNumber'     => {'type' => 'number',   'label' => 'Contract number',     'show'=> false},
-            'problemDescription' => {'type' => 'string',   'label' => 'Problem description', 'show'=> true},
-            'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show'=> false},
-            'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show'=> true}
+          'contractNumber'     => {'type' => 'number',   'label' => 'Contract number',     'show' => false},
+          'problemDescription' => {'type' => 'string',   'label' => 'Problem description', 'show' => true},
+          'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show' => false},
+          'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show' => true}
         }
       end
 
@@ -108,14 +108,14 @@ describe API::V1::ProfilesController, type: :request do
         expect(profile.id).not_to eq(nil)
         expect(profile.data).to   eq(data)
 
-        expect(JSON response_body).to eq({
-                                             'profile' => {
-                                                 'id'              => profile.id,
-                                                 'data'            => profile.data,
-                                                 'order_type_code' => profile.order_type.code,
-                                                 'user_email'      => profile.user.email
-                                             }
-                                         })
+        expect(JSON(response_body)).to eq({
+                                            'profile' => {
+                                              'id'              => profile.id,
+                                              'data'            => profile.data,
+                                              'order_type_code' => profile.order_type.code,
+                                              'user_email'      => profile.user.email
+                                            }
+                                          })
       end
     end
 
@@ -125,7 +125,7 @@ describe API::V1::ProfilesController, type: :request do
                 scope: :profile
       parameter :user_email,
                 I18n.t('doc.profiles.parameters.user_email'),
-                scope: :profile,
+                scope:    :profile,
                 required: true
       parameter :order_type_code,
                 I18n.t('doc.profiles.parameters.order_type_code'),
@@ -139,32 +139,32 @@ describe API::V1::ProfilesController, type: :request do
       let(:user_email)      { john.email }
       let(:data) do
         {
-            'contractNumber'     => {'type' => 'number',   'label' => 'Contract number',     'show'=> false},
-            'problemDescription' => {'type' => 'string',   'label' => 'Problem description', 'show'=> false},
-            'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show'=> false},
-            'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show'=> false}
+          'contractNumber'     => {'type' => 'number',   'label' => 'Contract number',     'show' => false},
+          'problemDescription' => {'type' => 'string',   'label' => 'Problem description', 'show' => false},
+          'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show' => false},
+          'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show' => false}
         }
       end
 
       example_request I18n.t('doc.common.cases.update') do
-
         expect(status).to eq(200)
 
         updated_profile = Profile.find(id)
         expect(updated_profile.data).to eq({
-                                             'contractNumber'     => {'type' => 'number',   'label' => 'Contract number',     'show'=> false},
-                                             'problemDescription' => {'type' => 'string',   'label' => 'Problem description', 'show'=> false},
-                                             'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show'=> false},
-                                             'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show'=> false}
+                                             'contractNumber'     => {'type' => 'number',   'label' => 'Contract number',     'show' => false},
+                                             'problemDescription' => {'type' => 'string',   'label' => 'Problem description', 'show' => false},
+                                             'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show' => false},
+                                             'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show' => false}
                                            })
 
-        expect(JSON response_body).to eq(
-                                          'profile' => {
-                                              'id'                  => updated_profile.id,
-                                              'data'                => updated_profile.data,
-                                              'order_type_code'     => updated_profile.order_type.code,
-                                              'user_email'          => updated_profile.user.email
-                                          })
+        expect(JSON(response_body)).to eq(
+          'profile' => {
+            'id'              => updated_profile.id,
+            'data'            => updated_profile.data,
+            'order_type_code' => updated_profile.order_type.code,
+            'user_email'      => updated_profile.user.email
+          }
+        )
       end
     end
   end

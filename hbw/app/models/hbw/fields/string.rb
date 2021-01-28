@@ -5,9 +5,9 @@ module HBW
 
       def coerce(value)
         case data_type
-          when :string then value
-          else
-            fail_unsupported_coercion(value)
+        when :string then value
+        else
+          fail_unsupported_coercion(value)
         end
       end
     end

@@ -23,7 +23,7 @@ module CustomFields
       raise NotImplementedError
     end
 
-  private
+    private
 
     def wrap_errors(errors)
       Hash.new do |h, field|

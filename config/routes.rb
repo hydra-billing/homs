@@ -2,9 +2,9 @@ require 'api_constraints'
 
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-               registrations: 'registrations',
-               sessions: 'sessions'
-             }
+    registrations: 'registrations',
+    sessions:      'sessions'
+  }
 
   get '/sign_in_by_token/:token' => 'sessions#sign_in_by_token'
 
@@ -18,9 +18,9 @@ Rails.application.routes.draw do
   end
 
   get '/orders/search_by/:field',
-      to: 'orders#search_by',
-      as: :search_order_by,
-      constraints: { field: /code|ext_code/ }
+      to:          'orders#search_by',
+      as:          :search_order_by,
+      constraints: {field: /code|ext_code/}
 
   get '/orders/order_type_attributes/:id' => 'orders#get_order_type_attributes'
 
@@ -43,16 +43,16 @@ Rails.application.routes.draw do
     resources :order_types, only: [:index, :show, :create, :destroy] do
       get :lookup, on: :collection
       put :activate, on: :member
-      delete :dismiss,  on: :member
+      delete :dismiss, on: :member
     end
   end
 
-  namespace :api, defaults: { format: :json } do
-    scope module: :v1,
+  namespace :api, defaults: {format: :json} do
+    scope module:      :v1,
           constraints: ApiConstraints.new(version: 1, default: true) do
       actions = [:index, :show, :create, :update, :destroy]
 
-      resources :users, only: actions, constraints: { id: /.*/ }
+      resources :users, only: actions, constraints: {id: /.*/}
       resources :orders, only: actions
       resources :profiles, only: actions
     end

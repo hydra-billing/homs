@@ -13,7 +13,7 @@ describe API::V1::OrdersController, type: :request do
       disable_http_basic_authentication(API::V1::OrdersController)
 
       [
-          "common: &common
+        "common: &common
   label: ''
   type: string
 
@@ -56,7 +56,7 @@ order_type:
     negativeNumberField:
       type: number
       label: Negative Number Field",
-          "common: &common
+        "common: &common
   label: ''
   type: string
 
@@ -82,7 +82,7 @@ order_type:
     resolutionText:
       <<: *common
       label: Resolution Text",
-          "common: &common
+        "common: &common
   label: ''
   type: string
 
@@ -129,55 +129,57 @@ order_type:
     pizzaPrice:
       <<: *common
       type: number
-      label: Pizza Price"].each do |order_type_file|
+      label: Pizza Price"
+      ].each do |order_type_file|
         OrderType.create!(
-            file: order_type_file,
-            active: true)
+          file:   order_type_file,
+          active: true
+        )
       end
 
       # vacation request order
       order = Order.new(
-          order_type_id: OrderType.find_by(code: 'vacation_request').id
+        order_type_id: OrderType.find_by(code: 'vacation_request').id
       )
       order.data = {
-          employeeFirstName:   'James',
-          employeeLastName:    'Carter',
-          employeeEmail:       'james@example.com',
-          beginDate:           '2016-07-15T14:45:03+00:00',
-          endDate:             '2016-07-16T14:49:42+00:00',
-          motivationText:      'I had a lot of work last 7 years',
-          jsonField:           '{"name": "James"}',
-          negativeNumberField: '-123456789'
+        employeeFirstName:   'James',
+        employeeLastName:    'Carter',
+        employeeEmail:       'james@example.com',
+        beginDate:           '2016-07-15T14:45:03+00:00',
+        endDate:             '2016-07-16T14:49:42+00:00',
+        motivationText:      'I had a lot of work last 7 years',
+        jsonField:           '{"name": "James"}',
+        negativeNumberField: '-123456789'
       }
       order.save
 
       # support request order
       order = Order.new(
-          order_type_id: OrderType.find_by(code: 'support_request').id
+        order_type_id: OrderType.find_by(code: 'support_request').id
       )
       order.bp_id = 465358
       order.bp_state = 'in_progress'
       order.state = 'in_progress'
       order.data = {
-          requesterName:  'Peter Park',
-          requesterPhone: '12345678900',
-          subject:        'Printer does not work',
-          description:    'I don\'t know what happened but printer in kitchen does not work. Help, please...'
+        requesterName:  'Peter Park',
+        requesterPhone: '12345678900',
+        subject:        'Printer does not work',
+        description:    'I don\'t know what happened but printer in kitchen does not work. Help, please...'
       }
       order.save
 
       # pizza order
       order = Order.new(
-          order_type_id: OrderType.find_by(code: 'pizza_order').id
+        order_type_id: OrderType.find_by(code: 'pizza_order').id
       )
       order.bp_id = 205210
       order.bp_state = 'done'
       order.done_at = '2016-08-16T14:49:42+00:00'
       order.state = 'done'
       order.data = {
-          customerName:  'John Smith',
-          customerPhone: '19876543211',
-          pizzaType:     'Margherita'
+        customerName:  'John Smith',
+        customerPhone: '19876543211',
+        pizzaType:     'Margherita'
       }
       order.save
     end
@@ -200,30 +202,30 @@ order_type:
 
         order = (JSON response_body)['orders'].first
         expect(order).to eq({
-                                'id'                  => Order.find_by_code(order['code']).id,
-                                'code'                => 'ORD-1',
-                                'ext_code'            => nil,
-                                'bp_id'               => nil,
-                                'bp_state'            => nil,
-                                'state'               => 'to_execute',
-                                'archived'            => false,
-                                'data'                => {
-                                    'employeeFirstName'   => 'James',
-                                    'employeeLastName'    => 'Carter',
-                                    'employeeEmail'       => 'james@example.com',
-                                    'beginDate'           => '2016-07-15T14:45:03.000+00:00',
-                                    'endDate'             => '2016-07-16T14:49:42.000+00:00',
-                                    'motivationText'      => 'I had a lot of work last 7 years',
-                                    'resolution'          => nil,
-                                    'resolutionText'      => nil,
-                                    'adjustResult'        => nil,
-                                    'jsonField'           => '{"name": "James"}',
-                                    'negativeNumberField' => -123456789
-                                },
-                                'done_at'             => nil,
-                                'estimated_exec_date' => nil,
-                                'order_type_code'     => 'vacation_request',
-                                'user_email'          => nil
+                              'id'                  => Order.find_by_code(order['code']).id,
+                              'code'                => 'ORD-1',
+                              'ext_code'            => nil,
+                              'bp_id'               => nil,
+                              'bp_state'            => nil,
+                              'state'               => 'to_execute',
+                              'archived'            => false,
+                              'data'                => {
+                                'employeeFirstName'   => 'James',
+                                'employeeLastName'    => 'Carter',
+                                'employeeEmail'       => 'james@example.com',
+                                'beginDate'           => '2016-07-15T14:45:03.000+00:00',
+                                'endDate'             => '2016-07-16T14:49:42.000+00:00',
+                                'motivationText'      => 'I had a lot of work last 7 years',
+                                'resolution'          => nil,
+                                'resolutionText'      => nil,
+                                'adjustResult'        => nil,
+                                'jsonField'           => '{"name": "James"}',
+                                'negativeNumberField' => -123456789
+                              },
+                              'done_at'             => nil,
+                              'estimated_exec_date' => nil,
+                              'order_type_code'     => 'vacation_request',
+                              'user_email'          => nil
                             })
       end
     end
@@ -239,32 +241,32 @@ order_type:
         expect(status).to eq(200)
         order = (JSON response_body)
         expect(order).to eq({
-                                'order' => {
-                                    'id'                  => Order.find_by_code(code).id,
-                                    'code'                => code,
-                                    'ext_code'            => nil,
-                                    'bp_id'               => nil,
-                                    'bp_state'            => nil,
-                                    'state'               => 'to_execute',
-                                    'archived'            => false,
-                                    'data'                => {
-                                        'employeeFirstName'   => 'James',
-                                        'employeeLastName'    => 'Carter',
-                                        'employeeEmail'       => 'james@example.com',
-                                        'beginDate'           => '2016-07-15T14:45:03.000+00:00',
-                                        'endDate'             => '2016-07-16T14:49:42.000+00:00',
-                                        'motivationText'      => 'I had a lot of work last 7 years',
-                                        'resolution'          => nil,
-                                        'resolutionText'      => nil,
-                                        'adjustResult'        => nil,
-                                        'jsonField'           => '{"name": "James"}',
-                                        'negativeNumberField' => -123456789
-                                    },
-                                    'done_at'             => nil,
-                                    'estimated_exec_date' => nil,
-                                    'order_type_code'     => 'vacation_request',
-                                    'user_email'          => nil
-                                }
+                              'order' => {
+                                'id'                  => Order.find_by_code(code).id,
+                                'code'                => code,
+                                'ext_code'            => nil,
+                                'bp_id'               => nil,
+                                'bp_state'            => nil,
+                                'state'               => 'to_execute',
+                                'archived'            => false,
+                                'data'                => {
+                                  'employeeFirstName'   => 'James',
+                                  'employeeLastName'    => 'Carter',
+                                  'employeeEmail'       => 'james@example.com',
+                                  'beginDate'           => '2016-07-15T14:45:03.000+00:00',
+                                  'endDate'             => '2016-07-16T14:49:42.000+00:00',
+                                  'motivationText'      => 'I had a lot of work last 7 years',
+                                  'resolution'          => nil,
+                                  'resolutionText'      => nil,
+                                  'adjustResult'        => nil,
+                                  'jsonField'           => '{"name": "James"}',
+                                  'negativeNumberField' => -123456789
+                                },
+                                'done_at'             => nil,
+                                'estimated_exec_date' => nil,
+                                'order_type_code'     => 'vacation_request',
+                                'user_email'          => nil
+                              }
                             })
       end
     end
@@ -314,17 +316,17 @@ order_type:
       let(:archived)            { false }
       let(:data) do
         {
-            'employeeFirstName'   => 'James',
-            'employeeLastName'    => 'Carter',
-            'employeeEmail'       => 'james@example.com',
-            'beginDate'           => '2016-07-15T14:45:03.000+00:00',
-            'endDate'             => '2016-07-16T14:49:42.000+00:00',
-            'motivationText'      => 'I had a lot of work last 7 years',
-            'resolution'          => 'Resolution',
-            'resolutionText'      => 'Resolution Text',
-            'adjustResult'        => 'Adjust Result',
-            'jsonField'           => '{"last_name": "Carter"}',
-            'negativeNumberField' => -123456789
+          'employeeFirstName'   => 'James',
+          'employeeLastName'    => 'Carter',
+          'employeeEmail'       => 'james@example.com',
+          'beginDate'           => '2016-07-15T14:45:03.000+00:00',
+          'endDate'             => '2016-07-16T14:49:42.000+00:00',
+          'motivationText'      => 'I had a lot of work last 7 years',
+          'resolution'          => 'Resolution',
+          'resolutionText'      => 'Resolution Text',
+          'adjustResult'        => 'Adjust Result',
+          'jsonField'           => '{"last_name": "Carter"}',
+          'negativeNumberField' => -123456789
         }
       end
 
@@ -342,22 +344,22 @@ order_type:
         expect(order.archived).to            eq(archived)
         expect(order.data).to                eq(data)
 
-        expect(JSON response_body).to eq({
-                                             'order' => {
-                                                 'id'                  => order.id,
-                                                 'code'                => order.code,
-                                                 'ext_code'            => order.ext_code,
-                                                 'bp_id'               => order.bp_id,
-                                                 'bp_state'            => order.bp_state,
-                                                 'state'               => order.state,
-                                                 'archived'            => order.archived,
-                                                 'data'                => order.data,
-                                                 'done_at'             => order.done_at.iso8601,
-                                                 'estimated_exec_date' => order.estimated_exec_date.iso8601,
-                                                 'order_type_code'     => order.order_type.code,
-                                                 'user_email'          => nil
-                                             }
-                                         })
+        expect(JSON(response_body)).to eq({
+                                            'order' => {
+                                              'id'                  => order.id,
+                                              'code'                => order.code,
+                                              'ext_code'            => order.ext_code,
+                                              'bp_id'               => order.bp_id,
+                                              'bp_state'            => order.bp_state,
+                                              'state'               => order.state,
+                                              'archived'            => order.archived,
+                                              'data'                => order.data,
+                                              'done_at'             => order.done_at.iso8601,
+                                              'estimated_exec_date' => order.estimated_exec_date.iso8601,
+                                              'order_type_code'     => order.order_type.code,
+                                              'user_email'          => nil
+                                            }
+                                          })
       end
     end
 
@@ -404,8 +406,8 @@ order_type:
       let(:archived)        { false }
       let(:data) do
         {
-            'requesterName'  => 'Frank',
-            'requesterPhone' => '123123123'
+          'requesterName'  => 'Frank',
+          'requesterPhone' => '123123123'
         }
       end
 
@@ -423,29 +425,30 @@ order_type:
         expect(updated_order.estimated_exec_date).to eq(nil)
         expect(updated_order.archived).to            eq(archived)
         expect(updated_order.data).to                eq({
-                                                 'requesterName'  => 'Frank',
-                                                 'requesterPhone' => '123123123',
-                                                 'subject'        => nil,
-                                                 'description'    => nil,
-                                                 'resolution'     => nil,
-                                                 'resolutionText' => nil
-                                             })
+                                                          'requesterName'  => 'Frank',
+                                                          'requesterPhone' => '123123123',
+                                                          'subject'        => nil,
+                                                          'description'    => nil,
+                                                          'resolution'     => nil,
+                                                          'resolutionText' => nil
+                                                        })
 
-        expect(JSON response_body).to eq(
-                                          'order' => {
-                                              'id'                  => updated_order.id,
-                                              'code'                => updated_order.code,
-                                              'ext_code'            => updated_order.ext_code,
-                                              'bp_id'               => updated_order.bp_id,
-                                              'bp_state'            => updated_order.bp_state,
-                                              'state'               => updated_order.state,
-                                              'archived'            => updated_order.archived,
-                                              'data'                => updated_order.data,
-                                              'done_at'             => nil,
-                                              'estimated_exec_date' => nil,
-                                              'order_type_code'     => updated_order.order_type.code,
-                                              'user_email'          => nil
-                                          })
+        expect(JSON(response_body)).to eq(
+          'order' => {
+            'id'                  => updated_order.id,
+            'code'                => updated_order.code,
+            'ext_code'            => updated_order.ext_code,
+            'bp_id'               => updated_order.bp_id,
+            'bp_state'            => updated_order.bp_state,
+            'state'               => updated_order.state,
+            'archived'            => updated_order.archived,
+            'data'                => updated_order.data,
+            'done_at'             => nil,
+            'estimated_exec_date' => nil,
+            'order_type_code'     => updated_order.order_type.code,
+            'user_email'          => nil
+          }
+        )
       end
     end
 
@@ -460,17 +463,17 @@ order_type:
       let(:code) { order_vacation_request.code }
       let(:data) do
         {
-            'employeeFirstName'   => 'James',
-            'employeeLastName'    => 'Prinston',
-            'employeeEmail'       => 'james@example.com',
-            'beginDate'           => '2016-07-15T14:45:03.000+00:00',
-            'endDate'             => '2016-07-16T14:49:42.000+00:00',
-            'motivationText'      => 'I had a lot of work last 7 years',
-            'resolution'          => nil,
-            'resolutionText'      => nil,
-            'adjustResult'        => nil,
-            'jsonField'           => '{"last_name": "Carter"}',
-            'negativeNumberField' => -123456789
+          'employeeFirstName'   => 'James',
+          'employeeLastName'    => 'Prinston',
+          'employeeEmail'       => 'james@example.com',
+          'beginDate'           => '2016-07-15T14:45:03.000+00:00',
+          'endDate'             => '2016-07-16T14:49:42.000+00:00',
+          'motivationText'      => 'I had a lot of work last 7 years',
+          'resolution'          => nil,
+          'resolutionText'      => nil,
+          'adjustResult'        => nil,
+          'jsonField'           => '{"last_name": "Carter"}',
+          'negativeNumberField' => -123456789
         }
       end
 
@@ -480,24 +483,24 @@ order_type:
         updated_order = Order.find_by_id(order_vacation_request.id)
         expect(updated_order.data).to eq(data)
 
-        expect(JSON response_body).to eq(
-                                          'order' => {
-                                              'id'                  => order_vacation_request.id,
-                                              'code'                => order_vacation_request.code,
-                                              'ext_code'            => order_vacation_request.ext_code,
-                                              'bp_id'               => order_vacation_request.bp_id,
-                                              'bp_state'            => order_vacation_request.bp_state,
-                                              'state'               => order_vacation_request.state,
-                                              'archived'            => order_vacation_request.archived,
-                                              'data'                => data,
-                                              'done_at'             => nil,
-                                              'estimated_exec_date' => nil,
-                                              'order_type_code'     => order_vacation_request.order_type.code,
-                                              'user_email'          => nil
-                                          })
+        expect(JSON(response_body)).to eq(
+          'order' => {
+            'id'                  => order_vacation_request.id,
+            'code'                => order_vacation_request.code,
+            'ext_code'            => order_vacation_request.ext_code,
+            'bp_id'               => order_vacation_request.bp_id,
+            'bp_state'            => order_vacation_request.bp_state,
+            'state'               => order_vacation_request.state,
+            'archived'            => order_vacation_request.archived,
+            'data'                => data,
+            'done_at'             => nil,
+            'estimated_exec_date' => nil,
+            'order_type_code'     => order_vacation_request.order_type.code,
+            'user_email'          => nil
+          }
+        )
       end
     end
-
 
     put '/api/orders/:code' do
       parameter :code,
@@ -516,21 +519,22 @@ order_type:
         expect(order_vacation_request.user_id).not_to                  eq(user_for_order.id)
         expect(Order.find_by_id(order_vacation_request.id).user_id).to eq(user_for_order.id)
 
-        expect(JSON response_body).to eq(
-                                          'order' => {
-                                              'id'                  => order_vacation_request.id,
-                                              'code'                => order_vacation_request.code,
-                                              'ext_code'            => order_vacation_request.ext_code,
-                                              'bp_id'               => order_vacation_request.bp_id,
-                                              'bp_state'            => order_vacation_request.bp_state,
-                                              'state'               => order_vacation_request.state,
-                                              'archived'            => order_vacation_request.archived,
-                                              'data'                => order_vacation_request.data,
-                                              'done_at'             => nil,
-                                              'estimated_exec_date' => nil,
-                                              'order_type_code'     => order_vacation_request.order_type.code,
-                                              'user_email'          => user_email
-                                          })
+        expect(JSON(response_body)).to eq(
+          'order' => {
+            'id'                  => order_vacation_request.id,
+            'code'                => order_vacation_request.code,
+            'ext_code'            => order_vacation_request.ext_code,
+            'bp_id'               => order_vacation_request.bp_id,
+            'bp_state'            => order_vacation_request.bp_state,
+            'state'               => order_vacation_request.state,
+            'archived'            => order_vacation_request.archived,
+            'data'                => order_vacation_request.data,
+            'done_at'             => nil,
+            'estimated_exec_date' => nil,
+            'order_type_code'     => order_vacation_request.order_type.code,
+            'user_email'          => user_email
+          }
+        )
       end
     end
 
@@ -554,7 +558,7 @@ order_type:
                 scope: :order
       parameter :state,
                 I18n.t('doc.orders.parameters.state'),
-                {:scope => :order,
+                {:scope                                         => :order,
                  I18n.t('doc.common.parameters.allowed_values') => Order.states.keys.join(', ')}
       parameter :done_at,
                 I18n.t('doc.orders.parameters.done_at'),
@@ -574,7 +578,7 @@ order_type:
       let(:bp_state)            { 'bp_state' }
       let(:state)               { 'in_progress' }
       let(:done_at)             { Time.zone.now.iso8601 }
-      let(:estimated_exec_date) { (Time.zone.now + 1.day).iso8601}
+      let(:estimated_exec_date) { (Time.zone.now + 1.day).iso8601 }
       let(:archived)            { false }
 
       example_request I18n.t('doc.orders.cases.update_base_fields') do
@@ -591,23 +595,23 @@ order_type:
         expect(updated_order.estimated_exec_date).to eq(estimated_exec_date)
         expect(updated_order.archived).to            eq(archived)
 
-        expect(JSON response_body).to eq(
-                                          'order' => {
-                                              'id'                  => updated_order.id,
-                                              'code'                => updated_order.code,
-                                              'ext_code'            => updated_order.ext_code,
-                                              'bp_id'               => updated_order.bp_id,
-                                              'bp_state'            => updated_order.bp_state,
-                                              'state'               => updated_order.state,
-                                              'archived'            => updated_order.archived,
-                                              'data'                => {},
-                                              'done_at'             => updated_order.done_at.iso8601,
-                                              'estimated_exec_date' => updated_order.estimated_exec_date.iso8601,
-                                              'order_type_code'     => order_type.code,
-                                              'user_email'          => nil
-                                          })
+        expect(JSON(response_body)).to eq(
+          'order' => {
+            'id'                  => updated_order.id,
+            'code'                => updated_order.code,
+            'ext_code'            => updated_order.ext_code,
+            'bp_id'               => updated_order.bp_id,
+            'bp_state'            => updated_order.bp_state,
+            'state'               => updated_order.state,
+            'archived'            => updated_order.archived,
+            'data'                => {},
+            'done_at'             => updated_order.done_at.iso8601,
+            'estimated_exec_date' => updated_order.estimated_exec_date.iso8601,
+            'order_type_code'     => order_type.code,
+            'user_email'          => nil
+          }
+        )
       end
     end
-
   end
 end

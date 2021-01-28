@@ -6,7 +6,6 @@ Warden.test_mode!
 #   I want to see a list of users
 #   So I can see who has registered
 feature 'User index page', :devise, js: true do
-
   after(:each) do
     Warden.test_reset!
   end
@@ -21,5 +20,4 @@ feature 'User index page', :devise, js: true do
     visit users_path
     expect(page).to have_content user.email
   end
-
 end

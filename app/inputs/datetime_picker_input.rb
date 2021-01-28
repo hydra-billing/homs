@@ -5,9 +5,9 @@ class DatetimePickerInput < SimpleForm::Inputs::Base
       @builder.text_field(attribute_name,
                           class: 'form-control',
                           value: value.present? ? l(value, format: datetime_format) : '') <<
-          @builder.hidden_field(attribute_name,
-                                class: 'form-control iso8601',
-                                value: value.try(:iso8601)) << <<-HTML.html_safe
+        @builder.hidden_field(attribute_name,
+                              class: 'form-control iso8601',
+                              value: value.try(:iso8601)) << <<-HTML.html_safe
         <span class="input-group-addon">
           <span class="fas fa-calendar"></span>
         </span>
@@ -20,10 +20,10 @@ class DatetimePickerInput < SimpleForm::Inputs::Base
 
     raw_value = options[:value].presence
     @value = case raw_value
-               when String then Time.iso8601(raw_value)
-               when DateTime then raw_value
-               else
-                 raw_value
+             when String then Time.iso8601(raw_value)
+             when DateTime then raw_value
+             else
+               raw_value
              end
   end
 end

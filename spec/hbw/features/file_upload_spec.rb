@@ -16,7 +16,7 @@ feature 'Check file upload field with', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_and_wait ('ORD-15')
+    click_and_wait('ORD-15')
 
     expect(page).to have_content  'ORD-15'
     expect(page).to have_selector "[name='homsOrderDataUploadedFile']"

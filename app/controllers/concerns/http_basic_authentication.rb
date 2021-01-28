@@ -18,7 +18,7 @@ module HttpBasicAuthentication
       return unless email && password
 
       user = User.find_by_email(email)
-      password == user.try(:api_token) ? sign_in(user) : fail(Unauthorized)
+      password == user.try(:api_token) ? sign_in(user) : raise(Unauthorized)
     end
   end
 

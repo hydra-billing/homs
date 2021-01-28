@@ -1,21 +1,21 @@
 describe CustomFields::FieldDef do
   let(:right_def) do
     {
-      name: 'my_field',
-      type: 'string',
-      label: 'my_label',
+      name:        'my_field',
+      type:        'string',
+      label:       'my_label',
       description: 'my_description',
-      value: 'string content',
-      required: true,
-      multiple: false,
-      visible:  true,
-      editable: true
+      value:       'string content',
+      required:    true,
+      multiple:    false,
+      visible:     true,
+      editable:    true
     }
   end
   let(:unexpected)    { right_def.dup.tap { |h| h[:name] = 1 } }
-  let(:unknown)       { right_def.dup.tap { |h| h[:type] = 'bad_type'   } }
-  let(:missing_type)  { right_def.dup.tap { |h| h.delete(:type)         } }
-  let(:missing_name)  { right_def.dup.tap { |h| h.delete(:name)        } }
+  let(:unknown)       { right_def.dup.tap { |h| h[:type] = 'bad_type' } }
+  let(:missing_type)  { right_def.dup.tap { |h| h.delete(:type) } }
+  let(:missing_name)  { right_def.dup.tap { |h| h.delete(:name) } }
 
   it 'Right definition should have certain getters' do
     fd = CustomFields::FieldDef.new right_def
@@ -59,10 +59,10 @@ describe CustomFields::FieldDef do
     fd = CustomFields::FieldDef.new({})
     expect(fd.valid?).to be false
     expect(fd.errors).to eq Hash(
-                                label: ["Missing attribute 'label'"],
-                                name:  ["Missing attribute 'name'"],
-                                type:  ["Missing attribute 'type'"]
-                            )
+      label: ["Missing attribute 'label'"],
+      name:  ["Missing attribute 'name'"],
+      type:  ["Missing attribute 'type'"]
+    )
   end
 
   it 'Missing :type attribute should only appear in errors' do
@@ -76,8 +76,8 @@ describe CustomFields::FieldDef do
     expect(fd.valid?).to be false
     expect(fd.errors)
       .to eq Hash(
-                 name: ["Attribute 'name' should be of the String type"]
-             )
+        name: ["Attribute 'name' should be of the String type"]
+      )
   end
 
   it 'Missing type specific attribute should appear in errors' do

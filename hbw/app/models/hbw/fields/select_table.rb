@@ -6,6 +6,7 @@ module HBW
       self.default_data_type = :string
 
       attr_reader :choices, :rows
+
       definition_reader :sql, :variable, :entity_class
 
       class << self
@@ -49,25 +50,25 @@ module HBW
       end
 
       def as_json
-        { name: name,
-          type: type,
-          mode: mode,
-          label: label,
-          css_class: css_class,
-          placeholder: placeholder,
-          label_css: label_css,
-          choices: processed_choices,
-          row_params: rows,
-          nullable: nullable?,
-          editable: editable?,
-          delimiter: delimiter?,
-          delete_if: delete_if,
-          disable_if: disable_if,
-          dynamic: dynamic,
-          variables: variables,
-          current_value: value,
-          url: url,
-          multi: multi }
+        {name:          name,
+         type:          type,
+         mode:          mode,
+         label:         label,
+         css_class:     css_class,
+         placeholder:   placeholder,
+         label_css:     label_css,
+         choices:       processed_choices,
+         row_params:    rows,
+         nullable:      nullable?,
+         editable:      editable?,
+         delimiter:     delimiter?,
+         delete_if:     delete_if,
+         disable_if:    disable_if,
+         dynamic:       dynamic,
+         variables:     variables,
+         current_value: value,
+         url:           url,
+         multi:         multi}
       end
 
       def processed_choices
@@ -139,7 +140,7 @@ module HBW
                            precision: config[:precision] || 0,
                            separator: config[:separator] || ',',
                            delimiter: config[:delimiter] || '',
-                           unit: '')
+                           unit:      '')
       end
     end
   end

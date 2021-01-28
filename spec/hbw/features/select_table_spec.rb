@@ -22,7 +22,7 @@ feature 'Select table', js: true do
 
     click_and_wait 'ORD-14'
 
-    expect(page).to have_content  'ORD-14'
+    expect(page).to have_content 'ORD-14'
 
     expect(page).to have_content 'Name'
     expect(page).to have_content 'Code'

@@ -14,8 +14,8 @@ module CustomFields
       rescue ArgumentError
         errors[attribute_name] << t('invalid_value',
                                     attribute_name: attribute_name,
-                                    type: 'DateTimeFilter',
-                                    value: value)
+                                    type:           'DateTimeFilter',
+                                    value:          value)
       end
 
       def coerce_value(value)
@@ -24,8 +24,8 @@ module CustomFields
         end
 
         {
-            from: datetime_obj.coerce_value(value[:from]),
-            to:   datetime_obj.coerce_value(value[:to])
+          from: datetime_obj.coerce_value(value[:from]),
+          to:   datetime_obj.coerce_value(value[:to])
         }
       end
 
