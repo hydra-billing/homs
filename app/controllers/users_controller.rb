@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   self.hbw_available = true
 
   PARAMS_ATTRIBUTES = [:name, :last_name, :middle_name, :company, :department,
-                       :email, :role, :password, :password_confirmation]
+                       :email, :role, :password, :password_confirmation].freeze
 
   before_action :authenticate_user!
   before_action :admin_only, except: [:show, :lookup]
@@ -37,8 +37,7 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: t('user_deleted')
   end
 
-  def edit
-  end
+  def edit; end
 
   def new
     @user = User.new

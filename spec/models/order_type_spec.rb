@@ -7,10 +7,10 @@ RSpec.describe OrderType, type: :model do
 
     right_file = {
       order_type: {
-          code: 'Charge',
-          name: 'Charge',
-          print_form_code: 'Print form code',
-          fields: { any_hash: :x }
+        code:            'Charge',
+        name:            'Charge',
+        print_form_code: 'Print form code',
+        fields:          {any_hash: :x}
       }
     }.to_yaml
     allow_any_instance_of(CustomFields::FieldDefSet)
@@ -38,21 +38,21 @@ RSpec.describe OrderType, type: :model do
       ]
     end
 
-    ot = OrderType.new(file: { order_type: 1 }.to_yaml)
+    ot = OrderType.new(file: {order_type: 1}.to_yaml)
     expect(ot.valid?).to be false
     expect(ot.errors.full_messages).to eq [
       "Loaded YAML file contents [\"Attribute 'order_type' should be "\
-      "of the Hash type\"]"
+      'of the Hash type"]'
     ]
 
-    ot = OrderType.new(file: { order_type: {} }.to_yaml)
+    ot = OrderType.new(file: {order_type: {}}.to_yaml)
     expect(ot.valid?).to be false
     expect(ot.errors.full_messages).to eq [
       "Loaded YAML file contents [\"Missing attribute 'fields'\", "\
       "\"Missing attribute 'code'\", \"Missing attribute 'name'\"]"
     ]
 
-    ot = OrderType.new(file: { order_type: { code: 'Charge' } }.to_yaml)
+    ot = OrderType.new(file: {order_type: {code: 'Charge'}}.to_yaml)
     expect(ot.valid?).to be false
     expect(ot.code).to eq(nil)
     expect(ot.fields).to eq(nil)
@@ -62,8 +62,8 @@ RSpec.describe OrderType, type: :model do
 
     ot = OrderType.new(file: {
       order_type: {
-        code: 'Charge',
-        name: 'Charge',
+        code:   'Charge',
+        name:   'Charge',
         fields: {}
       }
     }.to_yaml)
@@ -73,7 +73,7 @@ RSpec.describe OrderType, type: :model do
   end
 
   it '.id_from_code' do
-    active_c1   = FactoryBot.create(:order_type, :active,  code: 'C1')
+    active_c1 = FactoryBot.create(:order_type, :active, code: 'C1')
     FactoryBot.create(:order_type, code: 'C1')
     FactoryBot.create(:order_type, code: 'C2')
 
@@ -87,11 +87,11 @@ RSpec.describe OrderType, type: :model do
     a_c2 = FactoryBot.create(:order_type, :active,  code: 'Support Request', name: 'Support Request')
     a_c1 = FactoryBot.create(:order_type, :active,  code: 'Vacation request', name: 'Vacation request')
 
-    expect(OrderType.lookup('va')).to eq([{ id: a_c1.id, text: a_c1.code }])
-    expect(OrderType.lookup('su')).to eq([{ id: a_c2.id, text: a_c2.code }])
+    expect(OrderType.lookup('va')).to eq([{id: a_c1.id, text: a_c1.code}])
+    expect(OrderType.lookup('su')).to eq([{id: a_c2.id, text: a_c2.code}])
     expect(OrderType.lookup('req')).to eq([
-                                              { id: a_c2.id, text: a_c2.code },
-                                              { id: a_c1.id, text: a_c1.code }
+                                            {id: a_c2.id, text: a_c2.code},
+                                            {id: a_c1.id, text: a_c1.code}
                                           ])
     expect(OrderType.lookup('dis')).to eq([])
   end

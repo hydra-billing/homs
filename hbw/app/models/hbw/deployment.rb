@@ -9,8 +9,8 @@ module HBW
         deployment_id = process_definition.deployment_id
         resources = do_request(:get, "#{deployments_url_prefix}/%s/resources" % deployment_id)
         new(do_request(:get, "#{deployments_url_prefix}/%s" % deployment_id).merge(
-          'resources' => resources
-        ))
+              'resources' => resources
+            ))
       end
 
       def deployments_url_prefix

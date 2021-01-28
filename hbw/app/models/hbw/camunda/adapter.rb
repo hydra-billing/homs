@@ -5,13 +5,14 @@ module HBW
 
       def active_process_instances(entity_code, entity_class)
         response = api.post(
-            'process-instance',
-            active:    true,
-            variables: [
-              name:     entity_code_key(entity_class),
-              value:    entity_code,
-              operator: :eq
-            ])
+          'process-instance',
+          active:    true,
+          variables: [
+            name:     entity_code_key(entity_class),
+            value:    entity_code,
+            operator: :eq
+          ]
+        )
 
         response.status == 200 && response.body || []
       end
@@ -25,10 +26,10 @@ module HBW
         form_definition = form(task_id, entity_class)
 
         variables = form_definition.extract_and_coerce_values(form_data).map do |key, value|
-          { name: key, value: value }
+          {name: key, value: value}
         end
 
-        variables = variables.map { |item| [item.delete(:name), item]}.to_h
+        variables = variables.map { |item| [item.delete(:name), item] }.to_h
 
         response = api.post("task/#{task_id}/submit-form", variables: variables)
 
@@ -37,9 +38,9 @@ module HBW
 
       def get_variables(user, entity_class, entity_code, initial_variables)
         {
-          :initiator                    => { value: user.id,     type: :string },
-          :initiatorEmail               => { value: user.email,  type: :string },
-          entity_code_key(entity_class) => { value: entity_code, type: :string }
+          :initiator                    => {value: user.id,     type: :string},
+          :initiatorEmail               => {value: user.email,  type: :string},
+          entity_code_key(entity_class) => {value: entity_code, type: :string}
         }.merge(initial_variables)
       end
 

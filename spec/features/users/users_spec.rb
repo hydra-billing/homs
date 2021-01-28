@@ -11,9 +11,9 @@ feature 'User is', js: true do
     expect_widget_presence
 
     users = [
-        ['Blocked Doe', 'b.j.doe@example.com', 'Administrator', 'Marketing', 'LLC Tools', ''],
-        ['John Doe', 'j.doe@example.com', 'User', 'Marketing', 'LLC Tools', ''],
-        ['Christopher Johnson', 'c.johnson@example.com', 'Administrator', 'Administrators', 'LLC Tools', '']
+      ['Blocked Doe', 'b.j.doe@example.com', 'Administrator', 'Marketing', 'LLC Tools', ''],
+      ['John Doe', 'j.doe@example.com', 'User', 'Marketing', 'LLC Tools', ''],
+      ['Christopher Johnson', 'c.johnson@example.com', 'Administrator', 'Administrators', 'LLC Tools', '']
     ]
     expect(table_lines).to eq users
 
@@ -32,13 +32,13 @@ feature 'User is', js: true do
     button.click
     expect(validation_errors_container.find('.alert').text).to eq '6 errors prevented the user from being saved:'
     expect(validation_errors_container.all('li').map(&:text)).to eq [
-                                                                        'Email is not specified',
-                                                                        'Password is not specified',
-                                                                        'First name is not specified',
-                                                                        'Last name is not specified',
-                                                                        'Company is not specified',
-                                                                        'Department is not specified'
-                                                                    ]
+      'Email is not specified',
+      'Password is not specified',
+      'First name is not specified',
+      'Last name is not specified',
+      'Company is not specified',
+      'Department is not specified'
+    ]
     expect(is_input_in_error?('user_name')).to       be true
     expect(input_error_text('user_name')).to         eq 'is not specified'
 
@@ -80,10 +80,10 @@ feature 'User is', js: true do
     button.click
 
     users = [
-        ['Blocked Doe', 'b.j.doe@example.com', 'Administrator', 'Marketing', 'LLC Tools', ''],
-        ['John Doe', 'j.doe@example.com', 'User', 'Marketing', 'LLC Tools', ''],
-        ['Mark Jenkins', 'm.jenkins@example.com', 'Administrator', 'Administrators', 'LLC Tools', ''],
-        ['Christopher Johnson', 'c.johnson@example.com', 'Administrator', 'Administrators', 'LLC Tools', '']
+      ['Blocked Doe', 'b.j.doe@example.com', 'Administrator', 'Marketing', 'LLC Tools', ''],
+      ['John Doe', 'j.doe@example.com', 'User', 'Marketing', 'LLC Tools', ''],
+      ['Mark Jenkins', 'm.jenkins@example.com', 'Administrator', 'Administrators', 'LLC Tools', ''],
+      ['Christopher Johnson', 'c.johnson@example.com', 'Administrator', 'Administrators', 'LLC Tools', '']
     ]
     expect(table_lines).to eq users
 
@@ -110,13 +110,13 @@ feature 'User is', js: true do
     expect(user_edit(admin).text).to               eq('Edit')
     expect(user_generate_api_token(admin).text).to eq('Generate API token')
     expect(user_data).to eq [
-                                'Full name: Christopher Johnson',
-                                'Email: c.johnson@example.com',
-                                'Role: Administrator',
-                                'Company: LLC Tools',
-                                'Department: Administrators',
-                                'API token:'
-                            ]
+      'Full name: Christopher Johnson',
+      'Email: c.johnson@example.com',
+      'Role: Administrator',
+      'Company: LLC Tools',
+      'Department: Administrators',
+      'API token:'
+    ]
 
     user_generate_api_token(admin).click
     expect(user_generate_api_token(admin).text).to eq 'Renew API token'
@@ -127,13 +127,13 @@ feature 'User is', js: true do
     expect(is_button_red?("/users/#{admin.id}/clear_api_token")).to be true
     expect(admin.api_token).not_to be_nil
     expect(user_data).to eq [
-                                'Full name: Christopher Johnson',
-                                'Email: c.johnson@example.com',
-                                'Role: Administrator',
-                                'Company: LLC Tools',
-                                'Department: Administrators',
-                                "API token: #{admin.api_token}"
-                            ]
+      'Full name: Christopher Johnson',
+      'Email: c.johnson@example.com',
+      'Role: Administrator',
+      'Company: LLC Tools',
+      'Department: Administrators',
+      "API token: #{admin.api_token}"
+    ]
 
     user_clear_api_token(admin).click
     expect(active_modal_dialog_body.text).to    eq 'Current API token will be deleted. Are you sure?'
@@ -151,13 +151,13 @@ feature 'User is', js: true do
     active_modal_dialog_proceed.click
     expect(active_modal_dialogs.length).to eq 0
     expect(user_data).to eq [
-                                'Full name: Christopher Johnson',
-                                'Email: c.johnson@example.com',
-                                'Role: Administrator',
-                                'Company: LLC Tools',
-                                'Department: Administrators',
-                                'API token:'
-                            ]
+      'Full name: Christopher Johnson',
+      'Email: c.johnson@example.com',
+      'Role: Administrator',
+      'Company: LLC Tools',
+      'Department: Administrators',
+      'API token:'
+    ]
     expect(user_edit(admin).text).to               eq 'Edit'
     expect(user_generate_api_token(admin).text).to eq 'Generate API token'
 
@@ -170,13 +170,13 @@ feature 'User is', js: true do
 
     admin.reload
     expect(user_data).to eq [
-                                'Full name: Christopher Johnson',
-                                'Email: c.johnson@example.com',
-                                'Role: Administrator',
-                                'Company: LLC Tools',
-                                'Department: Administrators',
-                                "API token: #{admin.api_token}"
-                            ]
+      'Full name: Christopher Johnson',
+      'Email: c.johnson@example.com',
+      'Role: Administrator',
+      'Company: LLC Tools',
+      'Department: Administrators',
+      "API token: #{admin.api_token}"
+    ]
 
     user_generate_api_token(admin).click
     expect(active_modal_dialog_body.text).to    eq 'New API token will replace the current one. Are you sure?'
@@ -198,13 +198,13 @@ feature 'User is', js: true do
     admin.reload
     expect(admin.api_token).not_to eq previous_api_token
     expect(user_data).to eq [
-                                'Full name: Christopher Johnson',
-                                'Email: c.johnson@example.com',
-                                'Role: Administrator',
-                                'Company: LLC Tools',
-                                'Department: Administrators',
-                                "API token: #{admin.api_token}"
-                            ]
+      'Full name: Christopher Johnson',
+      'Email: c.johnson@example.com',
+      'Role: Administrator',
+      'Company: LLC Tools',
+      'Department: Administrators',
+      "API token: #{admin.api_token}"
+    ]
   end
 
   scenario 'editable' do
@@ -222,12 +222,12 @@ feature 'User is', js: true do
     expect(user_generate_api_token(john).text).to eq 'Generate API token'
 
     expect(user_data).to eq([
-                                'Full name: John Doe',
-                                'Email: j.doe@example.com',
-                                'Role: User',
-                                'Company: LLC Tools',
-                                'Department: Marketing',
-                                'API token:'
+                              'Full name: John Doe',
+                              'Email: j.doe@example.com',
+                              'Role: User',
+                              'Company: LLC Tools',
+                              'Department: Marketing',
+                              'API token:'
                             ])
 
     user_edit(john).click
@@ -254,9 +254,9 @@ feature 'User is', js: true do
     button.click
 
     users = [
-        ['Blocked Doe', 'b.j.doe@example.com', 'Administrator', 'Marketing', 'LLC Tools', ''],
-        ['Mark Jenkins', 'm.jenkins@example.com', 'Administrator', 'Administrators', 'LLC Tools', ''],
-        ['Christopher Johnson', 'c.johnson@example.com', 'Administrator', 'Administrators', 'LLC Tools', '']
+      ['Blocked Doe', 'b.j.doe@example.com', 'Administrator', 'Marketing', 'LLC Tools', ''],
+      ['Mark Jenkins', 'm.jenkins@example.com', 'Administrator', 'Administrators', 'LLC Tools', ''],
+      ['Christopher Johnson', 'c.johnson@example.com', 'Administrator', 'Administrators', 'LLC Tools', '']
     ]
     expect(table_lines).to eq users
 

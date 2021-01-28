@@ -24,11 +24,11 @@ module HBW
       end
 
       def load(response_file_path)
-        if File.exists?(response_file_path)
-          new_responses = YAML.load_file(response_file_path)
-        else
-          new_responses = {}
-        end
+        new_responses = if File.exist?(response_file_path)
+                          YAML.load_file(response_file_path)
+                        else
+                          {}
+                        end
 
         @responses = new_responses.deep_merge(new_responses)
       end

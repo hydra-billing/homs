@@ -14,21 +14,22 @@ describe API::V1::UsersController, type: :request do
     let!(:david) { FactoryBot.create(:user, :david) }
     let!(:user) do
       User.create!(
-          email: 'user@example.com',
-          password: 'changeme',
-          name: 'John',
-          last_name: 'Doe',
-          role: :admin,
-          company: 'Example Corporation',
-          department: 'Administrators',
-          api_token: 'RENEWMEPLEASE',
-          blocked: false,
-          external: false)
+        email:      'user@example.com',
+        password:   'changeme',
+        name:       'John',
+        last_name:  'Doe',
+        role:       :admin,
+        company:    'Example Corporation',
+        department: 'Administrators',
+        api_token:  'RENEWMEPLEASE',
+        blocked:    false,
+        external:   false
+      )
     end
 
     get '/api/users?page_size=:page_size&page=:page' do
       parameter :page_size,
-                 I18n.t('doc.common.parameters.page_size'),
+                I18n.t('doc.common.parameters.page_size'),
                 {I18n.t('doc.common.parameters.default') => 25}
       parameter :page,
                 I18n.t('doc.common.parameters.page'),
@@ -37,21 +38,21 @@ describe API::V1::UsersController, type: :request do
       example_request I18n.t('doc.common.cases.list'),
                       page_size: 1, page: 2 do
         expect(status).to eq(200)
-        expect(JSON response_body).to eq(
-                                          'users' => [
-                                              {
-                                                  'email'       => 'demo@example.com',
-                                                  'name'        => 'David',
-                                                  'last_name'   => 'Jones',
-                                                  'middle_name' => nil,
-                                                  'company'     => 'Example Corporation',
-                                                  'department'  => 'Demonstrations',
-                                                  'role'        => 'user',
-                                                  'blocked'     => false,
-                                                  'external'    => false
-                                              }
-                                          ]
-                                      )
+        expect(JSON(response_body)).to eq(
+          'users' => [
+            {
+              'email'       => 'demo@example.com',
+              'name'        => 'David',
+              'last_name'   => 'Jones',
+              'middle_name' => nil,
+              'company'     => 'Example Corporation',
+              'department'  => 'Demonstrations',
+              'role'        => 'user',
+              'blocked'     => false,
+              'external'    => false
+            }
+          ]
+        )
       end
     end
 
@@ -62,19 +63,19 @@ describe API::V1::UsersController, type: :request do
 
       example_request I18n.t('doc.common.cases.show') do
         expect(status).to eq(200)
-        expect(JSON response_body).to eq(
-                                          'user' => {
-                                              'email'       => 'demo@example.com',
-                                              'name'        => 'David',
-                                              'last_name'   => 'Jones',
-                                              'middle_name' => nil,
-                                              'company'     => 'Example Corporation',
-                                              'department'  => 'Demonstrations',
-                                              'role'        => 'user',
-                                              'blocked'     => false,
-                                              'external'    => false
-                                          }
-                                      )
+        expect(JSON(response_body)).to eq(
+          'user' => {
+            'email'       => 'demo@example.com',
+            'name'        => 'David',
+            'last_name'   => 'Jones',
+            'middle_name' => nil,
+            'company'     => 'Example Corporation',
+            'department'  => 'Demonstrations',
+            'role'        => 'user',
+            'blocked'     => false,
+            'external'    => false
+          }
+        )
       end
     end
 
@@ -102,19 +103,19 @@ describe API::V1::UsersController, type: :request do
       example_request I18n.t('doc.common.cases.update') do
         updated_user = User.find_by_email(email)
         expect(status).to eq(200)
-        expect(JSON response_body).to eq(
-                                          'user' => {
-                                              'email'       => 'demo@example.com',
-                                              'name'        => 'David',
-                                              'last_name'   => 'Jones',
-                                              'middle_name' => 'Jay',
-                                              'company'     => 'Example Corporation',
-                                              'department'  => 'Demonstrations',
-                                              'role'        => 'user',
-                                              'blocked'     => true,
-                                              'external'    => true
-                                          }
-                                      )
+        expect(JSON(response_body)).to eq(
+          'user' => {
+            'email'       => 'demo@example.com',
+            'name'        => 'David',
+            'last_name'   => 'Jones',
+            'middle_name' => 'Jay',
+            'company'     => 'Example Corporation',
+            'department'  => 'Demonstrations',
+            'role'        => 'user',
+            'blocked'     => true,
+            'external'    => true
+          }
+        )
         expect(updated_user.middle_name).to eq(middle_name)
       end
     end
@@ -124,9 +125,9 @@ describe API::V1::UsersController, type: :request do
       parameter :name,          I18n.t('doc.users.parameters.first_name'),         required: true, scope: :user
       parameter :middle_name,   I18n.t('doc.users.parameters.middle_name'),        scope: :user
       parameter :last_name,     I18n.t('doc.users.parameters.last_name'),          required: true, scope: :user
-      parameter :role,          I18n.t('doc.users.parameters.user_role'),         {:scope                                         => :user,
-                                                                                   I18n.t('doc.common.parameters.allowed_values') => User.roles_list.join(', '),
-                                                                                   I18n.t('doc.common.parameters.default')        => 'user'}
+      parameter :role,          I18n.t('doc.users.parameters.user_role'), {:scope                                         => :user,
+                                                                           I18n.t('doc.common.parameters.allowed_values') => User.roles_list.join(', '),
+                                                                           I18n.t('doc.common.parameters.default')        => 'user'}
       parameter :company,       I18n.t('doc.users.parameters.company'),            required: true, scope: :user
       parameter :department,    I18n.t('doc.users.parameters.department'),         required: true, scope: :user
       parameter :password,      I18n.t('doc.users.parameters.password'),           required: true, scope: :user
@@ -147,19 +148,19 @@ describe API::V1::UsersController, type: :request do
 
       example_request I18n.t('doc.common.cases.create') do
         expect(status).to eq(201)
-        expect(JSON response_body).to eq(
-                                          'user' => {
-                                              'email'       => 's.collins@example.com',
-                                              'name'        => 'Stan',
-                                              'last_name'   => 'Collins',
-                                              'middle_name' => 'Kay',
-                                              'company'     => 'LLC Tools',
-                                              'department'  => 'Administrators',
-                                              'role'        => 'admin',
-                                              'blocked'     => false,
-                                              'external'    => false
-                                          }
-                                      )
+        expect(JSON(response_body)).to eq(
+          'user' => {
+            'email'       => 's.collins@example.com',
+            'name'        => 'Stan',
+            'last_name'   => 'Collins',
+            'middle_name' => 'Kay',
+            'company'     => 'LLC Tools',
+            'department'  => 'Administrators',
+            'role'        => 'admin',
+            'blocked'     => false,
+            'external'    => false
+          }
+        )
       end
     end
 

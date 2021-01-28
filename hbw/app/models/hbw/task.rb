@@ -57,12 +57,12 @@ module HBW
         with_user(email) do |user|
           with_definitions(entity_code_variable_name) do
             options = {
-                active:  true,
-                processVariables: [
-                  name:     entity_code_variable_name,
-                  operator: :like,
-                  value:    '%'
-                ]
+              active:           true,
+              processVariables: [
+                name:     entity_code_variable_name,
+                operator: :like,
+                value:    '%'
+              ]
             }
 
             do_request(:post, 'task', **options.merge(assignee: user.id)) +
@@ -90,8 +90,8 @@ module HBW
             sortOrder: 'desc'
           },
           {
-            sortBy:    'processVariable',
-            sortOrder: 'asc',
+            sortBy:     'processVariable',
+            sortOrder:  'asc',
             parameters: {
               variable: bp_name_key(entity_class),
               type:     'String'

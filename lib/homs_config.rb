@@ -3,7 +3,7 @@ class HomsConfig
     def load(paths)
       paths.map! { |path| Rails.root.join(path) }
 
-      configs = paths.select { |p| File.exists?(p) && File.read(p).present? }.map { |p| YAML.load(File.read(p)) }
+      configs = paths.select { |p| File.exist?(p) && File.read(p).present? }.map { |p| YAML.load(File.read(p)) }
       config = configs.reduce(:deep_merge).deep_symbolize_keys
 
       new(config)

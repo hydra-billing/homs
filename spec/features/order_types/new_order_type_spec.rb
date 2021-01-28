@@ -1,5 +1,4 @@
 feature 'Create new order type', js: true do
-
   before(:each) do
     user = FactoryBot.create(:user, :admin)
     signin(user.email, user.password)

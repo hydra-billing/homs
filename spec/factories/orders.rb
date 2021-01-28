@@ -22,10 +22,10 @@ FactoryBot.define do
       done_at Time.zone.now
       estimated_exec_date Time.zone.now + 1.day
       archived false
-      data({creationDate: Time.now,
+      data({creationDate:       Time.now,
             problemDescription: 'Problem description',
-            callBack: true,
-            contractNumber: 111})
+            callBack:           true,
+            contractNumber:     111})
     end
 
     trait :order_support_request_for_ordering do
@@ -36,10 +36,10 @@ FactoryBot.define do
       done_at Time.zone.now
       estimated_exec_date Time.zone.now + 1.day
       archived false
-      data({creationDate: Time.now - 1.day,
+      data({creationDate:       Time.now - 1.day,
             problemDescription: 'Other problem description',
-            callBack: false,
-            contractNumber: 222})
+            callBack:           false,
+            contractNumber:     222})
     end
 
     data({})

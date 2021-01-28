@@ -1,7 +1,7 @@
 module HBW
   module Sources
     class YMLOracle < Base
-      def select(sql, variables, limit = nil)
+      def select(sql, variables, _limit = nil)
         find_response(build_params_key(sql, variables))
       end
 
@@ -18,7 +18,7 @@ module HBW
       end
 
       def build_params_key(sql, variables)
-        Digest::MD5.hexdigest('%s.%s' % [sql, variables.sort_by {|k, _| k}.flatten.join('.')])
+        Digest::MD5.hexdigest('%s.%s' % [sql, variables.sort_by { |k, _| k }.flatten.join('.')])
       end
     end
   end

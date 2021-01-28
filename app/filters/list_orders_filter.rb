@@ -23,10 +23,10 @@ class ListOrdersFilter
     extend self
 
     def filter_by_date(rel, dates)
-      { created_at_from:          'orders.created_at >= ?',
-        created_at_to:            'orders.created_at <= ?',
-        estimated_exec_date_from: 'orders.estimated_exec_date >= ?',
-        estimated_exec_date_to:   'orders.estimated_exec_date <= ?' }.reduce(rel) do |r, (attr, condition)|
+      {created_at_from:          'orders.created_at >= ?',
+       created_at_to:            'orders.created_at <= ?',
+       estimated_exec_date_from: 'orders.estimated_exec_date >= ?',
+       estimated_exec_date_to:   'orders.estimated_exec_date <= ?'}.reduce(rel) do |r, (attr, condition)|
         if dates[attr].present?
           r.where(condition, dates[attr])
         else
@@ -87,15 +87,15 @@ class ListOrdersFilter
     extend self
 
     MAPPING = {
-        'code'                => %w(code),
-        'order_type_code'     => %w(order_types.code),
-        'state'               => %w(state),
-        'created_at'          => %w(created_at),
-        'user'                => %w(users.name users.last_name),
-        'ext_code'            => %w(ext_code),
-        'archived'            => %w(archived),
-        'estimated_exec_date' => %w(estimated_exec_date)
-    }
+      'code'                => %w(code),
+      'order_type_code'     => %w(order_types.code),
+      'state'               => %w(state),
+      'created_at'          => %w(created_at),
+      'user'                => %w(users.name users.last_name),
+      'ext_code'            => %w(ext_code),
+      'archived'            => %w(archived),
+      'estimated_exec_date' => %w(estimated_exec_date)
+    }.freeze
 
     def sort_by(rel, column, order)
       if column
@@ -110,11 +110,11 @@ class ListOrdersFilter
     end
 
     def render_order_by_clause(conditions, order)
-      conditions.map { |condition| "#{condition} #{order} nulls last"}.join(',')
+      conditions.map { |condition| "#{condition} #{order} nulls last" }.join(',')
     end
   end
 
-  EMPTY_USER_ID = 'empty'
+  EMPTY_USER_ID = 'empty'.freeze
 
   delegate :empty_user, to: :'self.class'
 
@@ -152,10 +152,10 @@ class ListOrdersFilter
         estimated_exec_date_from = params[:estimated_exec_date_from].try(:change, {offset: Time.zone.formatted_offset})
         estimated_exec_date_to = params[:estimated_exec_date_to].try(:change, {offset: Time.zone.formatted_offset})
 
-        { created_at_from: created_at_from,
-          created_at_to: created_at_to,
-          estimated_exec_date_from: estimated_exec_date_from,
-          estimated_exec_date_to: estimated_exec_date_to }.with_indifferent_access
+        {created_at_from:          created_at_from,
+         created_at_to:            created_at_to,
+         estimated_exec_date_from: estimated_exec_date_from,
+         estimated_exec_date_to:   estimated_exec_date_to}.with_indifferent_access
       end
   end
 

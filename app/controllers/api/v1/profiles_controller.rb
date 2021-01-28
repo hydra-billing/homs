@@ -3,7 +3,7 @@ module API
     class ProfilesController < API::BaseController
       include HttpBasicAuthentication if !Rails.env.development? || ENV['HOMS_API_USE_AUTH']
 
-      PARAMS_ATTRIBUTES = [:order_type_code, :user_email]
+      PARAMS_ATTRIBUTES = [:order_type_code, :user_email].freeze
 
       private
 

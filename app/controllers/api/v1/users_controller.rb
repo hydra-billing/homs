@@ -5,7 +5,7 @@ module API
 
       PARAMS_ATTRIBUTES = [:name, :last_name, :middle_name, :company,
                            :department, :email, :role, :password, :external,
-                           :blocked, :password_salt, :encrypted_password]
+                           :blocked, :password_salt, :encrypted_password].freeze
 
       private
 

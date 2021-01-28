@@ -35,10 +35,10 @@ module HBW
     end
 
     def as_json
-      { css_class: css_class,
-        fields: fields.map(&:as_json),
-        variables: variables,
-        hide_cancel_button: hide_cancel_button }
+      {css_class:          css_class,
+       fields:             fields.map(&:as_json),
+       variables:          variables,
+       hide_cancel_button: hide_cancel_button}
     end
 
     def fields

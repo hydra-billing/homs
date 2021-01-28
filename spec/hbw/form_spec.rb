@@ -52,24 +52,24 @@ describe HBW::Form do
 
   let(:request_data) do
     {
-        'form_data' =>
-            {
-                'homsOrderDataResolutionText' => '',
-                'homsOrderDataBeginDate'      => '',
-                'homsOrderDataEndDate'        => '',
-                'homsOrderDataMotivationText' => '',
-                'homsOrderDataAdjustResult'   => 'Resend'
-            }
+      'form_data' =>
+                     {
+                       'homsOrderDataResolutionText' => '',
+                       'homsOrderDataBeginDate'      => '',
+                       'homsOrderDataEndDate'        => '',
+                       'homsOrderDataMotivationText' => '',
+                       'homsOrderDataAdjustResult'   => 'Resend'
+                     }
     }
   end
 
   it 'does fields coercing with empty strings' do
     form = HBW::Form.new(form_config.fetch('form').merge('variables' => [], 'taskId' => nil, 'entityClass' => :order))
     expect(form.extract_and_coerce_values(request_data['form_data'])).to eq({
-                                                                                'homsOrderDataBeginDate'      => nil,
-                                                                                'homsOrderDataEndDate'        => nil,
-                                                                                'homsOrderDataMotivationText' => '',
-                                                                                'homsOrderDataAdjustResult'   => 'Resend'
+                                                                              'homsOrderDataBeginDate'      => nil,
+                                                                              'homsOrderDataEndDate'        => nil,
+                                                                              'homsOrderDataMotivationText' => '',
+                                                                              'homsOrderDataAdjustResult'   => 'Resend'
                                                                             })
   end
 end

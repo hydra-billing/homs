@@ -6,7 +6,7 @@ module CustomFields
       # definition validation with default: true
       describe 'Testing valid definition with default true' do
         context 'Valid definition with default true' do
-          let(:options) { { default: true } }
+          let(:options) { {default: true} }
 
           it_behaves_like 'a CustomFields::Base descendant' do
             it_behaves_like 'valid'
@@ -17,7 +17,7 @@ module CustomFields
 
       describe 'Testing valid definition with default false' do
         context 'Valid definition with default false' do
-          let(:options) { { default: false } }
+          let(:options) { {default: false} }
 
           it_behaves_like 'a CustomFields::Base descendant' do
             it_behaves_like 'valid'
@@ -55,13 +55,13 @@ module CustomFields
 
       describe 'Testing unexpected value validation' do
         context 'Unexpected value validation' do
-          let(:options) { { default: true } }
+          let(:options) { {default: true} }
           let(:value) { 'Some string' }
           it_behaves_like 'a CustomFields::Base descendant' do
             it_behaves_like 'has validate value errors' do
               let(:errors) do
                 {
-                    'my_checkbox' => ["Attribute 'my_checkbox' with the value 'Some string' must have a value \
+                  'my_checkbox' => ["Attribute 'my_checkbox' with the value 'Some string' must have a value \
 from the list [\"true\", \"false\", \"on\", \"off\", \"1\", \"0\"]"]
                 }
               end
@@ -72,7 +72,7 @@ from the list [\"true\", \"false\", \"on\", \"off\", \"1\", \"0\"]"]
 
       describe 'Testing valid value validation with default false' do
         context 'Valid value validation' do
-          let(:options) { { default: false } }
+          let(:options) { {default: false} }
           let(:value) { true }
           it_behaves_like 'a CustomFields::Base descendant' do
             it_behaves_like 'has no validate value errors'
@@ -82,7 +82,7 @@ from the list [\"true\", \"false\", \"on\", \"off\", \"1\", \"0\"]"]
 
       describe 'Testing valid value validation with default true' do
         context 'Valid value validation' do
-          let(:options) { { default: true } }
+          let(:options) { {default: true} }
           let(:value) { false }
           it_behaves_like 'a CustomFields::Base descendant' do
             it_behaves_like 'has no validate value errors'

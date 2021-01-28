@@ -31,7 +31,7 @@ module HBW
     def zip_one(task, definitions, variable)
       new(task.merge(
             'processDefinition' => fetch_definition(definitions, task.fetch('processDefinitionId')),
-            'variables' => [HBW::Variable.new(variable)]
+            'variables'         => [HBW::Variable.new(variable)]
           ))
     end
 
@@ -39,7 +39,7 @@ module HBW
       tasks.map do |task|
         new(task.merge(
               'processDefinition' => fetch_definition(definitions, task.fetch('processDefinitionId')),
-              'variables' => HBW::Variable.wrap(variables.select { |var| var.fetch('processInstanceId') == task.fetch('processInstanceId') })
+              'variables'         => HBW::Variable.wrap(variables.select { |var| var.fetch('processInstanceId') == task.fetch('processInstanceId') })
             ))
       end
     end
@@ -58,14 +58,14 @@ module HBW
     def fetch_variable_for_processes(name, process_ids)
       do_request(:post,
                  'variable-instance',
-                 variableName: name,
+                 variableName:        name,
                  processInstanceIdIn: process_ids.uniq)
     end
 
     def fetch_variable_for_process(name, process_id)
       do_request(:get,
                  'variable-instance',
-                 variableName: name,
+                 variableName:      name,
                  processInstanceId: process_id).first
     end
 

@@ -22,7 +22,7 @@ module HBW
               when 'static/bpm'
                 HBW::Sources::BPM
               else
-                raise ArgumentError.new('Unknown source type %s: %s' % [source_name, type])
+                raise ArgumentError, 'Unknown source type %s: %s' % [source_name, type]
               end
 
       klass.new(source_name, source_config)
@@ -30,8 +30,9 @@ module HBW
 
     def register(source)
       if @sources.key?(source.name)
-        raise ArgumentError.new('Source %s already registered' % source.name)
+        raise ArgumentError, 'Source %s already registered' % source.name
       end
+
       @sources[source.name] = source
     end
 

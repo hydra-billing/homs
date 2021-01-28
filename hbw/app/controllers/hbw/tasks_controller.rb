@@ -95,15 +95,24 @@ module HBW
     end
 
     def files
-      form_data.map { |key, value| JSON.parse(value) rescue nil }
-          .compact
-          .map { |value| value['files'] if value.respond_to?(:key) }
-          .compact.flatten
+      form_data.map { |_key, value| parse_json_silent(value) }
+               .compact
+               .map { |value| value['files'] if value.respond_to?(:key) }
+               .compact
+               .flatten
+    end
+
+    def parse_json_silent(json)
+      JSON.parse(json)
+    rescue StandardError
+      nil
     end
 
     def fields_for_save
       fields = form_data.map do |key, value|
-        JSON.parse(value)['files'] ? nil : key rescue key
+        JSON.parse(value)['files'] ? nil : key
+      rescue StandardError
+        key
       end
 
       fields.compact

@@ -15,7 +15,7 @@ class OrderTypeFileValidator < ActiveModel::Validator
     if should_have_key?(:order_type, in: hash, as: Hash)
       if should_have_key?(:fields, in: hash[:order_type], as: Hash)
         fds = CustomFields::OrderTypeFieldDefSet.new(hash[:order_type][:fields])
-        self.errors.merge!(fds.errors)
+        errors.merge!(fds.errors)
       end
 
       should_have_key?(:code, in: hash[:order_type], as: String)

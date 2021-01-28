@@ -43,13 +43,13 @@ class ProfilesController < ApplicationController
   private
 
   def set_profile
-    @profile ||= Profile.new(user_id: params[:user_id] || current_user.id,
+    @profile ||= Profile.new(user_id:       params[:user_id] || current_user.id,
                              order_type_id: params[:order_type_id])
   end
 
   def collect_error_messages(messages)
     messages.map do |field, inner_errors|
-      '%s: %s.' % [field, inner_errors.map { |k, v| '%s %s' % [k, v]}.join(', ')]
+      '%s: %s.' % [field, inner_errors.map { |k, v| '%s %s' % [k, v] }.join(', ')]
     end.join("\n")
   end
 end

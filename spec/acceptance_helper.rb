@@ -10,7 +10,7 @@ RspecApiDocumentation.configure do |config|
   config.app = Rails.application
 
   # Output folder
-  config.docs_dir = Rails.root.join("public", "doc", "api")
+  config.docs_dir = Rails.root.join('public', 'doc', 'api')
 
   # An array of output format(s).
   # Possible values are :json, :html, :combined_text, :combined_json,
@@ -37,8 +37,8 @@ RspecApiDocumentation.configure do |config|
   # By default, when these settings are nil, all headers are shown,
   # which is sometimes too chatty. Setting the parameters to an
   # array of headers will render *only* those headers.
-  config.request_headers_to_include = ['Accept', 'Content-Type']
-  config.response_headers_to_include = ['Content-Type', 'Content-Length']
+  config.request_headers_to_include = %w[Accept Content-Type]
+  config.response_headers_to_include = %w[Content-Type Content-Length]
 
   # By default examples and resources are ordered by description. Set to true keep
   # the source order.
@@ -49,14 +49,14 @@ RspecApiDocumentation.configure do |config|
   # config.client_method = :client
 
   # Change the IODocs writer protocol
-  config.io_docs_protocol = "http"
+  config.io_docs_protocol = 'http'
 
   # You can define documentation groups as well. A group allows you generate multiple
   # sets of documentation.
   config.define_group :public do |conf|
     # By default the group's doc_dir is a subfolder under the parent group, based
     # on the group's name.
-    conf.docs_dir = ENV['API_DOCS_PATH'] || Rails.root.join("public", "doc", "api", "public")
+    conf.docs_dir = ENV['API_DOCS_PATH'] || Rails.root.join('public', 'doc', 'api', 'public')
 
     # Change the filter to only include :public examples
     conf.filter = :public

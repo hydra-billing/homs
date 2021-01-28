@@ -29,7 +29,7 @@ describe HasSequencedColumn do
     @model.has_sequenced_column :my_column
 
     expect(Sequence).to receive(:nextval).with(@model)
-      .and_return('FX-12345')
+                                         .and_return('FX-12345')
 
     expect_any_instance_of(@model).to receive(:[]=)
       .with(:my_column, 'FX-12345')

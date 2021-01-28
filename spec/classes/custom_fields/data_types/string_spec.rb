@@ -6,7 +6,7 @@ module CustomFields
 
       # definition validation
       context 'Valid definition' do
-        let(:options) { { default: 'Some value' } }
+        let(:options) { {default: 'Some value'} }
         it_behaves_like 'a CustomFields::Base descendant' do
           it_behaves_like 'valid'
           it_behaves_like 'has no errors'
@@ -22,7 +22,7 @@ module CustomFields
       end
 
       context 'Maximum length default string in a definition' do
-        let(:options) { { default: 's' * max_length } }
+        let(:options) { {default: 's' * max_length} }
         it_behaves_like 'a CustomFields::Base descendant' do
           it_behaves_like 'valid'
           it_behaves_like 'has no errors'
@@ -30,15 +30,14 @@ module CustomFields
       end
 
       context 'Too long default string in a definition' do
-        let(:options) { { default: 's' * (max_length + 1) } }
+        let(:options) { {default: 's' * (max_length + 1)} }
         it_behaves_like 'a CustomFields::Base descendant' do
           it_behaves_like 'invalid'
           it_behaves_like 'has errors' do
             let(:errors) do
               {
-                  :default => ["Attribute 'default' must not exceed #{max_length} characters"]
+                default: ["Attribute 'default' must not exceed #{max_length} characters"]
               }
-
             end
           end
         end
@@ -46,7 +45,7 @@ module CustomFields
 
       context 'Maximum allowed string length in string definition' do
         let(:options) do
-          { max_length: max_length }
+          {max_length: max_length}
         end
 
         it_behaves_like 'a CustomFields::Base descendant' do
@@ -57,7 +56,7 @@ module CustomFields
 
       context 'Too big string max_length in a definition' do
         let(:options) do
-          { max_length: max_length + 1 }
+          {max_length: max_length + 1}
         end
 
         it_behaves_like 'a CustomFields::Base descendant' do
@@ -65,8 +64,8 @@ module CustomFields
           it_behaves_like 'has errors' do
             let(:errors) do
               {
-                  :max_length => ["Attribute 'max_length' must not exceed " \
-               "#{max_length} characters"]
+                max_length: ["Attribute 'max_length' must not exceed " \
+             "#{max_length} characters"]
               }
             end
           end
@@ -78,7 +77,7 @@ module CustomFields
       # ways to define a mask. Depends on UI plugin
       context 'Mask in string definition' do
         let(:options) do
-          { mask: '(999) 999-99-99' }
+          {mask: '(999) 999-99-99'}
         end
 
         it_behaves_like 'a CustomFields::Base descendant' do
@@ -103,9 +102,9 @@ module CustomFields
           it_behaves_like 'has validate value errors' do
             let(:errors) do
               {
-                  'my_string' => [
-                      "Attribute 'my_string' must not exceed #{max_length} characters"
-                  ]
+                'my_string' => [
+                  "Attribute 'my_string' must not exceed #{max_length} characters"
+                ]
               }
             end
           end
@@ -129,5 +128,4 @@ module CustomFields
       end
     end
   end
-  # rubocop:enable Metrics/ModuleLength
 end

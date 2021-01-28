@@ -5,7 +5,7 @@ module CustomFields
 
       # definition validation
       context 'Valid definition' do
-        let(:options) { { } }
+        let(:options) { {} }
         it_behaves_like 'a CustomFields::Base descendant' do
           it_behaves_like 'valid'
           it_behaves_like 'has no errors'
@@ -14,7 +14,7 @@ module CustomFields
 
       # value validation
       context 'nil value validation' do
-        let(:options) { { } }
+        let(:options) { {} }
         let(:value) { nil }
         it_behaves_like 'a CustomFields::Base descendant' do
           it_behaves_like 'has no errors'
@@ -22,15 +22,15 @@ module CustomFields
       end
 
       context 'Wrong number value validation' do
-        let(:options) { { } }
+        let(:options) { {} }
         let(:value) { 'just not a number' }
         it_behaves_like 'a CustomFields::Base descendant' do
           it_behaves_like 'has validate value errors' do
             let(:errors) do
               {
-                  'my_number' => [
-                      "Attribute 'my_number' has the invalid value 'just not a number'"
-                  ]
+                'my_number' => [
+                  "Attribute 'my_number' has the invalid value 'just not a number'"
+                ]
               }
             end
           end

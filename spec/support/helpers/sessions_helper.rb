@@ -1,7 +1,6 @@
 module Features
   module SessionsHelper
     # rubocop:disable Metrics/ParameterLists
-    # rubocop:disable Metrics/MethodLength
     def sign_up_with(email, password, confirmation, name, middle_name,
                      last_name, company, department)
       visit new_user_registration_path
@@ -15,9 +14,8 @@ module Features
       fill_in('Department',  with: department)  if department
       click_button 'Sign up'
     end
-    # rubocop:enable Metrics/ParameterLists
-    # rubocop:enable Metrics/MethodLength
 
+    # rubocop:enable Metrics/ParameterLists
     def signin(email, password)
       visit new_user_session_path
       fill_in 'Email', with: email

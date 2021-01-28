@@ -35,9 +35,9 @@ module HBW
 
       def with_connection_errors_handler
         yield
-      rescue OCIError => error
-        if CONNECTION_ERROR_CODES.include?(error.code)
-          raise ConnectionFailed.new('Oracle connection error: %s' % error)
+      rescue OCIError => e
+        if CONNECTION_ERROR_CODES.include?(e.code)
+          raise ConnectionFailed, 'Oracle connection error: %s' % e
         else
           raise
         end
@@ -49,45 +49,41 @@ module HBW
 
       def execute(sql, limit = nil)
         2.times do
-          begin
-            establish_connection
-            if limit.nil?
-              return try_query(sql) { |c| yield(c) if block_given? }
-            else
-              return try_query(limit(sql, limit)) { |c| yield(c) if block_given? }
-            end
-          rescue ConnectionFailed
-            reconnect
+          establish_connection
+          if limit.nil?
+            return try_query(sql) { |c| yield(c) if block_given? }
+          else
+            return try_query(limit(sql, limit)) { |c| yield(c) if block_given? }
           end
+        rescue ConnectionFailed
+          reconnect
         end
       end
 
       def try_query(sql)
         with_connection_errors_handler do
-          begin
-            cursor = @connection.parse(sql)
-            yield(cursor)
-            cursor.exec
+          cursor = @connection.parse(sql)
+          yield(cursor)
+          cursor.exec
 
-            id_col, name_col = cursor.get_col_names
-            name_col ||= id_col
-            integer_id = id_col =~ /_id\z/i
-            rows = []
-            while r = cursor.fetch_hash
-              rows << r
-            end
-
-            rows.map do |row|
-              if integer_id
-                id = row[id_col].to_i
-              else
-                id = row[id_col]
-              end
-              { id: id, text: row[name_col] }.merge(row)
-            end
-          ensure
-            cursor.close if cursor.present?
+          id_col, name_col = cursor.get_col_names
+          name_col ||= id_col
+          integer_id = id_col =~ /_id\z/i
+          rows = []
+          while r = cursor.fetch_hash
+            rows << r
           end
+
+          rows.map do |row|
+            id = if integer_id
+                   row[id_col].to_i
+                 else
+                   row[id_col]
+                 end
+            {id: id, text: row[name_col]}.merge(row)
+          end
+        ensure
+          cursor.close if cursor.present?
         end
       end
 
@@ -98,7 +94,8 @@ module HBW
           @connection = OCI8.new(
             config.fetch('username'),
             config.fetch('password'),
-            config.fetch('tns_name'))
+            config.fetch('tns_name')
+          )
         end
       end
 

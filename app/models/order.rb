@@ -13,14 +13,14 @@ class Order < ActiveRecord::Base
 
   validates :order_type, presence: true
   validates_with OrderDataValidator
-  after_validation :coerce_values, if: -> rec { rec.errors.empty? }
+  after_validation :coerce_values, if: ->(rec) { rec.errors.empty? }
 
   delegate :fields, :field_definition_set, to: :order_type
   delegate :name, :code, :print_form_code, to: :order_type, prefix: true
 
   default_scope { includes(:order_type).order('created_at DESC') }
   scope :data_fields, ->(data) { where('data @> ?', data.to_json) }
-  scope :data_datetime_range, ->(field, from, to) {
+  scope :data_datetime_range, lambda { |field, from, to|
     where('(data->>:field)::timestamp between coalesce(:from, (data->>:field)::timestamp) and coalesce(:to, (data->>:field)::timestamp)',
           {field: field, from: from, to: to})
   }

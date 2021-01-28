@@ -19,9 +19,9 @@ module ValidationsArbitraryKeys
     end
 
     if errors.keys.length > 0
-      return :failure, errors
+      [:failure, errors]
     else
-      return :success, result_data
+      [:success, result_data]
     end
   end
 end

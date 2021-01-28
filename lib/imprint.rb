@@ -5,7 +5,7 @@ module Imprint
 
   class << self
     def inject(target)
-      -> *values { target.send(:include, Import[*values]) }
+      ->(*values) { target.send(:include, Import[*values]) }
     end
   end
 

@@ -18,7 +18,7 @@ feature 'List orders', js: true do
 
   scenario 'with correct filter defaults' do
     # "Orders list" tab is active by default
-    expect(active_tab 'Orders list').not_to be_nil
+    expect(active_tab('Orders list')).not_to be_nil
 
     # "Order type" select
     expect(label('order_type_id')).to                eq('Order type')
@@ -56,7 +56,7 @@ feature 'List orders', js: true do
 
     # Calendar "to"
     expect(label('created_at_to')).to          eq('to')
-    expect(calendar_value('created_at_to')).to eq(in_current_locale((DateTime.now).end_of_day))
+    expect(calendar_value('created_at_to')).to eq(in_current_locale(DateTime.now.end_of_day))
 
     # Estimated execution date "from"
     expect(label('estimated_exec_date_from')).to          eq('from')
@@ -326,16 +326,22 @@ feature 'List orders', js: true do
   end
 
   feature 'with ordering' do
-    let!(:support_request_order_for_ordering) { FactoryBot.create(:order,
-                                                                   :order_support_request_for_ordering,
-                                                                   order_type: support_request_type) }
-    let(:order_2) { ['ORD-2', 'Support request', 'In progress',
-                     in_current_locale(support_request_order.created_at), '', 'support_ext_code', '',
-                     in_current_locale(support_request_order.estimated_exec_date)] }
+    let!(:support_request_order_for_ordering) do
+      FactoryBot.create(:order,
+                        :order_support_request_for_ordering,
+                        order_type: support_request_type)
+    end
+    let(:order_2) do
+      ['ORD-2', 'Support request', 'In progress',
+       in_current_locale(support_request_order.created_at), '', 'support_ext_code', '',
+       in_current_locale(support_request_order.estimated_exec_date)]
+    end
 
-    let(:order_3) { ['ORD-3', 'Support request', 'In progress',
-                     in_current_locale(support_request_order_for_ordering.created_at), '', 'support_ext_code', '',
-                     in_current_locale(support_request_order_for_ordering.estimated_exec_date)] }
+    let(:order_3) do
+      ['ORD-3', 'Support request', 'In progress',
+       in_current_locale(support_request_order_for_ordering.created_at), '', 'support_ext_code', '',
+       in_current_locale(support_request_order_for_ordering.estimated_exec_date)]
+    end
 
     scenario 'by default fields' do
       # "Order type"

@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
         .select('id, name, middle_name, last_name')
         .order_by_name
         .limit(limit)
-        .map { |u| { id: u.id, text: u.full_name } }
+        .map { |u| {id: u.id, text: u.full_name} }
     end
 
     def order_by_name

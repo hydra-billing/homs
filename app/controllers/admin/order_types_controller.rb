@@ -9,8 +9,7 @@ class Admin::OrderTypesController < ApplicationController
     @order_types = OrderType.active
   end
 
-  def show
-  end
+  def show; end
 
   def create
     file_content = params.require(:order_type).permit(:file)[:file].read

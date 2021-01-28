@@ -23,12 +23,12 @@ module Imprint
           flash[:error] = I18n.t('orders.print_tasks.errors.internal_error')
           redirect_to request.referer
         else
-          send_data(response.body, type: response.headers[:content_type],
-                                   disposition: response.headers[:content_disposition],
+          send_data(response.body, type:            response.headers[:content_type],
+                                   disposition:     response.headers[:content_disposition],
                                    security_policy: response.headers[:content_security_policy])
         end
       else
-        flash[:error] = result.messages.map{|k, v| '%s %s.' % [k, v.join] }.join("\n")
+        flash[:error] = result.messages.map { |k, v| '%s %s.' % [k, v.join] }.join("\n")
 
         redirect_to request.referer
       end

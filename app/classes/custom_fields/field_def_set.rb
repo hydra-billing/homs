@@ -1,6 +1,5 @@
 module CustomFields
   class FieldDefSet < Base
-
     def validate_value(_name, fields_values)
       fields_values.each do |field_name, field_value|
         fd = @fds[field_name] || @fds[field_name.intern]
@@ -25,11 +24,9 @@ module CustomFields
     def coerce(values)
       options.keys.each_with_object({}) do |key, h|
         key_s = key.to_s
-        if values.key?(key_s) && !values.fetch(key_s).nil?
-          h[key_s] = @fds.fetch(key).coerce_value(values.fetch(key_s))
-        else
-          h[key_s] = nil
-        end
+        h[key_s] = if values.key?(key_s) && !values.fetch(key_s).nil?
+                     @fds.fetch(key).coerce_value(values.fetch(key_s))
+                   end
       end
     end
 
@@ -39,6 +36,7 @@ module CustomFields
       @fds = {}
       options.each do |field_name, field_params|
         next unless should_have_key?(field_name, in: options, as: Hash)
+
         fd = field_def_class.new(field_params.merge(name: field_name.to_s))
         if fd.valid?
           @fds[field_name] = fd

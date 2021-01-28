@@ -1,7 +1,7 @@
 class Sequence < ActiveRecord::Base
   validates :name, uniqueness: true
   validates :prefix, uniqueness: true
-  validates :start, numericality: { greater_than: 0 }
+  validates :start, numericality: {greater_than: 0}
 
   def self.nextval(model)
     sequence = find_by_name!(model_sequence_name(model))

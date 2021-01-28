@@ -7,25 +7,25 @@ Capybara.register_driver :chrome do |app|
   chrome_args.each { |arg| opts.add_argument(arg) }
 
   opts.add_preference(:download,
-                      directory_upgrade: true,
+                      directory_upgrade:   true,
                       prompt_for_download: false,
-                      default_directory: DownloadHelper::PATH.to_s)
+                      default_directory:   DownloadHelper::PATH.to_s)
 
-  opts.add_preference(:browser, set_download_behavior: { behavior: 'allow' })
+  opts.add_preference(:browser, set_download_behavior: {behavior: 'allow'})
 
   driver = Capybara::Selenium::Driver.new(app,
-                                 browser: :chrome,
-                                 options: opts)
+                                          browser: :chrome,
+                                          options: opts)
 
   # https://bugs.chromium.org/p/chromium/issues/detail?id=696481#c89
   bridge = driver.browser.send(:bridge)
   path = "/session/#{bridge.session_id}/chromium/send_command"
 
-  bridge.http.call(:post, path, cmd: 'Page.setDownloadBehavior',
-                   params: {
-                       behavior: 'allow',
-                       downloadPath: DownloadHelper::PATH.to_s
-                   })
+  bridge.http.call(:post, path, cmd:    'Page.setDownloadBehavior',
+                                params: {
+                                  behavior:     'allow',
+                                  downloadPath: DownloadHelper::PATH.to_s
+                                })
 
   driver
 end
@@ -39,7 +39,7 @@ Capybara::Screenshot.register_driver(:chrome) do |driver, path|
 end
 
 Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
-  "screenshot_#{example.full_description.gsub(' ', '-').gsub(/^.*\/spec\//,'')}"
+  "screenshot_#{example.full_description.gsub(' ', '-').gsub(%r{^.*/spec/}, '')}"
 end
 Capybara.default_max_wait_time = 10
 Capybara.server = :puma
