@@ -75,3 +75,6 @@ Layout/SpaceInsideHashLiteralBraces:
 
 Layout/SpaceAroundMethodCallOperator:
   Enabled: false
+
+Lint/RedundantSplatExpansion:
+  Enabled: false
