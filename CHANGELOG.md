@@ -20,6 +20,7 @@ See [#296](https://github.com/latera/homs/pull/296) for more details.
 - [#513](https://github.com/latera/homs/pull/513) Fix Camunda/PostgreSQL compatibility.
 - [#514](https://github.com/latera/homs/pull/514) Don't validate hidden and disabled fields.
 - [#515](https://github.com/latera/homs/pull/515) Escape single quotes, double quotes and backslashes in conditions.
+- [#525](https://github.com/latera/homs/pull/525) Fix url for select.
 
 ### Refactoring
 - [#506](https://github.com/latera/homs/pull/506), [#511](https://github.com/latera/homs/pull/511) Update ruby and js dependencies.

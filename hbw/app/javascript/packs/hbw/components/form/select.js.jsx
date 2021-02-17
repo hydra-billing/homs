@@ -242,7 +242,7 @@ modulejs.define('HBWFormSelect',
       selectComponent = (opts) => {
         if (this.props.params.mode === 'lookup') {
           return <Async loadOptions={this.loadOptions}
-                              {...opts} />;
+            {...opts} />;
         } else {
           return <Select {...opts} />;
         }
@@ -269,8 +269,10 @@ modulejs.define('HBWFormSelect',
       };
 
       fetchOptionsAsync = async (inputValue, callback) => {
+        const url = this.props.params.userLookup ? this.props.params.url
+          : `${this.props.env.connection.serverURL}${this.props.params.url}`;
         const response = await this.props.env.connection.request({
-          url:    this.props.params.url,
+          url,
           method: 'GET',
           data:   {
             q: inputValue
