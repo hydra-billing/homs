@@ -79,7 +79,7 @@ module HBW
 
       def url
         if lookup?
-          lookup_task_path(task_id, name: name, entity_class: entity_class)
+          lookup_task_path(task_id, name: name, entity_class: entity_class).gsub(HBW::Engine.routes.find_script_name({}), '')
         end
       end
 
