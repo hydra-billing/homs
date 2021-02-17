@@ -20,6 +20,7 @@ modulejs.define('HBWFormUser', ['React', 'ReactDOM', 'HBWFormSelect'], (React, R
         placeholder: params.placeholder || 'User',
         mode:        'lookup',
         url:         '/users/lookup',
+        userLookup:  true,
         choices:     []
       };
 
