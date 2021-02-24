@@ -61,7 +61,7 @@ The prefered way to install HOMS is to use [Docker](https://www.docker.com/).
 
 7. Login to [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*. Now you are able to start Pizza Order demo process.
 
-You can login to [Camunda Admin inteface](http://localhost:8766/camunda) with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file (`user/changeme` if these variables aren't set).
+You can login to [Camunda Admin interface](http://localhost:8766/camunda) with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file (`user/changeme` if these variables aren't set).
 
 ### In development
 1. Follow the instructions below:
