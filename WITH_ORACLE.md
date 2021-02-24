@@ -92,4 +92,4 @@ If you want to use Oracle as source for your HOMS instance.
     docker-compose -f docker-compose.oracle.yml up -d
     ```
 
-14. You can login to [Camunda Admin inteface](http://localhost:8766/camunda) with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file (`user/changeme` if these variables aren't set).
+14. You can login to [Camunda Admin interface](http://localhost:8766/camunda) with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file (`user/changeme` if these variables aren't set).

@@ -77,18 +77,17 @@ modulejs.define(
         }
       };
 
-      render = async () => {
-        await this.fetchBPTranslations();
+      render = () => {
         this.renderPortals();
       }
 
-      renderPortals = () => {
+      renderPortals = async () => {
         const formsContainer = this.options.entity_code ? this.$widgetContainer[0] : null;
         const taskId = this.options.entity_code ? this.options.task_id : null;
 
-        this.renderClaimingMenuButton(this.availableTasksButtonContainer);
-        this.renderClaimingTaskList(this.availableTaskListContainer);
-        this.renderWidget(formsContainer, taskId);
+        await this.renderClaimingMenuButton(this.availableTasksButtonContainer);
+        await this.renderClaimingTaskList(this.availableTaskListContainer);
+        await this.renderWidget(formsContainer, taskId);
       };
 
       renderApp = () => {
@@ -101,16 +100,19 @@ modulejs.define(
         );
       };
 
-      renderWidget = (container, taskId) => {
+      renderWidget = async (container, taskId) => {
+        await this.setBPTranslator();
         this.env.dispatcher.trigger('hbw:set-forms-container', 'widget', container);
         this.env.dispatcher.trigger('hbw:set-current-task', 'widget', taskId);
       };
 
-      renderClaimingMenuButton = (container) => {
+      renderClaimingMenuButton = async (container) => {
+        await this.setBPTranslator();
         this.env.dispatcher.trigger('hbw:set-button-container', 'widget', container);
       };
 
-      renderClaimingTaskList = (container) => {
+      renderClaimingTaskList = async (container) => {
+        await this.setBPTranslator();
         this.env.dispatcher.trigger('hbw:set-task-list-container', 'widget', container);
       };
 
@@ -138,8 +140,12 @@ modulejs.define(
           method: 'GET'
         }).then(data => data.json());
 
-        this.env.bpTranslator = Translator.getTranslatorForLocale(this.options.locale.code, bpTranslations, 1);
+        return Translator.getTranslatorForLocale(this.options.locale.code, bpTranslations);
       }
+
+      setBPTranslator = async () => {
+        this.env.bpTranslator ||= await this.fetchBPTranslations();
+      };
 
       setEntityCode = (code) => {
         this.options.entity_code = code;
