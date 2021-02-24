@@ -66,8 +66,8 @@ feature 'Check table with tasks', js: true do
       task_overview = find_by_dt('task-overview')
 
       expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Assigned task'
-      expect(find_by_dt('due-date-value', task_overview).text).to     eq '07/30/2016 09:07 AM'
-      expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 AM'
+      expect(find_by_dt('due-date-value', task_overview).text).to     eq '07/30/2016 09:07 am'
+      expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 am'
       expect(find_by_dt('priority-value', task_overview).text).to     eq 'Medium'
       expect(miss_by_dt('description-value', task_overview)).to       eq true
 
@@ -77,8 +77,8 @@ feature 'Check table with tasks', js: true do
       task_overview = find_by_dt('task-overview')
 
       expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Other assigned task'
-      expect(find_by_dt('due-date-value', task_overview).text).to     eq '07/30/2017 09:07 AM'
-      expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 AM'
+      expect(find_by_dt('due-date-value', task_overview).text).to     eq '07/30/2017 09:07 am'
+      expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 am'
       expect(find_by_dt('priority-value', task_overview).text).to     eq 'High'
       expect(find_by_dt('description-value', task_overview).text).to  eq 'Some test description'
 
@@ -103,8 +103,8 @@ feature 'Check table with tasks', js: true do
       task_overview = find_by_dt('task-overview')
 
       expect(find_by_dt('title-link', task_overview).text).to         eq 'Test name — Other unassigned task'
-      expect(find_by_dt('due-date-value', task_overview).text).to     eq '07/30/2017 09:07 AM'
-      expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 AM'
+      expect(find_by_dt('due-date-value', task_overview).text).to     eq '07/30/2017 09:07 am'
+      expect(find_by_dt('created-date-value', task_overview).text).to eq '06/30/2016 09:07 am'
       expect(find_by_dt('priority-value', task_overview).text).to     eq 'High'
       expect(find_by_dt('description-value', task_overview).text).to  eq 'Some test description'
 
