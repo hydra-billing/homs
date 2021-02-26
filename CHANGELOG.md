@@ -1,3 +1,8 @@
+v2.5.1 [unreleased]
+-------------------
+### Bugfixes
+- [#526](https://github.com/latera/homs/pull/526) Fix fetch BP translations.
+
 v2.5.0 [2020-12-14]
 -------------------
 ### Breaking changes
