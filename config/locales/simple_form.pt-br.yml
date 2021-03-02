@@ -1,0 +1,9 @@
+pt-br:
+  simple_form:
+    'yes': 'Sim'
+    'no': 'Não'
+    required:
+      text: obrigatório
+      mark: "*"
+    error_notification:
+      default_message: 'Por favor reveja os problemas abaixo:'
