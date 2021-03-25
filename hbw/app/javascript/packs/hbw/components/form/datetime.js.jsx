@@ -47,11 +47,12 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
 
       const isoValue = value ? value.format() : '';
       const inputCSS = cx(params.css_class, { hidden });
+      const labelCss = cx(params.label_css, 'hbw-datetime-label');
       const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       return <div className={inputCSS} title={params.tooltip} ref={(node) => { this.rootNode = node; }}>
         <div className="form-group">
-          <span className={params.label_css}>{label}</span>
+          <span className={labelCss}>{label}</span>
           <div className="input-group date datetime-picker">
             <input {...opts} className="form-control" />
             <input name={name} type="hidden" value={isoValue} />

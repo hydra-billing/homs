@@ -70,7 +70,7 @@ modulejs.define('HBWFormSelect',
         };
 
         const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
-        const labelCss = params.label_css;
+        const labelCss = cx(params.label_css, 'select-label');
         const cssClass = cx(params.css_class, { hidden });
 
         const selectErrorMessage = env.translator('errors.field_not_defined_in_bp', { field_name: name });

@@ -68,6 +68,7 @@ modulejs.define('HBWFormSelectTable',
 
         const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
+        const labelCss = cx(params.label_css, 'select-table-label');
         const cssClass = cx(params.css_class, { hidden });
         const selectErrorMessageCss = cx('alert', 'alert-danger', { hidden: !missFieldInVariables() });
         const formGroupCss = cx('hbw-table', 'form-group', { 'has-error': error });
@@ -76,7 +77,7 @@ modulejs.define('HBWFormSelectTable',
         });
 
         return <div className={cssClass} title={params.tooltip}>
-          <span className={params.label_css} ref={(i) => { this.label = i; }}>{label}</span>
+          <span className={labelCss} ref={(i) => { this.label = i; }}>{label}</span>
           <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
           <div className={formGroupCss}>
             {errorTooltip}

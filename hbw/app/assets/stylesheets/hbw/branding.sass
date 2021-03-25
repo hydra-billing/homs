@@ -47,8 +47,23 @@ $button-types: default primary danger info success warning
   &::-webkit-scrollbar-thumb:hover
     background: var(--hbw-webkit-scrollbar-thumb-hover-color, var(--base-hbw-webkit-scrollbar-thumb-hover-color))
 
+.select-table-label
+  font-family: var(--base-hbw-font-family)
+  font-size: var(--hbw-select-table-label-font-size, var(--base-hbw-select-table-label-font-size))
+  font-weight: var(--hbw-select-table-label-font-weight, var(--base-hbw-select-table-label-font-weight))
+  font-style: var(--hbw-select-table-label-font-style, var(--base-hbw-select-table-label-font-style))
+.select-label
+  font-family: var(--base-hbw-font-family)
+  font-size: var(--hbw-select-label-font-size, var(--base-hbw-select-label-font-size))
+  font-weight: var(--hbw-select-label-font-weight, var(--base-hbw-select-label-font-weight))
+  font-style: var(--hbw-select-label-font-style, var(--base-hbw-select-label-font-style))
+
 table.select-table
   tr
+    font-family: var(--base-hbw-font-family)
+    font-size: var(--hbw-select-table-tr-font-size, var(--base-hbw-select-table-tr-font-size))
+    font-weight: var(--hbw-select-table-tr-font-weight, var(--base-hbw-select-table-tr-font-weight))
+    font-style: var(--hbw-select-table-tr-font-style, var(--base-hbw-select-table-tr-font-style))
     &.selected
       td
         background-color: var(--hbw-selected-element, var(--base-hbw-selected-element))
@@ -64,6 +79,10 @@ table.disabled
 .attacher
   border: 1px solid var(--hbw-attacher-color, var(--base-hbw-attacher-color))
   color: var(--hbw-attacher-color, var(--base-hbw-attacher-color))
+  font-family: var(--hbw-font-family, var(--hbw-font-family))
+  font-size: var(--attacher-font-size, var(--base-attacher-font-size))
+  font-weight: var(--attacher-font-weight, var(--base-attacher-font-weight))
+  font-style: var(--attacher-font-style, var(--base-attacher-font-style))
   &.activated
     border: 2px dashed var(--hbw-mystic, var(--base-hbw-mystic))
     .drop_text
@@ -77,15 +96,33 @@ table.disabled
   ul
     border-bottom: 1px solid var(--hbw-light-gray, var(--base-hbw-light-gray))
     li
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-claim-tasks-tab-font-size, var(--base-hbw-claim-tasks-tab-font-size))
+      font-weight: var(--hbw-claim-tasks-tab-font-weight, var(--base-hbw-claim-tasks-tab-font-weight))
+      font-style: var(--hbw-claim-tasks-tab-font-style, var(--base-hbw-claim-tasks-tab-font-style))
       &.is-active
         a
+          font-weight: var(--hbw-claim-tasks-active-tab-font-weight, var(--base-hbw-claim-tasks-active-tab-font-weight))
           border-bottom: 5px solid var(--hbw-brand-success, var(--base-hbw-brand-success))
 
 .claiming-table
   .no-tasks, .pending
     color: var(--hbw-black, var(--base-hbw-black))
+    font-family: var(--base-hbw-font-family)
+    font-size: var(--hbw-no-tasks-font-size, var(--base-hbw-no-tasks-font-size))
+    font-weight: var(--hbw-no-tasks-font-weight, var(--base-hbw-no-tasks-font-weight))
+    font-style: var(--hbw-no-tasks-font-style, var(--base-hbw-no-tasks-font-style))
+  th 
+    font-family: var(--base-hbw-font-family)
+    font-size: var(--hbw-th-claiming-table-font-size, var(--base-hbw-th-claiming-table-font-size))
+    font-weight: var(--hbw-th-claiming-table-font-weight, var(--base-hbw-th-claiming-table-font-weight))
+    font-style: var(--hbw-th-claiming-table-font-style, var(--base-hbw-th-claiming-table-font-style))
   tr
     color: var(--hbw-black, var(--base-hbw-black))
+    font-family: var(--base-hbw-font-family)
+    font-size: var(--hbw-tr-claiming-table-font-size, var(--base-hbw-tr-claiming-table-font-size))
+    font-weight: var(--hbw-tr-claiming-table-font-weight, var(--base-hbw-tr-claiming-table-font-weight))
+    font-style: var(--hbw-tr-claiming-table-font-style, var(--base-hbw-tr-claiming-table-font-style))
   thead
     border-bottom: solid 1px var(--hbw-alto, var(--base-hbw-alto))
   tbody
@@ -107,6 +144,10 @@ table.disabled
         background-color: var(--hbw-alto, var(--base-hbw-alto))
 
 .priority
+  font-family: var(--base-hbw-font-family)
+  font-size: var(--hbw-priority-font-size, var(--base-hbw-priority-font-size))
+  font-weight: var(--hbw-priority-font-weight, var(--base-hbw-priority-font-weight))
+  font-style: var(--hbw-priority-font-style, var(--base-hbw-priority-font-style))
   &.medium
     background-color: var(--hbw-priority-medium-color, var(--base-hbw-priority-medium-color))
 
@@ -116,6 +157,27 @@ table.disabled
   &.urgent
     background-color: var(--hbw-urgent-color, var(--base-hbw-urgent-color))
 
+.task-overview
+  .header
+    font-family: var(--base-hbw-font-family)
+    font-size: var(--hbw-task-overview-header-font-size, var(--base-hbw-task-overview-header-font-size))
+    font-weight: var(--hbw-task-overview-header-font-weight, var(--base-hbw-task-overview-header-font-weight))
+    font-style: var(--hbw-task-overview-header-font-style, var(--base-hbw-task-overview-header-font-style))
+  .title
+    font-family: var(--base-hbw-font-family)
+    font-size: var(--hbw-task-overview-title-font-size, var(--base-hbw-task-overview-title-font-size))
+    font-weight: var(--hbw-task-overview-title-font-weight, var(--base-hbw-task-overview-title-font-weight))
+    font-style: var(--hbw-task-overview-title-font-style, var(--base-hbw-task-overview-title-font-style))
+  .buttons
+    font-family: var(--base-hbw-font-family)
+    font-size: var(--hbw-task-overview-buttons-font-size, var(--base-hbw-task-overview-buttons-font-size))
+    font-weight: var(--hbw-task-overview-buttons-font-weight, var(--base-hbw-task-overview-buttons-font-weight))
+    font-style: var(--hbw-task-overview-buttons-font-style, var(--base-hbw-task-overview-buttons-font-style))
+  tr 
+    font-family: var(--base-hbw-font-family)
+    font-size: var(--hbw-task-overview-tr-font-size, var(--base-hbw-task-overview-tr-font-size))
+    font-weight: var(--hbw-task-overview-tr-font-weight, var(--base-hbw-task-overview-tr-font-weight))
+    font-style: var(--hbw-task-overview-tr-font-style, var(--base-hbw-task-overview-tr-font-style))
 .deadline
   color: var(--hbw-urgent-color, var(--base-hbw-urgent-color))
 
@@ -141,6 +203,16 @@ table.disabled
   .short-list
     .no-tasks, .pending
       color: var(--hbw-black, var(--base-hbw-black))
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-no-tasks-font-size, var(--base-hbw-no-tasks-font-size))
+      font-weight: var(--hbw-no-tasks-font-weight, var(--base-hbw-no-tasks-font-weight))
+      font-style: var(--hbw-no-tasks-font-style, var(--base-hbw-no-tasks-font-style))
+    
+    .btn.btn-primary
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-btn-view-tasks-font-size, var(--base-hbw-btn-view-tasks-font-size))
+      font-weight: var(--hbw-btn-view-tasks-font-weight, var(--base-hbw-btn-view-tasks-font-weight))
+      font-style: var(--hbw-btn-view-tasks-font-style, var(--base-hbw-btn-view-tasks-font-style))
 
     .row
       border-bottom: 1px solid var(--hbw-light-gray, var(--base-hbw-light-gray))
@@ -160,10 +232,31 @@ table.disabled
   label
     font-size: var(--font-size, var(--base-font-size))
 
+  .control-buttons
+    font-family: var(--base-hbw-font-family)
+    font-size: var(--hbw-control-btn-font-size, var(--base-hbw-control-btn-font-size))
+    font-weight: var(--hbw-control-btn-font-weight, var(--base-hbw-control-btn-font-weight))
+    font-style: var(--hbw-control-btn-font-style, var(--base-hbw-control-btn-font-style))
+
+  .process-name
+    font-family: var(--base-hbw-font-family)
+
   .panel
     .panel-heading
       background-color: var(--hbw-light-gray, var(--base-hbw-light-gray))
       border-color: var(--hbw-light-gray, var(--base-hbw-light-gray))
+
+  .alert 
+    h4
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-alert-title-font-size, var(--base-hbw-alert-title-font-size))
+      font-weight: var(--hbw-alert-title-font-weight, var(--base-hbw-alert-title-font-weight))
+      font-style: var(--hbw-alert-title-font-style, var(--base-hbw-alert-title-font-style))
+    small
+      font-size: var(--hbw-alert-font-size, var(--base-hbw-alert-font-size))
+      font-family: var(--base-hbw-font-family)
+      font-weight: var(--hbw-alert-font-weight, var(--base-hbw-alert-font-weight))
+      font-style: var(--hbw-alert-font-style, var(--base-hbw-alert-font-style))
 
   .alert-danger
     background-color: var(--hbw-red, var(--base-hbw-red))
@@ -172,10 +265,54 @@ table.disabled
       color: var(--hbw-white, var(--base-hbw-white))
 
   .form-group
+    .hbw-checkbox-label
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-checkbox-label-font-size, var(--base-hbw-checkbox-label-font-size))
+      font-weight: var(--hbw-checkbox-label-font-weight, var(--base-hbw-checkbox-label-font-weight))
+      font-style: var(--hbw-checkbox-label-font-style, var(--base-hbw-checkbox-label-font-style))
+    .hbw-string-label
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-string-label-font-size, var(--base-hbw-string-label-font-size))
+      font-weight: var(--hbw-string-label-font-weight, var(--base-hbw-string-label-font-weight))
+      font-style: var(--hbw-string-label-font-style, var(--base-hbw-string-label-font-style))
+    .hbw-datetime-label
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-datetime-label-font-size, var(--base-hbw-datetime-label-font-size))
+      font-weight: var(--hbw-datetime-label-font-weight, var(--base-hbw-datetime-label-font-weight))
+      font-style: var(--hbw-datetime-label-font-style, var(--base-hbw-datetime-label-font-style))
+    .hbw-file-list-label
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-file-list-label-font-size, var(--base-hbw-file-list-label-font-size))
+      font-weight: var(--hbw-file-list-label-font-weight, var(--base-hbw-file-list-label-font-weight))
+      font-style: var(--hbw-file-list-label-font-style, var(--base-hbw-file-list-label-font-style))
+    .hbw-file-upload-label
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-file-upload-label-font-size, var(--base-hbw-file-upload-label-font-size))
+      font-weight: var(--hbw-file-upload-label-font-weight, var(--base-hbw-file-upload-label-font-weight))
+      font-style: var(--hbw-file-upload-label-font-style, var(--base-hbw-file-upload-label-font-style))
+    .hbw-text-label
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-text-label-font-size, var(--base-hbw-text-label-font-size))
+      font-weight: var(--hbw-text-label-font-weight, var(--base-hbw-text-label-font-weight))
+      font-style: var(--hbw-text-label-font-style, var(--base-hbw-text-label-font-style))
+    input
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-form-group-input-font-size, var(--base-hbw-form-group-input-font-size))
+      font-weight: var(--hbw-form-group-input-font-weight, var(--base-hbw-form-group-input-font-weight))
+      font-style: var(--hbw-form-group-input-font-style, var(--base-hbw-form-group-input-font-style))
+    .react-select-container
+      font-family: var(--base-hbw-font-family)
+      font-size: var(--hbw-form-group-select-font-size, var(--base-hbw-form-group-select-font-size))
+      font-weight: var(--hbw-form-group-select-font-weight, var(--base-hbw-form-group-select-font-weight))
+      font-style: var(--hbw-form-group-select-font-style, var(--base-hbw-form-group-select-font-style))
     .invalid
       border-color: var(--hbw-red, var(--base-hbw-red))
     .tooltip-red
       .tooltip
+        font-family: var(--base-hbw-font-family)
+        font-size: var(--hbw-tooltip-red-font-size, var(--base-hbw-tooltip-red-font-size))
+        font-weight: var(--hbw-tooltip-red-font-weight, var(--base-hbw-tooltip-red-font-weight))
+        font-style: var(--hbw-tooltip-red-font-style, var(--base-hbw-tooltip-red-font-style))
         background-color: var(--hbw-red, var(--base-hbw-red))
 
         &[x-placement^="top"] .tooltip-arrow
@@ -215,6 +352,10 @@ table.disabled
 
   .panel-title
     color: var(--hbw-text-color, var(--base-hbw-text-color))
+    font-family: var(--base-hbw-font-family)
+    font-size: var(--hbw-panel-title-font-size, var(--base-hbw-panel-title-font-size))
+    font-weight: var(--hbw-panel-title-font-weight, var(--base-hbw-panel-title-font-weight))
+    font-style: var(--hbw-panel-title-font-style, var(--base-hbw-panel-title-font-style))
 
 li.danger
   a
@@ -228,5 +369,9 @@ input.hbw-checkbox
       color: var(--hbw-alto, var(--base-hbw-alto))
 
 .nav-tabs
+  font-family: var(--base-hbw-font-family)
+  font-size: var(--hbw-nav-tabs-font-size, var(--base-hbw-nav-tabs-font-size))
+  font-weight: var(--hbw-nav-tabs-font-weight, var(--base-hbw-nav-tabs-font-weight))
+  font-style: var(--hbw-nav-tabs-font-style, var(--base-hbw-nav-tabs-font-style))
   li > a
       color: var(--hbw-text-color, var(--base-hbw-text-color)) !important
