@@ -35,11 +35,12 @@ modulejs.define('HBWFormText', ['React'], (React) => {
       };
 
       const cssClass = cx(params.css_class, { hidden });
+      const labelCss = cx(params.label_css, 'hbw-text-label');
       const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       return <div className={cssClass} title={params.tooltip}>
         <div className='form-group'>
-          <span className={params.label_css}>{label}</span>
+          <span className={labelCss}>{label}</span>
           <textarea {...opts} value={value || ''} onChange={this.handleChange} />
         </div>
       </div>;

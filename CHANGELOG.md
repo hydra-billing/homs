@@ -1,5 +1,8 @@
 v2.5.1 [unreleased]
 -------------------
+### Features
+- [#530](https://github.com/latera/homs/pull/530) Customize fonts in HBW.
+
 ### Bugfixes
 - [#526](https://github.com/latera/homs/pull/526) Fix fetch BP translations.
 - [#531](https://github.com/latera/homs/pull/531) Update Rails to fix `mimemagic` issue.

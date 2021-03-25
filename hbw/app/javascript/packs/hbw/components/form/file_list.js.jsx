@@ -28,7 +28,7 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
       const cssClass = cx(params.css_class, { hidden });
 
       const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
-      const labelCSS = cx('hbw-checkbox-label', params.label_css);
+      const labelCSS = cx('hbw-file-list-label', params.label_css);
 
       const hiddenValue = JSON.stringify(links.filter(link => !deletedFiles.includes(link.name)));
 

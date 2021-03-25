@@ -19,7 +19,7 @@ const HBWClaimingTaskOverview = ({
 
   return (
     <div data-test="task-overview" className="task-overview">
-      <div className="bold header">
+      <div className="header">
         {t('components.claiming.overview.header')}
       </div>
       <div className="title">
