@@ -77,7 +77,7 @@ You can login to [Camunda Admin interface](http://localhost:8766/camunda) with c
     ```bash
     rails s
     ```
-4. Create and seed (create user) the database:
+4. Create and populate the database (adds an admin user, initial order types, and orders):
     ```bash
     rake db:migrate
     export SEED_DB=true
