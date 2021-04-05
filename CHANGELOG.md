@@ -32,7 +32,7 @@ See [#296](https://github.com/latera/homs/pull/296) for more details.
 - [#506](https://github.com/latera/homs/pull/506), [#511](https://github.com/latera/homs/pull/511) Update ruby and js dependencies.
 - [#510](https://github.com/latera/homs/pull/510) Refactor render() of form field components.
 
-v2.4.3 [unreleased]
+v2.4.4 [unreleased]
 -------------------
 ### Bugfixes
 - [#531](https://github.com/latera/homs/pull/531) Update Rails to fix `mimemagic` issue.
