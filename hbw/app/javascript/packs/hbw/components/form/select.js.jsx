@@ -173,7 +173,7 @@ modulejs.define('HBWFormSelect',
           if (isFocused) {
             return 'var(--select-dropdown-indicator-color-focus, var(--base-select-dropdown-indicator-color-focus))';
           } else {
-            return 'var(--select-dropdown-indicator-color, var(--base-select-dropdown-indicator-color))';
+            return 'var(--base-hbw-gray)';
           }
         };
 
