@@ -719,6 +719,9 @@ get:
             type: file_upload
             label: Attach file
             css_class: col-md-4 col-xs-4 col-lg-4
+            multiple: true
+            drag_n_drop: true
+            preview: true
   "task/111116/deployed-form":
     "": |
       form:

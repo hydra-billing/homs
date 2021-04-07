@@ -1,15 +1,44 @@
 v2.6.0 [unreleased]
 -------------------
+### Breaking changes
+- New options have been introduced for `file_upload` field type:
+
+  * ```
+    multiple: true|false
+    ```
+    allows to upload multiple files at once;
+
+  * ```
+    drag_n_drop: true|false
+    ```
+    controls drag'n'drop area visibility.
+
+  It's `false` by default so that differs from old behaviour (all `file_upload` fields were multiple and had visible drag'n'drop area).
+  Hence you should set these options to `true` to keep the old behaviour.
+  Look at [#535](https://github.com/latera/homs/pull/535) for deatils
+
 ### Features
 - [#530](https://github.com/latera/homs/pull/530) Customize fonts in HBW.
 - [#534](https://github.com/latera/homs/pull/534) Add custom top/bottom descriptions and placeholder for string component.
 
-For BP form was added new keys for string description placement and text:
-```
-  description:
-    placement: bottom # top
-    text: Bottom description test
-```
+  For BP form was added new keys for string description placement and text:
+  ```
+    description:
+      placement: bottom # top
+      text: Bottom description test
+  ```
+- [#535](https://github.com/latera/homs/pull/535) Display attached files thumbnails.
+
+  Field type `file_upload` renders thubmnailed preview of uploaded files with `preview: true` flag, e.g.
+  ```
+  form:
+    ...
+    fields:
+    - name: fileUploadWithPreview
+      type: file_upload
+      ...
+      preview: true
+  ```
 
 v2.5.1 [2021-04-08]
 ### Bugfixes

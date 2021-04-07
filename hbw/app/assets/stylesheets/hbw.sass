@@ -175,25 +175,74 @@
     .text-align-right
       text-align: right
 
-  .attacher
-    align-items: center
-    justify-content: center
-    display: flex
-    margin-top: 5px
-    border-radius: 7px
-    width: 150px
-    padding: 8px
+  .hbw-file-upload
+    .attacher
+      align-items: center
+      justify-content: center
+      display: flex
+      margin-top: 10px
+      border-radius: 7px
+      width: 150px
+      padding: 8px
 
-    &.activated
-      width: auto
-      max-width: 480px
-      height: 115px
-      padding-top: 13px
+      &.activated
+        width: auto
+        max-width: 480px
+        height: 115px
+        padding-top: 13px
 
-    .drop_text
-      pointer-events: none
-      font-size: .8em
-      text-align: center
+      .drop-text
+        pointer-events: none
+        font-size: .8em
+        text-align: center
+
+    input[type=file]
+      margin-top: 10px
+
+    .files-preview-row
+      --file-preview-width: 120px
+      --file-preview-height: 160px
+
+      display: flex
+      flex-flow: row
+      overflow-x: scroll
+      max-width: fit-content
+      margin-top: 10px
+      padding: 10px
+
+      .files-preview-item
+        position: relative
+        display: flex
+        flex-flow: column
+        margin-right: 20px
+
+        .files-preview-image
+          display: flex
+          justify-content: center
+          align-items: center
+          overflow-y: hidden
+          width: var(--file-preview-width)
+          height: var(--file-preview-height)
+
+          embed
+            object-fit: cover
+            max-width: var(--file-preview-width)
+            max-height: var(--file-preview-height)
+
+        .files-preview-name
+          max-width: var(--file-preview-width)
+
+        .remove-file
+          display: none
+          position: absolute
+          font-size: 26px
+          right: 5px
+          top: 5px
+          cursor: pointer
+
+        &:hover
+          .remove-file
+            display: block
 
   .tabs
     display: flex

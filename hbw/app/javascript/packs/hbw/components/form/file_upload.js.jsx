@@ -1,9 +1,33 @@
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
 
 modulejs.define('HBWFormFileUpload', ['React'], (React) => {
   class HBWFormFileUpload extends React.Component {
+    static propTypes = {
+      name:   PropTypes.string.isRequired,
+      params: PropTypes.shape({
+        name:        PropTypes.string.isRequired,
+        label:       PropTypes.string.isRequired,
+        label_css:   PropTypes.string,
+        css_class:   PropTypes.string,
+        multiple:    PropTypes.bool,
+        preview:     PropTypes.bool,
+        drag_n_drop: PropTypes.bool
+      }).isRequired,
+      task: PropTypes.shape({
+        key:         PropTypes.string.isRequired,
+        process_key: PropTypes.string.isRequired
+      }).isRequired,
+      disabled:        PropTypes.bool.isRequired,
+      hidden:          PropTypes.bool.isRequired,
+      fileListPresent: PropTypes.bool.isRequired,
+      env:             PropTypes.object.isRequired,
+      onRef:           PropTypes.func.isRequired,
+      trigger:         PropTypes.func.isRequired
+    }
+
     state = {
       valid:          true,
       files:          [],
@@ -24,16 +48,17 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         name, params, disabled, hidden, fileListPresent, task, env
       } = this.props;
 
-      const { files, dragStyleClass } = this.state;
+      const { files } = this.state;
 
       const opts = {
         disabled,
         name,
-        onChange: this.onChange
+        onChange: this.onChange,
+        multiple: params.multiple
       };
 
       const hiddenValue = JSON.stringify({ files });
-      const cssClass = cx(params.css_class, { hidden });
+      const cssClass = cx('hbw-file-upload', params.css_class, { hidden });
       const errorMessage = env.translator('errors.file_list_field_required');
       const errorMessageCss = cx('alert', 'alert-danger', { hidden: fileListPresent });
       const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
@@ -43,22 +68,64 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         <div className={cssClass}>
           <span className={labelCSS}>{label}</span>
           <div className={errorMessageCss}>{errorMessage}</div>
+          {params.preview && files.length > 0 && this.renderPreviewRow()}
           <div className="form-group">
-            <input {...opts} type="file" multiple></input>
+            {params.drag_n_drop && this.renderDragDropField()}
+            <input {...opts} type="file"/>
             <input name={name} value={hiddenValue} type="hidden"/>
-            <div
-              className={dragStyleClass}
-              onDragEnter={e => this.onDragEnter(e)}
-              onDragLeave={e => this.onDragLeave(e)}
-              onDragOver={e => e.preventDefault()}
-              onDrop={e => this.onDrop(e)}
-            >
-              <div className='drop_text'>{env.translator('components.file_upload.drag_and_drop')}</div>
-            </div>
           </div>
         </div>
       );
     }
+
+    renderDragDropField = () => {
+      const { env } = this.props;
+      const { dragStyleClass } = this.state;
+
+      return (
+        <div
+          className={dragStyleClass}
+          onDragEnter={e => this.onDragEnter(e)}
+          onDragLeave={e => this.onDragLeave(e)}
+          onDragOver={e => e.preventDefault()}
+          onDrop={e => this.onDrop(e)}
+        >
+          <div className='drop-text'>{env.translator('components.file_upload.drag_and_drop')}</div>
+        </div>
+      );
+    }
+
+    renderPreviewRow = () => (
+      <div className="files-preview-row">
+        {this.state.files.map(file => this.renderPreviewItem(file))}
+      </div>
+    )
+
+    renderPreviewItem = ({ name, type, fileURL }) => (
+      <div className="files-preview-item" key={fileURL}>
+        <div className="far fa-times-circle remove-file" onClick={() => this.removeFile(name)}/>
+        <div className="files-preview-image">
+          {this.renderPreviewImage(name, type, fileURL)}
+        </div>
+        <span className="files-preview-name" title={name}>{this.ellipsisFileName(name)}</span>
+      </div>
+    )
+
+    renderPreviewImage = (name, type, fileURL) => {
+      if (type.startsWith('image/')) {
+        return <img src={fileURL} alt={name}/>;
+      } else if (type === 'application/pdf') {
+        return <embed src={fileURL} type={type}/>;
+      } else {
+        return <span className="far fa-file fa-7x"/>;
+      }
+    }
+
+    ellipsisFileName = name => (
+      name.length > 15
+        ? `${name.slice(0, 9)}...${name.slice(-6)}`
+        : name
+    )
 
     onDragEnter = (event) => {
       event.preventDefault();
@@ -86,40 +153,44 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       this.setState({
         files:      [],
         filesCount: files.length
+      },
+      () => {
+        if (files.length > 0) {
+          this.props.trigger('hbw:file-upload-started');
+
+          files.map(file => this.readFile(file));
+        }
       });
-
-      if (files.length > 0) {
-        this.props.trigger('hbw:file-upload-started');
-
-        return files.map(file => this.readFile(file.name, file));
-      }
-
-      return null;
     };
 
-    addValue = (name, res) => {
-      const { files } = this.state;
-
-      files.push({
-        name,
-        content: window.btoa(res)
+    addFile = (file) => {
+      this.setState(({ files, filesCount }) => ({
+        files:      [...files, file],
+        filesCount: filesCount - 1
+      }),
+      () => {
+        if (this.state.filesCount === 0) {
+          this.props.trigger('hbw:file-upload-finished');
+        }
       });
-
-      this.setState({
-        files,
-        filesCount: this.state.filesCount - 1
-      });
-
-      if (this.state.filesCount === 0) {
-        this.props.trigger('hbw:file-upload-finished');
-      }
     };
 
-    readFile = (name, file) => {
+    removeFile = (name) => {
+      this.setState(({ files }) => (
+        { files: files.filter(file => file.name !== name) }
+      ));
+    }
+
+    readFile = (file) => {
       const fileReader = new FileReader();
 
       fileReader.onloadend = () => {
-        this.addValue(name, fileReader.result);
+        this.addFile({
+          name:    file.name,
+          type:    file.type,
+          fileURL: URL.createObjectURL(file),
+          content: window.btoa(fileReader.result)
+        });
       };
 
       return fileReader.readAsBinaryString(file);
