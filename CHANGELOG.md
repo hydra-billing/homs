@@ -1,3 +1,8 @@
+v2.4.4 [2021-04-08]
+-------------------
+### Bugfixes
+- [#531](https://github.com/latera/homs/pull/531) Update Rails to fix `mimemagic` issue.
+
 v2.4.2 [2021-01-15]
 -------------------
 ### Bugfixes
