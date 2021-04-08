@@ -3,7 +3,7 @@ v2.6.0 [unreleased]
 ### Features
 - [#530](https://github.com/latera/homs/pull/530) Customize fonts in HBW.
 
-v2.5.1 [unreleased]
+v2.5.1 [2021-04-08]
 ### Bugfixes
 - [#526](https://github.com/latera/homs/pull/526) Fix fetch BP translations.
 - [#531](https://github.com/latera/homs/pull/531) Update Rails to fix `mimemagic` issue.
@@ -36,7 +36,7 @@ See [#296](https://github.com/latera/homs/pull/296) for more details.
 - [#506](https://github.com/latera/homs/pull/506), [#511](https://github.com/latera/homs/pull/511) Update ruby and js dependencies.
 - [#510](https://github.com/latera/homs/pull/510) Refactor render() of form field components.
 
-v2.4.4 [unreleased]
+v2.4.4 [2021-04-08]
 -------------------
 ### Bugfixes
 - [#531](https://github.com/latera/homs/pull/531) Update Rails to fix `mimemagic` issue.
