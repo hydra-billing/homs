@@ -1,3 +1,8 @@
+v2.5.1 [2021-04-08]
+### Bugfixes
+- [#526](https://github.com/latera/homs/pull/526) Fix fetch BP translations.
+- [#531](https://github.com/latera/homs/pull/531) Update Rails to fix `mimemagic` issue.
+
 v2.5.0 [2020-12-14]
 -------------------
 ### Breaking changes
