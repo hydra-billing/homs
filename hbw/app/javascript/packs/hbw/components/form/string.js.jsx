@@ -64,19 +64,23 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       return <div className={rootCSS} title={params.tooltip}>
         <div className="form-group">
           <span className={labelCss}>{label}</span>
-          {params.description?.placement === 'top'
-          && <div className="description" data-test="description-top">{this.props.params.description.text}</div>}
+          {params.description?.placement === 'top' && this.renderDescription()}
           <input {...opts}
                  ref={(i) => { this.input = i; }}
                  className={inputCSS}
                  placeholder={params.placeholder}
                  value={visualValue} />
-          {params.description?.placement === 'bottom'
-          && <div className="description" data-test="description-bottom">{this.props.params.description.text}</div>}
+          {params.description?.placement === 'bottom' && this.renderDescription()}
           {!opts.readOnly && <input name={name} value={value} type="hidden" />}
           {errorTooltip}
         </div>
       </div>;
+    }
+
+    renderDescription = () => {
+      const { placement, text } = this.props.params.description;
+
+      return <div className="description" data-test={`description-${placement}`}>{text}</div>;
     }
 
     componentDidMount () {

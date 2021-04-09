@@ -112,6 +112,24 @@ feature 'Check select', js: true do
       expect(page).to have_no_content 'Field with name homsOrderNotInVBPVariables not defined in BP variables'
       expect_widget_presence
     end
+
+    scenario 'description placement = top' do
+      click_and_wait 'ORD-3'
+
+      expect(page).to have_content 'ORD-3'
+      select_root = find_by_dt('select-homsOrderDataSelect')
+      expect(find_by_dt('description-top', select_root).text).to eq 'Top description text'
+      expect_widget_presence
+    end
+
+    scenario 'description placement = bottom' do
+      click_and_wait 'ORD-4'
+
+      expect(page).to have_content 'ORD-4'
+      select_root = find_by_dt('select-homsOrderDataSelect')
+      expect(find_by_dt('description-bottom', select_root).text).to eq 'Bottom description text'
+      expect_widget_presence
+    end
   end
 
   describe 'will be submitted with lookup mode' do

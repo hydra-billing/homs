@@ -19,13 +19,15 @@ v2.6.0 [unreleased]
 
 ### Features
 - [#530](https://github.com/latera/homs/pull/530) Customize fonts in HBW.
-- [#534](https://github.com/latera/homs/pull/534) Add custom top/bottom descriptions and placeholder for string component.
+- [#534](https://github.com/latera/homs/pull/534), [#536](https://github.com/latera/homs/pull/536) Add custom top/bottom descriptions and placeholder for components:
+  * string
+  * select
 
-  For BP form was added new keys for string description placement and text:
+  Now you can specify some additional description placed over/under the input for fields listed above with option:
   ```
     description:
-      placement: bottom # top
-      text: Bottom description test
+      placement: top|bottom
+      text: Your description test
   ```
 - [#535](https://github.com/latera/homs/pull/535) Display attached files thumbnails.
 
