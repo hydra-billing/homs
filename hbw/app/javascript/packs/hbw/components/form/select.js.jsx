@@ -81,11 +81,13 @@ modulejs.define('HBWFormSelect',
           className='tooltip-red'
         />;
 
-        return <div className={cssClass} title={params.tooltip}>
+        return <div className={cssClass} title={params.tooltip} data-test={`select-${name}`}>
           <span className={labelCss}>{label}</span>
           <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
           <div className='form-group' ref={(i) => { this.select = i; }}>
+            {params.description?.placement === 'top' && this.renderDescription()}
             {this.selectComponent(opts)}
+            {params.description?.placement === 'bottom' && this.renderDescription()}
           </div>
           {errorTooltip}
         </div>;
@@ -259,6 +261,12 @@ modulejs.define('HBWFormSelect',
       };
 
       loadingMessage = () => this.props.env.translator('components.select.searching');
+
+      renderDescription = () => {
+        const { placement, text } = this.props.params.description;
+
+        return <div className="description" data-test={`description-${placement}`}>{text}</div>;
+      }
 
       loadOptions = (inputValue, callback) => {
         if (inputValue && inputValue.length >= 2) {

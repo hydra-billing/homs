@@ -55,6 +55,7 @@ module HBW
          label:       label,
          css_class:   css_class,
          placeholder: placeholder,
+         description: description,
          label_css:   label_css,
          choices:     choices,
          nullable:    nullable?,
@@ -99,6 +100,10 @@ module HBW
 
       def placeholder
         definition['placeholder']
+      end
+
+      def description
+        definition['description']
       end
 
       def coerce(value)
