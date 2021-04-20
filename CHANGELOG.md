@@ -43,6 +43,7 @@ v2.6.0 [unreleased]
       ...
       preview: true
   ```
+- [#537](https://github.com/latera/homs/pull/537) Add fileinput field name to uploaded file metadata.
 
 v2.5.1 [2021-04-08]
 ### Bugfixes

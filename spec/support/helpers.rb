@@ -7,6 +7,7 @@ require 'support/helpers/users_helper'
 require 'support/helpers/wait_for_ajax_helper'
 require 'support/helpers/bp_form_helper'
 require 'support/helpers/i18n_helper'
+require 'support/helpers/files_helper'
 
 FIXTURES_PATH = File.join(__FILE__, '..', '..', '..', 'fixtures')
 
@@ -21,13 +22,16 @@ RSpec.configure do |config|
     end
   end, type: :feature)
 
-  config.include Features::SessionsHelper,    type: :feature
-  config.include Features::OrdersHelper,      type: :feature
-  config.include Features::OrderTypesHelper,  type: :feature
-  config.include Features::TablesHelper,      type: :feature
-  config.include Features::TasksHelper,       type: :feature
-  config.include Features::UsersHelper,       type: :feature
-  config.include Features::WaitForAjaxHelper, type: :feature
-  config.include Features::BPFormHelper,      type: :feature
-  config.include Features::I18nHelper,        type: :feature
+  [
+    Features::SessionsHelper,
+    Features::OrdersHelper,
+    Features::OrderTypesHelper,
+    Features::TablesHelper,
+    Features::TasksHelper,
+    Features::UsersHelper,
+    Features::WaitForAjaxHelper,
+    Features::BPFormHelper,
+    Features::I18nHelper,
+    Features::FilesHelper
+  ].each { |helper| config.include(helper, type: :feature) }
 end

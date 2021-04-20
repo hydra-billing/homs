@@ -21,11 +21,8 @@ module HBW
       register(:oracle) { HBW::Sources::Oracle }
     end
 
-    register(:adapter) do
-      HBW::Camunda::Adapter.new
-    end
-
-    register(:config) { HBW::Widget.config }
+    register(:adapter) { HBW::Camunda::Adapter.new }
+    register(:config)  { HBW::Widget.config }
   end
 
   Inject = Dry::AutoInject(Container)

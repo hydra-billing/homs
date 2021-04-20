@@ -186,10 +186,11 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
 
       fileReader.onloadend = () => {
         this.addFile({
-          name:    file.name,
-          type:    file.type,
-          fileURL: URL.createObjectURL(file),
-          content: window.btoa(fileReader.result)
+          fieldName: this.props.params.name,
+          name:      file.name,
+          type:      file.type,
+          fileURL:   URL.createObjectURL(file),
+          content:   window.btoa(fileReader.result)
         });
       };
 

@@ -13,7 +13,7 @@ module HBW
       end
 
       files = JSON.parse(params['files'])
-      saved_files = minio_adapter.save_file(files)
+      saved_files = minio_adapter.save_files(files)
 
       render json: saved_files.to_json, status: :ok
     end
