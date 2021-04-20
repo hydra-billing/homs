@@ -16,7 +16,8 @@ HBW::Engine.routes.draw do
 
     resources :translations, only: [:index]
 
-    post 'file_upload', to: 'files#upload'
+    post 'files/upload', to: 'files#upload'
+    post 'file_upload', to: 'files#upload' # [DEPRECATED]
 
     namespace :events do
       resources :tasks, only: [:update]

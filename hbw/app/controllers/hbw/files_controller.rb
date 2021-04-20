@@ -8,6 +8,10 @@ module HBW
     inject['minio_adapter']
 
     def upload
+      if request.path.end_with?('/file_upload')
+        warn '[DEPRECATION] Endpoint `/widget/file_upload` is deprecated.  Please use `/widget/files/upload` instead.'
+      end
+
       files = JSON.parse(params['files'])
       saved_files = minio_adapter.save_file(files)
 
