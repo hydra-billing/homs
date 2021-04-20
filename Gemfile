@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.6.6'
 gem 'apitome'
 gem 'asset_symlink', git: 'https://github.com/fcheung/asset_symlink', ref: 'c300363' # ~> 0.3.1
-gem 'aws-sdk', '~> 2'
+gem 'aws-sdk-s3'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
 gem 'bootstrap-sass'
 gem 'bootswatch-rails'

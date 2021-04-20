@@ -1,4 +1,4 @@
-require 'aws-sdk'
+require 'aws-sdk-s3'
 
 Rails.application.config.to_prepare do
   config = HBW::Widget.config.fetch(:minio, {})
