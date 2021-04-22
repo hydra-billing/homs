@@ -1,7 +1,7 @@
 module HBW
   module Fields
     class FileUpload < Ordinary
-      def has_value?
+      def value?
         true
       end
 

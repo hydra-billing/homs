@@ -74,7 +74,7 @@ module HBW
     end
 
     def fields_for_submit(values)
-      flatten_fields.select(&:has_value?).select(&:editable?).select { |f| values.key?(f.code) }
+      flatten_fields.select(&:value?).select(&:editable?).select { |f| values.key?(f.code) }
     end
   end
 end

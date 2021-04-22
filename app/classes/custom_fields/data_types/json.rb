@@ -6,7 +6,7 @@ module CustomFields
       end
 
       def validate_value(attribute_name, value)
-        JSON.load(value) if value.present?
+        JSON.parse(value) if value.present?
       rescue JSON::ParserError => _e
         errors[attribute_name] << t(:incorrect_format,
                                     attribute_name: attribute_name,

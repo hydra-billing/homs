@@ -1,7 +1,7 @@
 class OrderType < ActiveRecord::Base
   class << self
-    def lookup(q)
-      s = q.mb_chars.downcase.to_s
+    def lookup(query)
+      s = query.mb_chars.downcase.to_s
 
       active.where('lower(name) like ?', "%#{s}%")
             .select('id, name')
@@ -46,7 +46,7 @@ class OrderType < ActiveRecord::Base
   def activate
     last_one = self.class.code(code).last
     transaction do
-      last_one.update_column(:active, false) if last_one
+      last_one&.update_column(:active, false)
       update_column(:active, true)
     end
   end
@@ -86,7 +86,7 @@ class OrderType < ActiveRecord::Base
   end
 
   def check_for_orders
-    if orders.count > 0
+    if orders.count.positive?
       errors.add(:base, :cannot_delete_as_orders_exist)
       false
     else

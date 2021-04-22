@@ -41,16 +41,26 @@ module CustomFields
     end
 
     # checkings
-    def key_value_should_be_of_certain_type(key, options)
+    def validate_array_as(key, options)
+      options[:as].any? { |klass| options[:in][key].is_a?(klass) }
+    end
+
+    def validate_array_in(key, options)
+      options[:in][key].map { |e| e.is_a?(options[:as]) }
+    end
+
+    def validate_key_value_type(key, options)
       if options[:as].is_a?(Array)
-        options[:as].any? { |klass| options[:in][key].is_a?(klass) }
+        validate_array_as(key, options)
       elsif options[:in][key].is_a?(Array)
-        options[:in][key].map do |e|
-          e.is_a?(options[:as])
-        end
+        validate_array_in(key, options)
       else
         options[:in][key].is_a?(options[:as])
-      end || add_unexpected_type_error(key, options[:as])
+      end
+    end
+
+    def key_value_should_be_of_certain_type(key, options)
+      validate_key_value_type(key, options) || add_unexpected_type_error(key, options[:as])
     end
 
     def should_have_key?(key, options)

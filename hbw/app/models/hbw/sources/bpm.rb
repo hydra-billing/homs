@@ -5,7 +5,7 @@ module HBW
         value = variables.fetch(variable_name.to_sym)
 
         if value.present?
-          JSON.load(value).map!(&:deep_symbolize_keys!)
+          JSON.parse(value).map!(&:deep_symbolize_keys!)
         else
           []
         end

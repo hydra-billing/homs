@@ -6,7 +6,7 @@ module Devise
       def authenticate!
         super
 
-        if user && user.blocked
+        if user&.blocked
           @user = nil
           fail(:blocked)
         end

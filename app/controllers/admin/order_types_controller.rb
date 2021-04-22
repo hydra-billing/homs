@@ -16,16 +16,9 @@ class Admin::OrderTypesController < ApplicationController
     @order_type = OrderType.new(file: file_content)
 
     if @order_type.valid?
-      if @order_type.save_if_differs!
-        flash[:success] = t('.uploaded')
-        render action: 'show'
-      else
-        flash[:error] = '%s: %s' % [t('.equal_exists'), @order_type.code]
-        redirect_to action: 'index'
-      end
+      render_valid
     else
-      flash[:error] = @order_type.errors.full_messages.join(', ')
-      redirect_to action: 'index'
+      render_invalid
     end
   end
 
@@ -58,5 +51,20 @@ class Admin::OrderTypesController < ApplicationController
 
   def require_order_type
     @order_type = OrderType.find(params.require(:id))
+  end
+
+  def render_valid
+    if @order_type.save_if_differs!
+      flash[:success] = t('.uploaded')
+      render action: 'show'
+    else
+      flash[:error] = '%s: %s' % [t('.equal_exists'), @order_type.code]
+      redirect_to action: 'index'
+    end
+  end
+
+  def render_invalid
+    flash[:error] = @order_type.errors.full_messages.join(', ')
+    redirect_to action: 'index'
   end
 end

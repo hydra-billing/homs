@@ -120,7 +120,7 @@ module HBW
         end
 
         unless self.class.schema.(rows).success?
-          raise Exception, 'Wrong config for select table'
+          raise StandardError, 'Wrong config for select table'
         end
       end
 

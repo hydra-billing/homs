@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   include ::ValidationsArbitraryKeys
 
-  before_action :set_profile, only: :create
+  before_action :new_profile, only: :create
 
   schema do
     required(:label).filled(:str?)
@@ -13,10 +13,10 @@ class ProfilesController < ApplicationController
     result = validate_arbitrary_keys(params[:data].to_unsafe_hash)
 
     if result[0] == :success
-      @profile.data = result[1]
-      @profile.save
+      @new_profile.data = result[1]
+      @new_profile.save
 
-      render json: @profile
+      render json: @new_profile
     else
       flash[:error] = collect_error_messages(result[1])
 
@@ -42,9 +42,9 @@ class ProfilesController < ApplicationController
 
   private
 
-  def set_profile
-    @profile ||= Profile.new(user_id:       params[:user_id] || current_user.id,
-                             order_type_id: params[:order_type_id])
+  def new_profile
+    @new_profile ||= Profile.new(user_id:       params[:user_id] || current_user.id,
+                                 order_type_id: params[:order_type_id])
   end
 
   def collect_error_messages(messages)

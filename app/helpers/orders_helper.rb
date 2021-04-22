@@ -34,7 +34,7 @@ module OrdersHelper
   def split_data(data, index = 10)
     data = (data.presence || {})
     visible = data.keys[0...index]
-    hidden = data.keys[index..-1]
+    hidden = data.keys[index..]
     [data.slice(*visible), data.slice(*hidden)]
   end
 

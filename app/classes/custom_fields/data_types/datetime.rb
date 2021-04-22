@@ -25,7 +25,6 @@ module CustomFields
           else
             ::Time.iso8601(value)
           end
-        when ::Date, ::Time then value.to_time
         when ::Array then value.map { |v| coerce_value(v) }
         else raise NotImplementedError
         end

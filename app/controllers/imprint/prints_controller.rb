@@ -17,7 +17,7 @@ module Imprint
 
         response = imprint_adapter.print_single_file(order.order_type_print_form_code,
                                                      order.attributes,
-                                                     params[:convert_to_pdf])
+                                                     convert_to_pdf: params[:convert_to_pdf])
 
         if response.nil?
           flash[:error] = I18n.t('orders.print_tasks.errors.internal_error')

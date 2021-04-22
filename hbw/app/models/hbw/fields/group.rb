@@ -29,7 +29,7 @@ module HBW
         fields.find { |field| field.name == name }
       end
 
-      def has_value?
+      def value?
         false
       end
     end
