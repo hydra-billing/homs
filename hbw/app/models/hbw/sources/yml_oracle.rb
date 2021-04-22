@@ -14,7 +14,7 @@ module HBW
       def find_response(hash)
         response = responses[hash] || []
 
-        response.map { |item| item.symbolize_keys }
+        response.map(&:symbolize_keys)
       end
 
       def build_params_key(sql, variables)

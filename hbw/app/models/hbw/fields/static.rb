@@ -23,7 +23,7 @@ module HBW
         end
       end
 
-      def has_value?
+      def value?
         false
       end
     end

@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
       select(:id).find_by(email: email).try(:id)
     end
 
-    def lookup(q, limit = 10)
-      s = q.mb_chars.downcase.to_s
+    def lookup(query, limit = 10)
+      s = query.mb_chars.downcase.to_s
 
       where(<<-SQL, *(["%#{s}%"] * 3))
         lower(name) like ?

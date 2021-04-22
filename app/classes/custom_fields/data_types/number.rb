@@ -19,17 +19,22 @@ module CustomFields
       def coerce_value(value)
         case value
         when ::Numeric then value
-        when ::String
-          if value.empty?
-            nil
-          elsif value =~ /\.\d+\z/
-            value.to_f
-          else
-            value.to_i
-          end
+        when ::String then string_to_number(value)
         when ::Array then value.map { |v| coerce_value(v) }
         else
           raise NotImplementedError
+        end
+      end
+
+      private
+
+      def string_to_number(str)
+        if str.empty?
+          nil
+        elsif str =~ /\.\d+\z/
+          str.to_f
+        else
+          str.to_i
         end
       end
     end

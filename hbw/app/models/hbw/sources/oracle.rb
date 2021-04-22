@@ -44,7 +44,7 @@ module HBW
       end
 
       def parse_bind_names(sql)
-        sql.scan(/:\w+/).map { |s| s[1..-1].to_sym } - [:HH, :HH12, :HH24, :MI, :SS, :SSSS, :SSTZH, :TZH, :TZM]
+        sql.scan(/:\w+/).map { |s| s[1..].to_sym } - [:HH, :HH12, :HH24, :MI, :SS, :SSSS, :SSTZH, :TZH, :TZM]
       end
 
       def execute(sql, limit = nil)

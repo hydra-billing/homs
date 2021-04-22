@@ -73,12 +73,10 @@ class ListOrdersFilter
     def filter_with_dispatch(rel, column, value)
       if value.nil?
         rel
+      elsif respond_to?('filter_by_%s' % column)
+        public_send('filter_by_%s' % column, rel, value)
       else
-        if respond_to?('filter_by_%s' % column)
-          public_send('filter_by_%s' % column, rel, value)
-        else
-          filter_by(rel, column, value)
-        end
+        filter_by(rel, column, value)
       end
     end
   end
@@ -126,13 +124,13 @@ class ListOrdersFilter
   end
 
   def list_orders(relation = Order.all)
-    rel = %w(state order_type_id user_id archived).reduce(Filters.filter_by_date(relation, filter_values)) do |rel, column|
+    filtered_by_static_fields = %w(state order_type_id user_id archived).reduce(Filters.filter_by_date(relation, filter_values)) do |rel, column|
       Filters.filter_with_dispatch(rel, column, filter_values[column])
     end
 
-    rel = Filters.filter_by_custom_fields(rel, filter_values)
+    filtered_by_custom_fields = Filters.filter_by_custom_fields(filtered_by_static_fields, filter_values)
 
-    Sorters.sort_by(rel, sort_values[:sort_by], sort_values[:order] || 'asc')
+    Sorters.sort_by(filtered_by_custom_fields, sort_values[:sort_by], sort_values[:order] || 'asc')
   end
 
   def filter_values
@@ -161,10 +159,9 @@ class ListOrdersFilter
 
   def users
     (params[:user_id] || []).map do |user_id|
-      if user_id == EMPTY_USER_ID
-        empty_user
-      elsif user_id == current_user.id.to_s
-        current_user
+      case user_id
+      when EMPTY_USER_ID then empty_user
+      when current_user.id.to_s then current_user
       else
         User.find(user_id)
       end

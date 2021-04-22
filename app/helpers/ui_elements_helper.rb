@@ -35,7 +35,7 @@ module UiElementsHelper
   end
 
   def user_picker(name, value: [])
-    content_tag(:select, name:     name.to_s + '[]',
+    content_tag(:select, name:     "#{name}[]",
                          data:     {
                            allowClear:  true,
                            placeholder: I18n.t('helpers.enter_user'),

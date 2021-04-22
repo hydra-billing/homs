@@ -42,10 +42,7 @@ class OrdersController < API::BaseController
   end
 
   def create
-    @order.order_type_id = params[:order_type_id] || OrderType.active.first.id
-    @order.data = params[:order][:data]
-    @order.user_id = current_user.id
-    @order.update_attributes(order_common_params)
+    init_order!
 
     if @order.save
       redirect_to order_url(@order.code)
@@ -82,7 +79,7 @@ class OrdersController < API::BaseController
   end
 
   def list_filter
-    @filter ||= order_printing_service.build_filter(current_user, params)
+    @list_filter ||= order_printing_service.build_filter(current_user, params)
   end
   helper_method :list_filter
 
@@ -109,5 +106,12 @@ class OrdersController < API::BaseController
 
   def sort_params
     params.permit(:sort_by, :order)
+  end
+
+  def init_order!
+    @order.order_type_id = params[:order_type_id] || OrderType.active.first.id
+    @order.data = params[:order][:data]
+    @order.user_id = current_user.id
+    @order.update_attributes(order_common_params)
   end
 end

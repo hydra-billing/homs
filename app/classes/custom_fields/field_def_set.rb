@@ -3,11 +3,11 @@ module CustomFields
     def validate_value(_name, fields_values)
       fields_values.each do |field_name, field_value|
         fd = @fds[field_name] || @fds[field_name.intern]
+
         if fd.nil?
           fields_values.delete(field_name)
           fields_values.delete(field_name.intern)
           errors[field_name] << t('no_known_fields') if fields_values.empty?
-          # errors << t('undefined_field', field_name: field_name)
         else
           fd.validate_value(field_name, field_value)
           errors[field_name] += fd.errors[field_name] unless fd.valid?

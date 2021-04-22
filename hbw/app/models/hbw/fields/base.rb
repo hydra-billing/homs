@@ -44,7 +44,7 @@ module HBW
         raise NotImplementedError
       end
 
-      def has_value?
+      def value?
         true
       end
 

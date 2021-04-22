@@ -12,8 +12,8 @@ describe API::V1::OrdersController, type: :request do
     before(:each) do
       disable_http_basic_authentication(API::V1::OrdersController)
 
-      [
-        "common: &common
+      vacation_request_desc = "
+common: &common
   label: ''
   type: string
 
@@ -55,8 +55,10 @@ order_type:
       label: JSON Field
     negativeNumberField:
       type: number
-      label: Negative Number Field",
-        "common: &common
+      label: Negative Number Field"
+
+      support_request_desc = "
+common: &common
   label: ''
   type: string
 
@@ -81,8 +83,10 @@ order_type:
       label: Resolution
     resolutionText:
       <<: *common
-      label: Resolution Text",
-        "common: &common
+      label: Resolution Text"
+
+      pizza_order_desc = "
+common: &common
   label: ''
   type: string
 
@@ -130,7 +134,8 @@ order_type:
       <<: *common
       type: number
       label: Pizza Price"
-      ].each do |order_type_file|
+
+      [vacation_request_desc, support_request_desc, pizza_order_desc].each do |order_type_file|
         OrderType.create!(
           file:   order_type_file,
           active: true
