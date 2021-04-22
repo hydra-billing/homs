@@ -73,7 +73,6 @@ group :test do
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'rubocop-junit_formatter'
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'temping'

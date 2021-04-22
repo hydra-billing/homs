@@ -30,7 +30,7 @@ echo "sources:
 
 bundle exec rspec ./spec --format RspecJunitFormatter --out test-reports/out.xml --format progress
 
-rubocop --require rubocop/formatter/junit_formatter --format RuboCop::Formatter::JUnitFormatter --out test-reports/rubocop.xml
+rubocop --display-only-failed --format junit --out test-reports/rubocop.xml
 
 JEST_JUNIT_OUTPUT_NAME=./test-reports/jest.xml yarn test --ci --reporters=default --reporters=jest-junit
 

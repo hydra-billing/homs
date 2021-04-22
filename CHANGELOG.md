@@ -42,6 +42,9 @@ v2.6.0 [unreleased]
       preview: true
   ```
 
+### Bugfixes
+- [#538](https://github.com/latera/homs/pull/538) Removed usage of rubocop-junit_formatter gem.
+
 v2.5.1 [2021-04-08]
 ### Bugfixes
 - [#526](https://github.com/latera/homs/pull/526) Fix fetch BP translations.
