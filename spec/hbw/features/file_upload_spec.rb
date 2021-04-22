@@ -45,9 +45,7 @@ feature 'Check file upload field with', js: true do
     end
 
     before(:each) do
-      file_input = page.find_field('homsOrderDataUploadedFile', type: :file)
-
-      file_input.attach_file(files_to_attach.map { |path| Rails.root.join(path) })
+      attach_files('homsOrderDataUploadedFile', files_to_attach)
     end
 
     scenario 'should render thumbnailed uploaded files' do

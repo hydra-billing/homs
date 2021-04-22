@@ -31,7 +31,7 @@ module HBW
       if files.present?
         file_list = JSON.parse(data['homsOrderDataFileList'])
 
-        saved_files = minio_adapter.save_file(files)
+        saved_files = minio_adapter.save_files(files)
 
         file_list += saved_files
 

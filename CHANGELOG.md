@@ -17,6 +17,8 @@ v2.6.0 [unreleased]
   Hence you should set these options to `true` to keep the old behaviour.
   Look at [#535](https://github.com/latera/homs/pull/535) for deatils
 
+- [DEPRECATION] Endpoint `/widget/file_upload` is deprecated.  Please use `/widget/files/upload` instead.
+
 ### Features
 - [#530](https://github.com/latera/homs/pull/530) Customize fonts in HBW.
 - [#534](https://github.com/latera/homs/pull/534), [#536](https://github.com/latera/homs/pull/536) Add custom top/bottom descriptions and placeholder for components:
@@ -41,6 +43,7 @@ v2.6.0 [unreleased]
       ...
       preview: true
   ```
+- [#537](https://github.com/latera/homs/pull/537) Add fileinput field name to uploaded file metadata.
 
 v2.5.1 [2021-04-08]
 ### Bugfixes
