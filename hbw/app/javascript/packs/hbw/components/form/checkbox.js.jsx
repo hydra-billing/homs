@@ -39,6 +39,7 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
 
       return <div className={inputCSS} title={params.tooltip}>
         <div className="form-group">
+          {params.description?.placement === 'top' && this.renderDescription()}
           <label className={labelCSS}>
             <input
               type='checkbox'
@@ -49,8 +50,15 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
             />
             <span>{` ${label}`}</span>
           </label>
+          {params.description?.placement === 'bottom' && this.renderDescription()}
         </div>
       </div>;
+    }
+
+    renderDescription = () => {
+      const { placement, text } = this.props.params.description;
+
+      return <div className="description" data-test={`description-${placement}`}>{text}</div>;
     }
 
     serialize = () => {
