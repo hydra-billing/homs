@@ -69,21 +69,26 @@ You can login to [Camunda Admin interface](http://localhost:8766/camunda) with c
 
     * [Without Oracle Instant Client](https://github.com/latera/homs/blob/master/WITHOUT_ORACLE.md).
 
-2. Start `webpack-dev-server` in source directory:
+1. Install [Yarn](https://github.com/yarnpkg/yarn#installing-yarn) and run
+   ```
+   yarn install
+   ```
+
+1. Start `webpack-dev-server` in source directory:
     ```bash
     bin/webpack-dev-server
     ```
-3. Start HOMS application in another console tab:
+1. Start HOMS application in another console tab:
     ```bash
     rails s
     ```
-4. Create and populate the database (adds an admin user, initial order types, and orders):
+1. Create and populate the database (adds an admin user, initial order types, and orders):
     ```bash
-    rake db:migrate
+    rails db:migrate
     export SEED_DB=true
-    rake db:seed
+    rails db:seed
     ```
-5. Log in at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
+1. Log in at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
 ## Contributing/Development
 
