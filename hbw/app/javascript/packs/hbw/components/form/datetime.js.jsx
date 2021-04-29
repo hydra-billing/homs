@@ -53,6 +53,7 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
       return <div className={inputCSS} title={params.tooltip} ref={(node) => { this.rootNode = node; }}>
         <div className="form-group">
           <span className={labelCss}>{label}</span>
+          {params.description?.placement === 'top' && this.renderDescription()}
           <div className="input-group date datetime-picker">
             <input {...opts} className="form-control" />
             <input name={name} type="hidden" value={isoValue} />
@@ -60,6 +61,7 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
               <span className="fas fa-calendar" />
             </span>
           </div>
+          {params.description?.placement === 'bottom' && this.renderDescription()}
         </div>
       </div>;
     }
@@ -67,6 +69,12 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
     componentDidMount () {
       this.setOnChange();
       this.props.onRef(this);
+    }
+
+    renderDescription = () => {
+      const { placement, text } = this.props.params.description;
+
+      return <div className="description" data-test={`description-${placement}`}>{text}</div>;
     }
 
     componentWillUnmount () {

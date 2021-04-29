@@ -1930,15 +1930,28 @@ get:
             description:
               placement: top
               text: Top description test
-            placeholder: Test placeholder
-            css_class: col-xs-6 col-sm-4 col-md-3
+            css_class: col-xs-6 col-sm-4 col-md-3 checkbox-top
           - name: bottomDescriptionCheckbox
             type: checkbox
             label: Checkbox label 2
             description:
               placement: bottom
               text: Bottom description test
-            css_class: col-xs-6 col-sm-4 col-md-2
+            css_class: col-xs-6 col-sm-4 col-md-2 checkbox-bottom
+          - name: topDescriptionDateTime
+            type: datetime
+            label: Datetime label 1
+            description:
+              placement: top
+              text: Top description test
+            css_class: col-xs-6 col-sm-4 col-md-3 datetime-top
+          - name: bottomDescriptionDatetime
+            type: datetime
+            label: DateTime label 2
+            description:
+              placement: bottom
+              text: Bottom description test
+            css_class: col-xs-6 col-sm-4 col-md-2 datetime-bottom
 
   # task variables
   task/816011/variables:
@@ -2449,11 +2462,17 @@ get:
       homsOrderCode:
         type: "string"
         value: "ORD-36"
-      topDescriptionString:
+      topDescriptionCheckbox:
         type: "checkbox"
         value: null
-      bottomDescriptionString:
+      bottomDescriptionCheckbox:
         type: "checkbox"
+        value: null
+      topDescriptionDateTime:
+        type: "datetime"
+        value: null
+      bottomDescriptionDatetime:
+        type: "datetime"
         value: null
 
   task/816011:
