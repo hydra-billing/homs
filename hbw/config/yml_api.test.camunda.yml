@@ -1959,6 +1959,21 @@ get:
               placement: top
               text: Top description test
             css_class: col-xs-6 col-sm-4 col-md-2 filelist-top
+          - name: topDescriptionText
+            type: text
+            label: Text label 1
+            description:
+              placement: top
+              text: Top description test
+            placeholder: Test placeholder
+            css_class: col-xs-6 col-sm-4 col-md-3 text-top
+          - name: bottomDescriptionText
+            type: text
+            label: Text label 2
+            description:
+              placement: bottom
+              text: Bottom description test
+            css_class: col-xs-6 col-sm-4 col-md-2 text-bottom
 
   # task variables
   task/816011/variables:
@@ -2480,6 +2495,11 @@ get:
         value: null
       bottomDescriptionDatetime:
         type: "datetime"
+      topDescriptionText:
+        type: "text"
+        value: null
+      bottomDescriptionText:
+        type: "text"
         value: null
       topDescriptionFileList:
         type: "file_list"
