@@ -29,9 +29,10 @@ modulejs.define('HBWFormText', ['React'], (React) => {
 
       const opts = {
         name,
-        className: 'textarea',
-        rows:      params.rows,
-        readOnly:  params.editable === false || disabled
+        className:   'textarea',
+        rows:        params.rows,
+        readOnly:    params.editable === false || disabled,
+        placeholder: params.placeholder
       };
 
       const cssClass = cx(params.css_class, { hidden });
@@ -41,9 +42,17 @@ modulejs.define('HBWFormText', ['React'], (React) => {
       return <div className={cssClass} title={params.tooltip}>
         <div className='form-group'>
           <span className={labelCss}>{label}</span>
-          <textarea {...opts} value={value || ''} onChange={this.handleChange} />
+          {params.description?.placement === 'top' && this.renderDescription()}
+          <textarea {...opts} value={value || ''} onChange={this.handleChange}/>
+          {params.description?.placement === 'bottom' && this.renderDescription()}
         </div>
       </div>;
+    }
+
+    renderDescription = () => {
+      const { placement, text } = this.props.params.description;
+
+      return <div className="description" data-test={`description-${placement}`}>{text}</div>;
     }
 
     serialize = () => {
