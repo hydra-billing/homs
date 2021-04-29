@@ -33,14 +33,23 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
       const hiddenValue = JSON.stringify(links.filter(link => !deletedFiles.includes(link.name)));
 
       return <div className={cssClass}>
-        <input name={params.name} value={hiddenValue} type="hidden"/>
-        <label className={labelCSS}>
-          <span>{` ${label}`}</span>
-          <ul>
-            {this.files(links)}
-          </ul>
-        </label>
+        <div className="form-group">
+          <input name={params.name} value={hiddenValue} type="hidden"/>
+          <label className={labelCSS}>
+            <span>{` ${label}`}</span>
+            {params.description?.placement === 'top' && this.renderDescription()}
+            <ul>
+              {this.files(links)}
+            </ul>
+          </label>
+        </div>
       </div>;
+    }
+
+    renderDescription = () => {
+      const { placement, text } = this.props.params.description;
+
+      return <div className="description" data-test={`description-${placement}`}>{text}</div>;
     }
 
     files = (list) => {
