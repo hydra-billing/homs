@@ -1974,6 +1974,20 @@ get:
               placement: bottom
               text: Bottom description test
             css_class: col-xs-6 col-sm-4 col-md-2 text-bottom
+          - name: topDescriptionFileUpload
+            type: file_upload
+            label: FileUpload label 1
+            description:
+              placement: top
+              text: Top description test
+            css_class: col-xs-6 col-sm-4 col-md-3 fileupload-top
+          - name: bottomDescriptionFileUpload
+            type: file_upload
+            label: FileUpload label 2
+            description:
+              placement: bottom
+              text: Bottom description test
+            css_class: col-xs-6 col-sm-4 col-md-2 fileupload-bottom
 
   # task variables
   task/816011/variables:
