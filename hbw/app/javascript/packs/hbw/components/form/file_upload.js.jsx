@@ -14,7 +14,11 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         css_class:   PropTypes.string,
         multiple:    PropTypes.bool,
         preview:     PropTypes.bool,
-        drag_n_drop: PropTypes.bool
+        drag_n_drop: PropTypes.bool,
+        description: PropTypes.shape({
+          placement: PropTypes.oneOf(['top', 'bottom']),
+          text:      PropTypes.string
+        })
       }).isRequired,
       task: PropTypes.shape({
         key:         PropTypes.string.isRequired,
@@ -70,9 +74,11 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
           <div className={errorMessageCss}>{errorMessage}</div>
           {params.preview && files.length > 0 && this.renderPreviewRow()}
           <div className="form-group">
+            {params.description?.placement === 'top' && this.renderDescription()}
             {params.drag_n_drop && this.renderDragDropField()}
             <input {...opts} type="file"/>
             <input name={name} value={hiddenValue} type="hidden"/>
+            {params.description?.placement === 'bottom' && this.renderDescription()}
           </div>
         </div>
       );
@@ -119,6 +125,12 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       } else {
         return <span className="far fa-file fa-7x"/>;
       }
+    }
+
+    renderDescription = () => {
+      const { placement, text } = this.props.params.description;
+
+      return <div className="description" data-test={`description-${placement}`}>{text}</div>;
     }
 
     ellipsisFileName = name => (

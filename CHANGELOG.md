@@ -23,13 +23,15 @@ v2.6.0 [unreleased]
 - [#530](https://github.com/latera/homs/pull/530) Customize fonts in HBW.
 - [#534](https://github.com/latera/homs/pull/534), [#536](https://github.com/latera/homs/pull/536),
   [#543](https://github.com/latera/homs/pull/543), [#545](https://github.com/latera/homs/pull/545),
-  [#547](https://github.com/latera/homs/pull/547), [#546](https://github.com/latera/homs/pull/546) Add custom top/bottom descriptions and placeholder for components:
+  [#547](https://github.com/latera/homs/pull/547), [#546](https://github.com/latera/homs/pull/546),
+  [#548](https://github.com/latera/homs/pull/548) Add custom top/bottom descriptions and placeholder for components:
   * string
   * select
   * checkbox
   * datetime
   * file_list(placement: top only)
   * text
+  * file_upload
 
   Now you can specify some additional description placed over/under the input for fields listed above with option:
   ```
