@@ -12,3 +12,4 @@ import './submit_select.js';
 import './text.js';
 import './user.js';
 import './cancel_process_button.js';
+import './radio_button.js';

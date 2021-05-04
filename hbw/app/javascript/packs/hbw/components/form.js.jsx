@@ -7,9 +7,9 @@ import { withCallbacks, withErrorBoundary } from 'shared/hoc';
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect',
   'HBWFormUser', 'HBWFormString', 'HBWFormText', 'HBWFormCheckbox',
-  'HBWFormStatic', 'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload'],
+  'HBWFormStatic', 'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload', 'HBWFormRadioButton'],
 (React, jQuery, Error, DateTime, Group, Select, Submit, SubmitSelect,
-  User, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload) => {
+  User, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload, RadioButton) => {
   class HBWForm extends React.Component {
     state = {
       error:         null,
@@ -150,6 +150,10 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
             {...onRef} />;
         case 'file_upload':
           return <FileUpload
+            {...opts}
+            {...onRef} />;
+        case 'radio_button':
+          return <RadioButton
             {...opts}
             {...onRef} />;
         default: return <p>{name}: Unknown control type {params.type}</p>;
