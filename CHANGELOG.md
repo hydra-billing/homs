@@ -32,6 +32,7 @@ v2.6.0 [unreleased]
   * file_list(placement: top only)
   * text
   * file_upload
+  * radio_button(placement: top only)
 
   Now you can specify some additional description placed over/under the input for fields listed above with option:
   ```
@@ -52,6 +53,7 @@ v2.6.0 [unreleased]
       preview: true
   ```
 - [#537](https://github.com/latera/homs/pull/537) Add fileinput field name to uploaded file metadata.
+- [#550](https://github.com/latera/homs/pull/550) Add radio buttons.
 
 ### Bugfixes
 - [#538](https://github.com/latera/homs/pull/538) Removed usage of rubocop-junit_formatter gem.

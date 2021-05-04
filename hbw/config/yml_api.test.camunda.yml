@@ -1988,6 +1988,19 @@ get:
               placement: bottom
               text: Bottom description test
             css_class: col-xs-6 col-sm-4 col-md-2 fileupload-bottom
+          - name: radioButton
+            type: radio_button
+            variants:
+              - value: first
+                name: first
+                label: Radio button label 1
+              - value: second
+                name: second
+                label: Radio button label 1
+            description:
+              placement: top
+              text: Top description test
+            css_class: col-xs-6 col-sm-4 col-md-3 radiobutton-top
 
   # task variables
   task/816011/variables:
@@ -2518,6 +2531,9 @@ get:
       topDescriptionFileList:
         type: "file_list"
         value: null
+      radioButton:
+        type: "radio_button"
+        value: "first"
 
   task/816011:
     "": &default_tasks

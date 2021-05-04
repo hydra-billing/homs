@@ -7,8 +7,9 @@ import { withConditions, withErrorBoundary } from 'shared/hoc';
 modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
   'HBWFormSubmitSelect', 'HBWFormUser', 'HBWFormSelect',
   'HBWFormString', 'HBWFormText', 'HBWFormCheckbox', 'HBWFormStatic',
-  'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload'],
-(React, Datetime, SubmitSelect, User, Select, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload) => {
+  'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload', 'HBWFormRadioButton'],
+(React, Datetime, SubmitSelect,
+  User, Select, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload, RadioButton) => {
   class HBWFormGroup extends React.Component {
     componentDidMount () {
       this.props.onRef(this);
@@ -22,7 +23,6 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
       const {
         name, params, hidden, task, env
       } = this.props;
-
       const inputCSS = cx('tab-panel', 'form-group', params.css_class, { hidden });
       const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
@@ -76,6 +76,10 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
           return <Group
             {...opts}
             variables={this.props.variables}
+            {...onRef} />;
+        case 'radio_button':
+          return <RadioButton
+            {...opts}
             {...onRef} />;
         case 'datetime':
           return <Datetime
