@@ -81,6 +81,7 @@ modulejs.define('HBWFormSelectTable',
           <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
           <div className={formGroupCss}>
             {errorTooltip}
+            {params.description?.placement === 'top' && this.renderDescription()}
             <table className={tableCss}>
               <thead className='thead-inverse'>
               <tr>
@@ -91,8 +92,15 @@ modulejs.define('HBWFormSelectTable',
               {this.buildTableBody(choices, name, value)}
               </tbody>
             </table>
+            {params.description?.placement === 'bottom' && this.renderDescription()}
           </div>
         </div>;
+      }
+
+      renderDescription = () => {
+        const { placement, text } = this.props.params.description;
+
+        return <div className="description" data-test={`description-${placement}`}>{text}</div>;
       }
 
       validateOnSubmit = () => {

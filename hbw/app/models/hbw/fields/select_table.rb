@@ -58,6 +58,7 @@ module HBW
          placeholder:   placeholder,
          label_css:     label_css,
          choices:       processed_choices,
+         description:   description,
          row_params:    rows,
          nullable:      nullable?,
          editable:      editable?,
