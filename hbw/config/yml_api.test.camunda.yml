@@ -2001,6 +2001,64 @@ get:
               placement: top
               text: Top description test
             css_class: col-xs-6 col-sm-4 col-md-3 radiobutton-top
+          - name: topDescriptionSelectTable
+            type: select_table
+            label: Select table
+            description:
+              placement: top
+              text: Top description test
+            css_class: col-xs-12 pre-scrollable select-table-top
+            nullable: false
+            rows:
+              - name: Name
+                type: string
+                alignment: right
+              - name: Code
+              - name: Arbitrary number
+                type: number
+                precision: 2
+                separator: "."
+                delimiter: ","
+            choices:
+              -
+                - 125342501
+                - My favourite region name
+                - My favourite region code
+                - 235234521
+              -
+                - 125342601
+                - My favourite region name2
+                - My favourite region code2
+                - 3252349284
+          - name: bottomDescriptionSelectTable
+            type: select_table
+            label: Select table
+            description:
+              placement: bottom
+              text: Bottom description test
+            css_class: col-xs-12 pre-scrollable select-table-bottom
+            nullable: false
+            rows:
+              - name: Name
+                type: string
+                alignment: right
+              - name: Code
+              - name: Arbitrary number
+                type: number
+                precision: 2
+                separator: "."
+                delimiter: ","
+            choices:
+              -
+                - 125342501
+                - My favourite region name
+                - My favourite region code
+                - 235234521
+              -
+                - 125342601
+                - My favourite region name2
+                - My favourite region code2
+                - 3252349284
 
   # task variables
   task/816011/variables:
@@ -2534,6 +2592,12 @@ get:
       radioButton:
         type: "radio_button"
         value: "first"
+      topDescriptionSelectTable:
+        type: "select_table"
+        value: ""
+      bottomDescriptionSelectTable:
+        type: "select_table"
+        value: ""
 
   task/816011:
     "": &default_tasks

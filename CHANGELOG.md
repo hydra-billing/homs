@@ -24,7 +24,7 @@ v2.6.0 [unreleased]
 - [#534](https://github.com/latera/homs/pull/534), [#536](https://github.com/latera/homs/pull/536),
   [#543](https://github.com/latera/homs/pull/543), [#545](https://github.com/latera/homs/pull/545),
   [#547](https://github.com/latera/homs/pull/547), [#546](https://github.com/latera/homs/pull/546),
-  [#548](https://github.com/latera/homs/pull/548) Add custom top/bottom descriptions and placeholder for components:
+  [#548](https://github.com/latera/homs/pull/548), [#551](https://github.com/latera/homs/pull/551) Add custom top/bottom descriptions and placeholder for components:
   * string
   * select
   * checkbox
@@ -33,6 +33,7 @@ v2.6.0 [unreleased]
   * text
   * file_upload
   * radio_button(placement: top only)
+  * select_table
 
   Now you can specify some additional description placed over/under the input for fields listed above with option:
   ```
