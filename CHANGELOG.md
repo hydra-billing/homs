@@ -1,4 +1,4 @@
-v2.6.0 [unreleased]
+v2.6.0 [2021-05-06]
 -------------------
 ### Breaking changes
 - New options have been introduced for `file_upload` field type:
