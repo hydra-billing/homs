@@ -1,3 +1,20 @@
+v2.6.1 [unreleased]
+-------------------
+### Features
+- [#553](https://github.com/latera/homs/pull/553) Forbid more than one active process instance per entity.
+
+  Now we set `businessKey` field value on BP start to `${entity_class}_${entity_code}` value.
+
+  At first, it's semantically correct: `businesskey` field in Camunda BPMN is definitely for the same purposes as `entity_code` in HBW and it must be isolated between different host applications (`entity_class`).
+
+  Also it can be used for process-per-entity restriction, you just need to add [corresponding constraint](https://docs.camunda.org/manual/latest/user-guide/process-engine/database/database-configuration/#business-key) to Camunda DB:
+  ```
+  alter table ACT_RU_EXECUTION add constraint ACT_UNIQ_RU_BUS_KEY UNIQUE (PROC_DEF_ID_, BUSINESS_KEY_);
+  ```
+
+  ⚠️ Warning!
+  Do not reset/update `businessKey` manually inside your business processes, since it can lead to unexpected side effects.
+
 v2.6.0 [2021-05-06]
 -------------------
 ### Breaking changes
