@@ -61,7 +61,9 @@ module HBW
 
         variables = get_variables(user, entity_class, entity_code, initial_variables)
 
-        response = start_process_response(p_def['id'], variables)
+        business_key = [entity_class, entity_code].join('_')
+
+        response = start_process_response(p_def['id'], variables, business_key)
         response.status == 201
       end
 
