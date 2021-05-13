@@ -49,9 +49,10 @@ module HBW
         response.body.first if response.status == 200
       end
 
-      def start_process_response(id, variables)
+      def start_process_response(id, variables, business_key)
         api.post("process-definition/#{id}/start",
-                 variables: variables)
+                 variables:   variables,
+                 businessKey: business_key)
       end
     end
   end
