@@ -1,7 +1,17 @@
 module HBW
   class ButtonsController < BaseController
     def index
-      render json: buttons.to_json
+      if autorun_process_key.nil?
+        render json: buttons.to_json
+      else
+        widget.try_to_start_bp(current_user_identifier,
+                               autorun_process_key,
+                               entity_identifier,
+                               entity_class,
+                               initial_variables)
+
+        render json: {buttons: [], bp_running: true}.to_json
+      end
     end
 
     def create

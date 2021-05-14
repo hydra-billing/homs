@@ -14,6 +14,7 @@ Set up your configuration file. Preferred configuration options are:
 Initialize widget with following options:
 * `entity_code` (in your configuration file);
 * `entity_type` (in your configuration file);
+* `autorunProcessKey` (business process type code which will be started automatically on Widget mount (if it isn't already started), don't set this parameter if you want to start your BP manually);
 * `widgetContainer` (DOM selector of element for placing widget forms and buttons);
 * `availableTasksButtonContainer` (DOM selector of element for placing user available tasks button);
 * `availableTaskListContainer` (DOM selector of element for placing user available task list);
