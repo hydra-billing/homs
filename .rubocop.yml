@@ -47,6 +47,9 @@ Style/FormatString:
 Style/IfUnlessModifier:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+
 Naming/AccessorMethodName:
   Enabled: false
 

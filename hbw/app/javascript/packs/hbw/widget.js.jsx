@@ -42,7 +42,7 @@ modulejs.define(
           entity_class:     this.options.entity_class,
           entity_code:      this.options.entity_code,
           initialVariables: payload.variables,
-          taskListPath:     this.options.taskListPath,
+          taskListPath:     this.options.taskListPath
         };
 
         this.$widgetContainer = jQuery(this.options.widgetContainer);
@@ -59,6 +59,7 @@ modulejs.define(
       Forms = ({ taskId }) => <Container entityCode={this.options.entity_code}
                                          entityTypeCode={this.options.entity_type}
                                          entityClassCode={this.options.entity_class}
+                                         autorunProcessKey={this.options.autorunProcessKey}
                                          chosenTaskID={taskId}
                                          env={this.env} />;
 

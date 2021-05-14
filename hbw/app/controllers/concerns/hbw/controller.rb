@@ -27,5 +27,9 @@ module HBW
     def initial_variables
       params[:initial_variables].to_h
     end
+
+    def autorun_process_key
+      params[:autorun_process_key]
+    end
   end
 end

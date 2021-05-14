@@ -33,11 +33,21 @@ class HBW::Widget
     end
   end
 
-  def start_bp(user_identifier, bp_code, entity_code, entity_class, initial_variables = {})
+  def start_bp(current_user_identifier, bp_code, entity_code, entity_class, initial_variables = {})
     bp_code && @adapter.start_process(bp_code,
-                                      user_identifier,
+                                      current_user_identifier,
                                       entity_code,
                                       entity_class,
                                       initial_variables)
+  end
+
+  def try_to_start_bp(current_user_identifier, bp_code, entity_code, entity_class, initial_variables = {})
+    unless @adapter.bp_running?(entity_code, entity_class)
+      start_bp(current_user_identifier,
+               bp_code,
+               entity_code,
+               entity_class,
+               initial_variables)
+    end
   end
 end

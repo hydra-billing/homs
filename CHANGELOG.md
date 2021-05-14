@@ -15,6 +15,10 @@ v2.6.1 [unreleased]
   ⚠️ Warning!
   Do not reset/update `businessKey` manually inside your business processes, since it can lead to unexpected side effects.
 
+- [#555](https://github.com/latera/homs/pull/555) Allow to start business process automatically.
+
+  You can start business process automatically (if it's not already running) by setting `autorunProcessKey` parameter on HBW initialization. Check [HBW integration guide](https://github.com/latera/homs/blob/master/hbw/README.md) for details.
+
 v2.6.0 [2021-05-06]
 -------------------
 ### Breaking changes
