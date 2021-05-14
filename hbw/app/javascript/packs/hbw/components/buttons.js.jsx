@@ -41,13 +41,14 @@ modulejs.define(
 
       fetchButtons = async () => {
         const {
-          entityCode, entityTypeCode, entityClassCode, resetProcess, env
+          entityCode, entityTypeCode, entityClassCode, autorunProcessKey, resetProcess, env
         } = this.props;
 
         const data = {
-          entity_code:  entityCode,
-          entity_type:  entityTypeCode,
-          entity_class: entityClassCode
+          entity_code:         entityCode,
+          entity_type:         entityTypeCode,
+          entity_class:        entityClassCode,
+          autorun_process_key: autorunProcessKey
         };
 
         const { bp_running: bpRunning, buttons } = await env.connection.request({

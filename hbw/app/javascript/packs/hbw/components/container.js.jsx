@@ -30,7 +30,7 @@ modulejs.define(
 
       render () {
         const {
-          env, chosenTaskID, entityCode, entityTypeCode, entityClassCode
+          env, chosenTaskID, entityCode, entityTypeCode, entityClassCode, autorunProcessKey
         } = this.props;
 
         const { fetching, error, getFormsForTasks } = this.context;
@@ -55,6 +55,7 @@ modulejs.define(
               <Buttons entityCode={entityCode}
                        entityTypeCode={entityTypeCode}
                        entityClassCode={entityClassCode}
+                       autorunProcessKey={autorunProcessKey}
                        showSpinner={fetching}
                        env={env}
                        resetProcess={this.resetProcess}/>
