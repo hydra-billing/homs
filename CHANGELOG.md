@@ -1,4 +1,4 @@
-v2.6.1 [unreleased]
+v2.6.1 [2021-05-17]
 -------------------
 ### Features
 - [#553](https://github.com/latera/homs/pull/553) Forbid more than one active process instance per entity.
