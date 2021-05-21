@@ -371,12 +371,6 @@ table.disabled
     font-weight: var(--hbw-panel-title-font-weight, var(--base-hbw-panel-title-font-weight))
     font-style: var(--hbw-panel-title-font-style, var(--base-hbw-panel-title-font-style))
 
-li.danger
-  a
-    color: var(--hbw-li-danger, var(--base-hbw-li-danger))
-    &:focus
-      color: var(--hbw-li-danger, var(--base-hbw-li-danger))
-
 input.hbw-checkbox
   &[type=checkbox]:disabled
     + span:before
@@ -389,3 +383,12 @@ input.hbw-checkbox
   font-style: var(--hbw-nav-tabs-font-style, var(--base-hbw-nav-tabs-font-style))
   li > a
       color: var(--hbw-text-color, var(--base-hbw-text-color)) !important
+
+.hbw-file-list
+  li.danger
+    a
+      color: var(--hbw-file-list-deleted-link-color, var(--base-hbw-file-list-deleted-link-color))
+      &:focus
+        color: var(--hbw-file-list-deleted-link-color, var(--base-hbw-file-list-deleted-link-color))
+  a
+    color: var(--hbw-file-list-link-color, var(--base-hbw-file-list-link-color))

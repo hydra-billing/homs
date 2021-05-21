@@ -1,3 +1,8 @@
+v2.6.2 [unreleased]
+-------------------
+### Features
+- [#556](https://github.com/latera/homs/pull/556) Add css variable for links color.
+
 v2.6.1 [2021-05-17]
 -------------------
 ### Features
