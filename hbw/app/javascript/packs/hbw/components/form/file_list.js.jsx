@@ -25,7 +25,7 @@ modulejs.define('HBWFormFileList', ['React'], (React) => {
 
       const { links, deletedFiles } = this.state;
 
-      const cssClass = cx(params.css_class, { hidden });
+      const cssClass = cx(params.css_class, 'hbw-file-list', { hidden });
 
       const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
       const labelCSS = cx('hbw-file-list-label', params.label_css);
