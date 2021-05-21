@@ -7,7 +7,7 @@ modulejs.define('HBWFormStatic', ['React'], (React) => {
     const className = cx({
       [params.css_class]: true,
       hidden
-    });
+    }, 'hbw-static');
 
     return <div className={className}
                 dangerouslySetInnerHTML={{ __html: params.html }} />;

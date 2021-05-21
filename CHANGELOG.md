@@ -2,6 +2,7 @@ v2.6.2 [unreleased]
 -------------------
 ### Features
 - [#556](https://github.com/latera/homs/pull/556) Add css variable for links color.
+- [#557](https://github.com/latera/homs/pull/557) Customize static fonts.
 
 v2.6.1 [2021-05-17]
 -------------------
