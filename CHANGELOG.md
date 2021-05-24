@@ -4,8 +4,8 @@ v2.6.2 [2021-05-31]
 - [#556](https://github.com/latera/homs/pull/556) Add css variable for links color.
 - [#557](https://github.com/latera/homs/pull/557) Customize static fonts.
 - [#560](https://github.com/latera/homs/pull/560) Unify drag&drop field and browse file button.
-
   `file_upload`'s field options `drag_and_drop` and `preview` have been removed: drag&drop aria and file preview are always displayed now.
+- [#559](https://github.com/latera/homs/pull/559) Customize checkboxes and radiobuttons.
 
 v2.6.1 [2021-05-17]
 -------------------

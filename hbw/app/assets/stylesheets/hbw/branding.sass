@@ -375,11 +375,6 @@ table.disabled
     font-weight: var(--hbw-panel-title-font-weight, var(--base-hbw-panel-title-font-weight))
     font-style: var(--hbw-panel-title-font-style, var(--base-hbw-panel-title-font-style))
 
-input.hbw-checkbox
-  &[type=checkbox]:disabled
-    + span:before
-      color: var(--hbw-alto, var(--base-hbw-alto))
-
 .hbw-static
   font-family: var(--base-hbw-font-family)
   font-size: var(--hbw-static-font-size, var(--base-hbw-static-font-size))
@@ -402,3 +397,31 @@ input.hbw-checkbox
         color: var(--hbw-file-list-deleted-link-color, var(--base-hbw-file-list-deleted-link-color))
   a
     color: var(--hbw-file-list-link-color, var(--base-hbw-file-list-link-color))
+
+.hbw-body, #hbw-bp-control-buttons-container
+  input.hbw-checkbox
+    &[type=checkbox]:disabled
+      + span:before
+        color: var(--hbw-alto, var(--base-hbw-alto))
+    &[type=checkbox]
+      display: none
+      + span:before
+        font-family: "Font Awesome 5 Free"
+        display: inline-block
+        color: var(--hbw-checkbox-symbol-color, var(--base-hbw-checkbox-symbol-color))
+        content: var(--hbw-checkbox-symbol, var(--base-hbw-checkbox-symbol))
+    &[type=checkbox]:checked
+      + span:before
+        content: var(--hbw-checked-checkbox-symbol, var(--base-hbw-checked-checkbox-symbol))
+
+  input.hbw-radiobutton
+    &[type=radio]
+      display: none
+      + span:before
+        font-family: "Font Awesome 5 Free"
+        display: inline-block
+        color: var(--hbw-radio-symbol-color, var(--base-hbw-radio-symbol-color))
+        content: var(--hbw-radio-symbol, var(--base-hbw-radio-symbol))
+    &[type=radio]:checked
+      + span:before
+        content: var(--hbw-checked-radio-symbol, var(--base-hbw-checked-radio-symbol))
