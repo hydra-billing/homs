@@ -1,4 +1,4 @@
-feature 'Check file upload field with', js: true do
+feature 'File upload field with', js: true do
   before(:each) do
     user = FactoryBot.create(:user)
 
@@ -20,22 +20,22 @@ feature 'Check file upload field with', js: true do
   end
 
   scenario 'multuple = true should allow to attach several files' do
-    expect(page).to have_field('homsOrderDataUploadedFile', type: :file)
-    expect(page.find_field('homsOrderDataUploadedFile', type: :file).multiple?).to be true
+    expect(page).to have_field('homsOrderDataUploadedFile', type: :file, visible: :hidden)
+    expect(page.find_field('homsOrderDataUploadedFile', type: :file, visible: :hidden).multiple?).to be true
   end
 
-  scenario 'drag_n_drop = true should render drop aria' do
+  scenario 'should render drop aria' do
     expect(page).to have_selector '.hbw-file-upload'
-    expect(page.find('.hbw-file-upload')).to have_content 'Drag and drop files to attach them'
+    expect(page.find('.hbw-file-upload')).to have_content 'Drag and drop files to attach, or browse'
   end
 
   scenario 'file list field missing renders warning' do
-    expect(page).to have_selector "[name='homsOrderDataUploadedFile']"
-    expect(page).to have_content  'To load files please add a field of file_list type with the name homsOrderDataFileList'
+    expect(page).to have_field('homsOrderDataUploadedFile', type: :file, visible: :hidden)
+    expect(page).to have_content('To load files please add a field of file_list type with the name homsOrderDataFileList')
     expect_widget_presence
   end
 
-  describe 'preview = true' do
+  describe 'attached files' do
     let(:files_to_attach) do
       [
         'fixtures/attached_files/logo.svg',
