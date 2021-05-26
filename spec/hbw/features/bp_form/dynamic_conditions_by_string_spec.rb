@@ -24,6 +24,7 @@ feature 'Control fields with dynamic conditions by string', js: true do
     expect(page).to have_content 'Dependent string'
     expect(page).to have_content 'Dependent text'
     expect(page).to have_content 'Dependent file_upload'
+    expect(page).to have_content 'Dependent radio button'
 
     fill_in 'controlString', with: '42'
 
@@ -37,6 +38,7 @@ feature 'Control fields with dynamic conditions by string', js: true do
     expect(page).not_to have_content 'Dependent string'
     expect(page).not_to have_content 'Dependent text'
     expect(page).not_to have_content 'Dependent file_upload'
+    expect(page).not_to have_content 'Dependent radio button'
   end
 
   scenario 'should disable all fields' do
@@ -52,6 +54,8 @@ feature 'Control fields with dynamic conditions by string', js: true do
 
     expect(find_by_name('dependentDatetime').disabled?).to be false
 
+    expect(radio_button_disabled?('dependentRadioButton')).to be false
+
     fill_in 'controlString', with: 'Disable fields'
 
     expect(page.find('.dependent-select')).to       have_selector '.react-select--is-disabled'
@@ -65,5 +69,7 @@ feature 'Control fields with dynamic conditions by string', js: true do
     expect(readonly?('stringInDependentGroup')).to be true
 
     expect(find_by_name('dependentDatetime').disabled?).to be true
+
+    expect(radio_button_disabled?('dependentRadioButton')).to be true
   end
 end

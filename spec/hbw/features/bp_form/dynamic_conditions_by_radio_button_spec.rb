@@ -1,19 +1,19 @@
-feature 'Control fields with dynamic conditions by select', js: true do
+feature 'Control fields with dynamic conditions by radio button', js: true do
   before(:each) do
     order_type = FactoryBot.create(:order_type, :support_request)
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-30')
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-31')
-
+    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-37')
     user = FactoryBot.create(:user)
+
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
     expect(page).to     have_content 'Orders list'
+
+    click_and_wait 'ORD-37'
+
+    expect(page).to have_selector "[name='controlRadioButton']", visible: false
   end
 
   scenario 'should hide all fields' do
-    click_and_wait 'ORD-30'
-    expect_r_select_presence('controlSelect')
-
     expect(page).to have_content 'Dependent static'
     expect(page).to have_content 'Dependent select'
     expect(page).to have_content 'Dependent checkbox'
@@ -26,7 +26,7 @@ feature 'Control fields with dynamic conditions by select', js: true do
     expect(page).to have_content 'Dependent file_upload'
     expect(page).to have_content 'Dependent radio button'
 
-    set_r_select_option('controlSelect', 'Hide fields')
+    click_on_radio_button_value('controlRadioButton', 'Hide fields')
 
     expect(page).not_to have_content 'Dependent static'
     expect(page).not_to have_content 'Dependent select'
@@ -42,9 +42,6 @@ feature 'Control fields with dynamic conditions by select', js: true do
   end
 
   scenario 'should disable all fields' do
-    click_and_wait 'ORD-30'
-    expect_r_select_presence('controlSelect')
-
     expect(page.find('.dependent-select')).not_to       have_selector '.react-select--is-disabled'
     expect(page.find('.dependent-select-table')).not_to have_selector '.disabled'
 
@@ -59,7 +56,7 @@ feature 'Control fields with dynamic conditions by select', js: true do
 
     expect(radio_button_disabled?('dependentRadioButton')).to be false
 
-    set_r_select_option('controlSelect', 'Disable fields')
+    click_on_radio_button_value('controlRadioButton', 'Disable fields')
 
     expect(page.find('.dependent-select')).to       have_selector '.react-select--is-disabled'
     expect(page.find('.dependent-select-table')).to have_selector '.disabled'
@@ -74,41 +71,5 @@ feature 'Control fields with dynamic conditions by select', js: true do
     expect(find_by_name('dependentDatetime').disabled?).to be true
 
     expect(radio_button_disabled?('dependentRadioButton')).to be true
-  end
-
-  scenario 'should update variable from choices by default with nullable: false' do
-    click_and_wait 'ORD-31'
-    expect_r_select_presence('notNullableWithEmptyVariable')
-
-    expect(readonly?('dependentString')).to be true
-
-    set_r_select_option('notNullableWithEmptyVariable', 'Second value')
-
-    expect(readonly?('dependentString')).to be false
-  end
-
-  scenario 'should work correctly with sql choices' do
-    click_and_wait 'ORD-31'
-    expect_r_select_presence('withSQL')
-
-    expect(page).to have_content 'Dependent string'
-
-    set_r_select_option('withSQL', 'Subject 2')
-
-    expect(page).not_to have_content 'Dependent string'
-  end
-
-  scenario 'should work correctly with mode: lookup' do
-    click_and_wait 'ORD-31'
-    expect_r_select_presence('lookupMode')
-
-    expect(page).to have_content 'Dependent string'
-
-    r_select_input('lookupMode').set('hide')
-    wait_for_ajax
-    expect(r_select_lookup_options('lookupMode')).to eq ['Hide field']
-    set_r_select_lookup_option('lookupMode', 'Hide field')
-
-    expect(page).not_to have_content 'Dependent string'
   end
 end
