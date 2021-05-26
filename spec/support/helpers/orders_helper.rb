@@ -317,5 +317,19 @@ module Features
     def find_by_text(text)
       page.find("[text='#{text}']")
     end
+
+    def find_radio_button_variants(name)
+      page.all("input[name='#{name}']", visible: false)
+    end
+
+    def click_on_radio_button_value(name, value)
+      input = find_radio_button_variants(name).select { |node| node.value == value }.first
+
+      parent_node(input).click
+    end
+
+    def radio_button_disabled?(name)
+      find_radio_button_variants(name).first.disabled?
+    end
   end
 end
