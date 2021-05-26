@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
-import { withConditions, withErrorBoundary } from 'shared/hoc';
+import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
 
 modulejs.define('HBWFormRadioButton', ['React'], (React) => {
   class HBWFormRadioButton extends React.Component {
@@ -17,7 +17,10 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
     }
 
     handleChange = (event) => {
-      this.setState({ value: event.target.value });
+      const newValue = event.target.value;
+
+      this.setState({ value: newValue });
+      this.props.fireFieldValueUpdate(this.props.name, newValue);
     };
 
     render () {
@@ -78,5 +81,5 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
     };
   }
 
-  return compose(withConditions, withErrorBoundary)(HBWFormRadioButton);
+  return compose(withCallbacks, withConditions, withErrorBoundary)(HBWFormRadioButton);
 });
