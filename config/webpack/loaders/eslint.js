@@ -1,9 +1,9 @@
 module.exports = {
   enforce: 'pre',
-  test: /\.(js|jsx)$/i,
+  test:    /\.(j|t)sx?$/i,
   include: [/app\/javascript/, /hbw\/app\/javascript/],
-  use: {
-    loader: 'eslint-loader',
+  use:     {
+    loader:  'eslint-loader',
     options: {
       fix: false
     }
