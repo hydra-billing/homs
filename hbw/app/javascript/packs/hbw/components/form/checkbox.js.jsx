@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
-import { withConditions, withErrorBoundary } from 'shared/hoc';
+import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
 
 modulejs.define('HBWFormCheckbox', ['React'], (React) => {
   class HBWFormCheckbox extends React.Component {
@@ -17,6 +17,7 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
     }
 
     handleChange = () => {
+      this.props.fireFieldValueUpdate(this.props.name, !this.state.value);
       this.setState(prevState => ({ value: !prevState.value }));
     };
 
@@ -70,5 +71,5 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
     };
   }
 
-  return compose(withConditions, withErrorBoundary)(HBWFormCheckbox);
+  return compose(withCallbacks, withConditions, withErrorBoundary)(HBWFormCheckbox);
 });

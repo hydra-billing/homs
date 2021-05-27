@@ -5,6 +5,7 @@ v2.6.2 [unreleased]
 - [#557](https://github.com/latera/homs/pull/557) Customize static fonts.
 - [#558](https://github.com/latera/homs/pull/558) Add dynamic `disable_if` and `delete_if` options for radio button.
 - [#559](https://github.com/latera/homs/pull/559) Customize checkboxes and radiobuttons.
+- [#561](https://github.com/latera/homs/pull/561) Add dynamic `disable_if` and `delete_if` options for checkbox.
 
 v2.6.1 [2021-05-17]
 -------------------
