@@ -1,5 +1,5 @@
 {
-  "name": "HOMS",
+  "name": "homs",
   "description": "Web application for order and business process management.",
   "repository": "latera/homs",
   "license": "Apache-2.0",
@@ -46,6 +46,10 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.11.5",
     "@babel/preset-env": "^7.6.3",
+    "@types/react": "^17.0.8",
+    "@types/react-dom": "^17.0.5",
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
     "babel-jest": "^26.1.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
@@ -57,6 +61,8 @@
     "jest": "^26.1.0",
     "jest-junit": "^11.0.1",
     "js-yaml": "^3.13.1",
+    "ts-loader": "^8.3.0",
+    "typescript": "^4.2.4",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1"
   }

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "module": "ES6",
+    "sourceMap": true,
+    "jsx": "react",
+    "strict": true,
+    "target": "ES5",
+    "allowJs": true,
+    "checkJs": false,
+  },
+  "exclude": [
+    "node_modules",
+    "vendor",
+    "public",
+  ],
+}

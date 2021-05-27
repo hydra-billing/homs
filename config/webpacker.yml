@@ -9,17 +9,8 @@ default: &default
   extensions:
     - .jsx
     - .js
-#    - .sass
-#    - .scss
-#    - .css
-#    - .module.sass
-#    - .module.scss
-#    - .module.css
-#    - .png
-#    - .svg
-#    - .gif
-#    - .jpeg
-#    - .jpg
+    - .tsx
+    - .ts
 
 development:
   <<: *default

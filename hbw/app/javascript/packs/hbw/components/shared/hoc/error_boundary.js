@@ -1,27 +1,6 @@
 import React, { Component } from 'react';
 import withCallbacks from './callbacks';
 
-const withErrorBoundary = (WrappedComponent) => {
-  class WithErrorBoundary extends Component {
-    render () {
-      return (
-        <ErrorBoundary
-          translator={this.props.env.translator}
-          cssClass={this.props.params ? this.props.params.css_class : ''}
-          trigger={this.props.trigger}
-          bind={this.props.bind}
-        >
-          <WrappedComponent {...this.props} />
-        </ErrorBoundary>
-      );
-    }
-  }
-
-  return withCallbacks(WithErrorBoundary);
-};
-
-export default withErrorBoundary;
-
 class ErrorBoundary extends Component {
   state = {
     error: false,
@@ -47,3 +26,24 @@ class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
+
+const withErrorBoundary = (WrappedComponent) => {
+  class WithErrorBoundary extends Component {
+    render () {
+      return (
+        <ErrorBoundary
+          translator={this.props.env.translator}
+          cssClass={this.props.params ? this.props.params.css_class : ''}
+          trigger={this.props.trigger}
+          bind={this.props.bind}
+        >
+          <WrappedComponent {...this.props} />
+        </ErrorBoundary>
+      );
+    }
+  }
+
+  return withCallbacks(WithErrorBoundary);
+};
+
+export default withErrorBoundary;

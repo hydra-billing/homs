@@ -1,5 +1,3 @@
-/* eslint react/jsx-no-undef: "off" */
-
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
@@ -71,10 +69,13 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
 
       const onRef = { onRef: (i) => { this[`${name}`] = i; } };
 
+      const Group = compose(withConditions, withErrorBoundary)(HBWFormGroup);
+
       switch (params.type) {
         case 'group':
           return <Group
             {...opts}
+            fileListPresent={this.props.fileListPresent}
             variables={this.props.variables}
             {...onRef} />;
         case 'radio_button':
