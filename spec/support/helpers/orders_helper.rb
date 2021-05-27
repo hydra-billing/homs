@@ -331,5 +331,11 @@ module Features
     def radio_button_disabled?(name)
       find_radio_button_variants(name).first.disabled?
     end
+
+    def click_on_checkbox_by_name(name)
+      input = page.find("input[name='#{name}']", visible: false)
+
+      parent_node(input).click
+    end
   end
 end
