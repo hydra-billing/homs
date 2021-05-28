@@ -6,6 +6,10 @@ v2.6.2 [unreleased]
 - [#558](https://github.com/latera/homs/pull/558) Add dynamic `disable_if` and `delete_if` options for radio button.
 - [#559](https://github.com/latera/homs/pull/559) Customize checkboxes and radiobuttons.
 - [#561](https://github.com/latera/homs/pull/561) Add dynamic `disable_if` and `delete_if` options for checkbox.
+- [#560](https://github.com/latera/homs/pull/560) Unify drag&drop field and browse file button.
+
+  `file_upload`'s field options `drag_and_drop` and `preview` have been removed: drag&drop aria and file preview are always displayed now.
+
 
 v2.6.1 [2021-05-17]
 -------------------

@@ -189,13 +189,9 @@
       justify-content: center
       display: flex
       margin-top: 10px
-      border-radius: 7px
-      width: 150px
       padding: 8px
 
       &.activated
-        width: auto
-        max-width: 480px
         height: 115px
         padding-top: 13px
 
@@ -203,6 +199,15 @@
         pointer-events: none
         font-size: .8em
         text-align: center
+
+        .fa-cloud-upload-alt
+          padding-right: 5px
+
+        label
+          pointer-events: auto
+          cursor: pointer
+          font-size: inherit
+          font-weight: inherit
 
     input[type=file]
       margin-top: 10px
@@ -539,3 +544,6 @@
   .btn-group
     .btn
       margin-right: -1px
+
+  input[hidden]
+    display: none

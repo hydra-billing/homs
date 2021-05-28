@@ -13,8 +13,6 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         label_css:   PropTypes.string,
         css_class:   PropTypes.string,
         multiple:    PropTypes.bool,
-        preview:     PropTypes.bool,
-        drag_n_drop: PropTypes.bool,
         description: PropTypes.shape({
           placement: PropTypes.oneOf(['top', 'bottom']),
           text:      PropTypes.string
@@ -33,10 +31,10 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     }
 
     state = {
-      valid:          true,
-      files:          [],
-      filesCount:     0,
-      dragStyleClass: 'attacher'
+      valid:        true,
+      files:        [],
+      filesCount:   0,
+      isDragActive: false
     };
 
     componentDidMount () {
@@ -49,17 +47,10 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
 
     render () {
       const {
-        name, params, disabled, hidden, fileListPresent, task, env
+        name, params, hidden, fileListPresent, task, env
       } = this.props;
 
       const { files } = this.state;
-
-      const opts = {
-        disabled,
-        name,
-        onChange: this.onChange,
-        multiple: params.multiple
-      };
 
       const hiddenValue = JSON.stringify({ files });
       const cssClass = cx('hbw-file-upload', params.css_class, { hidden });
@@ -72,11 +63,10 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         <div className={cssClass}>
           <span className={labelCSS}>{label}</span>
           <div className={errorMessageCss}>{errorMessage}</div>
-          {params.preview && files.length > 0 && this.renderPreviewRow()}
+          {files.length > 0 && this.renderPreviewRow()}
           <div className="form-group">
             {params.description?.placement === 'top' && this.renderDescription()}
-            {params.drag_n_drop && this.renderDragDropField()}
-            <input {...opts} type="file"/>
+            {this.renderFileInput()}
             <input name={name} value={hiddenValue} type="hidden"/>
             {params.description?.placement === 'bottom' && this.renderDescription()}
           </div>
@@ -84,19 +74,37 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       );
     }
 
-    renderDragDropField = () => {
-      const { env } = this.props;
-      const { dragStyleClass } = this.state;
+    renderFileInput = () => {
+      const {
+        env, name, params, disabled
+      } = this.props;
+
+      const { isDragActive } = this.state;
+
+      const opts = {
+        disabled,
+        name,
+        id:       'fileInputID',
+        onChange: this.onChange,
+        multiple: params.multiple
+      };
 
       return (
         <div
-          className={dragStyleClass}
+          className={cx('attacher', { activated: isDragActive })}
           onDragEnter={e => this.onDragEnter(e)}
           onDragLeave={e => this.onDragLeave(e)}
           onDragOver={e => e.preventDefault()}
           onDrop={e => this.onDrop(e)}
         >
-          <div className='drop-text'>{env.translator('components.file_upload.drag_and_drop')}</div>
+          <div className='drop-text'>
+            <span className="fa fas fa-cloud-upload-alt"/>
+            {env.translator('components.file_upload.drag_and_drop')}
+            <label htmlFor="fileInputID">
+              <a>{env.translator('components.file_upload.browse')}</a>
+            </label>
+            <input {...opts} type="file" hidden/>
+          </div>
         </div>
       );
     }
@@ -141,18 +149,18 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
 
     onDragEnter = (event) => {
       event.preventDefault();
-      this.setState({ dragStyleClass: 'attacher activated' });
+      this.setState({ isDragActive: true });
     };
 
     onDragLeave = (event) => {
       event.preventDefault();
-      this.setState({ dragStyleClass: 'attacher' });
+      this.setState({ isDragActive: false });
     };
 
     onDrop = (event) => {
       event.preventDefault();
       const files = Array.from(event.dataTransfer.files);
-      this.setState({ dragStyleClass: 'attacher' });
+      this.setState({ isDragActive: false });
       this.readFiles(files);
     };
 
