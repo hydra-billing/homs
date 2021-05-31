@@ -3,7 +3,7 @@ v2.7.0 [unreleased]
 ### Features
 - [#562](https://github.com/latera/homs/pull/562) Bring in TypeScript into the project.
 
-v2.6.2 [unreleased]
+v2.6.2 [2021-05-31]
 -------------------
 ### Features
 - [#556](https://github.com/latera/homs/pull/556) Add css variable for links color.
