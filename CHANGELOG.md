@@ -1,4 +1,5 @@
-v2.6.4 [unreleased]
+v2.6.4 [2021-06-08]
+-------------------
 ### Features
 - [#558](https://github.com/latera/homs/pull/558) Add dynamic `disable_if` and `delete_if` options for radio button.
 
