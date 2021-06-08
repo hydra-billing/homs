@@ -3,7 +3,7 @@ v2.7.0 [unreleased]
 ### Features
 - [#562](https://github.com/latera/homs/pull/562) Bring in TypeScript into the project.
 
-v2.6.4 [unreleased]
+v2.6.4 [2021-06-08]
 -------------------
 ### Features
 - [#558](https://github.com/latera/homs/pull/558) Add dynamic `disable_if` and `delete_if` options for radio button.
