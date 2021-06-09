@@ -348,40 +348,40 @@ feature 'List orders', js: true do
       change_select2_value('order_type_id', 'Support request')
       search_button.click
       wait_for_ajax
-      expect(orders_list).to eq([order_3, order_2])
+      expect(orders_list).to eq([order3, order2])
 
       order_list_table_header('Code').click
       wait_for_ajax
-      expect(orders_list).to eq([order_2, order_3])
+      expect(orders_list).to eq([order2, order3])
 
       order_list_table_header('Code').click
       wait_for_ajax
-      expect(orders_list).to eq([order_3, order_2])
+      expect(orders_list).to eq([order3, order2])
     end
 
     scenario 'by custom fields' do
-      order_2_with_contract = order_2 + [support_request_order.data['contractNumber'].to_s]
-      order_3_with_contract = order_3 + [support_request_order_for_ordering.data['contractNumber'].to_s]
+      order2_with_contract = order2 + [support_request_order.data['contractNumber'].to_s]
+      order3_with_contract = order3 + [support_request_order_for_ordering.data['contractNumber'].to_s]
 
       # "Order type"
       change_select2_value('order_type_id', 'Support request')
       search_button.click
       wait_for_ajax
-      expect(orders_list).to eq([order_3, order_2])
+      expect(orders_list).to eq([order3, order2])
 
       # Add Contract number to orders table
       click_on_multiselect_options('column-settings', %w(contractNumber))
       wait_for_ajax
-      expect(orders_list).to eq([order_3_with_contract, order_2_with_contract])
+      expect(orders_list).to eq([order3_with_contract, order2_with_contract])
 
       # Check sorting
       order_list_table_header('Contract number').click
       wait_for_ajax
-      expect(orders_list).to eq([order_2_with_contract, order_3_with_contract])
+      expect(orders_list).to eq([order2_with_contract, order3_with_contract])
 
       order_list_table_header('Contract number').click
       wait_for_ajax
-      expect(orders_list).to eq([order_3_with_contract, order_2_with_contract])
+      expect(orders_list).to eq([order3_with_contract, order2_with_contract])
     end
   end
 end
