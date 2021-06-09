@@ -44,7 +44,7 @@ module UnicornMonitor
 
   def current_memory_consumption
     line = `#{memory_command}`
-    parts = line.split(' ')
+    parts = line.split
     parts[1].to_i.kilobytes
   end
 

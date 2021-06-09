@@ -24,7 +24,6 @@ module HBW
 
       if [200, 204].include?(response.status)
         case response.body
-        when Array then response.body
         when Hash
           if response.body.key?('data')
             response.body['data']

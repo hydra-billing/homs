@@ -2,21 +2,21 @@ describe CustomFields::FieldDefSet do
   let(:right_def) do
     (
       YAML.load <<~EOS
-        common: &common
-          required: true
-          multiple: false
-          visible:  true
-          editable: true
-        
-        order_type:
-          code: Подключение физического лица
-          fields:
-            my_field2:
-              type: 'string'
-              label: 'my_label2'
-              description: 'my_description2'
-              value: 'static content2'
-              <<: *common
+                common: &common
+                  required: true
+                  multiple: false
+                  visible:  true
+                  editable: true
+        #{'        '}
+                order_type:
+                  code: Подключение физического лица
+                  fields:
+                    my_field2:
+                      type: 'string'
+                      label: 'my_label2'
+                      description: 'my_description2'
+                      value: 'static content2'
+                      <<: *common
       EOS
     ).deep_symbolize_keys![:order_type][:fields]
   end
@@ -24,15 +24,15 @@ describe CustomFields::FieldDefSet do
   let(:empty_def) do
     (
       YAML.load <<~EOS
-        common: &common
-          required: true
-          multiple: false
-          visible:  true
-          editable: true
-        
-        order_type:
-          code: Подключение физического лица
-          fields: {}
+                common: &common
+                  required: true
+                  multiple: false
+                  visible:  true
+                  editable: true
+        #{'        '}
+                order_type:
+                  code: Подключение физического лица
+                  fields: {}
       EOS
     ).deep_symbolize_keys![:order_type][:fields]
   end
