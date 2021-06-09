@@ -331,13 +331,13 @@ feature 'List orders', js: true do
                         :order_support_request_for_ordering,
                         order_type: support_request_type)
     end
-    let(:order_2) do
+    let(:order2) do
       ['ORD-2', 'Support request', 'In progress',
        in_current_locale(support_request_order.created_at), '', 'support_ext_code', '',
        in_current_locale(support_request_order.estimated_exec_date)]
     end
 
-    let(:order_3) do
+    let(:order3) do
       ['ORD-3', 'Support request', 'In progress',
        in_current_locale(support_request_order_for_ordering.created_at), '', 'support_ext_code', '',
        in_current_locale(support_request_order_for_ordering.estimated_exec_date)]

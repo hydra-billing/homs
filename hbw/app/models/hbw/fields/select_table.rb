@@ -77,7 +77,9 @@ module HBW
 
         choices.map do |line|
           line.each_with_index.map do |item, idx|
-            if idx != 0
+            if idx.zero?
+              item.to_i
+            else
               config = rows[idx - 1]
 
               case config[:type]
@@ -85,8 +87,6 @@ module HBW
               when 'date' then prepare_date(item, config)
               else item
               end
-            else
-              item.to_i
             end
           end
         end

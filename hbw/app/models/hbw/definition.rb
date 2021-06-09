@@ -7,9 +7,9 @@ module HBW
         names.each do |name|
           key = name.to_s.camelize(:lower)
           class_eval(<<-RUBY, __FILE__, __LINE__ + 1)
-            def #{name}
-              definition.fetch('#{key}')
-            end
+            def #{name}                   # def id
+              definition.fetch('#{key}')  #   definition.fetch('id')
+            end                           # end
           RUBY
         end
       end

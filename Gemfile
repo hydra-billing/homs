@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.6.6'
+
+ruby '2.7.3'
+
 gem 'apitome'
 gem 'asset_symlink', git: 'https://github.com/fcheung/asset_symlink', ref: 'c300363' # ~> 0.3.1
 gem 'aws-sdk-s3'
@@ -31,7 +33,7 @@ gem 'settingslogic'
 gem 'simple_form'
 gem 'uglifier', '>= 1.3.0'
 gem 'web-console', '~> 2.0', group: :development
-gem 'webpacker', '~> 5.0'
+gem 'webpacker'
 
 group :oracle do
   gem 'ruby-oci8', '2.2.3'

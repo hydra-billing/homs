@@ -21,7 +21,6 @@ class DatetimePickerInput < SimpleForm::Inputs::Base
     raw_value = options[:value].presence
     @value = case raw_value
              when String then Time.iso8601(raw_value)
-             when DateTime then raw_value
              else
                raw_value
              end
