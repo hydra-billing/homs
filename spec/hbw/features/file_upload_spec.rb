@@ -26,7 +26,7 @@ feature 'File upload field with', js: true do
 
   scenario 'should render drop aria' do
     expect(page).to have_selector '.hbw-file-upload'
-    expect(page.find('.hbw-file-upload')).to have_content 'Drag and drop files to attach, or browse'
+    expect(page.first('.hbw-file-upload')).to have_content 'Drag and drop files to attach, or browse'
   end
 
   scenario 'file list field missing renders warning' do
@@ -72,5 +72,33 @@ feature 'File upload field with', js: true do
       expect(preview_row).to have_no_text 'logo.svg'
       expect(preview_row).to have_no_css  "img[alt='logo.svg']"
     end
+  end
+
+  scenario 'should attach to different file_uploads' do
+    attach_files(
+      'homsOrderDataUploadedFile',
+      [
+        'fixtures/attached_files/logo.svg'
+      ]
+    )
+
+    attach_files(
+      'homsOrderDataUploadedFileSecond',
+      [
+        'fixtures/attached_files/file.txt',
+        'fixtures/attached_files/file_with_long_name.pdf'
+      ]
+    )
+
+    preview_rows = page.all('.files-preview-row')
+    expect(preview_rows.length).to eq(2)
+
+    expect(preview_rows[0]).to have_content 'logo.svg'
+    expect(preview_rows[0]).to have_css "img[alt='logo.svg']"
+
+    expect(preview_rows[1]).to have_content 'file.txt'
+    expect(preview_rows[1]).to have_content 'file_with...me.pdf'
+    expect(preview_rows[1]).to have_css "embed[type='application/pdf']"
+    expect(preview_rows[1]).to have_css "span[class='far fa-file fa-7x'"
   end
 end
