@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
+import { v4 as uuidv4 } from 'uuid';
 
 modulejs.define('HBWFormFileUpload', ['React'], (React) => {
   class HBWFormFileUpload extends React.Component {
@@ -36,6 +37,8 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       filesCount:   0,
       isDragActive: false
     };
+
+    fileInputID = uuidv4();
 
     componentDidMount () {
       this.props.onRef(this);
@@ -84,7 +87,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       const opts = {
         disabled,
         name,
-        id:       'fileInputID',
+        id:       this.fileInputID,
         onChange: this.onChange,
         multiple: params.multiple
       };
@@ -100,7 +103,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
           <div className='drop-text'>
             <span className="fa fas fa-cloud-upload-alt"/>
             {env.translator('components.file_upload.drag_and_drop')}
-            <label htmlFor="fileInputID">
+            <label htmlFor={this.fileInputID}>
               <a>{env.translator('components.file_upload.browse')}</a>
             </label>
             <input {...opts} type="file" hidden/>

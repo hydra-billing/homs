@@ -1,3 +1,8 @@
+v2.6.5 [unreleased]
+-------------------
+### Bugfixes
+- [#563](https://github.com/latera/homs/pull/563) Generate unique id for file_upload compoment.
+
 v2.6.4 [2021-06-08]
 -------------------
 ### Features
