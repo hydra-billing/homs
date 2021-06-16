@@ -33,10 +33,10 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     }
 
     state = {
-      valid:        true,
-      files:        [],
-      filesCount:   0,
-      isDragActive: false
+      valid:                 true,
+      files:                 [],
+      unprocessedFilesCount: 0,
+      isDragActive:          false
     };
 
     fileInputID = uuidv4();
@@ -167,35 +167,50 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       event.preventDefault();
       const files = Array.from(event.dataTransfer.files);
       this.setState({ isDragActive: false });
-      this.readFiles(files);
+      this.processFiles(files);
     };
 
     onChange = (event) => {
       const files = Array.from(event.target.files);
-      this.readFiles(files);
+      this.processFiles(files);
     };
 
-    readFiles = (files) => {
-      this.setState({
-        files:      [],
-        filesCount: files.length
-      },
-      () => {
-        if (files.length > 0) {
-          this.props.trigger('hbw:file-upload-started');
+    setStateForMultipleFiles = (files) => {
+      this.setState(
+        { unprocessedFilesCount: files.length },
+        () => files.forEach(file => this.processFile(file))
+      );
+    };
 
-          files.map(file => this.readFile(file));
-        }
-      });
+    setStateForSingleFile = (file) => {
+      this.setState(
+        {
+          unprocessedFilesCount: 1,
+          files:                 []
+        },
+        () => this.processFile(file)
+      );
+    };
+
+    processFiles = (files) => {
+      if (files.length === 0) return;
+
+      this.props.trigger('hbw:file-upload-started');
+
+      if (this.props.params.multiple) {
+        this.setStateForMultipleFiles(files);
+      } else {
+        this.setStateForSingleFile(files[0]);
+      }
     };
 
     addFile = (file) => {
-      this.setState(({ files, filesCount }) => ({
-        files:      [...files, file],
-        filesCount: filesCount - 1
+      this.setState(({ files, unprocessedFilesCount }) => ({
+        files:                 [...files, file],
+        unprocessedFilesCount: unprocessedFilesCount - 1
       }),
       () => {
-        if (this.state.filesCount === 0) {
+        if (this.state.unprocessedFilesCount === 0) {
           this.props.trigger('hbw:file-upload-finished');
         }
       });
@@ -207,7 +222,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       ));
     }
 
-    readFile = (file) => {
+    processFile = (file) => {
       const fileReader = new FileReader();
 
       fileReader.onloadend = () => {

@@ -39,9 +39,9 @@ The prefered way to install HOMS is to use [Docker](https://www.docker.com/).
 
     :pushpin: All variables are set in `.env` file. There you can change them, if you want to.
 
-2. For OS X users: make path to folder with config shared in `Docker -> Preferences... -> File Sharing`.
+1. For OS X users: make path to folder with config shared in `Docker -> Preferences... -> File Sharing`.
 
-3. Set `SECRET_KEY_BASE` variable in your `.env` with uniq id as value. You can generate key with `openssl rand -hex 64` command. For example:
+1. Set `SECRET_KEY_BASE` variable in your `.env` with uniq id as value. You can generate key with `openssl rand -hex 64` command. For example:
 
     ```bash
     SECRET_KEY_BASE=0750fd0eac13032778f0a42e2ab450003eaece477ea881501be0cc438f870a2f498dbbc00ffb7c8379c30c960568a402d315496bb7bc2b3ee324401ba788a
@@ -49,17 +49,17 @@ The prefered way to install HOMS is to use [Docker](https://www.docker.com/).
 
     :warning: Make sure this key is secret and don't share it with anyone.
 
-4. Change [Minio](https://github.com/minio/minio) credentials in `.env` file. Generate `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` values with any credentials generator, e.g. `pwgen 32 2`.
+1. Change [Minio](https://github.com/minio/minio) credentials in `.env` file. Generate `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` values with any credentials generator, e.g. `pwgen 32 2`.
 
-5. Run `docker-compose`:
+1. Run `docker-compose`:
 
     ```bash
     docker-compose up -d
     ```
 
-6. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
+1. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
 
-7. Login to [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*. Now you are able to start Pizza Order demo process.
+1. Login to [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*. Now you are able to start Pizza Order demo process.
 
 You can login to [Camunda Admin interface](http://localhost:8766/camunda) with credentials equal to `BPM_USER:BPM_PASSWORD` values from `.env` file (`user/changeme` if these variables aren't set).
 
@@ -67,8 +67,15 @@ You can login to [Camunda Admin interface](http://localhost:8766/camunda) with c
 1. Follow the instructions below:
     * [With Oracle Instant Client](https://github.com/latera/homs/blob/master/WITH_ORACLE.md).
 
-    * [Without Oracle Instant Client](https://github.com/latera/homs/blob/master/WITHOUT_ORACLE.md).
+    * [Without Oracle Instant Client](https://github.com/latera/homs/blob/master/WITHOUT_ORACLE.md) (default way).
 
+1. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
+1. Export all variables from .env file
+   ```
+   export $(cat .env | xargs)
+   ```
+1. Change in bpm.yml value of development.base_url from `http://camunda:8080/engine-rest/` to `http://localhost:8766/engine-rest/`
+1. In database.yml change value of development.host from `<%= ENV['HOMS_DB_HOST'] %>` to `localhost`
 1. Install [Yarn](https://github.com/yarnpkg/yarn#installing-yarn) and run
    ```
    yarn install
@@ -95,9 +102,9 @@ You can login to [Camunda Admin interface](http://localhost:8766/camunda) with c
 The general development process is:
 
 1. Fork this repo and clone it to your workstation.
-2. Create a feature branch for your change.
-3. Write code and tests.
-4. Push your feature branch to github and open a pull request against master.
+1. Create a feature branch for your change.
+1. Write code and tests.
+1. Push your feature branch to github and open a pull request against master.
 
 ## Reporting Issues
 
@@ -122,7 +129,7 @@ bundle exec rspec spec/PATH/TO/DIR
 
 1. [Repo with helper classes for BPMN development](https://github.com/latera/camunda-ext).
 
-2. [Example of creating a demo business process](https://github.com/latera/camunda-ext/tree/master/demo_processes).
+1. [Example of creating a demo business process](https://github.com/latera/camunda-ext/tree/master/demo_processes).
 
 ## License
 
