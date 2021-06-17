@@ -78,27 +78,56 @@ feature 'File upload field with', js: true do
     attach_files(
       'homsOrderDataUploadedFile',
       [
-        'fixtures/attached_files/logo.svg'
-      ]
-    )
-
-    attach_files(
-      'homsOrderDataUploadedFileSecond',
-      [
-        'fixtures/attached_files/file.txt',
+        'fixtures/attached_files/logo.svg',
         'fixtures/attached_files/file_with_long_name.pdf'
       ]
     )
 
+    file_second_input = page.find_field('homsOrderDataUploadedFileSecond', type: :file, visible: :hidden)
+    file_second_input.attach_file(Rails.root.join('fixtures/attached_files/file.txt'))
+
     preview_rows = page.all('.files-preview-row')
     expect(preview_rows.length).to eq(2)
-
     expect(preview_rows[0]).to have_content 'logo.svg'
     expect(preview_rows[0]).to have_css "img[alt='logo.svg']"
+    expect(preview_rows[0]).to have_content 'file_with...me.pdf'
+    expect(preview_rows[0]).to have_css "embed[type='application/pdf']"
 
     expect(preview_rows[1]).to have_content 'file.txt'
-    expect(preview_rows[1]).to have_content 'file_with...me.pdf'
-    expect(preview_rows[1]).to have_css "embed[type='application/pdf']"
     expect(preview_rows[1]).to have_css "span[class='far fa-file fa-7x'"
+  end
+
+  scenario 'should append files if multiple is true' do
+    attach_files(
+      'homsOrderDataUploadedFile',
+      [
+        'fixtures/attached_files/logo.svg',
+        'fixtures/attached_files/file_with_long_name.pdf'
+      ]
+    )
+
+    file_input = page.find_field('homsOrderDataUploadedFile', type: :file, visible: :hidden)
+    file_input.attach_file(Rails.root.join('fixtures/attached_files/file.txt'))
+
+    preview_rows = page.all('.files-preview-row')
+    expect(preview_rows[0]).to have_content 'logo.svg'
+    expect(preview_rows[0]).to have_css "img[alt='logo.svg']"
+    expect(preview_rows[0]).to have_content 'file_with...me.pdf'
+    expect(preview_rows[0]).to have_css "embed[type='application/pdf']"
+    expect(preview_rows[0]).to have_content 'file.txt'
+    expect(preview_rows[0]).to have_css "span[class='far fa-file fa-7x'"
+  end
+
+  scenario 'should substitute files if multiple is false or absent' do
+    file_second_input = page.find_field('homsOrderDataUploadedFileSecond', type: :file, visible: :hidden)
+    file_second_input.attach_file(Rails.root.join('fixtures/attached_files/logo.svg'))
+    file_second_input.attach_file(Rails.root.join('fixtures/attached_files/file.txt'))
+
+    preview_rows = page.all('.files-preview-row')
+    expect(preview_rows[0]).not_to have_content 'logo.svg'
+    expect(preview_rows[0]).not_to have_css "img[alt='logo.svg']"
+
+    expect(preview_rows[0]).to have_content 'file.txt'
+    expect(preview_rows[0]).to have_css "span[class='far fa-file fa-7x'"
   end
 end
