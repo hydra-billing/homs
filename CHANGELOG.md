@@ -7,6 +7,7 @@ v2.6.5 [2021-06-18]
 -------------------
 ### Bugfixes
 - [#563](https://github.com/latera/homs/pull/563) Generate unique id for file_upload compoment.
+- [#565](https://github.com/latera/homs/pull/565) Use versions from task events & add simple tests for the store.
 
 v2.6.4 [2021-06-08]
 -------------------
