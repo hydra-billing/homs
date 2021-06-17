@@ -74,12 +74,14 @@ module.exports = {
   moduleFileExtensions: [
     'js',
     'js.jsx',
-    'jsx'
+    'jsx',
+    'tsx'
   ],
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^shared(.*)$': '<rootDir>/hbw/app/javascript/packs/hbw/components/shared$1'
+    '^shared(.*)$':    '<rootDir>/hbw/app/javascript/packs/hbw/components/shared$1',
+    '^messenger(.*)$': '<rootDir>/app/javascript/utils/messenger$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -92,7 +94,7 @@ module.exports = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  // preset: null,
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: null,
@@ -133,7 +135,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -170,7 +172,7 @@ module.exports = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    '^.+\\.[t|j]sx?$': '<rootDir>/spec/javascript/helpers/jest_preprocess.js',
+    '^.+\\.[t|j]sx?$': 'ts-jest',
     '^.+\\.ya?ml$':    '<rootDir>/spec/javascript/helpers/yaml_loader.js'
   },
 
