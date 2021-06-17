@@ -2,6 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 
 import React, { Component, createContext } from 'react';
+import PropTypes from 'prop-types';
 import ActionCable from 'actioncable';
 import orderBy from 'lodash-es/orderBy';
 import partition from 'lodash-es/partition';
@@ -13,9 +14,23 @@ export const { Consumer: StoreConsumer } = StoreContext;
 
 const withStoreContext = (WrappedComponent) => {
   class StoreProvider extends Component {
+    static propTypes = {
+      env: PropTypes.shape({
+        connection: PropTypes.shape({
+          request:   PropTypes.func.isRequired,
+          serverURL: PropTypes.string.isRequired,
+        }).isRequired,
+        widgetURL:      PropTypes.string.isRequired,
+        translator:     PropTypes.func.isRequired,
+        userIdentifier: PropTypes.string.isRequired,
+        entity_class:   PropTypes.string.isRequired,
+      }).isRequired,
+    };
+
     state = {
       tasks:      [],
       events:     [],
+      versions:   {},
       fetching:   true,
       ready:      false,
       socket:     null,
@@ -31,41 +46,97 @@ const withStoreContext = (WrappedComponent) => {
     getTaskById = async (taskId, cacheKey = null) => {
       const { env } = this.props;
 
-      const incomingTask = await env.connection.request({
+      const result = await env.connection.request({
         url:    `${env.connection.serverURL}/tasks/${taskId}`,
         method: 'GET',
         data:   {
           cache_key:    cacheKey,
           entity_class: env.entity_class,
         },
-      }).then(response => response.json());
-
-      const tasks = this.state.tasks.filter(task => task.id !== incomingTask.id);
-
-      this.setState({
-        tasks: this.orderTasks([...tasks, incomingTask])
       });
+
+      const incomingTask = await result.json();
 
       return incomingTask;
     };
 
-    onCreate = async (taskId, cacheKey) => {
-      await this.getTaskById(taskId, cacheKey);
+    persistTask = async (task, version) => {
+      this.setState(prevState => ({
+        tasks: this.orderTasks([
+          ...prevState.tasks.filter(({ id }) => id !== task.id),
+          task,
+        ]),
+        versions: {
+          ...prevState.versions,
+          [task.id]: version
+        }
+      }));
     };
 
-    onAssignment = async (taskId, cacheKey, assignedToMe) => {
-      const { translator: t } = this.props.env;
-      const { name, assignee } = await this.getTaskById(taskId, cacheKey);
-
-      if (assignee !== null) {
-        if (assignedToMe) {
-          Messenger.notice(t('notifications.new_assigned_task', {
-            task_name: name
-          }));
-        } else {
-          this.removeTaskFromList(taskId);
+    setTaskVersion = (taskId, version) => {
+      this.setState(prevState => ({
+        versions: {
+          ...prevState.versions,
+          [taskId]: version
         }
+      }));
+    };
+
+    removeTaskFromList = async (taskId) => {
+      this.setState(
+        prevState => ({
+          tasks: prevState.tasks.filter(({ id }) => id !== taskId)
+        }),
+        () => this.closeTaskOverview(taskId)
+      );
+    };
+
+    vesionIsOutdated = (taskId, version) => {
+      const currentVersion = this.state.versions[taskId];
+
+      return currentVersion && currentVersion > version;
+    };
+
+    fetchTask = async (taskId, cacheKey, assignedToMe, version) => {
+      const { translator: t } = this.props.env;
+      const task = await this.getTaskById(taskId, cacheKey);
+
+      if (this.vesionIsOutdated(taskId, version)) return;
+
+      if (task.assignee === null) {
+        await this.persistTask(task, version);
+      } else if (assignedToMe) {
+        await this.persistTask(task, version);
+
+        Messenger.notice(t('notifications.new_assigned_task', {
+          task_name: task.name
+        }));
       }
+    };
+
+    onReceive = async ({
+      task_id: taskId,
+      cache_key: cacheKey,
+      event_name: eventName,
+      assigned_to_me: assignedToMe,
+      version
+    }) => {
+      if (this.vesionIsOutdated(taskId, version)) return;
+
+      this.setState(
+        { fetching: true },
+        () => this.setTaskVersion(taskId, version)
+      );
+
+      if (['create', 'assignment'].includes(eventName)) {
+        await this.fetchTask(taskId, cacheKey, assignedToMe, version);
+      }
+
+      if (['complete', 'delete'].includes(eventName)) {
+        await this.removeTaskFromList(taskId);
+      }
+
+      this.setState({ fetching: false });
     };
 
     mergeFormsToTasks = (prevTasks, fetchedForms) => {
@@ -116,30 +187,6 @@ const withStoreContext = (WrappedComponent) => {
       }));
     };
 
-    onComplete = async (taskId) => {
-      this.removeTaskFromList(taskId);
-    };
-
-    onReceive = async ({
-      task_id: taskId, cache_key: cacheKey, event_name: eventName, assigned_to_me: assignedToMe
-    }) => {
-      this.setState({ fetching: true });
-
-      if (eventName === 'create') {
-        await this.onCreate(taskId, cacheKey);
-      }
-
-      if (eventName === 'assignment') {
-        await this.onAssignment(taskId, cacheKey, assignedToMe);
-      }
-
-      if (['complete', 'delete'].includes(eventName)) {
-        await this.onComplete(taskId);
-      }
-
-      this.setState({ fetching: false });
-    };
-
     defer = (callback) => {
       this.setState(prevState => ({ events: [...prevState.events, callback] }));
     };
@@ -165,13 +212,13 @@ const withStoreContext = (WrappedComponent) => {
       const ws = ActionCable.createConsumer(socketUrl);
 
       ws.subscriptions.create({ channel: 'TaskChannel', user_identifier: userIdentifier }, {
-        received: (data) => {
+        received: async (data) => {
           const callback = async () => {
             await this.onReceive(JSON.parse(data));
           };
 
           if (this.state.ready) {
-            callback();
+            await callback();
           } else {
             this.defer(callback);
           }
@@ -203,13 +250,6 @@ const withStoreContext = (WrappedComponent) => {
           ready:    true
         }, this.executeDeferred);
       }
-    };
-
-    removeTaskFromList = async (taskId) => {
-      const tasks = this.state.tasks.filter(task => task.id !== taskId);
-      this.setState({ tasks });
-
-      this.closeTaskOverview(taskId);
     };
 
     orderTasks = tasks => orderBy(

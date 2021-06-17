@@ -77,7 +77,6 @@ GEM
     ast (2.4.2)
     autoprefixer-rails (10.2.4.0)
       execjs
-    awesome_print (1.8.0)
     aws-eventstream (1.1.1)
     aws-partitions (1.446.0)
     aws-sdk-core (3.114.0)
@@ -131,8 +130,6 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.8)
-    coolline (0.5.0)
-      unicode_utils (~> 1.4)
     crass (1.0.6)
     dalli (2.7.11)
     database_cleaner (2.0.1)
@@ -141,15 +138,6 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
-    debbie (2.0.0)
-      awesome_print (~> 1.2)
-      coolline (>= 0.4.2)
-      hirb (~> 0.7)
-      pry (~> 0.10)
-      pry-byebug
-      pry-doc (~> 0.6)
-      pry-rails (~> 0.3)
-      railties (>= 3.0)
     debug_inspector (1.0.0)
     devise (4.7.3)
       bcrypt (~> 3.0)
@@ -222,7 +210,6 @@ GEM
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 5.1)
-    hirb (0.7.3)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -282,9 +269,6 @@ GEM
     pry-byebug (3.9.0)
       byebug (~> 11.0)
       pry (~> 0.13.0)
-    pry-doc (0.13.5)
-      pry (~> 0.11)
-      yard (~> 0.9.11)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (4.0.6)
@@ -428,7 +412,6 @@ GEM
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.7.0)
-    unicode_utils (1.4.0)
     unicorn (5.8.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
@@ -449,7 +432,6 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    yard (0.9.26)
 
 PLATFORMS
   ruby
@@ -469,7 +451,6 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   dalli
   database_cleaner
-  debbie
   devise
   devise-encryptable
   dry-auto_inject
