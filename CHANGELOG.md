@@ -3,7 +3,7 @@ v2.7.0 [unreleased]
 ### Features
 - [#562](https://github.com/latera/homs/pull/562) Bring in TypeScript into the project.
 
-v2.6.6 [unreleased]
+v2.6.6 [2021-06-18]
 -------------------
 ### Bugfixes
 - [#565](https://github.com/latera/homs/pull/565) Use versions from task events & add simple tests for the store.
