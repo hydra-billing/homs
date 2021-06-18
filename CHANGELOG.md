@@ -1,4 +1,4 @@
-v2.6.6 [unreleased]
+v2.6.6 [2021-06-18]
 -------------------
 ### Bugfixes
 - [#565](https://github.com/latera/homs/pull/565) Use versions from task events & add simple tests for the store.
