@@ -3,6 +3,11 @@ v2.7.0 [unreleased]
 ### Features
 - [#562](https://github.com/latera/homs/pull/562) Bring in TypeScript into the project.
 
+v2.6.7 [unreleased]
+-------------------
+### Features
+- [#567](https://github.com/latera/homs/pull/567) Add customization capability for file_upload.
+
 v2.6.6 [2021-06-18]
 -------------------
 ### Bugfixes
