@@ -1,3 +1,8 @@
+v2.6.7 [unreleased]
+-------------------
+### Features
+- [#567](https://github.com/latera/homs/pull/567) Add customization capability for file_upload.
+
 v2.6.6 [2021-06-18]
 -------------------
 ### Bugfixes

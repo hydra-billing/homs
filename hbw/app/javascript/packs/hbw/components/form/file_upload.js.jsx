@@ -14,6 +14,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         label_css:   PropTypes.string,
         css_class:   PropTypes.string,
         multiple:    PropTypes.bool,
+        input_text:  PropTypes.string,
         description: PropTypes.shape({
           placement: PropTypes.oneOf(['top', 'bottom']),
           text:      PropTypes.string
@@ -92,6 +93,8 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         multiple: params.multiple
       };
 
+      const inputText = params.input_text || env.translator('components.file_upload.drag_and_drop');
+
       return (
         <div
           className={cx('attacher', { activated: isDragActive })}
@@ -102,7 +105,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         >
           <div className='drop-text'>
             <span className="fa fas fa-cloud-upload-alt"/>
-            {env.translator('components.file_upload.drag_and_drop')}
+            {inputText}
             <label htmlFor={this.fileInputID}>
               <a>{env.translator('components.file_upload.browse')}</a>
             </label>
