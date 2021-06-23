@@ -2,6 +2,7 @@ v2.6.7 [unreleased]
 -------------------
 ### Features
 - [#567](https://github.com/latera/homs/pull/567) Add customization capability for file_upload.
+- [#564](https://github.com/latera/homs/pull/564) Append files to form instead of substituting when multiple prop is set up.
 
 v2.6.6 [2021-06-18]
 -------------------
