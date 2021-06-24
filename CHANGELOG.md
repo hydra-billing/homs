@@ -4,7 +4,7 @@ v2.7.0 [unreleased]
 - [#562](https://github.com/latera/homs/pull/562) Bring in TypeScript into the project.
 - [#564](https://github.com/latera/homs/pull/564) Append files to form instead of substituting when multiple prop is set up.
 
-v2.6.7 [unreleased]
+v2.6.7 [2021-06-24]
 -------------------
 ### Features
 - [#567](https://github.com/latera/homs/pull/567) Add customization capability for file_upload.
