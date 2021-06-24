@@ -9,13 +9,14 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     static propTypes = {
       name:   PropTypes.string.isRequired,
       params: PropTypes.shape({
-        name:        PropTypes.string.isRequired,
-        label:       PropTypes.string.isRequired,
-        label_css:   PropTypes.string,
-        css_class:   PropTypes.string,
-        multiple:    PropTypes.bool,
-        input_text:  PropTypes.string,
-        description: PropTypes.shape({
+        name:             PropTypes.string.isRequired,
+        label:            PropTypes.string.isRequired,
+        label_css:        PropTypes.string,
+        css_class:        PropTypes.string,
+        multiple:         PropTypes.bool,
+        input_text:       PropTypes.string,
+        browse_link_text: PropTypes.string,
+        description:      PropTypes.shape({
           placement: PropTypes.oneOf(['top', 'bottom']),
           text:      PropTypes.string
         })
@@ -94,6 +95,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       };
 
       const inputText = params.input_text || env.translator('components.file_upload.drag_and_drop');
+      const browseLinkText = params.browse_link_text || env.translator('components.file_upload.browse');
 
       return (
         <div
@@ -107,7 +109,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
             <span className="fa fas fa-cloud-upload-alt"/>
             {inputText}
             <label htmlFor={this.fileInputID}>
-              <a>{env.translator('components.file_upload.browse')}</a>
+              <a>{browseLinkText}</a>
             </label>
             <input {...opts} type="file" hidden/>
           </div>
