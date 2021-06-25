@@ -161,6 +161,11 @@ modulejs.define('HBWFormSelectTable',
         return result;
       };
 
+      onValueUpdate = () => {
+        this.setValidationState();
+        this.props.fireFieldValueUpdate(this.props.name, this.state.value);
+      }
+
       onClick = (event) => {
         if (this.props.params.editable === false || this.props.disabled) {
           return;
@@ -171,12 +176,12 @@ modulejs.define('HBWFormSelectTable',
         if (this.props.params.multi) {
           if (this.state.value.includes(newValue)) {
             const index = this.state.value.indexOf(newValue);
-            this.setState((prevState) => { prevState.value.splice(index, 1); }, this.setValidationState);
+            this.setState((prevState) => { prevState.value.splice(index, 1); }, this.onValueUpdate);
           } else {
-            this.setState((prevState) => { prevState.value.push(newValue); }, this.setValidationState);
+            this.setState((prevState) => { prevState.value.push(newValue); }, this.onValueUpdate);
           }
         } else {
-          this.setState({ value: newValue }, this.setValidationState);
+          this.setState({ value: newValue }, this.onValueUpdate);
         }
       };
 
@@ -272,5 +277,5 @@ modulejs.define('HBWFormSelectTable',
       };
     }
 
-    return compose(withSelect, withConditions, withCallbacks, withValidations, withErrorBoundary)(HBWFormSelectTable);
+    return compose(withSelect, withCallbacks, withConditions, withValidations, withErrorBoundary)(HBWFormSelectTable);
   });
