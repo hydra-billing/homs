@@ -1,6 +1,6 @@
 import './checkbox.js';
 import './datetime.js';
-import './file_list.js';
+import './file_list';
 import './file_upload.js';
 import './group.js';
 import './select.js';

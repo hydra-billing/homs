@@ -3,13 +3,14 @@
 
 import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
+import FileList from './form/file_list';
 
 modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect',
   'HBWFormUser', 'HBWFormString', 'HBWFormText', 'HBWFormCheckbox',
-  'HBWFormStatic', 'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload', 'HBWFormRadioButton'],
+  'HBWFormStatic', 'HBWFormSelectTable', 'HBWFormFileUpload', 'HBWFormRadioButton'],
 (React, jQuery, Error, DateTime, Group, Select, Submit, SubmitSelect,
-  User, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload, RadioButton) => {
+  User, String, Text, Checkbox, Static, SelectTable, FileUpload, RadioButton) => {
   class HBWForm extends React.Component {
     state = {
       error:         null,

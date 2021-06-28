@@ -3,6 +3,7 @@
     "eslint:recommended",
     "airbnb-base",
     "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended"
   ],
 
   "plugins": ["react", "@typescript-eslint"],
@@ -16,6 +17,7 @@
   },
 
   "rules": {
+    "camelcase": ["off"],
     "comma-dangle": [1, "only-multiline"],
     "func-names": [1, "never"],
     "import/extensions": 0,
@@ -27,6 +29,8 @@
     "max-len": [1, { "code": 121, "ignoreComments": true }],
     "no-alert": 0,
     "no-underscore-dangle": 0,
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "no-else-return": 0,
