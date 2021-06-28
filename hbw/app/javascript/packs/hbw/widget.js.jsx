@@ -20,7 +20,9 @@ modulejs.define(
         const payload = { variables: {}, ...this.options.payload };
 
         const {
-          widgetURL, widgetPath, widgetHost, userIdentifier
+          widgetURL, widgetPath, widgetHost,
+          userIdentifier, showNotifications, taskListPath,
+          entity_class, entity_code, locale
         } = this.options;
 
         const connection = new Connection({
@@ -33,16 +35,17 @@ modulejs.define(
           connection,
           widgetURL,
           userIdentifier,
+          locale,
+          entity_class,
+          entity_code,
+          taskListPath,
+          showNotifications,
           dispatcher:       new Dispatcher(),
           translator:       Translator.getTranslatorForLocale(this.options.locale.code),
           localizer:        localizer(this.options.locale),
           forms:            new HBWForms(connection, this.options.entity_class),
-          locale:           this.options.locale,
           userExist:        true,
-          entity_class:     this.options.entity_class,
-          entity_code:      this.options.entity_code,
           initialVariables: payload.variables,
-          taskListPath:     this.options.taskListPath
         };
 
         this.$widgetContainer = jQuery(this.options.widgetContainer);

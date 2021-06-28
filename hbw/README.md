@@ -25,6 +25,7 @@ Initialize widget with following options:
 * `locale` (object):
     * `code` (available values are 'en', 'ru')
     * `dateTimeFormat` (format for dates according to [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table))
+* `showNotifications` (allows pop-up notifications to appear when a new task has been assigned to the current user)
 
 After successful initialization widget would send HTTP-requests to get list of tasks and forms for current entity type.
 You need to proxy these requests in your application to homs using basic authorization (get user and password from your configuration file) and adding special parameters for BPM:

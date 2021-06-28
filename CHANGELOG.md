@@ -1,3 +1,8 @@
+v2.6.8 [unreleased]
+-------------------
+### Features
+- [#573](https://github.com/latera/homs/pull/573) Allow to show/hide notifications about new assigned tasks.
+
 v2.6.7 [2021-06-24]
 -------------------
 ### Features
