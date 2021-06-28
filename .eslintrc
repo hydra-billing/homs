@@ -17,7 +17,7 @@
   },
 
   "rules": {
-    "camelcase": ["off"],
+    "camelcase": "off",
     "comma-dangle": [1, "only-multiline"],
     "func-names": [1, "never"],
     "import/extensions": 0,

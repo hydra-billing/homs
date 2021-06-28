@@ -95,6 +95,7 @@ module ApplicationHelper
       availableTasksButtonContainer: '#hbw-tasks-list-button',
       availableTaskListContainer:    '#hbw-task-list',
       taskListPath:                  'tasks',
+      showNotifications:             true,
       locale:                        {
         code:           I18n.locale,
         dateTimeFormat: js_datetime_format
