@@ -20,10 +20,11 @@ const withStoreContext = (WrappedComponent) => {
           request:   PropTypes.func.isRequired,
           serverURL: PropTypes.string.isRequired,
         }).isRequired,
-        widgetURL:      PropTypes.string.isRequired,
-        translator:     PropTypes.func.isRequired,
-        userIdentifier: PropTypes.string.isRequired,
-        entity_class:   PropTypes.string.isRequired,
+        widgetURL:         PropTypes.string.isRequired,
+        translator:        PropTypes.func.isRequired,
+        userIdentifier:    PropTypes.string.isRequired,
+        entity_class:      PropTypes.string.isRequired,
+        showNotifications: PropTypes.bool
       }).isRequired,
     };
 
@@ -97,8 +98,17 @@ const withStoreContext = (WrappedComponent) => {
       return currentVersion && currentVersion > version;
     };
 
+    showNotificaton = (taskName) => {
+      const { translator: t, showNotifications } = this.props.env;
+
+      if (showNotifications) {
+        Messenger.notice(t('notifications.new_assigned_task', {
+          task_name: taskName
+        }));
+      }
+    }
+
     fetchTask = async (taskId, cacheKey, assignedToMe, version) => {
-      const { translator: t } = this.props.env;
       const task = await this.getTaskById(taskId, cacheKey);
 
       if (this.vesionIsOutdated(taskId, version)) return;
@@ -107,10 +117,7 @@ const withStoreContext = (WrappedComponent) => {
         await this.persistTask(task, version);
       } else if (assignedToMe) {
         await this.persistTask(task, version);
-
-        Messenger.notice(t('notifications.new_assigned_task', {
-          task_name: task.name
-        }));
+        this.showNotificaton(task.name);
       }
     };
 
