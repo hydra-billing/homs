@@ -1,13 +1,14 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
+import FileList from './file_list';
 
 modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
   'HBWFormSubmitSelect', 'HBWFormUser', 'HBWFormSelect',
   'HBWFormString', 'HBWFormText', 'HBWFormCheckbox', 'HBWFormStatic',
-  'HBWFormSelectTable', 'HBWFormFileList', 'HBWFormFileUpload', 'HBWFormRadioButton'],
+  'HBWFormSelectTable', 'HBWFormFileUpload', 'HBWFormRadioButton'],
 (React, Datetime, SubmitSelect,
-  User, Select, String, Text, Checkbox, Static, SelectTable, FileList, FileUpload, RadioButton) => {
+  User, Select, String, Text, Checkbox, Static, SelectTable, FileUpload, RadioButton) => {
   class HBWFormGroup extends React.Component {
     componentDidMount () {
       this.props.onRef(this);
