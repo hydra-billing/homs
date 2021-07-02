@@ -1,3 +1,8 @@
+v2.6.9 [unreleased]
+-------------------
+### Bugfixes
+- [#574](https://github.com/latera/homs/pull/574) Translate BP name with correct translator.
+
 v2.6.8 [unreleased]
 -------------------
 ### Features

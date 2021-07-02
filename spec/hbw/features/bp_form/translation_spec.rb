@@ -21,6 +21,9 @@ feature 'BP form with existing russian translation', js: true do
     scenario 'should be translated to russian' do
       click_and_wait 'ORD-32'
 
+      expect(page).to     have_content 'Подключение абонента'
+      expect(page).not_to have_content 'New Customer'
+
       expect(page).to     have_content 'ORD-32'
       expect(page).to     have_content 'Заполните адрес абонента'
       expect(page).not_to have_content 'Enter customer\'s address'
@@ -41,6 +44,9 @@ feature 'BP form with existing russian translation', js: true do
 
     scenario 'should not be translated to russian' do
       click_and_wait 'ORD-32'
+
+      expect(page).to     have_content 'New Customer'
+      expect(page).not_to have_content 'Подключение абонента'
 
       expect(page).to     have_content 'ORD-32'
       expect(page).to     have_content 'Enter customer\'s address'
