@@ -8,6 +8,7 @@ v2.6.9 [unreleased]
 -------------------
 ### Bugfixes
 - [#574](https://github.com/latera/homs/pull/574) Translate BP name with correct translator.
+- [#576](https://github.com/latera/homs/pull/576) Show message about incorrect sign in.
 
 v2.6.8 [unreleased]
 -------------------

@@ -40,7 +40,7 @@ class Messenger {
     this.typeMap = {
       default: ['info', 'notice'],
       success: ['success'],
-      warning: ['warn'],
+      warning: ['warn', 'alert'],
       error:   ['error']
     };
 

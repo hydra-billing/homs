@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def flash_messages
-    %i(success notice error).reduce([]) do |messages, type|
+    %i(success notice alert error).reduce([]) do |messages, type|
       if flash.key?(type)
         messages + [[type, flash[type]]]
       else
