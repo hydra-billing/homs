@@ -1,0 +1,4 @@
+%ul
+  - files.each do |file|
+    %li
+      = link_to file['origin_name'], file['url']

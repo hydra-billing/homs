@@ -3,6 +3,7 @@ v2.7.0 [unreleased]
 ### Features
 - [#562](https://github.com/latera/homs/pull/562) Bring in TypeScript into the project.
 - [#564](https://github.com/latera/homs/pull/564) Append files to form instead of substituting when multiple prop is set up.
+- [#575](https://github.com/latera/homs/pull/575) Add custom view for files to order data.
 
 v2.6.9 [unreleased]
 -------------------

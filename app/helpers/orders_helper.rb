@@ -1,6 +1,19 @@
 module OrdersHelper
   EMPTY_VALUE = '—'.freeze
 
+  FILE_LIST_SCHEMA = Dry::Validation.Schema do
+    each do
+      required('url').filled
+      required('name').filled
+      required('origin_name').filled
+      required('real_name').filled
+      required('field_name').filled
+      required('upload_time').filled
+      required('end_point').filled
+      required('bucket').filled
+    end
+  end
+
   def prettify_value(value, field = {})
     if value.is_a?(Array)
       return value.map { |v| prettify_value(v, field) }.join(', ')
@@ -11,6 +24,8 @@ module OrdersHelper
       prettify_date(value)
     when 'boolean'
       prettify_boolean(value)
+    when 'json'
+      prettify_json(value)
     else value.to_s.presence || EMPTY_VALUE
     end
   end
@@ -18,6 +33,19 @@ module OrdersHelper
   def prettify_date(value)
     if value.present?
       loc_datetime(value)
+    else
+      EMPTY_VALUE
+    end
+  end
+
+  def prettify_json(value)
+    if value.present?
+      parsed_value = JSON.parse(value)
+      if FILE_LIST_SCHEMA.(parsed_value).success?
+        render partial: 'orders/file_list', locals: {files: parsed_value}
+      else
+        value.to_s
+      end
     else
       EMPTY_VALUE
     end
