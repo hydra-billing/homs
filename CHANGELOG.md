@@ -1,9 +1,9 @@
-v2.6.9 [unreleased]
+v2.6.9 [2021-07-08]
 -------------------
 ### Bugfixes
 - [#574](https://github.com/latera/homs/pull/574) Translate BP name with correct translator.
 
-v2.6.8 [unreleased]
+v2.6.8 [2021-07-01]
 -------------------
 ### Features
 - [#573](https://github.com/latera/homs/pull/573) Allow to show/hide notifications about new assigned tasks.
