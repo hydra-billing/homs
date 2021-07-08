@@ -5,13 +5,13 @@ v2.7.0 [unreleased]
 - [#564](https://github.com/latera/homs/pull/564) Append files to form instead of substituting when multiple prop is set up.
 - [#575](https://github.com/latera/homs/pull/575) Add custom view for files to order data.
 
-v2.6.9 [unreleased]
+v2.6.9 [2021-07-08]
 -------------------
 ### Bugfixes
 - [#574](https://github.com/latera/homs/pull/574) Translate BP name with correct translator.
 - [#576](https://github.com/latera/homs/pull/576) Show message about incorrect sign in.
 
-v2.6.8 [unreleased]
+v2.6.8 [2021-07-01]
 -------------------
 ### Features
 - [#573](https://github.com/latera/homs/pull/573) Allow to show/hide notifications about new assigned tasks.
