@@ -1,3 +1,8 @@
+v2.6.10 [unreleased]
+-------------------
+### Features
+- [#577](https://github.com/latera/homs/pull/577) Hide file upload area if the only possible file has been attached.
+
 v2.6.9 [2021-07-08]
 -------------------
 ### Bugfixes
