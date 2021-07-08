@@ -5,6 +5,11 @@ v2.7.0 [unreleased]
 - [#564](https://github.com/latera/homs/pull/564) Append files to form instead of substituting when multiple prop is set up.
 - [#575](https://github.com/latera/homs/pull/575) Add custom view for files to order data.
 
+v2.6.10 [unreleased]
+-------------------
+### Features
+- [#577](https://github.com/latera/homs/pull/577) Hide file upload area if the only possible file has been attached.
+
 v2.6.9 [2021-07-08]
 -------------------
 ### Bugfixes

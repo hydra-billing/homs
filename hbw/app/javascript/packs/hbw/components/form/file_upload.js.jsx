@@ -57,6 +57,8 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
 
       const { files } = this.state;
 
+      const showFileInput = params.multiple || files.length === 0;
+
       const hiddenValue = JSON.stringify({ files });
       const cssClass = cx('hbw-file-upload', params.css_class, { hidden });
       const errorMessage = env.translator('errors.file_list_field_required');
@@ -71,7 +73,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
           {files.length > 0 && this.renderPreviewRow()}
           <div className="form-group">
             {params.description?.placement === 'top' && this.renderDescription()}
-            {this.renderFileInput()}
+            {showFileInput && this.renderFileInput()}
             <input name={name} value={hiddenValue} type="hidden"/>
             {params.description?.placement === 'bottom' && this.renderDescription()}
           </div>
@@ -94,7 +96,6 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         multiple: params.multiple
       };
 
-      const inputText = params.input_text || env.translator('components.file_upload.drag_and_drop');
       const browseLinkText = params.browse_link_text || env.translator('components.file_upload.browse');
 
       return (
@@ -106,8 +107,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
           onDrop={e => this.onDrop(e)}
         >
           <div className='drop-text'>
-            <span className="fa fas fa-cloud-upload-alt"/>
-            {inputText}
+            {this.renderInputText()}
             <label htmlFor={this.fileInputID}>
               <a>{browseLinkText}</a>
             </label>
@@ -125,7 +125,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
 
     renderPreviewItem = ({ name, type, fileURL }) => (
       <div className="files-preview-item" key={fileURL}>
-        <div className="far fa-times-circle remove-file" onClick={() => this.removeFile(name)}/>
+        <div className="fas fa-times remove-file" onClick={() => this.removeFile(name)}/>
         <div className="files-preview-image">
           {this.renderPreviewImage(name, type, fileURL)}
         </div>
@@ -147,6 +147,21 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       const { placement, text } = this.props.params.description;
 
       return <div className="description" data-test={`description-${placement}`}>{text}</div>;
+    }
+
+    renderInputText = () => {
+      const { params, env } = this.props;
+
+      const defaultInputText = (
+        <>
+          <span className="fa fas fa-cloud-upload-alt"/>
+          {env.translator('components.file_upload.drag_and_drop')}
+        </>
+      );
+
+      return 'input_text' in params
+        ? params.input_text
+        : defaultInputText;
     }
 
     ellipsisFileName = name => (

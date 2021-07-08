@@ -730,15 +730,16 @@ get:
           label: Files
           css_class: col-xs-12
           fields:
-          - name: homsOrderDataUploadedFile
+          - name: multipleFileInput
             type: file_upload
             label: Attach file
             css_class: col-md-4 col-xs-4 col-lg-4
             multiple: true
-          - name: homsOrderDataUploadedFileSecond
+          - name: singleFileInput
             type: file_upload
             label: Attach file
             css_class: col-md-4 col-xs-4 col-lg-4
+            input_text: 'Drag single file, or '
   "task/111116/deployed-form":
     "": |
       form:
@@ -2672,7 +2673,7 @@ get:
       homsOrderCode:
         type: "string"
         value: "ORD-15"
-      homsOrderDataUploadedFile:
+      multipleFileInput:
         type: "file_upload"
         value: null
 
