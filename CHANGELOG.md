@@ -6,6 +6,11 @@ v2.7.0 [unreleased]
 - [#575](https://github.com/latera/homs/pull/575) Add custom view for files to order data.
 - [#571](https://github.com/latera/homs/pull/512) Add dynamic `disable_if` and `delete_if` options for select_table.
 
+v2.6.10 [unreleased]
+-------------------
+### Features
+- [#577](https://github.com/latera/homs/pull/577) Hide file upload area if the only possible file has been attached.
+
 v2.6.9 [2021-07-08]
 -------------------
 ### Bugfixes
