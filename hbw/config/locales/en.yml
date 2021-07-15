@@ -13,7 +13,8 @@ en:
     field_not_defined_in_bp: Field with the name %{field_name} is not defined in BP variables
     cannot_obtain_available_actions: Unable to obtain available actions
     cannot_start_process: Unable to start the process
-    file_list_field_required: To load files please add a field of file_list type with the name homsOrderDataFileList
+    file_list_name_empty: The field %{field_name} must have not empty "file_list_name" parameter
+    file_list_name_not_matched: The form is missing a field with type "file_list" and name "%{file_list_name}"
     field_is_required: Field is required
     task_already_claimed: Task %{task_name} is already claimed
     user_not_found: Current user is not found in Camunda

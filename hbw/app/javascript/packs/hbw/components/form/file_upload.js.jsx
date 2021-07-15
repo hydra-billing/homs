@@ -19,6 +19,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         multiple:         PropTypes.bool,
         input_text:       PropTypes.string,
         browse_link_text: PropTypes.string,
+        file_list_name:   PropTypes.string,
         description:      PropTypes.shape({
           placement: PropTypes.oneOf(['top', 'bottom']),
           text:      PropTypes.string
@@ -28,15 +29,30 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         key:         PropTypes.string.isRequired,
         process_key: PropTypes.string.isRequired
       }).isRequired,
-      disabled:        PropTypes.bool.isRequired,
-      hidden:          PropTypes.bool.isRequired,
-      fileListPresent: PropTypes.bool.isRequired,
-      onRef:           PropTypes.func.isRequired,
-      trigger:         PropTypes.func.isRequired
+      disabled:      PropTypes.bool.isRequired,
+      hidden:        PropTypes.bool.isRequired,
+      fileListNames: PropTypes.array.isRequired,
+      onRef:         PropTypes.func.isRequired,
+      trigger:       PropTypes.func.isRequired
+    }
+
+    hasConfigErrors = () => {
+      const { params, fileListNames } = this.props;
+
+      if (!('file_list_name' in params)) {
+        return false;
+      } else {
+        return (
+          params.file_list_name === null
+          || params.file_list_name === ''
+          || !fileListNames.includes(params.file_list_name)
+        );
+      }
     }
 
     state = {
       valid:                 true,
+      error:                 this.hasConfigErrors(),
       files:                 [],
       unprocessedFilesCount: 0,
       isDragActive:          false
@@ -55,26 +71,50 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     render () {
       const { translate, translateBP } = this.context;
       const {
-        name, params, hidden, fileListPresent, task
+        name, params, hidden, fileListNames, task
       } = this.props;
 
-      const { files } = this.state;
+      const { files, error } = this.state;
 
       const showFileInput = params.multiple || files.length === 0;
 
       const hiddenValue = JSON.stringify({ files });
       const cssClass = cx('hbw-file-upload', params.css_class, { hidden });
-      const errorMessage = translate('errors.file_list_field_required');
-      const errorMessageCss = cx('alert', 'alert-danger', { hidden: fileListPresent });
+
+      const errMessageParamEmpty = translate(
+        'errors.file_list_name_empty',
+        { field_name: name }
+      );
+
+      const errMessageParamNotMatched = translate(
+        'errors.file_list_name_not_matched',
+        { file_list_name: params.file_list_name }
+      );
+
+      const errMessageCss = 'alert alert-danger';
+
+      const getErrMessage = () => {
+        if (!('file_list_name' in params)) {
+          return null;
+        } else if (params.file_list_name === null || params.file_list_name === '') {
+          return errMessageParamEmpty;
+        } else if (!fileListNames.includes(params.file_list_name)) {
+          return errMessageParamNotMatched;
+        } else {
+          return null;
+        }
+      };
+
       const label = translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
       const labelCSS = cx('hbw-file-upload-label', params.label_css);
+      const errMessage = getErrMessage();
 
       return (
         <div className={cssClass}>
           <span className={labelCSS}>{label}</span>
-          <div className={errorMessageCss}>{errorMessage}</div>
+          {errMessage && <div className={errMessageCss}>{errMessage}</div>}
           {files.length > 0 && this.renderPreviewRow()}
-          <div className="form-group">
+          <div className={cx('form-group', { 'has-error': error })}>
             {params.description?.placement === 'top' && this.renderDescription()}
             {showFileInput && this.renderFileInput()}
             <input name={name} value={hiddenValue} type="hidden"/>
@@ -256,11 +296,20 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       return fileReader.readAsBinaryString(file);
     };
 
+    getFileListName = () => (
+      this.props.params.file_list_name || 'homsOrderDataFileList'
+    )
+
     serialize = () => {
       if (this.props.disabled || this.props.hidden) {
         return null;
       } else {
-        return { [this.props.params.name]: JSON.stringify({ files: this.state.files }) };
+        return {
+          [this.props.params.name]: JSON.stringify({
+            files:        this.state.files,
+            fileListName: this.getFileListName()
+          })
+        };
       }
     };
   }
