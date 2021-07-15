@@ -9,8 +9,13 @@ module Minio
     register(:s3) { Aws::S3::Client.new(stub_responses: Rails.env.test?) }
 
     register(:minio_adapter) do
-      require "#{root}/adapter.rb"
-      Minio::Adapter.new
+      if Rails.env.test?
+        require "#{root}/test_adapter.rb"
+        Minio::TestAdapter.new
+      else
+        require "#{root}/adapter.rb"
+        Minio::Adapter.new
+      end
     end
   end
 end

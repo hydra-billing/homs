@@ -81,10 +81,10 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWFormDatetime',
         id,
         task,
         formValues,
-        value:           variables[name],
-        formSubmitting:  submitting || fileUploading,
-        fileListPresent: this.fileListPresent(form.fields),
-        showSubmit:      !!assignee
+        value:          variables[name],
+        formSubmitting: submitting || fileUploading,
+        fileListNames:  this.getFileListNames(),
+        showSubmit:     !!assignee
       };
 
       if (!assignee) {
@@ -199,6 +199,10 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWFormDatetime',
 
       return false;
     };
+
+    getFieldsByType = type => this.getFlattenFields().filter(field => field.type === type);
+
+    getFileListNames = () => this.getFieldsByType('file_list').map(f => f.name).sort();
 
     updateFormValues = ({ name, value }) => {
       this.setState(prevState => ({ formValues: { ...prevState.formValues, [name]: value } }));

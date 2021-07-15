@@ -78,7 +78,7 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
         case 'group':
           return <Group
             {...opts}
-            fileListPresent={this.props.fileListPresent}
+            fileListNames={this.props.fileListNames}
             variables={this.props.variables}
             {...onRef} />;
         case 'radio_button':
@@ -127,7 +127,7 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
         case 'file_upload':
           return <FileUpload
             {...opts}
-            fileListPresent={this.props.fileListPresent}
+            fileListNames={this.props.fileListNames}
             {...onRef} />;
         default: return <p>{name}: Unknown control type {params.type}</p>;
       }

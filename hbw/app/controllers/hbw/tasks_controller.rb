@@ -27,15 +27,15 @@ module HBW
 
     def submit
       data = form_data.select { |key| fields_for_save.include?(key) }
+      file_fields.each do |file_field|
+        file_list_name = file_field['fileListName']
+        file_list = JSON.parse(data[file_list_name])
 
-      if files.present?
-        file_list = JSON.parse(data['homsOrderDataFileList'])
-
-        saved_files = minio_adapter.save_files(files)
+        saved_files = minio_adapter.save_files(file_field['files'])
 
         file_list += saved_files
 
-        data['homsOrderDataFileList'] = file_list.to_json
+        data[file_list_name] = file_list.to_json
       end
 
       result = widget.submit(entity_class, task_id, data)
@@ -94,12 +94,10 @@ module HBW
       params[:entity_tasks]
     end
 
-    def files
-      form_data.map { |_key, value| parse_json_silent(value) }
-               .compact
-               .map { |value| value['files'] if value.respond_to?(:key) }
-               .compact
-               .flatten
+    def file_fields
+      form_data.map { |_key, value| parse_json_silent(value) }.compact
+               .map { |el| el.slice('files', 'fileListName') if el.respond_to?(:key) }
+               .select { |el| el.present? && el['files'].present? }
     end
 
     def parse_json_silent(json)
