@@ -52,11 +52,11 @@ feature 'List orders', js: true do
 
     # Calendar "from"
     expect(label('created_at_from')).to          eq('from')
-    expect(calendar_value('created_at_from')).to eq(in_current_locale((DateTime.now - 1.day).beginning_of_day))
+    expect(calendar_value('created_at_from')).to eq(in_current_locale((Time.current - 1.day).beginning_of_day))
 
     # Calendar "to"
     expect(label('created_at_to')).to          eq('to')
-    expect(calendar_value('created_at_to')).to eq(in_current_locale(DateTime.now.end_of_day))
+    expect(calendar_value('created_at_to')).to eq(in_current_locale(Time.current.end_of_day))
 
     # Estimated execution date "from"
     expect(label('estimated_exec_date_from')).to          eq('from')
