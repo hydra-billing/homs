@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Priority from 'shared/element/priority';
+import TranslationContext from 'shared/context/translation';
 
 const HBWClaimingTaskOverview = ({
-  env, assigned, entityUrl, task, claim
+  assigned, entityUrl, task, claim
 }) => {
-  const { translator: t, bpTranslator, localizer } = env;
+  const { translate: t, translateBP, Localizer } = useContext(TranslationContext);
 
   const goToTask = () => { window.location.href = entityUrl; };
 
@@ -14,8 +15,8 @@ const HBWClaimingTaskOverview = ({
     goToTask();
   };
 
-  const taskLabel = bpTranslator(`${task.process_key}.${task.key}.label`, {}, task.name);
-  const processLabel = bpTranslator(`${task.process_key}.label`, {}, task.process_name);
+  const taskLabel = translateBP(`${task.process_key}.${task.key}.label`, {}, task.name);
+  const processLabel = translateBP(`${task.process_key}.label`, {}, task.process_name);
 
   return (
     <div data-test="task-overview" className="task-overview">
@@ -33,16 +34,16 @@ const HBWClaimingTaskOverview = ({
           {task.due && (
             <tr>
               <td data-test="due-date-label">{t('components.claiming.overview.due')}</td>
-              <td data-test="due-date-value">{localizer.localizeDatetime(task.due)}</td>
+              <td data-test="due-date-value">{Localizer.localizeDatetime(task.due)}</td>
             </tr>
           )}
           <tr>
             <td data-test="created-date-label">{t('components.claiming.overview.created')}</td>
-            <td data-test="created-date-value">{localizer.localizeDatetime(task.created)}</td>
+            <td data-test="created-date-value">{Localizer.localizeDatetime(task.created)}</td>
           </tr>
           <tr>
             <td data-test="priority-label">{t('components.claiming.overview.priority')}</td>
-            <td data-test="priority-value"><Priority env={env} priority={task.priority} /></td>
+            <td data-test="priority-value"><Priority priority={task.priority} /></td>
           </tr>
         </tbody>
       </table>
@@ -74,7 +75,6 @@ const HBWClaimingTaskOverview = ({
 };
 
 HBWClaimingTaskOverview.propTypes = {
-  env:       PropTypes.object.isRequired,
   assigned:  PropTypes.bool.isRequired,
   entityUrl: PropTypes.string.isRequired,
   task:      PropTypes.shape({

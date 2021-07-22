@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
+import TranslationContext from '../context/translation';
 import withCallbacks from './callbacks';
 
 class ErrorBoundary extends Component {
   state = {
-    error: false,
+    error:     false,
+    errorText: null,
   };
 
-  componentDidCatch () {
-    this.setState({ error: true });
+  componentDidCatch (errorText) {
+    this.setState({ error: true, errorText });
     this.props.trigger('hbw:have-errors');
   }
 
@@ -17,7 +19,10 @@ class ErrorBoundary extends Component {
       <div className={this.props.cssClass}>
         <span>&nbsp;</span>
         <div className='alert alert-danger'>
-          {this.props.translator('error')}
+          {this.props.translate('error')}
+          <p>
+            {`${this.state.errorText}`}
+          </p>
         </div>
       </div>
       );
@@ -28,20 +33,20 @@ class ErrorBoundary extends Component {
 }
 
 const withErrorBoundary = (WrappedComponent) => {
-  class WithErrorBoundary extends Component {
-    render () {
-      return (
-        <ErrorBoundary
-          translator={this.props.env.translator}
-          cssClass={this.props.params ? this.props.params.css_class : ''}
-          trigger={this.props.trigger}
-          bind={this.props.bind}
-        >
-          <WrappedComponent {...this.props} />
-        </ErrorBoundary>
-      );
-    }
-  }
+  const WithErrorBoundary = (props) => {
+    const { translate } = useContext(TranslationContext);
+
+    return (
+      <ErrorBoundary
+        translate={translate}
+        cssClass={props.params ? props.params.css_class : ''}
+        trigger={props.trigger}
+        bind={props.bind}
+      >
+        <WrappedComponent {...props} />
+      </ErrorBoundary>
+    );
+  };
 
   return withCallbacks(WithErrorBoundary);
 };

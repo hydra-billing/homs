@@ -3,15 +3,20 @@
 
 import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
+import ConnectionContext from 'shared/context/connection';
 import FileList from './form/file_list';
+import ClaimButton from './form/claim_button';
+import Error from './error';
 
-modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
+modulejs.define('HBWForm', ['React', 'jQuery', 'HBWFormDatetime',
   'HBWFormGroup', 'HBWFormSelect', 'HBWFormSubmit', 'HBWFormSubmitSelect',
   'HBWFormUser', 'HBWFormString', 'HBWFormText', 'HBWFormCheckbox',
   'HBWFormStatic', 'HBWFormSelectTable', 'HBWFormFileUpload', 'HBWFormRadioButton'],
-(React, jQuery, Error, DateTime, Group, Select, Submit, SubmitSelect,
+(React, jQuery, DateTime, Group, Select, Submit, SubmitSelect,
   User, String, Text, Checkbox, Static, SelectTable, FileUpload, RadioButton) => {
   class HBWForm extends React.Component {
+    static contextType = ConnectionContext;
+
     state = {
       error:         null,
       submitting:    false,
@@ -31,12 +36,10 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
     }
 
     render () {
-      const { env } = this.props;
       const { form, assignee } = this.props.task;
 
       return <div className="hbw-form">
-          <Error error={this.state.error || this.props.error}
-                 env={env} />
+          <Error error={this.state.error || this.props.error} />
           <form method="POST"
                 ref={(f) => { this.form = f; }}
                 onSubmit={this.submit}>
@@ -47,26 +50,15 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         </div>;
     }
 
-    renderClaimButton = () => {
-      const { claiming } = this.state;
-      const { translator: t } = this.props.env;
-
-      return (
-        <button
-          disabled={claiming}
-          className="btn btn-primary"
-          onClick={this.claimTask}
-        >
-          {t('components.claiming.claim')}
-        </button>
-      );
-    };
+    renderClaimButton = () => <ClaimButton disabled={this.state.claiming} onClick={this.claimTask}/>;
 
     claimTask = async () => {
       this.setState({ claiming: true });
 
-      await this.props.env.connection.request({
-        url:    `${this.props.env.connection.serverURL}/tasks/${this.props.task.id}/claim`,
+      const { request, serverURL } = this.context;
+
+      await request({
+        url:    `${serverURL}/tasks/${this.props.task.id}/claim`,
         method: 'POST'
       });
 
@@ -79,9 +71,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
 
     formControl = (name, params) => {
       const { submitting, fileUploading, formValues } = this.state;
-      const {
-        id, variables, task, env
-      } = this.props;
+      const { id, variables, task } = this.props;
 
       const { form, assignee } = task;
 
@@ -90,7 +80,6 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
         params,
         id,
         task,
-        env,
         formValues,
         value:           variables[name],
         formSubmitting:  submitting || fileUploading,
@@ -163,15 +152,14 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWError', 'HBWFormDatetime',
 
     submitControl = (fields) => {
       const { submitting, fileUploading } = this.state;
-      const { task, env } = this.props;
+      const { task } = this.props;
       const last = fields[fields.length - 1];
 
       if (last.type !== 'submit_select') {
         return <Submit formSubmitting={submitting || fileUploading}
                        showCancelButton={!task.form.hide_cancel_button}
                        submitButtonName={task.form.submit_button_name}
-                       processInstanceId={task.process_instance_id}
-                       env={env} />;
+                       processInstanceId={task.process_instance_id} />;
       }
 
       return null;

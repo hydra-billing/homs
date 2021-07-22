@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import withStoreContext from 'shared/context/store';
 import { createPortal } from 'react-dom';
+import DispatcherContext from './shared/context/dispatcher';
 
-const App = ({
-  Button, TaskList, Forms, env
-}) => {
+const App = ({ Button, TaskList, Forms }) => {
+  const dispatcher = useContext(DispatcherContext);
+
   const [buttonContainer, setButtonContainer] = useState(null);
   const [taskListContainer, setTaskListContainer] = useState(null);
   const [formsContainer, setFormsContainer] = useState(null);
   const [taskId, setTaskId] = useState(null);
 
   useEffect(() => {
-    env.dispatcher.bind('hbw:set-button-container', 'widget', setButtonContainer);
-    env.dispatcher.bind('hbw:set-task-list-container', 'widget', setTaskListContainer);
-    env.dispatcher.bind('hbw:set-forms-container', 'widget', setFormsContainer);
-    env.dispatcher.bind('hbw:set-current-task', 'widget', setTaskId);
+    dispatcher.bind('hbw:set-button-container', 'widget', setButtonContainer);
+    dispatcher.bind('hbw:set-task-list-container', 'widget', setTaskListContainer);
+    dispatcher.bind('hbw:set-forms-container', 'widget', setFormsContainer);
+    dispatcher.bind('hbw:set-current-task', 'widget', setTaskId);
+
+    dispatcher.trigger('hbw:app-rendered', 'widget');
 
     return () => {
-      env.dispatcher.unbind('hbw:set-button-container', 'widget');
-      env.dispatcher.unbind('hbw:set-task-list-container', 'widget');
-      env.dispatcher.unbind('hbw:set-forms-container', 'widget');
-      env.dispatcher.unbind('hbw:set-current-task', 'widget');
+      dispatcher.unbind('hbw:set-button-container', 'widget');
+      dispatcher.unbind('hbw:set-task-list-container', 'widget');
+      dispatcher.unbind('hbw:set-forms-container', 'widget');
+      dispatcher.unbind('hbw:set-current-task', 'widget');
     };
   }, []);
 
@@ -38,9 +40,6 @@ App.propTypes = {
   Button:   PropTypes.func,
   TaskList: PropTypes.func,
   Forms:    PropTypes.func,
-  env:      PropTypes.shape({
-    dispatcher: PropTypes.object,
-  }),
 };
 
-export default withStoreContext(App);
+export default App;

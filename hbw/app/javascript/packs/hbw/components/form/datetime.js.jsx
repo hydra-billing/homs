@@ -1,15 +1,18 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
+import TranslationContext from 'shared/context/translation';
 
 modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (React, ReactDOM, jQuery, moment) => {
   class HBWFormDatetime extends React.Component {
-    constructor (props) {
-      super(props);
+    static contextType = TranslationContext;
+
+    constructor (props, context) {
+      super(props, context);
       let defaultValue;
       let value;
 
-      const locale = props.params.locale || props.env.locale.code || 'en';
+      const locale = props.params.locale || context.locale.code || 'en';
       const format = props.params.format || 'MM/DD/YYYY';
 
       if (props.value) {
@@ -30,7 +33,7 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
 
     render () {
       const {
-        name, params, disabled, hidden, task, env
+        name, params, disabled, hidden, task
       } = this.props;
 
       const { defaultValue, value } = this.state;
@@ -48,7 +51,7 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
       const isoValue = value ? value.format() : '';
       const inputCSS = cx(params.css_class, { hidden });
       const labelCss = cx(params.label_css, 'hbw-datetime-label');
-      const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+      const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       return <div className={inputCSS} title={params.tooltip} ref={(node) => { this.rootNode = node; }}>
         <div className="form-group">

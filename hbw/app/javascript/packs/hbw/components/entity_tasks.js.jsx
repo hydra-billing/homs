@@ -1,8 +1,11 @@
 import { withCallbacks } from 'shared/hoc';
+import TranslationContext from 'shared/context/translation';
 
 modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
   class HBWEntityTasks extends React.Component {
     PANEL_CLASS = 'hbw-entity-task-list-panel';
+
+    static contextType = TranslationContext;
 
     static getDerivedStateFromProps (nextProps) {
       return {
@@ -26,10 +29,10 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
     };
 
     getProcessName = () => {
-      const { env, tasks } = this.props;
+      const { tasks } = this.props;
 
       if (tasks.length > 0) {
-        return env.bpTranslator(`${tasks[0].process_key}.label`, {}, tasks[0].process_name);
+        return this.context.translateBP(`${tasks[0].process_key}.label`, {}, tasks[0].process_name);
       } else {
         return null;
       }
@@ -50,7 +53,7 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
     iterateTasks = (tasks) => {
       let taskAlreadyExpanded = false; // only one task should show its form - to be expanded
       const {
-        env, processInstanceId, chosenTaskID, entityCode, entityTypeCode, entityClassCode
+        processInstanceId, chosenTaskID, entityCode, entityTypeCode, entityClassCode
       } = this.props;
 
       const isTaskCollapsed = task => (
@@ -71,7 +74,6 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
                      key={`task_id_${task.id}`}
                      task={task}
                      parentClass={this.PANEL_CLASS}
-                     env={env}
                      taskId={task.id}
                      entityCode={entityCode}
                      entityTypeCode={entityTypeCode}

@@ -1,39 +1,38 @@
 import { withErrorBoundary } from 'shared/hoc';
-import React, { Component } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import TranslationContext from 'shared/context/translation';
+import ConnectionContext from 'shared/context/connection';
 
-class HBWFormCancelProcess extends Component {
-  state = {
-    error: false,
-  };
+const HBWFormCancelProcess = ({ processInstanceId, bind }) => {
+  const { translate: t } = useContext(TranslationContext);
+  const { request, serverURL } = useContext(ConnectionContext);
 
-  componentDidMount () {
-    this.props.bind('hbw:have-errors', () => this.setState({ error: true }));
-  }
+  const [error, setError] = useState(false);
 
-  onClick = () => {
-    const { env, processInstanceId } = this.props;
-    const result = window.confirm(env.translator('confirm_cancel'));
+  useEffect(() => {
+    bind('hbw:have-errors', () => setError(true));
+  }, []);
+
+  const onClick = () => {
+    const result = window.confirm(t('confirm_cancel'));
 
     if (result) {
-      env.connection.request({
-        url:    `${env.connection.serverURL}/tasks/${processInstanceId}`,
+      request({
+        url:    `${serverURL}/tasks/${processInstanceId}`,
         method: 'DELETE',
         async:  false
       });
     }
   };
 
-  render () {
-    const { env } = this.props;
-
-    return (
+  return (
       <button className="btn btn-primary"
               type="button"
-              onClick={this.onClick}>
-        {`${env.translator('cancel')}`}
+              onClick={onClick}
+              disabled={error}>
+        {`${t('cancel')}`}
       </button>
-    );
-  }
-}
+  );
+};
 
 export default withErrorBoundary(HBWFormCancelProcess);

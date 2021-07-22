@@ -1,10 +1,13 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
+import TranslationContext from 'shared/context/translation';
 import CancelProcessButton from './cancel_process_button.js';
 
 modulejs.define('HBWFormSubmit', ['React'], (React) => {
   class HBWFormSubmit extends React.Component {
+    static contextType = TranslationContext;
+
     state = {
       error: false,
     }
@@ -14,14 +17,13 @@ modulejs.define('HBWFormSubmit', ['React'], (React) => {
     }
 
     renderCancelButton = () => {
-      const { env, processInstanceId } = this.props;
+      const { processInstanceId } = this.props;
 
-      return <CancelProcessButton processInstanceId={processInstanceId}
-                                  env={env} />;
+      return <CancelProcessButton processInstanceId={processInstanceId} />;
     };
 
     renderSubmitButton = () => {
-      const { formSubmitting, submitButtonName, env } = this.props;
+      const { formSubmitting, submitButtonName } = this.props;
 
       const buttonCN = cx({
         btn:           true,
@@ -34,7 +36,7 @@ modulejs.define('HBWFormSubmit', ['React'], (React) => {
                 className={buttonCN}
                 disabled={formSubmitting || this.state.error}>
           <i className="fas fa-check" />
-          {` ${submitButtonName || env.translator('submit')}`}
+          {` ${submitButtonName || this.context.translate('submit')}`}
         </button>
       );
     };

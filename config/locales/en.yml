@@ -254,7 +254,6 @@ en:
     not_selected: Not selected
     select2:
       not_set: Empty
-    user_not_found: Current user is not found in Camunda
     columns_settings: Display fields
     from: from
     to: to

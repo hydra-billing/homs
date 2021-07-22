@@ -12,7 +12,7 @@ module HBW
         HBW::BPMUser.fetch_all
       end
 
-      def user_exist?(user_email)
+      def user_exists?(user_email)
         user = HBW::BPMUser.with_connection(api) do
           HBW::BPMUser.fetch(user_email)
         end

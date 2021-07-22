@@ -1,33 +1,42 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 
-import React, { Component, createContext } from 'react';
-import PropTypes from 'prop-types';
+import React, {
+  Component, createContext, useContext, useEffect
+} from 'react';
 import ActionCable from 'actioncable';
 import orderBy from 'lodash/orderBy';
 import partition from 'lodash/partition';
 import Messenger from 'messenger';
 import { parseISO } from 'date-fns';
+import TranslationContext from 'shared/context/translation';
+import DispatcherContext from 'shared/context/dispatcher';
 
-export const StoreContext = createContext({});
-export const { Consumer: StoreConsumer } = StoreContext;
+const StoreContext = createContext({});
 
-const withStoreContext = (WrappedComponent) => {
-  class StoreProvider extends Component {
-    static propTypes = {
-      env: PropTypes.shape({
-        connection: PropTypes.shape({
-          request:   PropTypes.func.isRequired,
-          serverURL: PropTypes.string.isRequired,
-        }).isRequired,
-        widgetURL:         PropTypes.string.isRequired,
-        translator:        PropTypes.func.isRequired,
-        userIdentifier:    PropTypes.string.isRequired,
-        entity_class:      PropTypes.string.isRequired,
-        showNotifications: PropTypes.bool
-      }).isRequired,
+const NewTaskNotifier = () => {
+  const { translate: t } = useContext(TranslationContext);
+  const { bind, unbind } = useContext(DispatcherContext);
+
+  useEffect(() => {
+    bind('hbw:notify-new-task', 'widget', (taskName) => {
+      Messenger.notice(t('notifications.new_assigned_task', {
+        task_name: taskName
+      }));
+    });
+
+    return () => {
+      unbind('hbw:notify-new-task', 'widget');
     };
+  });
 
+  return <></>;
+};
+
+export const withStoreContext = ({
+  widgetURL, userIdentifier, showNotifications, entityClassCode, dispatcher, connection
+}) => (WrappedComponent) => {
+  class StoreProvider extends Component {
     state = {
       tasks:      [],
       events:     [],
@@ -45,14 +54,12 @@ const withStoreContext = (WrappedComponent) => {
     }
 
     getTaskById = async (taskId, cacheKey = null) => {
-      const { env } = this.props;
-
-      const result = await env.connection.request({
-        url:    `${env.connection.serverURL}/tasks/${taskId}`,
+      const result = await connection.request({
+        url:    `${connection.serverURL}/tasks/${taskId}`,
         method: 'GET',
         data:   {
           cache_key:    cacheKey,
-          entity_class: env.entity_class,
+          entity_class: entityClassCode,
         },
       });
 
@@ -99,12 +106,8 @@ const withStoreContext = (WrappedComponent) => {
     };
 
     showNotificaton = (taskName) => {
-      const { translator: t, showNotifications } = this.props.env;
-
       if (showNotifications) {
-        Messenger.notice(t('notifications.new_assigned_task', {
-          task_name: taskName
-        }));
+        dispatcher.trigger('hbw:notify-new-task', 'widget', taskName);
       }
     }
 
@@ -163,7 +166,6 @@ const withStoreContext = (WrappedComponent) => {
 
     getFormsForTasks = async (tasks) => {
       const emptyFormTasks = this.getEmptyFormEntityTasks(tasks);
-      const { connection } = this.props.env;
 
       if (emptyFormTasks.length > 0) {
         const { forms } = await connection.request({
@@ -179,13 +181,13 @@ const withStoreContext = (WrappedComponent) => {
     };
 
     getEmptyFormEntityTasks = (entityTasks) => {
-      const entityClass = this.props.env.entity_class;
-
       const emptyFormEntityTasks = entityTasks.filter(
         task => (task.form === undefined)
       );
 
-      return Object.entries(emptyFormEntityTasks).map(([, task]) => ({ task_id: task.id, entity_class: entityClass }));
+      return Object.entries(emptyFormEntityTasks).map(([, task]) => ({
+        task_id: task.id, entity_class: entityClassCode
+      }));
     };
 
     addFormsToTasks = (fetchedForms) => {
@@ -209,7 +211,6 @@ const withStoreContext = (WrappedComponent) => {
     };
 
     initSocket = () => {
-      const { userIdentifier, widgetURL } = this.props.env;
       const { host, protocol } = new URL(widgetURL);
 
       const socketUrl = protocol === 'https:'
@@ -236,13 +237,12 @@ const withStoreContext = (WrappedComponent) => {
     };
 
     initStore = async () => {
-      const { env } = this.props;
       try {
-        const result = await env.connection.request({
-          url:    `${env.connection.serverURL}/tasks`,
+        const result = await connection.request({
+          url:    `${connection.serverURL}/tasks`,
           method: 'GET',
           data:   {
-            entity_class: env.entity_class,
+            entity_class: entityClassCode,
           },
         });
 
@@ -310,6 +310,7 @@ const withStoreContext = (WrappedComponent) => {
 
       return (
         <StoreContext.Provider value={contextValue}>
+          <NewTaskNotifier />
           <WrappedComponent {...this.props} />
         </StoreContext.Provider>
       );
@@ -319,4 +320,4 @@ const withStoreContext = (WrappedComponent) => {
   return StoreProvider;
 };
 
-export default withStoreContext;
+export default StoreContext;

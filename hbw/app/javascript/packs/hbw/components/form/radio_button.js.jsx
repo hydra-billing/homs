@@ -1,9 +1,12 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
+import TranslationContext from 'shared/context/translation';
 
 modulejs.define('HBWFormRadioButton', ['React'], (React) => {
   class HBWFormRadioButton extends React.Component {
+    static contextType = TranslationContext;
+
     state = {
       value: this.props.value
     };
@@ -45,8 +48,9 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
     }
 
     renderInputs = () => {
+      const { translateBP } = this.context;
       const {
-        name, params, disabled, task, env
+        name, params, disabled, task
       } = this.props;
       const { value } = this.state;
       const { variants } = params;
@@ -64,7 +68,7 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
                                               checked={value === field.value}
                                               className='hbw-radiobutton'/>
                                        <span>
-                                         { ` ${env.bpTranslator(`${task.process_key}.${task.key}.${name}.${field.name}`,
+                                         { ` ${translateBP(`${task.process_key}.${task.key}.${name}.${field.name}`,
                                            {},
                                            field.label)}` }
                                        </span>

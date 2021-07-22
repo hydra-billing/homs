@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StoreContext } from 'shared/context/store';
+import StoreContext from 'shared/context/store';
 import HydraIcon from 'shared/element/icon';
 import PopUp from './pop_up';
 
@@ -8,7 +8,7 @@ class HBWClaimingMenuButton extends Component {
   static contextType = StoreContext;
 
   static propTypes = {
-    env: PropTypes.object.isRequired,
+    taskListPath: PropTypes.string.isRequired,
   };
 
   state = {
@@ -36,7 +36,7 @@ class HBWClaimingMenuButton extends Component {
   };
 
   render () {
-    const { env } = this.props;
+    const { taskListPath } = this.props;
     const { count } = this.context;
     const { isOpen } = this.state;
 
@@ -48,7 +48,7 @@ class HBWClaimingMenuButton extends Component {
             {count.my}/{count.unassigned}
           </span>
         </div>
-        {isOpen && <PopUp env={env}/>}
+        {isOpen && <PopUp taskListPath={taskListPath} />}
       </div>
     );
   }

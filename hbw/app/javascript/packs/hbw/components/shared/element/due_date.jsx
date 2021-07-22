@@ -3,11 +3,13 @@ import {
   parseISO, isAfter, differenceInMinutes,
 } from 'date-fns';
 import { withDateFormatter } from 'shared/hoc';
+import { useContext } from 'react';
+import TranslationContext from '../context/translation';
 
 const HBWDueDate = ({
-  dateISO, now, env, dateFormatter,
+  dateISO, now, dateFormatter,
 }) => {
-  const { translator: t } = env;
+  const { translate: t } = useContext(TranslationContext);
   const {
     MINUTES_IN_DAY, MINUTES_IN_MONTH, MINUTES_IN_YEAR, lessThanMinute, inMinutes, inHours, inDays, inWeeks, inYears
   } = dateFormatter;
@@ -62,11 +64,8 @@ const HBWDueDate = ({
 };
 
 HBWDueDate.propTypes = {
-  dateISO: PropTypes.string.isRequired,
-  now:     PropTypes.instanceOf(Date).isRequired,
-  env:     PropTypes.shape({
-    translator: PropTypes.func.isRequired,
-  }).isRequired,
+  dateISO:       PropTypes.string.isRequired,
+  now:           PropTypes.instanceOf(Date).isRequired,
   dateFormatter: PropTypes.shape({
     MINUTES_IN_DAY:   PropTypes.number.isRequired,
     MINUTES_IN_MONTH: PropTypes.number.isRequired,

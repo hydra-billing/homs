@@ -220,10 +220,7 @@ $(() => {
   }
   const widget = window.HBWidget;
 
-  widget.env.dispatcher.bind('hbw:go-to-entity', 'host', (payload) => { window.location = payload.task.entity_url; });
-
-  widget.env.dispatcher.bind('hbw:bpm-user-not-found', 'widget',
-    () => Application.messenger.warn(I18n.t('js.user_not_found')));
+  widget.dispatcher.bind('hbw:go-to-entity', 'host', (payload) => { window.location = payload.task.entity_url; });
 
   widget.render();
 });

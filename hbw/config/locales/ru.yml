@@ -16,6 +16,7 @@ ru:
     file_list_field_required: Для загрузки файлов необходимо добавить поле типа file_list с именем homsOrderDataFileList
     field_is_required: Обязательное поле
     task_already_claimed: Задача «%{task_name}» уже взята в работу
+    user_not_found: Текущий пользователь не найден в Camunda
   notifications:
     new_assigned_task: 'Новая назначенная задача: %{task_name}'
     new_assigned_task_plural: 'Назначено %{count} новых задач: %{task_names}'

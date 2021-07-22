@@ -59,4 +59,4 @@ class Dispatcher {
   }
 }
 
-modulejs.define('HBWDispatcher', [], () => Dispatcher);
+export default Dispatcher;
