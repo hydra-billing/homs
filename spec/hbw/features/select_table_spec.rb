@@ -46,9 +46,20 @@ feature 'Select table', js: true do
       expect_widget_presence
     end
 
-    scenario 'empty nullable multi = false' do
+    scenario 'empty bp variable, nullable, multi = false' do
       click_and_wait 'ORD-18'
 
+      real_initial_table_values = {
+        table_options:    options_in_table_with_label('emptyDefaultParam'),
+        selected_options: selected_options_in_table_with_label('emptyDefaultParam')
+      }
+
+      expected_initial_table_values = {
+        table_options:    ['-', 'Some name'].sort,
+        selected_options: []
+      }
+
+      expect(real_initial_table_values).to eq(expected_initial_table_values)
       expect(page).to have_selector "button[type='submit']"
 
       click_and_wait 'Submit'
@@ -59,9 +70,68 @@ feature 'Select table', js: true do
       expect_widget_presence
     end
 
-    scenario 'empty nullable multi = true' do
+    scenario 'empty bp variable, nullable, multi = true' do
       click_and_wait 'ORD-19'
 
+      real_initial_table_values = {
+        table_options:    options_in_table_with_label('emptyDefaultParam'),
+        selected_options: selected_options_in_table_with_label('emptyDefaultParam')
+      }
+
+      expected_initial_table_values = {
+        table_options:    ['Some name', 'Other name'].sort,
+        selected_options: []
+      }
+
+      expect(real_initial_table_values).to eq(expected_initial_table_values)
+      expect(page).to have_selector "button[type='submit']"
+
+      click_and_wait 'Submit'
+
+      expect(page).not_to have_content 'Field does not match regex'
+      expect(page).not_to have_content 'Field is required'
+
+      expect_widget_presence
+    end
+
+    scenario 'not empty bp variable, nullable, multi = false' do
+      click_and_wait 'ORD-18'
+
+      real_initial_table_values = {
+        table_options:    options_in_table_with_label('notEmptyDefaultParam'),
+        selected_options: selected_options_in_table_with_label('notEmptyDefaultParam')
+      }
+
+      expected_initial_table_values = {
+        table_options:    ['-', 'Other name', 'Some name'].sort,
+        selected_options: ['Other name']
+      }
+
+      expect(real_initial_table_values).to eq(expected_initial_table_values)
+      expect(page).to have_selector "button[type='submit']"
+
+      click_and_wait 'Submit'
+
+      expect(page).not_to have_content 'Field does not match regex'
+      expect(page).not_to have_content 'Field is required'
+
+      expect_widget_presence
+    end
+
+    scenario 'not empty bp variable, nullable, multi = true' do
+      click_and_wait 'ORD-19'
+
+      real_initial_table_values = {
+        table_options:    options_in_table_with_label('notEmptyDefaultParam'),
+        selected_options: selected_options_in_table_with_label('notEmptyDefaultParam')
+      }
+
+      expected_initial_table_values = {
+        table_options:    ['Some name', 'Other name'].sort,
+        selected_options: ['Other name']
+      }
+
+      expect(real_initial_table_values).to eq(expected_initial_table_values)
       expect(page).to have_selector "button[type='submit']"
 
       click_and_wait 'Submit'
@@ -74,11 +144,23 @@ feature 'Select table', js: true do
 
     scenario 'filled required multi = false' do
       click_and_wait 'ORD-20'
+      real_initial_table_values = {
+        table_options:    table_options,
+        selected_options: selected_options
+      }
 
-      set_select_table_option 'Some name'
+      expected_initial_table_values = {
+        table_options:    ['Some name', 'Other name'].sort,
+        selected_options: ['Other name']
+      }
+
+      expect(real_initial_table_values).to eq(expected_initial_table_values)
+      expect(selected_options).to eq(['Other name'])
+
+      click_on_select_table_option 'Some name'
+      expect(selected_options).to eq(['Some name'])
 
       expect(page).to have_selector "button[type='submit']"
-
       click_and_wait 'Submit'
 
       expect(page).not_to have_content 'Field does not match regex'
@@ -90,11 +172,22 @@ feature 'Select table', js: true do
     scenario 'filled required multi = true' do
       click_and_wait 'ORD-21'
 
-      set_select_table_option 'Some name'
-      set_select_table_option 'Other name'
+      real_initial_table_values = {
+        table_options:    table_options,
+        selected_options: selected_options
+      }
+
+      expected_initial_table_values = {
+        table_options:    ['Some name', 'Other name'].sort,
+        selected_options: ['Some name']
+      }
+
+      expect(real_initial_table_values).to eq(expected_initial_table_values)
+
+      click_on_select_table_option 'Other name'
+      expect(selected_options).to eq(['Some name', 'Other name'].sort)
 
       expect(page).to have_selector "button[type='submit']"
-
       click_and_wait 'Submit'
 
       expect(page).not_to have_content 'Field does not match regex'
@@ -104,30 +197,25 @@ feature 'Select table', js: true do
     end
   end
 
-  describe 'will not be submitted if empty required' do
+  describe 'will not be submitted if' do
     before(:each) do
       click_on 'Orders'
       expect(page).to have_content 'Orders list'
       expect_widget_presence
     end
 
-    scenario 'multi = false' do
-      click_and_wait 'ORD-20'
-
-      expect(page).to have_selector "button[type='submit']"
-
-      click_and_wait 'Submit'
-
-      expect(page).to have_content 'Field is required'
-
-      expect_widget_presence
-    end
-
-    scenario 'multi = true' do
+    scenario 'filled required multi = true' do
       click_and_wait 'ORD-21'
 
-      expect(page).to have_selector "button[type='submit']"
+      expect(selected_options_in_table_with_label('Options')).to eq(['Some name'])
+      expect(page).not_to have_content 'Field is required'
 
+      click_on_select_table_option 'Some name'
+
+      expect(selected_options_in_table_with_label('Options')).to eq([])
+      expect(page).to have_content 'Field is required'
+
+      expect(page).to have_selector "button[type='submit']"
       click_and_wait 'Submit'
 
       expect(page).to have_content 'Field is required'

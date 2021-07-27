@@ -15,23 +15,41 @@ modulejs.define('HBWFormSelectTable',
       constructor (props, context) {
         super(props, context);
 
-        const value = this.getInputValues(props.params.current_value);
+        const value = this.getInitTableValue(props.params.current_value);
 
         this.state = {
-          value,
+          value:   Array.isArray(value) ? value.map(el => String(el)) : String(value),
           choices: this.getChoices(),
           error:   (!props.hasValueInChoices(value) && value) || props.missFieldInVariables(),
           valid:   true
         };
       }
 
-      getInputValues = (value) => {
+      getInitNullableTableValue (value) {
         if (this.props.params.multi) {
           return JSON.parse(value) || [];
         } else {
           return value || '';
         }
-      };
+      }
+
+      getInitNotNullableTableValue (value) {
+        if (this.props.params.multi) {
+          return JSON.parse(value) || [this.getFirstRowId()];
+        } else {
+          return value || this.getFirstRowId();
+        }
+      }
+
+      getInitTableValue (value) {
+        if (this.props.params.nullable) {
+          return this.getInitNullableTableValue(value);
+        } else {
+          return this.getInitNotNullableTableValue(value);
+        }
+      }
+
+      getFirstRowId = () => this.getChoices()[0][0]
 
       componentDidMount () {
         this.props.onRef(this);
@@ -256,19 +274,14 @@ modulejs.define('HBWFormSelectTable',
       buildCssFromConfig = config => `text-align-${config.alignment}`;
 
       getChoices = () => {
-        let choices;
+        const { nullable, multi } = this.props.params;
+        const choices = this.props.params.choices.slice();
 
-        if (this.props.params.mode === 'select') {
-          choices = this.props.params.choices.slice();
-
-          if (this.props.params.nullable) {
-            this.addNullChoice(choices);
-          }
-
-          return choices;
-        } else {
-          return null;
+        if (nullable && !multi) {
+          this.addNullChoice(choices);
         }
+
+        return choices;
       };
 
       serialize = () => {

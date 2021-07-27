@@ -43,20 +43,8 @@ feature 'Validate form', js: true do
       expect(page).to     have_content 'Field is required'
     end
 
-    scenario 'with empty required select table' do
-      click_and_wait 'ORD-14'
-
-      expect(page).to have_content 'Options'
-      expect(page).to have_selector "button[type='submit']"
-
-      click_and_wait 'Custom submit button name'
-
-      expect(page).to have_content 'Field is required'
-    end
-
     scenario 'with empty required multi select table' do
       click_and_wait 'ORD-16'
-      set_select_table_option 'My favourite region name1'
 
       expect(page).to have_content 'Options'
       expect(page).to have_selector "button[type='submit']"

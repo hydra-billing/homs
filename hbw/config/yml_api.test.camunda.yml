@@ -854,9 +854,9 @@ get:
             label: Customers
             css_class: col-xs-12
             fields:
-              - name: homsOrderDataSelect
+              - name: emptyDefaultParam
                 type: select_table
-                label: Options
+                label: emptyDefaultParam
                 css_class: col-xs-12 pre-scrollable
                 nullable: true
                 multi: false
@@ -868,6 +868,31 @@ get:
                       - 123
                       - Some name
                       - Some code
+
+          - name: group2
+            type: group
+            label: Customers
+            css_class: col-xs-12
+            fields:
+              - name: notEmptyDefaultParam
+                type: select_table
+                label: notEmptyDefaultParam
+                css_class: col-xs-12 pre-scrollable
+                nullable: true
+                multi: false
+                rows:
+                    - name: Name
+                    - name: Code
+                choices:
+                    -
+                      - 123
+                      - Some name
+                      - Some code
+                    -
+                      - 321
+                      - Other name
+                      - Other code
+
   "task/111119/deployed-form":
     "": |
       form:
@@ -878,9 +903,32 @@ get:
             label: Customers
             css_class: col-xs-12
             fields:
-              - name: homsOrderDataSelect
+              - name: emptyDefaultParam
                 type: select_table
-                label: Options
+                label: emptyDefaultParam
+                css_class: col-xs-12 pre-scrollable
+                nullable: true
+                multi: true
+                rows:
+                    - name: Name
+                    - name: Code
+                choices:
+                    -
+                      - 123
+                      - Some name
+                      - Some code
+                    -
+                      - 321
+                      - Other name
+                      - Other code
+          - name: group2
+            type: group
+            label: Customers
+            css_class: col-xs-12
+            fields:
+              - name: notEmptyDefaultParam
+                type: select_table
+                label: notEmptyDefaultParam
                 css_class: col-xs-12 pre-scrollable
                 nullable: true
                 multi: true
@@ -916,6 +964,10 @@ get:
                     - name: Name
                     - name: Code
                 choices:
+                    -
+                      - 321
+                      - Other name
+                      - Other code
                     -
                       - 123
                       - Some name
@@ -3037,18 +3089,24 @@ get:
       homsOrderCode:
         type: "string"
         value: "ORD-18"
-      homsOrderDataSelect:
+      emptyDefaultParam:
         type: "string"
         value: null
+      notEmptyDefaultParam:
+        type: "string"
+        value: "321"
 
   task/111119/variables:
     "":
       homsOrderCode:
         type: "string"
         value: "ORD-19"
-      homsOrderDataSelect:
+      emptyDefaultParam:
         type: "string"
         value: null
+      notEmptyDefaultParam:
+        type: "string"
+        value: '["321"]'
 
   task/111120/variables:
     "":
@@ -4261,10 +4319,10 @@ post:
     "variables[homsOrderDataSelect][value]=":
       - ""
   task/111118/submit-form:
-    "variables[homsOrderDataSelect][value]=":
+    "variables[emptyDefaultParam][value]=&variables[notEmptyDefaultParam][value]=321":
       - ""
   task/111119/submit-form:
-    "variables[homsOrderDataSelect][value]=[]":
+    'variables[emptyDefaultParam][value]=[]&variables[notEmptyDefaultParam][value]=["321"]':
       - ""
   task/111120/submit-form:
     "variables[homsOrderDataSelect][value]=123":

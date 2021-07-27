@@ -41,6 +41,8 @@ export default WrappedComponent => class WithSelect extends Component {
   };
 
   isEqual = (a, b) => {
+    const { multi } = this.props.params;
+
     if (a === b) {
       return true;
     }
@@ -48,6 +50,12 @@ export default WrappedComponent => class WithSelect extends Component {
       return true;
     }
     if (((a === '') && (b === null)) || ((a === null) && (b === ''))) {
+      return true;
+    }
+    if (((a === 'null') && (b === null)) || ((a === null) && (b === 'null'))) {
+      return true;
+    }
+    if (multi && (((a?.length === 0) && (b === null)) || ((a === null) && (b?.length === 0)))) {
       return true;
     }
     if ((a === null) || (b === null)) {
