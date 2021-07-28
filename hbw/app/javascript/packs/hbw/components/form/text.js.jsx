@@ -1,9 +1,12 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
+import TranslationContext from 'shared/context/translation';
 
 modulejs.define('HBWFormText', ['React'], (React) => {
   class HBWFormText extends React.Component {
+    static contextType = TranslationContext;
+
     state = {
       value: this.props.value
     };
@@ -22,7 +25,7 @@ modulejs.define('HBWFormText', ['React'], (React) => {
 
     render () {
       const {
-        name, params, disabled, hidden, task, env
+        name, params, disabled, hidden, task
       } = this.props;
 
       const { value } = this.state;
@@ -37,7 +40,7 @@ modulejs.define('HBWFormText', ['React'], (React) => {
 
       const cssClass = cx(params.css_class, { hidden });
       const labelCss = cx(params.label_css, 'hbw-text-label');
-      const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+      const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       return <div className={cssClass} title={params.tooltip}>
         <div className='form-group'>

@@ -14,14 +14,14 @@ class HBW::Widget
   extend Forwardable
 
   def_delegators :@adapter, :task_list, :get_task_with_form, :form,
-                 :submit, :users, :users_lookup, :user_exist?,
+                 :submit, :users, :users_lookup, :user_exists?,
                  :claim_task, :get_task_by_id, :get_form_by_task_id,
                  :get_forms_for_task_list, :cancel_process
 
   include HBW::Inject[:adapter]
 
   def bp_buttons(entity_identifier, entity_type, entity_class, current_user_identifier)
-    if !@adapter.user_exist?(current_user_identifier)
+    if !@adapter.user_exists?(current_user_identifier)
       {}
     elsif @adapter.bp_running?(entity_identifier, entity_class)
       {buttons: [], bp_running: true}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StoreContext } from 'shared/context/store';
+import StoreContext from 'shared/context/store';
 import Tabs from 'shared/element/task_tabs';
 import ShortList from './short_list';
 
@@ -8,7 +8,7 @@ class HBWPopUp extends Component {
   static contextType = StoreContext;
 
   static propTypes = {
-    env: PropTypes.object.isRequired,
+    taskListPath: PropTypes.string.isRequired,
   };
 
   listSize = 10;
@@ -37,22 +37,21 @@ class HBWPopUp extends Component {
   };
 
   render () {
-    const { env } = this.props;
+    const { taskListPath } = this.props;
     const { count, fetching, ready } = this.context;
     const { tab } = this.state;
 
     return (
       <div className="claimimg-popup">
-        <Tabs env={env}
-              count={count}
+        <Tabs count={count}
               tabs={this.tabs}
               activeTab={tab}
               onTabChange={this.switchTabTo}
         >
-          <ShortList env={env}
-                     tasks={this.tasksForCurrentTab()}
+          <ShortList tasks={this.tasksForCurrentTab()}
                      fetched={ready}
                      fetching={fetching}
+                     taskListPath={taskListPath}
           />
         </Tabs>
       </div>

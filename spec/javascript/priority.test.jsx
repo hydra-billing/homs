@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Priority from 'hbw/components/shared/element/priority';
-import Translator from 'hbw/translator';
+import { withTranslationContext } from 'hbw/components/shared/context/translation';
 
 describe('Priority label should be rendered properly', () => {
-  const fakeEnv = {
-    translator: Translator.getTranslatorForLocale('en'),
-  };
+  const PriorityWithContext = withTranslationContext({ locale: { code: 'en' } })(Priority);
 
-  const shallowComponent = priority => shallow(<Priority env={fakeEnv} priority={priority} />);
+  const shallowComponent = priority => shallow(
+    <PriorityWithContext priority={priority} />
+  );
 
   const itBehavesLike = priorityName => priorityValue => (
     it(`for priority ${priorityValue} renders '${priorityName}'`, () => {

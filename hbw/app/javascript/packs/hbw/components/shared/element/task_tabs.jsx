@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import TranslationContext from '../context/translation';
 
 class HBWClaimingTaskTabs extends Component {
+  static contextType = TranslationContext;
+
   static propTypes = {
-    env:      PropTypes.object.isRequired,
     children: PropTypes.element.isRequired,
     tabs:     PropTypes.shape({
       my:         PropTypes.number.isRequired,
@@ -27,7 +29,7 @@ class HBWClaimingTaskTabs extends Component {
 
   renderTabs = () => {
     const {
-      env, tabs, activeTab, onTabChange, count
+      tabs, activeTab, onTabChange, count
     } = this.props;
 
     const tabCN = tab => cx({
@@ -43,7 +45,7 @@ class HBWClaimingTaskTabs extends Component {
             className="tab"
             onClick={() => onTabChange(tab[1])}
           >
-            {env.translator(`components.claiming.tabs.${tab[0]}`, { count: count[tab[0]] })}
+            {this.context.translate(`components.claiming.tabs.${tab[0]}`, { count: count[tab[0]] })}
           </a>
         </li>
       ));

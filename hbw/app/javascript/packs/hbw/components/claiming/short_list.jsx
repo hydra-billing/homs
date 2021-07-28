@@ -1,18 +1,19 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { parseISO, isPast } from 'date-fns';
 import DueDate from 'shared/element/due_date';
 import CreatedDate from 'shared/element/created_date';
+import TranslationContext from 'shared/context/translation';
+import ConnectionContext from 'shared/context/connection';
 import Pending from '../pending';
 
 const HBWClaimingShortList = ({
-  env, tasks, fetched, fetching
+  tasks, fetched, fetching, taskListPath
 }) => {
-  const {
-    translator: t, bpTranslator, connection, taskListPath
-  } = env;
+  const { translate, translateBP } = useContext(TranslationContext);
+  const connection = useContext(ConnectionContext);
 
   const viewAll = () => { window.location.href = `${connection.options.host}/${taskListPath}`; };
   const goToTask = (entityUrl) => { window.location.href = entityUrl; };
@@ -21,9 +22,9 @@ const HBWClaimingShortList = ({
     const now = new Date();
 
     if (due) {
-      return <span className="deadline"><DueDate env={env} dateISO={due} now={now}/></span>;
+      return <span className="deadline"><DueDate dateISO={due} now={now}/></span>;
     } else {
-      return <span><CreatedDate env={env} dateISO={created} now={now} /></span>;
+      return <span><CreatedDate dateISO={created} now={now} /></span>;
     }
   };
 
@@ -37,7 +38,7 @@ const HBWClaimingShortList = ({
   const renderNoTasks = () => (
       <div className='no-tasks'>
         <span>
-          {t('components.claiming.table.empty_tasks')}
+          {translate('components.claiming.table.empty_tasks')}
         </span>
       </div>
   );
@@ -50,7 +51,7 @@ const HBWClaimingShortList = ({
         <div onClick={() => goToTask(entity_url)} key={id} className={rowCN(due)}>
           <div className="left">
             <i className={icon} />
-            <span className="title">{bpTranslator(`${process_key}.${key}.label`, {}, name)}</span>
+            <span className="title">{translateBP(`${process_key}.${key}.label`, {}, name)}</span>
             <span title={description} className="description">{description}</span>
           </div>
           <div className="right">
@@ -62,7 +63,7 @@ const HBWClaimingShortList = ({
       {fetched && tasks.length === 0 && renderNoTasks()}
       <div className="button">
         <button onClick={viewAll} className='btn btn-primary'>
-          {t('components.claiming.short_list.view_all')}
+          {translate('components.claiming.short_list.view_all')}
         </button>
       </div>
     </div>
@@ -70,10 +71,10 @@ const HBWClaimingShortList = ({
 };
 
 HBWClaimingShortList.propTypes = {
-  env:      PropTypes.object.isRequired,
-  fetched:  PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
-  tasks:    PropTypes.arrayOf(PropTypes.shape({
+  fetched:      PropTypes.bool.isRequired,
+  fetching:     PropTypes.bool.isRequired,
+  taskListPath: PropTypes.string.isRequired,
+  tasks:        PropTypes.arrayOf(PropTypes.shape({
     id:         PropTypes.string.isRequired,
     name:       PropTypes.string.isRequired,
     icon:       PropTypes.string.isRequired,

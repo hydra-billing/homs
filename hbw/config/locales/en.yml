@@ -16,6 +16,7 @@ en:
     file_list_field_required: To load files please add a field of file_list type with the name homsOrderDataFileList
     field_is_required: Field is required
     task_already_claimed: Task %{task_name} is already claimed
+    user_not_found: Current user is not found in Camunda
   notifications:
     new_assigned_task: 'New assigned task: %{task_name}'
     new_assigned_task_plural: "%{count} new tasks were assigned: %{task_names}"

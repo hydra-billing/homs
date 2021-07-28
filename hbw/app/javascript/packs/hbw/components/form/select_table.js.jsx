@@ -4,11 +4,14 @@ import compose from 'shared/utils/compose';
 import {
   withConditions, withSelect, withCallbacks, withValidations, withErrorBoundary
 } from 'shared/hoc';
+import TranslationContext from 'shared/context/translation';
 
 modulejs.define('HBWFormSelectTable',
   ['React'],
   (React) => {
     class HBWFormSelectTable extends React.Component {
+      static contextType = TranslationContext;
+
       constructor (props, context) {
         super(props, context);
 
@@ -33,7 +36,7 @@ modulejs.define('HBWFormSelectTable',
       componentDidMount () {
         this.props.onRef(this);
         this.tooltip = new Tooltip(this.label, {
-          title:     this.props.env.translator('errors.field_is_required'),
+          title:     this.context.translate('errors.field_is_required'),
           container: this.tooltipContainer,
           trigger:   'manual',
           placement: 'bottom'
@@ -54,7 +57,7 @@ modulejs.define('HBWFormSelectTable',
 
       render () {
         const {
-          name, params, disabled, hidden, task, env, missFieldInVariables
+          name, params, disabled, hidden, task, missFieldInVariables
         } = this.props;
 
         const {
@@ -64,9 +67,9 @@ modulejs.define('HBWFormSelectTable',
         const errorTooltip = <div ref={(t) => { this.tooltipContainer = t; }}
                                   className='tooltip-red' />;
 
-        const selectErrorMessage = env.translator('errors.field_not_defined_in_bp', { field_name: name });
+        const selectErrorMessage = this.context.translate('errors.field_not_defined_in_bp', { field_name: name });
 
-        const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+        const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
         const labelCss = cx(params.label_css, 'select-table-label');
         const cssClass = cx(params.css_class, { hidden });

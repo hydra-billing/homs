@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import cn from 'classnames';
 import compose from 'shared/utils/compose';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
+import TranslationContext, { ContextType as TranslationContextType } from 'shared/context/translation';
 
 type Props = {
   value?: string,
@@ -22,9 +23,6 @@ type Props = {
     key: string,
     process_key: string
   },
-  env: {
-    bpTranslator: (key: string, vars: Record<string, string>, fallback: string) => string
-  },
   onRef: (obj: { serialize: () => Record<string, string> | null }) => void
 }
 
@@ -41,9 +39,10 @@ const HBWFormFileList: React.FC<Props> = ({
   hidden,
   disabled,
   task,
-  env,
   onRef
 }) => {
+  const { translateBP } = useContext(TranslationContext) as TranslationContextType;
+
   const [links, setLinks] = useState<Link[]>((value && JSON.parse(value)) || []);
 
   const serialize = () => {
@@ -91,7 +90,7 @@ const HBWFormFileList: React.FC<Props> = ({
   const renderLinks = (ls: Link[]) => ls.map((link, i) => renderLink(link, i));
 
   const cssClass = cn(params.css_class, 'hbw-file-list', { hidden });
-  const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+  const label = translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
   const labelCSS = cn('hbw-file-list-label', params.label_css);
   const hiddenValue = JSON.stringify(links.filter(link => !link.deleted));
 

@@ -1,13 +1,13 @@
 /* eslint-disable implicit-arrow-linebreak */
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import {
   differenceInHours, differenceInDays, differenceInWeeks, differenceInYears
 } from 'date-fns';
+import TranslationContext from '../context/translation';
 
 const withDateFormatter = (WrappedComponent) => {
-  const WithDateFormatter = ({ ...props }) => {
-    const { translator: t, localizer } = props.env;
+  const WithDateFormatter = (props) => {
+    const { translate: t, Localizer } = useContext(TranslationContext);
 
     const MINUTES_IN_DAY = 1440;
     const MINUTES_IN_WEEK = 10080;
@@ -32,9 +32,9 @@ const withDateFormatter = (WrappedComponent) => {
     const inYears = (dateLeft, dateRight) =>
       `${differenceInYears(dateLeft, dateRight)}${t('components.claiming.created.periodUnits.year')}`;
 
-    const inDayMonth = date => localizer.localizeDayMonth(date.toISOString());
+    const inDayMonth = date => Localizer.localizeDayMonth(date.toISOString());
 
-    const inDayMonthYear = date => localizer.localizeDayMonthYear(date.toISOString());
+    const inDayMonthYear = date => Localizer.localizeDayMonthYear(date.toISOString());
 
     return (
       <WrappedComponent
@@ -55,13 +55,6 @@ const withDateFormatter = (WrappedComponent) => {
         {...props}
       />
     );
-  };
-
-  WithDateFormatter.propTypes = {
-    env: PropTypes.shape({
-      translator: PropTypes.func.isRequired,
-      localizer:  PropTypes.object.isRequired
-    }).isRequired,
   };
 
   return WithDateFormatter;

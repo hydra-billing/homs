@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import TranslationContext from '../shared/context/translation';
 
-const HBWClaimingSearch = ({
-  env, query, search, clear
-}) => {
-  const { translator: t } = env;
+const HBWClaimingSearch = ({ query, search, clear }) => {
+  const { translate: t } = useContext(TranslationContext);
 
   return (
     <div className="search-input-with-controls">
@@ -21,7 +20,6 @@ const HBWClaimingSearch = ({
 };
 
 HBWClaimingSearch.propTypes = {
-  env:    PropTypes.object.isRequired,
   query:  PropTypes.string.isRequired,
   search: PropTypes.func.isRequired,
   clear:  PropTypes.func.isRequired,

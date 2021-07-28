@@ -1,51 +1,49 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react';
 import Messenger from 'messenger';
-import { StoreContext } from 'shared/context/store';
+import StoreContext from 'shared/context/store';
+import ConnectionContext from 'shared/context/connection';
 import Tabs from 'shared/element/task_tabs';
 import Search from './search';
 import Table from './table';
 import Overview from './task_overview';
+import TranslationContext from '../shared/context/translation';
 
-class HBWClaimingTaskList extends Component {
-  static contextType = StoreContext;
-
-  static propTypes = {
-    env: PropTypes.object.isRequired,
-  };
-
-  perPage = 50;
-
-  tabs = {
+const HBWClaimingTaskList = () => {
+  const perPage = 50;
+  const tabs = {
     my:         0,
     unassigned: 1,
   };
 
-  state = {
-    tab:          this.tabs.my,
-    page:         1,
-    lastPage:     false,
-    claimingTask: null,
-    query:        '',
-    searchQuery:  null,
-    searching:    false,
+  const { request, serverURL } = useContext(ConnectionContext);
+  const { translate: t } = useContext(TranslationContext);
+  const {
+    myTasks, unassignedTasks, closeTask, fetching, count, openTask, activeTask
+  } = useContext(StoreContext);
+
+  const [tab, setTab] = useState(tabs.my);
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(false);
+  const [claimingTask, setClaimingTask] = useState(null);
+  const [query, setQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(null);
+
+  const isMyTab = () => tab === tabs.my;
+
+  const tasksForCurrentTab = () => (isMyTab() ? myTasks : unassignedTasks);
+
+  const addPage = () => {
+    const currentPage = page;
+
+    setPage(currentPage + 1);
+    setLastPage(tasksForCurrentTab().length <= (currentPage + 1) * perPage);
   };
 
-  addPage = () => {
-    this.setState(prevState => ({
-      page:     prevState.page + 1,
-      lastPage: this.tasksForCurrentTab().length <= (prevState.page + 1) * this.perPage,
-    }));
-  };
+  const claim = async (task) => {
+    setClaimingTask(task);
 
-  claim = async (task) => {
-    const { connection, translator: t } = this.props.env;
-    const { closeTask } = this.context;
-
-    this.setState({ claimingTask: task });
-
-    const { ok } = await connection.request({
-      url:    `${connection.serverURL}/tasks/${task.id}/claim`,
+    const { ok } = await request({
+      url:    `${serverURL}/tasks/${task.id}/claim`,
       method: 'POST'
     });
 
@@ -57,110 +55,86 @@ class HBWClaimingTaskList extends Component {
 
     closeTask(task.id);
 
-    this.setState({ claimingTask: null });
+    setClaimingTask(null);
   };
 
-  onSearch = ({ target }) => {
-    const { value: query } = target;
+  const onSearch = ({ target }) => {
+    const { value } = target;
 
-    this.setState({ query });
+    setQuery(value);
 
-    if (query.length > 2) {
-      this.setState({ searchQuery: query.trim() });
+    if (value.length > 2) {
+      setSearchQuery(value.trim());
     } else {
-      this.setState({ searchQuery: null });
+      setSearchQuery(null);
     }
   };
 
-  clearSearch = () => {
-    this.setState({ query: '', searchQuery: null });
+  const clearSearch = () => {
+    setQuery('');
+    setSearchQuery(null);
   };
 
-  switchTabTo = (tab) => {
-    const { closeTask } = this.context;
-
-    if (tab !== this.state.tab) {
-      this.setState({ tab });
+  const switchTabTo = (to) => {
+    if (to !== tab) {
+      setTab(to);
       closeTask();
-      this.clearSearch();
+      clearSearch();
     }
   };
 
-  isMyTab = () => this.state.tab === this.tabs.my;
-
-  tasksForCurrentTab = () => {
-    const { myTasks, unassignedTasks } = this.context;
-
-    return this.isMyTab() ? myTasks : unassignedTasks;
-  };
-
-  filterTasks = () => this.tasksForCurrentTab().filter(({ description }) => (
-    description && description.toLowerCase().includes(this.state.searchQuery.toLowerCase())
+  const filterTasks = () => tasksForCurrentTab().filter(({ description }) => (
+    description && description.toLowerCase().includes(searchQuery.toLowerCase())
   ));
 
-  tasksForRender = () => {
-    const filteredTasks = this.state.searchQuery
-      ? this.filterTasks()
-      : this.tasksForCurrentTab();
+  const tasksForRender = () => {
+    const filteredTasks = searchQuery
+      ? filterTasks()
+      : tasksForCurrentTab();
 
-    return filteredTasks.slice(0, this.perPage * this.state.page);
+    return filteredTasks.slice(0, perPage * page);
   };
 
-  render () {
-    const { env } = this.props;
-    const {
-      fetching, count, openTask, activeTask
-    } = this.context;
-    const {
-      tab, lastPage, claimingTask, query, searching
-    } = this.state;
-
-    return (
+  return (
       <div id="hbw-claiming-tasks">
         <div className="table">
           <div className="title-row">
             <div className="title">
-              {env.translator('components.claiming.open_tasks')}
+              {t('components.claiming.open_tasks')}
             </div>
-             <Search env={env}
-                     query={query}
-                     searching={searching}
-                     search={this.onSearch}
-                     clear={this.clearSearch}
+             <Search query={query}
+                     search={onSearch}
+                     clear={clearSearch}
              />
           </div>
-          <Tabs env={env}
-                count={count}
-                tabs={this.tabs}
+          <Tabs count={count}
+                tabs={tabs}
                 activeTab={tab}
-                onTabChange={this.switchTabTo}
+                onTabChange={switchTabTo}
           >
-            <Table env={env}
-                   tasks={this.tasksForRender()}
+            <Table tasks={tasksForRender()}
                    fetching={fetching}
-                   addPage={this.addPage}
+                   addPage={addPage}
                    openTask={openTask}
                    lastPage={lastPage}
-                   showClaimButton={!this.isMyTab()}
+                   showClaimButton={!isMyTab()}
                    claimingTask={claimingTask}
-                   claim={this.claim}
+                   claim={claim}
                    activeTask={activeTask}
             />
           </Tabs>
         </div>
          <div className="overview">
           {activeTask && (
-            <Overview env={env}
-                      entityUrl={activeTask.entity_url}
-                      assigned={this.isMyTab()}
+            <Overview entityUrl={activeTask.entity_url}
+                      assigned={isMyTab()}
                       task={activeTask}
-                      claim={this.claim}
+                      claim={claim}
             />
           )}
          </div>
       </div>
-    );
-  }
-}
+  );
+};
 
 export default HBWClaimingTaskList;

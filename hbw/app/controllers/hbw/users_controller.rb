@@ -11,7 +11,7 @@ module HBW
     end
 
     def check_user
-      render json: {user_exist: widget.user_exist?(current_user_identifier)}
+      render json: {user_exists: widget.user_exists?(current_user_identifier)}
     end
 
     private

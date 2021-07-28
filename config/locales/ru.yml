@@ -253,7 +253,6 @@ ru:
     not_selected: Не выбран
     select2:
       not_set: Не указан
-    user_not_found: Текущий пользователь не найден в Camunda
     columns_settings: Отображаемые поля
     from: с
     to: по

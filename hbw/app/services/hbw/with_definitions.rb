@@ -65,8 +65,8 @@ module HBW
     def fetch_variable_for_process(name, process_id)
       do_request(:get,
                  'variable-instance',
-                 variableName:      name,
-                 processInstanceId: process_id).first
+                 variableName:        name,
+                 processInstanceIdIn: process_id).first
     end
 
     def fetch_cached_variable(name, cache_key)

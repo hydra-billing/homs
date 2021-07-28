@@ -3,9 +3,12 @@ import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
 import { v4 as uuidv4 } from 'uuid';
+import TranslationContext from 'shared/context/translation';
 
 modulejs.define('HBWFormFileUpload', ['React'], (React) => {
   class HBWFormFileUpload extends React.Component {
+    static contextType = TranslationContext;
+
     static propTypes = {
       name:   PropTypes.string.isRequired,
       params: PropTypes.shape({
@@ -28,7 +31,6 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       disabled:        PropTypes.bool.isRequired,
       hidden:          PropTypes.bool.isRequired,
       fileListPresent: PropTypes.bool.isRequired,
-      env:             PropTypes.object.isRequired,
       onRef:           PropTypes.func.isRequired,
       trigger:         PropTypes.func.isRequired
     }
@@ -51,8 +53,9 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     }
 
     render () {
+      const { translate, translateBP } = this.context;
       const {
-        name, params, hidden, fileListPresent, task, env
+        name, params, hidden, fileListPresent, task
       } = this.props;
 
       const { files } = this.state;
@@ -61,9 +64,9 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
 
       const hiddenValue = JSON.stringify({ files });
       const cssClass = cx('hbw-file-upload', params.css_class, { hidden });
-      const errorMessage = env.translator('errors.file_list_field_required');
+      const errorMessage = translate('errors.file_list_field_required');
       const errorMessageCss = cx('alert', 'alert-danger', { hidden: fileListPresent });
-      const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+      const label = translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
       const labelCSS = cx('hbw-file-upload-label', params.label_css);
 
       return (
@@ -82,9 +85,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     }
 
     renderFileInput = () => {
-      const {
-        env, name, params, disabled
-      } = this.props;
+      const { name, params, disabled } = this.props;
 
       const { isDragActive } = this.state;
 
@@ -96,7 +97,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         multiple: params.multiple
       };
 
-      const browseLinkText = params.browse_link_text || env.translator('components.file_upload.browse');
+      const browseLinkText = params.browse_link_text || this.context.translate('components.file_upload.browse');
 
       return (
         <div
@@ -150,12 +151,12 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     }
 
     renderInputText = () => {
-      const { params, env } = this.props;
+      const { params } = this.props;
 
       const defaultInputText = (
         <>
           <span className="fa fas fa-cloud-upload-alt"/>
-          {env.translator('components.file_upload.drag_and_drop')}
+          {this.context.translate('components.file_upload.drag_and_drop')}
         </>
       );
 

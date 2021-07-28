@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import TranslationContext from '../context/translation';
 
-const HBWPriority = ({ env, priority }) => {
-  const { translator: t } = env;
+const HBWPriority = ({ priority }) => {
+  const { translate: t } = useContext(TranslationContext);
 
   const priorityName = (p) => {
     if (p < 50) {

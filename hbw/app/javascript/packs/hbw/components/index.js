@@ -5,6 +5,6 @@ import './buttons.js';
 import './container.js';
 import './entity_task.js';
 import './entity_tasks.js';
-import './error.js';
+import './error';
 import './form.js';
 import './pending';

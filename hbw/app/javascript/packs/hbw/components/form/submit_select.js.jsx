@@ -1,10 +1,13 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
+import TranslationContext from 'shared/context/translation';
 import CancelProcessButton from './cancel_process_button.js';
 
 modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
   class HBWFormSubmitSelect extends React.Component {
+    static contextType = TranslationContext;
+
     state = {
       value: this.props.value || '',
       error: false
@@ -39,7 +42,7 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
 
     buildButton = (option) => {
       const disabled = this.props.disabled || this.props.formSubmitting;
-      const { task, env } = this.props;
+      const { task } = this.props;
       const { error } = this.state;
 
       const onClick = () => this.setState({ value: option.value });
@@ -47,7 +50,7 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
       const cssClass = cx(option.css_class, { disabled });
       const faClass = cx(option.fa_class, { disabled });
 
-      const label = env.bpTranslator(`${task.process_key}.${task.key}.${option.name}`, {}, option.label);
+      const label = this.context.translateBP(`${task.process_key}.${task.key}.${option.name}`, {}, option.label);
 
       return (
         <button key={option.name}
@@ -63,10 +66,9 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
     };
 
     renderCancelButton = () => {
-      const { env, task } = this.props;
+      const { task } = this.props;
 
-      return <CancelProcessButton processInstanceId={task.process_instance_id}
-                                  env={env} />;
+      return <CancelProcessButton processInstanceId={task.process_instance_id} />;
     };
 
     serialize = () => {

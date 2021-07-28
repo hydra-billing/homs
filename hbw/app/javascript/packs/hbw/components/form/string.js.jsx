@@ -6,9 +6,12 @@ import CustomFormatter from 'formatter';
 import Tooltip from 'tooltip';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
+import TranslationContext from 'shared/context/translation';
 
 modulejs.define('HBWFormString', ['React'], (React) => {
   class HBWFormString extends React.Component {
+    static contextType = TranslationContext;
+
     constructor (props, context) {
       super(props, context);
       const values = this.getNormalizedInitialValues(props.value || '');
@@ -37,7 +40,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
 
     render () {
       const {
-        name, params, disabled, hidden, task, env
+        name, params, disabled, hidden, task
       } = this.props;
 
       const { valid, value, visualValue } = this.state;
@@ -59,7 +62,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       const rootCSS = cx(params.css_class, { hidden });
       const labelCss = cx(params.label_css, 'hbw-string-label');
       const inputCSS = cx('form-control', { invalid: this.isAvailable() && !valid });
-      const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+      const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       return <div className={rootCSS} title={params.tooltip}>
         <div className="form-group">
@@ -86,7 +89,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
     componentDidMount () {
       this.props.onRef(this);
       this.tooltip = new Tooltip(this.input, {
-        title:     this.props.params.message || this.props.env.translator('errors.field_is_required'),
+        title:     this.props.params.message || this.context.translate('errors.field_is_required'),
         container: this.tooltipContainer,
         trigger:   'manual',
         placement: 'top'

@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
+import TranslationContext from 'shared/context/translation';
 import FileList from './file_list';
 
 modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
@@ -10,6 +11,8 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
 (React, Datetime, SubmitSelect,
   User, Select, String, Text, Checkbox, Static, SelectTable, FileUpload, RadioButton) => {
   class HBWFormGroup extends React.Component {
+    static contextType = TranslationContext;
+
     componentDidMount () {
       this.props.onRef(this);
     }
@@ -20,10 +23,10 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
 
     render () {
       const {
-        name, params, hidden, task, env
+        name, params, hidden, task
       } = this.props;
       const inputCSS = cx('tab-panel', 'form-group', params.css_class, { hidden });
-      const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+      const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       return <div className={inputCSS}>
         <ul className='nav nav-tabs' role='tablist'>
@@ -59,7 +62,6 @@ modulejs.define('HBWFormGroup', ['React', 'HBWFormDatetime',
         task:           this.props.task,
         value:          this.props.variables[name],
         formSubmitting: this.props.formSubmitting,
-        env:            this.props.env,
         showSubmit:     this.props.showSubmit,
         formValues:     this.props.formValues
       };

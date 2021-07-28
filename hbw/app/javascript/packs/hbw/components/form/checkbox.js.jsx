@@ -1,9 +1,12 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
+import TranslationContext from 'shared/context/translation';
 
 modulejs.define('HBWFormCheckbox', ['React'], (React) => {
   class HBWFormCheckbox extends React.Component {
+    static contextType = TranslationContext;
+
     state = {
       value: this.props.value
     };
@@ -23,7 +26,7 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
 
     render () {
       const {
-        name, params, disabled, hidden, task, env
+        name, params, disabled, hidden, task
       } = this.props;
 
       const { value } = this.state;
@@ -34,7 +37,7 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
       };
 
       const inputCSS = cx(params.css_class, { hidden });
-      const label = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+      const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       const labelCSS = cx('hbw-checkbox-label', this.props.params.label_css);
 

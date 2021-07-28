@@ -3,15 +3,11 @@ import { shallow } from 'enzyme';
 import {
   addSeconds, addMinutes, addHours, addDays, addWeeks, addYears,
 } from 'date-fns';
+import { withTranslationContext } from 'hbw/components/shared/context/translation';
 import CreatedDate from 'hbw/components/shared/element/created_date';
-import Translator from 'hbw/translator';
-import { localizer } from 'hbw/init/date_localizer';
 
 describe('CreatedDate should render correctly', () => {
-  const fakeEnv = {
-    translator: Translator.getTranslatorForLocale('en'),
-    localizer:  localizer('en')
-  };
+  const CreatedDateWithContext = withTranslationContext({ locale: { code: 'en' } })(CreatedDate);
 
   const now = new Date(2019, 11, 2);
   const sec = addSeconds(now, -30);
@@ -22,7 +18,7 @@ describe('CreatedDate should render correctly', () => {
   const years = addYears(weeks, -1);
 
   const shallowComponent = date => (
-    shallow(<CreatedDate env={fakeEnv} dateISO={date.toISOString()} now={now} />)
+    shallow(<CreatedDateWithContext dateISO={date.toISOString()} now={now} />)
   );
 
   it('with creation date in last year', () => {

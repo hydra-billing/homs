@@ -3,15 +3,11 @@ import { shallow } from 'enzyme';
 import {
   addSeconds, addMinutes, addHours, addDays, addWeeks, addYears,
 } from 'date-fns';
+import { withTranslationContext } from 'hbw/components/shared/context/translation';
 import DueDate from 'hbw/components/shared/element/due_date';
-import Translator from 'hbw/translator';
-import { localizer } from 'hbw/init/date_localizer';
 
 describe('DueDate should render correctly', () => {
-  const fakeEnv = {
-    translator: Translator.getTranslatorForLocale('en'),
-    localizer:  localizer('en')
-  };
+  const DueDateWithContext = withTranslationContext({ locale: { code: 'en' } })(DueDate);
 
   const now = new Date();
 
@@ -30,7 +26,7 @@ describe('DueDate should render correctly', () => {
   const expiredYears = addYears(now, -6);
 
   const shallowComponent = date => (
-    shallow(<DueDate env={fakeEnv} dateISO={date.toISOString()} now={now} />)
+    shallow(<DueDateWithContext dateISO={date.toISOString()} now={now} />)
   );
 
   it('with years to due date', () => {

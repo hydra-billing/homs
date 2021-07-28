@@ -1,84 +1,77 @@
 import cx from 'classnames';
+import React, {
+  useContext, useEffect, useRef, useState
+} from 'react';
 import { withCallbacks } from 'shared/hoc';
+import ConnectionContext from 'shared/context/connection';
+import TranslationContext from 'shared/context/translation';
 import Pending from './pending';
+import Error from './error';
 
 modulejs.define(
   'HBWEntityTask',
-  ['React', 'jQuery', 'HBWForm', 'HBWError', 'HBWFormDefinition'],
-  (React, jQuery, Form, Error, FormDefinition) => {
-    class HBWEntityTask extends React.Component {
-      state = {
-        error:     null,
-        collapsed: this.props.collapsed || false
-      };
+  ['jQuery', 'HBWForm', 'HBWFormDefinition'],
+  (jQuery, Form, FormDefinition) => {
+    const HBWEntityTask = ({
+      taskId, task, entityClassCode, guid, trigger, bind, collapsed: initiallyCollapsed
+    }) => {
+      const { request, serverURL } = useContext(ConnectionContext);
+      const { translateBP } = useContext(TranslationContext);
 
-      componentDidMount () {
-        this.props.bind(`hbw:submit-form-${this.props.guid}`, this.submitForm);
+      const [error, setError] = useState(null);
+      const [collapsed, setCollapsed] = useState(initiallyCollapsed || false);
 
-        const e = jQuery(this.rootNode);
-        e.on('hidden.bs.collapse', this.choose);
-        e.on('shown.bs.collapse', this.choose);
-      }
+      const rootNode = useRef(null);
 
-      componentWillUnmount () {
-        jQuery(this.rootNode).off('hidden.bs.collapse').off('shown.bs.collapse');
-      }
-
-      render () {
-        const { task, env } = this.props;
-        const { collapsed } = this.state;
-
-        const iconClass = cx('indicator', 'pull-right', 'fa', {
-          'fa-chevron-down': collapsed,
-          'fa-chevron-up':   !collapsed,
-        });
-
-        return <div className="panel panel-default" ref={(node) => { this.rootNode = node; }}>
-          <div className="panel-heading">
-            <h4 className="panel-title collapsable">
-              <a onClick={this.toggleCollapse}>
-                {env.bpTranslator(`${task.process_key}.${task.key}.label`, {}, task.name)}
-              </a>
-              <i
-                onClick={this.toggleCollapse}
-                className={iconClass}
-              />
-            </h4>
-          </div>
-          {!collapsed && (
-            <div className="panel-body">
-              {this.renderForm()}
-            </div>
-          )}
-        </div>;
-      }
-
-      renderForm = () => {
-        const { guid, task, env } = this.props;
-        const { error } = this.state;
-
-        if (task.form !== undefined) {
-          if (error) {
-            return <Error error={error} env={env}/>;
-          } else {
-            const opts = {
-              task,
-              env,
-              error,
-              id:            guid,
-              variables:     this.formVariablesFromTask(task),
-              taskVariables: task.form.variables
-            };
-
-            return <Form {...opts}/>;
-          }
-        } else {
-          return <div className="hbw-spinner"><Pending /></div>;
+      const saveForm = variables => request({
+        url:    `${serverURL}/tasks/${taskId}/form`,
+        method: 'PUT',
+        data:   {
+          form_data:    variables,
+          entity_class: entityClassCode
+        },
+        headers: {
+          'X-CSRF-Token': task.form.csrf_token,
+          'Content-Type': 'application/json'
         }
+      });
+
+      const submitForm = (variables) => {
+        saveForm(variables)
+          .then(() => {
+            setError(null);
+            trigger('hbw:form-submitted', task);
+          })
+          .catch((response) => {
+            setError(response);
+
+            trigger('hbw:form-submitting-failed', {
+              response,
+              task
+            });
+          });
       };
 
-      formVariablesFromTask = () => {
-        const { form } = this.props.task;
+      const choose = () => trigger('hbw:task-clicked', task);
+
+      const toggleCollapse = () => setCollapsed(!collapsed);
+
+      useEffect(() => {
+        bind(`hbw:submit-form-${guid}`, submitForm);
+
+        const $rootElement = jQuery(rootNode.current);
+        $rootElement.on('hidden.bs.collapse', choose);
+        $rootElement.on('shown.bs.collapse', choose);
+
+        return () => {
+          jQuery(rootNode.current)
+            .off('hidden.bs.collapse')
+            .off('shown.bs.collapse');
+        };
+      }, []);
+
+      const formVariablesFromTask = () => {
+        const { form } = task;
 
         const formVariables = {};
         const formDef = new FormDefinition(form);
@@ -92,33 +85,50 @@ modulejs.define(
         return formVariables;
       };
 
-      submitForm = (variables) => {
-        this.props.env.forms.save({
-          taskId: this.props.taskId,
-          variables,
-          token:  this.props.task.form.csrf_token
-        })
-          .then(() => {
-            this.setState({ error: null });
-            this.props.trigger('hbw:form-submitted', this.props.task);
-          })
-          .catch((response) => {
-            this.setState({ error: response });
-            return this.props.trigger('hbw:form-submitting-failed', {
-              response,
-              task: this.props.task
-            });
-          });
+      const renderForm = () => {
+        if (task.form !== undefined) {
+          if (error) {
+            return <Error error={error}/>;
+          } else {
+            const opts = {
+              task,
+              error,
+              id:            guid,
+              variables:     formVariablesFromTask(task),
+              taskVariables: task.form.variables
+            };
+
+            return <Form {...opts}/>;
+          }
+        } else {
+          return <div className="hbw-spinner"><Pending /></div>;
+        }
       };
 
-      choose = () => {
-        this.props.trigger('hbw:task-clicked', this.props.task);
-      };
+      const iconClass = cx('indicator', 'pull-right', 'fa', {
+        'fa-chevron-down': collapsed,
+        'fa-chevron-up':   !collapsed,
+      });
 
-      toggleCollapse = () => {
-        this.setState(prevState => ({ collapsed: !prevState.collapsed }));
-      };
-    }
+      return <div className="panel panel-default" ref={rootNode}>
+          <div className="panel-heading">
+            <h4 className="panel-title collapsable">
+              <a onClick={toggleCollapse}>
+                {translateBP(`${task.process_key}.${task.key}.label`, {}, task.name)}
+              </a>
+              <i
+                onClick={toggleCollapse}
+                className={iconClass}
+              />
+            </h4>
+          </div>
+          {!collapsed && (
+            <div className="panel-body">
+              {renderForm()}
+            </div>
+          )}
+        </div>;
+    };
 
     return withCallbacks(HBWEntityTask);
   }

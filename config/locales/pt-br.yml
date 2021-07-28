@@ -254,7 +254,6 @@ pt-br:
     not_selected: Não selecionado
     select2:
       not_set: Vazio
-    user_not_found: O usuário atual não foi encontrado no Camunda
     columns_settings: Campos de exibição
     from: de
     to: para

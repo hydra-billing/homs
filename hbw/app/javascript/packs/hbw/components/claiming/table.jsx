@@ -6,11 +6,13 @@ import { withErrorBoundary } from 'shared/hoc';
 import Priority from 'shared/element/priority';
 import DueDate from 'shared/element/due_date';
 import CreatedDate from 'shared/element/created_date';
+import TranslationContext from 'shared/context/translation';
 import Pending from '../pending';
 
 class HBWTasksTable extends Component {
+  static contextType = TranslationContext;
+
   static propTypes = {
-    env:             PropTypes.object.isRequired,
     tasks:           PropTypes.array.isRequired,
     showClaimButton: PropTypes.bool.isRequired,
     fetching:        PropTypes.bool.isRequired,
@@ -102,13 +104,12 @@ class HBWTasksTable extends Component {
   };
 
   renderDate = (created, due) => {
-    const { env } = this.props;
     const now = new Date();
 
     if (due) {
-      return <span className="deadline"><DueDate env={env} dateISO={due} now={now} /></span>;
+      return <span className="deadline"><DueDate dateISO={due} now={now} /></span>;
     } else {
-      return <span><CreatedDate env={env} dateISO={created} now={now} /></span>;
+      return <span><CreatedDate dateISO={created} now={now} /></span>;
     }
   };
 
@@ -121,10 +122,10 @@ class HBWTasksTable extends Component {
   renderRow = (row, index) => {
     const { cursor } = this.state;
     const {
-      tasks, showClaimButton, env, openTask, claimingTask, activeTask
+      tasks, showClaimButton, openTask, claimingTask, activeTask
     } = this.props;
 
-    const { translator: t, bpTranslator } = env;
+    const { translate: t, translateBP } = this.context;
 
     const claiming = claimingTask && claimingTask.id === row.id;
     const opened = activeTask && activeTask.id === row.id;
@@ -142,13 +143,13 @@ class HBWTasksTable extends Component {
       'btn-default': !opened,
     });
 
-    const taskLabel = bpTranslator(`${row.process_key}.${row.key}.label`, {}, row.name);
-    const processLabel = bpTranslator(`${row.process_key}.label`, {}, row.process_name);
+    const taskLabel = translateBP(`${row.process_key}.${row.key}.label`, {}, row.name);
+    const processLabel = translateBP(`${row.process_key}.label`, {}, row.process_name);
 
     return (
       <tr className={chosenCN} key={row.id} onClick={() => openTask(row)}>
         <td className='priority'>
-          <Priority env={env} priority={row.priority} />
+          <Priority priority={row.priority} />
         </td>
         <td>{taskLabel}</td>
         <td><i className={row.icon}/>&nbsp;{processLabel}</td>
@@ -166,7 +167,7 @@ class HBWTasksTable extends Component {
   };
 
   renderNoTasks = () => {
-    const { translator: t } = this.props.env;
+    const { translate: t } = this.context;
 
     return (
       <div className='no-tasks'>
@@ -182,7 +183,7 @@ class HBWTasksTable extends Component {
       showClaimButton, tasks, fetching
     } = this.props;
 
-    const { translator: t } = this.props.env;
+    const { translate: t } = this.context;
 
     return (
       <div className='claiming-table'>

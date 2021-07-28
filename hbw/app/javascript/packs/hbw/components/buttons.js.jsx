@@ -1,48 +1,39 @@
 /* eslint no-console: "off" */
 
+import { useContext, useState, useEffect } from 'react';
 import { withCallbacks } from 'shared/hoc';
+import ConnectionContext from 'shared/context/connection';
+import TranslationContext from 'shared/context/translation';
 import Pending from './pending';
+import Error from './error';
 
 modulejs.define(
   'HBWButtons',
-  ['React', 'HBWButton', 'HBWError'],
-  (React, Button, Error) => {
-    class HBWButtons extends React.Component {
-      constructor (props, context) {
-        super(props, context);
+  ['React', 'HBWButton'],
+  (React, Button) => {
+    const HBWButtons = ({
+      entityCode, entityTypeCode, entityClassCode, autorunProcessKey, resetProcess,
+      initialVariables, showSpinner, userExists, bind
+    }) => {
+      const { translate: t } = useContext(TranslationContext);
+      const { request, serverURL } = useContext(ConnectionContext);
 
-        this.state = {
-          buttons:        [],
-          fetchError:     null,
-          submitError:    null,
-          errorHeader:    '',
-          fetched:        false,
-          submitting:     false,
-          bpRunning:      false,
-          fileUploading:  false,
-          BPStateChecker: null,
+      const [buttons, setButtons] = useState([]);
+      const [fetchError, setFetchError] = useState(null);
+      const [submitError, setSubmitError] = useState(null);
+      const [errorHeader, setErrorHeader] = useState('');
+      const [fetched, setFetched] = useState(false);
+      const [submitting, setSubmitting] = useState(false);
+      const [BPRunning, setBPRunning] = useState(false);
+      const [fileUploading, setFileUploading] = useState(false);
+      const [BPStateChecker, setBPStateChecker] = useState(null);
+
+      const buttonsURL = `${serverURL}/buttons`;
+
+      const fetchButtons = async () => {
+        const trySetBPStateChecker = () => {
+          setBPStateChecker(prevState => prevState || setTimeout(fetchButtons, 5000));
         };
-      }
-
-      submitButton = businessProcessCode => this.props.env.connection.request({
-        url:     this.buttonsURL(),
-        method:  'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          entity_code:       this.props.entityCode,
-          entity_type:       this.props.entityTypeCode,
-          entity_class:      this.props.entityClassCode,
-          bp_code:           businessProcessCode,
-          initial_variables: this.props.env.initialVariables
-        }
-      });
-
-      fetchButtons = async () => {
-        const {
-          entityCode, entityTypeCode, entityClassCode, autorunProcessKey, resetProcess, env
-        } = this.props;
 
         const data = {
           entity_code:         entityCode,
@@ -51,111 +42,105 @@ modulejs.define(
           autorun_process_key: autorunProcessKey
         };
 
-        const { bp_running: bpRunning, buttons } = await env.connection.request({
-          url:    this.buttonsURL(),
+        const { bp_running, buttons: fetchedButtons } = await request({
+          url:    buttonsURL,
           method: 'GET',
           data
         }).then(response => response.json())
-          .catch(response => this.setState({
-            fetchError:  response,
-            errorHeader: env.translator('errors.cannot_obtain_available_actions')
-          }));
+          .catch((error) => {
+            setFetchError(error);
+            setErrorHeader(t('errors.cannot_obtain_available_actions'));
+          });
 
-        if (bpRunning) {
-          this.setBPStateChecker();
+        if (bp_running) {
+          trySetBPStateChecker();
         } else {
           resetProcess();
         }
 
-        return this.setState({
-          fetched:    true,
-          fetchError: null,
-          buttons,
-          bpRunning,
-        });
+        setButtons(fetchedButtons);
+        setFetched(true);
+        setFetchError(null);
+        setBPRunning(bp_running);
       };
 
-      setBPStateChecker = () => {
-        this.setState(prevState => ({
-          BPStateChecker: prevState.BPStateChecker || setTimeout(this.fetchButtons, 5000)
-        }));
+      const resetBPStateChecker = () => {
+        clearTimeout(BPStateChecker);
       };
 
-      resetBPStateChecker = () => {
-        clearTimeout(this.state.BPStateChecker);
+      const submitButton = businessProcessCode => request({
+        url:     buttonsURL,
+        method:  'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          entity_code:       entityCode,
+          entity_type:       entityTypeCode,
+          entity_class:      entityClassCode,
+          bp_code:           businessProcessCode,
+          initial_variables: initialVariables
+        }
+      });
+
+      const onButtonActivation = async (button) => {
+        console.log(`Clicked button[${button.title}], submitting`);
+        setSubmitting(true);
+
+        const { bp_running, buttons: fetchedButtons } = await submitButton(button.bp_code)
+          .then(data => data.json())
+          .catch((error) => {
+            setSubmitError(error);
+            setSubmitting(false);
+            setErrorHeader(t('errors.cannot_start_process'));
+          });
+
+        setSubmitError(null);
+        setButtons(fetchedButtons);
+        setBPRunning(bp_running);
       };
 
-      buttonsURL = () => `${this.props.env.connection.serverURL}/buttons`;
+      useEffect(() => {
+        fetchButtons();
+        bind('hbw:button-activated', onButtonActivation);
+        bind('hbw:file-upload-started', () => setFileUploading(true));
+        bind('hbw:file-upload-finished', () => setFileUploading(false));
 
-      componentDidMount () {
-        this.fetchButtons();
-        this.props.bind('hbw:button-activated', this.onButtonActivation);
-        this.props.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
-        this.props.bind('hbw:file-upload-finished', () => this.setState({ fileUploading: false }));
-      }
+        return () => {
+          resetBPStateChecker();
+        };
+      }, []);
 
-      componentWillUnmount () {
-        this.resetBPStateChecker();
-      }
-
-      render () {
-        const { env, showSpinner } = this.props;
-        const {
-          fetched, bpRunning, buttons, submitting, fileUploading, submitError, fetchError, errorHeader
-        } = this.state;
-
-        if (env.userExist) {
-          if (showSpinner || !fetched) {
-            return <div className="hbw-spinner"><Pending /></div>;
-          } else if (bpRunning) {
-            return (
+      if (userExists) {
+        if (showSpinner || !fetched) {
+          return <div className="hbw-spinner"><Pending /></div>;
+        } else if (BPRunning) {
+          return (
               <div className="hbw-spinner">
-                <Pending text={env.translator('bp_running')} />
+                <Pending text={t('bp_running')} />
               </div>
-            );
-          } else {
-            const buttonElements = buttons.map((button, index) => (
+          );
+        } else {
+          const buttonElements = buttons.map((button, index) => (
               <Button key={index}
                       button={button}
                       disabled={submitting || fileUploading}
-                      env={env}
               />
-            ));
+          ));
 
-            return (
+          return (
               <div className='hbw-bp-control-buttons btn-group'>
                 <Error error={submitError || fetchError}
                        errorHeader={errorHeader}
-                       env={env}
                 />
                 {buttonElements}
               </div>
-            );
-          }
-        } else {
-          return <div />;
+          );
         }
+      } else {
+        return <div />;
       }
-
-      onButtonActivation = async (button) => {
-        console.log(`Clicked button[${button.title}], submitting`);
-        this.setState({ submitting: true });
-
-        const { bp_running: bpRunning, buttons } = await this.submitButton(button.bp_code)
-          .then(data => data.json())
-          .catch(response => this.setState({
-            submitError: response,
-            submitting:  false,
-            errorHeader: this.props.env.translator('errors.cannot_start_process')
-          }));
-
-        this.setState({
-          submitError: null,
-          buttons,
-          bpRunning
-        });
-      };
-    }
+    };
 
     return withCallbacks(HBWButtons);
   }
