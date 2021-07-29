@@ -11,6 +11,8 @@ import Messenger from 'messenger';
 import { parseISO } from 'date-fns';
 import TranslationContext from 'shared/context/translation';
 import DispatcherContext from 'shared/context/dispatcher';
+import { CamundaError } from '../utils/errors';
+import ErrorHandlingContext from './error_handling';
 
 const StoreContext = createContext({});
 
@@ -114,7 +116,9 @@ export const withStoreContext = ({
     fetchTask = async (taskId, cacheKey, assignedToMe, version) => {
       const task = await this.getTaskById(taskId, cacheKey);
 
-      if (this.vesionIsOutdated(taskId, version)) return;
+      if (this.vesionIsOutdated(taskId, version)) {
+        return;
+      }
 
       if (task.assignee === null) {
         await this.persistTask(task, version);
@@ -131,7 +135,9 @@ export const withStoreContext = ({
       assigned_to_me: assignedToMe,
       version
     }) => {
-      if (this.vesionIsOutdated(taskId, version)) return;
+      if (this.vesionIsOutdated(taskId, version)) {
+        return;
+      }
 
       this.setState(
         { fetching: true },
@@ -246,6 +252,11 @@ export const withStoreContext = ({
           },
         });
 
+        if (result.status === 504) {
+          this.context.addError(CamundaError);
+          this.setState({ error: this.context.formError });
+        }
+
         const { tasks } = await result.json();
 
         this.setState({ tasks: this.orderTasks(tasks) });
@@ -293,8 +304,8 @@ export const withStoreContext = ({
     render () {
       const [unassignedTasks, myTasks] = partition(this.state.tasks, { assignee: null });
       const count = {
-        my:         myTasks.length,
-        unassigned: unassignedTasks.length,
+        my:         this.state.error ? '-' : myTasks.length,
+        unassigned: this.state.error ? '-' : unassignedTasks.length,
       };
 
       const contextValue = {
@@ -316,6 +327,8 @@ export const withStoreContext = ({
       );
     }
   }
+
+  StoreProvider.contextType = ErrorHandlingContext;
 
   return StoreProvider;
 };

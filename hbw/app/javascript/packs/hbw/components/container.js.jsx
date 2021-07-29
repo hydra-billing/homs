@@ -4,7 +4,7 @@ import Messenger from 'messenger';
 import { useContext, useEffect, useState } from 'react';
 import ConnectionContext from 'shared/context/connection';
 import TranslationContext from 'shared/context/translation';
-import Error from './error';
+import ErrorHandlingContext from 'shared/context/error_handling';
 
 modulejs.define(
   'HBWContainer',
@@ -17,8 +17,9 @@ modulejs.define(
         tasks, fetching, error, getFormsForTasks
       } = useContext(StoreContext);
 
-      const { request, serverURL } = useContext(ConnectionContext);
+      const { serverURL } = useContext(ConnectionContext);
       const { translate } = useContext(TranslationContext);
+      const { safeRequest } = useContext(ErrorHandlingContext);
 
       const [processInstanceId, setProcessInstanceId] = useState(null);
       const [userExists, setUserExists] = useState(false);
@@ -30,7 +31,7 @@ modulejs.define(
       };
 
       const checkBpmUser = async () => {
-        const response = await request({
+        const response = await safeRequest({
           url:    `${serverURL}/users/check`,
           method: 'GET',
           async:  false
@@ -64,6 +65,7 @@ modulejs.define(
         getFormsForTasks(activeTasks());
 
         return <div className='hbw-body'>
+            {error}
             <Tasks tasks={activeTasks()}
                     chosenTaskID={chosenTaskID}
                     entityCode={entityCode}
@@ -74,7 +76,7 @@ modulejs.define(
           </div>;
       } else {
         return <div className='hbw-body'>
-            <Error error={error} />
+            {error}
             <Buttons entityCode={entityCode}
                       entityTypeCode={entityTypeCode}
                       entityClassCode={entityClassCode}

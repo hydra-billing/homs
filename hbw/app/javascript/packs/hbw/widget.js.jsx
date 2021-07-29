@@ -4,7 +4,8 @@ import { withStoreContext } from 'shared/context/store';
 import { withTranslationContext } from 'shared/context/translation';
 import { withConnectionContext } from 'shared/context/connection';
 import { withDispatcherContext } from 'shared/context/dispatcher';
-import compose from './components/shared/utils/compose';
+import { withErrorHandlingContext } from 'shared/context/error_handling';
+import compose from 'shared/utils/compose';
 import App from './components/app';
 import AvailableTasksButton from './components/claiming/menu_button';
 import AvailableTaskList from './components/claiming/task_list';
@@ -86,6 +87,7 @@ modulejs.define(
           withDispatcherContext({ dispatcher: this.dispatcher }),
           withConnectionContext({ connection: this.connection }),
           withTranslationContext({ locale }),
+          withErrorHandlingContext(),
           withStoreContext({
             widgetURL,
             userIdentifier,

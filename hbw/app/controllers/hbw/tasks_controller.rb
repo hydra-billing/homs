@@ -1,7 +1,7 @@
 require 'minio'
 
 module HBW
-  class TasksController < BaseController
+  class TasksController < ApiController
     include Minio
     extend Minio::Mixin
 

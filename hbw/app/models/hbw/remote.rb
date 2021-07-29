@@ -37,7 +37,7 @@ module HBW
         raise RemoteError.new(args[0], 'response code: %s, body: %s' % [response.status, response.body])
       end
     rescue StandardError => e
-      raise RemoteError.new(args[0], e.message, e.backtrace)
+      e.instance_of?(RemoteError) ? (raise e) : (raise RemoteError.new(args[0], e.message, e.backtrace))
     end
   end
 

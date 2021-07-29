@@ -5,14 +5,13 @@ import TranslationContext, { ContextType as TranslationContextType } from 'share
 
 type Props = {
   errorHeader?: string,
-  error?: {
-    responseText?: string
-  }
+  errorBody?: string
 }
 
-const HBWError: FC<Props> = ({ errorHeader = '', error }) => {
+const HBWError: FC<Props> = ({ errorHeader, errorBody }) => {
   const { translate: t } = useContext(TranslationContext) as TranslationContextType;
-  const [showFull, setShowFull] = useState(false);
+
+  const [showFull, setShowFull] = useState(() => false);
 
   const toggleBacktrace = () => {
     setShowFull(!showFull);
@@ -23,26 +22,22 @@ const HBWError: FC<Props> = ({ errorHeader = '', error }) => {
     'fa-chevron-right': !showFull
   });
 
-  if (error) {
-    const errorText = error.responseText || error;
-
-    const header = errorHeader
-      ? ` ${t('error')} — ${errorHeader}`
-      : ` ${t('error')}`;
+  if (errorHeader) {
+    const header = ` ${t('error')} — ${errorHeader}`;
 
     return (
       <div className="alert alert-danger hbw-error">
         <i className="fas fa-exclamation-triangle"></i>
         <strong>{header}</strong>
-        <br />
+        <br/>
         <a href="javascript:;"
            onClick={toggleBacktrace}
            className="show-more"
-           style={{ display: errorText ? 'block' : 'none' }}>
+           style={{ display: errorBody ? 'block' : 'none' }}>
            <i className={iconClass}></i>
            {t('more')}
         </a>
-        <pre style={{ display: showFull ? 'block' : 'none' }}>{errorText}</pre>
+        <pre style={{ display: showFull ? 'block' : 'none' }}>{errorBody}</pre>
       </div>
     );
   } else {

@@ -1,5 +1,5 @@
 module HBW
-  class ButtonsController < BaseController
+  class ButtonsController < ApiController
     def index
       if autorun_process_key.nil?
         render json: buttons.to_json
