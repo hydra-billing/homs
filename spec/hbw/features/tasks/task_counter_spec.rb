@@ -34,7 +34,7 @@ feature 'Check available tasks counter', js: true do
         [
           "Assigned task\nexpired (#{years_since(first_task_due_date)}y past due date)",
           "Other assigned task\nSome test description\nexpired (#{years_since(second_task_due_date)}y past due date)",
-          "Enter customer's address\n30 Jun 2016",
+          "Check test form\n30 Jun 2016",
           "Check test form\n30 Jun 2016",
           "Check test form\n30 Jun 2016",
           "Check test form\n30 Jun 2016",

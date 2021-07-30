@@ -144,9 +144,9 @@ get:
         deploymentId: "31"
       - <<:
         id: "testProcess:32:32"
-        key: "new_customer"
+        key: "test_translations"
         version: 1
-        name: "New Customer"
+        name: "Test translations"
         description: null
         tenantId: null
         deploymentId: "1313123"
@@ -1850,34 +1850,73 @@ get:
       form:
         css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
         fields:
-          - name: homsOrderDataCustomerCity
+          - name: selectField
             type: select
-            label: City
+            label: Select field
             nullable: false
             required: true
             choices:
-              - Moscow
-              - Saint Petersburg
-              - Novosibirsk
-              - Yekaterinburg
-              - Nizhniy Novgorod
-              - Samara
+              - someSity
             css_class: col-xs-6 col-sm-4 col-md-3
-          - name: homsOrderDataCustomerStreet
+          - name: stringField
             type: string
-            label: Street
+            label: String field
             required: true
             css_class: col-xs-6 col-sm-4 col-md-3
-          - name: homsOrderDataCustomerHouse
-            type: string
-            label: House
+          - name: staticField
+            type: static
+            html: <div class="alert alert-success"><h4>Static field</h4></div>
+            css_class: col-xs-12
+          - name: selectTableField
+            type: select_table
+            label: Select table field
+            css_class: col-xs-12
             required: true
+            nullable: false
+            rows:
+              - name: Name
+                type: string
+                alignment: center
+            choices:
+              - [1, Second choise]
+          - name: textField
+            type: text
+            label: Text field
+            rows: 6
+            css_class: col-xs-6
+          - name: datetimeField
+            type: datetime
+            label: Datetime field
             css_class: col-xs-6 col-sm-4 col-md-3
-          - name: homsOrderDataCustomerEntrance
-            type: string
-            label: Entrance
-            required: true
-            css_class: col-xs-6 col-sm-4 col-md-3
+          - name: group
+            type: group
+            label: Group
+            css_class: col-xs-12
+            fields:
+              - name: fileUploadField
+                type: file_upload
+                label: File upload field
+                css_class: col-md-4 col-xs-4 col-lg-4
+              - name: homsOrderDataFileList
+                type: file_list
+                label: File list field
+                css_class: col-md-8 col-xs-8 col-lg-8
+          - name: checkboxField
+            type: checkbox
+            label: Checkbox field
+            css_class: col-xs-12 col-sm-6 col-md-4
+          - name: submitSelectField
+            type: submit_select
+            css_class: col-xs-12
+            options:
+            - name: submitSelectButton1
+              label: Button 1
+              value: Value_1
+              css_class: btn btn-success btn-lg
+            - name: submitSelectButton2
+              label: Button 2
+              value: Value_2
+              css_class: btn btn-danger btn-lg
 
   task/111133/deployed-form:
     "": |
@@ -3338,7 +3377,31 @@ get:
       homsOrderCode:
         type: "string"
         value: "ORD-32"
-      homsOrderDataCustomerCity:
+      selectField:
+        type: "string"
+        value: null
+      stringField:
+        type: "string"
+        value: null
+      staticField:
+        type: "string"
+        value: null
+      selectTableField:
+        type: "string"
+        value: null
+      textField:
+        type: "string"
+        value: null
+      datetimeField:
+        type: "string"
+        value: null
+      fileUploadField:
+        type: "string"
+        value: null
+      fileListField:
+        type: "string"
+        value: null
+      checkboxField:
         type: "string"
         value: null
 
@@ -4002,11 +4065,11 @@ post:
         processDefinitionId: "testProcess:31:31"
       - <<: *default_tasks
         id: "111132"
-        name: "Enter customer's address"
+        name: "Form for testing of field translations"
         formKey: "test_form_with_disabled_buttons.yml"
         processInstanceId: 32
         processDefinitionId: "testProcess:32:32"
-        taskDefinitionKey: "Activity_1jedmqv"
+        taskDefinitionKey: "Activity_test_translations"
       - <<: *default_tasks
         id: "111133"
         formKey: "test_form_validation.yml"

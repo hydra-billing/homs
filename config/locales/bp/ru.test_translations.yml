@@ -1,0 +1,17 @@
+ru:
+  test_translations:
+    label: Тестирование переводов
+    Activity_test_translations:
+      label: Форма для тестирования переводов
+      group: Группа
+      selectField: Поле select
+      stringField: Поле string
+      staticField: <div class="alert alert-success"><h4>Поле static</h4></div>
+      selectTableField: Поле select_table
+      textField: Поле text
+      datetimeField: Поле datetime
+      fileUploadField: Поле file_opload
+      homsOrderDataFileList: Поле file_list
+      checkboxField: Поле checkbox
+      submitSelectButton1: Кнопка 1
+      submitSelectButton2: Кнопка 2
