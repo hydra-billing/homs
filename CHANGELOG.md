@@ -1,4 +1,10 @@
-v2.6.10 [unreleased]
+v2.6.11 [unreleased]
+-------------------
+### Bugfixes
+- [#582](https://github.com/latera/homs/pull/582) Fix select table in edge cases.
+- [#584](https://github.com/latera/homs/pull/584) Add locale to field with type `static`.
+
+v2.6.10 [2021-07-12]
 -------------------
 ### Features
 - [#577](https://github.com/latera/homs/pull/577) Hide file upload area if the only possible file has been attached.

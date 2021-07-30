@@ -13,6 +13,7 @@ ru:
       label: Выбор тарифа
       homsOrderDataPlanId: Тариф
       homsOrderDataPlanComment: Комментарий для абонента
+      static: <div class="alert alert-success"><h4>Подключение доступно</h4> <small>Решение основано на автоматической проверке доступа в биллинге</small></div>
     Activity_08wwoqp:
       label: Ввод данных абонента
       group1: Персональные данные абонента

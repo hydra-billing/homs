@@ -27,8 +27,8 @@ feature 'Check table with tasks', js: true do
         [
           ['Medium', 'Assigned task', ' Test name', '—', "expired (#{years_since(first_task_due_date)}y past due date)"],
           ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due date)"],
-          ['High', "Enter customer's address", ' New Customer', '—', '30 Jun 2016'],
-          *Array.new(35) { ['High', 'Check test form', ' Test name', '—', '30 Jun 2016'] }
+          *Array.new(35) { ['High', 'Check test form', ' Test name', '—', '30 Jun 2016'] },
+          ['High', 'Form for testing of field translations', ' Test translations', '—', '30 Jun 2016']
         ]
       )
     end
