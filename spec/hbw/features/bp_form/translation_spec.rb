@@ -21,19 +21,37 @@ feature 'BP form with existing russian translation', js: true do
     scenario 'should be translated to russian' do
       click_and_wait 'ORD-32'
 
-      expect(page).to     have_content 'Подключение абонента'
-      expect(page).not_to have_content 'New Customer'
-
+      expect(page).to     have_content 'Тестирование переводов'
       expect(page).to     have_content 'ORD-32'
-      expect(page).to     have_content 'Заполните адрес абонента'
-      expect(page).not_to have_content 'Enter customer\'s address'
+      expect(page).to     have_content 'Форма для тестирования переводов'
 
-      form = find_bp_form_with_name('Заполните адрес абонента')
+      expect(page).to     have_content 'Поле select'
+      expect(page).to     have_content 'Поле string'
+      expect(page).to     have_content 'Поле static'
+      expect(page).to     have_content 'Поле select_table'
+      expect(page).to     have_content 'Поле text'
+      expect(page).to     have_content 'Поле datetime'
+      expect(page).to     have_content 'Группа'
+      expect(page).to     have_content 'Поле file_opload'
+      expect(page).to     have_content 'Поле file_list'
+      expect(page).to     have_content 'Поле checkbox'
+      expect(page).to     have_content 'Кнопка 1'
+      expect(page).to     have_content 'Кнопка 2'
 
-      expect(form).to     have_content 'Город'
-      expect(form).to     have_content 'Улица'
-      expect(form).not_to have_content 'City'
-      expect(form).not_to have_content 'Street'
+      expect(page).not_to     have_content 'Test translations'
+      expect(page).not_to     have_content 'Form for testing of field translations'
+
+      expect(page).not_to     have_content 'Select field'
+      expect(page).not_to     have_content 'String field'
+      expect(page).not_to     have_content 'Static field'
+      expect(page).not_to     have_content 'Select table field'
+      expect(page).not_to     have_content 'Text field'
+      expect(page).not_to     have_content 'Datetime field'
+      expect(page).not_to     have_content 'Group'
+      expect(page).not_to     have_content 'File upload field'
+      expect(page).not_to     have_content 'Checkbox field'
+      expect(page).not_to     have_content 'Button 1'
+      expect(page).not_to     have_content 'Button 2'
 
       expect_widget_presence
     end
@@ -42,22 +60,40 @@ feature 'BP form with existing russian translation', js: true do
   describe 'with current lang = en' do
     let(:locale) { :en }
 
-    scenario 'should not be translated to russian' do
+    scenario `should have text from form config` do
       click_and_wait 'ORD-32'
 
-      expect(page).to     have_content 'New Customer'
-      expect(page).not_to have_content 'Подключение абонента'
-
+      expect(page).to     have_content 'Test translations'
       expect(page).to     have_content 'ORD-32'
-      expect(page).to     have_content 'Enter customer\'s address'
-      expect(page).not_to have_content 'Заполните адрес абонента'
+      expect(page).to     have_content 'Form for testing of field translations'
 
-      form = find_bp_form_with_name('Enter customer\'s address')
+      expect(page).to     have_content 'Select field'
+      expect(page).to     have_content 'String field'
+      expect(page).to     have_content 'Static field'
+      expect(page).to     have_content 'Select table field'
+      expect(page).to     have_content 'Text field'
+      expect(page).to     have_content 'Datetime field'
+      expect(page).to     have_content 'Group'
+      expect(page).to     have_content 'File upload field'
+      expect(page).to     have_content 'Checkbox field'
+      expect(page).to     have_content 'Button 1'
+      expect(page).to     have_content 'Button 2'
 
-      expect(form).to     have_content 'City'
-      expect(form).to     have_content 'Street'
-      expect(form).not_to have_content 'Город'
-      expect(form).not_to have_content 'Улица'
+      expect(page).not_to have_content 'Тестирование переводов'
+      expect(page).not_to have_content 'Форма для тестирования переводов'
+
+      expect(page).not_to have_content 'Поле select'
+      expect(page).not_to have_content 'Поле string'
+      expect(page).not_to have_content 'Поле static'
+      expect(page).not_to have_content 'Поле select_table'
+      expect(page).not_to have_content 'Поле text'
+      expect(page).not_to have_content 'Поле datetime'
+      expect(page).not_to have_content 'Группа'
+      expect(page).not_to have_content 'Поле file_opload'
+      expect(page).not_to have_content 'Поле file_list'
+      expect(page).not_to have_content 'Поле checkbox'
+      expect(page).not_to have_content 'Кнопка 1'
+      expect(page).not_to have_content 'Кнопка 2'
 
       expect_widget_presence
     end
