@@ -66,10 +66,7 @@ class Messenger {
 
     const o = { ...options };
 
-    if (!options.title) {
-      const title = this.titleFor(options, level);
-      o.title = (title != null) ? title : '';
-    }
+    o.title = options.title || '';
 
     o.style = this.stylesMap[level] || level;
     o.message = jQuery('<div/>').text(options.message).html();
@@ -77,13 +74,6 @@ class Messenger {
     o.size = 'large';
 
     jQuery.growl(o);
-  };
-
-  titleFor = (options, level) => {
-    if (level === 'error') {
-      return I18n.t('js.error');
-    }
-    return null;
   };
 
   show = messages => (() => {

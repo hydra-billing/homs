@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
-import DispatcherContext from './shared/context/dispatcher';
+import DispatcherContext from 'shared/context/dispatcher';
 
 const App = ({ Button, TaskList, Forms }) => {
   const dispatcher = useContext(DispatcherContext);
@@ -29,9 +29,9 @@ const App = ({ Button, TaskList, Forms }) => {
 
   return (
     <>
-        {buttonContainer && createPortal(<Button />, buttonContainer)}
-        {taskListContainer && createPortal(<TaskList />, taskListContainer)}
-        {formsContainer && createPortal(<Forms taskId={taskId} />, formsContainer)}
+      {formsContainer && createPortal(<Forms taskId={taskId} />, formsContainer)}
+      {taskListContainer && createPortal(<TaskList />, taskListContainer)}
+      {buttonContainer && createPortal(<Button />, buttonContainer)}
     </>
   );
 };

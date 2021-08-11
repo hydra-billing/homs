@@ -4,6 +4,7 @@ import { useContext, useState, useEffect } from 'react';
 import { withCallbacks } from 'shared/hoc';
 import ConnectionContext from 'shared/context/connection';
 import TranslationContext from 'shared/context/translation';
+import ErrorHandlingContext from 'shared/context/error_handling';
 import Pending from './pending';
 import Error from './error';
 
@@ -16,7 +17,8 @@ modulejs.define(
       initialVariables, showSpinner, userExists, bind
     }) => {
       const { translate: t } = useContext(TranslationContext);
-      const { request, serverURL } = useContext(ConnectionContext);
+      const { serverURL } = useContext(ConnectionContext);
+      const { safeRequest } = useContext(ErrorHandlingContext);
 
       const [buttons, setButtons] = useState([]);
       const [fetchError, setFetchError] = useState(null);
@@ -42,7 +44,7 @@ modulejs.define(
           autorun_process_key: autorunProcessKey
         };
 
-        const { bp_running, buttons: fetchedButtons } = await request({
+        const { bp_running, buttons: fetchedButtons } = await safeRequest({
           url:    buttonsURL,
           method: 'GET',
           data
@@ -68,7 +70,7 @@ modulejs.define(
         clearTimeout(BPStateChecker);
       };
 
-      const submitButton = businessProcessCode => request({
+      const submitButton = businessProcessCode => safeRequest({
         url:     buttonsURL,
         method:  'POST',
         headers: {

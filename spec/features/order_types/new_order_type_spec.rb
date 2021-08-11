@@ -93,7 +93,6 @@ feature 'Create new order type', js: true do
     expect(page).to have_css '.file-caption-name', text: 'invalid_field_request.yml'
 
     click_on 'Upload'
-    expect(page).to have_css        '.growl-title',   text: 'Error'
     expect(page).to have_css        '.growl-message', text: "Loaded YAML file contents [\"creationDate: Unknown type 'undefined'\"]"
     expect(page).to have_no_css     '.btn-danger',    text: 'Activate'
     expect(page).to have_no_css     '.btn-primary',   text: 'Dismiss'
@@ -110,7 +109,6 @@ feature 'Create new order type', js: true do
     expect(page).to have_css '.file-caption-name', text: 'invalid_yml_request.yml'
 
     click_on 'Upload'
-    expect(page).to have_css        '.growl-title',   text: 'Error'
     expect(page).to have_css        '.growl-message', text: "Loaded YAML file contents [\"Missing attribute 'order_type'\"]"
     expect(page).to have_no_css     '.btn-danger',    text: 'Activate'
     expect(page).to have_no_css     '.btn-primary',   text: 'Dismiss'

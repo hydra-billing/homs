@@ -251,7 +251,9 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     };
 
     processFiles = (files) => {
-      if (files.length === 0) return;
+      if (files.length === 0) {
+        return;
+      }
 
       this.props.trigger('hbw:file-upload-started');
 

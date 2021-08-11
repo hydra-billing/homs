@@ -41,7 +41,8 @@
     "space-before-function-paren": [1, "always"],
     "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
     "max-classes-per-file": ["error", 3],
-    "prefer-destructuring": ["error", {"object": true, "array": false}]
+    "prefer-destructuring": ["error", {"object": true, "array": false}],
+    "curly": [1, "all"]
   },
 
   "globals": {

@@ -255,7 +255,6 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWFormDatetime',
       });
 
       console.log(`Serialized form: ${JSON.stringify(variables)}`);
-
       return variables;
     };
   }

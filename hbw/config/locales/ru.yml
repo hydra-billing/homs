@@ -10,6 +10,7 @@ ru:
   hide_widget: Скрыть
   bp_running: Бизнес-процесс выполняется или назначен на другого пользователя
   errors:
+    camunda_is_unavailable: Сервис Camunda недоступен
     field_not_defined_in_bp: Поле с именем %{field_name} отсутствует в переменных бизнес-процесса
     cannot_obtain_available_actions: Не удалось получить список доступных действий
     cannot_start_process: Не удалось начать процесс
