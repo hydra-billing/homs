@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
-import { withConditions, withErrorBoundary } from 'shared/hoc';
+import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
 import TranslationContext from 'shared/context/translation';
 
 modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (React, ReactDOM, jQuery, moment) => {
@@ -98,6 +98,7 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
       }
 
       this.setState({ value });
+      this.props.fireFieldValueUpdate(this.props.name, this.state.value);
     };
 
     setOnChange = () => {
@@ -132,5 +133,5 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
     };
   }
 
-  return compose(withConditions, withErrorBoundary)(HBWFormDatetime);
+  return compose(withCallbacks, withConditions, withErrorBoundary)(HBWFormDatetime);
 });

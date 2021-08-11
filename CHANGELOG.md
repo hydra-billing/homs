@@ -5,8 +5,9 @@ v2.7.0 [unreleased]
 - [#562](https://github.com/latera/homs/pull/562) Bring in TypeScript into the project.
 - [#564](https://github.com/latera/homs/pull/564) Append files to form instead of substituting when multiple prop is set up.
 - [#575](https://github.com/latera/homs/pull/575) Add custom view for files to order data.
-- [#571](https://github.com/latera/homs/pull/512) Add dynamic `disable_if` and `delete_if` options for select_table.
+- [#571](https://github.com/latera/homs/pull/512) Add dynamic `disable_if` and `delete_if` options for select_table field.
 - [#580](https://github.com/latera/homs/pull/580) Add several upload file fields for single form.
+- [#587](https://github.com/latera/homs/pull/587) Add dynamic `disable_if` and `delete_if` options for datetime field.
 
 ### Refactoring
 - [#592](https://github.com/latera/homs/pull/592) Replace memcached with redis.
