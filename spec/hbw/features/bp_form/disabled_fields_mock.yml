@@ -1,0 +1,374 @@
+## Structure of file:
+# <method>:
+#   <url>:
+#     - params: <body-1 or querystring-1>
+#       response: <response-1>
+#     - params: <body-2 or querystring-2>
+#       response: <response-2>
+
+get:
+  tasks: {}
+  user:
+    - params: "email=c.johnson@example.com"
+      response:
+        data:
+          - id:         'demo'
+            firstName:  'Demo'
+            lastName:   'Demo'
+            url:        'http://bpm.example.com'
+            email:      'c.johnson@example.com'
+            pictureUrl: null
+        total: 1
+        start: 0
+        sort: 'id'
+        order: 'asc'
+        size: 1
+
+  # process definitions
+  process-definition:
+    - params: ""
+      response:
+        # Originally ORD-1
+        - &default_process-definition
+          id: "testProcess:469:222221"
+          key: "supportRequestProcess"
+          version: 469
+          name: "Test name"
+          description: null
+          tenantId: null
+          deploymentId: "222221"
+          resource: "testProcess.bpmn"
+          diagram: null
+          category: "http://bpmn.io/schema/bpmn"
+          suspended: false
+          versionTag: null
+          historyTimeToLive: null
+
+  # form definitions
+  task/111111/deployed-form:
+    - params: ""
+      response: |
+        form:
+          name: Test form with options
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+          - name: group1
+            type: group
+            label: Choose option
+            css_class: col-xs-12
+            fields:
+            - name: homsOrderDataStatic
+              type: static
+              label: TEST
+              css_class: col-xs-12 col-sm-6 col-md-4
+              html: "<h4> TEST STATIC $homsOrderCode </h4>"
+            - name: homsOrderDataSelect
+              type: select
+              label: Options
+              css_class: col-xs-12 col-sm-6 col-md-4
+              nullable: false
+              choices:
+                -
+                  - 123456
+                  - Option 1
+                -
+                  - 654321
+                  - Option 2
+            - name: homsOrderDataBeginDate
+              type: datetime
+              label: Begin Date
+              css_class: col-xs-6 col-sm-4 col-md-3
+            - name: homsOrderDataEndDate
+              type: datetime
+              label: End Date
+              css_class: col-xs-6 col-sm-4 col-md-3
+              locale: ru
+              format: DD.MM.YYYY
+            - name: homsOrderDataDisabledEndDate
+              type: datetime
+              label: End Date
+              css_class: col-xs-6 col-sm-4 col-md-3
+              locale: ru
+              format: DD.MM.YYYY
+              disable_if:
+                -
+                  - variable: homsOrderDataZeroVariable
+                    condition: $var != 0
+                -
+                  - variable: homsOrderDataOneVariable
+                    condition: $var == 1
+            - name: homsOrderDataAddress
+              type: string
+              label: Address
+              css_class: col-xs-6 col-sm-4 col-md-3
+              regex: .+\s.+
+              message: Field does not match regex
+              disable_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var != 0
+                - variable: homsOrderDataOneVariable
+                  condition: $var == 1
+            - name: homsOrderDataWorkPlace
+              type: string
+              label: Work place
+              css_class: col-xs-6 col-sm-4 col-md-3
+              delete_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+                - variable: homsOrderDataOneVariable
+                  condition: $var == 1
+            - name: homsOrderDataHomePlace
+              type: string
+              label: Home place
+              css_class: col-xs-6 col-sm-4 col-md-3
+              required: true
+              delete_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var != 0
+                - variable: homsOrderDataOneVariable
+                  condition: $var == 1
+            - name: homsOrderDataWorkAddress
+              type: string
+              label: Work address
+              css_class: col-xs-6 col-sm-4 col-md-3
+              disable_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+                - variable: homsOrderDataOneVariable
+                  condition: $var == 1
+            - name: homsOrderDataReason
+              type: string
+              label: Reason
+              css_class: col-xs-6 col-sm-4 col-md-3
+              delete_if:
+                -
+                  - variable: homsOrderDataZeroVariable
+                    condition: $var != 0
+                  - variable: homsOrderDataOneVariable
+                    condition: $var == 1
+                -
+                  - variable: homsOrderDataZeroVariable
+                    condition: $var == 0
+            - name: homsOrderDataRecommendation
+              type: string
+              label: Reason
+              css_class: col-xs-6 col-sm-4 col-md-3
+              delete_if:
+                -
+                  - variable: homsOrderDataZeroVariable
+                    condition: $var != 0
+                  - variable: homsOrderDataOneVariable
+                    condition: $var == 1
+                -
+                  - variable: homsOrderDataOneVariable
+                    condition: $var == 0
+              disable_if:
+                -
+                  - variable: homsOrderDataZeroVariable
+                    condition: $var != 0
+                  - variable: homsOrderDataOneVariable
+                    condition: $var == 1
+                -
+                  - variable: homsOrderDataOneVariable
+                    condition: $var == 0
+            - name: homsOrderDataSomeStr
+              type: string
+              label: Reason
+              css_class: col-xs-6 col-sm-4 col-md-3
+              delete_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+            - name: homsOrderDataSomeDatetime
+              type: datetime
+              label: Some datetime
+              css_class: col-xs-6 col-sm-4 col-md-3
+              delete_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+            - name: homsOrderDataSomeCheckbox
+              type: checkbox
+              label: Some checkbox
+              css_class: col-xs-6 col-sm-4 col-md-3
+              delete_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+            - name: homsOrderDataSomeDisabledCheckbox
+              type: checkbox
+              label: Some disabled checkbox
+              css_class: col-xs-6 col-sm-4 col-md-3
+              disable_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+            - name: homsOrderDataSomeSelect
+              type: select
+              label: Some select
+              css_class: col-xs-6 col-sm-4 col-md-3 my-select
+              choices: []
+              delete_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+            - name: homsOrderDataSomeDisabledSelect
+              type: select
+              label: Some select
+              css_class: col-xs-6 col-sm-4 col-md-3 my-disabled-select
+              choices: []
+              disable_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+            - name: homsOrderDataSomeStatic
+              type: static
+              html: Some static
+              css_class: col-xs-6 col-sm-4 col-md-3
+              delete_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+            - name: homsOrderDataSomeText
+              type: text
+              label: Text
+              css_class: col-xs-6 col-sm-4 col-md-3
+              delete_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+            - name: homsOrderDataSomeDisabledText
+              type: text
+              label: Disabled Text
+              css_class: col-xs-6 col-sm-4 col-md-3
+              disable_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: $var == 0
+          - name: group2
+            type: group
+            label: Hidden group
+            css_class: col-xs-12
+            fields: []
+            delete_if:
+              - variable: homsOrderDataZeroVariable
+                condition: $var == 0
+
+  # task variables
+  task/111111/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-1"
+        homsOrderDataSelect:
+          type: "select"
+          value: 123456
+        homsOrderDataBeginDate:
+          type: "string"
+          value: "2016-09-30T14:52:20.000+03:00"
+        homsOrderDataEndDate:
+          type: "string"
+          value: "2016-09-30T14:52:20.000+03:00"
+        homsOrderDataDisabledEndDate:
+          type: "string"
+          value: "2016-09-30T14:52:20.000+03:00"
+        homsOrderDataAddress:
+          type: "string"
+          value: ""
+        homsOrderDataWorkPlace:
+          type: "string"
+          value: ""
+        homsOrderDataZeroVariable:
+          type: "number"
+          value: 0
+        homsOrderDataOneVariable:
+          type: "number"
+          value: 1
+        homsOrderDataHomePlace:
+          type: "string"
+          value: ""
+        homsOrderDataWorkAddress:
+          type: "string"
+          value: ""
+        homsOrderDataReason:
+          type: "string"
+          value: ""
+        homsOrderDataRecommendation:
+          type: "string"
+          value: ""
+        homsOrderDataSomeStr:
+          type: "string"
+          value: ""
+        homsOrderDataSomeDatetime:
+          type: "string"
+          value: ""
+        homsOrderDataSomeText:
+          type: "string"
+          value: ""
+        homsOrderDataSomeDisabledText:
+          type: "string"
+          value: ""
+        homsOrderDataSomeDisabledSelect:
+          type: "select"
+          value: ""
+
+  task/111111:
+    - params: ""
+      response: &default_task
+        id: "111111"
+        name: "Check test form"
+        assignee: "demo"
+        created: "2016-06-30T12:07:59.000+03:00"
+        due: null
+        followUp: null
+        delegationState: null
+        description: null
+        executionId: "222221"
+        owner: null
+        parentTaskId: null
+        priority: 50
+        processDefinitionId: "testProcess:469:222221"
+        processInstanceId: 222221
+        taskDefinitionKey: "usertask10"
+        caseExecutionId: null
+        caseInstanceId: null
+        caseDefinitionId: null
+        suspended: false
+        formKey: "test_form.yml"
+        tenantId: null
+
+put: {}
+patch: {}
+post:
+  task:
+    - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response:
+        - <<: *default_task
+    - params: "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response: []
+
+  process-instance:
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq"
+      response:
+        default_data: &default_process-instances
+          id: "111111"
+          businessKey: null
+          caseInstanceId: null
+          suspended: false
+          ended: false
+          processDefinitionId: "testProcess:1:1"
+          tenantId: null
+        data:
+          - <<: *default_process-instances
+            id: "111111"
+            processDefinitionId: "testProcess:469:222221"
+
+  task/111111/submit-form:
+    - params: "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456"
+      response:
+        - ""
+
+  variable-instance:
+    - params: "processInstanceIdIn[]=222221&variableName=homsOrderCode"
+      response:
+        - processInstanceId: 222221
+          type: string
+          name: homsOrderCode
+          value: ORD-1
+
+    - params: "variableName=homsOrderCode"
+      response: []
+
+delete: {}
