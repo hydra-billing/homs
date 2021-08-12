@@ -6,6 +6,8 @@ feature 'Edit order', js: true do
   let(:current_date_iso) { Date.today.iso8601 }
 
   before(:each) do
+    set_camunda_api_mock_file('spec/features/orders/edit_order_mock.yml')
+
     user = FactoryBot.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
