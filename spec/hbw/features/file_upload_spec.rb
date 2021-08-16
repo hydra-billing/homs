@@ -1,5 +1,7 @@
 feature 'File upload field', js: true do
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/file_upload_mock.yml')
+
     user = FactoryBot.create(:user)
 
     signin(user.email, user.password)
@@ -8,8 +10,8 @@ feature 'File upload field', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-15')
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-40')
+    FactoryBot.create(:order, order_type: order_type) # ORD-1
+    FactoryBot.create(:order, order_type: order_type) # ORD-2
 
     click_on 'Orders'
     expect(page).to have_content 'Orders list'
@@ -18,8 +20,8 @@ feature 'File upload field', js: true do
 
   describe 'with properly configured fields' do
     before(:each) do
-      click_and_wait('ORD-15')
-      expect(page).to have_content 'ORD-15'
+      click_and_wait('ORD-1')
+      expect(page).to have_content 'ORD-1'
     end
 
     scenario 'with multuple = true should allow to attach several files' do
@@ -186,8 +188,8 @@ feature 'File upload field', js: true do
 
   describe 'with not properly configured fields' do
     before(:each) do
-      click_and_wait('ORD-40')
-      expect(page).to have_content 'ORD-40'
+      click_and_wait('ORD-2')
+      expect(page).to have_content 'ORD-2'
     end
 
     scenario 'should render error if file_list_name parameter empty / not matched / not unique' do

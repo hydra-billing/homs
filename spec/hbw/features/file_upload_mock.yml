@@ -1,0 +1,296 @@
+## Structure of file:
+# <method>:
+#   <url>:
+#     - params: <body-1 or querystring-1>
+#       response: <response-1>
+#     - params: <body-2 or querystring-2>
+#       response: <response-2>
+
+get:
+  tasks: {}
+  user:
+    - params: "email=c.johnson@example.com"
+      response:
+        data:
+          - id:         'demo'
+            firstName:  'Demo'
+            lastName:   'Demo'
+            url:        'http://bpm.example.com'
+            email:      'c.johnson@example.com'
+            pictureUrl: null
+        total: 1
+        start: 0
+        sort: 'id'
+        order: 'asc'
+        size: 1
+
+  # process definitions
+  process-definition:
+    - params: ""
+      response:
+        - &default_process-definition
+          id: "testProcess:469:222221"
+          key: "supportRequestProcess"
+          version: 469
+          name: "Test name"
+          description: null
+          tenantId: null
+          deploymentId: "222221"
+          resource: "testProcess.bpmn"
+          diagram: null
+          category: "http://bpmn.io/schema/bpmn"
+          suspended: false
+          versionTag: null
+          historyTimeToLive: null
+        - <<: *default_process-definition
+          id: "testProcess:469:222222"
+          deploymentId: "222222"
+
+  # form definitions
+  task/111111/deployed-form:
+    - params: ""
+      response: |
+        form:
+          name: Test form with file upload without file list
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+          - name: group1
+            type: group
+            label: Files
+            css_class: col-xs-12
+            fields:
+            - name: multipleFileUpload
+              type: file_upload
+              label: Attach multiple files
+              file_list_name: FL_MultipleFileUpload
+              css_class: col-md-4 col-xs-4 col-lg-4
+              multiple: true
+            - name: FL_MultipleFileUpload
+              type: file_list
+              label: Attached files
+              css_class: col-md-8 col-xs-8 col-lg-8
+
+            - name: paramAbsentFileUpload
+              type: file_upload
+              label: Attach single file in group
+              css_class: col-md-4 col-xs-4 col-lg-4
+              input_text: ''
+            - name: homsOrderDataFileList
+              type: file_list
+              label: Attached files
+              css_class: col-md-8 col-xs-8 col-lg-8
+
+            - name: emptyFileUpload
+              type: file_upload
+              label: Attach single file in group
+              file_list_name: FL_EmptyFileUpload
+              css_class: col-md-4 col-xs-4 col-lg-4
+              input_text: ''
+            - name: FL_EmptyFileUpload
+              type: file_list
+              label: Attached files
+              css_class: col-md-8 col-xs-8 col-lg-8
+
+          - name: singleFileUpload
+            type: file_upload
+            label: Attach single file
+            file_list_name: FL_SingleFileUpload
+            css_class: col-md-4 col-xs-4 col-lg-4
+            input_text: 'Drag single file, or '
+          - name: FL_SingleFileUpload
+            type: file_list
+            label: Attached files
+            css_class: col-md-8 col-xs-8 col-lg-8
+
+  task/111112/deployed-form:
+    - params: ""
+      response: |
+        form:
+          name: Test form with file upload without file list
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+          - name: groupNormalConfig
+            type: group
+            label: Files
+            css_class: col-xs-12
+            fields:
+            - name: fieldNormalConfig
+              type: file_upload
+              label: fieldNormalConfig
+              file_list_name: FL_FieldNormalConfig
+              css_class: col-md-4 col-xs-4 col-lg-4
+            - name: FL_FieldNormalConfig
+              type: file_list
+              label: FL_FieldNormalConfig
+              css_class: col-md-8 col-xs-8 col-lg-8
+
+          - name: groupParamAbsent
+            type: group
+            label: Files
+            css_class: col-xs-12
+            fields:
+            - name: fieldParamAbsent
+              type: file_upload
+              label: fieldParamAbsent
+              css_class: col-md-4 col-xs-4 col-lg-4
+            - name: FL_FieldParamAbsent
+              type: file_list
+              label: FL_FieldParamAbsent
+              css_class: col-md-8 col-xs-8 col-lg-8
+
+          - name: groupParamEmpty
+            type: group
+            label: Files
+            css_class: col-xs-12
+            fields:
+            - name: fieldParamEmpty
+              type: file_upload
+              label: fieldParamEmpty
+              file_list_name:
+              css_class: col-md-4 col-xs-4 col-lg-4
+            - name: FL_FieldParamEmpty
+              type: file_list
+              label: FL_FieldParamEmpty
+              css_class: col-md-8 col-xs-8 col-lg-8
+
+            - name: fieldParamEmptyStr
+              type: file_upload
+              label: fieldParamEmptyStr
+              file_list_name: ''
+              css_class: col-md-4 col-xs-4 col-lg-4
+            - name: FL_FieldParamEmptyStr
+              type: file_list
+              label: FL_FieldParamEmptyStr
+              css_class: col-md-8 col-xs-8 col-lg-8
+
+          - name: groupParamNotMatched
+            type: group
+            label: Files
+            css_class: col-xs-12
+            fields:
+            - name: fieldParamNotMatched
+              type: file_upload
+              label: fieldParamNotMatched
+              file_list_name: FL_FieldParamNotMatched_typo
+              css_class: col-md-4 col-xs-4 col-lg-4
+            - name: FL_FieldParamNotMatched
+              type: file_list
+              label: FL_FieldParamNotMatched
+              css_class: col-md-8 col-xs-8 col-lg-8
+
+  # task variables
+  task/111111/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-1"
+        multipleFileInput:
+          type: "file_upload"
+          value: null
+        FL_SingleFileUpload:
+          type: "string"
+          value: '[{"name":"file3.txt (21.07.2021 16:57:16)","origin_name":"file3.txt","field_name":"multipleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"},{"name":"file4.txt (21.07.2021 16:57:16)","origin_name":"file4.txt","field_name":"multipleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"}]'
+        homsOrderDataFileList:
+          type: "string"
+          value: "[]"
+
+  task/111112/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-2"
+
+  task/111111:
+    - params: ""
+      response: &default_task
+        id: "111111"
+        name: "Check test form"
+        assignee: "demo"
+        created: "2016-06-30T12:07:59.000+03:00"
+        due: null
+        followUp: null
+        delegationState: null
+        description: null
+        executionId: "222221"
+        owner: null
+        parentTaskId: null
+        priority: 50
+        processDefinitionId: "testProcess:469:222221"
+        processInstanceId: 222221
+        taskDefinitionKey: "usertask10"
+        caseExecutionId: null
+        caseInstanceId: null
+        caseDefinitionId: null
+        suspended: false
+        formKey: "file_upload_without_file_list.yml"
+        tenantId: null
+
+  task/111112:
+    - params: ""
+      response:
+        <<: *default_task
+        id: "111112"
+        formKey: "test_form_for_file_upload_errors.yml"
+        processInstanceId: 222222
+        processDefinitionId: "testProcess:469:222222"
+
+put: {}
+patch: {}
+post:
+  task:
+    - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response:
+        - <<: *default_task
+        - <<: *default_task
+          id: "111112"
+          formKey: "test_form_for_file_upload_errors.yml"
+          processInstanceId: 222222
+          processDefinitionId: "testProcess:469:222222"
+    - params: "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response: []
+
+  process-instance:
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq"
+      response:
+        default_data: &default_process-instances
+          id: "111111"
+          businessKey: null
+          caseInstanceId: null
+          suspended: false
+          ended: false
+          processDefinitionId: "testProcess:1:1"
+          tenantId: null
+        data:
+          - <<: *default_process-instances
+            id: "111111"
+            processDefinitionId: "testProcess:469:222221"
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-2&variables[][operator]=eq"
+      response:
+        data:
+          - <<: *default_process-instances
+            id: "111112"
+            processDefinitionId: "testProcess:469:222222"
+
+  task/111111/submit-form:
+    - params: 'variables[FL_EmptyFileUpload][value]=[]&variables[FL_MultipleFileUpload][value]=[{"origin_name":"logo.svg","field_name":"multipleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"},{"origin_name":"file_with_long_name.pdf","field_name":"multipleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"}]&variables[FL_SingleFileUpload][value]=[{"name":"file3.txt+(21.07.2021+16:57:16)","origin_name":"file3.txt","field_name":"multipleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"},{"name":"file4.txt+(21.07.2021+16:57:16)","origin_name":"file4.txt","field_name":"multipleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"},{"origin_name":"file.txt","field_name":"singleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"}]&variables[homsOrderDataFileList][value]=[{"origin_name":"file2.txt","field_name":"paramAbsentFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"}]'
+      response:
+        - ""
+
+  variable-instance:
+    - params: "processInstanceIdIn[]=222221&processInstanceIdIn[]=222222&variableName=homsOrderCode"
+      response:
+        - processInstanceId: 222221
+          type: string
+          name: homsOrderCode
+          value: ORD-1
+        - processInstanceId: 222222
+          type: string
+          name: homsOrderCode
+          value: ORD-2
+
+    - params: "variableName=homsOrderCode"
+      response: []
+
+delete: {}
