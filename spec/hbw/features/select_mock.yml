@@ -1,0 +1,716 @@
+## Structure of file:
+# <method>:
+#   <url>:
+#     - params: <body-1 or querystring-1>
+#       response: <response-1>
+#     - params: <body-2 or querystring-2>
+#       response: <response-2>
+
+get:
+  tasks: {}
+  user:
+    - params: "email=c.johnson@example.com"
+      response:
+        data:
+          - id:         'demo'
+            firstName:  'Demo'
+            lastName:   'Demo'
+            url:        'http://bpm.example.com'
+            email:      'c.johnson@example.com'
+            pictureUrl: null
+        total: 1
+        start: 0
+        sort: 'id'
+        order: 'asc'
+        size: 1
+
+  # process definitions
+  process-definition:
+    - params: ""
+      response:
+        - &default_process-definition
+          id: "testProcess:469:22221"
+          key: "supportRequestProcess"
+          version: 469
+          name: "Test name"
+          description: null
+          tenantId: null
+          deploymentId: "22221"
+          resource: "testProcess.bpmn"
+          diagram: null
+          category: "http://bpmn.io/schema/bpmn"
+          suspended: false
+          versionTag: null
+          historyTimeToLive: null
+        - <<: *default_process-definition
+          id: "testProcess:469:22222"
+          deploymentId: "22222"
+        - <<: *default_process-definition
+          id: "testProcess:469:22223"
+          deploymentId: "22223"
+        - <<: *default_process-definition
+          id: "testProcess:469:22224"
+          deploymentId: "22224"
+        - <<: *default_process-definition
+          id: "testProcess:469:22225"
+          deploymentId: "22225"
+        - <<: *default_process-definition
+          id: "testProcess:469:22226"
+          deploymentId: "22226"
+        - <<: *default_process-definition
+          id: "testProcess:469:22227"
+          deploymentId: "22227"
+        - <<: *default_process-definition
+          id: "testProcess:469:22228"
+          deploymentId: "22228"
+        - <<: *default_process-definition
+          id: "testProcess:469:22229"
+          deploymentId: "22229"
+        - <<: *default_process-definition
+          id: "testProcess:469:222210"
+          deploymentId: "222210"
+
+  # form definitions
+  task/11111/deployed-form:
+    - params: ""
+      response: |
+        form:
+          name: Test form with options
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+          - name: group1
+            type: group
+            label: Choose option
+            css_class: col-xs-12
+            fields:
+            - name: homsOrderDataStatic
+              type: static
+              label: TEST
+              css_class: col-xs-12 col-sm-6 col-md-4
+              html: "<h4> $wrongBPVariable TEST STATIC $wrongBPVariable </h4>"
+            - name: homsOrderDataSelect
+              type: select
+              label: Options
+              nullable: true
+              placeholder: placeholder
+              css_class: col-xs-12 col-sm-6 col-md-4
+              description:
+                placement: top
+                text: Top description text
+              choices:
+                -
+                  - 123456
+                  - Option 1
+  task/11112/deployed-form:
+    - params: ""
+      response: |
+        form:
+          name: Test form with options
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+          - name: group1
+            type: group
+            label: Choose option
+            css_class: col-xs-12
+            fields:
+            - name: homsOrderDataStatic
+              type: static
+              label: TEST
+              css_class: col-xs-12 col-sm-6 col-md-4
+              html: "<h4> $homsOrderCode TEST STATIC $homsOrderCode </h4>"
+            - name: homsOrderDataSelect
+              type: select
+              mode: select
+              label: Options
+              nullable: false
+              placeholder: placeholder
+              editable: true
+              css_class: col-xs-12 col-sm-6 col-md-4
+              description:
+                placement: bottom
+                text: Bottom description text
+              choices:
+                -
+                  - 123456
+                  - Option 1
+                -
+                  - 654321
+                  - Option 2
+  task/11113/deployed-form:
+    - params: ""
+      response: |
+        form:
+          name: Test form with options
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+          - name: group1
+            type: group
+            label: Choose option
+            css_class: col-xs-12
+            fields:
+            - name: homsOrderDataSelect
+              type: select
+              mode: select
+              label: Options
+              nullable: true
+              editable: true
+              css_class: col-xs-12 col-sm-6 col-md-4
+              choices:
+                -
+                  - 123456
+                  - Option 1
+                -
+                  - 654321
+                  - Option 2
+  task/11114/deployed-form:
+    - params: ""
+      response: |
+        form:
+          name: Test form with options
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+          - name: group1
+            type: group
+            label: Choose option
+            css_class: col-xs-12
+            fields:
+            - name: homsOrderDataSelect
+              type: select
+              mode: select
+              label: Options
+              nullable: false
+              editable: true
+              css_class: col-xs-12 col-sm-6 col-md-4
+              choices:
+                -
+                  - 123456
+                  - Option 1
+                -
+                  - 654321
+                  - Option 2
+  task/11115/deployed-form:
+    - params: ""
+      response: |
+        form:
+          name: Test form with options
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+          - name: group1
+            type: group
+            label: Choose option
+            css_class: col-xs-12
+            fields:
+            - name: homsOrderDataSelect
+              type: select
+              mode: select
+              label: Options
+              nullable: false
+              editable: true
+              css_class: col-xs-12 col-sm-6 col-md-4
+              choices:
+                -
+                  - 112233
+                  - Option 1
+                -
+                  - 445566
+                  - Option 2
+  task/11116/deployed-form:
+    - params: ""
+      response: |
+        form:
+          name: Test form with options
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+          - name: group1
+            type: group
+            label: Choose option
+            css_class: col-xs-12
+            fields:
+            - name: homsOrderDataSelect
+              type: select
+              mode: select
+              label: Options
+              nullable: false
+              editable: true
+              css_class: col-xs-12 col-sm-6 col-md-4
+              choices:
+                - Option 1
+                - Option 2
+  task/11117/deployed-form:
+    - params: ""
+      response: |
+        form:
+          name: Test form with options
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+          - name: group1
+            type: group
+            label: Choose option
+            css_class: col-xs-12
+            fields:
+            - name: homsOrderNotInVBPVariables
+              type: select
+              mode: select
+              label: Options
+              nullable: false
+              editable: true
+              css_class: col-xs-12 col-sm-6 col-md-4
+              choices:
+                - Option 1
+                - Option 2
+  task/11118/deployed-form:
+    - params: ""
+      response: |
+        form:
+          name: Test form with options
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+          - name: group1
+            type: group
+            label: Choose option
+            css_class: col-xs-12
+            fields:
+            - name: homsOrderDataSelect
+              type: select
+              mode: select
+              label: Options
+              nullable: false
+              editable: true
+              css_class: col-xs-12 col-sm-6 col-md-4
+              choices:
+                - Option 1
+                - Option 2
+  task/11119/deployed-form:
+    - params: ""
+      response: |
+        form:
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+            - name: group1
+              type: group
+              label: Customers
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderDataSelect
+                  type: select
+                  label: Options
+                  css_class: col-xs-12
+                  nullable: true
+                  placeholder: placeholder
+                  mode: lookup
+                  data_source: billing
+                  sql: "$condition"
+                  id_condition: "SELECT 1, 2 FROM DUAL WHERE DUMMY = DUMMY"
+                  filter_condition: "SELECT 1, 2 FROM DUAL"
+  task/111110/deployed-form:
+    - params: ""
+      response: |
+        form:
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+            - name: group1
+              type: group
+              label: Customers
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderDataSelect
+                  type: select
+                  label: Options
+                  css_class: col-xs-12
+                  nullable: false
+                  placeholder: placeholder
+                  mode: lookup
+                  data_source: billing
+                  sql: "$condition"
+                  id_condition: "SELECT 123, 'Some text' FROM DUAL WHERE DUMMY = DUMMY"
+                  filter_condition: "SELECT 123, 'Some text' FROM DUAL"
+
+  # task variables
+  task/11111/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-1"
+        homsOrderDataSelect:
+          type: "select"
+          value: null
+  task/11112/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-2"
+        homsOrderDataSelect:
+          type: "select"
+          value: null
+  task/11113/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-3"
+        homsOrderDataSelect:
+          type: "select"
+          value: null
+  task/11114/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-4"
+        homsOrderDataSelect:
+          type: "select"
+          value: null
+  task/11115/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-5"
+        homsOrderDataSelect:
+          type: "select"
+          value: null
+  task/11116/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-6"
+        homsOrderDataSelect:
+          type: "select"
+          value: null
+  task/11117/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-7"
+        homsOrderDataSelect:
+          type: "select"
+          value: null
+  task/11118/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-8"
+        homsOrderDataSelect:
+          type: "select"
+          value: null
+  task/11119/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-9"
+        homsOrderDataSelect:
+          type: "select"
+          value: null
+  task/111110/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-10"
+        homsOrderDataSelect:
+          type: "string"
+          value: null
+  task/11111:
+    - params: ""
+      response: &default_task
+        id: "11111"
+        name: "Check test form"
+        assignee: "demo"
+        created: "2016-06-30T12:07:59.000+03:00"
+        due: null
+        followUp: null
+        delegationState: null
+        description: null
+        executionId: "22221"
+        owner: null
+        parentTaskId: null
+        priority: 50
+        processDefinitionId: "testProcess:469:22221"
+        processInstanceId: 22221
+        taskDefinitionKey: "usertask10"
+        caseExecutionId: null
+        caseInstanceId: null
+        caseDefinitionId: null
+        suspended: false
+        formKey: "test_form.yml"
+        tenantId: null
+
+  task/11112:
+    - params: ""
+      response:
+        <<: *default_task
+        id: "11112"
+        formKey: "test_form.yml"
+        processInstanceId: 22222
+        processDefinitionId: "testProcess:469:22222"
+
+  task/11113:
+    - params: ""
+      response:
+        <<: *default_task
+        id: "11113"
+        formKey: "test_form.yml"
+        processInstanceId: 22223
+        processDefinitionId: "testProcess:469:22223"
+
+  task/11114:
+    - params: ""
+      response:
+        <<: *default_task
+        id: "11114"
+        formKey: "test_form.yml"
+        processInstanceId: 22224
+        processDefinitionId: "testProcess:469:22224"
+
+  task/11115:
+    - params: ""
+      response:
+        <<: *default_task
+        id: "11115"
+        formKey: "test_form.yml"
+        processInstanceId: 22225
+        processDefinitionId: "testProcess:469:22225"
+
+  task/11116:
+    - params: ""
+      response:
+        <<: *default_task
+        id: "11116"
+        formKey: "test_form.yml"
+        processInstanceId: 22226
+        processDefinitionId: "testProcess:469:22226"
+
+  task/11117:
+    - params: ""
+      response:
+        <<: *default_task
+        id: "11117"
+        formKey: "test_form.yml"
+        processInstanceId: 22227
+        processDefinitionId: "testProcess:469:22227"
+
+  task/11118:
+    - params: ""
+      response:
+        <<: *default_task
+        id: "11118"
+        formKey: "test_form.yml"
+        processInstanceId: 22228
+        processDefinitionId: "testProcess:469:22228"
+
+  task/11119:
+    - params: ""
+      response:
+        <<: *default_task
+        id: "11119"
+        formKey: "test_form_with_select_table_multi.yml"
+        processInstanceId: 22229
+        processDefinitionId: "testProcess:469:22229"
+
+  task/111110:
+    - params: ""
+      response:
+        <<: *default_task
+        id: "111110"
+        formKey: "test_form_with_required_select_lookup.yml"
+        processInstanceId: 222210
+        processDefinitionId: "testProcess:469:222210"
+
+
+put: {}
+patch: {}
+post:
+  task:
+    - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response:
+        - <<: *default_task
+        - <<: *default_task
+          id: "11112"
+          formKey: "test_form.yml"
+          processInstanceId: 22222
+          processDefinitionId: "testProcess:469:22222"
+        - <<: *default_task
+          id: "11113"
+          formKey: "test_form.yml"
+          processInstanceId: 22223
+          processDefinitionId: "testProcess:469:22223"
+        - <<: *default_task
+          id: "11114"
+          formKey: "test_form.yml"
+          processInstanceId: 22224
+          processDefinitionId: "testProcess:469:22224"
+        - <<: *default_task
+          id: "11115"
+          formKey: "test_form.yml"
+          processInstanceId: 22225
+          processDefinitionId: "testProcess:469:22225"
+        - <<: *default_task
+          id: "11116"
+          formKey: "test_form.yml"
+          processInstanceId: 22226
+          processDefinitionId: "testProcess:469:22226"
+        - <<: *default_task
+          id: "11117"
+          formKey: "test_form.yml"
+          processInstanceId: 22227
+          processDefinitionId: "testProcess:469:22227"
+        - <<: *default_task
+          id: "11118"
+          formKey: "test_form.yml"
+          processInstanceId: 22228
+          processDefinitionId: "testProcess:469:22228"
+        - <<: *default_task
+          id: "11119"
+          formKey: "test_form_with_select_table_multi.yml"
+          processInstanceId: 22229
+          processDefinitionId: "testProcess:469:22229"
+        - <<: *default_task
+          id: "111110"
+          formKey: "test_form_with_required_select_lookup.yml"
+          processInstanceId: 222210
+          processDefinitionId: "testProcess:469:222210"
+
+    - params: "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response: []
+
+  process-instance:
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq"
+      response:
+        default_data: &default_process-instances
+          id: "11111"
+          businessKey: null
+          caseInstanceId: null
+          suspended: false
+          ended: false
+          processDefinitionId: "testProcess:1:1"
+          tenantId: null
+        data:
+          - <<: *default_process-instances
+            id: "11111"
+            processDefinitionId: "testProcess:469:22221"
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-2&variables[][operator]=eq"
+      response:
+        data:
+          - <<: *default_process-instances
+            id: "11112"
+            processDefinitionId: "testProcess:469:22222"
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-3&variables[][operator]=eq"
+      response:
+        data:
+          - <<: *default_process-instances
+            id: "11113"
+            processDefinitionId: "testProcess:469:22223"
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-4&variables[][operator]=eq"
+      response:
+        data:
+          - <<: *default_process-instances
+            id: "11114"
+            processDefinitionId: "testProcess:469:22224"
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-5&variables[][operator]=eq"
+      response:
+        data:
+          - <<: *default_process-instances
+            id: "11115"
+            processDefinitionId: "testProcess:469:22225"
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-6&variables[][operator]=eq"
+      response:
+        data:
+          - <<: *default_process-instances
+            id: "11116"
+            processDefinitionId: "testProcess:469:22226"
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-7&variables[][operator]=eq"
+      response:
+        data:
+          - <<: *default_process-instances
+            id: "11117"
+            processDefinitionId: "testProcess:469:22227"
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-8&variables[][operator]=eq"
+      response:
+        data:
+          - <<: *default_process-instances
+            id: "11118"
+            processDefinitionId: "testProcess:469:22228"
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-9&variables[][operator]=eq"
+      response:
+        data:
+          - <<: *default_process-instances
+            id: "11119"
+            processDefinitionId: "testProcess:469:22229"
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-10&variables[][operator]=eq"
+      response:
+        data:
+          - <<: *default_process-instances
+            id: "111110"
+            processDefinitionId: "testProcess:469:222210"
+
+  task/11111/submit-form:
+    - params: "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456"
+      response:
+        - ""
+  task/11112/submit-form:
+    - params: "variables[homsOrderDataSelect][value]=[\"125342501\"]"
+      response:
+        - ""
+  task/11119/submit-form:
+    - params: "variables[homsOrderDataSelect][value]="
+      response:
+        - ""
+  task/111110/submit-form:
+    - params: "variables[homsOrderDataSelect][value]=123"
+      response:
+        - ""
+
+  variable-instance:
+    - params: "processInstanceIdIn[]=22221&processInstanceIdIn[]=22222&processInstanceIdIn[]=22223&processInstanceIdIn[]=22224&processInstanceIdIn[]=22225&processInstanceIdIn[]=22226&processInstanceIdIn[]=22227&processInstanceIdIn[]=22228&processInstanceIdIn[]=22229&processInstanceIdIn[]=222210&variableName=homsOrderCode"
+      response:
+        - processInstanceId: 22221
+          type: string
+          name: homsOrderCode
+          value: ORD-1
+        - processInstanceId: 22222
+          type: string
+          name: homsOrderCode
+          value: ORD-2
+        - processInstanceId: 22223
+          type: string
+          name: homsOrderCode
+          value: ORD-3
+        - processInstanceId: 22224
+          type: string
+          name: homsOrderCode
+          value: ORD-4
+        - processInstanceId: 22225
+          type: string
+          name: homsOrderCode
+          value: ORD-5
+        - processInstanceId: 22226
+          type: string
+          name: homsOrderCode
+          value: ORD-6
+        - processInstanceId: 22227
+          type: string
+          name: homsOrderCode
+          value: ORD-7
+        - processInstanceId: 22228
+          type: string
+          name: homsOrderCode
+          value: ORD-8
+        - processInstanceId: 22229
+          type: string
+          name: homsOrderCode
+          value: ORD-9
+        - processInstanceId: 222210
+          type: string
+          name: homsOrderCode
+          value: ORD-10
+
+    - params: "variableName=homsOrderCode"
+      response: []
+
+delete: {}
