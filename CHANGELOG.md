@@ -1,4 +1,4 @@
-v2.6.11 [unreleased]
+v2.6.11 [2021-08-16]
 -------------------
 ### Bugfixes
 - [#582](https://github.com/latera/homs/pull/582) Fix select table in edge cases.
