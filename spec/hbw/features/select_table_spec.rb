@@ -1,5 +1,7 @@
 feature 'Select table', js: true do
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/select_table_mock.yml')
+
     user = FactoryBot.create(:user)
 
     signin(user.email, user.password)
@@ -8,11 +10,11 @@ feature 'Select table', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-14')
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-18')
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-19')
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-20')
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-21')
+    FactoryBot.create(:order, order_type: order_type) # ORD-1
+    FactoryBot.create(:order, order_type: order_type) # ORD-2
+    FactoryBot.create(:order, order_type: order_type) # ORD-3
+    FactoryBot.create(:order, order_type: order_type) # ORD-4
+    FactoryBot.create(:order, order_type: order_type) # ORD-5
   end
 
   scenario 'rendered with static variants' do
@@ -20,9 +22,9 @@ feature 'Select table', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_and_wait 'ORD-14'
+    click_and_wait 'ORD-1'
 
-    expect(page).to have_content 'ORD-14'
+    expect(page).to have_content 'ORD-1'
 
     expect(page).to have_content 'Name'
     expect(page).to have_content 'Code'
@@ -47,7 +49,7 @@ feature 'Select table', js: true do
     end
 
     scenario 'empty bp variable, nullable, multi = false' do
-      click_and_wait 'ORD-18'
+      click_and_wait 'ORD-2'
 
       real_initial_table_values = {
         table_options:    options_in_table_with_label('emptyDefaultParam'),
@@ -71,7 +73,7 @@ feature 'Select table', js: true do
     end
 
     scenario 'empty bp variable, nullable, multi = true' do
-      click_and_wait 'ORD-19'
+      click_and_wait 'ORD-3'
 
       real_initial_table_values = {
         table_options:    options_in_table_with_label('emptyDefaultParam'),
@@ -95,7 +97,7 @@ feature 'Select table', js: true do
     end
 
     scenario 'not empty bp variable, nullable, multi = false' do
-      click_and_wait 'ORD-18'
+      click_and_wait 'ORD-2'
 
       real_initial_table_values = {
         table_options:    options_in_table_with_label('notEmptyDefaultParam'),
@@ -119,7 +121,7 @@ feature 'Select table', js: true do
     end
 
     scenario 'not empty bp variable, nullable, multi = true' do
-      click_and_wait 'ORD-19'
+      click_and_wait 'ORD-3'
 
       real_initial_table_values = {
         table_options:    options_in_table_with_label('notEmptyDefaultParam'),
@@ -143,7 +145,7 @@ feature 'Select table', js: true do
     end
 
     scenario 'filled required multi = false' do
-      click_and_wait 'ORD-20'
+      click_and_wait 'ORD-4'
       real_initial_table_values = {
         table_options:    table_options,
         selected_options: selected_options
@@ -170,7 +172,7 @@ feature 'Select table', js: true do
     end
 
     scenario 'filled required multi = true' do
-      click_and_wait 'ORD-21'
+      click_and_wait 'ORD-5'
 
       real_initial_table_values = {
         table_options:    table_options,
@@ -205,7 +207,7 @@ feature 'Select table', js: true do
     end
 
     scenario 'filled required multi = true' do
-      click_and_wait 'ORD-21'
+      click_and_wait 'ORD-5'
 
       expect(selected_options_in_table_with_label('Options')).to eq(['Some name'])
       expect(page).not_to have_content 'Field is required'
