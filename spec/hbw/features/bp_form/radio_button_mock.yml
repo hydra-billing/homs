@@ -1,0 +1,305 @@
+## Structure of file:
+# <method>:
+#   <url>:
+#     - params: <body-1 or querystring-1>
+#       response: <response-1>
+#     - params: <body-2 or querystring-2>
+#       response: <response-2>
+
+get:
+  tasks: {}
+  user:
+    - params: "email=c.johnson@example.com"
+      response:
+        data:
+          - id:         'demo'
+            firstName:  'Demo'
+            lastName:   'Demo'
+            url:        'http://bpm.example.com'
+            email:      'c.johnson@example.com'
+            pictureUrl: null
+        total: 1
+        start: 0
+        sort: 'id'
+        order: 'asc'
+        size: 1
+
+  # process definitions
+  process-definition:
+    - params: ''
+      response:
+        - id: "testProcess:469:222221"
+          key: "test_translations"
+          version: 469
+          name: "Test translations"
+          description: null
+          tenantId: null
+          deploymentId: "222221"
+          resource: "testProcess.bpmn"
+          diagram: null
+          category: "http://bpmn.io/schema/bpmn"
+          suspended: false
+          versionTag: null
+          historyTimeToLive: null
+
+  # form definitions
+  task/111111/deployed-form:
+    - params: ''
+      response: |
+        form:
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+            - name: topDescriptionCheckbox
+              type: checkbox
+              label: Checkbox label 1
+              description:
+                placement: top
+                text: Top description test
+              css_class: col-xs-6 col-sm-4 col-md-3 checkbox-top
+            - name: bottomDescriptionCheckbox
+              type: checkbox
+              label: Checkbox label 2
+              description:
+                placement: bottom
+                text: Bottom description test
+              css_class: col-xs-6 col-sm-4 col-md-2 checkbox-bottom
+            - name: topDescriptionDateTime
+              type: datetime
+              label: Datetime label 1
+              description:
+                placement: top
+                text: Top description test
+              css_class: col-xs-6 col-sm-4 col-md-3 datetime-top
+            - name: bottomDescriptionDatetime
+              type: datetime
+              label: DateTime label 2
+              description:
+                placement: bottom
+                text: Bottom description test
+              css_class: col-xs-6 col-sm-4 col-md-2 datetime-bottom
+            - name: topDescriptionFileList
+              type: file_list
+              label: FileList label
+              description:
+                placement: top
+                text: Top description test
+              css_class: col-xs-6 col-sm-4 col-md-2 filelist-top
+            - name: topDescriptionText
+              type: text
+              label: Text label 1
+              description:
+                placement: top
+                text: Top description test
+              placeholder: Test placeholder
+              css_class: col-xs-6 col-sm-4 col-md-3 text-top
+            - name: bottomDescriptionText
+              type: text
+              label: Text label 2
+              description:
+                placement: bottom
+                text: Bottom description test
+              css_class: col-xs-6 col-sm-4 col-md-2 text-bottom
+            - name: topDescriptionFileUpload
+              type: file_upload
+              label: FileUpload label 1
+              description:
+                placement: top
+                text: Top description test
+              css_class: col-xs-6 col-sm-4 col-md-3 fileupload-top
+            - name: bottomDescriptionFileUpload
+              type: file_upload
+              label: FileUpload label 2
+              description:
+                placement: bottom
+                text: Bottom description test
+              css_class: col-xs-6 col-sm-4 col-md-2 fileupload-bottom
+            - name: radioButton
+              type: radio_button
+              variants:
+                - value: first
+                  name: first
+                  label: Radio button label 1
+                - value: second
+                  name: second
+                  label: Radio button label 1
+              description:
+                placement: top
+                text: Top description test
+              css_class: col-xs-6 col-sm-4 col-md-3 radiobutton-top
+            - name: topDescriptionSelectTable
+              type: select_table
+              label: Select table
+              description:
+                placement: top
+                text: Top description test
+              css_class: col-xs-12 pre-scrollable select-table-top
+              nullable: false
+              rows:
+                - name: Name
+                  type: string
+                  alignment: right
+                - name: Code
+                - name: Arbitrary number
+                  type: number
+                  precision: 2
+                  separator: "."
+                  delimiter: ","
+              choices:
+                -
+                  - 125342501
+                  - My favourite region name
+                  - My favourite region code
+                  - 235234521
+                -
+                  - 125342601
+                  - My favourite region name2
+                  - My favourite region code2
+                  - 3252349284
+            - name: bottomDescriptionSelectTable
+              type: select_table
+              label: Select table
+              description:
+                placement: bottom
+                text: Bottom description test
+              css_class: col-xs-12 pre-scrollable select-table-bottom
+              nullable: false
+              rows:
+                - name: Name
+                  type: string
+                  alignment: right
+                - name: Code
+                - name: Arbitrary number
+                  type: number
+                  precision: 2
+                  separator: "."
+                  delimiter: ","
+              choices:
+                -
+                  - 125342501
+                  - My favourite region name
+                  - My favourite region code
+                  - 235234521
+                -
+                  - 125342601
+                  - My favourite region name2
+                  - My favourite region code2
+                  - 3252349284
+
+  # task variables
+  task/111111/variables:
+    - params: ''
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-1"
+        topDescriptionCheckbox:
+          type: "checkbox"
+          value: null
+        bottomDescriptionCheckbox:
+          type: "checkbox"
+          value: null
+        topDescriptionDateTime:
+          type: "datetime"
+          value: null
+        bottomDescriptionDatetime:
+          type: "datetime"
+        topDescriptionText:
+          type: "text"
+          value: null
+        bottomDescriptionText:
+          type: "text"
+          value: null
+        topDescriptionFileList:
+          type: "file_list"
+          value: null
+        radioButton:
+          type: "radio_button"
+          value: "first"
+        topDescriptionSelectTable:
+          type: "select_table"
+          value: ""
+        bottomDescriptionSelectTable:
+          type: "select_table"
+          value: ""
+
+  task/111111:
+    - params: ""
+      response: &default_task
+        id: "111111"
+        name: "Check test form"
+        assignee: "demo"
+        created: "2016-06-30T12:07:59.000+03:00"
+        due: null
+        followUp: null
+        delegationState: null
+        description: null
+        executionId: "222221"
+        owner: null
+        parentTaskId: null
+        priority: 50
+        processDefinitionId: "testProcess:469:222221"
+        processInstanceId: 222221
+        taskDefinitionKey: "usertask10"
+        caseExecutionId: null
+        caseInstanceId: null
+        caseDefinitionId: null
+        suspended: false
+        formKey: "test_form_with_description_checkbox.yml"
+        tenantId: null
+
+put: {}
+patch: {}
+post:
+  task:
+    - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response:
+        - id: "111111"
+          name: "Form for testing of field translations"
+          assignee: "demo"
+          created: "2016-06-30T12:07:59.000+03:00"
+          due: null
+          followUp: null
+          delegationState: null
+          description: null
+          executionId: "222221"
+          owner: null
+          parentTaskId: null
+          priority: 50
+          caseExecutionId: null
+          caseInstanceId: null
+          caseDefinitionId: null
+          suspended: false
+          processInstanceId: 222221
+          processDefinitionId: "testProcess:469:222221"
+          taskDefinitionKey: "Activity_test_translations"
+          formKey:  "test_form_with_description_checkbox.yml"
+          tenantId: null
+    - params: "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response: []
+
+  process-instance:
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq"
+      response:
+        data:
+          - id: "111111"
+            businessKey: null
+            caseInstanceId: null
+            suspended: false
+            ended: false
+            processDefinitionId: "testProcess:469:222221"
+            tenantId: null
+
+  task/111111/submit-form:
+    - params: "variables[submittedString][value]=111"
+      response:
+        - ""
+
+  variable-instance:
+    - params: "processInstanceIdIn[]=222221&variableName=homsOrderCode"
+      response:
+        - processInstanceId: 222221
+          type: string
+          name: homsOrderCode
+          value: ORD-1
+
+delete: {}
