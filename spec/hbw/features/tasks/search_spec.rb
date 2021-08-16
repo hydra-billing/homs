@@ -5,13 +5,13 @@ feature 'Check searching in table with tasks', js: true do
   let(:initial_tasks) do
     [
       ['Medium', 'Assigned task', ' Test name', '—', "expired (#{years_since(first_task_due_date)}y past due date)"],
-      ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due date)"],
-      *Array.new(37) { ['High', 'Check test form', ' Test name', '—', '30 Jun 2016'] },
-      ['High', 'Form for testing of field translations', ' Test translations', '—', '30 Jun 2016']
+      ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due date)"]
     ]
   end
 
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/tasks/search_mock.yml')
+
     user = FactoryBot.create(:user)
 
     signin(user.email, user.password)
