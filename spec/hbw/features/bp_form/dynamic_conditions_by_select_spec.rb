@@ -1,8 +1,10 @@
 feature 'Control fields with dynamic conditions by select', js: true do
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/bp_form/dynamic_conditions_by_select_mock.yml')
+
     order_type = FactoryBot.create(:order_type, :support_request)
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-30')
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-31')
+    FactoryBot.create(:order, order_type: order_type) # ORD-1
+    FactoryBot.create(:order, order_type: order_type) # ORD-2
 
     user = FactoryBot.create(:user)
     signin(user.email, user.password)
@@ -11,7 +13,7 @@ feature 'Control fields with dynamic conditions by select', js: true do
   end
 
   scenario 'should hide all fields' do
-    click_and_wait 'ORD-30'
+    click_and_wait 'ORD-1'
     expect_r_select_presence('controlSelect')
 
     expect(page).to have_content 'Dependent static'
@@ -42,7 +44,7 @@ feature 'Control fields with dynamic conditions by select', js: true do
   end
 
   scenario 'should disable all fields' do
-    click_and_wait 'ORD-30'
+    click_and_wait 'ORD-1'
     expect_r_select_presence('controlSelect')
 
     expect(page.find('.dependent-select')).not_to       have_selector '.react-select--is-disabled'
@@ -77,7 +79,7 @@ feature 'Control fields with dynamic conditions by select', js: true do
   end
 
   scenario 'should update variable from choices by default with nullable: false' do
-    click_and_wait 'ORD-31'
+    click_and_wait 'ORD-2'
     expect_r_select_presence('notNullableWithEmptyVariable')
 
     expect(readonly?('dependentString')).to be true
@@ -88,7 +90,7 @@ feature 'Control fields with dynamic conditions by select', js: true do
   end
 
   scenario 'should work correctly with sql choices' do
-    click_and_wait 'ORD-31'
+    click_and_wait 'ORD-2'
     expect_r_select_presence('withSQL')
 
     expect(page).to have_content 'Dependent string'
@@ -99,7 +101,7 @@ feature 'Control fields with dynamic conditions by select', js: true do
   end
 
   scenario 'should work correctly with mode: lookup' do
-    click_and_wait 'ORD-31'
+    click_and_wait 'ORD-2'
     expect_r_select_presence('lookupMode')
 
     expect(page).to have_content 'Dependent string'
