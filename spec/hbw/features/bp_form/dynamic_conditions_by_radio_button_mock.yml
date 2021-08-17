@@ -1,5 +1,4 @@
 get:
-  tasks: {}
   user:
     - params: "email=c.johnson@example.com"
       response:
@@ -289,8 +288,6 @@ get:
         formKey: "test_form_with_dynamic_conditions.yml"
         tenantId: null
 
-put: {}
-patch: {}
 post:
   task:
     - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
