@@ -1,0 +1,208 @@
+## Structure of file:
+# <method>:
+#   <url>:
+#     - params: <body-1 or querystring-1>
+#       response: <response-1>
+#     - params: <body-2 or querystring-2>
+#       response: <response-2>
+
+get:
+  tasks: {}
+  user:
+    - params: "email=c.johnson@example.com"
+      response:
+        data:
+          - id:         'demo'
+            firstName:  'Demo'
+            lastName:   'Demo'
+            url:        'http://bpm.example.com'
+            email:      'c.johnson@example.com'
+            pictureUrl: null
+        total: 1
+        start: 0
+        sort: 'id'
+        order: 'asc'
+        size: 1
+
+  # process definitions
+  process-definition:
+    - params: ""
+      response:
+        - &default_process-definition
+          id: "testProcess:469:222221"
+          key: "supportRequestProcess"
+          version: 469
+          name: "Test name"
+          description: null
+          tenantId: null
+          deploymentId: "222221"
+          resource: "testProcess.bpmn"
+          diagram: null
+          category: "http://bpmn.io/schema/bpmn"
+          suspended: false
+          versionTag: null
+          historyTimeToLive: null
+
+  # form definitions
+  task/111111/deployed-form:
+    - params: ""
+      response: |
+        form:
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+            - name: group1
+              type: group
+              label: Dynamic disable_if test
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderCheckingThis
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  label: Reason
+                  type: string
+                - name: homsOrderOrEnabledAfterChanges
+                  type: string
+                  label: Will be enabled after changes
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  dynamic: true
+                  disable_if:
+                    -
+                      - variable: homsOrderDataZeroVariable
+                        condition: >
+                          parseInt("$var") == 1
+                    -
+                      - variable: homsOrderCheckingThis
+                        condition: >
+                          parseInt("$var") == 666
+                - name: homsOrderAndEnabledAfterChanges
+                  type: string
+                  label: Will be enabled after changes
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  dynamic: true
+                  disable_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: >
+                        parseInt("$var") == 0
+                    - variable: homsOrderCheckingThis
+                      condition: >
+                        parseInt("$var") == 666
+                - name: homsOrderOrDisabledAfterChanges
+                  type: string
+                  label: OR Will be disabled after changes
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  dynamic: true
+                  disable_if:
+                    -
+                      - variable: homsOrderDataZeroVariable
+                        condition: >
+                          parseInt("$var") == 1
+                    -
+                      - variable: homsOrderCheckingThis
+                        condition: >
+                          parseInt("$var") == 1234
+                - name: homsOrderAndDisabledAfterChanges
+                  type: string
+                  label: AND Will be disabled after changes
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  dynamic: true
+                  disable_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: >
+                        parseInt("$var") == 0
+                    - variable: homsOrderCheckingThis
+                      condition: >
+                        parseInt("$var") == 1234
+
+  # task variables
+  task/111111/variables:
+    - params: ""
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-1"
+        homsOrderDataZeroVariable:
+          type: "number"
+          value: 0
+        homsOrderCheckingThis:
+          type: "number"
+          value: 666
+        homsOrderOrEnabledAfterChanges:
+          type: "string"
+          value: "or_enabled"
+        homsOrderAndEnabledAfterChanges:
+          type: "string"
+          value: "and_enabled"
+        homsOrderOrDisabledAfterChanges:
+          type: "string"
+          value: "or_disabled"
+        homsOrderAndDisabledAfterChanges:
+          type: "string"
+          value: "and_disabled"
+
+  task/111111:
+    - params: ""
+      response: &default_task
+        id: "111111"
+        name: "Check test form"
+        assignee: "demo"
+        created: "2016-06-30T12:07:59.000+03:00"
+        due: null
+        followUp: null
+        delegationState: null
+        description: null
+        executionId: "222221"
+        owner: null
+        parentTaskId: null
+        priority: 50
+        processDefinitionId: "testProcess:469:222221"
+        processInstanceId: 222221
+        taskDefinitionKey: "usertask10"
+        caseExecutionId: null
+        caseInstanceId: null
+        caseDefinitionId: null
+        suspended: false
+        formKey: "test_form_with_dynamic_conditions.yml"
+        tenantId: null
+
+put: {}
+patch: {}
+post:
+  task:
+    - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response:
+        - <<: *default_task
+    - params: "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response: []
+
+  process-instance:
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq"
+      response:
+        default_data: &default_process-instances
+          id: "111111"
+          businessKey: null
+          caseInstanceId: null
+          suspended: false
+          ended: false
+          processDefinitionId: "testProcess:1:1"
+          tenantId: null
+        data:
+          - <<: *default_process-instances
+            id: "111111"
+            processDefinitionId: "testProcess:469:222221"
+
+  task/111111/submit-form:
+    - params: "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456"
+      response:
+        - ""
+
+  variable-instance:
+    - params: "processInstanceIdIn[]=222221&variableName=homsOrderCode"
+      response:
+        - processInstanceId: 222221
+          type: string
+          name: homsOrderCode
+          value: ORD-1
+
+    - params: "variableName=homsOrderCode"
+      response: []
+
+delete: {}
