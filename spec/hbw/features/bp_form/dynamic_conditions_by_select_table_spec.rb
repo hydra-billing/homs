@@ -4,8 +4,10 @@ feature 'Control fields with dynamic conditions by select table', js: true do
   let(:hide_fields_cell)    { find(:xpath, "//*[text() = 'Hide fields']") }
 
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/bp_form/dynamic_conditions_by_select_table_mock.yml')
+
     order_type = FactoryBot.create(:order_type, :new_customer)
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-39')
+    FactoryBot.create(:order, order_type: order_type) # ORD-1
 
     user = FactoryBot.create(:user)
     signin(user.email, user.password)
@@ -15,7 +17,7 @@ feature 'Control fields with dynamic conditions by select table', js: true do
   end
 
   scenario 'should do nothing when neutral field is selected' do
-    click_and_wait 'ORD-39'
+    click_and_wait 'ORD-1'
 
     expect(page).to have_content 'Control select table'
     expect(page).to have_content 'Dependent static'
@@ -57,7 +59,7 @@ feature 'Control fields with dynamic conditions by select table', js: true do
   end
 
   scenario 'should hide all fields' do
-    click_and_wait 'ORD-39'
+    click_and_wait 'ORD-1'
 
     expect(page).to have_content 'Control select table'
     expect(page).to have_content 'Dependent static'
@@ -89,7 +91,7 @@ feature 'Control fields with dynamic conditions by select table', js: true do
   end
 
   scenario 'should disable all fields' do
-    click_and_wait 'ORD-39'
+    click_and_wait 'ORD-1'
 
     expect(page).to have_content 'Control select table'
 
