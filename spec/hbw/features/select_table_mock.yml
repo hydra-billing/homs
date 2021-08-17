@@ -1,13 +1,4 @@
-## Structure of file:
-# <method>:
-#   <url>:
-#     - params: <body-1 or querystring-1>
-#       response: <response-1>
-#     - params: <body-2 or querystring-2>
-#       response: <response-2>
-
 get:
-  tasks: {}
   user:
     - params: "email=c.johnson@example.com"
       response:
@@ -377,8 +368,6 @@ get:
         processInstanceId: 222225
         processDefinitionId: "testProcess:469:222225"
 
-put: {}
-patch: {}
 post:
   task:
     - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
@@ -449,20 +438,16 @@ post:
 
   task/111112/submit-form:
     - params: "variables[emptyDefaultParam][value]=&variables[notEmptyDefaultParam][value]=321"
-      response:
-        - ""
+      response: [""]
   task/111113/submit-form:
     - params: 'variables[emptyDefaultParam][value]=[]&variables[notEmptyDefaultParam][value]=["321"]'
-      response:
-        - ""
+      response: [""]
   task/111114/submit-form:
     - params: "variables[homsOrderDataSelect][value]=123"
-      response:
-        - ""
+      response: [""]
   task/111115/submit-form:
     - params: "variables[homsOrderDataSelect][value]=[\"123\",\"321\"]"
-      response:
-        - ""
+      response: [""]
 
   variable-instance:
     - params: "processInstanceIdIn[]=222221&processInstanceIdIn[]=222222&processInstanceIdIn[]=222223&processInstanceIdIn[]=222224&processInstanceIdIn[]=222225&variableName=homsOrderCode"
@@ -490,5 +475,3 @@ post:
 
     - params: "variableName=homsOrderCode"
       response: []
-
-delete: {}

@@ -1,13 +1,4 @@
-## Structure of file:
-# <method>:
-#   <url>:
-#     - params: <body-1 or querystring-1>
-#       response: <response-1>
-#     - params: <body-2 or querystring-2>
-#       response: <response-2>
-
 get:
-  tasks: {}
   user:
     - params: "email=c.johnson@example.com"
       response:
@@ -328,8 +319,6 @@ get:
         formKey: "test_form.yml"
         tenantId: null
 
-put: {}
-patch: {}
 post:
   task:
     - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
@@ -356,8 +345,7 @@ post:
 
   task/111111/submit-form:
     - params: "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456"
-      response:
-        - ""
+      response: [""]
 
   variable-instance:
     - params: "processInstanceIdIn[]=222221&variableName=homsOrderCode"
@@ -369,5 +357,3 @@ post:
 
     - params: "variableName=homsOrderCode"
       response: []
-
-delete: {}

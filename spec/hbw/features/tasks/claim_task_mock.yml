@@ -1,13 +1,4 @@
-## Structure of file:
-# <method>:
-#   <url>:
-#     - params: <body-1 or querystring-1>
-#       response: <response-1>
-#     - params: <body-2 or querystring-2>
-#       response: <response-2>
-
 get:
-  tasks: {}
   user:
     - params: "email=c.johnson@example.com"
       response:
@@ -366,8 +357,6 @@ get:
         processInstanceId: 222222
         processDefinitionId: "testProcess:469:222222"
 
-put: {}
-patch: {}
 post:
   task:
     - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
@@ -438,13 +427,11 @@ post:
 
   task/111111/submit-form:
     - params: "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456"
-      response:
-        - ""
+      response: [""]
 
   task/111112/submit-form:
     - params: 'variables[FL_EmptyFileUpload][value]=[]&variables[FL_MultipleFileUpload][value]=[{"origin_name":"logo.svg","field_name":"multipleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"},{"origin_name":"file_with_long_name.pdf","field_name":"multipleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"}]&variables[FL_SingleFileUpload][value]=[{"name":"file3.txt+(21.07.2021+16:57:16)","origin_name":"file3.txt","field_name":"multipleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"},{"name":"file4.txt+(21.07.2021+16:57:16)","origin_name":"file4.txt","field_name":"multipleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"},{"origin_name":"file.txt","field_name":"singleFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"}]&variables[homsOrderDataFileList][value]=[{"origin_name":"file2.txt","field_name":"paramAbsentFileUpload","end_point":"http://127.0.0.1:9000","bucket":"bucket-name"}]'
-      response:
-        - ""
+      response: [""]
 
   task/111112/claim:
     - params: "userId=demo"
@@ -472,5 +459,3 @@ post:
 
     - params: "variableName=homsOrderCode"
       response: []
-
-delete: {}

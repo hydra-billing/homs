@@ -1,13 +1,4 @@
-## Structure of file:
-# <method>:
-#   <url>:
-#     - params: <body-1 or querystring-1>
-#       response: <response-1>
-#     - params: <body-2 or querystring-2>
-#       response: <response-2>
-
 get:
-  tasks: {}
   user:
     - params: "email=c.johnson@example.com"
       response:
@@ -223,8 +214,6 @@ get:
         formKey: "test_submit_disabled_fields.yml"
         tenantId: null
 
-put: {}
-patch: {}
 post:
   task:
     - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
@@ -267,8 +256,7 @@ post:
 
   task/111111/submit-form:
     - params: "variables[submittedString][value]=111"
-      response:
-        - ""
+      response: [""]
 
   variable-instance:
     - params: "processInstanceIdIn[]=222221&variableName=homsOrderCode"
@@ -277,5 +265,3 @@ post:
           type: string
           name: homsOrderCode
           value: ORD-1
-
-delete: {}
