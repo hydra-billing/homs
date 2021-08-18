@@ -1,5 +1,7 @@
 feature 'Create new order type', js: true do
   before(:each) do
+    set_camunda_api_mock_file('spec/features/order_types/new_order_type_mock.yml')
+
     user = FactoryBot.create(:user, :admin)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'

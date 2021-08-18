@@ -9,6 +9,8 @@ feature 'List orders', js: true do
   let!(:contract_number)        { 111 }
 
   before(:each) do
+    set_camunda_api_mock_file('spec/features/orders/orders_mock.yml')
+
     signin(user.email, user.password)
 
     click_on 'Orders'

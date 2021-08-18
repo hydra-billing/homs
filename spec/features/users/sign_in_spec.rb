@@ -1,4 +1,8 @@
 feature 'Sign in', :devise, js: true do
+  before(:each) do
+    set_camunda_api_mock_file('spec/features/users/users_mock.yml')
+  end
+
   let(:user) { FactoryBot.create(:user) }
 
   scenario 'user cannot sign in if not registered' do

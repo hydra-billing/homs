@@ -1,4 +1,8 @@
 feature 'User is', js: true do
+  before(:each) do
+    set_camunda_api_mock_file('spec/features/users/users_mock.yml')
+  end
+
   let!(:admin)         { FactoryBot.create(:user, :admin) }
   let!(:john)          { FactoryBot.create(:user, :john) }
   let!(:blocked_admin) { FactoryBot.create(:user, :blocked_admin) }
