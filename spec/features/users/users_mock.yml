@@ -1,0 +1,46 @@
+get:
+  user:
+    - params: "email=c.johnson@example.com"
+      response:
+        data:
+          - id:         'demo'
+            firstName:  'Demo'
+            lastName:   'Demo'
+            url:        'http://bpm.example.com'
+            email:      'c.johnson@example.com'
+            pictureUrl: null
+        total: 1
+        start: 0
+        sort: 'id'
+        order: 'asc'
+        size: 1
+
+    - params: "email=j.doe@example.com"
+      response:
+        data:
+          - id:         'john'
+            firstName:  'John'
+            lastName:   'Doe'
+            url:        'http://bpm.example.com'
+            email:      'j.doe@example.com'
+            pictureUrl: null
+        total: 1
+        start: 0
+        sort: 'id'
+        order: 'asc'
+        size: 1
+
+post:
+  task:
+    - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response: []
+    - params: "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response: []
+    - params: "active=true&assignee=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response: []
+    - params: "active=true&candidateUser=john&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response: []
+
+  variable-instance:
+    - params: "variableName=homsOrderCode"
+      response: []
