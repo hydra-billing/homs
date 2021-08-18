@@ -1,5 +1,7 @@
 feature 'Control fields on form', js: true do
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/bp_form/hidden_fields_mock.yml')
+
     user = FactoryBot.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'

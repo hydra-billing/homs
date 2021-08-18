@@ -1,24 +1,29 @@
 require 'dry-container'
 require 'dry-auto_inject'
+require 'dry/container/stub'
 
 module HBW
   class Container
     extend Dry::Container::Mixin
 
     register(:api) do
-      if Rails.env.test?
-        HBW::Camunda::YMLAPI.build(Rails.root.join('hbw/config/yml_api.test.camunda.yml'))
-      elsif Rails.env.development? && HBW::Widget.config.fetch(:use_bpm_stub)
-        HBW::Camunda::YMLAPI.build(Rails.root.join('hbw/config/yml_api.development.yml'))
+      if Rails.env.development? && HBW::Widget.config.fetch(:use_bpm_stub)
+        HBW::Camunda::YMLAPI.build('hbw/config/yml_api.development.yml')
       else
         HBW::Camunda::API.build
       end
     end
 
+    register(:oracle) do
+      if Rails.env.test?
+        HBW::Sources::YMLOracle
+      else
+        HBW::Sources::Oracle
+      end
+    end
+
     if Rails.env.test?
-      register(:oracle) { HBW::Sources::YMLOracle }
-    else
-      register(:oracle) { HBW::Sources::Oracle }
+      enable_stubs!
     end
 
     register(:adapter) { HBW::Camunda::Adapter.new }

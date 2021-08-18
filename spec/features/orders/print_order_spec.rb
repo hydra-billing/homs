@@ -5,6 +5,7 @@ feature 'Print', js: true do
   let(:second_order_code) { 'ORD-2' }
 
   before(:each) do
+    set_camunda_api_mock_file('spec/features/orders/print_order_mock.yml')
     clear_downloads
 
     user = FactoryBot.create(:user)

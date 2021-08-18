@@ -1,10 +1,11 @@
 feature 'Validate form', js: true do
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/bp_form/validation_mock.yml')
+
     order_type = FactoryBot.create(:order_type, :support_request)
     FactoryBot.create(:order, order_type: order_type)
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-14')
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-16')
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-33')
+    FactoryBot.create(:order, order_type: order_type)
+    FactoryBot.create(:order, order_type: order_type)
     user = FactoryBot.create(:user)
 
     signin(user.email, user.password)
@@ -44,7 +45,7 @@ feature 'Validate form', js: true do
     end
 
     scenario 'with empty required multi select table' do
-      click_and_wait 'ORD-16'
+      click_and_wait 'ORD-2'
 
       expect(page).to have_content 'Options'
       expect(page).to have_selector "button[type='submit']"
@@ -57,7 +58,7 @@ feature 'Validate form', js: true do
 
   describe 'form should be submitted' do
     scenario 'with hidden and disabled not valid fields' do
-      click_and_wait 'ORD-33'
+      click_and_wait 'ORD-3'
 
       fill_in 'submittedString', with: 'act'
 

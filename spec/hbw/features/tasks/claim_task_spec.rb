@@ -1,5 +1,7 @@
 feature 'Check task claiming', js: true do
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/tasks/claim_task_mock.yml')
+
     user = FactoryBot.create(:user)
 
     signin(user.email, user.password)
@@ -8,8 +10,8 @@ feature 'Check task claiming', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-1')
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-23')
+    FactoryBot.create(:order, order_type: order_type) # ORD-1
+    FactoryBot.create(:order, order_type: order_type) # ORD-2
   end
 
   describe 'form with all fields' do
@@ -20,7 +22,7 @@ feature 'Check task claiming', js: true do
     end
 
     scenario 'have only disabled or readonly fields' do
-      click_and_wait 'ORD-23'
+      click_and_wait 'ORD-2'
 
       find_form.find_all('input').each do |input|
         expect(input.disabled? || input.readonly?).to eq true
@@ -28,7 +30,7 @@ feature 'Check task claiming', js: true do
     end
 
     scenario 'can be claimed' do
-      click_and_wait 'ORD-23'
+      click_and_wait 'ORD-2'
 
       expect(page).not_to have_content 'Submit'
 

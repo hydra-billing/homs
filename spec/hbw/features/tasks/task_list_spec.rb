@@ -3,8 +3,10 @@ feature 'Check table with tasks', js: true do
   let(:second_task_due_date) { DateTime.parse('2017-07-30T12:07:59').in_time_zone }
 
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/tasks/task_list_mock.yml')
+
     order_type = FactoryBot.create(:order_type, :support_request)
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-23')
+    FactoryBot.create(:order, order_type: order_type) # ORD-1
 
     user = FactoryBot.create(:user)
 
@@ -15,7 +17,7 @@ feature 'Check table with tasks', js: true do
     click_on 'Tasks'
     expect_widget_presence
     expect(page).to have_content 'Open tasks'
-    expect(page).to have_content 'My tasks (40)'
+    expect(page).to have_content 'My tasks (2)'
     expect(page).to have_content 'Unclaimed tasks (3)'
   end
 
@@ -26,9 +28,7 @@ feature 'Check table with tasks', js: true do
       expect(tasks_table_content).to eq(
         [
           ['Medium', 'Assigned task', ' Test name', '—', "expired (#{years_since(first_task_due_date)}y past due date)"],
-          ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due date)"],
-          *Array.new(37) { ['High', 'Check test form', ' Test name', '—', '30 Jun 2016'] },
-          ['High', 'Form for testing of field translations', ' Test translations', '—', '30 Jun 2016']
+          ['High', 'Other assigned task', ' Test name', 'Some test description', "expired (#{years_since(second_task_due_date)}y past due date)"]
         ]
       )
     end
@@ -54,7 +54,7 @@ feature 'Check table with tasks', js: true do
     end
 
     it 'for assigned task' do
-      expect(tasks_table_content.length).to eq(40)
+      expect(tasks_table_content.length).to eq(2)
 
       click_on_task_table_row(1)
 
@@ -84,7 +84,7 @@ feature 'Check table with tasks', js: true do
 
       click_on 'Go to task'
 
-      expect(page).to have_content 'ORD-23'
+      expect(page).to have_content 'ORD-1'
       expect(page).to have_content 'Check test form'
     end
 
@@ -110,7 +110,7 @@ feature 'Check table with tasks', js: true do
 
       click_on 'Claim and go to task'
 
-      expect(page).to have_content 'ORD-23'
+      expect(page).to have_content 'ORD-1'
       expect(page).to have_content 'Check test form'
     end
   end

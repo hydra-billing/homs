@@ -1,5 +1,7 @@
 feature 'Show business process form', js: true do
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/show_bp_form_mock.yml')
+
     user = FactoryBot.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
@@ -8,7 +10,7 @@ feature 'Show business process form', js: true do
     order_type = FactoryBot.create(:order_type, :support_request)
     FactoryBot.create(:order, order_type: order_type)
     FactoryBot.create(:order, order_type: order_type)
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-13')
+    FactoryBot.create(:order, order_type: order_type)
   end
 
   scenario 'check select options' do
@@ -50,9 +52,9 @@ feature 'Show business process form', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_and_wait 'ORD-13'
+    click_and_wait 'ORD-3'
 
-    expect(page).to have_content 'ORD-13'
+    expect(page).to have_content 'ORD-3'
     expect_r_select_presence('homsOrderDataSelect')
 
     r_select_input('homsOrderDataSelect').set('cust')

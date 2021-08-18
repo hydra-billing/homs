@@ -4,6 +4,8 @@ feature 'Check datetime picker with', js: true do
   let(:title)      { 'Orders' }
 
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/datetime_picker_mock.yml')
+
     user = FactoryBot.create(:user)
 
     signin(user.email, user.password)
