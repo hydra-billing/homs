@@ -10,6 +10,8 @@ feature 'Create new order', js: true do
   let(:vacation_request_type_name) { 'Vacation request' }
 
   before(:each) do
+    set_camunda_api_mock_file('spec/features/orders/orders_mock.yml')
+
     user = FactoryBot.create(:user)
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
