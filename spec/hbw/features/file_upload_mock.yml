@@ -45,53 +45,53 @@ get:
           name: Test form with file upload without file list
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Files
-            css_class: col-xs-12
-            fields:
-            - name: multipleFileUpload
+            - name: group1
+              type: group
+              label: Files
+              css_class: col-xs-12
+              fields:
+                - name: multipleFileUpload
+                  type: file_upload
+                  label: Attach multiple files
+                  file_list_name: FL_MultipleFileUpload
+                  css_class: col-md-4 col-xs-4 col-lg-4
+                  multiple: true
+                - name: FL_MultipleFileUpload
+                  type: file_list
+                  label: Attached files
+                  css_class: col-md-8 col-xs-8 col-lg-8
+
+                - name: paramAbsentFileUpload
+                  type: file_upload
+                  label: Attach single file in group
+                  css_class: col-md-4 col-xs-4 col-lg-4
+                  input_text: ''
+                - name: homsOrderDataFileList
+                  type: file_list
+                  label: Attached files
+                  css_class: col-md-8 col-xs-8 col-lg-8
+
+                - name: emptyFileUpload
+                  type: file_upload
+                  label: Attach single file in group
+                  file_list_name: FL_EmptyFileUpload
+                  css_class: col-md-4 col-xs-4 col-lg-4
+                  input_text: ''
+                - name: FL_EmptyFileUpload
+                  type: file_list
+                  label: Attached files
+                  css_class: col-md-8 col-xs-8 col-lg-8
+
+            - name: singleFileUpload
               type: file_upload
-              label: Attach multiple files
-              file_list_name: FL_MultipleFileUpload
+              label: Attach single file
+              file_list_name: FL_SingleFileUpload
               css_class: col-md-4 col-xs-4 col-lg-4
-              multiple: true
-            - name: FL_MultipleFileUpload
+              input_text: 'Drag single file, or '
+            - name: FL_SingleFileUpload
               type: file_list
               label: Attached files
               css_class: col-md-8 col-xs-8 col-lg-8
-
-            - name: paramAbsentFileUpload
-              type: file_upload
-              label: Attach single file in group
-              css_class: col-md-4 col-xs-4 col-lg-4
-              input_text: ''
-            - name: homsOrderDataFileList
-              type: file_list
-              label: Attached files
-              css_class: col-md-8 col-xs-8 col-lg-8
-
-            - name: emptyFileUpload
-              type: file_upload
-              label: Attach single file in group
-              file_list_name: FL_EmptyFileUpload
-              css_class: col-md-4 col-xs-4 col-lg-4
-              input_text: ''
-            - name: FL_EmptyFileUpload
-              type: file_list
-              label: Attached files
-              css_class: col-md-8 col-xs-8 col-lg-8
-
-          - name: singleFileUpload
-            type: file_upload
-            label: Attach single file
-            file_list_name: FL_SingleFileUpload
-            css_class: col-md-4 col-xs-4 col-lg-4
-            input_text: 'Drag single file, or '
-          - name: FL_SingleFileUpload
-            type: file_list
-            label: Attached files
-            css_class: col-md-8 col-xs-8 col-lg-8
 
   task/111112/deployed-form:
     - params: ""

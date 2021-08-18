@@ -48,198 +48,198 @@ get:
           name: Test form with options
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Choose option
-            css_class: col-xs-12
-            fields:
-            - name: homsOrderDataStatic
-              type: static
-              label: TEST
-              css_class: col-xs-12 col-sm-6 col-md-4
-              html: "<h4> TEST STATIC $homsOrderCode </h4>"
-            - name: homsOrderDataSelect
-              type: select
-              label: Options
-              css_class: col-xs-12 col-sm-6 col-md-4
-              nullable: false
-              choices:
-                -
-                  - 123456
-                  - Option 1
-                -
-                  - 654321
-                  - Option 2
-            - name: homsOrderDataBeginDate
-              type: datetime
-              label: Begin Date
-              css_class: col-xs-6 col-sm-4 col-md-3
-            - name: homsOrderDataEndDate
-              type: datetime
-              label: End Date
-              css_class: col-xs-6 col-sm-4 col-md-3
-              locale: ru
-              format: DD.MM.YYYY
-            - name: homsOrderDataDisabledEndDate
-              type: datetime
-              label: End Date
-              css_class: col-xs-6 col-sm-4 col-md-3
-              locale: ru
-              format: DD.MM.YYYY
-              disable_if:
-                -
-                  - variable: homsOrderDataZeroVariable
-                    condition: $var != 0
-                -
-                  - variable: homsOrderDataOneVariable
-                    condition: $var == 1
-            - name: homsOrderDataAddress
-              type: string
-              label: Address
-              css_class: col-xs-6 col-sm-4 col-md-3
-              regex: .+\s.+
-              message: Field does not match regex
-              disable_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var != 0
-                - variable: homsOrderDataOneVariable
-                  condition: $var == 1
-            - name: homsOrderDataWorkPlace
-              type: string
-              label: Work place
-              css_class: col-xs-6 col-sm-4 col-md-3
+            - name: group1
+              type: group
+              label: Choose option
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderDataStatic
+                  type: static
+                  label: TEST
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  html: "<h4> TEST STATIC $homsOrderCode </h4>"
+                - name: homsOrderDataSelect
+                  type: select
+                  label: Options
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  nullable: false
+                  choices:
+                    -
+                      - 123456
+                      - Option 1
+                    -
+                      - 654321
+                      - Option 2
+                - name: homsOrderDataBeginDate
+                  type: datetime
+                  label: Begin Date
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                - name: homsOrderDataEndDate
+                  type: datetime
+                  label: End Date
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  locale: ru
+                  format: DD.MM.YYYY
+                - name: homsOrderDataDisabledEndDate
+                  type: datetime
+                  label: End Date
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  locale: ru
+                  format: DD.MM.YYYY
+                  disable_if:
+                    -
+                      - variable: homsOrderDataZeroVariable
+                        condition: $var != 0
+                    -
+                      - variable: homsOrderDataOneVariable
+                        condition: $var == 1
+                - name: homsOrderDataAddress
+                  type: string
+                  label: Address
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  regex: .+\s.+
+                  message: Field does not match regex
+                  disable_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var != 0
+                    - variable: homsOrderDataOneVariable
+                      condition: $var == 1
+                - name: homsOrderDataWorkPlace
+                  type: string
+                  label: Work place
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 0
+                    - variable: homsOrderDataOneVariable
+                      condition: $var == 1
+                - name: homsOrderDataHomePlace
+                  type: string
+                  label: Home place
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  required: true
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var != 0
+                    - variable: homsOrderDataOneVariable
+                      condition: $var == 1
+                - name: homsOrderDataWorkAddress
+                  type: string
+                  label: Work address
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  disable_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 0
+                    - variable: homsOrderDataOneVariable
+                      condition: $var == 1
+                - name: homsOrderDataReason
+                  type: string
+                  label: Reason
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  delete_if:
+                    -
+                      - variable: homsOrderDataZeroVariable
+                        condition: $var != 0
+                      - variable: homsOrderDataOneVariable
+                        condition: $var == 1
+                    -
+                      - variable: homsOrderDataZeroVariable
+                        condition: $var == 0
+                - name: homsOrderDataRecommendation
+                  type: string
+                  label: Reason
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  delete_if:
+                    -
+                      - variable: homsOrderDataZeroVariable
+                        condition: $var != 0
+                      - variable: homsOrderDataOneVariable
+                        condition: $var == 1
+                    -
+                      - variable: homsOrderDataOneVariable
+                        condition: $var == 0
+                  disable_if:
+                    -
+                      - variable: homsOrderDataZeroVariable
+                        condition: $var != 0
+                      - variable: homsOrderDataOneVariable
+                        condition: $var == 1
+                    -
+                      - variable: homsOrderDataOneVariable
+                        condition: $var == 0
+                - name: homsOrderDataSomeStr
+                  type: string
+                  label: Reason
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 0
+                - name: homsOrderDataSomeDatetime
+                  type: datetime
+                  label: Some datetime
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 0
+                - name: homsOrderDataSomeCheckbox
+                  type: checkbox
+                  label: Some checkbox
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 0
+                - name: homsOrderDataSomeDisabledCheckbox
+                  type: checkbox
+                  label: Some disabled checkbox
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  disable_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 0
+                - name: homsOrderDataSomeSelect
+                  type: select
+                  label: Some select
+                  css_class: col-xs-6 col-sm-4 col-md-3 my-select
+                  choices: []
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 0
+                - name: homsOrderDataSomeDisabledSelect
+                  type: select
+                  label: Some select
+                  css_class: col-xs-6 col-sm-4 col-md-3 my-disabled-select
+                  choices: []
+                  disable_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 0
+                - name: homsOrderDataSomeStatic
+                  type: static
+                  html: Some static
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 0
+                - name: homsOrderDataSomeText
+                  type: text
+                  label: Text
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 0
+                - name: homsOrderDataSomeDisabledText
+                  type: text
+                  label: Disabled Text
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  disable_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: $var == 0
+            - name: group2
+              type: group
+              label: Hidden group
+              css_class: col-xs-12
+              fields: []
               delete_if:
                 - variable: homsOrderDataZeroVariable
                   condition: $var == 0
-                - variable: homsOrderDataOneVariable
-                  condition: $var == 1
-            - name: homsOrderDataHomePlace
-              type: string
-              label: Home place
-              css_class: col-xs-6 col-sm-4 col-md-3
-              required: true
-              delete_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var != 0
-                - variable: homsOrderDataOneVariable
-                  condition: $var == 1
-            - name: homsOrderDataWorkAddress
-              type: string
-              label: Work address
-              css_class: col-xs-6 col-sm-4 col-md-3
-              disable_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var == 0
-                - variable: homsOrderDataOneVariable
-                  condition: $var == 1
-            - name: homsOrderDataReason
-              type: string
-              label: Reason
-              css_class: col-xs-6 col-sm-4 col-md-3
-              delete_if:
-                -
-                  - variable: homsOrderDataZeroVariable
-                    condition: $var != 0
-                  - variable: homsOrderDataOneVariable
-                    condition: $var == 1
-                -
-                  - variable: homsOrderDataZeroVariable
-                    condition: $var == 0
-            - name: homsOrderDataRecommendation
-              type: string
-              label: Reason
-              css_class: col-xs-6 col-sm-4 col-md-3
-              delete_if:
-                -
-                  - variable: homsOrderDataZeroVariable
-                    condition: $var != 0
-                  - variable: homsOrderDataOneVariable
-                    condition: $var == 1
-                -
-                  - variable: homsOrderDataOneVariable
-                    condition: $var == 0
-              disable_if:
-                -
-                  - variable: homsOrderDataZeroVariable
-                    condition: $var != 0
-                  - variable: homsOrderDataOneVariable
-                    condition: $var == 1
-                -
-                  - variable: homsOrderDataOneVariable
-                    condition: $var == 0
-            - name: homsOrderDataSomeStr
-              type: string
-              label: Reason
-              css_class: col-xs-6 col-sm-4 col-md-3
-              delete_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var == 0
-            - name: homsOrderDataSomeDatetime
-              type: datetime
-              label: Some datetime
-              css_class: col-xs-6 col-sm-4 col-md-3
-              delete_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var == 0
-            - name: homsOrderDataSomeCheckbox
-              type: checkbox
-              label: Some checkbox
-              css_class: col-xs-6 col-sm-4 col-md-3
-              delete_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var == 0
-            - name: homsOrderDataSomeDisabledCheckbox
-              type: checkbox
-              label: Some disabled checkbox
-              css_class: col-xs-6 col-sm-4 col-md-3
-              disable_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var == 0
-            - name: homsOrderDataSomeSelect
-              type: select
-              label: Some select
-              css_class: col-xs-6 col-sm-4 col-md-3 my-select
-              choices: []
-              delete_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var == 0
-            - name: homsOrderDataSomeDisabledSelect
-              type: select
-              label: Some select
-              css_class: col-xs-6 col-sm-4 col-md-3 my-disabled-select
-              choices: []
-              disable_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var == 0
-            - name: homsOrderDataSomeStatic
-              type: static
-              html: Some static
-              css_class: col-xs-6 col-sm-4 col-md-3
-              delete_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var == 0
-            - name: homsOrderDataSomeText
-              type: text
-              label: Text
-              css_class: col-xs-6 col-sm-4 col-md-3
-              delete_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var == 0
-            - name: homsOrderDataSomeDisabledText
-              type: text
-              label: Disabled Text
-              css_class: col-xs-6 col-sm-4 col-md-3
-              disable_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var == 0
-          - name: group2
-            type: group
-            label: Hidden group
-            css_class: col-xs-12
-            fields: []
-            delete_if:
-              - variable: homsOrderDataZeroVariable
-                condition: $var == 0
 
   task/111112/deployed-form: *form_with_everything
   task/111113/deployed-form: *form_with_everything

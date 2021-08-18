@@ -69,29 +69,29 @@ get:
           name: Test form with options
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Choose option
-            css_class: col-xs-12
-            fields:
-            - name: homsOrderDataStatic
-              type: static
-              label: TEST
-              css_class: col-xs-12 col-sm-6 col-md-4
-              html: "<h4> $wrongBPVariable TEST STATIC $wrongBPVariable </h4>"
-            - name: homsOrderDataSelect
-              type: select
-              label: Options
-              nullable: true
-              placeholder: placeholder
-              css_class: col-xs-12 col-sm-6 col-md-4
-              description:
-                placement: top
-                text: Top description text
-              choices:
-                -
-                  - 123456
-                  - Option 1
+            - name: group1
+              type: group
+              label: Choose option
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderDataStatic
+                  type: static
+                  label: TEST
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  html: "<h4> $wrongBPVariable TEST STATIC $wrongBPVariable </h4>"
+                - name: homsOrderDataSelect
+                  type: select
+                  label: Options
+                  nullable: true
+                  placeholder: placeholder
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  description:
+                    placement: top
+                    text: Top description text
+                  choices:
+                    -
+                      - 123456
+                      - Option 1
   task/11112/deployed-form:
     - params: ""
       response: |
@@ -99,34 +99,34 @@ get:
           name: Test form with options
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Choose option
-            css_class: col-xs-12
-            fields:
-            - name: homsOrderDataStatic
-              type: static
-              label: TEST
-              css_class: col-xs-12 col-sm-6 col-md-4
-              html: "<h4> $homsOrderCode TEST STATIC $homsOrderCode </h4>"
-            - name: homsOrderDataSelect
-              type: select
-              mode: select
-              label: Options
-              nullable: false
-              placeholder: placeholder
-              editable: true
-              css_class: col-xs-12 col-sm-6 col-md-4
-              description:
-                placement: bottom
-                text: Bottom description text
-              choices:
-                -
-                  - 123456
-                  - Option 1
-                -
-                  - 654321
-                  - Option 2
+            - name: group1
+              type: group
+              label: Choose option
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderDataStatic
+                  type: static
+                  label: TEST
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  html: "<h4> $homsOrderCode TEST STATIC $homsOrderCode </h4>"
+                - name: homsOrderDataSelect
+                  type: select
+                  mode: select
+                  label: Options
+                  nullable: false
+                  placeholder: placeholder
+                  editable: true
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  description:
+                    placement: bottom
+                    text: Bottom description text
+                  choices:
+                    -
+                      - 123456
+                      - Option 1
+                    -
+                      - 654321
+                      - Option 2
   task/11113/deployed-form:
     - params: ""
       response: |
@@ -134,25 +134,25 @@ get:
           name: Test form with options
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Choose option
-            css_class: col-xs-12
-            fields:
-            - name: homsOrderDataSelect
-              type: select
-              mode: select
-              label: Options
-              nullable: true
-              editable: true
-              css_class: col-xs-12 col-sm-6 col-md-4
-              choices:
-                -
-                  - 123456
-                  - Option 1
-                -
-                  - 654321
-                  - Option 2
+            - name: group1
+              type: group
+              label: Choose option
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderDataSelect
+                  type: select
+                  mode: select
+                  label: Options
+                  nullable: true
+                  editable: true
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  choices:
+                    -
+                      - 123456
+                      - Option 1
+                    -
+                      - 654321
+                      - Option 2
   task/11114/deployed-form:
     - params: ""
       response: |
@@ -160,25 +160,25 @@ get:
           name: Test form with options
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Choose option
-            css_class: col-xs-12
-            fields:
-            - name: homsOrderDataSelect
-              type: select
-              mode: select
-              label: Options
-              nullable: false
-              editable: true
-              css_class: col-xs-12 col-sm-6 col-md-4
-              choices:
-                -
-                  - 123456
-                  - Option 1
-                -
-                  - 654321
-                  - Option 2
+            - name: group1
+              type: group
+              label: Choose option
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderDataSelect
+                  type: select
+                  mode: select
+                  label: Options
+                  nullable: false
+                  editable: true
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  choices:
+                    -
+                      - 123456
+                      - Option 1
+                    -
+                      - 654321
+                      - Option 2
   task/11115/deployed-form:
     - params: ""
       response: |
@@ -186,25 +186,25 @@ get:
           name: Test form with options
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Choose option
-            css_class: col-xs-12
-            fields:
-            - name: homsOrderDataSelect
-              type: select
-              mode: select
-              label: Options
-              nullable: false
-              editable: true
-              css_class: col-xs-12 col-sm-6 col-md-4
-              choices:
-                -
-                  - 112233
-                  - Option 1
-                -
-                  - 445566
-                  - Option 2
+            - name: group1
+              type: group
+              label: Choose option
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderDataSelect
+                  type: select
+                  mode: select
+                  label: Options
+                  nullable: false
+                  editable: true
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  choices:
+                    -
+                      - 112233
+                      - Option 1
+                    -
+                      - 445566
+                      - Option 2
   task/11116/deployed-form:
     - params: ""
       response: |
@@ -212,21 +212,21 @@ get:
           name: Test form with options
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Choose option
-            css_class: col-xs-12
-            fields:
-            - name: homsOrderDataSelect
-              type: select
-              mode: select
-              label: Options
-              nullable: false
-              editable: true
-              css_class: col-xs-12 col-sm-6 col-md-4
-              choices:
-                - Option 1
-                - Option 2
+            - name: group1
+              type: group
+              label: Choose option
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderDataSelect
+                  type: select
+                  mode: select
+                  label: Options
+                  nullable: false
+                  editable: true
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  choices:
+                    - Option 1
+                    - Option 2
   task/11117/deployed-form:
     - params: ""
       response: |
@@ -234,21 +234,21 @@ get:
           name: Test form with options
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Choose option
-            css_class: col-xs-12
-            fields:
-            - name: homsOrderNotInVBPVariables
-              type: select
-              mode: select
-              label: Options
-              nullable: false
-              editable: true
-              css_class: col-xs-12 col-sm-6 col-md-4
-              choices:
-                - Option 1
-                - Option 2
+            - name: group1
+              type: group
+              label: Choose option
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderNotInVBPVariables
+                  type: select
+                  mode: select
+                  label: Options
+                  nullable: false
+                  editable: true
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  choices:
+                    - Option 1
+                    - Option 2
   task/11118/deployed-form:
     - params: ""
       response: |
@@ -256,21 +256,21 @@ get:
           name: Test form with options
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Choose option
-            css_class: col-xs-12
-            fields:
-            - name: homsOrderDataSelect
-              type: select
-              mode: select
-              label: Options
-              nullable: false
-              editable: true
-              css_class: col-xs-12 col-sm-6 col-md-4
-              choices:
-                - Option 1
-                - Option 2
+            - name: group1
+              type: group
+              label: Choose option
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderDataSelect
+                  type: select
+                  mode: select
+                  label: Options
+                  nullable: false
+                  editable: true
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  choices:
+                    - Option 1
+                    - Option 2
   task/11119/deployed-form:
     - params: ""
       response: |

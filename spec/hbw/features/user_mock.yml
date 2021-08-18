@@ -58,34 +58,34 @@ get:
         form:
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Choose parameters of your transformation
-            css_class: col-xs-12
-            fields:
-            - name: homsOrderDataComment
-              type: text
-              rows: 3
-              label: You can write also additional details
-              css_class: col-xs-12 col-sm-6 col-md-4
-            - name: homsOrderWhatUser
-              type: user
-              label: Choose user to transformate
-              css_class: col-xs-12 col-sm-6 col-md-4
-              placeholder: placeholder
-              nullable: true
-          - name: homsOrderDataDoMagic
-            type: submit_select
-            css_class: col-xs-12
-            options:
-            - name: doMagic
-              label: Do Magic!
-              value: Do Magic
-              css_class: btn btn-success btn-lg
-            - name: undo
-              label: Undo
-              value: Canceled
-              css_class: btn btn-danger btn-lg
+            - name: group1
+              type: group
+              label: Choose parameters of your transformation
+              css_class: col-xs-12
+              fields:
+              - name: homsOrderDataComment
+                type: text
+                rows: 3
+                label: You can write also additional details
+                css_class: col-xs-12 col-sm-6 col-md-4
+              - name: homsOrderWhatUser
+                type: user
+                label: Choose user to transformate
+                css_class: col-xs-12 col-sm-6 col-md-4
+                placeholder: placeholder
+                nullable: true
+            - name: homsOrderDataDoMagic
+              type: submit_select
+              css_class: col-xs-12
+              options:
+              - name: doMagic
+                label: Do Magic!
+                value: Do Magic
+                css_class: btn btn-success btn-lg
+              - name: undo
+                label: Undo
+                value: Canceled
+                css_class: btn btn-danger btn-lg
 
   task/111112/deployed-form:
     - params: ""
@@ -93,34 +93,34 @@ get:
         form:
           css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
           fields:
-          - name: group1
-            type: group
-            label: Choose parameters of your transformation
-            css_class: col-xs-12
-            fields:
-            - name: homsOrderDataComment
-              type: text
-              rows: 3
-              label: You can write also additional details
-              css_class: col-xs-12 col-sm-6 col-md-4
-            - name: homsOrderWhatUser
-              type: user
-              label: Choose user to transformate
-              css_class: col-xs-12 col-sm-6 col-md-4
-              placeholder: placeholder
-              nullable: false
-          - name: homsOrderDataDoMagic
-            type: submit_select
-            css_class: col-xs-12
-            options:
-            - name: doMagic
-              label: Do Magic!
-              value: Do Magic
-              css_class: btn btn-success btn-lg
-            - name: undo
-              label: Undo
-              value: Canceled
-              css_class: btn btn-danger btn-lg
+            - name: group1
+              type: group
+              label: Choose parameters of your transformation
+              css_class: col-xs-12
+              fields:
+                - name: homsOrderDataComment
+                  type: text
+                  rows: 3
+                  label: You can write also additional details
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                - name: homsOrderWhatUser
+                  type: user
+                  label: Choose user to transformate
+                  css_class: col-xs-12 col-sm-6 col-md-4
+                  placeholder: placeholder
+                  nullable: false
+            - name: homsOrderDataDoMagic
+              type: submit_select
+              css_class: col-xs-12
+              options:
+              - name: doMagic
+                label: Do Magic!
+                value: Do Magic
+                css_class: btn btn-success btn-lg
+              - name: undo
+                label: Undo
+                value: Canceled
+                css_class: btn btn-danger btn-lg
 
   # task variables
   task/111111/variables:
