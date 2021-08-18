@@ -1,8 +1,9 @@
 feature 'BP form with existing russian translation', js: true do
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/bp_form/translation_mock.yml')
     user = FactoryBot.create(:user)
     order_type = FactoryBot.create(:order_type, :new_customer)
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-32')
+    FactoryBot.create(:order, order_type: order_type)
 
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'
@@ -19,10 +20,10 @@ feature 'BP form with existing russian translation', js: true do
     let(:locale) { :ru }
 
     scenario 'should be translated to russian' do
-      click_and_wait 'ORD-32'
+      click_and_wait 'ORD-1'
 
       expect(page).to     have_content 'Тестирование переводов'
-      expect(page).to     have_content 'ORD-32'
+      expect(page).to     have_content 'ORD-1'
       expect(page).to     have_content 'Форма для тестирования переводов'
 
       expect(page).to     have_content 'Поле select'
@@ -61,10 +62,10 @@ feature 'BP form with existing russian translation', js: true do
     let(:locale) { :en }
 
     scenario `should have text from form config` do
-      click_and_wait 'ORD-32'
+      click_and_wait 'ORD-1'
 
       expect(page).to     have_content 'Test translations'
-      expect(page).to     have_content 'ORD-32'
+      expect(page).to     have_content 'ORD-1'
       expect(page).to     have_content 'Form for testing of field translations'
 
       expect(page).to     have_content 'Select field'

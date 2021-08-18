@@ -35,8 +35,18 @@ module HBW
 
       private
 
+      ## Structure of a camunda api mock file:
+      # <method>:
+      #   <url>:
+      #     - params: <body-1 or querystring-1>
+      #       response: <response-1>
+      #     - params: <body-2 or querystring-2>
+      #       response: <response-2>
       def fetch_response(method, url, params)
-        responses.fetch(method).fetch(url).fetch(Addressable::URI.unescape(params.to_query)[0..1021])
+        responses.fetch(method)
+                 .fetch(url)
+                 .find { |el| el['params'] == Addressable::URI.unescape(params.to_query) }
+                 .fetch('response')
       end
     end
 

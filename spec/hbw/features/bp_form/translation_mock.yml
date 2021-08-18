@@ -1,0 +1,192 @@
+get:
+  user:
+    - params: "email=c.johnson@example.com"
+      response:
+        data:
+          - id:         'demo'
+            firstName:  'Demo'
+            lastName:   'Demo'
+            url:        'http://bpm.example.com'
+            email:      'c.johnson@example.com'
+            pictureUrl: null
+        total: 1
+        start: 0
+        sort: 'id'
+        order: 'asc'
+        size: 1
+
+  # process definitions
+  process-definition:
+    - params: ''
+      response:
+        - id: "testProcess:469:222221"
+          key: "test_translations"
+          version: 469
+          name: "Test translations"
+          description: null
+          tenantId: null
+          deploymentId: "222221"
+          resource: "testProcess.bpmn"
+          diagram: null
+          category: "http://bpmn.io/schema/bpmn"
+          suspended: false
+          versionTag: null
+          historyTimeToLive: null
+
+  # form definitions
+  task/111111/deployed-form:
+    - params: ''
+      response: |
+        form:
+          css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+          fields:
+            - name: selectField
+              type: select
+              label: Select field
+              nullable: false
+              required: true
+              choices:
+                - someSity
+              css_class: col-xs-6 col-sm-4 col-md-3
+            - name: stringField
+              type: string
+              label: String field
+              required: true
+              css_class: col-xs-6 col-sm-4 col-md-3
+            - name: staticField
+              type: static
+              html: <div class="alert alert-success"><h4>Static field</h4></div>
+              css_class: col-xs-12
+            - name: selectTableField
+              type: select_table
+              label: Select table field
+              css_class: col-xs-12
+              required: true
+              nullable: false
+              rows:
+                - name: Name
+                  type: string
+                  alignment: center
+              choices:
+                - [1, Second choise]
+            - name: textField
+              type: text
+              label: Text field
+              rows: 6
+              css_class: col-xs-6
+            - name: datetimeField
+              type: datetime
+              label: Datetime field
+              css_class: col-xs-6 col-sm-4 col-md-3
+            - name: group
+              type: group
+              label: Group
+              css_class: col-xs-12
+              fields:
+                - name: fileUploadField
+                  type: file_upload
+                  label: File upload field
+                  css_class: col-md-4 col-xs-4 col-lg-4
+                - name: homsOrderDataFileList
+                  type: file_list
+                  label: File list field
+                  css_class: col-md-8 col-xs-8 col-lg-8
+            - name: checkboxField
+              type: checkbox
+              label: Checkbox field
+              css_class: col-xs-12 col-sm-6 col-md-4
+            - name: submitSelectField
+              type: submit_select
+              css_class: col-xs-12
+              options:
+              - name: submitSelectButton1
+                label: Button 1
+                value: Value_1
+                css_class: btn btn-success btn-lg
+              - name: submitSelectButton2
+                label: Button 2
+                value: Value_2
+                css_class: btn btn-danger btn-lg
+
+  # task variables
+  task/111111/variables:
+    - params: ''
+      response:
+        homsOrderCode:
+          type: "string"
+          value: "ORD-1"
+        selectField:
+          type: "string"
+          value: null
+        stringField:
+          type: "string"
+          value: null
+        staticField:
+          type: "string"
+          value: null
+        selectTableField:
+          type: "string"
+          value: null
+        textField:
+          type: "string"
+          value: null
+        datetimeField:
+          type: "string"
+          value: null
+        fileUploadField:
+          type: "string"
+          value: null
+        fileListField:
+          type: "string"
+          value: null
+        checkboxField:
+          type: "string"
+          value: null
+
+post:
+  task:
+    - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response:
+        - id: "111111"
+          name: "Form for testing of field translations"
+          assignee: "demo"
+          created: "2016-06-30T12:07:59.000+03:00"
+          due: null
+          followUp: null
+          delegationState: null
+          description: null
+          executionId: "222221"
+          owner: null
+          parentTaskId: null
+          priority: 50
+          caseExecutionId: null
+          caseInstanceId: null
+          caseDefinitionId: null
+          suspended: false
+          processInstanceId: 222221
+          processDefinitionId: "testProcess:469:222221"
+          taskDefinitionKey: "Activity_test_translations"
+          formKey: null
+          tenantId: null
+    - params: "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response: []
+
+  process-instance:
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-1&variables[][operator]=eq"
+      response:
+        data:
+          - id: "111111"
+            businessKey: null
+            caseInstanceId: null
+            suspended: false
+            ended: false
+            processDefinitionId: "testProcess:469:222221"
+            tenantId: null
+
+  variable-instance:
+    - params: "processInstanceIdIn[]=222221&variableName=homsOrderCode"
+      response:
+        - processInstanceId: 222221
+          type: string
+          name: homsOrderCode
+          value: ORD-1

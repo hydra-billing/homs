@@ -1,5 +1,7 @@
 feature 'Check static field', js: true do
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/static_mock.yml')
+
     user = FactoryBot.create(:user)
 
     signin(user.email, user.password)

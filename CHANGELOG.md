@@ -8,6 +8,9 @@ v2.7.0 [unreleased]
 - [#571](https://github.com/latera/homs/pull/512) Add dynamic `disable_if` and `delete_if` options for select_table.
 - [#580](https://github.com/latera/homs/pull/580) Add several upload file fields for single form.
 
+### Refactoring
+- [#586](https://github.com/latera/homs/pull/586) Stub api container in tests with local api mock file and refactor tests.
+
 v2.6.11 [2021-08-16]
 -------------------
 ### Bugfixes

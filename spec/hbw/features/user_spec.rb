@@ -2,6 +2,8 @@ feature 'Check user picker', js: true do
   let(:placeholder) { 'placeholder' }
 
   before(:each) do
+    set_camunda_api_mock_file('spec/hbw/features/user_mock.yml')
+
     user = FactoryBot.create(:user)
     FactoryBot.create(:user, :john)
 
@@ -11,8 +13,8 @@ feature 'Check user picker', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-10')
-    FactoryBot.create(:order, order_type: order_type).update(code: 'ORD-11')
+    FactoryBot.create(:order, order_type: order_type) # ORD-1
+    FactoryBot.create(:order, order_type: order_type) # ORD-2
   end
 
   scenario 'with placeholder' do
@@ -20,9 +22,9 @@ feature 'Check user picker', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_and_wait 'ORD-10'
+    click_and_wait 'ORD-1'
 
-    expect(page).to have_content 'ORD-10'
+    expect(page).to have_content 'ORD-1'
     expect_r_select_presence('homsOrderWhatUser')
     expect(r_select_placeholder('homsOrderWhatUser')).to eq placeholder
     expect_widget_presence
@@ -33,9 +35,9 @@ feature 'Check user picker', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_and_wait 'ORD-10'
+    click_and_wait 'ORD-1'
 
-    expect(page).to have_content 'ORD-10'
+    expect(page).to have_content 'ORD-1'
     expect_r_select_presence('homsOrderWhatUser')
     r_select_input('homsOrderWhatUser').set('John')
     wait_for_ajax
@@ -49,9 +51,9 @@ feature 'Check user picker', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_and_wait 'ORD-10'
+    click_and_wait 'ORD-1'
 
-    expect(page).to have_content 'ORD-10'
+    expect(page).to have_content 'ORD-1'
     expect_r_select_presence('homsOrderWhatUser')
     r_select_input('homsOrderWhatUser').set('John')
     wait_for_ajax
@@ -69,9 +71,9 @@ feature 'Check user picker', js: true do
     expect(page).to have_content 'Orders list'
     expect_widget_presence
 
-    click_and_wait 'ORD-11'
+    click_and_wait 'ORD-2'
 
-    expect(page).to have_content 'ORD-11'
+    expect(page).to have_content 'ORD-2'
     expect_r_select_presence('homsOrderWhatUser')
     r_select_input('homsOrderWhatUser').set('John')
     wait_for_ajax
