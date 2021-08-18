@@ -10,6 +10,10 @@ feature 'User index page', :devise, js: true do
     Warden.test_reset!
   end
 
+  before(:each) do
+    set_camunda_api_mock_file('spec/features/users/users_mock.yml')
+  end
+
   # Scenario: User listed on index page
   #   Given I am signed in
   #   When I visit the user index page
