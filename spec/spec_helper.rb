@@ -33,4 +33,8 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.include FactoryBot::Syntax::Methods
+
+  config.before(:each) do
+    Rails.cache.clear
+  end
 end
