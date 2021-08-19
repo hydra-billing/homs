@@ -27,7 +27,7 @@ feature 'BP form with existing russian translation', js: true do
 
       expect(page).to     have_content 'Поле select'
       expect(page).to     have_content 'Поле string'
-      expect(page).to     have_content 'Поле static'
+      expect(page).to     have_content 'Поле static с подстановкой ORD-32'
       expect(page).to     have_content 'Поле select_table'
       expect(page).to     have_content 'Поле text'
       expect(page).to     have_content 'Поле datetime'
@@ -43,7 +43,7 @@ feature 'BP form with existing russian translation', js: true do
 
       expect(page).not_to     have_content 'Select field'
       expect(page).not_to     have_content 'String field'
-      expect(page).not_to     have_content 'Static field'
+      expect(page).not_to     have_content 'Static field with substitution ORD-32'
       expect(page).not_to     have_content 'Select table field'
       expect(page).not_to     have_content 'Text field'
       expect(page).not_to     have_content 'Datetime field'
@@ -60,7 +60,7 @@ feature 'BP form with existing russian translation', js: true do
   describe 'with current lang = en' do
     let(:locale) { :en }
 
-    scenario `should have text from form config` do
+    scenario 'should have text from form config' do
       click_and_wait 'ORD-32'
 
       expect(page).to     have_content 'Test translations'
@@ -69,7 +69,7 @@ feature 'BP form with existing russian translation', js: true do
 
       expect(page).to     have_content 'Select field'
       expect(page).to     have_content 'String field'
-      expect(page).to     have_content 'Static field'
+      expect(page).to     have_content 'Static field with substitution ORD-32'
       expect(page).to     have_content 'Select table field'
       expect(page).to     have_content 'Text field'
       expect(page).to     have_content 'Datetime field'
@@ -84,7 +84,7 @@ feature 'BP form with existing russian translation', js: true do
 
       expect(page).not_to have_content 'Поле select'
       expect(page).not_to have_content 'Поле string'
-      expect(page).not_to have_content 'Поле static'
+      expect(page).not_to have_content 'Поле static с подстановкой ORD-32'
       expect(page).not_to have_content 'Поле select_table'
       expect(page).not_to have_content 'Поле text'
       expect(page).not_to have_content 'Поле datetime'

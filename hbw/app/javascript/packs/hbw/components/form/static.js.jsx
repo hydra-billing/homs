@@ -11,10 +11,18 @@ modulejs.define('HBWFormStatic', ['React'], (React) => {
       hidden
     }, 'hbw-static');
 
+    const variableValue = variableName => (
+      task.form.variables.find(variable => `$${variable.name}` === variableName)?.value
+    );
+
+    const substituteVariables = rawHTML => (
+      rawHTML.replace(/\$\w*\b/g, variableName => variableValue(variableName) || variableName)
+    );
+
     const html = env.bpTranslator(`${task.process_key}.${task.key}.${name}`, {}, params.html);
 
     return <div className={className}
-                dangerouslySetInnerHTML={{ __html: html }} />;
+                dangerouslySetInnerHTML={{ __html: substituteVariables(html) }} />;
   };
 
   return compose(withConditions, withErrorBoundary)(HBWFormStatic);
