@@ -55,7 +55,7 @@ get:
               css_class: col-xs-6 col-sm-4 col-md-3
             - name: staticField
               type: static
-              html: <div class="alert alert-success"><h4>Static field</h4></div>
+              html: <div class="alert alert-success"><h4>Static field with substitution $homsOrderCode</h4></div>
               css_class: col-xs-12
             - name: selectTableField
               type: select_table

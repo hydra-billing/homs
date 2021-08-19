@@ -6,7 +6,7 @@ ru:
       group: Группа
       selectField: Поле select
       stringField: Поле string
-      staticField: <div class="alert alert-success"><h4>Поле static</h4></div>
+      staticField: <div class="alert alert-success"><h4>Поле static с подстановкой $homsOrderCode</h4></div>
       selectTableField: Поле select_table
       textField: Поле text
       datetimeField: Поле datetime
