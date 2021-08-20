@@ -1,4 +1,4 @@
-v2.6.12 [unreleased]
+v2.6.12 [2021-08-20]
 -------------------
 ### Features
 - [#591](https://github.com/latera/homs/pull/591) Support substitutions in localized static fields.
