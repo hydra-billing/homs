@@ -11,7 +11,7 @@ v2.7.0 [unreleased]
 ### Refactoring
 - [#586](https://github.com/latera/homs/pull/586) Stub api container in tests with local api mock file and refactor tests.
 
-v2.6.12 [unreleased]
+v2.6.12 [2021-08-20]
 -------------------
 ### Features
 - [#591](https://github.com/latera/homs/pull/591) Support substitutions in localized static fields.
