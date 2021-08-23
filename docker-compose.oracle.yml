@@ -98,15 +98,15 @@ services:
       - db_homs
       - camunda
       - minio
-      - memcached
+      - redis
     ports:
       - $HOMS_PORT:3000
     networks:
       - custom_network
-  memcached:
-    image: memcached
-    container_name: memcached
-    hostname: memcached
+  redis:
+    image: redis
+    container_name: redis
+    hostname: redis
     networks:
       - custom_network
 networks:

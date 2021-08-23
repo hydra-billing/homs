@@ -68,7 +68,6 @@ services:
       - db_homs
       - camunda
       - minio
-      - memcached
       - redis
     ports:
       - $HOMS_PORT:3000
@@ -92,12 +91,6 @@ services:
       - $BPM_PORT:8080
     depends_on:
       - db_camunda
-    networks:
-      - custom_network
-  memcached:
-    image: memcached
-    container_name: memcached
-    hostname: memcached
     networks:
       - custom_network
   redis:
