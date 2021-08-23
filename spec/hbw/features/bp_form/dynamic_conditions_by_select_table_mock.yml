@@ -228,6 +228,65 @@ get:
                     - variable: controlSelectTable
                       condition: >
                         "$var" == "2"
+                - name: dependentSubmitSelectGroup
+                  type: group
+                  label: Dependent submit_select group
+                  css_class: col-xs-12
+                  fields:
+                    - name: dependentSubmitSelect
+                      type: submit_select
+                      css_class: col-xs-12
+                      label: Dependent submit_select
+                      dynamic: true
+                      disable_if:
+                        - variable: controlSelectTable
+                          condition: >
+                            "$var" == "1"
+                      delete_if:
+                        - variable: controlSelectTable
+                          condition: >
+                            "$var" == "2"
+                      options:
+                        - name: button1
+                          label: Button 1
+                          value: Button 1
+                          css_class: btn btn-success btn-lg
+                        - name: button2
+                          label: Button 2
+                          value: Button 2
+                          css_class: btn btn-danger btn-lg
+                - name: dependentSubmitSelectButtonsGroup
+                  type: group
+                  label: Dependent submit_select buttons group
+                  css_class: col-xs-12
+                  fields:
+                    - name: dependentSubmitSelectButtons
+                      type: submit_select
+                      css_class: col-xs-12
+                      label: Dependent submit_select buttons
+                      options:
+                        - name: neutralButton
+                          label: Neutral button
+                          value: Neutral button
+                          css_class: btn btn-success btn-lg
+                        - name: buttonToBeDisabled
+                          label: Button to be disabled
+                          value: Button to be disabled
+                          css_class: btn btn-danger btn-lg
+                          dynamic: true
+                          disable_if:
+                            - variable: controlSelectTable
+                              condition: >
+                                "$var" == "1"
+                        - name: buttonToBeHidden
+                          label: Button to be hidden
+                          value: Button to be hidden
+                          css_class: btn btn-danger btn-lg
+                          dynamic: true
+                          delete_if:
+                            - variable: controlSelectTable
+                              condition: >
+                                "$var" == "2"
             - name: dependentGroup
               type: group
               label: Dependent group

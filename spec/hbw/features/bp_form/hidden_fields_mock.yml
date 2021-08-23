@@ -74,19 +74,6 @@ get:
                   css_class: col-xs-6 col-sm-4 col-md-3
                   locale: ru
                   format: DD.MM.YYYY
-                - name: homsOrderDataDisabledEndDate
-                  type: datetime
-                  label: End Date
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  locale: ru
-                  format: DD.MM.YYYY
-                  disable_if:
-                    -
-                      - variable: homsOrderDataZeroVariable
-                        condition: $var != 0
-                    -
-                      - variable: homsOrderDataOneVariable
-                        condition: $var == 1
                 - name: homsOrderDataAddress
                   type: string
                   label: Address
@@ -115,15 +102,6 @@ get:
                   delete_if:
                     - variable: homsOrderDataZeroVariable
                       condition: $var != 0
-                    - variable: homsOrderDataOneVariable
-                      condition: $var == 1
-                - name: homsOrderDataWorkAddress
-                  type: string
-                  label: Work address
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  disable_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var == 0
                     - variable: homsOrderDataOneVariable
                       condition: $var == 1
                 - name: homsOrderDataReason
@@ -182,27 +160,12 @@ get:
                   delete_if:
                     - variable: homsOrderDataZeroVariable
                       condition: $var == 0
-                - name: homsOrderDataSomeDisabledCheckbox
-                  type: checkbox
-                  label: Some disabled checkbox
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  disable_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var == 0
                 - name: homsOrderDataSomeSelect
                   type: select
                   label: Some select
                   css_class: col-xs-6 col-sm-4 col-md-3 my-select
                   choices: []
                   delete_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var == 0
-                - name: homsOrderDataSomeDisabledSelect
-                  type: select
-                  label: Some select
-                  css_class: col-xs-6 col-sm-4 col-md-3 my-disabled-select
-                  choices: []
-                  disable_if:
                     - variable: homsOrderDataZeroVariable
                       condition: $var == 0
                 - name: homsOrderDataSomeStatic
@@ -219,13 +182,6 @@ get:
                   delete_if:
                     - variable: homsOrderDataZeroVariable
                       condition: $var == 0
-                - name: homsOrderDataSomeDisabledText
-                  type: text
-                  label: Disabled Text
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  disable_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var == 0
             - name: group2
               type: group
               label: Hidden group
@@ -234,6 +190,73 @@ get:
               delete_if:
                 - variable: homsOrderDataZeroVariable
                   condition: $var == 0
+            - name: submitSelectToBeHiddenGroup
+              type: group
+              label: submit_select to be hidden group
+              css_class: col-xs-12
+              fields:
+                - name: submitSelectToBeHidden
+                  type: submit_select
+                  css_class: col-xs-12
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: >
+                        $var == 0
+                  options:
+                    - name: button1
+                      label: Button 1
+                      value: Button 1
+                      css_class: btn btn-success btn-lg
+                    - name: button2
+                      label: Button 2
+                      value: Button 2
+                      css_class: btn btn-danger btn-lg
+            - name: submitSelectToBeVisibleGroup
+              type: group
+              label: submit_select to be visible group
+              css_class: col-xs-12
+              fields:
+                - name: submitSelectToBeVisible
+                  type: submit_select
+                  css_class: col-xs-12
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: >
+                        $var == 1
+                  options:
+                    - name: button1
+                      label: Button 1
+                      value: Button 1
+                      css_class: btn btn-success btn-lg
+                    - name: button2
+                      label: Button 2
+                      value: Button 2
+                      css_class: btn btn-danger btn-lg
+            - name: submitSelectButtonsToBeHiddenGroup
+              type: group
+              label: submit_select buttons to be hidden group
+              css_class: col-xs-12
+              fields:
+                - name: submitSelectButtonsToBeHidden
+                  type: submit_select
+                  css_class: col-xs-12
+                  options:
+                    - name: hiddenButton
+                      label: Hidden button
+                      value: Hidden button
+                      css_class: btn btn-success btn-lg
+                      delete_if:
+                        - variable: homsOrderDataZeroVariable
+                          condition: >
+                            $var == 0
+                    - name: visibleButton
+                      label: Visible button
+                      value: Visible button
+                      css_class: btn btn-danger btn-lg
+                      delete_if:
+                        - variable: homsOrderDataZeroVariable
+                          condition: >
+                            $var == 1
 
   # task variables
   task/111111/variables:
