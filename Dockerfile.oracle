@@ -57,7 +57,8 @@ COPY --chown=homs hbw/*.gemspec /opt/homs/hbw/
 COPY --chown=homs hbw/lib/hbw/ /opt/homs/hbw/lib/hbw/
 
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
-ENV MEMCACHED_URL memcached
+ENV REDIS_HOST                    redis
+ENV REDIS_PORT                    6379
 
 RUN gem install bundler
 RUN bundle config --global frozen 1

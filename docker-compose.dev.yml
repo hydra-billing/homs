@@ -71,10 +71,10 @@ services:
       - ./data/minio:/opt/minio
     ports:
       - $MINIO_PORT:9000
-  memcached:
-    image: memcached
-    container_name: memcached
-    hostname: memcached
+  redis:
+    image: redis
+    container_name: redis
+    hostname: redis
     networks:
       - custom_network
 networks:
