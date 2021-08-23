@@ -1,8 +1,9 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
-import { withCallbacks, withErrorBoundary } from 'shared/hoc';
+import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
 import TranslationContext from 'shared/context/translation';
 import CancelProcessButton from './cancel_process_button.js';
+import SubmitSelectButton from './submit_select_button.js';
 
 modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
   class HBWFormSubmitSelect extends React.Component {
@@ -24,13 +25,13 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
 
     render () {
       const {
-        params, name, showSubmit, showCancelButton
+        params, name, showSubmit, showCancelButton, hidden
       } = this.props;
 
       const self = this;
       const buttons = params.options.map(option => self.buildButton(option));
 
-      return showSubmit
+      return showSubmit && !hidden
       && <div className={cx('col-xs-12', params.css_class)}>
           <div className="control-buttons">
             { showCancelButton && this.renderCancelButton() }
@@ -41,28 +42,28 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
     }
 
     buildButton = (option) => {
-      const disabled = this.props.disabled || this.props.formSubmitting;
-      const { task } = this.props;
-      const { error } = this.state;
+      const buttonParams = {
+        ...option,
+        variables: this.props.params.variables
+      };
+      const {
+        formValues,
+        id,
+        task,
+        disabled,
+        formSubmitting
+      } = this.props;
 
-      const onClick = () => this.setState({ value: option.value });
-
-      const cssClass = cx(option.css_class, { disabled });
-      const faClass = cx(option.fa_class, { disabled });
-
-      const label = this.context.translateBP(`${task.process_key}.${task.key}.${option.name}`, {}, option.label);
-
-      return (
-        <button key={option.name}
-                type="submit"
-                className={cssClass}
-                title={option.title}
-                onClick={onClick}
-                disabled={error || disabled}>
-          <i className={faClass} />
-          {` ${label}`}
-        </button>
-      );
+      return <SubmitSelectButton
+        key={buttonParams.name}
+        params={buttonParams}
+        error={this.state.error}
+        onClick={() => this.setState({ value: option.value })}
+        formValues={formValues}
+        id={id}
+        task={task}
+        submitSelectDisabled={disabled || formSubmitting}
+      />;
     };
 
     renderCancelButton = () => {
@@ -80,5 +81,5 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
     };
   }
 
-  return compose(withCallbacks, withErrorBoundary)(HBWFormSubmitSelect);
+  return compose(withCallbacks, withConditions, withErrorBoundary)(HBWFormSubmitSelect);
 });
