@@ -98,25 +98,6 @@ get:
                       condition: $var != 0
                     - variable: homsOrderDataOneVariable
                       condition: $var == 1
-                - name: homsOrderDataWorkPlace
-                  type: string
-                  label: Work place
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  delete_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var == 0
-                    - variable: homsOrderDataOneVariable
-                      condition: $var == 1
-                - name: homsOrderDataHomePlace
-                  type: string
-                  label: Home place
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  required: true
-                  delete_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var != 0
-                    - variable: homsOrderDataOneVariable
-                      condition: $var == 1
                 - name: homsOrderDataWorkAddress
                   type: string
                   label: Work address
@@ -126,32 +107,10 @@ get:
                       condition: $var == 0
                     - variable: homsOrderDataOneVariable
                       condition: $var == 1
-                - name: homsOrderDataReason
-                  type: string
-                  label: Reason
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  delete_if:
-                    -
-                      - variable: homsOrderDataZeroVariable
-                        condition: $var != 0
-                      - variable: homsOrderDataOneVariable
-                        condition: $var == 1
-                    -
-                      - variable: homsOrderDataZeroVariable
-                        condition: $var == 0
                 - name: homsOrderDataRecommendation
                   type: string
                   label: Reason
                   css_class: col-xs-6 col-sm-4 col-md-3
-                  delete_if:
-                    -
-                      - variable: homsOrderDataZeroVariable
-                        condition: $var != 0
-                      - variable: homsOrderDataOneVariable
-                        condition: $var == 1
-                    -
-                      - variable: homsOrderDataOneVariable
-                        condition: $var == 0
                   disable_if:
                     -
                       - variable: homsOrderDataZeroVariable
@@ -161,40 +120,11 @@ get:
                     -
                       - variable: homsOrderDataOneVariable
                         condition: $var == 0
-                - name: homsOrderDataSomeStr
-                  type: string
-                  label: Reason
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  delete_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var == 0
-                - name: homsOrderDataSomeDatetime
-                  type: datetime
-                  label: Some datetime
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  delete_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var == 0
-                - name: homsOrderDataSomeCheckbox
-                  type: checkbox
-                  label: Some checkbox
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  delete_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var == 0
                 - name: homsOrderDataSomeDisabledCheckbox
                   type: checkbox
                   label: Some disabled checkbox
                   css_class: col-xs-6 col-sm-4 col-md-3
                   disable_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var == 0
-                - name: homsOrderDataSomeSelect
-                  type: select
-                  label: Some select
-                  css_class: col-xs-6 col-sm-4 col-md-3 my-select
-                  choices: []
-                  delete_if:
                     - variable: homsOrderDataZeroVariable
                       condition: $var == 0
                 - name: homsOrderDataSomeDisabledSelect
@@ -205,20 +135,6 @@ get:
                   disable_if:
                     - variable: homsOrderDataZeroVariable
                       condition: $var == 0
-                - name: homsOrderDataSomeStatic
-                  type: static
-                  html: Some static
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  delete_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var == 0
-                - name: homsOrderDataSomeText
-                  type: text
-                  label: Text
-                  css_class: col-xs-6 col-sm-4 col-md-3
-                  delete_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: $var == 0
                 - name: homsOrderDataSomeDisabledText
                   type: text
                   label: Disabled Text
@@ -226,14 +142,73 @@ get:
                   disable_if:
                     - variable: homsOrderDataZeroVariable
                       condition: $var == 0
-            - name: group2
-              type: group
-              label: Hidden group
-              css_class: col-xs-12
-              fields: []
-              delete_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: $var == 0
+                - name: submitSelectToBeDisabledGroup
+                  type: group
+                  label: submit_select to be disabled group
+                  css_class: col-xs-12
+                  fields:
+                    - name: submitSelectToBeDisabled
+                      type: submit_select
+                      css_class: col-xs-12
+                      disable_if:
+                        - variable: homsOrderDataZeroVariable
+                          condition: >
+                            $var == 0
+                      options:
+                        - name: button1
+                          label: Button 1
+                          value: Button 1
+                          css_class: btn btn-success btn-lg
+                        - name: button2
+                          label: Button 2
+                          value: Button 2
+                          css_class: btn btn-danger btn-lg
+                - name: submitSelectToBeEnabledGroup
+                  type: group
+                  label: submit_select to be enabled group
+                  css_class: col-xs-12
+                  fields:
+                    - name: submitSelectToBeEnabled
+                      type: submit_select
+                      css_class: col-xs-12
+                      disable_if:
+                        - variable: homsOrderDataZeroVariable
+                          condition: >
+                            $var == 1
+                      options:
+                        - name: button1
+                          label: Button 1
+                          value: Button 1
+                          css_class: btn btn-success btn-lg
+                        - name: button2
+                          label: Button 2
+                          value: Button 2
+                          css_class: btn btn-danger btn-lg
+                - name: submitSelectButtonsToBeDisabledGroup
+                  type: group
+                  label: submit_select buttons to be disabled group
+                  css_class: col-xs-12
+                  fields:
+                    - name: submitSelectButtonsToBeDisabled
+                      type: submit_select
+                      css_class: col-xs-12
+                      options:
+                        - name: disabledButton
+                          label: Disabled button
+                          value: Disabled button
+                          css_class: btn btn-success btn-lg
+                          disable_if:
+                            - variable: homsOrderDataZeroVariable
+                              condition: >
+                                $var == 0
+                        - name: enabledButton
+                          label: Enabled button
+                          value: Enabled button
+                          css_class: btn btn-danger btn-lg
+                          disable_if:
+                            - variable: homsOrderDataZeroVariable
+                              condition: >
+                                $var == 1
 
   # task variables
   task/111111/variables:

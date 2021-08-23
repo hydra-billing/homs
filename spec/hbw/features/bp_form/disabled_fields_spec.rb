@@ -46,4 +46,21 @@ feature 'Control fields on form', js: true do
   scenario 'for text' do
     expect(find_by_name('homsOrderDataSomeDisabledText').readonly?).to eq true
   end
+
+  scenario 'for submit_select' do
+    in_group_with_label('submit_select to be disabled group') do |group|
+      group.find_button('Button 1', disabled: true)
+      group.find_button('Button 2', disabled: true)
+    end
+
+    in_group_with_label('submit_select to be enabled group') do |group|
+      group.find_button('Button 1', disabled: false)
+      group.find_button('Button 2', disabled: false)
+    end
+
+    in_group_with_label('submit_select buttons to be disabled group') do |group|
+      group.find_button('Disabled button', disabled: true)
+      group.find_button('Enabled button',  disabled: false)
+    end
+  end
 end

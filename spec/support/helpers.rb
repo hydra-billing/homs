@@ -10,6 +10,7 @@ require 'support/helpers/i18n_helper'
 require 'support/helpers/files_helper'
 require 'support/helpers/api_helper'
 require 'support/helpers/fill_helper'
+require 'support/helpers/scopes_helper'
 
 FIXTURES_PATH = File.join(__FILE__, '..', '..', '..', 'fixtures')
 
@@ -36,6 +37,7 @@ RSpec.configure do |config|
     Features::I18nHelper,
     Features::FilesHelper,
     Features::ApiHelper,
-    Features::FillHelper
+    Features::FillHelper,
+    Features::ScopesHelper
   ].each { |helper| config.include(helper, type: :feature) }
 end

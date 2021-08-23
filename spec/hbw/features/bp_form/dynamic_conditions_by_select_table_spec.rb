@@ -32,6 +32,16 @@ feature 'Control fields with dynamic conditions by select table', js: true do
     expect(page).to have_content 'Dependent file_upload'
     expect(page).to have_content 'Dependent radio_button'
 
+    in_group_with_label('Dependent submit_select group') do |group|
+      group.find_button('Button 1', disabled: false)
+      group.find_button('Button 2', disabled: false)
+    end
+    in_group_with_label('Dependent submit_select buttons group') do |group|
+      group.find_button('Neutral button',        disabled: false)
+      group.find_button('Button to be disabled', disabled: false)
+      group.find_button('Button to be hidden',   disabled: false)
+    end
+
     neutral_option_cell.click
 
     expect(page).to have_content 'Control select table'
@@ -56,9 +66,19 @@ feature 'Control fields with dynamic conditions by select table', js: true do
     expect(readonly?('stringInDependentGroup')).to be false
     expect(find_by_name('dependentDatetime').disabled?).to    be false
     expect(radio_button_disabled?('dependentRadioButton')).to be false
+
+    in_group_with_label('Dependent submit_select group') do |group|
+      group.find_button('Button 1', disabled: false)
+      group.find_button('Button 2', disabled: false)
+    end
+    in_group_with_label('Dependent submit_select buttons group') do |group|
+      group.find_button('Neutral button',        disabled: false)
+      group.find_button('Button to be disabled', disabled: false)
+      group.find_button('Button to be hidden',   disabled: false)
+    end
   end
 
-  scenario 'should hide all fields' do
+  scenario 'should hide dependent fields' do
     click_and_wait 'ORD-1'
 
     expect(page).to have_content 'Control select table'
@@ -74,6 +94,16 @@ feature 'Control fields with dynamic conditions by select table', js: true do
     expect(page).to have_content 'Dependent file_upload'
     expect(page).to have_content 'Dependent radio_button'
 
+    in_group_with_label('Dependent submit_select group') do |group|
+      expect(group).to have_content 'Button 1'
+      expect(group).to have_content 'Button 2'
+    end
+    in_group_with_label('Dependent submit_select buttons group') do |group|
+      expect(group).to have_content 'Neutral button'
+      expect(group).to have_content 'Button to be disabled'
+      expect(group).to have_content 'Button to be hidden'
+    end
+
     hide_fields_cell.click
 
     expect(page).to have_content 'Control select table'
@@ -88,9 +118,19 @@ feature 'Control fields with dynamic conditions by select table', js: true do
     expect(page).not_to have_content 'Dependent text'
     expect(page).not_to have_content 'Dependent file_upload'
     expect(page).not_to have_content 'Dependent radio_button'
+
+    in_group_with_label('Dependent submit_select group') do |group|
+      expect(group).not_to have_content 'Button 1'
+      expect(group).not_to have_content 'Button 2'
+    end
+    in_group_with_label('Dependent submit_select buttons group') do |group|
+      expect(group).to     have_content 'Neutral button'
+      expect(group).to     have_content 'Button to be disabled'
+      expect(group).not_to have_content 'Button to be hidden'
+    end
   end
 
-  scenario 'should disable all fields' do
+  scenario 'should disable dependent fields' do
     click_and_wait 'ORD-1'
 
     expect(page).to have_content 'Control select table'
@@ -105,6 +145,16 @@ feature 'Control fields with dynamic conditions by select table', js: true do
     expect(find_by_name('dependentDatetime').disabled?).to    be false
     expect(radio_button_disabled?('dependentRadioButton')).to be false
 
+    in_group_with_label('Dependent submit_select group') do |group|
+      group.find_button('Button 1', disabled: false)
+      group.find_button('Button 2', disabled: false)
+    end
+    in_group_with_label('Dependent submit_select buttons group') do |group|
+      group.find_button('Neutral button',        disabled: false)
+      group.find_button('Button to be disabled', disabled: false)
+      group.find_button('Button to be hidden',   disabled: false)
+    end
+
     disable_fields_cell.click
 
     expect(page.find('.dependent-select')).to       have_selector '.react-select--is-disabled'
@@ -116,5 +166,15 @@ feature 'Control fields with dynamic conditions by select table', js: true do
     expect(readonly?('stringInDependentGroup')).to be true
     expect(find_by_name('dependentDatetime').disabled?).to    be true
     expect(radio_button_disabled?('dependentRadioButton')).to be true
+
+    in_group_with_label('Dependent submit_select group') do |group|
+      group.find_button('Button 1', disabled: true)
+      group.find_button('Button 2', disabled: true)
+    end
+    in_group_with_label('Dependent submit_select buttons group') do |group|
+      group.find_button('Neutral button',        disabled: false)
+      group.find_button('Button to be disabled', disabled: true)
+      group.find_button('Button to be hidden',   disabled: false)
+    end
   end
 end
