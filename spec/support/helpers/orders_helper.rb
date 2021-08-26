@@ -191,7 +191,7 @@ module Features
     end
 
     def calendar_clear_button(name)
-      parent_node(input_by_name(name)).find('.glyphicon-trash')
+      parent_node(input_by_name(name)).find('.fa-trash')
     end
 
     def calendar_date_button(name)
