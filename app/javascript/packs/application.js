@@ -4,13 +4,16 @@
 /* eslint no-eval: "off" */
 /* eslint constructor-super: "off" */
 
+import 'application.sass';
+import 'logo.svg';
+
 import '../init/unwrap_jquery';
 import '../init/unwrap_moment';
 import '../init/translations';
 import 'jquery-ujs';
 import 'select2/select2.full';
 import 'select2/i18n/ru';
-import 'bootstrap-sass';
+import 'bootstrap-sass/assets/javascripts/bootstrap.js';
 import 'fileinput';
 import 'bootstrap-datetimepicker';
 import 'confirm';
@@ -132,10 +135,24 @@ class Homs {
       const $el = $(this);
       const format = $el.data('format') ? $el.data('format') : false;
       const showClear = $el.data('showclear') ? $el.data('showclear') : false;
+
+      const icons = {
+        up:       'fas fa-chevron-up',
+        down:     'fas fa-chevron-down',
+        date:     'fas fa-calendar',
+        time:     'fas fa-clock',
+        next:     'fas fa-chevron-right',
+        previous: 'fas fa-chevron-left',
+        today:    'fas fa-dot-circle-o',
+        clear:    'fas fa-trash',
+        close:    'fas fa-times'
+      };
+
       return $el.datetimepicker({
         locale:    I18n.locale,
+        showClear: showClear || allowClear,
         format,
-        showClear: showClear || allowClear
+        icons
       });
     });
   };

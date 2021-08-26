@@ -79,7 +79,7 @@ USER homs
 
 RUN yarn install && \
   yarn lint && \
-  bundle exec rails assets:precompile && \
+  yarn build && \
   rm -rf /opt/homs/node_modules/
 
 WORKDIR /opt/homs

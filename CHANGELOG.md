@@ -13,6 +13,7 @@ v2.7.0 [unreleased]
 ### Refactoring
 - [#592](https://github.com/latera/homs/pull/592) Replace memcached with redis.
 - [#586](https://github.com/latera/homs/pull/586) Stub api container in tests with local api mock file and refactor tests.
+- [#594](https://github.com/latera/homs/pull/594) Get rid of Webpacker & build all assets with Webpack 5.
 
 v2.6.12 [2021-08-20]
 -------------------

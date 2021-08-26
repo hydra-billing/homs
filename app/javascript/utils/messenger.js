@@ -1,4 +1,4 @@
-import { Growl } from 'jquery.growl';
+import { Growl } from 'jquery.growl/javascripts/jquery.growl';
 
 class PatchedGrowl extends Growl {
   constructor (...args) {

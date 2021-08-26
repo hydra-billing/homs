@@ -27,7 +27,7 @@ module UiElementsHelper
                     class: 'form-control',
                     value: value) do
           content_tag(:span, class: 'input-group-addon') do
-            content_tag(:span, class: 'glyphicon glyphicon-calendar') {}
+            content_tag(:span, class: 'fas fa-calendar') {}
           end
         end
       end
