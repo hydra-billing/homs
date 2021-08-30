@@ -14,12 +14,15 @@ modulejs.define('HBWFormStatic', ['React'], (React) => {
       hidden
     }, 'hbw-static');
 
-    const variableValue = variableName => (
-      task.form.variables.find(variable => `$${variable.name}` === variableName)?.value
+    const findVariable = variableName => (
+      task.form.variables.find(variable => `$${variable.name}` === variableName)
     );
 
     const substituteVariables = rawHTML => (
-      rawHTML.replace(/\$\w*\b/g, variableName => variableValue(variableName) || variableName)
+      rawHTML.replace(/\$\w*\b/g, (variableName) => {
+        const foundVariable = findVariable(variableName);
+        return foundVariable ? foundVariable.value : variableName;
+      })
     );
 
     const html = translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.html);
