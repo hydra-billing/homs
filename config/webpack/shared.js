@@ -11,6 +11,7 @@ const eslint = require('./loaders/eslint');
 const ts = require('./loaders/ts');
 const file = require('./loaders/file');
 const babel = require('./loaders/babel');
+const css = require('./loaders/css');
 const SymlinkAssets = require('./plugins/symlink');
 
 module.exports = (_, { mode }) => ({
@@ -58,14 +59,7 @@ module.exports = (_, { mode }) => ({
           test: /\.(css)$/i,
           use:  [
             { loader: MiniCssExtractPlugin.loader },
-            {
-              loader:  'css-loader',
-              options: {
-                sourceMap:     true,
-                importLoaders: 2,
-                modules:       false
-              }
-            },
+            css,
           ],
           sideEffects: true,
         },
@@ -73,15 +67,7 @@ module.exports = (_, { mode }) => ({
           test: /\.(scss|sass)$/i,
           use:  [
             { loader: MiniCssExtractPlugin.loader },
-            {
-              loader:  'css-loader',
-              options: {
-                url:           false,
-                sourceMap:     true,
-                importLoaders: 2,
-                modules:       false
-              }
-            },
+            css,
             {
               loader:  'sass-loader',
               options: {

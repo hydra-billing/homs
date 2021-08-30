@@ -41,7 +41,7 @@ db/*.sqlite3
 /public/cache
 /public/stylesheets/compiled
 /public/system/*
-/public/assets/*
+/public/assets/*.*
 /spec/tmp/*
 /cache
 /.cache
