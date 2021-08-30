@@ -76,14 +76,14 @@ You can login to [Camunda Admin interface](http://localhost:8766/camunda) with c
    ```
 1. Change in bpm.yml value of development.base_url from `http://camunda:8080/engine-rest/` to `http://localhost:8766/engine-rest/`
 1. In database.yml change value of development.host from `<%= ENV['HOMS_DB_HOST'] %>` to `localhost`
-1. Install [Yarn](https://github.com/yarnpkg/yarn#installing-yarn) and run
+1. Install [Yarn](https://github.com/yarnpkg/yarn#installing-yarn) and run:
    ```
    yarn install
    ```
 
-1. Start `webpack-dev-server` in source directory:
+1. Compile assets:
     ```bash
-    bin/webpack-dev-server
+    yarn dev
     ```
 1. Start HOMS application in another console tab:
     ```bash
