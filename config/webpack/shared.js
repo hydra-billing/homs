@@ -76,6 +76,7 @@ module.exports = (_, { mode }) => ({
             {
               loader:  'css-loader',
               options: {
+                url:           false,
                 sourceMap:     true,
                 importLoaders: 2,
                 modules:       false

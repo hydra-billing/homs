@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "esModuleInterop": true,
     "module": "ES6",
     "sourceMap": true,
@@ -8,7 +9,15 @@
     "target": "ES5",
     "allowJs": true,
     "checkJs": false,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "paths": {
+      "shared/*": [
+        "hbw/app/javascript/packs/hbw/components/shared/*"
+      ],
+      "messenger": [
+        "app/javascript/utils/messenger"
+      ],
+    }
   },
   "exclude": [
     "node_modules",
