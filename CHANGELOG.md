@@ -1,3 +1,8 @@
+v2.6.13 [unreleased]
+-------------------
+### Bugfixes
+- [#595](https://github.com/latera/homs/pull/595) Fix substitution of empty values of BP variables in localized static fields.
+
 v2.6.12 [2021-08-20]
 -------------------
 ### Features
