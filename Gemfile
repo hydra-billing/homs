@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.7.3'
+ruby '2.7.4'
 
 gem 'apitome'
 gem 'aws-sdk-s3'
@@ -27,7 +27,7 @@ gem 'rails', '~> 5.2.4'
 gem 'redis'
 gem 'settingslogic'
 gem 'simple_form'
-gem 'web-console', '~> 2.0', group: :development
+gem 'sprockets', '~> 3.7'
 
 group :oracle do
   gem 'ruby-oci8', '2.2.3'

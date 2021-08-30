@@ -65,7 +65,7 @@ module CustomFields
             let(:errors) do
               {
                 max_length: ["Attribute 'max_length' must not exceed " \
-             "#{max_length} characters"]
+                             "#{max_length} characters"]
               }
             end
           end
