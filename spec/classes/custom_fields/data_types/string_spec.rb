@@ -72,20 +72,6 @@ module CustomFields
         end
       end
 
-      # Allow mask to be defined
-      # Do not enforce value to fit the mask, as there are many
-      # ways to define a mask. Depends on UI plugin
-      context 'Mask in string definition' do
-        let(:options) do
-          {mask: '(999) 999-99-99'}
-        end
-
-        it_behaves_like 'a CustomFields::Base descendant' do
-          it_behaves_like 'valid'
-          it_behaves_like 'has no errors'
-        end
-      end
-
       # value validation
       context 'nil value validation' do
         let(:options) { {} }

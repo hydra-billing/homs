@@ -12,7 +12,6 @@ module CustomFields
           options[:max_length] <= MAX_LENGTH ||
           add_max_length_error(:max_length, MAX_LENGTH)
         )
-        may_have_key?(:mask, in: options, as: ::String)
       end
 
       def validate_value(attribute_name, value)
