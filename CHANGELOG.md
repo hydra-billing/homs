@@ -14,6 +14,7 @@ v2.7.0 [unreleased]
 - [#592](https://github.com/latera/homs/pull/592) Replace memcached with redis.
 - [#586](https://github.com/latera/homs/pull/586) Stub api container in tests with local api mock file and refactor tests.
 - [#594](https://github.com/latera/homs/pull/594) Get rid of Webpacker & build all assets with Webpack 5.
+- [#598](https://github.com/latera/homs/pull/598) Remove the mask option validation from the string order field.
 
 v2.6.13 [unreleased]
 -------------------
