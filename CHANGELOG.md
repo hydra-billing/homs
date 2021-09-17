@@ -16,7 +16,12 @@ v2.7.0 [unreleased]
 - [#594](https://github.com/latera/homs/pull/594) Get rid of Webpacker & build all assets with Webpack 5.
 - [#598](https://github.com/latera/homs/pull/598) Remove the mask option validation from the string order field.
 
-v2.6.13 [unreleased]
+v2.6.14 [unreleased]
+-------------------
+### Bugfixes
+- [#601](https://github.com/latera/homs/pull/601) Move fontawesome to public/assets.
+
+v2.6.13 [2021-09-03]
 -------------------
 ### Bugfixes
 - [#595](https://github.com/latera/homs/pull/595) Fix substitution of empty values of BP variables in localized static fields.
