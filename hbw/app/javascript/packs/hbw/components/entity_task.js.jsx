@@ -3,6 +3,7 @@ import React, {
   useContext, useEffect, useRef, useState
 } from 'react';
 import { withCallbacks } from 'shared/hoc';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ConnectionContext from 'shared/context/connection';
 import TranslationContext from 'shared/context/translation';
 import Pending from './pending';
@@ -105,10 +106,7 @@ modulejs.define(
         }
       };
 
-      const iconClass = cx('indicator', 'pull-right', 'fa', {
-        'fa-chevron-down': collapsed,
-        'fa-chevron-up':   !collapsed,
-      });
+      const iconClass = collapsed ? 'chevron-down' : 'chevron-up';
 
       return <div className="panel panel-default" ref={rootNode}>
           <div className="panel-heading">
@@ -116,9 +114,10 @@ modulejs.define(
               <a onClick={toggleCollapse}>
                 {translateBP(`${task.process_key}.${task.key}.label`, {}, task.name)}
               </a>
-              <i
+              <FontAwesomeIcon
                 onClick={toggleCollapse}
-                className={iconClass}
+                className={cx('indicator', 'pull-right')}
+                icon={iconClass}
               />
             </h4>
           </div>

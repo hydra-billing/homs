@@ -10,19 +10,19 @@ hbw:
             - name: 'Process Pizza Order'           # Button text
               title: 'Start pizza order processing' # Button help text
               class: 'btn btn-default'              # Button container class
-              fa_class: 'fas fa-user'               # Button icon class
+              fa_class: ['fas', 'user']             # Button icon class
               bp_code: 'pizza_order'                # Business process code
           new_customer:
             - name: 'New Customer'
               title: 'Start Creating Customer'
               class: 'btn btn-primary'
-              fa_class: 'fa fa-user'
+              fa_class: ['fas', 'user']
               bp_code: 'new_customer'
           relocate_customer:
             - name: 'Relocate Customer'
               title: 'Start Relocating Customer'
               class: 'btn btn-default'
-              fa_class: 'fa fa-suitcase-rolling'
+              fa_class: ['fas', 'suitcase-rolling']
               bp_code: 'relocate_customer'
 
     billing_customer:
@@ -42,13 +42,13 @@ hbw:
             - name: 'New Customer'
               title: 'Start Creating Customer'
               class: 'btn btn-success'
-              fa_class: 'fa fa-user'
+              fa_class: ['fas', 'user']
               bp_code: 'new_customer'
           SUBJ_TYPE_Person:
             - name: 'Relocate Customer'
               title: 'Start Relocating Customer'
               class: 'btn btn-default'
-              fa_class: 'fas fa-suitcase-rolling'
+              fa_class: ['fas', 'suitcase-rolling']
               bp_code: 'relocate_customer'
 
     crm_account:

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import TranslationContext from '../shared/context/translation';
 
@@ -13,8 +14,8 @@ const HBWClaimingSearch = ({ query, search, clear }) => {
         value={query}
         onChange={search}
       />
-      <span className="fas fa-search icon search" />
-      {query.length > 0 && <span className="fas fa-times icon cross" onClick={clear} />}
+      <FontAwesomeIcon icon={['fas', 'search']} className="fas icon search"/>
+      {query.length > 0 && <FontAwesomeIcon icon={['fas', 'times']} className="fas icon cross" onClick={clear} />}
     </div>
   );
 };

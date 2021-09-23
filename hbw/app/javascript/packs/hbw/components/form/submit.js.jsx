@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TranslationContext from 'shared/context/translation';
 import CancelProcessButton from './cancel_process_button.js';
 
@@ -35,7 +36,7 @@ modulejs.define('HBWFormSubmit', ['React'], (React) => {
         <button type="submit"
                 className={buttonCN}
                 disabled={formSubmitting || this.state.error}>
-          <i className="fas fa-check" />
+          <FontAwesomeIcon icon="check" />
           {` ${submitButtonName || this.context.translate('submit')}`}
         </button>
       );

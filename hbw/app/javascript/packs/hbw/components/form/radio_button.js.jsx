@@ -1,5 +1,6 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
 import TranslationContext from 'shared/context/translation';
 
@@ -55,6 +56,10 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
       const { value } = this.state;
       const { variants } = params;
       const labelCSS = cx('hbw-radio-label', this.props.params.label_css);
+      const checkedIcon = params.icon?.checked || ['far', 'check-circle'];
+      const uncheckedIcon = params.icon?.unchecked || ['far', 'circle'];
+
+      const icon = value ? checkedIcon : uncheckedIcon;
       const opts = {
         name,
         disabled: params.editable === false || disabled,
@@ -67,6 +72,9 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
                                               value={field.value}
                                               checked={value === field.value}
                                               className='hbw-radiobutton'/>
+                                       <FontAwesomeIcon
+                                         className='hbw-radiobutton'
+                                         icon={icon}/>
                                        <span>
                                          { ` ${translateBP(`${task.process_key}.${task.key}.${name}.${field.name}`,
                                            {},

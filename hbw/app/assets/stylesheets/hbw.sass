@@ -120,6 +120,9 @@
     .hbw-checkbox-label
       font-weight: normal
       margin-top: 10px
+      svg
+        display: inline-block
+
     .hbw-radio-label
       font-weight: normal
       margin-top: 10px
@@ -248,8 +251,6 @@
           top: 15px
           width: 20px
           height: 20px
-          padding-left: 4px
-          padding-top: 2px
           background-color: #ffffffc1
           border-radius: 50%
           cursor: pointer
@@ -336,8 +337,8 @@
     .title
       margin-bottom: 15px
 
-      span
-        padding-right: 7px
+      svg
+        padding-right: 3px
 
     .two-cols
       margin-bottom: 5px
@@ -381,8 +382,10 @@
       justify-content: center
       position: absolute
       top: 0
-      height: 40px
-      width: 30px
+      height: 15px
+      width: 15px
+      margin-top: 12px
+      margin-left: 5px
       font-size: .9em
 
       &.search
@@ -453,28 +456,30 @@
         padding: 10px 10px
         cursor: pointer
 
-        i
-          padding: 3px 5px
+        svg
+          margin-right: 3px
+          padding-top: 3px
+          margin-top: 2px
 
-        .left, .right
-          display: flex
-          flex-grow: 1
-        .left
-          justify-content: flex-start
+      .left, .right
+        display: flex
+        flex-grow: 1
+      .left
+        justify-content: flex-start
+        overflow: hidden
+        padding-right: 5px
+        .title, .description
           overflow: hidden
-          padding-right: 5px
-          .title, .description
-            overflow: hidden
-            text-overflow: ellipsis
-            white-space: nowrap
-          .description
-            flex: 1
-            padding-left: 5px
-        .right
-          flex: 0 0 auto
-          justify-content: flex-end
-          text-align: end
-          padding-right: 10px
+          text-overflow: ellipsis
+          white-space: nowrap
+        .description
+          flex: 1
+          padding-left: 5px
+      .right
+        flex: 0 0 auto
+        justify-content: flex-end
+        text-align: end
+        padding-right: 10px
 
       .button
         display: flex
@@ -622,4 +627,3 @@
     &__navigation-icon::before
       border-color: #222222
       border-radius: 1px
-

@@ -1,6 +1,6 @@
 /* eslint no-script-url: "off" */
 import React, { FC, useContext, useState } from 'react';
-import cn from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TranslationContext, { ContextType as TranslationContextType } from 'shared/context/translation';
 
 type Props = {
@@ -17,24 +17,21 @@ const HBWError: FC<Props> = ({ errorHeader, errorBody }) => {
     setShowFull(!showFull);
   };
 
-  const iconClass = cn('fas', {
-    'fa-chevron-down':  showFull,
-    'fa-chevron-right': !showFull
-  });
+  const icon = showFull ? 'chevron-down' : 'chevron-right';
 
   if (errorHeader) {
     const header = ` ${t('error')} — ${errorHeader}`;
 
     return (
       <div className="alert alert-danger hbw-error">
-        <i className="fas fa-exclamation-triangle"></i>
+        <FontAwesomeIcon icon={['fas', 'exclamation-triangle']} />
         <strong>{header}</strong>
         <br/>
         <a href="javascript:;"
            onClick={toggleBacktrace}
            className="show-more"
            style={{ display: errorBody ? 'block' : 'none' }}>
-           <i className={iconClass}></i>
+           <FontAwesomeIcon icon={icon}/>
            {t('more')}
         </a>
         <pre style={{ display: showFull ? 'block' : 'none' }}>{errorBody}</pre>

@@ -3,6 +3,7 @@ import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
 import { v4 as uuidv4 } from 'uuid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TranslationContext from 'shared/context/translation';
 
 modulejs.define('HBWFormFileUpload', ['React'], (React) => {
@@ -166,7 +167,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
 
     renderPreviewItem = ({ name, type, fileURL }) => (
       <div className="files-preview-item" key={fileURL}>
-        <div className="fas fa-times remove-file" onClick={() => this.removeFile(name)}/>
+        <FontAwesomeIcon className="remove-file" icon={['fas', 'times']} onClick={() => this.removeFile(name)}/>
         <div className="files-preview-image">
           {this.renderPreviewImage(name, type, fileURL)}
         </div>
@@ -180,7 +181,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       } else if (type === 'application/pdf') {
         return <embed src={fileURL} type={type}/>;
       } else {
-        return <span className="far fa-file fa-7x"/>;
+        return <FontAwesomeIcon icon={['far', 'file']} className="far fa-7x"/>;
       }
     }
 
@@ -195,7 +196,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
 
       const defaultInputText = (
         <>
-          <span className="fa fas fa-cloud-upload-alt"/>
+          <FontAwesomeIcon icon={['fas', 'cloud-upload-alt']} size="lg"/>
           {this.context.translate('components.file_upload.drag_and_drop')}
         </>
       );

@@ -1,5 +1,35 @@
 v2.7.0 [unreleased]
 -------------------
+### Breaking changes
+- [#600](https://github.com/latera/homs/pull/600) Replace bootstrap-datetimepicker with react-datepicker.
+
+  Dynamic conditions by datetime on form now strictly use ISO date format
+- [#602](https://github.com/latera/homs/pull/602) Use FontAwesomeIcon for icons.
+
+  - Changed customization rule for icon radio buttons and checkboxes:
+    - `hbw-checkbox-symbol`, `hbw-checked-checkbox-symbol`, `hbw-checked-checkbox-symbol`, `hbw-radio-symbol` and `hbw-checked-radio-symbol` have been removed. To select the radiobaton icon and the checkbox icon you need add to the task form field. For example:
+    ```
+            - name: CustomIconCheckbox
+              type: checkbox
+              label: Checkbox label 1
+              icon:
+                unchecked: ['far', 'circle']
+                checked: ['fas', 'square']
+    ```
+    Where first element is class for custom icon `far`, `fas`, `fab`. Second - name of the fontawesome icon.
+  - Changed customization rule for business-process icon: in `hbw.yml` for `fa_class` key use class and icon name. For example:
+  ```
+            new_customer:
+              - name: 'New Customer'
+                title: 'Start Creating Customer'
+                class: 'btn btn-primary'
+                fa_class: ['fas', 'user']
+                bp_code: 'new_customer'
+  ```
+
+
+
+-------------------
 ### Features
 - [#583](https://github.com/latera/homs/pull/583) Add the output of errors for the availability of the Сamunda service to the widget.
 - [#562](https://github.com/latera/homs/pull/562) Bring in TypeScript into the project.
@@ -15,9 +45,6 @@ v2.7.0 [unreleased]
 - [#586](https://github.com/latera/homs/pull/586) Stub api container in tests with local api mock file and refactor tests.
 - [#594](https://github.com/latera/homs/pull/594) Get rid of Webpacker & build all assets with Webpack 5.
 - [#598](https://github.com/latera/homs/pull/598) Remove the mask option validation from the string order field.
-- [#600](https://github.com/latera/homs/pull/600) Replace bootstrap-datetimepicker with react-datepicker.
-
-  Dynamic conditions by datetime on form now strictly use ISO date format
 
 v2.6.14 [unreleased]
 -------------------
