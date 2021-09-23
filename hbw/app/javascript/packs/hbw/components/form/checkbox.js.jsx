@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TranslationContext from 'shared/context/translation';
 
 modulejs.define('HBWFormCheckbox', ['React'], (React) => {
@@ -41,6 +42,11 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
 
       const labelCSS = cx('hbw-checkbox-label', this.props.params.label_css);
 
+      const checkedIcon = params.icon?.checked || ['far', 'check-square'];
+      const uncheckedIcon = params.icon?.unchecked || ['far', 'square'];
+
+      const icon = value ? checkedIcon : uncheckedIcon;
+
       return <div className={inputCSS} title={params.tooltip}>
         <div className="form-group">
           {params.description?.placement === 'top' && this.renderDescription()}
@@ -51,6 +57,10 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
               onChange={this.handleChange}
               checked={value}
               className='hbw-checkbox'
+            />
+            <FontAwesomeIcon
+              className='hbw-checkbox'
+              icon={icon}
             />
             <span>{` ${label}`}</span>
           </label>

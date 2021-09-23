@@ -1,4 +1,5 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type Props = {
   text?: string
@@ -6,7 +7,7 @@ type Props = {
 
 const HBWPending: React.FC<Props> = ({ text = '' }) => (
   <div className="pending">
-    <i className="fas fa-spinner fa-spin fa-2x" />
+    <FontAwesomeIcon icon={['fas', 'spinner']} size="2x" spin />
     {` ${text}`}
   </div>
 );

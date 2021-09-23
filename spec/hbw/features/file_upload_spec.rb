@@ -55,7 +55,7 @@ feature 'File upload field', js: true do
       expect(preview_rows[0]).to have_css     "embed[type='application/pdf']"
 
       expect(preview_rows[1]).to have_content 'file.txt'
-      expect(preview_rows[1]).to have_css     "span[class='far fa-file fa-7x'"
+      expect(preview_rows[1].find(:dp, 'far')).to eq preview_rows[1].find(:di, 'file')
     end
 
     scenario 'should append files if multiple is true' do
@@ -76,7 +76,7 @@ feature 'File upload field', js: true do
       expect(preview_rows[0]).to have_content 'file_with...me.pdf'
       expect(preview_rows[0]).to have_css     "embed[type='application/pdf']"
       expect(preview_rows[0]).to have_content 'file.txt'
-      expect(preview_rows[0]).to have_css     "span[class='far fa-file fa-7x'"
+      expect(preview_rows[0].find(:dp, 'far')).to eq preview_rows[0].find(:di, 'file')
     end
 
     scenario 'should hide input area if the only possible file has been attached' do
@@ -112,10 +112,10 @@ feature 'File upload field', js: true do
       expect(preview_rows[0]).to have_css     "embed[type='application/pdf']"
 
       expect(preview_rows[1]).to have_content 'file2.txt'
-      expect(preview_rows[1]).to have_css     "span[class='far fa-file fa-7x'"
+      expect(preview_rows[1].find(:dp, 'far')).to eq preview_rows[1].find(:di, 'file')
 
       expect(preview_rows[2]).to have_content 'file.txt'
-      expect(preview_rows[2]).to have_css     "span[class='far fa-file fa-7x'"
+      expect(preview_rows[2].find(:dp, 'far')).to eq preview_rows[2].find(:di, 'file')
 
       click_and_wait 'Submit'
     end
@@ -168,7 +168,7 @@ feature 'File upload field', js: true do
 
         expect(preview_row).to have_css "img[alt='logo.svg']"
         expect(preview_row).to have_css "embed[type='application/pdf']"
-        expect(preview_row).to have_css "span[class='far fa-file fa-7x'"
+        expect(preview_row.find(:dp, 'far')).to eq preview_row.find(:di, 'file')
       end
 
       scenario 'thumbnailed preview should allow to remove attached file' do

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import Priority from 'shared/element/priority';
 import TranslationContext from 'shared/context/translation';
@@ -25,7 +26,7 @@ const HBWClaimingTaskOverview = ({
       </div>
       <div className="title">
         <a data-test="title-link" href={entityUrl}>
-          {task.icon && <span className={task.icon} />}
+          {task.icon && <FontAwesomeIcon icon={task.icon} className={task.icon}/>}
           {processLabel} — {taskLabel}
         </a>
       </div>

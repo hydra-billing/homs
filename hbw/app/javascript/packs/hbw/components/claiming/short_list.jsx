@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { parseISO, isPast } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DueDate from 'shared/element/due_date';
 import CreatedDate from 'shared/element/created_date';
 import TranslationContext from 'shared/context/translation';
@@ -50,7 +51,7 @@ const HBWClaimingShortList = ({
       }) => (
         <div onClick={() => goToTask(entity_url)} key={id} className={rowCN(due)}>
           <div className="left">
-            <i className={icon} />
+            <FontAwesomeIcon icon={icon}/>
             <span className="title">{translateBP(`${process_key}.${key}.label`, {}, name)}</span>
             <span title={description} className="description">{description}</span>
           </div>

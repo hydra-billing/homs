@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import cn from 'classnames';
 import compose from 'shared/utils/compose';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
 import TranslationContext, { ContextType as TranslationContextType } from 'shared/context/translation';
 
@@ -78,9 +79,10 @@ const HBWFormFileList: React.FC<Props> = ({
       <a href={link.url}>{link.name}</a>
       &nbsp;
       {!disabled && (
-        <a
+        <FontAwesomeIcon
+          icon={link.deleted ? 'reply' : 'times'}
           href="#"
-          className={cn('fas', link.deleted ? 'fa-reply' : 'fa-times')}
+          className='fas'
           onClick={() => toggleLink(link)}
         />
       )}

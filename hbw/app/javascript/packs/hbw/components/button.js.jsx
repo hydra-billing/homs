@@ -1,4 +1,5 @@
 import { withCallbacks } from 'shared/hoc';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 modulejs.define('HBWButton', ['React'], (React) => {
   const HBWButton = ({ button, disabled, trigger }) => {
@@ -27,7 +28,7 @@ modulejs.define('HBWButton', ['React'], (React) => {
     return (
       <span className="hbw-button">
         <a onClick={onClick} {...opts} href='#'>
-        <i className={button.fa_class} />
+        <FontAwesomeIcon icon={button.fa_class} />
         {` ${button.name}`}
         </a>
       </span>

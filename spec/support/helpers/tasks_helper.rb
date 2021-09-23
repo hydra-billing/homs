@@ -2,6 +2,14 @@ Capybara.add_selector(:dt) do
   css { |value| "*[data-test=#{value}]" }
 end
 
+Capybara.add_selector(:dp) do
+  css { |value| "*[data-prefix=#{value}]" }
+end
+
+Capybara.add_selector(:di) do
+  css { |value| "*[data-icon=#{value}]" }
+end
+
 module Features
   module TasksHelper
     def find_by_dt(value, context = page)

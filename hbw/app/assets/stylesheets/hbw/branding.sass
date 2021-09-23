@@ -395,20 +395,17 @@ table.disabled
     color: var(--hbw-file-list-link-color, var(--base-hbw-file-list-link-color))
 
 .hbw-body, #hbw-bp-control-buttons-container
-  input.hbw-checkbox
+  .hbw-checkbox
     &[type=checkbox]:disabled
-      + span:before
+      + svg
         color: var(--hbw-alto, var(--base-hbw-alto))
     &[type=checkbox]
       display: none
-      + span:before
+      + svg
         font-family: "Font Awesome 5 Free"
         display: inline-block
         color: var(--hbw-checkbox-symbol-color, var(--base-hbw-checkbox-symbol-color))
         content: var(--hbw-checkbox-symbol, var(--base-hbw-checkbox-symbol))
-    &[type=checkbox]:checked
-      + span:before
-        content: var(--hbw-checked-checkbox-symbol, var(--base-hbw-checked-checkbox-symbol))
 
   input.hbw-radiobutton
     &[type=radio]
