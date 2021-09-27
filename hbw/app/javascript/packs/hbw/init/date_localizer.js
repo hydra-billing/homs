@@ -1,8 +1,15 @@
 import { parseISO, format } from 'date-fns';
 import en from 'date-fns/locale/en-US';
 import ru from 'date-fns/locale/ru';
+import { registerLocale } from 'react-datepicker';
 
 const locales = { en, ru };
+
+export const initDatePickerLocale = () => {
+  Object.keys(locales).forEach((locale) => {
+    registerLocale(locale.toString(), locales[locale]);
+  });
+};
 
 export const localize = (str, locale, dateTimeFormat) => {
   if (str) {
