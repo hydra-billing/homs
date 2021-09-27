@@ -1,4 +1,4 @@
-const HBWDependencies = ['$', 'jQuery', 'moment', 'React', 'ReactDOM', 'define', 'require'];
+const HBWDependencies = ['$', 'jQuery', 'React', 'ReactDOM', 'define', 'require'];
 
 window._globalsBeforeHBW = {};
 

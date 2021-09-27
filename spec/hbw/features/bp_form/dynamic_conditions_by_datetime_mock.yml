@@ -63,7 +63,7 @@ get:
                   delete_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Tue Aug 11 2020 00:00:00 GMT+0000"
+                        "$var" == "2020-08-11T00:00:00.000+00:00"
                 - name: dependentSelect
                   type: select
                   label: Dependent select
@@ -75,11 +75,11 @@ get:
                   disable_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Wed Aug 11 2021 00:00:00 GMT+0000"
+                        "$var" == "2021-08-11T00:00:00.000+00:00"
                   delete_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Tue Aug 11 2020 00:00:00 GMT+0000"
+                        "$var" == "2020-08-11T00:00:00.000+00:00"
                 - name: dependentDatetime
                   type: datetime
                   label: Dependent datetime
@@ -88,11 +88,11 @@ get:
                   disable_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Wed Aug 11 2021 00:00:00 GMT+0000"
+                        "$var" == "2021-08-11T00:00:00.000+00:00"
                   delete_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Tue Aug 11 2020 00:00:00 GMT+0000"
+                        "$var" == "2020-08-11T00:00:00.000+00:00"
                 - name: dependentString
                   type: string
                   label: Dependent string
@@ -101,11 +101,11 @@ get:
                   disable_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Wed Aug 11 2021 00:00:00 GMT+0000"
+                        "$var" == "2021-08-11T00:00:00.000+00:00"
                   delete_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Tue Aug 11 2020 00:00:00 GMT+0000"
+                        "$var" == "2020-08-11T00:00:00.000+00:00"
                 - name: dependentCheckbox
                   type: checkbox
                   label: Dependent checkbox
@@ -114,11 +114,11 @@ get:
                   disable_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Wed Aug 11 2021 00:00:00 GMT+0000"
+                        "$var" == "2021-08-11T00:00:00.000+00:00"
                   delete_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Tue Aug 11 2020 00:00:00 GMT+0000"
+                        "$var" == "2020-08-11T00:00:00.000+00:00"
                 - name: dependentText
                   type: text
                   label: Dependent text
@@ -127,11 +127,11 @@ get:
                   disable_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Wed Aug 11 2021 00:00:00 GMT+0000"
+                        "$var" == "2021-08-11T00:00:00.000+00:00"
                   delete_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Tue Aug 11 2020 00:00:00 GMT+0000"
+                        "$var" == "2020-08-11T00:00:00.000+00:00"
                 - name: dependentSelectTable
                   type: select_table
                   label: Dependent select_table
@@ -162,11 +162,11 @@ get:
                   disable_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Wed Aug 11 2021 00:00:00 GMT+0000"
+                        "$var" == "2021-08-11T00:00:00.000+00:00"
                   delete_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Tue Aug 11 2020 00:00:00 GMT+0000"
+                        "$var" == "2020-08-11T00:00:00.000+00:00"
                 - name: dependentUploadedFile
                   type: file_upload
                   label: Dependent file_upload
@@ -175,11 +175,11 @@ get:
                   disable_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Wed Aug 11 2021 00:00:00 GMT+0000"
+                        "$var" == "2021-08-11T00:00:00.000+00:00"
                   delete_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Tue Aug 11 2020 00:00:00 GMT+0000"
+                        "$var" == "2020-08-11T00:00:00.000+00:00"
                 - name: homsOrderDataFileList
                   type: file_list
                   label: Dependent file_list
@@ -188,11 +188,11 @@ get:
                   disable_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Wed Aug 11 2021 00:00:00 GMT+0000"
+                        "$var" == "2021-08-11T00:00:00.000+00:00"
                   delete_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Tue Aug 11 2020 00:00:00 GMT+0000"
+                        "$var" == "2020-08-11T00:00:00.000+00:00"
                 - name: dependentRadioButton
                   type: radio_button
                   label: Dependent radio_button
@@ -205,11 +205,11 @@ get:
                   disable_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Wed Aug 11 2021 00:00:00 GMT+0000"
+                        "$var" == "2021-08-11T00:00:00.000+00:00"
                   delete_if:
                     - variable: controlDatetime
                       condition: >
-                        "$var" == "Tue Aug 11 2020 00:00:00 GMT+0000"
+                        "$var" == "2020-08-11T00:00:00.000+00:00"
             - name: dependentGroup
               type: group
               label: Dependent group
@@ -223,11 +223,11 @@ get:
               disable_if:
                 - variable: controlDatetime
                   condition: >
-                    "$var" == "Wed Aug 11 2021 00:00:00 GMT+0000"
+                    "$var" == "2021-08-11T00:00:00.000+00:00"
               delete_if:
                 - variable: controlDatetime
                   condition: >
-                    "$var" == "Tue Aug 11 2020 00:00:00 GMT+0000"
+                    "$var" == "2020-08-11T00:00:00.000+00:00"
 
   # task variables
   task/111111/variables:

@@ -55,7 +55,7 @@ feature 'Control fields with dynamic conditions by radio button', js: true do
     expect(readonly?('dependentText')).to          be false
     expect(readonly?('stringInDependentGroup')).to be false
 
-    expect(find_by_name('dependentDatetime').disabled?).to be false
+    expect(find_by_name('dependentDatetime-visible-input').disabled?).to be false
 
     expect(radio_button_disabled?('dependentRadioButton')).to be false
 
@@ -71,7 +71,7 @@ feature 'Control fields with dynamic conditions by radio button', js: true do
     expect(readonly?('dependentText')).to          be true
     expect(readonly?('stringInDependentGroup')).to be true
 
-    expect(find_by_name('dependentDatetime').disabled?).to be true
+    expect(find_by_name('dependentDatetime-visible-input').disabled?).to be true
 
     expect(radio_button_disabled?('dependentRadioButton')).to be true
   end

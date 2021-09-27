@@ -358,16 +358,11 @@ table.disabled
     @extend .form-control
     height: auto
 
-  .datetime-picker
-    .input-group-addon
-      font-size: var(--font-size, var(--base-font-size))
-      height: var(--form-control-height, var(--base-form-control-height))
-      padding: var(--dtpicker-padding, var(--base-dtpicker-padding))
-      background-color: var(--dtpicker-bg-color, var(--base-dtpicker-bg-color))
-      border-color: var(--hbw-mystic, var(--base-hbw-mystic))
+  .react-datepicker
+    font-size: var(--font-size, var(--base-font-size))
 
-      &:hover
-        background-color: var(--dtpicker-bg-color-hover, var(--base-dtpicker-bg-color-hover))
+    &__current-month, &__day, &__day-name
+      color: var(--hbw-text-color, var(--base-hbw-text-color))
 
   .panel-title
     color: var(--hbw-text-color, var(--base-hbw-text-color))

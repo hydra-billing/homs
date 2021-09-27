@@ -2,75 +2,74 @@ import cx from 'classnames';
 import compose from 'shared/utils/compose';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
 import TranslationContext from 'shared/context/translation';
+import DatePickerWrapper from 'shared/element/date_picker_wrapper';
+import convertToDateFNSDateFormat from 'shared/utils/to_fns_date_format';
+import { format } from 'date-fns';
+import { initDatePickerLocale } from '../../init/date_localizer';
 
-modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (React, ReactDOM, jQuery, moment) => {
+initDatePickerLocale();
+
+modulejs.define('HBWFormDatetime', ['React'], (React) => {
   class HBWFormDatetime extends React.Component {
     static contextType = TranslationContext;
 
     constructor (props, context) {
       super(props, context);
-      let defaultValue;
-      let value;
 
       const locale = props.params.locale || context.locale.code || 'en';
-      const format = props.params.format || 'MM/DD/YYYY';
+      const dateFormat = props.params.format ? convertToDateFNSDateFormat(props.params.format) : 'MM/dd/yyyy';
 
-      if (props.value) {
-        value = moment(Date.parse(props.value));
-        defaultValue = value.locale(locale).format(format);
-      } else {
-        value = null;
-        defaultValue = '';
-      }
+      const value = props.value ? new Date(props.value) : null;
 
       this.state = {
         value,
-        defaultValue,
         locale,
-        format
+        dateFormat
       };
     }
+
+    ISODateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx";
+
+    popperOptions = [{ name: 'offset', options: { offset: [0, -8] } },
+      { name: 'flip', options: { fallbackPlacements: ['bottom-start'] } }];
 
     render () {
       const {
         name, params, disabled, hidden, task
       } = this.props;
 
-      const { defaultValue, value } = this.state;
+      const { value, locale } = this.state;
 
-      const opts = {
-        name,
-        defaultValue,
-        type: 'text'
-      };
-
-      if (params.editable === false || disabled) {
-        opts.disabled = 'disabled';
-      }
-
-      const isoValue = value ? value.format() : '';
+      const isoValue = value ? format(value, this.ISODateFormat) : '';
       const inputCSS = cx(params.css_class, { hidden });
-      const labelCss = cx(params.label_css, 'hbw-datetime-label');
+      const labelCSS = cx(params.label_css, 'hbw-datetime-label');
       const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
 
       return <div className={inputCSS} title={params.tooltip} ref={(node) => { this.rootNode = node; }}>
         <div className="form-group">
-          <span className={labelCss}>{label}</span>
+          <span className={labelCSS}>{label}</span>
           {params.description?.placement === 'top' && this.renderDescription()}
-          <div className="input-group date datetime-picker">
-            <input {...opts} className="form-control" />
-            <input name={name} type="hidden" value={isoValue} />
-            <span className="input-group-addon">
-              <span className="fas fa-calendar" />
-            </span>
-          </div>
+          <DatePickerWrapper
+            name={`${name}-visible-input`}
+            className="form-control"
+            onChange={date => this.setValue(date)}
+            selected={value}
+            dateFormat={this.state.dateFormat}
+            locale={locale}
+            fixedHeight
+            disabledKeyboardNavigation
+            disabled={params.editable === false || disabled}
+            popperPlacement="bottom-start"
+            popperModifiers={this.popperOptions}
+            autoComplete='off'
+          />
+          <input name={name} type="hidden" value={isoValue} />
           {params.description?.placement === 'bottom' && this.renderDescription()}
         </div>
       </div>;
     }
 
     componentDidMount () {
-      this.setOnChange();
       this.props.onRef(this);
     }
 
@@ -81,54 +80,19 @@ modulejs.define('HBWFormDatetime', ['React', 'ReactDOM', 'jQuery', 'moment'], (R
     }
 
     componentWillUnmount () {
-      jQuery(this.rootNode).off();
       this.props.onRef(undefined);
     }
 
-    updateValue = ({ date }) => {
-      let stringValue;
-      let value;
-
-      if (date) {
-        stringValue = date.format(this.state.format);
-        value = moment(stringValue, this.state.format, true);
-      } else {
-        stringValue = '';
-        value = null;
-      }
-
-      this.setState({ value });
-      this.props.fireFieldValueUpdate(this.props.name, this.state.value);
-    };
-
-    setOnChange = () => {
-      const icons = {
-        up:       'fas fa-chevron-up',
-        down:     'fas fa-chevron-down',
-        date:     'fas fa-calendar',
-        time:     'fas fa-clock-o',
-        next:     'fas fa-chevron-right',
-        previous: 'fas fa-chevron-left',
-        today:    'fas fa-dot-circle-o',
-        clear:    'fas fa-trash',
-        close:    'fas fa-times'
-      };
-
-      jQuery(this.rootNode)
-        .find('.datetime-picker')
-        .datetimepicker({
-          format: this.state.format,
-          locale: this.state.locale,
-          icons,
-        })
-        .on('dp.change', e => this.updateValue(e));
+    setValue = (date) => {
+      this.setState({ value: date });
+      this.props.fireFieldValueUpdate(this.props.name, format(date, this.ISODateFormat));
     };
 
     serialize = () => {
       if (this.props.params.editable === false || this.props.disabled || this.props.hidden) {
         return null;
       } else {
-        return { [this.props.params.name]: this.state.value ? this.state.value.format() : '' };
+        return { [this.props.params.name]: this.state.value ? format(this.state.value, this.ISODateFormat) : '' };
       }
     };
   }

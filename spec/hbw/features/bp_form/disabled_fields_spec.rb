@@ -28,7 +28,7 @@ feature 'Control fields on form', js: true do
   end
 
   scenario 'disable for OR-condition for datetime' do
-    expect(find_by_name('homsOrderDataDisabledEndDate').disabled?).to eq true
+    expect(find_by_name('homsOrderDataDisabledEndDate-visible-input').disabled?).to eq true
   end
 
   scenario 'enable for OR-condition' do

@@ -28,7 +28,7 @@ feature 'Control fields with dynamic conditions by datetime', js: true do
     expect(page).to have_content 'Dependent file_upload'
     expect(page).to have_content 'Dependent radio_button'
 
-    fill_in_datetime_field 'controlDatetime', with: '08/11/2019'
+    fill_in_datetime_field 'controlDatetime-visible-input', with: '08/11/2019'
 
     expect(page).to have_content 'Control datetime'
     expect(page).to have_content 'Dependent static'
@@ -50,8 +50,8 @@ feature 'Control fields with dynamic conditions by datetime', js: true do
     expect(readonly?('dependentString')).to        be false
     expect(readonly?('dependentText')).to          be false
     expect(readonly?('stringInDependentGroup')).to be false
-    expect(find_by_name('dependentDatetime').disabled?).to    be false
-    expect(radio_button_disabled?('dependentRadioButton')).to be false
+    expect(find_by_name('dependentDatetime-visible-input').disabled?).to be false
+    expect(radio_button_disabled?('dependentRadioButton')).to            be false
   end
 
   scenario 'should hide all fields' do
@@ -69,7 +69,7 @@ feature 'Control fields with dynamic conditions by datetime', js: true do
     expect(page).to have_content 'Dependent file_upload'
     expect(page).to have_content 'Dependent radio_button'
 
-    fill_in_datetime_field 'controlDatetime', with: '08/11/2020'
+    fill_in_datetime_field 'controlDatetime-visible-input', with: '08/11/2020'
 
     expect(page).to have_content 'Control datetime'
     expect(page).not_to have_content 'Dependent static'
@@ -96,10 +96,10 @@ feature 'Control fields with dynamic conditions by datetime', js: true do
     expect(readonly?('dependentString')).to        be false
     expect(readonly?('dependentText')).to          be false
     expect(readonly?('stringInDependentGroup')).to be false
-    expect(find_by_name('dependentDatetime').disabled?).to    be false
-    expect(radio_button_disabled?('dependentRadioButton')).to be false
+    expect(find_by_name('dependentDatetime-visible-input').disabled?).to be false
+    expect(radio_button_disabled?('dependentRadioButton')).to            be false
 
-    fill_in_datetime_field 'controlDatetime', with: '08/11/2021'
+    fill_in_datetime_field 'controlDatetime-visible-input', with: '08/11/2021'
 
     expect(page.find('.dependent-select')).to       have_selector '.react-select--is-disabled'
     expect(page.find('.dependent-select-table')).to have_selector '.disabled'
@@ -108,7 +108,7 @@ feature 'Control fields with dynamic conditions by datetime', js: true do
     expect(readonly?('dependentString')).to        be true
     expect(readonly?('dependentText')).to          be true
     expect(readonly?('stringInDependentGroup')).to be true
-    expect(find_by_name('dependentDatetime').disabled?).to    be true
-    expect(radio_button_disabled?('dependentRadioButton')).to be true
+    expect(find_by_name('dependentDatetime-visible-input').disabled?).to be true
+    expect(radio_button_disabled?('dependentRadioButton')).to            be true
   end
 end

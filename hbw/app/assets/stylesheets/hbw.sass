@@ -12,7 +12,6 @@
   @import 'bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss'
   @import 'bootstrap-sass/assets/stylesheets/bootstrap'
   @import 'bootswatch/flatly/bootswatch'
-  @import 'eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker-build.scss'
 
   @import 'app/assets/stylesheets/tooltip'
 
@@ -563,3 +562,69 @@
 
   input[hidden]
     display: none
+
+  .react-datepicker
+    box-shadow: 0px 6px 12px 0 #E0E0E0
+    border: 1px solid #ccc
+
+    &__navigation
+      margin-top: 5px
+
+    &__month-container
+      display: table
+      width: 285px
+      height: 250px
+      padding: 5px
+
+    &__header
+      display: table
+      width: 100%
+      background-color: white
+      border: none
+      margin: 0
+      padding: 0
+
+    &__current-month
+      display: table-caption
+      font-size: inherit
+      padding: 5px
+
+    &__day-names
+      display: table-row
+      font-weight: bold
+
+    &__month
+      display: table
+      margin: 0
+      width: 100%
+
+    &__week, &__day-names
+      display: table-row
+
+    &__day, &__day-name
+      display: table-cell
+      height: 20px
+      width: 20px
+      line-height: 20px
+      padding: 5px
+
+    &__day--selected
+      background-color: white
+
+    &__day, &__day-selected
+      &:hover
+        background-color: #f0f0f0
+
+    &__day--outside-month
+      color: #b4bcc2 !important
+
+    &__day--today
+      font-weight: normal
+
+    &__triangle::after
+      border-bottom-color: white !important
+
+    &__navigation-icon::before
+      border-color: #222222
+      border-radius: 1px
+

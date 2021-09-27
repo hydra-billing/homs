@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import moment from 'moment';
 
 Object.assign(window, {
-  $, jQuery, React, ReactDOM, moment
+  $, jQuery, React, ReactDOM
 });
 
 Object.keys(window._globalsBeforeHBW).forEach((name) => {

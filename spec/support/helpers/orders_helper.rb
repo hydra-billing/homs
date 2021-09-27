@@ -261,11 +261,11 @@ module Features
     end
 
     def bp_calendar_value(name)
-      page.find("[name='homsOrderData#{name}']").value
+      page.find("[name='homsOrderData#{name}-visible-input']").value
     end
 
     def click_on_bp_calendar(name)
-      page.find("[name='homsOrderData#{name}']").find(:xpath, '..').find('span.fas.fa-calendar').click
+      page.find("[name='homsOrderData#{name}-visible-input']").click
     end
 
     def add_custom_field_filter

@@ -8,7 +8,6 @@ import 'application.sass';
 import 'logo.svg';
 
 import '../init/unwrap_jquery';
-import '../init/unwrap_moment';
 import '../init/translations';
 import 'jquery-ujs';
 import 'select2/select2.full';
@@ -18,6 +17,7 @@ import 'fileinput';
 import 'bootstrap-datetimepicker';
 import 'confirm';
 import 'bootstrap-multiselect';
+import moment from 'moment';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Messenger from 'messenger';
