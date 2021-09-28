@@ -20,7 +20,7 @@ modulejs.define('HBWFormSelectTable',
         this.state = {
           value:   Array.isArray(value) ? value.map(el => String(el)) : String(value),
           choices: this.getChoices(),
-          error:   (!props.hasValueInChoices(value) && value) || props.missFieldInVariables(),
+          error:   props.missFieldInVariables(),
           valid:   true
         };
       }
@@ -145,6 +145,12 @@ modulejs.define('HBWFormSelectTable',
         this.setState({ valid: this.props.isValid(this.state.value) });
       };
 
+      setErrorState = () => {
+        this.setState({
+          error: (this.state.value.length === 0 && !this.props.params.nullable) || this.props.missFieldInVariables()
+        });
+      };
+
       controlValidationTooltip = (toHide) => {
         if (toHide) {
           this.tooltip.hide();
@@ -184,6 +190,7 @@ modulejs.define('HBWFormSelectTable',
 
       onValueUpdate = () => {
         this.setValidationState();
+        this.setErrorState();
         this.props.fireFieldValueUpdate(this.props.name, this.state.value);
       }
 
