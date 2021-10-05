@@ -38,6 +38,9 @@ feature 'Select table', js: true do
     expect(page).to have_content 'My favourite region code2'
     expect(page).to have_content '3,252,349,284.00'
 
+    expect(page).to have_content 'Custom cancel button name'
+    expect(page).to have_content 'Custom submit button name'
+
     expect_widget_presence
   end
 

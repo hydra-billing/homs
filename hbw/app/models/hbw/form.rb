@@ -34,6 +34,10 @@ module HBW
       definition['submit_button_name']
     end
 
+    def cancel_button_name
+      definition['cancel_button_name']
+    end
+
     def as_json
       {css_class:          css_class,
        fields:             fields.map(&:as_json),
