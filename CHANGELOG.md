@@ -27,8 +27,6 @@ v2.7.0 [unreleased]
                 bp_code: 'new_customer'
   ```
 
-
-
 -------------------
 ### Features
 - [#583](https://github.com/latera/homs/pull/583) Add the output of errors for the availability of the Сamunda service to the widget.
@@ -39,6 +37,7 @@ v2.7.0 [unreleased]
 - [#580](https://github.com/latera/homs/pull/580) Add several upload file fields for single form.
 - [#587](https://github.com/latera/homs/pull/587) Add dynamic `disable_if` and `delete_if` options for datetime field.
 - [#593](https://github.com/latera/homs/pull/593) Add disable_if/delete_if for submit_select buttons.
+- [#604](https://github.com/latera/homs/pull/604) Add customization for CancelProcessButton.
 
 ### Refactoring
 - [#592](https://github.com/latera/homs/pull/592) Replace memcached with redis.

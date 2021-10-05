@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import TranslationContext from 'shared/context/translation';
 import ConnectionContext from 'shared/context/connection';
 
-const HBWFormCancelProcess = ({ processInstanceId, bind }) => {
+const HBWFormCancelProcess = ({ processInstanceId, cancelButtonName, bind }) => {
   const { translate: t } = useContext(TranslationContext);
   const { request, serverURL } = useContext(ConnectionContext);
 
@@ -26,11 +26,11 @@ const HBWFormCancelProcess = ({ processInstanceId, bind }) => {
   };
 
   return (
-      <button className="btn btn-primary"
+      <button className="btn-primary btn-cancel-process btn"
               type="button"
               onClick={onClick}
               disabled={error}>
-        {`${t('cancel')}`}
+        {` ${cancelButtonName || t('cancel')}`}
       </button>
   );
 };

@@ -18,9 +18,12 @@ modulejs.define('HBWFormSubmit', ['React'], (React) => {
     }
 
     renderCancelButton = () => {
-      const { processInstanceId } = this.props;
+      const { processInstanceId, cancelButtonName } = this.props;
 
-      return <CancelProcessButton processInstanceId={processInstanceId} />;
+      return <CancelProcessButton
+               processInstanceId={processInstanceId}
+               cancelButtonName = {cancelButtonName}
+             />;
     };
 
     renderSubmitButton = () => {

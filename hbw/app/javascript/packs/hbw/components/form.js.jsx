@@ -159,6 +159,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWFormDatetime',
         return <Submit formSubmitting={submitting || fileUploading}
                        showCancelButton={!task.form.hide_cancel_button}
                        submitButtonName={task.form.submit_button_name}
+                       cancelButtonName={task.form.cancel_button_name}
                        processInstanceId={task.process_instance_id} />;
       }
 
