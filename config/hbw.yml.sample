@@ -79,7 +79,7 @@ hbw:
   use_bpm_stub: false
 
   minio:
-    endpoint: 'http://127.0.0.1:9000'
+    endpoint: <%= "#{ENV['MINIO_HOST']}:#{ENV['MINIO_PORT']}" %>
     access_key_id: <%= ENV['MINIO_ACCESS_KEY'] %>
     secret_access_key: <%= ENV['MINIO_SECRET_KEY'] %>
     bucket: <%= ENV['MINIO_BUCKET_NAME'] %>

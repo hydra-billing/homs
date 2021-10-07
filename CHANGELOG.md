@@ -26,7 +26,7 @@ v2.7.0 [unreleased]
                 fa_class: ['fas', 'user']
                 bp_code: 'new_customer'
   ```
-- [#607](https://github.com/latera/homs/pull/607) Use `button_text` field for fallback submit-select components. 
+- [#607](https://github.com/latera/homs/pull/607) Use `button_text` field for fallback submit-select components.
 
   For submit-select buttons was added new field `button_text` which contain a fallback for text translation. The previous behavior has been changed: the fallback on `label` field has been replaced with the `button_text` key. The key for translations still stored in the `name` field. For example:
   ```
@@ -54,6 +54,7 @@ v2.7.0 [unreleased]
 - [#609](https://github.com/latera/homs/pull/609) Add `required` property to radio_button.
 - [#629](https://github.com/latera/homs/pull/629) Update dry to 1.x.x.
 - [#632](https://github.com/latera/homs/pull/632) Make a login form with SSO.
+- [#606](https://github.com/latera/homs/pull/606) Allow to set Minio host through environment variable.
 
 ### Refactoring
 - [#592](https://github.com/latera/homs/pull/592) Replace memcached with redis.
