@@ -47,6 +47,8 @@ v2.7.0 [unreleased]
 
 v2.6.14 [unreleased]
 -------------------
+### Features
+- [#610](https://github.com/latera/homs/pull/610) Log app start/stop and user login attempts in CEF.
 ### Bugfixes
 - [#601](https://github.com/latera/homs/pull/601) Move fontawesome to public/assets.
 

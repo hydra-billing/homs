@@ -10,8 +10,10 @@ require 'dry-validation'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Homs
+module HOMS
   class Application < Rails::Application
+    VERSION = '2.7.0'.freeze
+
     config.generators do |g|
       g.test_framework :rspec,
                        fixtures:         true,
@@ -35,6 +37,10 @@ module Homs
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    initializer('homs.load_container') do
+      require 'container'
+    end
+
     config.allow_concurrency = true
 
     config.action_controller.permit_all_parameters = true
@@ -50,6 +56,8 @@ module Homs
     config.relative_url_root = config.app.fetch(:base_url, '/')
 
     config.after_initialize do
+      HOMS.container[:cef_logger].log_event(:start)
+
       I18n.locale = I18n.default_locale = (config.app.locale.fetch(:code) || :en).to_sym
     end
 
