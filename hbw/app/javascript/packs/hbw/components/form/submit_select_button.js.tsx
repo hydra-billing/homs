@@ -10,7 +10,8 @@ type Props = {
     fa_class?: string,
     label: string,
     name: string,
-    title?: string
+    title?: string,
+    button_text?: string
   },
   error: boolean,
   onClick: MouseEventHandler<HTMLButtonElement>,
@@ -38,7 +39,7 @@ const HBWSubmitSelectButton: React.FC<Props> = ({
   const cssClass = cx(params.css_class, { buttonDisabled });
   const faClass = cx(params.fa_class, { buttonDisabled });
 
-  const label = translateBP(`${task.process_key}.${task.key}.${params.name}`, {}, params.label);
+  const label = translateBP(`${task.process_key}.${task.key}.${params.name}`, {}, params.button_text);
   const buildButton = () => (
       <button
         type="submit"

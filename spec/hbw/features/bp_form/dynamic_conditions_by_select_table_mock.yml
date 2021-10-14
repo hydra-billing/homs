@@ -248,11 +248,11 @@ get:
                             "$var" == "2"
                       options:
                         - name: button1
-                          label: Button 1
+                          button_text: Button 1
                           value: Button 1
                           css_class: btn btn-success btn-lg
                         - name: button2
-                          label: Button 2
+                          button_text: Button 2
                           value: Button 2
                           css_class: btn btn-danger btn-lg
                 - name: dependentSubmitSelectButtonsGroup
@@ -266,11 +266,11 @@ get:
                       label: Dependent submit_select buttons
                       options:
                         - name: neutralButton
-                          label: Neutral button
+                          button_text: Neutral button
                           value: Neutral button
                           css_class: btn btn-success btn-lg
                         - name: buttonToBeDisabled
-                          label: Button to be disabled
+                          button_text: Button to be disabled
                           value: Button to be disabled
                           css_class: btn btn-danger btn-lg
                           dynamic: true
@@ -279,8 +279,8 @@ get:
                               condition: >
                                 "$var" == "1"
                         - name: buttonToBeHidden
-                          label: Button to be hidden
                           value: Button to be hidden
+                          button_text: Button to be hidden
                           css_class: btn btn-danger btn-lg
                           dynamic: true
                           delete_if:

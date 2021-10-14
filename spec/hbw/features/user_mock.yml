@@ -79,7 +79,6 @@ get:
               css_class: col-xs-12
               options:
               - name: doMagic
-                label: Do Magic!
                 value: Do Magic
                 css_class: btn btn-success btn-lg
               - name: undo
@@ -114,11 +113,9 @@ get:
               css_class: col-xs-12
               options:
               - name: doMagic
-                label: Do Magic!
                 value: Do Magic
                 css_class: btn btn-success btn-lg
               - name: undo
-                label: Undo
                 value: Canceled
                 css_class: btn btn-danger btn-lg
 

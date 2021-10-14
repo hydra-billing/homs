@@ -26,8 +26,21 @@ v2.7.0 [unreleased]
                 fa_class: ['fas', 'user']
                 bp_code: 'new_customer'
   ```
+- [#607](https://github.com/latera/homs/pull/607) Use `button_text` field for fallback submit-select components. 
 
--------------------
+  For submit-select buttons was added new field `button_text` which contain a fallback for text translation. The previous behavior has been changed: the fallback on `label` field has been replaced with the `button_text` key. The key for translations still stored in the `name` field. For example:
+  ```
+          - name: submitSelectButton
+            type: submit_select
+            css_class: col-xs-12
+            options:
+              - name: button1
+                button_text: Button 1
+                value: Button 1
+                css_class: btn btn-success btn-lg
+  ```
+
+
 ### Features
 - [#583](https://github.com/latera/homs/pull/583) Add the output of errors for the availability of the Сamunda service to the widget.
 - [#562](https://github.com/latera/homs/pull/562) Bring in TypeScript into the project.
