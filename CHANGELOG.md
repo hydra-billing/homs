@@ -1,3 +1,8 @@
+v2.6.16 [unreleased]
+-------------------
+### Features
+- [#610](https://github.com/latera/homs/pull/610) Log app start/stop and user login attempts in CEF.
+
 v2.6.15 [2021-10-29]
 -------------------
 ### Bugfixes
