@@ -17,7 +17,7 @@ modulejs.define('HBWFormSelectTable',
         this.state = {
           value,
           choices: this.getChoices(),
-          error:   (!props.hasValueInChoices(value) && value) || props.missFieldInVariables(),
+          error:   props.missFieldInVariables(),
           valid:   true
         };
       }
@@ -124,6 +124,12 @@ modulejs.define('HBWFormSelectTable',
         this.setState({ valid: this.props.isValid(this.state.value) });
       };
 
+      setErrorState = () => {
+        this.setState({
+          error: (this.state.value.length === 0 && !this.props.params.nullable) || this.props.missFieldInVariables()
+        });
+      };
+
       controlValidationTooltip = (toHide) => {
         if (toHide) {
           this.tooltip.hide();
@@ -161,6 +167,11 @@ modulejs.define('HBWFormSelectTable',
         return result;
       };
 
+      onValueUpdate = () => {
+        this.setValidationState();
+        this.setErrorState();
+      };
+
       onClick = (event) => {
         if (this.props.params.editable === false || this.props.disabled) {
           return;
@@ -171,12 +182,12 @@ modulejs.define('HBWFormSelectTable',
         if (this.props.params.multi) {
           if (this.state.value.includes(newValue)) {
             const index = this.state.value.indexOf(newValue);
-            this.setState((prevState) => { prevState.value.splice(index, 1); }, this.setValidationState);
+            this.setState((prevState) => { prevState.value.splice(index, 1); }, this.onValueUpdate);
           } else {
-            this.setState((prevState) => { prevState.value.push(newValue); }, this.setValidationState);
+            this.setState((prevState) => { prevState.value.push(newValue); }, this.onValueUpdate);
           }
         } else {
-          this.setState({ value: newValue }, this.setValidationState);
+          this.setState({ value: newValue }, this.onValueUpdate);
         }
       };
 

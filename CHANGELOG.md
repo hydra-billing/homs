@@ -1,3 +1,8 @@
+v2.6.14 [unreleased]
+-------------------
+### Bugfixes
+- [#603](https://github.com/latera/homs/pull/603) Don't highlight multi nullable select_table.
+
 v2.6.13 [unreleased]
 -------------------
 ### Bugfixes
