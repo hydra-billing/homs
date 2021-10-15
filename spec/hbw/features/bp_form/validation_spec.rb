@@ -6,6 +6,7 @@ feature 'Validate form', js: true do
     FactoryBot.create(:order, order_type: order_type)
     FactoryBot.create(:order, order_type: order_type)
     FactoryBot.create(:order, order_type: order_type)
+    FactoryBot.create(:order, order_type: order_type)
     user = FactoryBot.create(:user)
 
     signin(user.email, user.password)
@@ -54,6 +55,17 @@ feature 'Validate form', js: true do
 
       expect(page).not_to have_content 'Field is required'
     end
+
+    scenario 'with not filled required radio button' do
+      click_and_wait 'ORD-4'
+
+      expect(page).to have_content 'Radio button label 1'
+      expect(page).to have_selector "button[type='submit']"
+
+      click_and_wait 'Submit'
+
+      expect(page).to have_content 'Field is required'
+    end
   end
 
   describe 'form should be submitted' do
@@ -65,10 +77,12 @@ feature 'Validate form', js: true do
       expect(page).not_to have_content 'Hidden string'
       expect(page).not_to have_content 'Hidden select'
       expect(page).not_to have_content 'Hidden select_table'
+      expect(page).not_to have_content 'Hidden radio button label 1'
 
       expect(readonly?('disabledString')).to         be true
       expect(page.find('.disabled-select')).to       have_selector '.react-select--is-disabled'
       expect(page.find('.disabled-select-table')).to have_selector '.disabled'
+      expect(page).to                                have_selector '.hbw-radio-label.disabled'
 
       expect(page).to have_selector "button[type='submit']"
       click_and_wait 'Submit'

@@ -1,4 +1,5 @@
 import cx from 'classnames';
+import Tooltip from 'tooltip';
 import compose from 'shared/utils/compose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withCallbacks, withConditions, withErrorBoundary } from 'shared/hoc';
@@ -12,8 +13,31 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
       value: this.props.value
     };
 
+    containerRef = React.createRef();
+
+    getEl = () => this.containerRef.current;
+
+    isRequired = this.props.params.required;
+
     componentDidMount () {
+      this.tooltip = new Tooltip(this.getEl(), {
+        title:     this.context.translate('errors.field_is_required'),
+        container: this.tooltipContainer,
+        trigger:   'manual',
+        placement: 'top',
+      });
+
+      if (this.isRequired) {
+        this.validateOnSubmit();
+      }
+
       this.props.onRef(this);
+    }
+
+    componentDidUpdate () {
+      const hideTooltip = !this.isAvailable() || !this.isRequired || this.isValid();
+
+      this.controlErrorTooltip(hideTooltip);
     }
 
     componentWillUnmount () {
@@ -32,12 +56,16 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
         params, hidden
       } = this.props;
 
-      const inputCSS = cx(params.css_class, { hidden });
+      const inputCSS = cx(params.css_class, { hidden, invalid: this.isRequired && !this.isValid() });
 
-      return <div className={inputCSS} title={params.tooltip}>
+      const errorTooltip = <div ref={(t) => { this.tooltipContainer = t; }}
+                                className='tooltip-red'/>;
+
+      return <div ref={this.containerRef} className={inputCSS} title={params.tooltip}>
         <div className="form-group">
           {params.description?.placement === 'top' && this.renderDescription()}
           {this.renderInputs()}
+          {errorTooltip}
         </div>
       </div>;
     }
@@ -55,11 +83,10 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
       } = this.props;
       const { value } = this.state;
       const { variants } = params;
-      const labelCSS = cx('hbw-radio-label', this.props.params.label_css);
+      const labelCSS = cx('hbw-radio-label', this.props.params.label_css, { disabled });
       const checkedIcon = params.icon?.checked || ['far', 'check-circle'];
       const uncheckedIcon = params.icon?.unchecked || ['far', 'circle'];
 
-      const icon = value ? checkedIcon : uncheckedIcon;
       const opts = {
         name,
         disabled: params.editable === false || disabled,
@@ -74,7 +101,7 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
                                               className='hbw-radiobutton'/>
                                        <FontAwesomeIcon
                                          className='hbw-radiobutton'
-                                         icon={icon}/>
+                                         icon={value === field.value ? checkedIcon : uncheckedIcon}/>
                                        <span>
                                          { ` ${translateBP(`${task.process_key}.${task.key}.${name}.${field.name}`,
                                            {},
@@ -83,6 +110,44 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
                                      </label>
                                    </div>);
     }
+
+    validateOnSubmit = () => {
+      this.props.bind(`hbw:validate-form-${this.props.id}`, this.onFormSubmit);
+    };
+
+    onFormSubmit = () => {
+      if (this.isValid()) {
+        this.getEl().classList.remove('invalid');
+      } else {
+        this.getEl().classList.add('invalid');
+
+        this.props.trigger('hbw:form-submitting-failed');
+      }
+    };
+
+    isValid = () => {
+      if (!this.isAvailable()) {
+        return true;
+      }
+
+      return this.isFilled();
+    };
+
+    isAvailable = () => !this.props.hidden && !this.props.disabled;
+
+    isFilled = () => {
+      const { value } = this.state;
+
+      return value !== null && value !== undefined;
+    };
+
+    controlErrorTooltip = (toHide) => {
+      if (toHide) {
+        this.tooltip.hide();
+      } else {
+        this.tooltip.show();
+      }
+    };
 
     serialize = () => {
       if (this.props.params.editable === false || this.props.disabled || this.props.hidden) {
