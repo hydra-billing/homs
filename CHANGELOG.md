@@ -38,6 +38,7 @@ v2.7.0 [unreleased]
 - [#587](https://github.com/latera/homs/pull/587) Add dynamic `disable_if` and `delete_if` options for datetime field.
 - [#593](https://github.com/latera/homs/pull/593) Add disable_if/delete_if for submit_select buttons.
 - [#604](https://github.com/latera/homs/pull/604) Add customization for CancelProcessButton.
+- [#609](https://github.com/latera/homs/pull/609) Add `required` property to radio_button
 
 ### Refactoring
 - [#592](https://github.com/latera/homs/pull/592) Replace memcached with redis.
