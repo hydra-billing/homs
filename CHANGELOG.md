@@ -3,7 +3,7 @@ v2.6.14 [2021-10-22]
 ### Bugfixes
 - [#603](https://github.com/latera/homs/pull/603) Don't highlight multi nullable select_table.
 
-v2.6.13 [2021-10-22]
+v2.6.13 [2021-09-03]
 -------------------
 ### Bugfixes
 - [#595](https://github.com/latera/homs/pull/595) Fix substitution of empty values of BP variables in localized static fields.
