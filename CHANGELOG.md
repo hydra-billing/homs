@@ -51,6 +51,7 @@ v2.6.14 [unreleased]
 ### Bugfixes
 - [#601](https://github.com/latera/homs/pull/601) Move fontawesome to public/assets.
 - [#603](https://github.com/latera/homs/pull/603) Don't highlight multi nullable select_table.
+- [#611](https://github.com/latera/homs/pull/611) Filter current tasks by process_key
 
 v2.6.13 [2021-09-03]
 -------------------

@@ -55,7 +55,8 @@ modulejs.define(
         };
       }, []);
 
-      const activeTasks = () => tasks.filter(task => task.entity_code === entityCode).reverse();
+      const activeTasks = () => tasks.filter(task => task.entity_code === entityCode
+                                                     && task.entity_types.includes(entityTypeCode)).reverse();
 
       const resetProcess = () => {
         setProcessInstanceId(null);

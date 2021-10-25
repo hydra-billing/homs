@@ -58,7 +58,7 @@ FactoryBot.define do
 
     trait :support_request do
       active true
-      code 'Support Request'
+      code 'support_request'
       print_form_code 'print_form_code'
       fields(
         creationDate:       {
@@ -86,7 +86,7 @@ FactoryBot.define do
 
     trait :new_customer do
       active true
-      code 'New customer'
+      code 'new_customer'
       fields(
         customerCity:       {
           type:  'string',

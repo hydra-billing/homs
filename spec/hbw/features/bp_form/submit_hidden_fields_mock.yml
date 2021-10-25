@@ -20,7 +20,7 @@ get:
     - params: ''
       response:
         - id: "testProcess:469:222221"
-          key: "test_translations"
+          key: "support_request"
           version: 469
           name: "Test translations"
           description: null
@@ -236,7 +236,7 @@ post:
           suspended: false
           processInstanceId: 222221
           processDefinitionId: "testProcess:469:222221"
-          taskDefinitionKey: "Activity_test_translations"
+          taskDefinitionKey: "Activity_support_request"
           formKey: null
           tenantId: null
     - params: "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
