@@ -46,12 +46,16 @@ v2.7.0 [unreleased]
 - [#594](https://github.com/latera/homs/pull/594) Get rid of Webpacker & build all assets with Webpack 5.
 - [#598](https://github.com/latera/homs/pull/598) Remove the mask option validation from the string order field.
 
-v2.6.14 [unreleased]
+v2.6.15 [unreleased]
+-------------------
+### Bugfixes
+- [#611](https://github.com/latera/homs/pull/611) Filter current tasks by process_key.
+
+v2.6.14 [2021-10-22]
 -------------------
 ### Bugfixes
 - [#601](https://github.com/latera/homs/pull/601) Move fontawesome to public/assets.
 - [#603](https://github.com/latera/homs/pull/603) Don't highlight multi nullable select_table.
-- [#611](https://github.com/latera/homs/pull/611) Filter current tasks by process_key
 
 v2.6.13 [2021-09-03]
 -------------------
