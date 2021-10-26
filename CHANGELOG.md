@@ -1,3 +1,8 @@
+v2.6.15 [unreleased]
+-------------------
+### Bugfixes
+- [#611](https://github.com/latera/homs/pull/611) Filter current tasks by process_key.
+
 v2.6.14 [2021-10-22]
 -------------------
 ### Bugfixes

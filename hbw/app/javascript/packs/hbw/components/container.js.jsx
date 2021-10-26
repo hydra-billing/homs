@@ -18,10 +18,11 @@ modulejs.define(
       }
 
       tasks = () => {
-        const { entityCode } = this.props;
+        const { entityCode, entityTypeCode } = this.props;
         const { tasks } = this.context;
 
-        return tasks.filter(task => task.entity_code === entityCode).reverse();
+        return tasks.filter(task => task.entity_code === entityCode
+                                    && task.entity_types.includes(entityTypeCode)).reverse();
       };
 
       resetProcess = () => {

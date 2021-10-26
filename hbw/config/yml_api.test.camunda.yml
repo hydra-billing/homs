@@ -33,7 +33,7 @@ get:
     "":
       - &default_process-definition
         id: "testProcess:469:814905"
-        key: "supportRequestProcess"
+        key: "support_request"
         version: 469
         name: "Test name"
         description: null
