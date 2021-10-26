@@ -46,7 +46,7 @@ describe API::V1::ProfilesController, type: :request do
                                   'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show' => true},
                                   'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show' => true}
                                 },
-                                'order_type_code' => 'Support Request',
+                                'order_type_code' => 'support_request',
                                 'user_email'      => 'j.doe@example.com'
                               })
       end
@@ -71,7 +71,7 @@ describe API::V1::ProfilesController, type: :request do
                                     'creationDate'       => {'type' => 'datetime', 'label' => 'Creation date',       'show' => true},
                                     'callBack'           => {'type' => 'boolean',  'label' => 'Callback',            'show' => true}
                                   },
-                                  'order_type_code' => 'Support Request',
+                                  'order_type_code' => 'support_request',
                                   'user_email'      => 'j.doe@example.com'
                                 }
                               })

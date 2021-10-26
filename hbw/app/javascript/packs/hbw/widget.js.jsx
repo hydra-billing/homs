@@ -163,7 +163,7 @@ modulejs.define(
 
       setWidgetContainer = (container) => {
         this.$widgetContainer = [container];
-      }
+      };
     }
 
     return HBW;
