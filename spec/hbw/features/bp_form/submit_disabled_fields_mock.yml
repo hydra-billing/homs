@@ -20,7 +20,7 @@ get:
     - params: ''
       response:
         - id: "testProcess:469:222221"
-          key: "test_translations"
+          key: "support_request"
           version: 469
           name: "Test translations"
           description: null

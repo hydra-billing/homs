@@ -133,5 +133,11 @@ module HBW
     def entity_code(entity_class)
       variable(config[:entities].fetch(entity_class)[:entity_code_key]).value
     end
+
+    def entity_types(task, entity_class)
+      config[:entities].fetch(entity_class)[:bp_toolbar][:entity_type_buttons]
+                       .select { |_entity_type, buttons| buttons.map { |button| button[:bp_code] }.include?(task.process_key) }
+                       .keys
+    end
   end
 end

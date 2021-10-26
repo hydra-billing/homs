@@ -21,7 +21,7 @@ get:
       response:
         - &default_process-definition
           id: "testProcess:469:22221"
-          key: "supportRequestProcess"
+          key: "support_request"
           version: 469
           name: "Test name"
           description: null

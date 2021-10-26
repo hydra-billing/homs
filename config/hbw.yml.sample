@@ -18,12 +18,23 @@ hbw:
               class: 'btn btn-primary'
               fa_class: ['fas', 'user']
               bp_code: 'new_customer'
+            - name: 'Testing translations'
+              title: 'BP For Testing translations'
+              class: 'btn btn-default'
+              fa_class: ['fas', 'suitcase-rolling']
+              bp_code: 'test_translations'
           relocate_customer:
             - name: 'Relocate Customer'
               title: 'Start Relocating Customer'
               class: 'btn btn-default'
               fa_class: ['fas', 'suitcase-rolling']
               bp_code: 'relocate_customer'
+          support_request:
+            - name: 'Support Request'
+              title: 'Fill Support Request'
+              class: 'btn btn-default'
+              fa_class: 'fa fa-suitcase-rolling'
+              bp_code: 'support_request'
 
     billing_customer:
       entity_code_key: billingCustomerId
