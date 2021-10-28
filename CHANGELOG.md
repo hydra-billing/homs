@@ -2,6 +2,7 @@ v2.6.15 [unreleased]
 -------------------
 ### Bugfixes
 - [#611](https://github.com/latera/homs/pull/611) Filter current tasks by process_key.
+- [#617](https://github.com/latera/homs/pull/617) Use name field for fallback submit_select button.
 
 v2.6.14 [2021-10-22]
 -------------------
