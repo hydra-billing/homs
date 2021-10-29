@@ -53,6 +53,8 @@ v2.6.15 [2021-10-29]
 
 v2.6.14 [2021-10-22]
 -------------------
+### Features
+- [#610](https://github.com/latera/homs/pull/610) Log app start/stop and user login attempts in CEF.
 ### Bugfixes
 - [#601](https://github.com/latera/homs/pull/601) Move fontawesome to public/assets.
 - [#603](https://github.com/latera/homs/pull/603) Don't highlight multi nullable select_table.

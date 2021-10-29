@@ -18,7 +18,16 @@ module HttpBasicAuthentication
       return unless email && password
 
       user = User.find_by_email(email)
-      password == user.try(:api_token) ? sign_in(user) : raise(Unauthorized)
+
+      if password == user.try(:api_token)
+        HOMS.container[:cef_logger].log_user_event(:login, {id: user.id, email: user.email}, request.headers)
+
+        sign_in(user)
+      else
+        HOMS.container[:cef_logger].log_user_event(:failed_login, {id: nil, email: email}, request.headers)
+
+        raise(Unauthorized)
+      end
     end
   end
 

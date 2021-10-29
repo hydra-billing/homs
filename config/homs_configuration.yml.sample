@@ -18,3 +18,5 @@ greeting:
 announcement:
 
 orders_expiration_warning_days: 1
+
+cef_logger: false
