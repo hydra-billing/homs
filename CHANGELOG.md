@@ -46,7 +46,7 @@ v2.7.0 [unreleased]
 - [#594](https://github.com/latera/homs/pull/594) Get rid of Webpacker & build all assets with Webpack 5.
 - [#598](https://github.com/latera/homs/pull/598) Remove the mask option validation from the string order field.
 
-v2.6.15 [unreleased]
+v2.6.15 [2021-10-29]
 -------------------
 ### Bugfixes
 - [#611](https://github.com/latera/homs/pull/611) Filter current tasks by process_key.
