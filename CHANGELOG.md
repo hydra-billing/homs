@@ -46,7 +46,7 @@ v2.7.0 [unreleased]
 - [#594](https://github.com/latera/homs/pull/594) Get rid of Webpacker & build all assets with Webpack 5.
 - [#598](https://github.com/latera/homs/pull/598) Remove the mask option validation from the string order field.
 
-v2.6.16 [unreleased]
+v2.6.16 [2021-11-03]
 -------------------
 ### Features
 - [#610](https://github.com/latera/homs/pull/610) Log app start/stop and user login attempts in CEF.
