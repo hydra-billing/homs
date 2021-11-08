@@ -156,11 +156,11 @@ get:
                             $var == 0
                       options:
                         - name: button1
-                          label: Button 1
+                          button_text: Button 1
                           value: Button 1
                           css_class: btn btn-success btn-lg
                         - name: button2
-                          label: Button 2
+                          button_text: Button 2
                           value: Button 2
                           css_class: btn btn-danger btn-lg
                 - name: submitSelectToBeEnabledGroup
@@ -177,12 +177,12 @@ get:
                             $var == 1
                       options:
                         - name: button1
-                          label: Button 1
                           value: Button 1
+                          button_text: Button 1
                           css_class: btn btn-success btn-lg
                         - name: button2
-                          label: Button 2
                           value: Button 2
+                          button_text: Button 2
                           css_class: btn btn-danger btn-lg
                 - name: submitSelectButtonsToBeDisabledGroup
                   type: group
@@ -194,16 +194,16 @@ get:
                       css_class: col-xs-12
                       options:
                         - name: disabledButton
-                          label: Disabled button
                           value: Disabled button
+                          button_text: Disabled button
                           css_class: btn btn-success btn-lg
                           disable_if:
                             - variable: homsOrderDataZeroVariable
                               condition: >
                                 $var == 0
                         - name: enabledButton
-                          label: Enabled button
                           value: Enabled button
+                          button_text: Enabled button
                           css_class: btn btn-danger btn-lg
                           disable_if:
                             - variable: homsOrderDataZeroVariable

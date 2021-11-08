@@ -204,11 +204,11 @@ get:
                         $var == 0
                   options:
                     - name: button1
-                      label: Button 1
+                      button_text: Button 1
                       value: Button 1
                       css_class: btn btn-success btn-lg
                     - name: button2
-                      label: Button 2
+                      button_text: Button 2
                       value: Button 2
                       css_class: btn btn-danger btn-lg
             - name: submitSelectToBeVisibleGroup
@@ -225,11 +225,11 @@ get:
                         $var == 1
                   options:
                     - name: button1
-                      label: Button 1
                       value: Button 1
+                      button_text: Button 1
                       css_class: btn btn-success btn-lg
                     - name: button2
-                      label: Button 2
+                      button_text: Button 2
                       value: Button 2
                       css_class: btn btn-danger btn-lg
             - name: submitSelectButtonsToBeHiddenGroup
@@ -242,6 +242,7 @@ get:
                   css_class: col-xs-12
                   options:
                     - name: hiddenButton
+                      button_text: Hidden button
                       label: Hidden button
                       value: Hidden button
                       css_class: btn btn-success btn-lg
@@ -250,6 +251,7 @@ get:
                           condition: >
                             $var == 0
                     - name: visibleButton
+                      button_text: Visible button
                       label: Visible button
                       value: Visible button
                       css_class: btn btn-danger btn-lg
