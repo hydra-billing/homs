@@ -54,4 +54,29 @@ describe User do
       'Frank Poe'
     ]
   end
+
+  describe 'destroying' do
+    before :each do
+      @user1 = FactoryBot.create(:user, :john)
+      @user2 = FactoryBot.create(:user, :frank)
+      @order_type = FactoryBot.create(:order_type, :support_request)
+      @profile = @user1.profiles.create(order_type_id: @order_type.id,
+                                        data:          '{"qwe": 123}')
+      @order = Order.create(order_type_id: @order_type.id,
+                            user_id:       @user2.id,
+                            code:          'test_order')
+    end
+
+    it 'with profiles' do
+      @user1.destroy
+
+      expect(User.find_by(id: @user1.id)).to        be_nil
+      expect(Profile.find_by(id: @profile.id)).to   be_nil
+    end
+
+    it 'restrictred if orders present' do
+      expect { @user2.destroy }.to                 raise_error(ActiveRecord::DeleteRestrictionError)
+      expect(User.find_by(id: @user2.id)).not_to   be_nil
+    end
+  end
 end

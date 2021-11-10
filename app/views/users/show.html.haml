@@ -16,3 +16,7 @@
           = link_to t('.clear_api_token'), clear_api_token_user_path(@user), method: 'delete', class: 'btn btn-danger', data: { confirm: t('.clear_api_token_warning'), confirm_proceed: t('.yes_clear') }
         - else
           = link_to t('.generate_api_token'), generate_api_token_user_path(@user), method: 'put', class: 'btn btn-primary'
+%br
+.row
+  .col-xs-12
+    = link_to t('.delete_user'), user_path, method: 'delete', class: 'btn btn-danger'

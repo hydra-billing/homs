@@ -33,8 +33,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user.destroy
+    @user.destroy
+
     redirect_to users_path, notice: t('user_deleted')
+  rescue ActiveRecord::DeleteRestrictionError
+    flash[:alert] = t('users.destroy.user_has_orders', user_name: @user.name)
+
+    redirect_to user_path, id: @user.id
   end
 
   def edit; end
