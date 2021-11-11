@@ -1812,11 +1812,11 @@ get:
             type: submit_select
             css_class: col-xs-12
             options:
-            - name: submitSelectButton1
+            - name: Button_1
               label: Button 1
               value: Value_1
               css_class: btn btn-success btn-lg
-            - name: submitSelectButton2
+            - name: Button_2
               label: Button 2
               value: Value_2
               css_class: btn btn-danger btn-lg
