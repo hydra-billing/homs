@@ -1,4 +1,4 @@
-v2.5.2 [unreleased]
+v2.5.2 [2021-11-11]
 ### Bugfixes
 - [#616](https://github.com/latera/homs/pull/616) Use name field for fallback in submit-select components.
 
