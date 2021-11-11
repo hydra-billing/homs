@@ -50,8 +50,8 @@ feature 'BP form with existing russian translation', js: true do
       expect(page).not_to     have_content 'Group'
       expect(page).not_to     have_content 'File upload field'
       expect(page).not_to     have_content 'Checkbox field'
-      expect(page).not_to     have_content 'Button 1'
-      expect(page).not_to     have_content 'Button 2'
+      expect(page).not_to     have_content 'Button_1'
+      expect(page).not_to     have_content 'Button_2'
 
       expect_widget_presence
     end
@@ -76,8 +76,8 @@ feature 'BP form with existing russian translation', js: true do
       expect(page).to     have_content 'Group'
       expect(page).to     have_content 'File upload field'
       expect(page).to     have_content 'Checkbox field'
-      expect(page).to     have_content 'Button 1'
-      expect(page).to     have_content 'Button 2'
+      expect(page).to     have_content 'Button_1'
+      expect(page).to     have_content 'Button_2'
 
       expect(page).not_to have_content 'Тестирование переводов'
       expect(page).not_to have_content 'Форма для тестирования переводов'
