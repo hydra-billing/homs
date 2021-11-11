@@ -13,5 +13,5 @@ ru:
       fileUploadField: Поле file_opload
       homsOrderDataFileList: Поле file_list
       checkboxField: Поле checkbox
-      submitSelectButton1: Кнопка 1
-      submitSelectButton2: Кнопка 2
+      Button_1: Кнопка 1
+      Button_2: Кнопка 2
