@@ -89,7 +89,10 @@ en:
       clear_api_token_warning: Current API token will be deleted. Are you sure?
       yes_clear: Yes, delete
       yes_renew: Yes, renew
+      delete_user: Delete user
     empty: Empty
+    destroy:
+      user_has_orders: Unable to delete the user %{user_name} because he owns orders
   orders:
     new:
       title: Add order

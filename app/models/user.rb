@@ -42,4 +42,7 @@ class User < ActiveRecord::Base
   validates :last_name,   presence: true
   validates :company,     presence: true
   validates :department,  presence: true
+
+  has_many :profiles, dependent: :destroy
+  has_many :orders,   dependent: :restrict_with_exception
 end

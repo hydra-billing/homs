@@ -59,6 +59,11 @@ v2.7.0 [unreleased]
 - [#594](https://github.com/latera/homs/pull/594) Get rid of Webpacker & build all assets with Webpack 5.
 - [#598](https://github.com/latera/homs/pull/598) Remove the mask option validation from the string order field.
 
+v2.6.17 [unreleased]
+-------------------
+### Features
+- [#620](https://github.com/latera/homs/pull/620) Add deleting users.
+
 v2.6.16 [2021-11-03]
 -------------------
 ### Features
