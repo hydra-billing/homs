@@ -63,6 +63,7 @@ v2.6.17 [unreleased]
 -------------------
 ### Features
 - [#620](https://github.com/latera/homs/pull/620) Add deleting users.
+- [#613](https://github.com/latera/homs/pull/613) Fix typo in variable to display notifications.
 
 v2.6.16 [2021-11-03]
 -------------------
