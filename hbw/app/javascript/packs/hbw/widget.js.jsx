@@ -78,7 +78,7 @@ modulejs.define(
         const {
           widgetURL,
           userIdentifier,
-          showNotification,
+          showNotifications,
           locale,
           entity_class: entityClassCode
         } = this.options;
@@ -91,7 +91,7 @@ modulejs.define(
           withStoreContext({
             widgetURL,
             userIdentifier,
-            showNotification,
+            showNotifications,
             entityClassCode,
             dispatcher: this.dispatcher,
             connection: this.connection
