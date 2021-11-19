@@ -14,7 +14,7 @@ module HBW
           ]
         )
 
-        response.status == 200 && response.body || []
+        (response.status == 200 && response.body) || []
       end
 
       def cancel_process(id)
