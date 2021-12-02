@@ -1,4 +1,4 @@
-v2.6.18 [unreleased]
+v2.6.18 [2021-12-02]
 -------------------
 ### Features
 - [#620](https://github.com/latera/homs/pull/620) Add deleting users.
