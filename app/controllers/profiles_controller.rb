@@ -3,10 +3,12 @@ class ProfilesController < ApplicationController
 
   before_action :new_profile, only: :create
 
-  schema do
-    required(:label).filled(:str?)
-    required(:type).filled(:str?)
-    required(:show).filled(:bool?)
+  contract do
+    params do
+      required(:label).filled(:string)
+      required(:type).filled(:string)
+      required(:show).filled(:bool)
+    end
   end
 
   def create

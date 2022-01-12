@@ -4,16 +4,16 @@ module Validations
   end
 
   module ClassMethods
-    def schema(&block)
+    def contract(&block)
       if block
-        @schema = Dry::Validation.Form(&block)
+        @contract = Class.new(Dry::Validation::Contract, &block).new
       else
-        @schema
+        @contract
       end
     end
   end
 
   def validate(input)
-    self.class.schema.call(input.to_h)
+    self.class.contract.call(input.to_h)
   end
 end

@@ -1,5 +1,29 @@
 module HBW
   module Fields
+    class SelectTableContract < Dry::Validation::Contract
+      schema do
+        required(:rows).array(:hash) do
+          required(:name).filled(:string)
+          optional(:type).maybe(included_in?: %w(string number date))
+          optional(:alignment).maybe(included_in?: %w(left center right))
+
+          # number specific attributes
+          optional(:precision).maybe(:integer)
+          optional(:separator).maybe(:string)
+          optional(:delimiter).maybe(:string)
+
+          # date specific attributes
+          optional(:format).maybe(:string)
+        end
+      end
+
+      rule(:rows).each do
+        key.failure('invalid number') if value[:type] && value[:type] != 'number' && (value[:separator] || value[:delimiter] || value[:precision])
+
+        key.failure('invalid date') if value[:type] && value[:type] != 'date' && value[:format]
+      end
+    end
+
     class SelectTable < Select
       include ActionView::Helpers::NumberHelper
 
@@ -9,45 +33,9 @@ module HBW
 
       definition_reader :sql, :variable, :entity_class
 
-      class << self
-        def schema
-          @schema = Dry::Validation.Schema do
-            each do
-              schema do
-                configure do
-                  def correct_type?(value)
-                    value.in? %w(string number date)
-                  end
+      class_attribute :contract
 
-                  def correct_alignment?(value)
-                    value.in? %w(left center right)
-                  end
-                end
-
-                required(:name).filled(:str?)
-                optional(:type).maybe(:correct_type?)
-                optional(:alignment).maybe(:correct_alignment?)
-
-                # number specific attributes
-                optional(:precision).maybe(:int?)
-                optional(:separator).maybe(:str?)
-                optional(:delimiter).maybe(:str?)
-
-                # date specific attributes
-                optional(:format).maybe(:str?)
-
-                validate(valid_number: %i[delimiter separator precision type]) do |t_sep, d_sep, precision, type|
-                  type == 'number' || (t_sep.nil? && d_sep.nil? && precision.nil?)
-                end
-
-                validate(valid_date: %i[format type]) do |format, type|
-                  type == 'date' || format.nil?
-                end
-              end
-            end
-          end
-        end
-      end
+      self.contract = SelectTableContract.new
 
       def as_json
         {name:          name,
@@ -120,7 +108,7 @@ module HBW
           config
         end
 
-        unless self.class.schema.(rows).success?
+        unless contract.(rows: rows).success?
           raise StandardError, 'Wrong config for select table'
         end
       end

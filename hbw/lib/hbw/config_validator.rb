@@ -1,39 +1,40 @@
-require 'dry-validation'
+require 'dry-schema'
 
 module HBW
   class ConfigValidator
-    EntitySchema = Dry::Validation.Schema do
-      required(:entity_code_key).filled(:str?)
-      required(:bp_name_key).filled(:str?)
-      required(:task_list).schema do
-        required(:entity_url).filled(:str?)
-        required(:entity_url_params).each(:str?)
+    EntitySchema = Dry::Schema.JSON do
+      required(:entity_code_key).filled(:string)
+      required(:bp_name_key).filled(:string)
+      required(:task_list).hash do
+        required(:entity_url).filled(:string)
+        required(:entity_url_params).each(:string)
       end
-      optional(:bp_toolbar).schema do
-        optional(:entity_type_buttons).schema
+      optional(:bp_toolbar).hash do
+        optional(:entity_type_buttons).hash
         optional(:common_buttons).each do
           schema do
-            required(:name).filled(:str?)
-            required(:bp_code).filled(:str?)
-            optional(:title).filled(:str?)
-            optional(:class).filled(:str?)
-            optional(:fa_class).filled(:str?)
+            required(:name).filled(:string)
+            required(:bp_code).filled(:string)
+            optional(:title).filled(:string)
+            optional(:class).filled(:string)
+            optional(:fa_class).filled(:string)
           end
         end
       end
     end
 
-    ConfigSchema = Dry::Validation.Schema do
-      required(:hbw).schema do
-        required(:entities).schema
-        optional(:use_bpm_stub).filled(:bool?)
-        optional(:minio).schema do
-          optional(:endpoint).maybe(:str?)
-          optional(:access_key_id).maybe(:str?)
-          optional(:secret_access_key).maybe(:str?)
-          optional(:bucket).maybe(:str?)
-          optional(:region).maybe(:str?)
+    ConfigSchema = Dry::Schema.JSON do
+      required(:hbw).hash do
+        required(:entities).hash
+        optional(:use_bpm_stub).filled(:bool)
+        optional(:minio).hash do
+          optional(:endpoint).maybe(:string)
+          optional(:access_key_id).maybe(:string)
+          optional(:secret_access_key).maybe(:string)
+          optional(:bucket).maybe(:string)
+          optional(:region).maybe(:string)
         end
+        required(:allowed_request_origins).each(:string)
       end
     end
 

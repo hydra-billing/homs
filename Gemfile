@@ -11,7 +11,7 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'dry-auto_inject'
 gem 'dry-container'
-gem 'dry-validation', '~> 0.11.1'
+gem 'dry-validation'
 gem 'haml-rails'
 gem 'hbw', path: File.join(File.dirname(__FILE__), 'hbw')
 gem 'i18n-js', git: 'https://github.com/fnando/i18n-js', ref: '7ed2d2'
