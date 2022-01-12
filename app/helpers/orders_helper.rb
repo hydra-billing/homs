@@ -1,16 +1,16 @@
 module OrdersHelper
   EMPTY_VALUE = '—'.freeze
 
-  FILE_LIST_SCHEMA = Dry::Validation.Schema do
-    each do
-      required('url').filled
-      required('name').filled
-      required('origin_name').filled
-      required('real_name').filled
-      required('field_name').filled
-      required('upload_time').filled
-      required('end_point').filled
-      required('bucket').filled
+  FILE_LIST_SCHEMA = Dry::Schema.Params do
+    required(:file_list).array(:hash) do
+      required(:url).filled
+      required(:name).filled
+      required(:origin_name).filled
+      required(:real_name).filled
+      required(:field_name).filled
+      required(:upload_time).filled
+      required(:end_point).filled
+      required(:bucket).filled
     end
   end
 
@@ -41,7 +41,7 @@ module OrdersHelper
   def prettify_json(value)
     if value.present?
       parsed_value = JSON.parse(value)
-      if FILE_LIST_SCHEMA.(parsed_value).success?
+      if FILE_LIST_SCHEMA.(file_list: parsed_value).success?
         render partial: 'orders/file_list', locals: {files: parsed_value}
       else
         value.to_s

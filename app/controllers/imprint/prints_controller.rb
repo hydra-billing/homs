@@ -5,8 +5,10 @@ module Imprint
 
     inject['imprint_adapter', 'services.order_printing_service']
 
-    schema do
-      required(:order_code).filled(:str?)
+    contract do
+      params do
+        required(:order_code).filled(:string)
+      end
     end
 
     def print

@@ -6,22 +6,24 @@ module Imprint
 
       inject['imprint_adapter']
 
-      schema do
-        optional(:state).maybe(:int?, lteq?: 2, gteq?: 0)
-        optional(:order_type_id).maybe(:int?)
-        optional(:archived).maybe(:bool?)
-        optional(:created_at_from).maybe(:date_time?)
-        optional(:created_at_to).maybe(:date_time?)
-        optional(:estimated_exec_date_from).maybe(:date_time?)
-        optional(:estimated_exec_date_to).maybe(:date_time?)
-        optional(:custom_fields).maybe(:hash?)
-        optional(:filter).maybe(:str?)
-        optional(:user_id).maybe(:array?)
-        optional(:sort_by).maybe(:str?)
-        optional(:order).maybe(:str?)
+      contract do
+        params do
+          optional(:state).maybe(:integer, lteq?: 2, gteq?: 0)
+          optional(:order_type_id).maybe(:integer)
+          optional(:archived).maybe(:bool)
+          optional(:created_at_from).maybe(:date_time)
+          optional(:created_at_to).maybe(:date_time)
+          optional(:estimated_exec_date_from).maybe(:date_time)
+          optional(:estimated_exec_date_to).maybe(:date_time)
+          optional(:custom_fields).maybe(:hash)
+          optional(:filter).maybe(:string)
+          optional(:user_id).maybe(:array)
+          optional(:sort_by).maybe(:string)
+          optional(:order).maybe(:string)
+        end
 
-        rule(order_type_for_custom_fields: [:order_type_id, :custom_fields]) do |order_type_id, custom_fields|
-          custom_fields.filled?.then(order_type_id.filled?)
+        rule(:order_type_id) do
+          key.failure('order type is not set') if values[:custom_fields] && !key?
         end
       end
 
