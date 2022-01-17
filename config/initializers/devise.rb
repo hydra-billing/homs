@@ -1,6 +1,15 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  config.omniauth :keycloak_openid,
+                  'homs',
+                  'af9504fc-b030-405e-97b6-813220c07a7e',
+                  strategy_class: OmniAuth::Strategies::KeycloakOpenId,
+                  client_options: { 
+                    site: "http://localhost:8080",
+                    realm: "hydra",
+                  }
+
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.

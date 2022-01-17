@@ -3,8 +3,13 @@ require 'api_constraints'
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'registrations',
-    sessions:      'sessions'
+    sessions:      'sessions',
+    omniauth_callbacks: 'omniauth_callbacks'
   }
+
+  # devise_scope :user do
+  #   delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  # end
 
   get '/sign_in_by_token/:token' => 'sessions#sign_in_by_token'
 

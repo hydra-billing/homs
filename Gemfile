@@ -29,6 +29,10 @@ gem 'settingslogic'
 gem 'simple_form'
 gem 'sprockets', '~> 3.7'
 
+gem 'omniauth', '~> 2.0', '>= 2.0.4'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-keycloak', '~> 1.4'
+
 group :oracle do
   gem 'ruby-oci8', '2.2.3'
 end

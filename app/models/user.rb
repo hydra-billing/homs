@@ -25,6 +25,31 @@ class User < ActiveRecord::Base
     def empty
       @empty ||= Empty.new
     end
+
+    def from_omniauth(auth)
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user.email = auth.info.email
+        user.name = auth.info.email
+        user.last_name = auth.info.email
+        user.company = auth.info.email
+        user.department = auth.info.email
+        user.password = Devise.friendly_token[0, 20]
+        user.provider = auth.provider
+        user.uid = auth.uid
+      end
+    end
+
+    def new_with_session(params, session)
+      super.tap do |user|
+        if data = session["devise.keycloakopenid_data"] # && session["devise.keycloakopenid_data"]["extra"]["raw_info"]
+          user.email = data["info"]["email"] if user.email.blank?
+          user.name = data["info"]["email"] if user.name.blank?
+          user.last_name = data["info"]["email"] if user.last_name.blank?
+          user.company = data["info"]["email"] if user.company.blank?
+          user.department = data["info"]["email"] if user.department.blank?
+        end
+      end
+    end
   end
 
   include HasRole
@@ -36,7 +61,8 @@ class User < ActiveRecord::Base
     [name, last_name].join ' '
   end
 
-  devise :database_authenticatable, :rememberable, :trackable, :validatable, :encryptable
+  devise :database_authenticatable, :rememberable, :trackable, :validatable, :encryptable,
+         :registerable, :omniauthable, omniauth_providers: %i[keycloakopenid]
 
   validates :name,        presence: true
   validates :last_name,   presence: true

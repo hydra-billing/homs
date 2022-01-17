@@ -3,6 +3,7 @@
   <%- if @greeting.present?%>
     <div class="greeting alert" role="alert"><h4><p class="greeting-text text-center"><%= @greeting.html_safe %></p></h4></div>
   <% end -%>
+
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
     <h3><%= t('.title') %></h3>
     <%= render partial: 'devise/shared/error_messages', resource: resource %>
@@ -30,4 +31,9 @@
         </div>
       <% end -%>
   <% end %>
+
+  <hr>
+  <%= button_to "Connect to Keycloak", user_keycloakopenid_omniauth_authorize_path, method: :post, data: {turbo: "false"}, class: "btn btn-primary pull-right" %>
+  <hr>
+
 </div>
