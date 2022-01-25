@@ -3,7 +3,8 @@ require 'api_constraints'
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'registrations',
-    sessions:      'sessions'
+    sessions:      'sessions',
+    omniauth_callbacks: 'omniauth_callbacks',
   }
 
   get '/sign_in_by_token/:token' => 'sessions#sign_in_by_token'

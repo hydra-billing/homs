@@ -55,6 +55,7 @@ en:
         forgot_password: Forgot password?
         remember_me: Remember me
         submit: Sign in
+        sign_in_by_sso: Sign in by SSO
   helpers:
     enter_state: Order status
     enter_user: User

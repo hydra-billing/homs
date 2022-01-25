@@ -30,4 +30,8 @@
         </div>
       <% end -%>
   <% end %>
+
+  <hr>
+    <%= button_to t('.sign_in_by_sso'), user_keycloakopenid_omniauth_authorize_path, method: :post, data: {turbo: "false"}, class: "btn btn-primary pull-right" %>
+  <hr>
 </div>
