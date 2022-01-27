@@ -1,4 +1,4 @@
-<% use_sso_only = Rails.application.config.app[:SSO][:enabled] && !Rails.application.config.app[:SSO][:use_regular_login] %>
+<% use_sso_only = Rails.application.config.app[:SSO].fetch(:enabled) && !Rails.application.config.app[:SSO].fetch(:use_regular_login) %>
 <% content_for(:title, t('.title')) %>
 <div class="authform">
   <%- if @greeting.present?%>
@@ -34,7 +34,7 @@
           <%= f.submit t('.submit'), :class => 'btn btn-primary btn-block' %>
         </div>
       <% end %>
-      <%- if Rails.application.config.app[:SSO][:enabled] %>
+      <%- if Rails.application.config.app[:SSO].fetch(:enabled) %>
         <div class="form-group">
           <%= link_to t('.single_sign_on'), '/redirect_to_keycloak', type: 'button', class: "btn btn-primary btn-block" %>
         </div>

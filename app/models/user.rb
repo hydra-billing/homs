@@ -25,6 +25,16 @@ class User < ActiveRecord::Base
     def empty
       @empty ||= Empty.new
     end
+
+    def from_keycloack(user_data)
+      where(email: user_data[:email]).first_or_create do |user|
+        user.email = user_data[:email]
+        user.name = user_data[:name]
+        user.last_name = user_data[:last_name]
+        user.company = user_data[:company]
+        user.department = user_data[:department]
+      end
+    end
   end
 
   include HasRole

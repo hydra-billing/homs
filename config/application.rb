@@ -45,11 +45,11 @@ module HOMS
 
     config.action_controller.permit_all_parameters = true
 
-    config.cache_store = :redis_cache_store, {url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}/0"}
-
     require Rails.root.join('lib/homs_config')
-    config.app = HomsConfig.load(%w(config/homs_configuration.default.yml
-                                    config/homs_configuration.yml))
+    config.app = Settings::Homs
+
+    redis_config = config.app.fetch(:redis, {})
+    config.cache_store = :redis_cache_store, {url: "redis://#{redis_config.fetch(:host)}:#{redis_config.fetch(:port)}/0"}
 
     require Rails.root.join('lib/imprint')
 

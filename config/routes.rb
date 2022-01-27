@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   get '/sign_in_by_token/:token' => 'sessions#sign_in_by_token'
 
+  devise_scope :user do
+    get  '/redirect_to_keycloak', to: 'sessions#redirect_to_keycloak'
+    get  '/authenticate_by_keycloak', to: 'sessions#authenticate_by_keycloak'
+  end
+
   root to: 'orders#index'
 
   resources :users do
