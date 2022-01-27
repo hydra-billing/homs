@@ -33,4 +33,32 @@ class SessionsController < Devise::SessionsController
   def token_user
     User.find_by!(email: token_config.fetch(:sign_in_as))
   end
+
+  def redirect_to_keycloak
+    redirect_to HOMS.container[:keycloak_client].auth_url
+  end
+
+  def authenticate_by_keycloak
+    HOMS.container[:keycloak_client].authenticate!(params['code']).either(
+      proc do |session_state|
+        cookies['session_state'] = {value: session_state, httponly: true}
+
+        sign_in(keycloak_user(session_state))
+        redirect_to params.fetch(:redirect_to, '/')
+      end,
+      proc do
+        flash[:error] = t('devise.failure.invalid', authentication_keys: t('devise.login'))
+        redirect_to new_user_session_url
+      end
+    )
+  end
+
+  def destroy
+    if use_keycloak?
+      sign_out current_user
+      redirect_to HOMS.container[:keycloak_client].logout!(cookies['session_state'])
+    else
+      super
+    end
+  end
 end

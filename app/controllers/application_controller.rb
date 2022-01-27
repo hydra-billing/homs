@@ -8,7 +8,48 @@ class ApplicationController < ActionController::Base
 
   before_action -> { ENV['DISABLE_PRY'] = nil }
 
+  def authenticate_user!
+    if use_keycloak?
+      session_state = cookies['session_state']
+      authorization_result = HOMS.container[:keycloak_client].authorize!(session_state)
+
+      if authorization_result.failure? && current_user
+        sign_out @user
+      end
+    end
+
+    super
+  end
+
   protected
+
+  def keycloak_user(session_state)
+    HOMS.container[:keycloak_client].access_token(session_state).bind do |access_token|
+      User.from_keycloack(access_token)
+    end
+  end
+
+  def use_keycloak?
+    return false unless keycloak_enabled?
+
+    if keycloak_enabled? && !regular_login_enabled?
+      true
+    else
+      authenticated_by_keycloak?
+    end
+  end
+
+  def keycloak_enabled?
+    Rails.application.config.app.fetch(:SSO, {}).fetch(:enabled)
+  end
+
+  def regular_login_enabled?
+    Rails.application.config.app.fetch(:SSO, {}).fetch(:use_regular_login)
+  end
+
+  def authenticated_by_keycloak?
+    HOMS.container[:keycloak_client]&.authenticated?(cookies['session_state'])
+  end
 
   def json_request?
     request.format.json?

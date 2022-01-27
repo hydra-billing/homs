@@ -1,25 +1,19 @@
-class HomsConfig
-  class << self
-    def load(paths)
-      paths.map! { |path| Rails.root.join(path) }
+require 'settingslogic'
 
-      configs = paths.select { |p| File.exist?(p) && File.read(p).present? }.map { |p| YAML.load(File.read(p)) }
-      config = configs.reduce(:deep_merge).deep_symbolize_keys
+module Settings
+  class Homs < Settingslogic
+    source Rails.root.join('config/homs_configuration.default.yml')
 
-      new(config)
+    custom_config_path = Rails.root.join('config/homs_configuration.yml')
+
+    if File.exist?(custom_config_path) && File.read(custom_config_path).present?
+      custom_settings = Settings::Homs.new(custom_config_path)
+      instance.deep_merge!(custom_settings)
+      instance.deep_symbolize_keys!
     end
 
-    def config_key(*keys)
-      keys.each do |key|
-        define_method(key) { self[key] }
-      end
+    def self.fetch(key, default = nil)
+      instance[key] || default
     end
-  end
-
-  config_key :locale
-  delegate :[], :fetch, to: :@value
-
-  def initialize(value)
-    @value = value
   end
 end
