@@ -55,6 +55,7 @@ ru:
         forgot_password: Забыли пароль?
         remember_me: Запомнить меня
         submit: Войти
+        single_sign_on: Единый вход (SSO)
   helpers:
     enter_state: Состояние заказа
     enter_user: Пользователь

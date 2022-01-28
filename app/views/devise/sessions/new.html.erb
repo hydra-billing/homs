@@ -1,3 +1,4 @@
+<% use_sso_only = Rails.application.config.app[:SSO][:enabled] && !Rails.application.config.app[:SSO][:use_regular_login] %>
 <% content_for(:title, t('.title')) %>
 <div class="authform">
   <%- if @greeting.present?%>
@@ -10,24 +11,33 @@
       <%- if devise_mapping.registerable? %>
         <%= link_to t('.sign_up'), new_registration_path(resource_name), class: 'right'  %>
       <% end -%>
-      <%= f.email_field :email, :autofocus => true, class: 'form-control floating-label', placeholder: User.human_attribute_name(:email) %>
+      <%= f.email_field :email, :autofocus => !use_sso_only, class: 'form-control floating-label', placeholder: User.human_attribute_name(:email), disabled: use_sso_only %>
     </div>
     <div class="form-group">
       <%- if devise_mapping.recoverable? %>
         <%= link_to t('.forgot_password'), new_password_path(resource_name), class: 'right', tabindex: 5 %>
       <% end -%>
-      <%= f.password_field :password, class: 'form-control floating-label', placeholder: User.human_attribute_name(:password) %>
+      <%= f.password_field :password, class: 'form-control floating-label', placeholder: User.human_attribute_name(:password),  disabled: use_sso_only %>
     </div>
-      <%= f.submit t('.submit'), :class => 'btn btn-primary pull-right' %>
       <% if devise_mapping.rememberable? -%>
         <div class="checkbox" style="width:150px">
           <label class="custom_boolean checkbox">
-            <%= f.check_box :remember_me %>
+            <%= f.check_box :remember_me, disabled: use_sso_only %>
             <span>
               <%= t('.remember_me') %>
             </span>
           </label>
         </div>
       <% end -%>
+      <%- unless use_sso_only %>
+        <div class="form-group">
+          <%= f.submit t('.submit'), :class => 'btn btn-primary btn-block' %>
+        </div>
+      <% end %>
+      <%- if Rails.application.config.app[:SSO][:enabled] %>
+        <div class="form-group">
+          <%= link_to t('.single_sign_on'), '/redirect_to_keycloak', type: 'button', class: "btn btn-primary btn-block" %>
+        </div>
+      <% end %>
   <% end %>
 </div>

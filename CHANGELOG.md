@@ -53,6 +53,7 @@ v2.7.0 [unreleased]
 - [#604](https://github.com/latera/homs/pull/604) Add customization for CancelProcessButton.
 - [#609](https://github.com/latera/homs/pull/609) Add `required` property to radio_button.
 - [#629](https://github.com/latera/homs/pull/629) Update dry to 1.x.x.
+- [#632](https://github.com/latera/homs/pull/632) Make a login form with SSO.
 
 ### Refactoring
 - [#592](https://github.com/latera/homs/pull/592) Replace memcached with redis.
