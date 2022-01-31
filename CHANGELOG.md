@@ -1,3 +1,8 @@
+v2.6.19 [unreleased]
+-------------------
+### Features
+- [#633](https://github.com/latera/homs/pull/633) Add disable_if/delete_if for submit_select buttons.
+
 v2.6.18 [2021-12-02]
 -------------------
 ### Features
