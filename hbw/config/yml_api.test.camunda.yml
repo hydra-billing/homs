@@ -168,6 +168,9 @@ get:
       - <<: *default_process-definition
         id: "testProcess:38:38"
         deploymentId: "38"
+      - <<: *default_process-definition
+        id: "testProcess:39:39"
+        deploymentId: "39"
 
   # form definitions
   task/816011/deployed-form: &form_with_everything
@@ -368,140 +371,6 @@ get:
           delete_if:
             - variable: homsOrderDataZeroVariable
               condition: $var == 0
-        - name: submitSelectToBeDisabledGroup
-          type: group
-          label: submit_select to be disabled group
-          css_class: col-xs-12
-          fields:
-            - name: submitSelectToBeDisabled
-              type: submit_select
-              css_class: col-xs-12
-              disable_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: >
-                    $var == 0
-              options:
-                - name: button1
-                  label: Button 1
-                  value: Button 1
-                  css_class: btn btn-success btn-lg
-                - name: button2
-                  label: Button 2
-                  value: Button 2
-                  css_class: btn btn-danger btn-lg
-        - name: submitSelectToBeEnabledGroup
-          type: group
-          label: submit_select to be enabled group
-          css_class: col-xs-12
-          fields:
-            - name: submitSelectToBeEnabled
-              type: submit_select
-              css_class: col-xs-12
-              disable_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: >
-                    $var == 1
-              options:
-                - name: button1
-                  label: Button 1
-                  value: Button 1
-                  css_class: btn btn-success btn-lg
-                - name: button2
-                  label: Button 2
-                  value: Button 2
-                  css_class: btn btn-danger btn-lg
-        - name: submitSelectButtonsToBeDisabledGroup
-          type: group
-          label: submit_select buttons to be disabled group
-          css_class: col-xs-12
-          fields:
-            - name: submitSelectButtonsToBeDisabled
-              type: submit_select
-              css_class: col-xs-12
-              options:
-                - name: disabledButton
-                  label: Disabled button
-                  value: Disabled button
-                  css_class: btn btn-success btn-lg
-                  disable_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: >
-                        $var == 0
-                - name: enabledButton
-                  label: Enabled button
-                  value: Enabled button
-                  css_class: btn btn-danger btn-lg
-                  disable_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: >
-                        $var == 1
-        - name: submitSelectToBeHiddenGroup
-          type: group
-          label: submit_select to be hidden group
-          css_class: col-xs-12
-          fields:
-            - name: submitSelectToBeHidden
-              type: submit_select
-              css_class: col-xs-12
-              delete_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: >
-                    $var == 0
-              options:
-                - name: button1
-                  label: Button 1
-                  value: Button 1
-                  css_class: btn btn-success btn-lg
-                - name: button2
-                  label: Button 2
-                  value: Button 2
-                  css_class: btn btn-danger btn-lg
-        - name: submitSelectToBeVisibleGroup
-          type: group
-          label: submit_select to be visible group
-          css_class: col-xs-12
-          fields:
-            - name: submitSelectToBeVisible
-              type: submit_select
-              css_class: col-xs-12
-              delete_if:
-                - variable: homsOrderDataZeroVariable
-                  condition: >
-                    $var == 1
-              options:
-                - name: button1
-                  label: Button 1
-                  value: Button 1
-                  css_class: btn btn-success btn-lg
-                - name: button2
-                  label: Button 2
-                  value: Button 2
-                  css_class: btn btn-danger btn-lg
-        - name: submitSelectButtonsToBeHiddenGroup
-          type: group
-          label: submit_select buttons to be hidden group
-          css_class: col-xs-12
-          fields:
-            - name: submitSelectButtonsToBeHidden
-              type: submit_select
-              css_class: col-xs-12
-              options:
-                - name: hiddenButton
-                  label: Hidden button
-                  value: Hidden button
-                  css_class: btn btn-success btn-lg
-                  delete_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: >
-                        $var == 0
-                - name: visibleButton
-                  label: Visible button
-                  value: Visible button
-                  css_class: btn btn-danger btn-lg
-                  delete_if:
-                    - variable: homsOrderDataZeroVariable
-                      condition: >
-                        $var == 1
 
   "task/53452/deployed-form":
     "": |
@@ -2663,6 +2532,146 @@ get:
                 condition: >
                   $var == true
 
+  task/111139/deployed-form:
+    "": |
+      form:
+        css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4
+        fields:
+          - name: submitSelectToBeDisabledGroup
+            type: group
+            label: submit_select to be disabled group
+            css_class: col-xs-12
+            fields:
+              - name: submitSelectToBeDisabled
+                type: submit_select
+                css_class: col-xs-12
+                disable_if:
+                  - variable: homsOrderDataZeroVariable
+                    condition: >
+                      $var == 0
+                options:
+                  - name: button1
+                    label: Button 1
+                    value: Button 1
+                    css_class: btn btn-success btn-lg
+                  - name: button2
+                    label: Button 2
+                    value: Button 2
+                    css_class: btn btn-danger btn-lg
+          - name: submitSelectToBeEnabledGroup
+            type: group
+            label: submit_select to be enabled group
+            css_class: col-xs-12
+            fields:
+              - name: submitSelectToBeEnabled
+                type: submit_select
+                css_class: col-xs-12
+                disable_if:
+                  - variable: homsOrderDataZeroVariable
+                    condition: >
+                      $var == 1
+                options:
+                  - name: button1
+                    label: Button 1
+                    value: Button 1
+                    css_class: btn btn-success btn-lg
+                  - name: button2
+                    label: Button 2
+                    value: Button 2
+                    css_class: btn btn-danger btn-lg
+          - name: submitSelectButtonsToBeDisabledGroup
+            type: group
+            label: submit_select buttons to be disabled group
+            css_class: col-xs-12
+            fields:
+              - name: submitSelectButtonsToBeDisabled
+                type: submit_select
+                css_class: col-xs-12
+                options:
+                  - name: disabledButton
+                    label: Disabled button
+                    value: Disabled button
+                    css_class: btn btn-success btn-lg
+                    disable_if:
+                      - variable: homsOrderDataZeroVariable
+                        condition: >
+                          $var == 0
+                  - name: enabledButton
+                    label: Enabled button
+                    value: Enabled button
+                    css_class: btn btn-danger btn-lg
+                    disable_if:
+                      - variable: homsOrderDataZeroVariable
+                        condition: >
+                          $var == 1
+          - name: submitSelectToBeHiddenGroup
+            type: group
+            label: submit_select to be hidden group
+            css_class: col-xs-12
+            fields:
+              - name: submitSelectToBeHidden
+                type: submit_select
+                css_class: col-xs-12
+                delete_if:
+                  - variable: homsOrderDataZeroVariable
+                    condition: >
+                      $var == 0
+                options:
+                  - name: button1
+                    label: Button 1
+                    value: Button 1
+                    css_class: btn btn-success btn-lg
+                  - name: button2
+                    label: Button 2
+                    value: Button 2
+                    css_class: btn btn-danger btn-lg
+          - name: submitSelectToBeVisibleGroup
+            type: group
+            label: submit_select to be visible group
+            css_class: col-xs-12
+            fields:
+              - name: submitSelectToBeVisible
+                type: submit_select
+                css_class: col-xs-12
+                delete_if:
+                  - variable: homsOrderDataZeroVariable
+                    condition: >
+                      $var == 1
+                options:
+                  - name: button1
+                    label: Button 1
+                    value: Button 1
+                    css_class: btn btn-success btn-lg
+                  - name: button2
+                    label: Button 2
+                    value: Button 2
+                    css_class: btn btn-danger btn-lg
+          - name: submitSelectButtonsToBeHiddenGroup
+            type: group
+            label: submit_select buttons to be hidden group
+            css_class: col-xs-12
+            fields:
+              - name: submitSelectButtonsToBeHidden
+                type: submit_select
+                css_class: col-xs-12
+                options:
+                  - name: hiddenButton
+                    label: Hidden button
+                    value: Hidden button
+                    css_class: btn btn-success btn-lg
+                    delete_if:
+                      - variable: homsOrderDataZeroVariable
+                        condition: >
+                          $var == 0
+                  - name: visibleButton
+                    label: Visible button
+                    value: Visible button
+                    css_class: btn btn-danger btn-lg
+                    delete_if:
+                      - variable: homsOrderDataZeroVariable
+                        condition: >
+                          $var == 1
+
   # task variables
   task/816011/variables:
     "":
@@ -3286,6 +3295,17 @@ get:
       dependentRadioButton:
         type: "string"
         value: ""
+  task/111139/variables:
+    "":
+      homsOrderCode:
+        type: "string"
+        value: "ORD-39"
+      homsOrderDataZeroVariable:
+        type: "number"
+        value: 0
+      homsOrderDataOneVariable:
+        type: "number"
+        value: 1
 
   task/816011:
     "": &default_tasks
@@ -3589,6 +3609,13 @@ get:
       formKey: "test_form_with_dynamic_conditions.yml"
       processInstanceId: 38
       processDefinitionId: "testProcess:38:38"
+  task/111139:
+    "":
+      <<: *default_tasks
+      id: "111139"
+      formKey: "test_form.yml"
+      processInstanceId: 39
+      processDefinitionId: "testProcess:39:39"
 
 put: {}
 patch: {}
@@ -3794,6 +3821,11 @@ post:
         formKey: "test_form_with_dynamic_conditions.yml"
         processInstanceId: 38
         processDefinitionId: "testProcess:38:38"
+      - <<: *default_tasks
+        id: "111139"
+        formKey: "test_form.yml"
+        processInstanceId: 39
+        processDefinitionId: "testProcess:39:39"
     "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%":
       - <<: *default_tasks
         id: "111124"
@@ -4044,6 +4076,11 @@ post:
         - <<: *default_process-instances
           id: "111138"
           processDefinitionId: "testProcess:38:38"
+    "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-39&variables[][operator]=eq":
+      data:
+        - <<: *default_process-instances
+          id: "111139"
+          processDefinitionId: "testProcess:39:39"
 
   task/816011/submit-form:
     "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456":
@@ -4084,7 +4121,7 @@ post:
     "userId=demo": null
 
   variable-instance:
-    "processInstanceIdIn[]=814972&processInstanceIdIn[]=2&processInstanceIdIn[]=3&processInstanceIdIn[]=4&processInstanceIdIn[]=5&processInstanceIdIn[]=6&processInstanceIdIn[]=7&processInstanceIdIn[]=8&processInstanceIdIn[]=9&processInstanceIdIn[]=10&processInstanceIdIn[]=11&processInstanceIdIn[]=12&processInstanceIdIn[]=13&processInstanceIdIn[]=14&processInstanceIdIn[]=15&processInstanceIdIn[]=16&processInstanceIdIn[]=17&processInstanceIdIn[]=18&processInstanceIdIn[]=19&processInstanceIdIn[]=20&processInstanceIdIn[]=21&processInstanceIdIn[]=22&processInstanceIdIn[]=23&processInstanceIdIn[]=24&processInstanceIdIn[]=25&processInstanceIdIn[]=26&processInstanceIdIn[]=27&processInstanceIdIn[]=28&processInstanceIdIn[]=29&processInstanceIdIn[]=30&processInstanceIdIn[]=31&processInstanceIdIn[]=32&processInstanceIdIn[]=33&processInstanceIdIn[]=34&processInstanceIdIn[]=35&processInstanceIdIn[]=36&processInstanceIdIn[]=37&processInstanceIdIn[]=38&variableName=homsOrderCode":
+    "processInstanceIdIn[]=814972&processInstanceIdIn[]=2&processInstanceIdIn[]=3&processInstanceIdIn[]=4&processInstanceIdIn[]=5&processInstanceIdIn[]=6&processInstanceIdIn[]=7&processInstanceIdIn[]=8&processInstanceIdIn[]=9&processInstanceIdIn[]=10&processInstanceIdIn[]=11&processInstanceIdIn[]=12&processInstanceIdIn[]=13&processInstanceIdIn[]=14&processInstanceIdIn[]=15&processInstanceIdIn[]=16&processInstanceIdIn[]=17&processInstanceIdIn[]=18&processInstanceIdIn[]=19&processInstanceIdIn[]=20&processInstanceIdIn[]=21&processInstanceIdIn[]=22&processInstanceIdIn[]=23&processInstanceIdIn[]=24&processInstanceIdIn[]=25&processInstanceIdIn[]=26&processInstanceIdIn[]=27&processInstanceIdIn[]=28&processInstanceIdIn[]=29&processInstanceIdIn[]=30&processInstanceIdIn[]=31&processInstanceIdIn[]=32&processInstanceIdIn[]=33&processInstanceIdIn[]=34&processInstanceIdIn[]=35&processInstanceIdIn[]=36&processInstanceIdIn[]=37&processInstanceIdIn[]=38&processInstanceIdIn[]=39&variableName=homsOrderCode":
       - processInstanceId: 814972
         type: string
         name: homsOrderCode
@@ -4237,6 +4274,10 @@ post:
         type: string
         name: homsOrderCode
         value: ORD-38
+      - processInstanceId: 39
+        type: string
+        name: homsOrderCode
+        value: ORD-39
 
     variableName=homsOrderCode: []
 

@@ -18,7 +18,7 @@ const HBWSubmitSelectButton = ({
   const cssClass = cx(params.css_class, { buttonDisabled });
   const faClass = cx(params.fa_class, { buttonDisabled });
 
-  const label = env.bpTranslator(`${task.process_key}.${task.key}.${params.name}`, {}, params.label);
+  const label = env.bpTranslator(`${task.process_key}.${task.key}.${params.name}`, {}, params.name);
   const buildButton = () => (
       <button
         type="submit"
