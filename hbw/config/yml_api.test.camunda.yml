@@ -368,6 +368,140 @@ get:
           delete_if:
             - variable: homsOrderDataZeroVariable
               condition: $var == 0
+        - name: submitSelectToBeDisabledGroup
+          type: group
+          label: submit_select to be disabled group
+          css_class: col-xs-12
+          fields:
+            - name: submitSelectToBeDisabled
+              type: submit_select
+              css_class: col-xs-12
+              disable_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: >
+                    $var == 0
+              options:
+                - name: button1
+                  label: Button 1
+                  value: Button 1
+                  css_class: btn btn-success btn-lg
+                - name: button2
+                  label: Button 2
+                  value: Button 2
+                  css_class: btn btn-danger btn-lg
+        - name: submitSelectToBeEnabledGroup
+          type: group
+          label: submit_select to be enabled group
+          css_class: col-xs-12
+          fields:
+            - name: submitSelectToBeEnabled
+              type: submit_select
+              css_class: col-xs-12
+              disable_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: >
+                    $var == 1
+              options:
+                - name: button1
+                  label: Button 1
+                  value: Button 1
+                  css_class: btn btn-success btn-lg
+                - name: button2
+                  label: Button 2
+                  value: Button 2
+                  css_class: btn btn-danger btn-lg
+        - name: submitSelectButtonsToBeDisabledGroup
+          type: group
+          label: submit_select buttons to be disabled group
+          css_class: col-xs-12
+          fields:
+            - name: submitSelectButtonsToBeDisabled
+              type: submit_select
+              css_class: col-xs-12
+              options:
+                - name: disabledButton
+                  label: Disabled button
+                  value: Disabled button
+                  css_class: btn btn-success btn-lg
+                  disable_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: >
+                        $var == 0
+                - name: enabledButton
+                  label: Enabled button
+                  value: Enabled button
+                  css_class: btn btn-danger btn-lg
+                  disable_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: >
+                        $var == 1
+        - name: submitSelectToBeHiddenGroup
+          type: group
+          label: submit_select to be hidden group
+          css_class: col-xs-12
+          fields:
+            - name: submitSelectToBeHidden
+              type: submit_select
+              css_class: col-xs-12
+              delete_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: >
+                    $var == 0
+              options:
+                - name: button1
+                  label: Button 1
+                  value: Button 1
+                  css_class: btn btn-success btn-lg
+                - name: button2
+                  label: Button 2
+                  value: Button 2
+                  css_class: btn btn-danger btn-lg
+        - name: submitSelectToBeVisibleGroup
+          type: group
+          label: submit_select to be visible group
+          css_class: col-xs-12
+          fields:
+            - name: submitSelectToBeVisible
+              type: submit_select
+              css_class: col-xs-12
+              delete_if:
+                - variable: homsOrderDataZeroVariable
+                  condition: >
+                    $var == 1
+              options:
+                - name: button1
+                  label: Button 1
+                  value: Button 1
+                  css_class: btn btn-success btn-lg
+                - name: button2
+                  label: Button 2
+                  value: Button 2
+                  css_class: btn btn-danger btn-lg
+        - name: submitSelectButtonsToBeHiddenGroup
+          type: group
+          label: submit_select buttons to be hidden group
+          css_class: col-xs-12
+          fields:
+            - name: submitSelectButtonsToBeHidden
+              type: submit_select
+              css_class: col-xs-12
+              options:
+                - name: hiddenButton
+                  label: Hidden button
+                  value: Hidden button
+                  css_class: btn btn-success btn-lg
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: >
+                        $var == 0
+                - name: visibleButton
+                  label: Visible button
+                  value: Visible button
+                  css_class: btn btn-danger btn-lg
+                  delete_if:
+                    - variable: homsOrderDataZeroVariable
+                      condition: >
+                        $var == 1
 
   "task/53452/deployed-form":
     "": |

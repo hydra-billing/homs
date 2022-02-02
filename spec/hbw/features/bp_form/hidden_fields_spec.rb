@@ -60,4 +60,21 @@ feature 'Control fields on form', js: true do
   scenario 'for text' do
     expect(page).not_to have_selector "[name='homsOrderDataSomeText']"
   end
+
+  scenario 'for submit_select' do
+    in_group_with_label('submit_select to be hidden group') do |group|
+      expect(group).not_to have_content 'Button 1'
+      expect(group).not_to have_content 'Button 2'
+    end
+
+    in_group_with_label('submit_select to be visible group') do |group|
+      expect(group).to have_content 'Button 1'
+      expect(group).to have_content 'Button 2'
+    end
+
+    in_group_with_label('submit_select buttons to be hidden group') do |group|
+      expect(group).not_to have_content 'Hidden button'
+      expect(group).to have_content 'Visible button'
+    end
+  end
 end
