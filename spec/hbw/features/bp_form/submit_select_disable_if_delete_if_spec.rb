@@ -34,7 +34,6 @@ feature 'Control fields on form', js: true do
     end
   end
 
-
   scenario 'delete_if for submit_select' do
     in_group_with_label('submit_select to be hidden group') do |group|
       expect(group).not_to have_content 'button1'
