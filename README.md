@@ -103,9 +103,8 @@ Requirements:
 * [Keycloak](https://www.keycloak.org/)
 
 For using SSO with HOMS:
-
-1. Add user attributes in keycloak with prefix `homs_`: `homs_company`, `homs_department`, `homs_email`, `homs_last_name`, `homs_name`.
-1. Add mappers in keycloak without prefix:
+1. Add [user attributes](https://www.keycloak.org/docs/latest/server_admin/index.html#proc-configuring-user-attributes_server_administration_guide) in Keycloak with prefix `homs_`: `homs_company`, `homs_department`, `homs_email`, `homs_last_name`, `homs_name`.
+1. Add [mappers](https://www.keycloak.org/docs/latest/server_admin/index.html#_protocol-mappers) in Keycloak without prefix:
 
 Name | Mapper type | User attribute | Token clain name | Claim JSON type | Add to ID token | Add to access token | Add to userinfo | Multivalued | Aggregate attributes values 
 --- | --- | --- | --- |--- |--- |--- |--- |--- |--- 
@@ -115,6 +114,19 @@ Name | Mapper type | User attribute | Token clain name | Claim JSON type | Add t
 `last_name` | `User Attribute` | `last_name` | `last_name` | string | On | On | On | Off | Off 
 `name` | `User Attribute` | `name` | `name` | string | On | On | On | Off | Off 
 
+3. Add to HOMS config file `homs_configuration.yml`:
+```
+SSO:
+  enabled: true
+  use_regular_login: true
+  keycloak:
+    auth_server_url: "http://keycloak_host:keycloak_port/auth/"
+    realm: hydra
+    client_id: homs
+    redirect_uri: "http://homs_host:homs_port/authenticate_by_keycloak"
+    secret: "af9504fc-b030-405e-97b6-813220c07a7e"
+    logout_redirect: "http://homs_host:homs_port"
+```
 ## Contributing/Development
 
 The general development process is:
