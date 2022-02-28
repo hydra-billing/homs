@@ -98,6 +98,23 @@ You can login to [Camunda Admin interface](http://localhost:8766/camunda) with c
     ```
 1. Log in at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
+### Work with SSO
+Requirements:
+* [Keycloak](https://www.keycloak.org/)
+
+For using SSO with HOMS:
+
+1. Add user attributes in keycloak with prefix `homs_`: `homs_company`, `homs_department`, `homs_email`, `homs_last_name`, `homs_name`.
+1. Add mappers in keycloak without prefix:
+
+Name | Mapper type | User attribute | Token clain name | Claim JSON type | Add to ID token | Add to access token | Add to userinfo | Multivalued | Aggregate attributes values 
+--- | --- | --- | --- |--- |--- |--- |--- |--- |--- 
+`company` | `User Attribute` | `company` | `company` | string | On | On | On | Off | Off 
+`department` | `User Attribute` | `department` | `department` | string | On | On | On | Off | Off 
+`email` | `User Attribute` | `email` | `email` | string | On | On | On | Off | Off 
+`last_name` | `User Attribute` | `last_name` | `last_name` | string | On | On | On | Off | Off 
+`name` | `User Attribute` | `name` | `name` | string | On | On | On | Off | Off 
+
 ## Contributing/Development
 
 The general development process is:
