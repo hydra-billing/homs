@@ -1,7 +1,8 @@
 module HBW
   class BaseController < ActionController::Base
     include Controller
-    include HttpBasicAuthentication
+    include HttpBasicAuthentication if !keycloak_enabled?
+    include KeycloakAuthentication if keycloak_enabled?
     include HBW::Logger
     before_action :start, unless: -> { Rails.env.test? }
     after_action :log, unless: -> { Rails.env.test? }
