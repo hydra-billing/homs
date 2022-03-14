@@ -42,6 +42,7 @@ v2.7.0 [unreleased]
 
 
 ### Features
+- [#638](https://github.com/latera/homs/pull/638) Improve SSO error messages
 - [#631](https://github.com/latera/homs/pull/631) Add authorization by SSO (with Keycloak)
 - [#583](https://github.com/latera/homs/pull/583) Add the output of errors for the availability of the Сamunda service to the widget.
 - [#562](https://github.com/latera/homs/pull/562) Bring in TypeScript into the project.

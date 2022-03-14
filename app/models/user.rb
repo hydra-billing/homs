@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
         user.last_name = user_data[:last_name]
         user.company = user_data[:company]
         user.department = user_data[:department]
+        user.password = Devise.friendly_token
       end
     end
   end
