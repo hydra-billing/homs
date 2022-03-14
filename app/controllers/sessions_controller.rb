@@ -1,4 +1,7 @@
 class SessionsController < Devise::SessionsController
+  include Dry::Monads[:result]
+  include Dry::Monads::Do.for(:get_user)
+
   skip_before_action :assert_is_devise_resource!, :configure_permitted_parameters,
                      only: :sign_in_by_token
 
@@ -39,18 +42,23 @@ class SessionsController < Devise::SessionsController
   end
 
   def authenticate_by_keycloak
-    HOMS.container[:keycloak_client].authenticate!(params['code']).either(
-      proc do |session_state|
-        cookies['session_state'] = {value: session_state, httponly: true}
+    user = get_user(params['code'])
 
-        sign_in(keycloak_user(session_state))
-        redirect_to params.fetch(:redirect_to, '/')
-      end,
-      proc do
-        flash[:error] = t('devise.failure.invalid', authentication_keys: t('devise.login'))
-        redirect_to new_user_session_url
-      end
-    )
+    if user.success?
+      sign_in(user.value!)
+      redirect_to params.fetch(:redirect_to, '/')
+    else
+      flash[:error] = t("devise.failure.#{user.failure[:code]}")
+      redirect_to new_user_session_url
+    end
+  end
+
+  def get_user(auth_code)
+    session_state = yield HOMS.container[:keycloak_client].authenticate!(auth_code)
+    user = yield keycloak_user(session_state)
+
+    cookies['session_state'] = {value: session_state, httponly: true}
+    Success(user)
   end
 
   def destroy
