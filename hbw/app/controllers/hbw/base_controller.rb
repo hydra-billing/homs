@@ -1,7 +1,7 @@
 module HBW
   class BaseController < ActionController::Base
     include Controller
-    include HttpBasicAuthentication
+    include HttpAuthentication
     include HBW::Logger
     before_action :start, unless: -> { Rails.env.test? }
     after_action :log, unless: -> { Rails.env.test? }
