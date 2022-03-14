@@ -7,7 +7,7 @@ module HttpAuthHelper
 
   def disable_http_basic_authentication(controller_class)
     allow_any_instance_of(controller_class).to receive(
-      :perform_http_basic_authentication
+      :perform_http_authentication
     ).and_return(true)
   end
 end

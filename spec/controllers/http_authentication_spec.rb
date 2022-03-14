@@ -1,10 +1,10 @@
-describe HttpBasicAuthentication, type: :controller do
+describe HttpAuthentication, type: :controller do
   include HttpAuthHelper
 
   controller(ApplicationController) do
-    include HttpBasicAuthentication
+    include HttpAuthentication
 
-    before_action :perform_http_basic_authentication, only: [:new]
+    before_action :perform_http_authentication, only: [:new]
 
     def index
       render plain: 'index'
@@ -22,7 +22,7 @@ describe HttpBasicAuthentication, type: :controller do
     end
   end
 
-  describe '#perform_http_basic_authentication' do
+  describe '#perform_http_authentication' do
     describe 'with no credentials' do
       it 'returns :success for unprotected action' do
         get :index
