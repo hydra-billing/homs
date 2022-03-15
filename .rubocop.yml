@@ -87,3 +87,6 @@ Lint/EmptyBlock:
 
 Lint/DuplicateBranch:
   Enabled: false
+
+Gemspec/RequireMFA:
+  Enabled: false
