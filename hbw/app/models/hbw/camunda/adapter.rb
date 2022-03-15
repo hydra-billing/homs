@@ -29,7 +29,7 @@ module HBW
           {name: key, value: value}
         end
 
-        variables = variables.map { |item| [item.delete(:name), item] }.to_h
+        variables = variables.to_h { |item| [item.delete(:name), item] }
 
         response = api.post("task/#{task_id}/submit-form", variables: variables)
 
