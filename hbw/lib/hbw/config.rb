@@ -17,5 +17,9 @@ module HBW
         result
       end
     end
+
+    def set(key, value)
+      @value[key] = value
+    end
   end
 end

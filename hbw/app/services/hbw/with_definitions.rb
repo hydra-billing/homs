@@ -1,11 +1,15 @@
 module HBW
   module WithDefinitions
-    def with_definitions(entity_code_key)
+    def with_definitions(entity_code_key, user_email)
       tasks = yield
 
       entity_codes = fetch_variable_for_processes(entity_code_key, tasks.map { |task| task.fetch('processInstanceId') })
 
-      zip_many(tasks, process_definitions, entity_codes)
+      if filter_bp_with_candidate_starters?
+        zip_many(tasks, process_definitions_with_starter_candidates(user_email), entity_codes)
+      else
+        zip_many(tasks, process_definitions, entity_codes)
+      end
     end
 
     def with_definition(task, entity_code_key)
@@ -26,6 +30,25 @@ module HBW
           ::HBW::ProcessDefinition.new(definition)
         end
       end
+    end
+
+    def process_definitions_with_starter_candidates(user_email)
+      Rails.cache.fetch("process_definitions_#{user_email}") do
+        do_request(:get, 'process-definition', **query_params(user_email)).map do |definition|
+          ::HBW::ProcessDefinition.new(definition)
+        end
+      end
+    end
+
+    def query_params(user_email)
+      {
+        startableBy:   user_email,
+        latestVersion: true
+      }
+    end
+
+    def filter_bp_with_candidate_starters?
+      HBW::Widget.config.fetch(:candidate_starters)&.fetch(:enabled, false)
     end
 
     def zip_one(task, definitions, variable)
