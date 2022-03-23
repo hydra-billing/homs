@@ -1,0 +1,123 @@
+get:
+  user:
+    - params: "email=c.johnson@example.com"
+      response:
+        data:
+          - id:         'demo'
+            firstName:  'Demo'
+            lastName:   'Demo'
+            url:        'http://bpm.example.com'
+            email:      'c.johnson@example.com'
+            pictureUrl: null
+        total: 1
+        start: 0
+        sort: 'id'
+        order: 'asc'
+        size: 1
+
+  # process definitions
+  process-definition:
+    - params: "latestVersion=true&startableBy=c.johnson@example.com"
+      response:
+        - &default_process-definition
+          id: "testProcess:469:222221"
+          key: "support_request"
+          version: 469
+          name: "Test name"
+          description: null
+          tenantId: null
+          deploymentId: "222221"
+          resource: "testProcess.bpmn"
+          diagram: null
+          category: "http://bpmn.io/schema/bpmn"
+          suspended: false
+          versionTag: null
+          historyTimeToLive: null
+        - <<: *default_process-definition
+          id: "testProcess:469:222222"
+          deploymentId: "222222"
+
+  task/111111:
+    - params: ""
+      response: &default_task
+        id: "111111"
+        name: "Check test form"
+        assignee: "demo"
+        created: "2016-06-30T12:07:59.000+03:00"
+        due: null
+        followUp: null
+        delegationState: null
+        description: null
+        executionId: "222221"
+        owner: null
+        parentTaskId: null
+        priority: 50
+        processDefinitionId: "testProcess:469:222221"
+        processInstanceId: 222221
+        taskDefinitionKey: "usertask10"
+        caseExecutionId: null
+        caseInstanceId: null
+        caseDefinitionId: null
+        suspended: false
+        formKey: "test_form_with_required_select_lookup.yml"
+        tenantId: null
+
+post:
+  task:
+    - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response:
+        - <<: *default_task
+          id: "111111"
+          formKey: "test_form_with_disabled_buttons.yml"
+          processInstanceId: 222221
+          processDefinitionId: "testProcess:469:222221"
+          assignee: null
+        - <<: *default_task
+          id: "111112"
+          name: "Assigned task"
+          due: "2016-07-30T12:07:59.000+03:00"
+          priority: 25
+          processInstanceId: 222222
+          processDefinitionId: "testProcess:469:222222"
+        - <<: *default_task
+          id: "111113"
+          name: "Other assigned task"
+          due: "2017-07-30T12:07:59.000+03:00"
+          formKey: "test_form_with_disabled_buttons.yml"
+          processInstanceId: 222221
+          description: 'Some test description'
+          processDefinitionId: "testProcess:469:222221"
+    - params: "active=true&candidateUser=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
+      response:
+        - <<: *default_task
+          id: "111112"
+          name: "Unassigned task"
+          due: "2016-07-30T12:07:59.000+03:00"
+          priority: 25
+          processInstanceId: 222222
+          processDefinitionId: "testProcess:469:222222"
+          assignee: null
+        - <<: *default_task
+          id: "111111"
+          name: "Other unassigned task"
+          due: "2017-07-30T12:07:59.000+03:00"
+          formKey: "test_form_with_disabled_buttons.yml"
+          processInstanceId: 222221
+          description: 'Some test description'
+          processDefinitionId: "testProcess:469:222221"
+          assignee: null
+
+  variable-instance:
+    - params: "processInstanceIdIn[]=222221&processInstanceIdIn[]=222222&variableName=homsOrderCode"
+      response:
+        - processInstanceId: 222221
+          type: string
+          name: homsOrderCode
+          value: ORD-1
+        - processInstanceId: 222222
+          type: string
+          name: homsOrderCode
+          value: ORD-2
+
+    - params: "variableName=homsOrderCode"
+      response: []

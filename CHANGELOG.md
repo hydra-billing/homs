@@ -1,3 +1,8 @@
+v2.7.1 [unreleased]
+-------------------
+### Features
+- [#641](https://github.com/latera/homs/pull/641) Filter business processes available for launch.
+
 v2.7.0 [2022-03-23]
 -------------------
 ### Breaking changes
@@ -42,9 +47,9 @@ v2.7.0 [2022-03-23]
 
 
 ### Features
-- [#638](https://github.com/latera/homs/pull/638) Improve SSO error messages
-- [#637](https://github.com/latera/homs/pull/637) Add keycloak authorization for BPM
-- [#631](https://github.com/latera/homs/pull/631) Add authorization by SSO (with Keycloak)
+- [#638](https://github.com/latera/homs/pull/638) Improve SSO error messages.
+- [#637](https://github.com/latera/homs/pull/637) Add keycloak authorization for BPM.
+- [#631](https://github.com/latera/homs/pull/631) Add authorization by SSO (with Keycloak).
 - [#583](https://github.com/latera/homs/pull/583) Add the output of errors for the availability of the Сamunda service to the widget.
 - [#562](https://github.com/latera/homs/pull/562) Bring in TypeScript into the project.
 - [#564](https://github.com/latera/homs/pull/564) Append files to form instead of substituting when multiple prop is set up.

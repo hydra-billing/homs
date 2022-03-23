@@ -35,6 +35,9 @@ module HBW
           optional(:region).maybe(:string)
         end
         required(:allowed_request_origins).each(:string)
+        optional(:candidate_starters).hash do
+          optional(:enabled).filled(:bool)
+        end
       end
     end
 
