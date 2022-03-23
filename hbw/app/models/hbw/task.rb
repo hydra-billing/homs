@@ -55,7 +55,7 @@ module HBW
         entity_code_variable_name = entity_code_key(entity_class)
 
         with_user(email) do |user|
-          with_definitions(entity_code_variable_name) do
+          with_definitions(entity_code_variable_name, user.email) do
             options = {
               active:           true,
               processVariables: [
