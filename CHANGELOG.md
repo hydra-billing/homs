@@ -1,4 +1,4 @@
-v2.7.0 [unreleased]
+v2.7.0 [2022-03-23]
 -------------------
 ### Breaking changes
 - [#600](https://github.com/latera/homs/pull/600) Replace bootstrap-datetimepicker with react-datepicker.
