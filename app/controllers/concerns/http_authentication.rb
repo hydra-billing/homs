@@ -38,7 +38,7 @@ module HttpAuthentication
     authenticate_or_request_with_http_token do |token, _options|
       HOMS.container[:keycloak_client].introspect_token(token).either(
         proc do
-          user = User.from_keycloack(::Hydra::Keycloak::Token.new(token))
+          user = User.from_keycloak(::Hydra::Keycloak::Token.new(token))
 
           sign_in(user)
         end,

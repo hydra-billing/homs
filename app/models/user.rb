@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
       @empty ||= Empty.new
     end
 
-    def from_keycloack(user_data)
+    def from_keycloak(user_data)
       where(email: user_data[:email]).first_or_create do |user|
         user.email = user_data[:email]
         user.name = user_data[:name]

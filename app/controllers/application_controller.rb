@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def keycloak_user(session_state)
     HOMS.container[:keycloak_client].access_token(session_state).fmap do |access_token|
-      User.from_keycloack(access_token)
+      User.from_keycloak(access_token)
     end
   end
 
