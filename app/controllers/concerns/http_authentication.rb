@@ -40,9 +40,12 @@ module HttpAuthentication
         proc do
           user = User.from_keycloack(::Hydra::Keycloak::Token.new(token))
 
+          HOMS.container[:cef_logger].log_user_event(:login, {id: user.id, email: user.email}, request.headers)
           sign_in(user)
         end,
         proc do
+          HOMS.container[:cef_logger].log_user_event(:failed_login, {id: nil, email: email}, request.headers)
+
           raise(Unauthorized)
         end
       )

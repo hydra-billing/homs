@@ -1,6 +1,7 @@
 v2.7.1 [unreleased]
 -------------------
 ### Features
+- [#644](https://github.com/latera/homs/pull/644) Add logging in ArcSight format at the moment of login by SSO.
 - [#641](https://github.com/latera/homs/pull/641) Filter business processes available for launch.
 
 v2.7.0 [2022-03-23]
