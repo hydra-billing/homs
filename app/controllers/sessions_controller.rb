@@ -45,9 +45,18 @@ class SessionsController < Devise::SessionsController
     user = get_user(params['code'])
 
     if user.success?
-      sign_in(user.value!)
+      user_instance = user.value!
+      HOMS.container[:cef_logger].log_user_event(:login, {id: user_instance.id, email: user_instance.email}, request.headers)
+
+      sign_in(user_instance)
       redirect_to params.fetch(:redirect_to, '/')
     else
+      user_data = {
+        id:    nil,
+        email: nil
+      }
+      HOMS.container[:cef_logger].log_user_event(:failed_login, user_data, headers)
+
       flash[:error] = t("devise.failure.#{user.failure[:code]}")
       redirect_to new_user_session_url
     end
