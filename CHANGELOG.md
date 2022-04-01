@@ -1,3 +1,8 @@
+v2.7.2 [unreleased]
+-------------------
+### Features
+- [#646](https://github.com/latera/homs/pull/646) Fill user not nullable fields by default for SSO first login.
+
 v2.7.1 [2022-04-01]
 -------------------
 ### Features
