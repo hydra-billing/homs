@@ -1,4 +1,4 @@
-v2.7.1 [unreleased]
+v2.7.1 [01.04.2022]
 -------------------
 ### Features
 - [#644](https://github.com/latera/homs/pull/644) Add logging in ArcSight format at the moment of login by SSO.
