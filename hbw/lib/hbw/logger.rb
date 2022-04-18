@@ -34,7 +34,7 @@ end
 module HBW
   module Logger
     def logger
-      logger = HBWLogger.new(ActiveSupport::Logger.new(STDOUT))
+      logger = HBWLogger.new(ActiveSupport::Logger.new($stdout))
       logger.level = ENV['LOG_LEVEL'] || 'info'
       logger
     end

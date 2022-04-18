@@ -16,6 +16,10 @@ module HBW
       variable(variable_name.to_s).value
     end
 
+    def respond_to_missing?(variable_name, *args)
+      variable(variable_name.to_s).present? || super
+    end
+
     class << self
       def with_user(email)
         user = ::HBW::BPMUser.fetch(email)

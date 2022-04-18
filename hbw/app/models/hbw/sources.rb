@@ -2,7 +2,7 @@ require 'settings'
 
 module HBW
   module Sources
-    extend self
+    module_function
 
     @sources = {}
 

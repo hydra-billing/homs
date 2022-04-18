@@ -20,7 +20,7 @@ class ListOrdersFilter
   end
 
   module Filters
-    extend self
+    module_function
 
     def filter_by_date(rel, dates)
       {created_at_from:          'orders.created_at >= ?',
@@ -82,7 +82,7 @@ class ListOrdersFilter
   end
 
   module Sorters
-    extend self
+    module_function
 
     MAPPING = {
       'code'                => %w(code),
