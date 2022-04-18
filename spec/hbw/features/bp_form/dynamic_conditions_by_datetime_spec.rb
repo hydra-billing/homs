@@ -45,8 +45,8 @@ feature 'Control fields with dynamic conditions by datetime', js: true do
 
     expect(page.find('.dependent-select')).not_to       have_selector '.react-select--is-disabled'
     expect(page.find('.dependent-select-table')).not_to have_selector '.disabled'
-    expect(is_element('dependentCheckbox', true)).to     be false
-    expect(is_element('dependentUploadedFile', true)).to be false
+    expect(is_element('dependentCheckbox', disabled: true)).to     be false
+    expect(is_element('dependentUploadedFile', disabled: true)).to be false
     expect(readonly?('dependentString')).to        be false
     expect(readonly?('dependentText')).to          be false
     expect(readonly?('stringInDependentGroup')).to be false
@@ -91,8 +91,8 @@ feature 'Control fields with dynamic conditions by datetime', js: true do
 
     expect(page.find('.dependent-select')).not_to       have_selector '.react-select--is-disabled'
     expect(page.find('.dependent-select-table')).not_to have_selector '.disabled'
-    expect(is_element('dependentCheckbox', true)).to     be false
-    expect(is_element('dependentUploadedFile', true)).to be false
+    expect(is_element('dependentCheckbox', disabled: true)).to     be false
+    expect(is_element('dependentUploadedFile', disabled: true)).to be false
     expect(readonly?('dependentString')).to        be false
     expect(readonly?('dependentText')).to          be false
     expect(readonly?('stringInDependentGroup')).to be false
@@ -103,8 +103,8 @@ feature 'Control fields with dynamic conditions by datetime', js: true do
 
     expect(page.find('.dependent-select')).to       have_selector '.react-select--is-disabled'
     expect(page.find('.dependent-select-table')).to have_selector '.disabled'
-    expect(is_element('dependentCheckbox', true)).to     be true
-    expect(is_element('dependentUploadedFile', true)).to be true
+    expect(is_element('dependentCheckbox', disabled: true)).to     be true
+    expect(is_element('dependentUploadedFile', disabled: true)).to be true
     expect(readonly?('dependentString')).to        be true
     expect(readonly?('dependentText')).to          be true
     expect(readonly?('stringInDependentGroup')).to be true

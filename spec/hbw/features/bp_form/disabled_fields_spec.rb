@@ -36,7 +36,7 @@ feature 'Control fields on form', js: true do
   end
 
   scenario 'for checkbox' do
-    expect(is_element('homsOrderDataSomeDisabledCheckbox', true)).to eq true
+    expect(is_element('homsOrderDataSomeDisabledCheckbox', disabled: true)).to eq true
   end
 
   scenario 'for select' do

@@ -1,7 +1,7 @@
 describe CustomFields::FieldDefSet do
   let(:right_def) do
     (
-      YAML.load <<~EOS
+      YAML.load <<~YML
                 common: &common
                   required: true
                   multiple: false
@@ -17,13 +17,13 @@ describe CustomFields::FieldDefSet do
                       description: 'my_description2'
                       value: 'static content2'
                       <<: *common
-      EOS
+      YML
     ).deep_symbolize_keys![:order_type][:fields]
   end
 
   let(:empty_def) do
     (
-      YAML.load <<~EOS
+      YAML.load <<~YML
                 common: &common
                   required: true
                   multiple: false
@@ -33,7 +33,7 @@ describe CustomFields::FieldDefSet do
                 order_type:
                   code: Подключение физического лица
                   fields: {}
-      EOS
+      YML
     ).deep_symbolize_keys![:order_type][:fields]
   end
 

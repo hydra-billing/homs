@@ -9,7 +9,6 @@ module HBW
         time = case value
                when ::String then ::Time.iso8601(value)
                when ::Date, ::Time then value.to_time
-               when ::Time then value
                else raise NotImplementedError
                end
 

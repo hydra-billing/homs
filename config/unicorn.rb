@@ -1,3 +1,5 @@
+require 'English'
+
 rails_root = '/opt/homs'
 
 working_directory rails_root
@@ -30,7 +32,7 @@ module UnicornMonitor
     mem_size = current_memory_consumption
     logger = Rails.logger
     if mem_size > memory_limit
-      ::Process.kill('QUIT', $$)
+      ::Process.kill('QUIT', $PROCESS_ID)
       logger.info('Current memory consumption: %s mb. Reloading' % (mem_size.to_f / 1.megabyte).round(2))
     elsif logger.debug?
       logger.debug('Current memory consumption: %s mb' % (mem_size.to_f / 1.megabyte).round(2))
@@ -49,7 +51,7 @@ module UnicornMonitor
   end
 
   def memory_command
-    @memory_command ||= "ps -e -www -o pid,rss,command | grep '[u]nicorn_rails worker' | grep #{$$}"
+    @memory_command ||= "ps -e -www -o pid,rss,command | grep '[u]nicorn_rails worker' | grep #{$PROCESS_ID}"
   end
 end
 

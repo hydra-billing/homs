@@ -37,17 +37,8 @@ module HttpAuthentication
   def authenticate_by_keycloak
     authenticate_or_request_with_http_token do |token, _options|
       HOMS.container[:keycloak_client].introspect_token(token).either(
-        proc do
-          user = User.from_keycloak(::Hydra::Keycloak::Token.new(token))
-
-          HOMS.container[:cef_logger].log_user_event(:login, {id: user.id, email: user.email}, request.headers)
-          sign_in(user)
-        end,
-        proc do
-          HOMS.container[:cef_logger].log_user_event(:failed_login, {id: nil, email: nil}, request.headers)
-
-          raise(Unauthorized)
-        end
+        proc { sign_in_by_token(token) },
+        proc { fail_auth(nil) }
       )
     end
   end
@@ -63,10 +54,23 @@ module HttpAuthentication
 
         sign_in(user)
       else
-        HOMS.container[:cef_logger].log_user_event(:failed_login, {id: nil, email: email}, request.headers)
-
-        raise(Unauthorized)
+        fail_auth(email)
       end
     end
+  end
+
+  private
+
+  def sign_in_by_token(token)
+    user = User.from_keycloak(::Hydra::Keycloak::Token.new(token))
+
+    HOMS.container[:cef_logger].log_user_event(:login, {id: user.id, email: user.email}, request.headers)
+    sign_in(user)
+  end
+
+  def fail_auth(email)
+    HOMS.container[:cef_logger].log_user_event(:failed_login, {id: nil, email: email}, request.headers)
+
+    raise(Unauthorized)
   end
 end
