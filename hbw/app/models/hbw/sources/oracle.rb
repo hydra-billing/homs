@@ -70,7 +70,7 @@ module HBW
           name_col ||= id_col
           integer_id = id_col =~ /_id\z/i
           rows = []
-          while r = cursor.fetch_hash
+          while (r = cursor.fetch_hash)
             rows << r
           end
 

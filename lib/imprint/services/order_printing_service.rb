@@ -33,7 +33,7 @@ module Imprint
       def process_print_task(current_user, params)
         orders_or_error = filter_and_prepare(current_user, params)
 
-        if orders_or_error.has_key?(:error)
+        if orders_or_error.key?(:error)
           orders_or_error
         else
           response = imprint_adapter.print_multiple_files(orders_or_error[:print_form_code],
@@ -41,9 +41,9 @@ module Imprint
 
           if response.nil?
             {error: I18n.t('orders.print_tasks.errors.internal_error')}
-          elsif response.body.has_key?('task_id')
+          elsif response.body.key?('task_id')
             {success: I18n.t('orders.print_tasks.started', print_task_id: response.body['task_id'])}
-          elsif response.body.has_key?('errors')
+          elsif response.body.key?('errors')
             {error: response.body['errors'].to_s}
           else
             {error: I18n.t('orders.print_tasks.errors.internal_error')}
@@ -65,7 +65,7 @@ module Imprint
 
       def serialize_orders(orders)
         {
-          orders:          orders.map { |order| order.attributes },
+          orders:          orders.map(&:attributes),
           print_form_code: orders.first.try(:order_type_print_form_code)
         }
       end

@@ -206,7 +206,7 @@ module Features
       to_current_locale_date(page.evaluate_script("jQuery('[name=\"#{name}\"]').val()"))
     end
 
-    def is_element(name, disabled = false)
+    def is_element(name, disabled: false)
       page.evaluate_script("jQuery('[name=\"#{name}\"]#{disabled ? ':disabled' : ''}').length") > 0
     end
 

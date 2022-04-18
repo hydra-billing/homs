@@ -55,7 +55,7 @@ module Features
     end
 
     def tasks_table_content
-      tasks_table.all('tr').to_a[1..-1].map { |row| row.all('td').map(&:text) }
+      tasks_table.all('tr').to_a[1..].map { |row| row.all('td').map(&:text) }
     end
 
     def click_on_tab(text)

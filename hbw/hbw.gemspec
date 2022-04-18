@@ -1,4 +1,4 @@
-$:.push File.expand_path('lib', __dir__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 
 require 'hbw/version'
 
@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = 'HBW'
   s.description = '...'
   s.license     = 'Commercial'
+  s.required_ruby_version = '~> 2.7'
 
   s.files = Dir['{app,config,db,lib}/**/*']
 
