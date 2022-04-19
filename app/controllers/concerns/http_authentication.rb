@@ -44,7 +44,7 @@ module HttpAuthentication
           sign_in(user)
         end,
         proc do
-          HOMS.container[:cef_logger].log_user_event(:failed_login, {id: nil, email: email}, request.headers)
+          HOMS.container[:cef_logger].log_user_event(:failed_login, {id: nil, email: nil}, request.headers)
 
           raise(Unauthorized)
         end
