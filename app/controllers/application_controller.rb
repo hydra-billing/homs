@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   self.hbw_available = false
   helper_method :hbw_available?
 
+  include Dry::Monads[:result]
+  include Dry::Monads::Do.for(:keycloak_user)
+  include KeycloakUtils
+
   before_action -> { ENV['DISABLE_PRY'] = nil }
 
   def authenticate_user!
@@ -24,9 +28,10 @@ class ApplicationController < ActionController::Base
   protected
 
   def keycloak_user(session_state)
-    HOMS.container[:keycloak_client].access_token(session_state).fmap do |access_token|
-      User.from_keycloak(access_token)
-    end
+    access_token = yield HOMS.container[:keycloak_client].access_token(session_state)
+    validated_user_data = yield validate_user_data(access_token)
+
+    Success(User.from_keycloak(validated_user_data))
   end
 
   def use_keycloak?

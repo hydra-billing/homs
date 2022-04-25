@@ -1,3 +1,8 @@
+v2.7.3 [unreleased]
+-------------------
+### Features
+- [#651](https://github.com/latera/homs/pull/651) HOMS-414 Add role transfering from keycloak to HOMS.
+
 v2.7.2 [2022-04-01]
 -------------------
 ### Features
