@@ -57,7 +57,13 @@ class SessionsController < Devise::SessionsController
       }
       HOMS.container[:cef_logger].log_user_event(:failed_login, user_data, headers)
 
-      flash[:error] = t("devise.failure.#{user.failure[:code]}")
+      flash[:error] = case user.failure
+                      in ::Dry::Schema::Result
+                        t('devise.failure.user_attributes_error', message: user.failure.errors.to_h)
+                      else
+                        t("devise.failure.#{user.failure[:code]}")
+                      end
+
       redirect_to new_user_session_url
     end
   end

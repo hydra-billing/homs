@@ -113,6 +113,9 @@ Name | Mapper type | User attribute | Token clain name | Claim JSON type | Add t
 `email` | `User Attribute` | `email` | `email` | string | On | On | On | Off | Off 
 `last_name` | `User Attribute` | `last_name` | `last_name` | string | On | On | On | Off | Off 
 `name` | `User Attribute` | `name` | `name` | string | On | On | On | Off | Off 
+`role*` | `User Attribute` | `role` | `role` | string | On | On | On | Off | Off 
+
+`*` attribure `role` must be `admin` or `user`
 
 3. Add to HOMS config file `homs_configuration.yml`:
 ```

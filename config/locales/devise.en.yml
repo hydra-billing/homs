@@ -21,6 +21,7 @@ en:
       bad_keycloak_response: Error while Keycloak request
       keycloak_unavailable: Keycloak unavailable
       json_parser_error: Error while Keycloak parse Keycloak data
+      user_attributes_error: 'Wrong user attributes: %{message}'
     mailer:
       confirmation_instructions:
         subject: Confirm your email
