@@ -27,14 +27,18 @@ class User < ActiveRecord::Base
     end
 
     def from_keycloak(user_data)
-      where(email: user_data[:email]).first_or_create do |user|
-        user.email = user_data[:email]
-        user.name = user_data[:name]
-        user.last_name = user_data[:last_name] || '-'
-        user.company = user_data[:company] || '-'
-        user.department = user_data[:department] || '-'
-        user.password = Devise.friendly_token
+      user = where(email: user_data[:email]).first_or_create do |new_user|
+        new_user.email = user_data[:email]
+        new_user.name = user_data[:name]
+        new_user.last_name = user_data[:last_name] || '-'
+        new_user.company = user_data[:company] || '-'
+        new_user.department = user_data[:department] || '-'
+        new_user.password = Devise.friendly_token
+        new_user.role = user_data[:role]
       end
+
+      user.update_attribute(:role, user_data[:role])
+      user
     end
   end
 

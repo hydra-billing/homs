@@ -62,7 +62,10 @@ module HttpAuthentication
   private
 
   def sign_in_by_token(token)
-    user = User.from_keycloak(::Hydra::Keycloak::Token.new(token))
+    user = validate_user_data(::Hydra::Keycloak::Token.new(token)).bind do |validated_user_data|
+      User.from_keycloak(validated_user_data)
+    end
+    raise(Unauthorized) if user.respond_to?(:failure?) && user.failure?
 
     HOMS.container[:cef_logger].log_user_event(:login, {id: user.id, email: user.email}, request.headers)
     sign_in(user)
