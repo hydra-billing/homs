@@ -1,15 +1,16 @@
 = render partial: 'layouts/form_errors', locals: { record: @user }
-= f.input :name, autofocus: true, required: false
+= f.input :name, autofocus: true, required: false, disabled: from_sso
 = f.input :middle_name, required: false
-= f.input :last_name, required: false
-= f.input :email, required: false
+= f.input :last_name, required: false, disabled: from_sso
+= f.input :email, required: false, disabled: from_sso
 - if @user == @current_user
-  = f.input :role do
+  = f.input :role, disabled: from_sso do
     %span.form-control
       = roles_for_select.find { |(_, role)| role == @user.role }.first
 - else
-  = f.input :role, as: :select, collection: roles_for_select
-= f.input :company, required: false
-= f.input :department, required: false
-= f.input :password
-= f.input :password_confirmation
+  = f.input :role, as: :select, collection: roles_for_select, disabled: from_sso
+= f.input :company, required: false, disabled: from_sso
+= f.input :department, required: false, disabled: from_sso
+- unless from_sso
+  = f.input :password
+  = f.input :password_confirmation

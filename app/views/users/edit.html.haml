@@ -4,5 +4,6 @@
                   method: 'put',
                   wrapper: :horizontal_form,
                   html: { class: 'form-horizontal order-edit-form col-sm-6' }) do |f|
-  = render partial: 'form_fields', locals: { f: f }
+  = render partial: 'form_fields', locals: { f: f, 
+                                             from_sso: @user.from_sso? }
   = f.submit t('save'), class: 'btn btn-primary pull-right'

@@ -1,3 +1,8 @@
+v2.7.4 [unreleased]
+-------------------
+### Features
+- [#653](https://github.com/hydra-billing/homs/pull/653) HOMS-415 Differentiate users from Keycloak and regular.
+
 v2.7.3 [2022-04-29]
 -------------------
 ### Features
