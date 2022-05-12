@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
         new_user.company = user_data[:company] || '-'
         new_user.department = user_data[:department] || '-'
         new_user.password = Devise.friendly_token
+        new_user.directory = 'hydra_sso'
         new_user.role = user_data[:role]
       end
 
@@ -51,12 +52,20 @@ class User < ActiveRecord::Base
     [name, last_name].join ' '
   end
 
+  def from_sso?
+    directory == 'hydra_sso'
+  end
+
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :encryptable
 
   validates :name,        presence: true
   validates :last_name,   presence: true
   validates :company,     presence: true
   validates :department,  presence: true
+  validates :directory,   inclusion: {
+    in:      %w(hydra_sso internal),
+    message: "%{value} must be 'hydra_sso' or 'internal'"
+  }
 
   has_many :profiles, dependent: :destroy
   has_many :orders,   dependent: :restrict_with_exception
