@@ -103,8 +103,9 @@ Requirements:
 * [Keycloak](https://www.keycloak.org/)
 
 For using SSO with HOMS:
-1. Add [user attributes](https://www.keycloak.org/docs/latest/server_admin/index.html#proc-configuring-user-attributes_server_administration_guide) in Keycloak with prefix `homs_`: `homs_company`, `homs_department`, `homs_email`, `homs_last_name`, `homs_name`.
-1. Add [mappers](https://www.keycloak.org/docs/latest/server_admin/index.html#_protocol-mappers) in Keycloak without prefix:
+1. Add [user roles](https://www.keycloak.org/docs/latest/server_admin/index.html#con-client-roles_server_administration_guide). HOMS use "admin" and "user" client level roles. Only one role could be assigned to user.
+2. Add [user attributes](https://www.keycloak.org/docs/latest/server_admin/index.html#proc-configuring-user-attributes_server_administration_guide) in Keycloak with prefix `homs_`: `homs_company`, `homs_department`, `homs_email`, `homs_last_name`, `homs_name`.
+3. Add [mappers](https://www.keycloak.org/docs/latest/server_admin/index.html#_protocol-mappers) in Keycloak without prefix:
 
 Name | Mapper type | User attribute | Token clain name | Claim JSON type | Add to ID token | Add to access token | Add to userinfo | Multivalued | Aggregate attributes values 
 --- | --- | --- | --- |--- |--- |--- |--- |--- |--- 
@@ -113,9 +114,6 @@ Name | Mapper type | User attribute | Token clain name | Claim JSON type | Add t
 `email` | `User Attribute` | `email` | `email` | string | On | On | On | Off | Off 
 `last_name` | `User Attribute` | `last_name` | `last_name` | string | On | On | On | Off | Off 
 `name` | `User Attribute` | `name` | `name` | string | On | On | On | Off | Off 
-`role*` | `User Attribute` | `role` | `role` | string | On | On | On | Off | Off 
-
-`*` attribure `role` must be `admin` or `user`
 
 3. Add to HOMS config file `homs_configuration.yml`:
 ```
