@@ -1,4 +1,4 @@
-v2.7.4 [unreleased]
+v2.7.4 [2022-06-02]
 -------------------
 ### Features
 - [#654](https://github.com/hydra-billing/homs/pull/654) HOMS-423 Use native Keycloak roles from resource_access instead of custom user attribute.
