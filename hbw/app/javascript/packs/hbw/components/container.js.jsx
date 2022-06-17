@@ -11,7 +11,7 @@ modulejs.define(
   ['React', 'HBWButtons', 'HBWEntityTasks'],
   (React, Buttons, Tasks) => {
     const Container = ({
-      chosenTaskID, entityCode, entityTypeCode, entityClassCode, autorunProcessKey, bind, unbind
+      chosenTaskID, entityCode, entityTypeCode, entityClassCode, autorunProcessKey, bind, unbind, initialVariables
     }) => {
       const {
         tasks, fetching, error, getFormsForTasks
@@ -82,6 +82,7 @@ modulejs.define(
                       entityTypeCode={entityTypeCode}
                       entityClassCode={entityClassCode}
                       autorunProcessKey={autorunProcessKey}
+                      initialVariables={initialVariables}
                       showSpinner={fetching}
                       userExists={userExists}
                       resetProcess={resetProcess}/>
