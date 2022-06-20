@@ -1,4 +1,4 @@
-v2.7.5 [2022-06-02]
+v2.7.5 [2022-06-20]
 -------------------
 ### Bugfixes
 - [#656](https://github.com/hydra-billing/homs/pull/656) HOMS-427 Pass initialVariables into Buttons.
