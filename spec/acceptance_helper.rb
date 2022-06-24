@@ -56,7 +56,7 @@ RspecApiDocumentation.configure do |config|
   config.define_group :public do |conf|
     # By default the group's doc_dir is a subfolder under the parent group, based
     # on the group's name.
-    conf.docs_dir = ENV['API_DOCS_PATH'] || Rails.root.join('public', 'doc', 'api', 'public')
+    conf.docs_dir = ENV.fetch('API_DOCS_PATH') { Rails.root.join('public', 'doc', 'api', 'public') }
 
     # Change the filter to only include :public examples
     conf.filter = :public
