@@ -11,7 +11,7 @@ modulejs.define(
   ['React', 'HBWButtons', 'HBWEntityTasks'],
   (React, Buttons, Tasks) => {
     const Container = ({
-      chosenTaskID, entityCode, entityTypeCode, entityClassCode, autorunProcessKey, bind, unbind, initialVariables
+      entityCode, entityTypeCode, entityClassCode, autorunProcessKey, bind, unbind, initialVariables
     }) => {
       const {
         tasks, fetching, error, getFormsForTasks
@@ -68,7 +68,6 @@ modulejs.define(
         return <div className='hbw-body'>
             {error}
             <Tasks tasks={activeTasks()}
-                    chosenTaskID={chosenTaskID}
                     entityCode={entityCode}
                     entityTypeCode={entityTypeCode}
                     entityClassCode={entityClassCode}
