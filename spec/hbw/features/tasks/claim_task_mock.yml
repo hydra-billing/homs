@@ -357,6 +357,15 @@ get:
         processInstanceId: 222222
         processDefinitionId: "testProcess:469:222222"
 
+  task/111113:
+    - params: ""
+      response:
+        <<: *default_task
+        id: "111113"
+        formKey: "test_form.yml"
+        processInstanceId: 222223
+        processDefinitionId: "testProcess:469:222223"
+
 post:
   task:
     - params: "active=true&assignee=demo&processVariables[][name]=homsOrderCode&processVariables[][operator]=like&processVariables[][value]=%"
@@ -368,13 +377,6 @@ post:
           processInstanceId: 222222
           processDefinitionId: "testProcess:469:222222"
           assignee: null
-        - <<: *default_task
-          id: "111113"
-          name: "Assigned task"
-          due: "2016-07-30T12:07:59.000+03:00"
-          priority: 25
-          processInstanceId: 222223
-          processDefinitionId: "testProcess:469:222223"
         - <<: *default_task
           id: "111112"
           name: "Other assigned task"
@@ -424,6 +426,12 @@ post:
           - <<: *default_process-instances
             id: "111112"
             processDefinitionId: "testProcess:469:222222"
+    - params: "active=true&variables[][name]=homsOrderCode&variables[][value]=ORD-3&variables[][operator]=eq"
+      response:
+        data:
+          - <<: *default_process-instances
+            id: "111113"
+            processDefinitionId: "testProcess:469:222223"
 
   task/111111/submit-form:
     - params: "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456"

@@ -7,12 +7,6 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
 
     static contextType = TranslationContext;
 
-    static getDerivedStateFromProps (nextProps) {
-      return {
-        chosenTaskID: nextProps.chosenTaskID
-      };
-    }
-
     selectFirstTaskId = () => {
       if (this.props.tasks.length > 0) {
         this.props.trigger('hbw:task-clicked', this.props.tasks[0]);
@@ -24,8 +18,7 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
     };
 
     state = {
-      error:        null,
-      chosenTaskID: this.props.chosenTaskID || this.selectFirstTaskId()
+      error: null
     };
 
     getProcessName = () => {
@@ -45,42 +38,25 @@ modulejs.define('HBWEntityTasks', ['React', 'HBWEntityTask'], (React, Task) => {
       return <div className={classes}>
         <div className={`panel panel-group ${this.PANEL_CLASS}`}>
           {processName && <div className='process-name'>{processName}</div>}
-          {this.iterateTasks(this.props.tasks, this.state.chosenTaskID)}
+          {this.iterateTasks(this.props.tasks)}
         </div>
       </div>;
     }
 
-    iterateTasks = (tasks) => {
-      let taskAlreadyExpanded = false; // only one task should show its form - to be expanded
+    iterateTasks (tasks) {
       const {
-        processInstanceId, chosenTaskID, entityCode, entityTypeCode, entityClassCode
+        entityCode, entityTypeCode, entityClassCode
       } = this.props;
 
-      const isTaskCollapsed = task => (
-        processInstanceId && (task.id !== chosenTaskID) && (task.process_instance_id !== processInstanceId)
-      );
-
-      return tasks.map((task) => {
-        let collapsed;
-
-        if (taskAlreadyExpanded) {
-          collapsed = true;
-        } else {
-          collapsed = isTaskCollapsed(task);
-          taskAlreadyExpanded = !collapsed;
-        }
-
-        return <Task id={`task_id_${task.id}`}
-                     key={`task_id_${task.id}`}
-                     task={task}
-                     parentClass={this.PANEL_CLASS}
-                     taskId={task.id}
-                     entityCode={entityCode}
-                     entityTypeCode={entityTypeCode}
-                     entityClassCode={entityClassCode}
-                     collapsed={collapsed} />;
-      });
-    };
+      return tasks.map(task => <Task id={`task_id_${task.id}`}
+                                     key={`task_id_${task.id}`}
+                                     task={task}
+                                     parentClass={this.PANEL_CLASS}
+                                     taskId={task.id}
+                                     entityCode={entityCode}
+                                     entityTypeCode={entityTypeCode}
+                                     entityClassCode={entityClassCode} />);
+    }
   }
 
   return withCallbacks(HBWEntityTasks);
