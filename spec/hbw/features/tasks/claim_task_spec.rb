@@ -12,6 +12,7 @@ feature 'Check task claiming', js: true do
 
     FactoryBot.create(:order, order_type: order_type) # ORD-1
     FactoryBot.create(:order, order_type: order_type) # ORD-2
+    FactoryBot.create(:order, order_type: order_type) # ORD-3
   end
 
   describe 'form with all fields' do
@@ -24,15 +25,15 @@ feature 'Check task claiming', js: true do
     scenario 'have only disabled or readonly fields' do
       click_and_wait 'ORD-2'
 
-      find_form.find_all('input').each do |input|
+      form = find_bp_form_with_name('Check test form')
+
+      form.find_all('input').each do |input|
         expect(input.disabled? || input.readonly?).to eq true
       end
     end
 
     scenario 'can be claimed' do
-      click_and_wait 'ORD-2'
-
-      expect(page).not_to have_content 'Submit'
+      click_and_wait 'ORD-3'
 
       click_and_wait('Claim')
     end

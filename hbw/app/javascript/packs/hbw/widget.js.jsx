@@ -39,12 +39,11 @@ modulejs.define(
         this.renderApp();
       }
 
-      Forms = ({ taskId }) => <Container entityCode={this.options.entity_code}
-                                         entityTypeCode={this.options.entity_type}
-                                         entityClassCode={this.options.entity_class}
-                                         autorunProcessKey={this.options.autorunProcessKey}
-                                         initialVariables={this.payload.variables}
-                                         chosenTaskID={taskId} />;
+      Forms = () => <Container entityCode={this.options.entity_code}
+                               entityTypeCode={this.options.entity_type}
+                               entityClassCode={this.options.entity_class}
+                               autorunProcessKey={this.options.autorunProcessKey}
+                               initialVariables={this.payload.variables} />;
 
       Button = () => <AvailableTasksButton taskListPath={this.options.taskListPath} />;
 
