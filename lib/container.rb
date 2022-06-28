@@ -24,7 +24,8 @@ module HOMS
                    logout_redirect:      keycloak_config.fetch(:logout_redirect),
                    store_client:         'redis',
                    store_client_options: {redis_host: redis_config.fetch(:host),
-                                          redis_port: redis_config.fetch(:port)}
+                                          redis_port: redis_config.fetch(:port)},
+                   scope:                keycloak_config.fetch(:scope)
                  }
                ))
     end

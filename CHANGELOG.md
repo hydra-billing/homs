@@ -1,5 +1,8 @@
 v2.7.7 [unreleased]
 -------------------
+### Features
+- [#660](https://github.com/hydra-billing/homs/pull/660) Use scope parameter for SSO authentication.
+
 ### Bugfixes
 - [#664](https://github.com/hydra-billing/homs/pull/664) Fix hide start BP button in case of `candidate_starters` enabled.
 

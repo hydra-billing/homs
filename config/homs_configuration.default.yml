@@ -31,6 +31,7 @@ SSO:
     redirect_uri: "http://localhost:4000/authenticate_by_keycloak"
     secret: "af9504fc-b030-405e-97b6-813220c07a7e"
     logout_redirect: "http://localhost:4000"
+    scope: homs_scope
 
 redis:
   host: <%= ENV['REDIS_HOST'] %>
