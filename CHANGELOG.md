@@ -1,4 +1,4 @@
-v2.7.6 [unreleased]
+v2.7.6 [2022-06-28]
 -------------------
 ### Bugfixes
 - [#659](https://github.com/hydra-billing/homs/pull/659) Always show BP form deployed.
