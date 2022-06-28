@@ -1,3 +1,8 @@
+v2.7.7 [unreleased]
+-------------------
+### Features
+- [#660](https://github.com/hydra-billing/homs/pull/660) Use scope parameter for SSO authentication.
+
 v2.7.6 [2022-06-28]
 -------------------
 ### Bugfixes
