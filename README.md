@@ -128,6 +128,11 @@ SSO:
     secret: "af9504fc-b030-405e-97b6-813220c07a7e"
     logout_redirect: "http://homs_host:homs_port"
 ```
+
+### Filter business processes by user
+
+Set `cadidate_starters.enabled` in `hbw.yml` to `true` to send user email to camunda when fetching business processes definition. That way you can allow users to run only certain business processes.
+
 ## Contributing/Development
 
 The general development process is:
