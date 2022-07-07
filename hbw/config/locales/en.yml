@@ -9,6 +9,7 @@ en:
   loading: Loading
   hide_widget: Hide
   bp_running: The business process is already running or assigned to another user
+  no_bp_to_start: There are no business processes available to start.
   errors:
     camunda_is_unavailable: Camunda service is unavailable
     field_not_defined_in_bp: Field with the name %{field_name} is not defined in BP variables

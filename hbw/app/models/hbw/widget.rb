@@ -29,8 +29,24 @@ class HBW::Widget
       buttons = self.class.entity_type_buttons(entity_type, entity_class).map do |button_params|
         button_params.slice(:name, :title, :class, :fa_class, :bp_code)
       end
+
+      if filter_bp_with_candidate_starters?
+        definitions = @adapter.definitions_with_starter_candidates(current_user_identifier)
+        buttons = allowed_bp_buttons(buttons, definitions)
+      end
+
       {buttons: buttons, bp_running: false}
     end
+  end
+
+  def allowed_bp_buttons(buttons, definitions)
+    allowed_bp_codes = definitions.map(&:key)
+
+    buttons.select { |button| allowed_bp_codes.include? button[:bp_code] }
+  end
+
+  def filter_bp_with_candidate_starters?
+    HBW::Widget.config.fetch(:candidate_starters)&.fetch(:enabled, false)
   end
 
   def start_bp(current_user_identifier, bp_code, entity_code, entity_class, initial_variables = {})

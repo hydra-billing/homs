@@ -1,3 +1,8 @@
+v2.7.7 [unreleased]
+-------------------
+### Bugfixes
+- [#664](https://github.com/hydra-billing/homs/pull/664) Fix hide start BP button in case of `candidate_starters` enabled.
+
 v2.7.6 [2022-06-28]
 -------------------
 ### Bugfixes

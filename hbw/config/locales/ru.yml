@@ -9,6 +9,7 @@ ru:
   loading: Загрузка
   hide_widget: Скрыть
   bp_running: Бизнес-процесс выполняется или назначен на другого пользователя
+  no_bp_to_start: Нет бизнес-процессов доступных для запуска.
   errors:
     camunda_is_unavailable: Сервис Camunda недоступен
     field_not_defined_in_bp: Поле с именем %{field_name} отсутствует в переменных бизнес-процесса

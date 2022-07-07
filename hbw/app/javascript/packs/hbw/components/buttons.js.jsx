@@ -102,6 +102,14 @@ modulejs.define(
         setBPRunning(bp_running);
       };
 
+      const renderNoBP = () => (
+        <div className='hbw-bp-control-buttons'>
+          <span>
+            {t('no_bp_to_start')}
+          </span>
+        </div>
+      );
+
       useEffect(() => {
         fetchButtons();
         bind('hbw:button-activated', onButtonActivation);
@@ -135,6 +143,7 @@ modulejs.define(
                 <Error error={submitError || fetchError}
                        errorHeader={errorHeader}
                 />
+                {buttons.length === 0 && renderNoBP()}
                 {buttonElements}
               </div>
           );

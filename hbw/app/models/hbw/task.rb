@@ -3,6 +3,7 @@ module HBW
     extend HBW::Remote
     extend HBW::WithDefinitions
     extend HBW::TaskHelper
+    extend HBW::UserHelper
     include HBW::GetIcon
     include HBW::Definition
 
@@ -21,14 +22,6 @@ module HBW
     end
 
     class << self
-      def with_user(email)
-        user = ::HBW::BPMUser.fetch(email)
-
-        unless user.nil?
-          yield(user)
-        end
-      end
-
       def get_task_by_id(id)
         do_request(:get, "task/#{id}")
       end
@@ -59,7 +52,7 @@ module HBW
         entity_code_variable_name = entity_code_key(entity_class)
 
         with_user(email) do |user|
-          with_definitions(entity_code_variable_name, user.email) do
+          with_definitions(entity_code_variable_name) do
             options = {
               active:           true,
               processVariables: [
