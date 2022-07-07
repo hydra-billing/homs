@@ -2,6 +2,8 @@ module HBW
   module Common
     class Adapter
       include HBW::Inject[:api, :config]
+      include HBW::WithDefinitions
+      include HBW::UserHelper
 
       def entity_code_key(entity_class)
         config[:entities].fetch(entity_class)[:entity_code_key]
@@ -18,6 +20,14 @@ module HBW
         end
 
         !user.nil?
+      end
+
+      def definitions_with_starter_candidates(user_email)
+        with_connection(api) do
+          with_user(user_email) do |user|
+            process_definitions_with_starter_candidates(user.id)
+          end
+        end
       end
 
       def users_lookup(pattern)

@@ -1,15 +1,13 @@
 module HBW
   module WithDefinitions
-    def with_definitions(entity_code_key, user_email)
+    include HBW::Remote
+
+    def with_definitions(entity_code_key)
       tasks = yield
 
       entity_codes = fetch_variable_for_processes(entity_code_key, tasks.map { |task| task.fetch('processInstanceId') })
 
-      if filter_bp_with_candidate_starters?
-        zip_many(tasks, process_definitions_with_starter_candidates(user_email), entity_codes)
-      else
-        zip_many(tasks, process_definitions, entity_codes)
-      end
+      zip_many(tasks, process_definitions, entity_codes)
     end
 
     def with_definition(task, entity_code_key)
@@ -45,10 +43,6 @@ module HBW
         startableBy:   user_email,
         latestVersion: true
       }
-    end
-
-    def filter_bp_with_candidate_starters?
-      HBW::Widget.config.fetch(:candidate_starters)&.fetch(:enabled, false)
     end
 
     def zip_one(task, definitions, variable)
