@@ -1,3 +1,23 @@
+v2.8.0 [unreleased]
+-------------------
+### Breaking changes
+- [#666](https://github.com/hydra-billing/homs/pull/666) Add translation for file upload field.
+  - BP localization config structure was changed:
+
+  before:
+   ```
+   fileUploadField: Field label
+   ```
+
+  after:
+
+   ```
+   fileUploadField:
+     label: Field label
+     input_text: Field text
+     browse_link_text: Link text
+   ```
+
 v2.7.7 [unreleased]
 -------------------
 ### Features
