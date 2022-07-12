@@ -1,17 +1,24 @@
 v2.8.0 [unreleased]
 -------------------
 ### Breaking changes
+- [#665](https://github.com/hydra-billing/homs/pull/665) Add tooltip message translation for string field.
 - [#666](https://github.com/hydra-billing/homs/pull/666) Add translation for file upload field.
-  - BP localization config structure was changed:
 
+- BP localization config structure was changed. Now input labels for the next field types should be placed in key "label": `checkbox`, `datetime`, `file_list`, `file_upload`, `select`, `select_table`, `string`, `submit_button` and `text`.
+  `string` field has additional key "message" for tooltip message, `file_upload` has `input_text` and `browse_link_text` keys.
+  
   before:
    ```
+   stringField: Field label
    fileUploadField: Field label
    ```
 
   after:
 
    ```
+   stringField:
+     label: Field label
+     message: Tooltip message
    fileUploadField:
      label: Field label
      input_text: Field text

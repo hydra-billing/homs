@@ -53,6 +53,13 @@ get:
               label: String field
               required: true
               css_class: col-xs-6 col-sm-4 col-md-3
+            - name: stringRegexpField
+              type: string
+              label: String Regexp field
+              regex: ^[0-9]{12}$
+              message: Field does not match regexp
+              required: true
+              css_class: col-xs-12 col-sm-6 col-md-4
             - name: staticField
               type: static
               html: <div class="alert alert-success"><h4>Static field with substitution $homsOrderCode</h4></div>
@@ -119,6 +126,9 @@ get:
           type: "string"
           value: null
         stringField:
+          type: "string"
+          value: null
+        stringRegexpField:
           type: "string"
           value: null
         staticField:

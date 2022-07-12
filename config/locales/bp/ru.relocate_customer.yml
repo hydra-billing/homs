@@ -3,35 +3,56 @@ ru:
     label: Изменение адреса абонента
     Activity_1jedmqv:
       label: Заполните адрес абонента
-      homsOrderDataCustomerCity: Город
-      homsOrderDataCustomerStreet: Улица
-      homsOrderDataCustomerHouse: Дом
-      homsOrderDataCustomerEntrance: Подъезд
+      homsOrderDataCustomerCity:
+        label: Город
+      homsOrderDataCustomerStreet:
+        label: Улица
+      homsOrderDataCustomerHouse:
+        label: Дом
+      homsOrderDataCustomerEntrance:
+        label: Подъезд
     Activity_1u3vwq1:
       label: Подключение
       group1: Контактная информация
-      homsOrderDataCustomerName: Имя
-      homsOrderDataCustomerSurname: Фамилия
-      homsOrderDataCustomerPhone: Телефон
-      homsOrderDataCustomerEmail: Email
-      homsOrderDataInstallDate: Дата подключения
+      homsOrderDataCustomerName:
+        label: Имя
+      homsOrderDataCustomerSurname:
+        label: Фамилия
+      homsOrderDataCustomerPhone:
+        label: Телефон
+      homsOrderDataCustomerEmail:
+        label: Email
+      homsOrderDataInstallDate:
+        label: Дата подключения
       group2: Смена тарифа
-      homsOrderDataChangePlan: Требуется смена тарифа
+      homsOrderDataChangePlan:
+        label: Требуется смена тарифа
     Activity_08wwoqp:
       label: Выбор нового тарифа
-      homsOrderDataPlanId: Тариф
-      homsOrderDataPlanComment: Комментарий для абонента
+      homsOrderDataPlanId:
+        label: Тариф
+      homsOrderDataPlanComment:
+        label: Комментарий для абонента
     Activity_0dhj8f6:
       label: Подтверждение
       group1: Новый адрес
-      homsOrderDataCustomerCity: Город
-      homsOrderDataCustomerStreet: Улица
-      homsOrderDataCustomerHouse: Дом
-      homsOrderDataCustomerEntrance: Подъезд
+      homsOrderDataCustomerCity:
+        label: Город
+      homsOrderDataCustomerStreet:
+        label: Улица
+      homsOrderDataCustomerHouse:
+        label: Дом
+      homsOrderDataCustomerEntrance:
+        label: Подъезд
       group2: Контактная информация
-      homsOrderDataCustomerName: Имя
-      homsOrderDataCustomerSurname: Фамилия
-      homsOrderDataCustomerPhone: Телефон
-      homsOrderDataCustomerEmail: Email
-      homsOrderDataInstallDate: Дата подключения
+      homsOrderDataCustomerName:
+        label: Имя
+      homsOrderDataCustomerSurname:
+        label: Фамилия
+      homsOrderDataCustomerPhone:
+        label: Телефон
+      homsOrderDataCustomerEmail:
+        label: Email
+      homsOrderDataInstallDate:
+        label: Дата подключения
       group3: Новый тариф

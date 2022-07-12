@@ -92,7 +92,7 @@ const HBWFormFileList: React.FC<Props> = ({
   const renderLinks = (ls: Link[]) => ls.map((link, i) => renderLink(link, i));
 
   const cssClass = cn(params.css_class, 'hbw-file-list', { hidden });
-  const label = translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+  const label = translateBP(`${task.process_key}.${task.key}.${name}.label`, {}, params.label);
   const labelCSS = cn('hbw-file-list-label', params.label_css);
   const hiddenValue = JSON.stringify(links.filter(link => !link.deleted));
 

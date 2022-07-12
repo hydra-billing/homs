@@ -38,7 +38,7 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
       };
 
       const inputCSS = cx(params.css_class, { hidden });
-      const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+      const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}.label`, {}, params.label);
 
       const labelCSS = cx('hbw-checkbox-label', this.props.params.label_css);
 
