@@ -62,7 +62,7 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       const rootCSS = cx(params.css_class, { hidden });
       const labelCss = cx(params.label_css, 'hbw-string-label');
       const inputCSS = cx('form-control', { invalid: this.isAvailable() && !valid });
-      const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+      const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}.label`, {}, params.label);
 
       return <div className={rootCSS} title={params.tooltip}>
         <div className="form-group">
@@ -87,9 +87,14 @@ modulejs.define('HBWFormString', ['React'], (React) => {
     }
 
     componentDidMount () {
+      const { name, params, task } = this.props;
+      const tooltipMessage = this.context.translateBP(`${task.process_key}.${task.key}.${name}.message`,
+        {},
+        params.message || this.context.translate('errors.field_is_required'));
+
       this.props.onRef(this);
       this.tooltip = new Tooltip(this.input, {
-        title:     this.props.params.message || this.context.translate('errors.field_is_required'),
+        title:     tooltipMessage,
         container: this.tooltipContainer,
         trigger:   'manual',
         placement: 'top'

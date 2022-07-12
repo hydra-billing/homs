@@ -39,7 +39,7 @@ const HBWSubmitSelectButton: React.FC<Props> = ({
   const cssClass = cx(params.css_class, { buttonDisabled });
   const faClass = cx(params.fa_class, { buttonDisabled });
 
-  const label = translateBP(`${task.process_key}.${task.key}.${params.name}`, {}, params.button_text);
+  const label = translateBP(`${task.process_key}.${task.key}.${params.name}.label`, {}, params.button_text);
   const buildButton = () => (
       <button
         type="submit"

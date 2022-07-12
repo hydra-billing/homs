@@ -43,7 +43,7 @@ modulejs.define('HBWFormDatetime', ['React'], (React) => {
       const isoValue = value ? format(value, this.ISODateFormat) : '';
       const inputCSS = cx(params.css_class, { hidden });
       const labelCSS = cx(params.label_css, 'hbw-datetime-label');
-      const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+      const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}.label`, {}, params.label);
 
       return <div className={inputCSS} title={params.tooltip} ref={(node) => { this.rootNode = node; }}>
         <div className="form-group">

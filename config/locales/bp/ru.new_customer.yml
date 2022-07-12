@@ -3,49 +3,79 @@ ru:
     label: Подключение абонента
     Activity_1jedmqv:
       label: Заполните адрес абонента
-      homsOrderDataCustomerCity: Город
-      homsOrderDataCustomerStreet: Улица
-      homsOrderDataCustomerHouse: Дом
-      homsOrderDataCustomerEntrance: Подъезд
+      homsOrderDataCustomerCity:
+        label: Город
+      homsOrderDataCustomerStreet:
+        label: Улица
+      homsOrderDataCustomerHouse:
+        label: Дом
+      homsOrderDataCustomerEntrance:
+        label: Подъезд
     Activity_1pk04of:
       label: Адрес недоступен
     Activity_1u3vwq1:
       label: Выбор тарифа
-      homsOrderDataPlanId: Тариф
-      homsOrderDataPlanComment: Комментарий для абонента
+      homsOrderDataPlanId:
+        label: Тариф
+      homsOrderDataPlanComment:
+        label: Комментарий для абонента
       static: <div class="alert alert-success"><h4>Подключение доступно</h4> <small>Решение основано на автоматической проверке доступа в биллинге</small></div>
     Activity_08wwoqp:
       label: Ввод данных абонента
       group1: Персональные данные абонента
-      homsOrderDataCustomerName: Имя
-      homsOrderDataCustomerSurname: Фамилия
-      homsOrderDataCustomerPhone: Телефон
-      homsOrderDataCustomerEmail: Email
-      homsOrderDataInstallDate: Дата подключения
+      homsOrderDataCustomerName:
+        label: Имя
+      homsOrderDataCustomerSurname:
+        label: Фамилия
+      homsOrderDataCustomerPhone:
+        label: Телефон
+      homsOrderDataCustomerEmail:
+        label: Email
+      homsOrderDataInstallDate:
+        label: Дата подключения
       group2: Документы абонента
-      homsOrderDataUploadedFile: Прикрепить документы
-      homsOrderDataFileList: Прикрепленные файлы
+      homsOrderDataUploadedFile:
+        label: Прикрепить документы
+      homsOrderDataFileList:
+        label: Прикрепленные файлы
       group3: Откуда вы узнали о нас
-      homsOrderDataFromFriends: Друзья
-      homsOrderDataFromTV: TV
-      homsOrderDataFromFacebookAds: Реклама на Facebook
-      homsOrderDataFromOther: Другое
+      homsOrderDataFromFriends:
+        label: Друзья
+      homsOrderDataFromTV:
+        label: TV
+      homsOrderDataFromFacebookAds:
+        label: Реклама на Facebook
+      homsOrderDataFromOther:
+        label: Другое
     Activity_0dhj8f6:
       label: Подтверждение
       group1: Данные абонента
-      homsOrderDataCustomerName: Имя
-      homsOrderDataCustomerSurname: Фамилия
-      homsOrderDataCustomerPhone: Телефон
-      homsOrderDataCustomerEmail: Email
-      homsOrderDataInstallDate: Дата подключения
+      homsOrderDataCustomerName:
+        label: Имя
+      homsOrderDataCustomerSurname:
+        label: Фамилия
+      homsOrderDataCustomerPhone:
+        label: Телефон
+      homsOrderDataCustomerEmail:
+        label: Email
+      homsOrderDataInstallDate:
+        label: Дата подключения
       group2: Тариф
       group3: Адрес
-      homsOrderDataCustomerCity: Город
-      homsOrderDataCustomerStreet: Улица
-      homsOrderDataCustomerHouse: Дом
-      homsOrderDataCustomerEntrance: Подъезд
+      homsOrderDataCustomerCity:
+        label: Город
+      homsOrderDataCustomerStreet:
+        label: Улица
+      homsOrderDataCustomerHouse:
+        label:  Дом
+      homsOrderDataCustomerEntrance:
+        label: Подъезд
       group5: Откуда вы узнали о нас
-      homsOrderDataFromFriends: Друзья
-      homsOrderDataFromTV: TV
-      homsOrderDataFromFacebookAds: Реклама на Facebook
-      homsOrderDataFromOther: Другое
+      homsOrderDataFromFriends:
+        label: Друзья
+      homsOrderDataFromTV:
+        label: TV
+      homsOrderDataFromFacebookAds:
+        label: Реклама на Facebook
+      homsOrderDataFromOther:
+        label: Другое

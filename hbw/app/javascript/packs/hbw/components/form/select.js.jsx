@@ -365,7 +365,7 @@ modulejs.define('HBWFormSelect',
         onChange:        opt => applyValue(opt)
       };
 
-      const label = translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+      const label = translateBP(`${task.process_key}.${task.key}.${name}.label`, {}, params.label);
       const labelCss = cx(params.label_css, 'select-label');
       const cssClass = cx(params.css_class, { hidden });
 

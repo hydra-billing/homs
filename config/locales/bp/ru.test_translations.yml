@@ -4,17 +4,29 @@ ru:
     Activity_test_translations:
       label: Форма для тестирования переводов
       group: Группа
-      selectField: Поле select
-      stringField: Поле string
+      selectField:
+        label: Поле select
+      stringField:
+        label: Поле string
+      stringRegexpField:
+        label: Поле string c regexp валидацией
+        message: Поле не соответствует regexp
       staticField: <div class="alert alert-success"><h4>Поле static с подстановкой $homsOrderCode</h4></div>
-      selectTableField: Поле select_table
-      textField: Поле text
-      datetimeField: Поле datetime
+      selectTableField:
+        label: Поле select_table
+      textField:
+        label: Поле text
+      datetimeField:
+        label: Поле datetime
       fileUploadField:
         label: Поле file_upload
         input_text: Перенесите файл сюда
         browse_link_text: Прикрепите файлы
-      homsOrderDataFileList: Поле file_list
-      checkboxField: Поле checkbox
-      submitSelectButton1: Кнопка 1
-      submitSelectButton2: Кнопка 2
+      homsOrderDataFileList:
+        label: Поле file_list
+      checkboxField:
+        label: Поле checkbox
+      submitSelectButton1:
+        label: Кнопка 1
+      submitSelectButton2:
+        label: Кнопка 2

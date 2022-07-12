@@ -87,7 +87,7 @@ modulejs.define('HBWFormSelectTable',
 
         const selectErrorMessage = this.context.translate('errors.field_not_defined_in_bp', { field_name: name });
 
-        const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+        const label = this.context.translateBP(`${task.process_key}.${task.key}.${name}.label`, {}, params.label);
 
         const labelCss = cx(params.label_css, 'select-table-label');
         const cssClass = cx(params.css_class, { hidden });
