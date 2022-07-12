@@ -10,7 +10,10 @@ ru:
       selectTableField: Поле select_table
       textField: Поле text
       datetimeField: Поле datetime
-      fileUploadField: Поле file_opload
+      fileUploadField:
+        label: Поле file_upload
+        input_text: Перенесите файл сюда
+        browse_link_text: Прикрепите файлы
       homsOrderDataFileList: Поле file_list
       checkboxField: Поле checkbox
       submitSelectButton1: Кнопка 1

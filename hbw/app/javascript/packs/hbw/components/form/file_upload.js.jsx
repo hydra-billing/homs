@@ -106,7 +106,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         }
       };
 
-      const label = translateBP(`${task.process_key}.${task.key}.${name}`, {}, params.label);
+      const label = translateBP(`${task.process_key}.${task.key}.${name}.label`, {}, params.label);
       const labelCSS = cx('hbw-file-upload-label', params.label_css);
       const errMessage = getErrMessage();
 
@@ -126,7 +126,9 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     }
 
     renderFileInput = () => {
-      const { name, params, disabled } = this.props;
+      const {
+        name, params, disabled, task
+      } = this.props;
 
       const { isDragActive } = this.state;
 
@@ -138,7 +140,9 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         multiple: params.multiple
       };
 
-      const browseLinkText = params.browse_link_text || this.context.translate('components.file_upload.browse');
+      const browseLinkText = this.context.translateBP(`${task.process_key}.${task.key}.${name}.browse_link_text`,
+        {},
+        params.browse_link_text || this.context.translate('components.file_upload.browse'));
 
       return (
         <div
@@ -192,7 +196,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     }
 
     renderInputText = () => {
-      const { params } = this.props;
+      const { name, params, task } = this.props;
 
       const defaultInputText = (
         <>
@@ -201,9 +205,11 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         </>
       );
 
-      return 'input_text' in params
-        ? params.input_text
-        : defaultInputText;
+      const inputText = this.context.translateBP(`${task.process_key}.${task.key}.${name}.input_text`,
+        {},
+        params.input_text || defaultInputText);
+
+      return inputText;
     }
 
     ellipsisFileName = name => (
