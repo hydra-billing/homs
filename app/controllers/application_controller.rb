@@ -34,28 +34,6 @@ class ApplicationController < ActionController::Base
     Success(User.from_keycloak(validated_user_data))
   end
 
-  def use_keycloak?
-    return false unless keycloak_enabled?
-
-    if keycloak_enabled? && !regular_login_enabled?
-      true
-    else
-      authenticated_by_keycloak?
-    end
-  end
-
-  def keycloak_enabled?
-    Rails.application.config.app.fetch(:SSO, {}).fetch(:enabled)
-  end
-
-  def regular_login_enabled?
-    Rails.application.config.app.fetch(:SSO, {}).fetch(:use_regular_login)
-  end
-
-  def authenticated_by_keycloak?
-    HOMS.container[:keycloak_client]&.authenticated?(cookies['session_state'])
-  end
-
   def json_request?
     request.format.json?
   end
