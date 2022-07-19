@@ -18,7 +18,11 @@ v2.8.0 [unreleased]
      browse_link_text: Link text
    ```
 
-v2.7.7 [unreleased]
+v2.7.8 [unreleased]
+### Features
+- [#643](https://github.com/latera/homs/pull/643) Filter business processes available for launch in the SSO world.
+
+v2.7.7 [2022-07-11]
 -------------------
 ### Features
 - [#660](https://github.com/hydra-billing/homs/pull/660) Use scope parameter for SSO authentication.

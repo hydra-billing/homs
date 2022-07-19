@@ -27,7 +27,12 @@ module HBW
     private
 
     def buttons
-      widget.bp_buttons(entity_identifier, entity_type, entity_class, current_user_identifier)
+      user_identifier = if keycloak_enabled?
+                          token_user_identifier || current_user_identifier
+                        else
+                          current_user_identifier
+                        end
+      widget.bp_buttons(entity_identifier, entity_type, entity_class, user_identifier)
     end
 
     def bp_code
