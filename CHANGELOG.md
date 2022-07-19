@@ -1,3 +1,27 @@
+v2.8.0 [unreleased]
+-------------------
+### Breaking changes
+- [#666](https://github.com/hydra-billing/homs/pull/666) Add translation for file upload field.
+  - BP localization config structure was changed:
+
+  before:
+   ```
+   fileUploadField: Field label
+   ```
+
+  after:
+
+   ```
+   fileUploadField:
+     label: Field label
+     input_text: Field text
+     browse_link_text: Link text
+   ```
+
+v2.7.8 [unreleased]
+### Features
+- [#643](https://github.com/latera/homs/pull/643) Filter business processes available for launch in the SSO world.
+
 v2.7.7 [2022-07-11]
 -------------------
 ### Features
