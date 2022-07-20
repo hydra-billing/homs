@@ -45,6 +45,9 @@ module HOMS
 
     config.action_controller.permit_all_parameters = true
 
+    # Allow to serialize Symbol
+    config.active_record.yaml_column_permitted_classes = [Symbol]
+
     require Rails.root.join('lib/homs_config')
     config.app = Settings::Homs
 

@@ -14,7 +14,7 @@ class OrdersController < API::BaseController
 
   # GET /orders/search_by/{:code | :ext_code}/
   def search_by
-    @criteria = "#{Order.human_attribute_name(params[:field])}: "\
+    @criteria = "#{Order.human_attribute_name(params[:field])}: " \
                 "'#{params[:value]}'"
     resource_set Order.find_by!(params[:field] => params[:value])
     render action: :show
