@@ -41,14 +41,14 @@ RSpec.describe OrderType, type: :model do
     ot = OrderType.new(file: {order_type: 1}.to_yaml)
     expect(ot.valid?).to be false
     expect(ot.errors.full_messages).to eq [
-      "Loaded YAML file contents [\"Attribute 'order_type' should be "\
+      "Loaded YAML file contents [\"Attribute 'order_type' should be " \
       'of the Hash type"]'
     ]
 
     ot = OrderType.new(file: {order_type: {}}.to_yaml)
     expect(ot.valid?).to be false
     expect(ot.errors.full_messages).to eq [
-      "Loaded YAML file contents [\"Missing attribute 'fields'\", "\
+      "Loaded YAML file contents [\"Missing attribute 'fields'\", " \
       "\"Missing attribute 'code'\", \"Missing attribute 'name'\"]"
     ]
 
