@@ -21,6 +21,7 @@ v2.8.0 [unreleased]
 v2.7.8 [unreleased]
 ### Features
 - [#643](https://github.com/latera/homs/pull/643) Filter business processes available for launch in the SSO world.
+- [#668](https://github.com/latera/homs/pull/668) Add es locale.
 
 v2.7.7 [2022-07-11]
 -------------------
