@@ -1,9 +1,10 @@
 import { parseISO, format } from 'date-fns';
 import en from 'date-fns/locale/en-US';
 import ru from 'date-fns/locale/ru';
+import es from 'date-fns/locale/es';
 import { registerLocale } from 'react-datepicker';
 
-const locales = { en, ru };
+const locales = { en, ru, es };
 
 export const initDatePickerLocale = () => {
   Object.keys(locales).forEach((locale) => {

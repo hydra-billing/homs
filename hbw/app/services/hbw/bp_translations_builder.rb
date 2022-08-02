@@ -1,7 +1,7 @@
 module HBW
   class BPTranslationsBuilder
     TRANSLATIONS_DIR = Rails.root.join('config', 'locales', 'bp').freeze
-    LOCALES = [:en, :ru].freeze
+    LOCALES = [:en, :ru, :es].freeze
 
     class << self
       def call
