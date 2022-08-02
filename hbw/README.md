@@ -23,7 +23,7 @@ Initialize widget with following options:
 * `taskListPath` (relative path to page with task list mounted to `availableTaskListContainer`);
 * `userIdentifier` (email of user in HOMS);
 * `locale` (object):
-    * `code` (available values are 'en', 'ru')
+    * `code` (available values are 'en', 'ru', 'es')
     * `dateTimeFormat` (format for dates according to [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table))
 * `showNotifications` (allows pop-up notifications to appear when a new task has been assigned to the current user)
 
