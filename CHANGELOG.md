@@ -6,7 +6,7 @@ v2.8.0 [unreleased]
 
 - BP localization config structure was changed. Now input labels for the next field types should be placed in key "label": `checkbox`, `datetime`, `file_list`, `file_upload`, `select`, `select_table`, `string`, `submit_button` and `text`.
   `string` field has additional key "message" for tooltip message, `file_upload` has `input_text` and `browse_link_text` keys.
-  
+
   before:
    ```
    stringField: Field label
@@ -25,7 +25,7 @@ v2.8.0 [unreleased]
      browse_link_text: Link text
    ```
 
-v2.7.8 [unreleased]
+v2.7.8 [2022-08-04]
 ### Features
 - [#643](https://github.com/latera/homs/pull/643) Filter business processes available for launch in the SSO world.
 - [#668](https://github.com/latera/homs/pull/668) Add es locale.
