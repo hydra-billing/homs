@@ -1,7 +1,7 @@
 inherit_from: .rubocop_todo.yml
 
 AllCops:
-  TargetRubyVersion: 2.7.4
+  TargetRubyVersion: 2.7.6
   SuggestExtensions: false
   NewCops: enable
   Exclude:
