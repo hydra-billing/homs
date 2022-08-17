@@ -1,4 +1,4 @@
-FROM ruby:2.7.4-slim
+FROM ruby:2.7.6-slim
 
 RUN mkdir -p /opt/homs
 
