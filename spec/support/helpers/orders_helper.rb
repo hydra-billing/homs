@@ -337,5 +337,9 @@ module Features
 
       parent_node(input).click
     end
+
+    def clear_float(str)
+      str.to_f.to_s
+    end
   end
 end

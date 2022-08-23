@@ -45,6 +45,11 @@ FactoryBot.define do
                visible:     true,
                editable:    true
              },
+             estimatePrice:     {
+               type:        'number',
+               label:       'Estimate price',
+               description: 'Estimate price'
+             },
              approver:          {
                type:        'string',
                label:       'Approver',
