@@ -1,4 +1,10 @@
+v2.7.9 [unreleased]
+-------------------
+### Bugfixes
+- [#671](https://github.com/hydra-billing/homs/pull/670) Cut trailing zeroes when validate number in order form.
+
 v2.7.8 [2022-08-04]
+-------------------
 ### Features
 - [#643](https://github.com/latera/homs/pull/643) Filter business processes available for launch in the SSO world.
 - [#668](https://github.com/latera/homs/pull/668) Add es locale.
