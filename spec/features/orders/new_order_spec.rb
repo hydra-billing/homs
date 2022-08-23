@@ -4,6 +4,7 @@ feature 'Create new order', js: true do
   let(:problem_descr)              { 'Problem description' }
   let(:employee)                   { 'Employee' }
   let(:approver)                   { 'Approver' }
+  let(:price)                      { '123.60' }
   let(:order_code)                 { 'ORD-1' }
   let(:current_date)               { Date.today.strftime('%m/%d/%Y') }
   let(:support_request_type_name)  { 'Support request' }
@@ -70,11 +71,13 @@ feature 'Create new order', js: true do
       expect(page).to have_content 'Vacation end date'
       expect(page).to have_content 'Employee'
       expect(page).to have_content 'Approver'
+      expect(page).to have_content 'Estimate price'
 
       click_on_calendar('order_data_vacationLeaveDate')
       click_on_calendar('order_data_vacationBackDate')
       fill_in('order[data][employee]', with: employee)
       fill_in('order[data][approver]', with: approver)
+      fill_in('order[data][estimatePrice]', with: price)
       click_and_wait('Add')
 
       expect(page).to                               have_content order_code
@@ -82,6 +85,8 @@ feature 'Create new order', js: true do
       expect(find_by_title('Vacation end date')).to have_content current_date
       expect(find_by_title('Employee')).to          have_content employee
       expect(find_by_title('Approver')).to          have_content approver
+
+      expect(find_by_title('Estimate price')).to    have_content clear_float(price)
 
       expect(Order.find_by_code(order_code).present?).to be_truthy
       expect_widget_presence
