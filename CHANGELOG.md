@@ -1,4 +1,4 @@
-v2.7.9 [unreleased]
+v2.7.9 [2022-09-01]
 -------------------
 ### Bugfixes
 - [#671](https://github.com/hydra-billing/homs/pull/670) Cut trailing zeroes when validate number in order form.
