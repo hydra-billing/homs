@@ -42,11 +42,11 @@ module KeycloakUtils
   end
 
   def keycloak_enabled?
-    Rails.application.config.app.fetch(:SSO, {}).fetch(:enabled)
+    Rails.application.config.app.fetch(:sso, {}).fetch(:enabled)
   end
 
   def regular_login_enabled?
-    Rails.application.config.app.fetch(:SSO, {}).fetch(:use_regular_login)
+    Rails.application.config.app.fetch(:sso, {}).fetch(:use_regular_login)
   end
 
   def authenticated_by_keycloak?
