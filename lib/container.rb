@@ -9,7 +9,7 @@ module HOMS
 
     register(:cef_logger) { CEFLogger.new(enabled: Rails.application.config.app.fetch(:cef_logger, false)) }
 
-    sso_config = Rails.application.config.app.fetch(:SSO, {})
+    sso_config = Rails.application.config.app.fetch(:sso, {})
     if sso_config.fetch(:enabled)
       keycloak_config = sso_config.fetch(:keycloak, {})
       redis_config    = Rails.application.config.app.fetch(:redis, {})

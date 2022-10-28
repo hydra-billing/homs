@@ -107,17 +107,17 @@ For using SSO with HOMS:
 2. Add [user attributes](https://www.keycloak.org/docs/latest/server_admin/index.html#proc-configuring-user-attributes_server_administration_guide) in Keycloak with prefix `homs_`: `homs_company`, `homs_department`, `homs_email`, `homs_last_name`, `homs_name`.
 3. Add [mappers](https://www.keycloak.org/docs/latest/server_admin/index.html#_protocol-mappers) in Keycloak without prefix:
 
-Name | Mapper type | User attribute | Token clain name | Claim JSON type | Add to ID token | Add to access token | Add to userinfo | Multivalued | Aggregate attributes values 
---- | --- | --- | --- |--- |--- |--- |--- |--- |--- 
-`company` | `User Attribute` | `company` | `company` | string | On | On | On | Off | Off 
-`department` | `User Attribute` | `department` | `department` | string | On | On | On | Off | Off 
-`email` | `User Attribute` | `email` | `email` | string | On | On | On | Off | Off 
-`last_name` | `User Attribute` | `last_name` | `last_name` | string | On | On | On | Off | Off 
-`name` | `User Attribute` | `name` | `name` | string | On | On | On | Off | Off 
+Name | Mapper type | User attribute | Token clain name | Claim JSON type | Add to ID token | Add to access token | Add to userinfo | Multivalued | Aggregate attributes values
+--- | --- | --- | --- |--- |--- |--- |--- |--- |---
+`company` | `User Attribute` | `company` | `company` | string | On | On | On | Off | Off
+`department` | `User Attribute` | `department` | `department` | string | On | On | On | Off | Off
+`email` | `User Attribute` | `email` | `email` | string | On | On | On | Off | Off
+`last_name` | `User Attribute` | `last_name` | `last_name` | string | On | On | On | Off | Off
+`name` | `User Attribute` | `name` | `name` | string | On | On | On | Off | Off
 
 3. Add to HOMS config file `homs_configuration.yml`:
 ```
-SSO:
+sso:
   enabled: true
   use_regular_login: true
   keycloak:

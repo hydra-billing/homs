@@ -24,6 +24,26 @@ v2.8.0 [unreleased]
      input_text: Field text
      browse_link_text: Link text
    ```
+- [#674](https://github.com/hydra-billing/homs/pull/674) Downcase SSO key in the config & treat redis port as a number.
+
+  If you are using SSO make this change your `homs_configuration.yml` from
+  ```yaml
+  SSO:
+   ...
+
+  redis:
+    host: redis_host
+    port: '12345'
+  ```
+  to
+  ```yaml
+  sso:
+   ...
+
+  redis:
+    host: redis_host
+    port: 12345
+  ```
 
 v2.7.9 [2022-09-01]
 -------------------

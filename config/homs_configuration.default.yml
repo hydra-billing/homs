@@ -21,7 +21,7 @@ orders_expiration_warning_days: 1
 
 base_url: '/'
 
-SSO:
+sso:
   enabled: true
   use_regular_login: true
   keycloak:
@@ -36,4 +36,4 @@ SSO:
 
 redis:
   host: <%= ENV['REDIS_HOST'] %>
-  port: '<%= ENV['REDIS_PORT'] %>'
+  port: <%= ENV['REDIS_PORT'] %>

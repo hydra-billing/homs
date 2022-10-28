@@ -21,7 +21,7 @@ orders_expiration_warning_days: 1
 
 cef_logger: false
 
-SSO:
+sso:
   enabled: true
   use_regular_login: true
   keycloak:
