@@ -4,7 +4,6 @@ module HBW
   class TasksController < ApiController
     include Minio
     extend Minio::Mixin
-    include KeycloakUtils
 
     inject['minio_adapter']
 

@@ -1,3 +1,4 @@
+require 'dry-effects'
 require 'faraday/detailed_logger'
 require 'faraday_middleware'
 require 'settings'
@@ -5,19 +6,19 @@ require 'settings'
 module HBW
   module Common
     class API
-      class_attribute :config
-      attr_reader :token
+      include Dry::Effects.Reader(:auth_header)
 
-      def initialize(conn, api_token)
+      class_attribute :config
+
+      def initialize(conn)
         @conn = conn
-        @token = api_token
       end
 
       %w(get put patch post delete).each do |method|
         define_method method do |url, *params|
           @conn.send(method, url, *params) do |request|
             request.headers['Content-type'] = 'application/json'
-            request.headers['Authorization'] = "Basic #{token}"
+            request.headers['Authorization'] = auth_header
           end
         end
       end
@@ -25,7 +26,7 @@ module HBW
       class << self
         include HBW::Logger
 
-        def build(config = API.config)
+        def build
           conn = Faraday.new(url: config[:base_url]) do |faraday|
             faraday.request :json
             faraday.response :json, content_type: /\bjson$/
@@ -33,11 +34,7 @@ module HBW
             faraday.adapter Faraday.default_adapter
           end
 
-          new(conn, config[:api_token] || token_from(config[:login], config[:password]))
-        end
-
-        def token_from(login, password)
-          Base64.strict_encode64 "#{login}:#{password}"
+          new(conn)
         end
 
         def load

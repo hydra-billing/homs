@@ -104,11 +104,11 @@ Requirements:
 
 For using SSO with HOMS:
 1. Add [user roles](https://www.keycloak.org/docs/latest/server_admin/index.html#con-client-roles_server_administration_guide). HOMS use "admin" and "user" client level roles. Only one role could be assigned to user.
-2. Add [user attributes](https://www.keycloak.org/docs/latest/server_admin/index.html#proc-configuring-user-attributes_server_administration_guide) in Keycloak with prefix `homs_`: `homs_company`, `homs_department`, `homs_email`, `homs_last_name`, `homs_name`.
+2. Add [user attributes](https://www.keycloak.org/docs/latest/server_admin/index.html#proc-configuring-user-attributes_server_administration_guide) in Keycloak: `company`, `department`, `email`, `last_name`, `name`.
 3. Add [mappers](https://www.keycloak.org/docs/latest/server_admin/index.html#_protocol-mappers) in Keycloak without prefix:
 
 Name | Mapper type | User attribute | Token clain name | Claim JSON type | Add to ID token | Add to access token | Add to userinfo | Multivalued | Aggregate attributes values
---- | --- | --- | --- |--- |--- |--- |--- |--- |---
+--- | --- | --- | --- | --- | --- | --- | --- | --- | ---
 `company` | `User Attribute` | `company` | `company` | string | On | On | On | Off | Off
 `department` | `User Attribute` | `department` | `department` | string | On | On | On | Off | Off
 `email` | `User Attribute` | `email` | `email` | string | On | On | On | Off | Off
@@ -127,6 +127,8 @@ sso:
     redirect_uri: "http://homs_host:homs_port/authenticate_by_keycloak"
     secret: "af9504fc-b030-405e-97b6-813220c07a7e"
     logout_redirect: "http://homs_host:homs_port"
+    scope:
+      - homs
 ```
 
 ### Filter business processes by user
