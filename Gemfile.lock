@@ -145,6 +145,12 @@ GEM
     dry-core (1.0.0)
       concurrent-ruby (~> 1.0)
       zeitwerk (~> 2.6)
+    dry-effects (0.4.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.0)
+      dry-inflector (~> 1.0)
+      dry-initializer (~> 3.0)
+      zeitwerk (~> 2.6)
     dry-inflector (1.0.0)
     dry-initializer (3.1.1)
     dry-logic (1.4.0)
@@ -233,7 +239,7 @@ GEM
       haml (>= 4.0)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
-    hydra-keycloak-client (0.1.13)
+    hydra-keycloak-client (0.1.14)
       dry-auto_inject
       dry-container
       dry-monads
@@ -460,6 +466,7 @@ DEPENDENCIES
   devise-encryptable
   dry-auto_inject
   dry-container
+  dry-effects
   dry-monads
   dry-struct
   dry-validation
