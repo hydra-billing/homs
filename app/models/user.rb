@@ -29,8 +29,8 @@ class User < ActiveRecord::Base
     def from_keycloak(user_data)
       user = where(email: user_data[:email]).first_or_create do |new_user|
         new_user.email = user_data[:email]
-        new_user.name = user_data[:name]
-        new_user.last_name = user_data[:last_name] || '-'
+        new_user.name = user_data[:given_name]
+        new_user.last_name = user_data[:family_name] || '-'
         new_user.company = user_data[:company] || '-'
         new_user.department = user_data[:department] || '-'
         new_user.password = Devise.friendly_token
