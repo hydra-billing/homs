@@ -22,7 +22,7 @@ orders_expiration_warning_days: 1
 base_url: '/'
 
 sso:
-  enabled: true
+  enabled: false
   use_regular_login: true
   keycloak:
     auth_server_url: "http://0.0.0.0:8080/auth/"
