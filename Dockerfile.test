@@ -21,6 +21,7 @@ RUN apt-get update && \
   libgtk-3-0 \
   libnspr4 \
   libnss3 \
+  libu2f-udev \
   libxss1 \
   libxtst6 \
   unzip \
