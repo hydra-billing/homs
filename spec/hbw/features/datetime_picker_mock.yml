@@ -74,6 +74,18 @@ get:
                   css_class: col-xs-6 col-sm-4 col-md-3
                   locale: ru
                   format: DD.MM.YYYY
+                - name: homsOrderDataEnDateTime
+                  type: datetime
+                  label: EN Datetime
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  format: MM/DD/YYYY HH:mm
+                  set_time: true
+                - name: homsOrderDataRuDateTime
+                  type: datetime
+                  label: RU Datetime
+                  css_class: col-xs-6 col-sm-4 col-md-3
+                  format: DD.MM.YYYY HH:mm
+                  set_time: true
                 - name: homsOrderDataDisabledEndDate
                   type: datetime
                   label: End Date
@@ -251,6 +263,12 @@ get:
         homsOrderDataEndDate:
           type: "string"
           value: "2016-09-30T14:52:20.000+03:00"
+        homsOrderDataEnDateTime:
+          type: "string"
+          value: "2016-09-30T17:52:20.000+03:00"
+        homsOrderDataRuDateTime:
+          type: "string"
+          value: "2016-09-30T17:52:20.000+03:00"
         homsOrderDataDisabledEndDate:
           type: "string"
           value: "2016-09-30T14:52:20.000+03:00"
@@ -344,7 +362,7 @@ post:
             processDefinitionId: "testProcess:469:222221"
 
   task/111111/submit-form:
-    - params: "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456"
+    - params: "variables[homsOrderDataAddress][value]=test+address&variables[homsOrderDataBeginDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEndDate][value]=2016-09-30T11:52:20+00:00&variables[homsOrderDataEnDateTime][value]=2016-09-30T14:52:20+00:00&variables[homsOrderDataRuDateTime][value]=2016-09-30T14:52:20+00:00&variables[homsOrderDataHomePlace][value]=test+home+place&variables[homsOrderDataRecommendation][value]=&variables[homsOrderDataSelect][value]=123456"
       response: [""]
 
   variable-instance:

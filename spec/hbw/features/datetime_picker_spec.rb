@@ -31,6 +31,12 @@ feature 'Check datetime picker with', js: true do
 
     click_on_bp_calendar('BeginDate')
     expect(page).to have_content 'September 2016'
+
+    expect(page).to have_content 'EN Datetime'
+    expect(bp_calendar_value('EnDateTime')).to eq('09/30/2016 14:52')
+
+    click_on_bp_calendar('EnDateTime')
+    expect(input_by_name('time-input').value).to eq('14:52')
   end
 
   scenario 'ru locale' do
@@ -39,5 +45,11 @@ feature 'Check datetime picker with', js: true do
 
     click_on_bp_calendar('EndDate')
     expect(page).to have_content 'сентябрь 2016'
+
+    expect(page).to have_content 'RU Datetime'
+    expect(bp_calendar_value('RuDateTime')).to eq('30.09.2016 14:52')
+
+    click_on_bp_calendar('RuDateTime')
+    expect(input_by_name('time-input').value).to eq('14:52')
   end
 end
