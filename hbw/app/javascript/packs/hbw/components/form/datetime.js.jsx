@@ -62,6 +62,8 @@ modulejs.define('HBWFormDatetime', ['React'], (React) => {
             popperPlacement="bottom-start"
             popperModifiers={this.popperOptions}
             autoComplete='off'
+            showTimeInput={params.set_time}
+            timeInputLabel=""
           />
           <input name={name} type="hidden" value={isoValue} />
           {params.description?.placement === 'bottom' && this.renderDescription()}

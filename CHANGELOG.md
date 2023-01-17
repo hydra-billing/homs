@@ -1,3 +1,12 @@
+v2.7.10 [unreleased]
+-------------------
+### Bugfixes
+- [#683](https://github.com/hydra-billing/homs/pull/683) Allow to set time in datetimepicker. Added new option for datetime field type:
+  ```
+  set_time: true|false
+  ```
+  False by default. If true - time input becomes available in calendar.
+
 v2.7.9 [2022-09-01]
 -------------------
 ### Bugfixes
