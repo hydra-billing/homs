@@ -21,9 +21,13 @@ class HBW::Widget
   include HBW::Inject[:adapter]
 
   def bp_buttons(entity_identifier, entity_type, entity_class, current_user_identifier)
+    bp_codes = HBW::Widget.config[:entities].fetch(entity_class.to_sym)[:bp_toolbar][:entity_type_buttons][entity_type.to_sym].map do |bp|
+      bp[:bp_code]
+    end
+
     if !@adapter.user_exists?(current_user_identifier)
       {}
-    elsif @adapter.bp_running?(entity_identifier, entity_class)
+    elsif @adapter.bp_running?(entity_identifier, entity_class, bp_codes)
       {buttons: [], bp_running: true}
     else
       buttons = self.class.entity_type_buttons(entity_type, entity_class).map do |button_params|
@@ -58,7 +62,7 @@ class HBW::Widget
   end
 
   def try_to_start_bp(current_user_identifier, bp_code, entity_code, entity_class, initial_variables = {})
-    unless @adapter.bp_running?(entity_code, entity_class)
+    unless @adapter.bp_running?(entity_code, entity_class, [bp_code])
       start_bp(current_user_identifier,
                bp_code,
                entity_code,

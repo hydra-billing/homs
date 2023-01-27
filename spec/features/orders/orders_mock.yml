@@ -51,6 +51,10 @@ get:
         - <<: *default_process-definition
           id: "testProcess:469:222222"
           deploymentId: "222222"
+        - <<: *default_process-definition
+          id: "vacation_request:469:222223"
+          key: "vacation_request"
+          deploymentId: "222223"
 
   # form definitions
   task/111111/deployed-form:

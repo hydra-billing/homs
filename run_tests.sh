@@ -10,6 +10,7 @@ cp config/bpm.yml.sample config/bpm.yml
 cp config/database.yml.sample config/database.yml
 cp config/secrets.yml.sample config/secrets.yml
 cp config/cable.yml.sample config/cable.yml
+cp config/hbw.yml.sample config/hbw.yml
 echo "sources:
   bpmanagementsystem:
     type: 'static/bpm'
