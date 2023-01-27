@@ -2,6 +2,7 @@ v2.7.12 [unreleased]
 -------------------
 ### Bugfixes
 - [#683](https://github.com/hydra-billing/homs/pull/689) Set focus to the first element in form.
+- [#683](https://github.com/hydra-billing/homs/pull/687) Filter processes by entity_type.
 
 v2.7.11 [2022-01-28]
 -------------------

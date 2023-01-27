@@ -17,7 +17,7 @@ FactoryBot.define do
 
     trait :vacation_request do
       active true
-      code 'Vacation request'
+      code 'vacation_request'
       fields(vacationLeaveDate: {
                type:        'datetime',
                label:       'Leave date',
