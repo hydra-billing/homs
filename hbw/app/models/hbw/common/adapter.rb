@@ -71,7 +71,13 @@ module HBW
 
         variables = get_variables(user, entity_class, entity_code, initial_variables)
 
-        business_key = [entity_class, entity_code].join('_')
+        entity_type = HBW::Widget.config[:entities].fetch(entity_class.to_sym)[:bp_toolbar][:entity_type_buttons].select do |_key, value|
+                        value.any? do |bp|
+                          bp[:bp_code] == bp_code
+                        end
+                      end.keys[0]
+
+        business_key = [entity_class, entity_type, entity_code].join('_')
 
         response = start_process_response(p_def['id'], variables, business_key)
         response.status == 201
