@@ -1,4 +1,9 @@
-v2.7.10 [unreleased]
+v2.7.11 [2022-01-28]
+-------------------
+### Bugfixes
+- [#683](https://github.com/hydra-billing/homs/pull/686) Add entity_type to business key.
+
+v2.7.10 [2022-01-24]
 -------------------
 ### Bugfixes
 - [#683](https://github.com/hydra-billing/homs/pull/683) Allow to set time in datetimepicker. Added new option for datetime field type:
