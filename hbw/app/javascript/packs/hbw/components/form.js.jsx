@@ -27,7 +27,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWFormDatetime',
 
     componentDidMount () {
       this.setInitialFormValues();
-      jQuery(':input:enabled:visible:first').focus();
+      jQuery('.hbw-form :input:enabled:visible:first').focus();
       this.props.bind(`hbw:submit-form-${this.props.id}`, () => this.setState({ submitting: true }));
       this.props.bind('hbw:form-submitting-failed', () => this.setState({ submitting: false }));
       this.props.bind('hbw:file-upload-started', () => this.setState({ fileUploading: true }));
