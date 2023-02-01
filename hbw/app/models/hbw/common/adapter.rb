@@ -48,8 +48,15 @@ module HBW
 
       # TODO: How to distinguish between running process instance and done
       # TODO: Think of suspended process instances
-      def bp_running?(entity_code, entity_class)
-        active_process_instances(entity_code, entity_class).present?
+      def bp_running?(entity_code, entity_class, bp_codes)
+        processes = active_process_instances(entity_code, entity_class)
+        definitions = with_connection(api) do
+          process_definitions
+        end
+
+        definitions_ids = definitions.select { |d| bp_codes.include?(d.key) }.map(&:id)
+
+        processes.select { |p| p['definitionId'].in?(definitions_ids) }.present?
       end
 
       def get_variables(_, _, _, _)
