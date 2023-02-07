@@ -15,7 +15,7 @@ module HttpAuthentication
   def perform_http_authentication
     realm = Rails.application.secrets.http_basic_realm || 'Latera OMS'
 
-    if token_present?
+    if sso_enabled? && token_present?
       authenticate_by_keycloak
     else
       basic_authenticate(realm)
@@ -27,7 +27,7 @@ module HttpAuthentication
   end
 
   def check_token
-    @token_present = request.headers.include?('Authorization') && request.headers['Authorization'].start_with?('Token token=')
+    @token_present = request.headers.include?('Authorization') && request.headers['Authorization'].start_with?('Bearer')
   end
 
   def token_present?

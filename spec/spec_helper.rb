@@ -1,3 +1,4 @@
+require 'dry/monads'
 require 'factory_bot'
 require 'tilt/coffee'
 require 'capybara/rspec'
@@ -33,6 +34,8 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.include FactoryBot::Syntax::Methods
+
+  config.include Dry::Monads[:result]
 
   config.before(:each) do
     Rails.cache.clear

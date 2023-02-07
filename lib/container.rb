@@ -10,7 +10,7 @@ module HOMS
     register(:cef_logger) { CEFLogger.new(enabled: Rails.application.config.app.fetch(:cef_logger, false)) }
 
     sso_config = Rails.application.config.app.fetch(:sso, {})
-    if sso_config.fetch(:enabled)
+    if sso_config.fetch(:enabled) || Rails.env.test?
       keycloak_config = sso_config.fetch(:keycloak, {})
       redis_config    = Rails.application.config.app.fetch(:redis, {})
       register(:keycloak_client,
@@ -28,6 +28,12 @@ module HOMS
                    scope:                keycloak_config.fetch(:scope)
                  }
                ))
+    else
+      register(:keycloak_client, 'Keycloak Client has not been initialized since SSO is disabled')
+    end
+
+    if Rails.env.test?
+      enable_stubs!
     end
   end
 

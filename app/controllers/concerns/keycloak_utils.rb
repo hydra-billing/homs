@@ -25,16 +25,16 @@ module KeycloakUtils
   end
 
   def use_keycloak?
-    return false unless keycloak_enabled?
+    return false unless sso_enabled?
 
-    if keycloak_enabled? && !regular_login_enabled?
+    if sso_enabled? && !regular_login_enabled?
       true
     else
       authenticated_by_keycloak?
     end
   end
 
-  def keycloak_enabled?
+  def sso_enabled?
     Rails.application.config.app.fetch(:sso, {}).fetch(:enabled)
   end
 
