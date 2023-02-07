@@ -44,6 +44,16 @@ v2.8.0 [unreleased]
     host: redis_host
     port: 12345
   ```
+- [#690](https://github.com/hydra-billing/homs/pull/690) Use `Bearer` instead of `Token token=` for JWT auth header.
+
+  From now on HOMS HTTP API expects `Authorization` header in the following format:
+  ```
+  Bearer your.jwt.here
+  ```
+  instead of
+  ```
+  Token token=your.jwt.here
+  ```
 
 v2.7.12 [unreleased]
 -------------------

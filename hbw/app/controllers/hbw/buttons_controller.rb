@@ -27,7 +27,7 @@ module HBW
     private
 
     def buttons
-      user_identifier = if keycloak_enabled?
+      user_identifier = if sso_enabled?
                           token_user_identifier || current_user_identifier
                         else
                           current_user_identifier

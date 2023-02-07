@@ -17,7 +17,7 @@ module HBW
     end
 
     def auth_header
-      if keycloak_enabled?
+      if sso_enabled?
         "Bearer #{@access_token}"
       else
         "Basic #{basic_auth_token}"

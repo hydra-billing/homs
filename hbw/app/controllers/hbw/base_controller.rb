@@ -9,7 +9,7 @@ module HBW
 
     before_action :start, unless: -> { Rails.env.test? }
     before_action :set_service_user_cookie, if: -> { !Rails.env.test? && auth_as_sso_service_user? }
-    before_action :get_access_token, if: -> { keycloak_enabled? }
+    before_action :get_access_token, if: -> { sso_enabled? }
     after_action :log, unless: -> { Rails.env.test? }
 
     protected
@@ -56,7 +56,7 @@ module HBW
     end
 
     def token_from_headers
-      pattern = /^Token token=/
+      pattern = /^Bearer /
       header  = request.headers['Authorization']
       header.gsub(pattern, '') if header&.match(pattern)
     end
@@ -74,7 +74,7 @@ module HBW
     end
 
     def auth_as_sso_service_user?
-      keycloak_enabled? && regular_login_enabled? && token_from_headers.nil? && !authenticated_by_keycloak?
+      sso_enabled? && regular_login_enabled? && token_from_headers.nil? && !authenticated_by_keycloak?
     end
   end
 end
