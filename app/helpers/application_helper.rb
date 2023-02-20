@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def localize_date_range(date_range)
-    date_range.each_with_object({}) { |(k, v), range| range[k] = DateTime.iso8601(v).strftime(datetime_format) if v.present?; }
+    date_range.each_with_object({}) { |(k, v), range| range[k] = DateTime.iso8601(v).strftime(datetime_format) if v.present? }
   end
 
   def boolean_indicator(boolean)
