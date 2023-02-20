@@ -38,7 +38,7 @@ class SessionsController < Devise::SessionsController
   end
 
   def redirect_to_keycloak
-    redirect_to HOMS.container[:keycloak_client].auth_url
+    redirect_to keycloak_client.auth_url
   end
 
   def authenticate_by_keycloak
@@ -46,7 +46,7 @@ class SessionsController < Devise::SessionsController
 
     if user.success?
       user_instance = user.value!
-      HOMS.container[:cef_logger].log_user_event(:login, {id: user_instance.id, email: user_instance.email}, request.headers)
+      cef_logger.log_user_event(:login, {id: user_instance.id, email: user_instance.email}, request.headers)
 
       sign_in(user_instance)
       redirect_to params.fetch(:redirect_to, '/')
@@ -55,13 +55,13 @@ class SessionsController < Devise::SessionsController
         id:    nil,
         email: nil
       }
-      HOMS.container[:cef_logger].log_user_event(:failed_login, user_data, headers)
+      cef_logger.log_user_event(:failed_login, user_data, headers)
 
       flash[:error] = case user.failure
                       in ::Dry::Schema::Result
                         t('devise.failure.user_attributes_error', message: user.failure.errors.to_h)
                       else
-                        t("devise.failure.#{user.failure[:code]}")
+                        keycloak_client_error(user.failure)
                       end
 
       redirect_to new_user_session_url
@@ -69,7 +69,7 @@ class SessionsController < Devise::SessionsController
   end
 
   def get_user(auth_code)
-    session_state = yield HOMS.container[:keycloak_client].authenticate!(auth_code)
+    session_state = yield keycloak_client.authenticate!(auth_code)
     user = yield keycloak_user(session_state)
 
     cookies['session_state'] = {value: session_state, httponly: true}
@@ -78,10 +78,40 @@ class SessionsController < Devise::SessionsController
 
   def destroy
     if use_keycloak?
-      sign_out current_user
-      redirect_to HOMS.container[:keycloak_client].logout!(cookies['session_state'])
+      session_state = cookies.delete('session_state')
+
+      keycloak_client
+        .logout!(session_state)
+        .either(->(logout_url) { logout_via_keycloak(logout_url) },
+                ->(error) { after_keycloak_error(error) { super } })
     else
       super
     end
+  end
+
+  private
+
+  def logout_via_keycloak(logout_url)
+    sign_out current_user
+    set_flash_message! :notice, :signed_out
+    redirect_to(logout_url)
+  end
+
+  def after_keycloak_error(error)
+    yield if block_given?
+
+    flash[:error] = keycloak_client_error(error)
+  end
+
+  def keycloak_client
+    HOMS.container[:keycloak_client]
+  end
+
+  def keycloak_client_error(error)
+    t("devise.failure.#{error[:code]}")
+  end
+
+  def cef_logger
+    HOMS.container[:cef_logger]
   end
 end
