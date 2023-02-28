@@ -55,18 +55,23 @@ v2.8.0 [unreleased]
   Token token=your.jwt.here
   ```
 
-v2.7.12 [unreleased]
+v2.7.13 [unreleased]
+-------------------
+### Features
+- [#683](https://github.com/hydra-billing/homs/pull/693) Localize SSO authentication error messages.
+
+v2.7.12 [2023-02-01]
 -------------------
 ### Bugfixes
 - [#683](https://github.com/hydra-billing/homs/pull/689) Set focus to the first element in form.
 - [#683](https://github.com/hydra-billing/homs/pull/687) Filter processes by entity_type.
 
-v2.7.11 [2022-01-28]
+v2.7.11 [2023-01-28]
 -------------------
 ### Bugfixes
 - [#683](https://github.com/hydra-billing/homs/pull/686) Add entity_type to business key.
 
-v2.7.10 [2022-01-24]
+v2.7.10 [2023-01-24]
 -------------------
 ### Bugfixes
 - [#683](https://github.com/hydra-billing/homs/pull/683) Allow to set time in datetimepicker. Added new option for datetime field type:

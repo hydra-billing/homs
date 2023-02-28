@@ -50,7 +50,7 @@ module HBW
         config[:hbw][:entities].each do |name, entity_config|
           validated_entity = EntitySchema.(entity_config)
 
-          raise "Entity #{name} misconfigured: #{validated_entity.errors}" if validated_entity.failure?
+          raise "Entity #{name} misconfigured: #{validated_entity.errors.to_h}" if validated_entity.failure?
         end
 
         validated_config
