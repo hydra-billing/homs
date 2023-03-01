@@ -42,7 +42,7 @@ class SessionsController < Devise::SessionsController
   end
 
   def authenticate_by_keycloak
-    user = get_user(params['code'])
+    user = get_user(params[:code])
 
     if user.success?
       user_instance = user.value!
@@ -57,9 +57,11 @@ class SessionsController < Devise::SessionsController
       }
       cef_logger.log_user_event(:failed_login, user_data, headers)
 
+      cookies.delete('session_state')
+
       flash[:error] = case user.failure
                       in ::Dry::Schema::Result
-                        t('devise.failure.user_attributes_error', message: user.failure.errors.to_h)
+                        t('devise.failure.sso.user_attributes_error', message: user.failure.errors.to_h)
                       else
                         keycloak_client_error(user.failure)
                       end
@@ -108,7 +110,7 @@ class SessionsController < Devise::SessionsController
   end
 
   def keycloak_client_error(error)
-    t("devise.failure.#{error[:code]}")
+    t("devise.failure.sso.#{error[:code]}")
   end
 
   def cef_logger
