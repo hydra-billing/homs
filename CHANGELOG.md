@@ -55,10 +55,9 @@ v2.8.0 [unreleased]
   Token token=your.jwt.here
   ```
 
-v2.7.13 [unreleased]
--------------------
 ### Features
 - [#683](https://github.com/hydra-billing/homs/pull/693) Localize SSO authentication error messages.
+
 
 v2.7.12 [2023-02-01]
 -------------------
