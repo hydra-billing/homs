@@ -1,4 +1,4 @@
-v2.8.0 [unreleased]
+v2.8.0 [2023-03-07]
 -------------------
 ### Breaking changes
 - [#665](https://github.com/hydra-billing/homs/pull/665) Add tooltip message translation for string field.
