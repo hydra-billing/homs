@@ -3,11 +3,11 @@ const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const yaml = require('./loaders/yaml');
 const I18n = require('./loaders/I18n');
 const modulejs = require('./loaders/modulejs');
 const tooltip = require('./loaders/tooltip');
-const eslint = require('./loaders/eslint');
 const ts = require('./loaders/ts');
 const file = require('./loaders/file');
 const babel = require('./loaders/babel');
@@ -80,7 +80,6 @@ module.exports = (_, { mode }) => ({
         file,
         babel,
         yaml,
-        eslint,
         ts,
         modulejs,
         I18n,
@@ -89,6 +88,11 @@ module.exports = (_, { mode }) => ({
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new ESLintPlugin({
+      extensions: ['js', 'jsx'],
+      exclude:    ['node_modules', 'vendor'],
+      fix:        false
+    }),
     new WebpackManifestPlugin(),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru/),
     new webpack.ProvidePlugin({
