@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { withStoreContext } from 'shared/context/store';
 import { withTranslationContext } from 'shared/context/translation';
 import { withConnectionContext } from 'shared/context/connection';
@@ -99,11 +99,10 @@ modulejs.define(
 
         const AppWithContext = withContext(App);
 
-        ReactDOM.render(
+        createRoot(document.createElement('div')).render(
           <AppWithContext Forms={this.Forms}
                           Button={this.Button}
-                          TaskList={this.TaskList} />,
-          document.createElement('div')
+                          TaskList={this.TaskList} />
         );
       };
 
