@@ -28,7 +28,7 @@
     "bootstrap-sass": "^3.4.1",
     "bootswatch": "^3.3.5",
     "classnames": "^2.2.6",
-    "clean-webpack-plugin": "^3.0.0",
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.2.0",
     "date-fns": "^2.11.0",
     "eonasdan-bootstrap-datetimepicker": "4.17.49",
