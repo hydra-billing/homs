@@ -19,6 +19,7 @@
   "rules": {
     "camelcase": "off",
     "comma-dangle": [1, "only-multiline"],
+    "class-methods-use-this": 0,
     "func-names": [1, "never"],
     "import/extensions": 0,
     "import/no-unresolved": 0,

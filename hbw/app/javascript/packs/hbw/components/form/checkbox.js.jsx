@@ -73,7 +73,7 @@ modulejs.define('HBWFormCheckbox', ['React'], (React) => {
       const { placement, text } = this.props.params.description;
 
       return <div className="description" data-test={`description-${placement}`}>{text}</div>;
-    }
+    };
 
     serialize = () => {
       if (this.props.params.editable === false || this.props.disabled || this.props.hidden) {

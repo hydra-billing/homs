@@ -74,7 +74,7 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
       const { placement, text } = this.props.params.description;
 
       return <div className="description" data-test={`description-${placement}`}>{text}</div>;
-    }
+    };
 
     renderInputs = () => {
       const { translateBP } = this.context;
@@ -103,13 +103,15 @@ modulejs.define('HBWFormRadioButton', ['React'], (React) => {
                                          className='hbw-radiobutton'
                                          icon={value === field.value ? checkedIcon : uncheckedIcon}/>
                                        <span>
-                                         { ` ${translateBP(`${task.process_key}.${task.key}.${name}.${field.name}`,
+                                         { ` ${translateBP(
+                                           `${task.process_key}.${task.key}.${name}.${field.name}`,
                                            {},
-                                           field.label)}` }
+                                           field.label
+                                         )}` }
                                        </span>
                                      </label>
                                    </div>);
-    }
+    };
 
     validateOnSubmit = () => {
       this.props.bind(`hbw:validate-form-${this.props.id}`, this.onFormSubmit);

@@ -1,3 +1,5 @@
+/* eslint default-param-last: "off" */
+
 import HBWTranslations from './init/translations';
 
 const HBWTranslator = {

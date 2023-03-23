@@ -69,7 +69,8 @@ $(() => {
     }
   };
 
-  $.fn.select2.amd.require(['select2/utils', 'select2/data/ajax', 'select2/data/minimumInputLength'],
+  $.fn.select2.amd.require(
+    ['select2/utils', 'select2/data/ajax', 'select2/data/minimumInputLength'],
     (Utils, AJAXAdapter, MinimumInputLength) => {
       const UserNotSet = function (decorated, ...args) {
         decorated.apply(this, args);
@@ -108,7 +109,8 @@ $(() => {
         dataAdapter:        decoratedAdapter,
         language:           I18n.locale
       });
-    });
+    }
+  );
 
   $.fn.twitter_bootstrap_confirmbox.defaults = {
     fade:          false,
@@ -218,7 +220,7 @@ class Homs {
     createRoot(container).render(
       <OrderList {...props} />
     );
-  }
+  };
 }
 defaultExport.Application = new Homs();
 window.Application = defaultExport.Application;

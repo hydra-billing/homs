@@ -34,9 +34,9 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       '*': '[A-Za-z0-9 ]'
     };
 
-    partRegexp = new RegExp('{{[^}]+}}');
+    partRegexp = /{{[^}]+}}/;
 
-    templateRegexp = new RegExp('{{([^}]+)}}', 'g');
+    templateRegexp = /{{([^}]+)}}/g;
 
     render () {
       const {
@@ -84,13 +84,15 @@ modulejs.define('HBWFormString', ['React'], (React) => {
       const { placement, text } = this.props.params.description;
 
       return <div className="description" data-test={`description-${placement}`}>{text}</div>;
-    }
+    };
 
     componentDidMount () {
       const { name, params, task } = this.props;
-      const tooltipMessage = this.context.translateBP(`${task.process_key}.${task.key}.${name}.message`,
+      const tooltipMessage = this.context.translateBP(
+        `${task.process_key}.${task.key}.${name}.message`,
         {},
-        params.message || this.context.translate('errors.field_is_required'));
+        params.message || this.context.translate('errors.field_is_required')
+      );
 
       this.props.onRef(this);
       this.tooltip = new Tooltip(this.input, {

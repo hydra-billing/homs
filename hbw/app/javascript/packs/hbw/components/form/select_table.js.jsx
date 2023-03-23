@@ -6,7 +6,8 @@ import {
 } from 'shared/hoc';
 import TranslationContext from 'shared/context/translation';
 
-modulejs.define('HBWFormSelectTable',
+modulejs.define(
+  'HBWFormSelectTable',
   ['React'],
   (React) => {
     class HBWFormSelectTable extends React.Component {
@@ -49,7 +50,7 @@ modulejs.define('HBWFormSelectTable',
         }
       }
 
-      getFirstRowId = () => this.getChoices()[0][0]
+      getFirstRowId = () => this.getChoices()[0][0];
 
       componentDidMount () {
         this.props.onRef(this);
@@ -122,7 +123,7 @@ modulejs.define('HBWFormSelectTable',
         const { placement, text } = this.props.params.description;
 
         return <div className="description" data-test={`description-${placement}`}>{text}</div>;
-      }
+      };
 
       validateOnSubmit = () => {
         this.props.bind(`hbw:validate-form-${this.props.id}`, this.onFormSubmit);
@@ -192,7 +193,7 @@ modulejs.define('HBWFormSelectTable',
         this.setValidationState();
         this.setErrorState();
         this.props.fireFieldValueUpdate(this.props.name, this.state.value);
-      }
+      };
 
       onClick = (event) => {
         if (this.props.params.editable === false || this.props.disabled) {
@@ -301,4 +302,5 @@ modulejs.define('HBWFormSelectTable',
     }
 
     return compose(withSelect, withCallbacks, withConditions, withValidations, withErrorBoundary)(HBWFormSelectTable);
-  });
+  }
+);
