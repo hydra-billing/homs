@@ -23,7 +23,7 @@ const HBWClaimingShortList = ({
     const now = new Date();
 
     if (due) {
-      return <span className="deadline"><DueDate dateISO={due} now={now}/></span>;
+      return <span className="deadline"><DueDate dateISO={due} now={now} /></span>;
     } else {
       return <span><CreatedDate dateISO={created} now={now} /></span>;
     }
@@ -37,11 +37,11 @@ const HBWClaimingShortList = ({
   );
 
   const renderNoTasks = () => (
-      <div className='no-tasks'>
-        <span>
-          {translate('components.claiming.table.empty_tasks')}
-        </span>
-      </div>
+    <div className='no-tasks'>
+      <span>
+        {translate('components.claiming.table.empty_tasks')}
+      </span>
+    </div>
   );
 
   return (
@@ -51,7 +51,7 @@ const HBWClaimingShortList = ({
       }) => (
         <div onClick={() => goToTask(entity_url)} key={id} className={rowCN(due)}>
           <div className="left">
-            <FontAwesomeIcon icon={icon}/>
+            <FontAwesomeIcon icon={icon} />
             <span className="title">{translateBP(`${process_key}.${key}.label`, {}, name)}</span>
             <span title={description} className="description">{description}</span>
           </div>
@@ -78,7 +78,7 @@ HBWClaimingShortList.propTypes = {
   tasks:        PropTypes.arrayOf(PropTypes.shape({
     id:         PropTypes.string.isRequired,
     name:       PropTypes.string.isRequired,
-    icon:       PropTypes.string.isRequired,
+    icon:       PropTypes.array.isRequired,
     entity_url: PropTypes.string.isRequired,
     created:    PropTypes.string.isRequired,
     due:        PropTypes.string,

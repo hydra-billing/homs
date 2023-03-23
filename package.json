@@ -32,7 +32,7 @@
     "css-loader": "^6.2.0",
     "date-fns": "^2.11.0",
     "eonasdan-bootstrap-datetimepicker": "4.17.49",
-    "expose-loader": "^1.0.0",
+    "expose-loader": "^4.1.0",
     "file-loader": "^6.2.0",
     "i18n-js": "^3.0.11",
     "jquery": "^3.5.1",
