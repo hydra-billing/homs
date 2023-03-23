@@ -19,7 +19,7 @@ import 'confirm';
 import 'bootstrap-multiselect';
 import moment from 'moment';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import Messenger from 'messenger';
 import OrderList from '../components/order_list';
 
@@ -215,9 +215,8 @@ class Homs {
   };
 
   renderOrderList = (container, props) => {
-    ReactDOM.render(
-      <OrderList {...props} />,
-      container
+    createRoot(container).render(
+      <OrderList {...props} />
     );
   }
 }
