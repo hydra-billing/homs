@@ -34,7 +34,7 @@
     "eonasdan-bootstrap-datetimepicker": "4.17.49",
     "expose-loader": "^4.1.0",
     "file-loader": "^6.2.0",
-    "i18n-js": "^3.0.11",
+    "i18n-js": "^4.2.3",
     "jquery": "^3.5.1",
     "jquery-ujs": "^1.2.2",
     "jquery.growl": "1.3.1",

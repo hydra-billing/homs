@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const yaml = require('./loaders/yaml');
-const I18n = require('./loaders/I18n');
 const modulejs = require('./loaders/modulejs');
 const tooltip = require('./loaders/tooltip');
 const ts = require('./loaders/ts');
@@ -82,7 +81,6 @@ module.exports = (_, { mode }) => ({
         yaml,
         ts,
         modulejs,
-        I18n,
         tooltip
       ]
   },
