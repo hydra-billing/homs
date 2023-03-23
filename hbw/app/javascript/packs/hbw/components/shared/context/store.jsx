@@ -111,7 +111,7 @@ export const withStoreContext = ({
       if (showNotifications) {
         dispatcher.trigger('hbw:notify-new-task', 'widget', taskName);
       }
-    }
+    };
 
     fetchTask = async (taskId, cacheKey, assignedToMe, version) => {
       const task = await this.getTaskById(taskId, cacheKey);

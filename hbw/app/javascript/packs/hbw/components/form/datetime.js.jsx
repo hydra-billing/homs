@@ -79,7 +79,7 @@ modulejs.define('HBWFormDatetime', ['React'], (React) => {
       const { placement, text } = this.props.params.description;
 
       return <div className="description" data-test={`description-${placement}`}>{text}</div>;
-    }
+    };
 
     componentWillUnmount () {
       this.props.onRef(undefined);

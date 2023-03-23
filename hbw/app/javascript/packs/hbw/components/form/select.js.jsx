@@ -14,7 +14,8 @@ import {
 import TranslationContext from '../shared/context/translation';
 import ConnectionContext from '../shared/context/connection';
 
-modulejs.define('HBWFormSelect',
+modulejs.define(
+  'HBWFormSelect',
   ['React'],
   (React) => {
     const FormSelect = ({
@@ -390,4 +391,5 @@ modulejs.define('HBWFormSelect',
     };
 
     return compose(withSelect, withCallbacks, withConditions, withValidations, withErrorBoundary)(FormSelect);
-  });
+  }
+);

@@ -62,7 +62,7 @@ modulejs.define(
 
       render = () => {
         this.renderPortals();
-      }
+      };
 
       renderPortals = async () => {
         const formsContainer = this.options.entity_code ? this.$widgetContainer[0] : null;

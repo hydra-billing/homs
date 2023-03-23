@@ -35,7 +35,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       fileListNames: PropTypes.array.isRequired,
       onRef:         PropTypes.func.isRequired,
       trigger:       PropTypes.func.isRequired
-    }
+    };
 
     hasConfigErrors = () => {
       const { params, fileListNames } = this.props;
@@ -49,7 +49,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
           || !fileListNames.includes(params.file_list_name)
         );
       }
-    }
+    };
 
     state = {
       valid:                 true,
@@ -140,9 +140,11 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         multiple: params.multiple
       };
 
-      const browseLinkText = this.context.translateBP(`${task.process_key}.${task.key}.${name}.browse_link_text`,
+      const browseLinkText = this.context.translateBP(
+        `${task.process_key}.${task.key}.${name}.browse_link_text`,
         {},
-        params.browse_link_text || this.context.translate('components.file_upload.browse'));
+        params.browse_link_text || this.context.translate('components.file_upload.browse')
+      );
 
       return (
         <div
@@ -161,13 +163,13 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
           </div>
         </div>
       );
-    }
+    };
 
     renderPreviewRow = () => (
       <div className="files-preview-row">
         {this.state.files.map(file => this.renderPreviewItem(file))}
       </div>
-    )
+    );
 
     renderPreviewItem = ({ name, type, fileURL }) => (
       <div className="files-preview-item" key={fileURL}>
@@ -177,7 +179,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         </div>
         <span className="files-preview-name" title={name}>{this.ellipsisFileName(name)}</span>
       </div>
-    )
+    );
 
     renderPreviewImage = (name, type, fileURL) => {
       if (type.startsWith('image/')) {
@@ -187,13 +189,13 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
       } else {
         return <FontAwesomeIcon icon={['far', 'file']} className="far fa-7x"/>;
       }
-    }
+    };
 
     renderDescription = () => {
       const { placement, text } = this.props.params.description;
 
       return <div className="description" data-test={`description-${placement}`}>{text}</div>;
-    }
+    };
 
     renderInputText = () => {
       const { name, params, task } = this.props;
@@ -205,18 +207,20 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
         </>
       );
 
-      const inputText = this.context.translateBP(`${task.process_key}.${task.key}.${name}.input_text`,
+      const inputText = this.context.translateBP(
+        `${task.process_key}.${task.key}.${name}.input_text`,
         {},
-        params.input_text || defaultInputText);
+        params.input_text || defaultInputText
+      );
 
       return inputText;
-    }
+    };
 
     ellipsisFileName = name => (
       name.length > 15
         ? `${name.slice(0, 9)}...${name.slice(-6)}`
         : name
-    )
+    );
 
     onDragEnter = (event) => {
       event.preventDefault();
@@ -272,22 +276,24 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
     };
 
     addFile = (file) => {
-      this.setState(({ files, unprocessedFilesCount }) => ({
-        files:                 [...files, file],
-        unprocessedFilesCount: unprocessedFilesCount - 1
-      }),
-      () => {
-        if (this.state.unprocessedFilesCount === 0) {
-          this.props.trigger('hbw:file-upload-finished');
+      this.setState(
+        ({ files, unprocessedFilesCount }) => ({
+          files:                 [...files, file],
+          unprocessedFilesCount: unprocessedFilesCount - 1
+        }),
+        () => {
+          if (this.state.unprocessedFilesCount === 0) {
+            this.props.trigger('hbw:file-upload-finished');
+          }
         }
-      });
+      );
     };
 
     removeFile = (name) => {
       this.setState(({ files }) => (
         { files: files.filter(file => file.name !== name) }
       ));
-    }
+    };
 
     processFile = (file) => {
       const fileReader = new FileReader();
@@ -307,7 +313,7 @@ modulejs.define('HBWFormFileUpload', ['React'], (React) => {
 
     getFileListName = () => (
       this.props.params.file_list_name || 'homsOrderDataFileList'
-    )
+    );
 
     serialize = () => {
       if (this.props.disabled || this.props.hidden) {
