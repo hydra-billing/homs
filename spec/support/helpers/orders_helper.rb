@@ -179,7 +179,7 @@ module Features
     end
 
     def r_select_input(name)
-      r_select_container(name).find('.react-select__input').find('input')
+      r_select_container(name).find('.react-select__input')
     end
 
     def input_by_name(name)
