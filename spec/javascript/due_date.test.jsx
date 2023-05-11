@@ -1,13 +1,20 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 import {
   addSeconds, addMinutes, addHours, addDays, addWeeks, addYears,
 } from 'date-fns';
 import { withTranslationContext } from 'hbw/components/shared/context/translation';
 import DueDate from 'hbw/components/shared/element/due_date';
+import { withConnectionContext } from 'hbw/components/shared/context/connection';
+import { waitFor } from '@testing-library/react';
+import compose from 'shared/utils/compose';
+import ConnectionMock from './helpers/mock_connection';
 
 describe('DueDate should render correctly', () => {
-  const DueDateWithContext = withTranslationContext({ locale: { code: 'en' } })(DueDate);
+  const DueDateWithContext = compose(
+    withConnectionContext({ connection: ConnectionMock }),
+    withTranslationContext({ locale: { code: 'en' } })
+  )(DueDate);
 
   const now = new Date();
 
@@ -25,55 +32,30 @@ describe('DueDate should render correctly', () => {
   const expiredWeeks = addWeeks(now, -5);
   const expiredYears = addYears(now, -6);
 
-  const shallowComponent = date => (
-    shallow(<DueDateWithContext dateISO={date.toISOString()} now={now} />)
+  const dueDateComponent = date => (
+    renderer
+      .create(<DueDateWithContext dateISO={date.toISOString()} now={now} />)
+      .toJSON()
   );
 
-  it('with years to due date', () => {
-    expect(shallowComponent(years).html()).toEqual('6y to due date');
-  });
+  const matchSnapshot = testCode => date => (
+    it(testCode, async () => {
+      await waitFor(() => {
+        expect(dueDateComponent(date)).toMatchSnapshot();
+      });
+    })
+  );
 
-  it('with weeks to due date', () => {
-    expect(shallowComponent(weeks).html()).toEqual('5w to due date');
-  });
-
-  it('with days to due date', () => {
-    expect(shallowComponent(days).html()).toEqual('4d to due date');
-  });
-
-  it('with hours to due date', () => {
-    expect(shallowComponent(hours).html()).toEqual('3h to due date');
-  });
-
-  it('with minutes to due date', () => {
-    expect(shallowComponent(minutes).html()).toEqual('2m to due date');
-  });
-
-  it('with seconds to due date', () => {
-    expect(shallowComponent(sec).html()).toEqual('&lt;1m to due date');
-  });
-
-  it('with expired (years past due date)', () => {
-    expect(shallowComponent(expiredYears).html()).toEqual('expired (6y past due date)');
-  });
-
-  it('with expired (weeks past due date)', () => {
-    expect(shallowComponent(expiredWeeks).html()).toEqual('expired (5w past due date)');
-  });
-
-  it('with expired (days past due date)', () => {
-    expect(shallowComponent(expiredDays).html()).toEqual('expired (4d past due date)');
-  });
-
-  it('with expired (hours past due date)', () => {
-    expect(shallowComponent(expiredHours).html()).toEqual('expired (3h past due date)');
-  });
-
-  it('with expired (minutes past due date)', () => {
-    expect(shallowComponent(expiredMinutes).html()).toEqual('expired (2m past due date)');
-  });
-
-  it('with expired (seconds past due date)', () => {
-    expect(shallowComponent(expiredSec).html()).toEqual('expired (&lt;1m past due date)');
-  });
+  matchSnapshot('with years to due date')(years);
+  matchSnapshot('with weeks to due date')(weeks);
+  matchSnapshot('with days to due date')(days);
+  matchSnapshot('with hours to due date')(hours);
+  matchSnapshot('with minutes to due date')(minutes);
+  matchSnapshot('with seconds to due date')(sec);
+  matchSnapshot('with expired (years past due date)')(expiredYears);
+  matchSnapshot('with expired (weeks past due date)')(expiredWeeks);
+  matchSnapshot('with expired (days past due date)')(expiredDays);
+  matchSnapshot('with expired (hours past due date)')(expiredHours);
+  matchSnapshot('with expired (minutes past due date)')(expiredMinutes);
+  matchSnapshot('with expired (seconds past due date)')(expiredSec);
 });
