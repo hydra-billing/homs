@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Priority label should be rendered properly for priority -50 renders 'Medium' 1`] = `
+<span
+  className="badge priority medium"
+>
+  Medium
+</span>
+`;
+
+exports[`Priority label should be rendered properly for priority 0 renders 'Medium' 1`] = `
+<span
+  className="badge priority medium"
+>
+  Medium
+</span>
+`;
+
+exports[`Priority label should be rendered properly for priority 49.9 renders 'Medium' 1`] = `
+<span
+  className="badge priority medium"
+>
+  Medium
+</span>
+`;
+
+exports[`Priority label should be rendered properly for priority 50 renders 'High' 1`] = `
+<span
+  className="badge priority high"
+>
+  High
+</span>
+`;
+
+exports[`Priority label should be rendered properly for priority 62 renders 'High' 1`] = `
+<span
+  className="badge priority high"
+>
+  High
+</span>
+`;
+
+exports[`Priority label should be rendered properly for priority 74.9 renders 'High' 1`] = `
+<span
+  className="badge priority high"
+>
+  High
+</span>
+`;
+
+exports[`Priority label should be rendered properly for priority 75 renders 'Urgent' 1`] = `
+<span
+  className="badge priority urgent"
+>
+  Urgent
+</span>
+`;
+
+exports[`Priority label should be rendered properly for priority 123456 renders 'Urgent' 1`] = `
+<span
+  className="badge priority urgent"
+>
+  Urgent
+</span>
+`;

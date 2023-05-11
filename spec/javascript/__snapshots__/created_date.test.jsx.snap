@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreatedDate should render correctly with creation date in last days 1`] = `"4d ago"`;
+
+exports[`CreatedDate should render correctly with creation date in last hours 1`] = `"3h ago"`;
+
+exports[`CreatedDate should render correctly with creation date in last minutes 1`] = `"2m ago"`;
+
+exports[`CreatedDate should render correctly with creation date in last seconds 1`] = `"<1m ago"`;
+
+exports[`CreatedDate should render correctly with creation date in last weeks 1`] = `"06 Nov"`;
+
+exports[`CreatedDate should render correctly with creation date in last year 1`] = `"06 Nov 2018"`;

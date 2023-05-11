@@ -1,47 +1,47 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 import {
   addSeconds, addMinutes, addHours, addDays, addWeeks, addYears,
 } from 'date-fns';
 import { withTranslationContext } from 'hbw/components/shared/context/translation';
 import CreatedDate from 'hbw/components/shared/element/created_date';
+import { withConnectionContext } from 'hbw/components/shared/context/connection';
+import { waitFor } from '@testing-library/react';
+import compose from 'shared/utils/compose';
+import ConnectionMock from './helpers/mock_connection';
 
 describe('CreatedDate should render correctly', () => {
-  const CreatedDateWithContext = withTranslationContext({ locale: { code: 'en' } })(CreatedDate);
+  const CreatedDateWithContext = compose(
+    withConnectionContext({ connection: ConnectionMock }),
+    withTranslationContext({ locale: { code: 'en' } })
+  )(CreatedDate);
 
   const now = new Date(2019, 11, 2);
-  const sec = addSeconds(now, -30);
-  const minutes = addMinutes(sec, -2);
+  const seconds = addSeconds(now, -30);
+  const minutes = addMinutes(seconds, -2);
   const hours = addHours(minutes, -3);
   const days = addDays(hours, -4);
   const weeks = addWeeks(days, -3);
   const years = addYears(weeks, -1);
 
-  const shallowComponent = date => (
-    shallow(<CreatedDateWithContext dateISO={date.toISOString()} now={now} />)
+  const createdDateComponent = date => (
+    renderer
+      .create(<CreatedDateWithContext dateISO={date.toISOString()} now={now} />)
+      .toJSON()
   );
 
-  it('with creation date in last year', () => {
-    expect(shallowComponent(years).html()).toEqual('06 Nov 2018');
-  });
+  const matchSnapshot = testCode => date => (
+    it(testCode, async () => {
+      await waitFor(() => {
+        expect(createdDateComponent(date)).toMatchSnapshot();
+      });
+    })
+  );
 
-  it('with creation date in last weeks', () => {
-    expect(shallowComponent(weeks).html()).toEqual('06 Nov');
-  });
-
-  it('with creation date in last days', () => {
-    expect(shallowComponent(days).html()).toEqual('4d ago');
-  });
-
-  it('with creation date in last hours', () => {
-    expect(shallowComponent(hours).html()).toEqual('3h ago');
-  });
-
-  it('with creation date in last minutes', () => {
-    expect(shallowComponent(minutes).html()).toEqual('2m ago');
-  });
-
-  it('with creation date in last seconds', () => {
-    expect(shallowComponent(sec).html()).toEqual('&lt;1m ago');
-  });
+  matchSnapshot('with creation date in last year')(years);
+  matchSnapshot('with creation date in last weeks')(weeks);
+  matchSnapshot('with creation date in last days')(days);
+  matchSnapshot('with creation date in last hours')(hours);
+  matchSnapshot('with creation date in last minutes')(minutes);
+  matchSnapshot('with creation date in last seconds')(seconds);
 });

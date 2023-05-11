@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DueDate should render correctly with days to due date 1`] = `"4d to due date"`;
+
+exports[`DueDate should render correctly with expired (days past due date) 1`] = `"expired (4d past due date)"`;
+
+exports[`DueDate should render correctly with expired (hours past due date) 1`] = `"expired (3h past due date)"`;
+
+exports[`DueDate should render correctly with expired (minutes past due date) 1`] = `"expired (2m past due date)"`;
+
+exports[`DueDate should render correctly with expired (seconds past due date) 1`] = `"expired (<1m past due date)"`;
+
+exports[`DueDate should render correctly with expired (weeks past due date) 1`] = `"expired (5w past due date)"`;
+
+exports[`DueDate should render correctly with expired (years past due date) 1`] = `"expired (6y past due date)"`;
+
+exports[`DueDate should render correctly with hours to due date 1`] = `"3h to due date"`;
+
+exports[`DueDate should render correctly with minutes to due date 1`] = `"2m to due date"`;
+
+exports[`DueDate should render correctly with seconds to due date 1`] = `"<1m to due date"`;
+
+exports[`DueDate should render correctly with weeks to due date 1`] = `"5w to due date"`;
+
+exports[`DueDate should render correctly with years to due date 1`] = `"6y to due date"`;

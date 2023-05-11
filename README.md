@@ -159,6 +159,13 @@ bundle exec rspec spec/PATH/TO/FILE_spec.rb
 # Run a subset of tests
 bundle exec rspec spec/PATH/TO/DIR
 ```
+HBW Widget uses jest and [snapshots](https://jestjs.io/docs/snapshot-testing#snapshot-testing-with-jest) for tests. 
+```bash
+# Run frontend tests
+jest
+# Update snapshots after intentionally changing implementation elements
+jest --updateSnapshot
+```
 
 ## Links
 

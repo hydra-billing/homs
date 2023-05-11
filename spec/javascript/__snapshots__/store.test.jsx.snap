@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StoreProvider /> adds task to state on assign 1`] = `
+<div>
+  <p
+    className="tasks"
+  >
+    0%5Bid%5D=assignedTaskID&0%5Bassignee%5D=user%40example.com
+  </p>
+  <p
+    className="events"
+  />
+  <p
+    className="versions"
+  >
+    assignedTaskID=2
+  </p>
+  <p
+    className="fetching"
+  >
+    false
+  </p>
+  <p
+    className="ready"
+  >
+    true
+  </p>
+  <p
+    className="activeTask"
+  />
+</div>
+`;
+
+exports[`<StoreProvider /> adds task to state on create 1`] = `
+<div>
+  <p
+    className="tasks"
+  >
+    0%5Bid%5D=unassignedTaskID&0%5Bassignee%5D=
+  </p>
+  <p
+    className="events"
+  />
+  <p
+    className="versions"
+  >
+    unassignedTaskID=1
+  </p>
+  <p
+    className="fetching"
+  >
+    false
+  </p>
+  <p
+    className="ready"
+  >
+    true
+  </p>
+  <p
+    className="activeTask"
+  />
+</div>
+`;
+
+exports[`<StoreProvider /> ignores event with outdated version 1`] = `
+<div>
+  <p
+    className="tasks"
+  />
+  <p
+    className="events"
+  />
+  <p
+    className="versions"
+  >
+    longFetchedTask=3
+  </p>
+  <p
+    className="fetching"
+  >
+    false
+  </p>
+  <p
+    className="ready"
+  >
+    true
+  </p>
+  <p
+    className="activeTask"
+  />
+</div>
+`;
+
+exports[`<StoreProvider /> ignores task assigned to someone else 1`] = `
+<div>
+  <p
+    className="tasks"
+  />
+  <p
+    className="events"
+  />
+  <p
+    className="versions"
+  >
+    assignedTaskID=2
+  </p>
+  <p
+    className="fetching"
+  >
+    false
+  </p>
+  <p
+    className="ready"
+  >
+    true
+  </p>
+  <p
+    className="activeTask"
+  />
+</div>
+`;
+
+exports[`<StoreProvider /> initializes 1`] = `
+<div>
+  <p
+    className="tasks"
+  />
+  <p
+    className="events"
+  />
+  <p
+    className="versions"
+  />
+  <p
+    className="fetching"
+  >
+    false
+  </p>
+  <p
+    className="ready"
+  >
+    true
+  </p>
+  <p
+    className="activeTask"
+  />
+</div>
+`;
+
+exports[`<StoreProvider /> removes task from state on complete 1`] = `
+<div>
+  <p
+    className="tasks"
+  />
+  <p
+    className="events"
+  />
+  <p
+    className="versions"
+  >
+    assignedTaskID=3
+  </p>
+  <p
+    className="fetching"
+  >
+    false
+  </p>
+  <p
+    className="ready"
+  >
+    true
+  </p>
+  <p
+    className="activeTask"
+  />
+</div>
+`;
+
+exports[`<StoreProvider /> removes task from state on delete 1`] = `
+<div>
+  <p
+    className="tasks"
+  />
+  <p
+    className="events"
+  />
+  <p
+    className="versions"
+  >
+    assignedTaskID=4
+  </p>
+  <p
+    className="fetching"
+  >
+    false
+  </p>
+  <p
+    className="ready"
+  >
+    true
+  </p>
+  <p
+    className="activeTask"
+  />
+</div>
+`;
