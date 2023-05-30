@@ -40,10 +40,6 @@ en:
       signed_up_but_unconfirmed: A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.
       update_needs_confirmation: You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address.
       updated: Your account has been updated successfully.
-    sessions:
-      signed_in: ''
-      signed_out: ''
-      already_signed_out: ''
     unlocks:
       send_instructions: You will receive an email with instructions on how to unlock your account in a few minutes.
       send_paranoid_instructions: If your account exists, you will receive an email with instructions on how to unlock it in a few minutes.
