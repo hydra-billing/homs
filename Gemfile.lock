@@ -113,7 +113,6 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.2.0)
-    connection_pool (2.3.0)
     crass (1.0.6)
     dalli (3.2.4)
     database_cleaner (2.0.1)
@@ -356,10 +355,7 @@ GEM
     rainbow (3.1.1)
     raindrops (0.20.0)
     rake (13.0.6)
-    redis (5.0.6)
-      redis-client (>= 0.9.0)
-    redis-client (0.12.2)
-      connection_pool
+    redis (4.8.1)
     regexp_parser (2.7.0)
     responders (3.1.0)
       actionpack (>= 5.2)
@@ -503,7 +499,7 @@ DEPENDENCIES
   rack (~> 2.2.3)
   rails (~> 5.2.4)
   rails_layout
-  redis
+  redis (~> 4)
   rspec-mocks
   rspec-rails
   rspec_api_documentation (~> 4.4)
@@ -526,4 +522,4 @@ RUBY VERSION
    ruby 2.7.6p219
 
 BUNDLED WITH
-   2.3.26
+   2.4.1
