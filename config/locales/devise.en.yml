@@ -16,6 +16,22 @@ en:
       unauthenticated: You need to sign in or sign up before continuing.
       unconfirmed: Please confirm your email address before continuing.
       blocked: User is blocked
+      sso:
+        default_message: SSO Authentication error
+        cant_create_session: Failed to create a session on the authentication and authorization server
+        user_data_validation_error: Invalid set of user attributes on the authentication and authorization server
+        not_authenticated: SSO authorization error, user is not authenticated
+        token_not_found: Data caching error, token not found in the cache
+        auth_code_was_not_received: Data caching error, authorization code missing
+        username_or_password_is_empty: Service user authentication error, login or password is missing
+        token_not_active: Token verification error, expired token
+        token_refreshing_error: Failed to update tokens on the authentication and authorization server
+        bad_keycloak_response: Bad response from the authentication and authorization server
+        keycloak_unavailable: Authentication and authorization server is unavailable
+        json_parser_error: Failed to parse response from authentication and authorization server
+        redis_unavailable: Error accessing redis during authentication
+        memcached_unavailable: Error accessing memcached during authentication
+        user_attributes_error: 'Invalid user attributes: %{message}'
     mailer:
       confirmation_instructions:
         subject: Confirm your email

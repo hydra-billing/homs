@@ -72,5 +72,7 @@ ru:
       not_found: не найдена
       not_locked: не была заблокирована
       not_saved:
-        one: '1 ошибка препятствует сохранению %{resource}:'
+        one: "%{count} ошибка препятствует сохранению %{resource}:"
+        few: "%{count} ошибки препятствуют сохранению %{resource}:"
+        many: "%{count} ошибок препятствуют сохранению %{resource}:"
         other: "%{count} ошибок препятствуют сохранению %{resource}:"

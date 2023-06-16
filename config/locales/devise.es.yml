@@ -1,0 +1,56 @@
+es:
+  devise:
+    login: inicio de sesión
+    confirmations:
+      confirmed: Se ha confirmado su dirección de correo electrónico.
+      send_instructions: En unos minutos recibirá un correo electrónico de confirmación para verificar tu dirección de correo electrónico.
+      send_paranoid_instructions: Si su dirección de correo electrónico existe en nuestra base de datos, en unos minutos recibirá un correo electrónico de confirmación para verificarla.
+    failure:
+      already_authenticated: Ya has iniciado sesión.
+      inactive: Su cuenta aún no está activada.
+      invalid: Contraseña o %{authentication_keys} no válida.
+      locked: Su cuenta está bloqueada.
+      last_attempt: Tiene un intento más antes de que se bloquee su cuenta.
+      not_found_in_database: Contraseña o %{authentication_keys} no válida.
+      timeout: Su sesión ha caducado. Vuelva a iniciar sesión para continuar.
+      unauthenticated: Tiene que iniciar sesión o registrarse antes de continuar.
+      unconfirmed: Confirme su dirección de correo electrónico antes de continuar.
+      blocked: El usuario está bloqueado
+    mailer:
+      confirmation_instructions:
+        subject: Confirme su correo electrónico
+      reset_password_instructions:
+        subject: Restablecer contraseña
+      unlock_instructions:
+        subject: Desbloquee su cuenta
+    omniauth_callbacks:
+      failure: No se le ha podido autenticar desde %{kind} porque "%{reason}".
+      success: Se ha autenticado correctamente desde la %{kind} cuenta.
+    passwords:
+      no_token: No puede acceder a esta página si no viene de un correo electrónico de restablecimiento de contraseña. Si procede del correo electrónico de restablecimiento de contraseña, asegúrese de haber utilizado la URL completa proporcionada.
+      send_instructions: En unos minutos recibirá un correo electrónico con instrucciones para restablecer su contraseña.
+      send_paranoid_instructions: Si su dirección de correo electrónico existe en nuestra base de datos, recibirá un enlace de recuperación de contraseña en su dirección de correo electrónico en unos minutos.
+      updated: Su contraseña ha sido cambiada con éxito. Ya ha iniciado sesión.
+      updated_not_active: Su contraseña ha sido cambiada con éxito.
+    registrations:
+      destroyed: "¡Adiós! Su cuenta ha sido cancelada con éxito. Esperamos volver a verle pronto."
+      signed_up: "¡Bienvenido! Se ha registrado correctamente."
+      signed_up_but_inactive: Se ha registrado correctamente. Sin embargo, no hemos podido iniciar sesión porque su cuenta aún no está activada.
+      signed_up_but_locked: Se ha registrado correctamente. Sin embargo, no hemos podido iniciar sesión porque su cuenta está bloqueada.
+      signed_up_but_unconfirmed: Se ha enviado un mensaje con un enlace de confirmación a su dirección de correo electrónico. Siga el enlace para activar su cuenta.
+      update_needs_confirmation: Ha actualizado su cuenta correctamente, pero necesitamos verificar su nueva dirección de correo electrónico. Comprueba su correo electrónico y sigue el enlace de confirmación para confirmar su nueva dirección de correo electrónico.
+      updated: Su cuenta se ha actualizado correctamente.
+    unlocks:
+      send_instructions: En unos minutos recibirá un correo electrónico con instrucciones para desbloquear su cuenta.
+      send_paranoid_instructions: Si su cuenta existe, en unos minutos recibirá un correo electrónico con instrucciones para desbloquearla.
+      unlocked: Su cuenta se ha desbloqueado correctamente. Inicie sesión para continuar.
+  errors:
+    messages:
+      already_confirmed: ya ha sido confirmado, por favor intente iniciar sesión
+      confirmation_period_expired: tenía que confirmarse en %{period}, solicite uno nuevo
+      expired: ha caducado, solicite uno nuevo
+      not_found: no encontrado
+      not_locked: no estaba bloqueado
+      not_saved:
+        one: '1 error impidió que este %{resource} se guardara:'
+        other: "%{count} errores impidieron guardar este %{resource}:"

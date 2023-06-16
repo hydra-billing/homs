@@ -65,8 +65,8 @@ pt-br:
     from: de
     to: para
     yes_no:
-      'yes': 'Sim'
-      'no': 'Não'
+      'yes': Sim
+      'no': Não
     custom_fields_filter:
       title: Campos personalizados do pedido
       add: Filtrar por campos personalizados
@@ -144,9 +144,7 @@ pt-br:
       tasks: Tarefas
     form_errors:
       errors:
-        one: "%{count} erro impediu o usuário de ser salvo:"
-        few: "%{count} erros impediram o usuário de ser salvo:"
-        many: "%{count} erros impediram o usuário de ser salvo:"
+        one: "%{count} erros impediram o usuário de ser salvo:"
         other: "%{count} erros impediram o usuário de ser salvo:"
   admin:
     order_types:
@@ -250,7 +248,7 @@ pt-br:
     cancel: Cancelar
     error: Erro
     remove: Remover
-    'yes': 'Sim'
+    'yes': Sim
     not_selected: Não selecionado
     select2:
       not_set: Vazio
