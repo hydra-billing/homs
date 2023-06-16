@@ -1,1 +1,318 @@
 es:
+  logo: Hydra OMS
+  hello: Hola mundo
+  add: Añadir
+  access_denied: Acceso denegado
+  edit: Editar
+  save: Guardar
+  activate: Activar
+  dismiss: Desestimar
+  user: 'Usuario '
+  user_updated: Usuario actualizado
+  user_deleted: Usuario eliminado
+  record_not_found: Registro no encontrado
+  config:
+    bad_entity_url: Parámetro incorrecto en entity_url '%{variable_name}'
+  custom_fields:
+    definition:
+      missing_attribute: Atributo que falta '%{attribute_name}'
+      unknown_type: Tipo desconocido '%{type}'
+      invalid_type: El atributo '%{attribute_name}' debe ser del tipo %{type}.
+      undefined_field: El campo '%{field_name}' no está definido en el tipo de pedido
+      max_length: El atributo '%{attribute_name}' no debe superar los %{max_length} caracteres.
+      no_known_fields: No quedan campos tras ignorar los desconocidos
+      invalid_value: El atributo '%{attribute_name}' con el valor '%{value}' debe ser del tipo %{type}.
+      at_least: El atributo '%{attribute_name}' debe tener al menos %{min_value} valor(es) en %{in}
+      not_in_set: El atributo '%{attribute_name}' con el valor '%{value}' debe tener un valor de la lista %{set}
+      invalid: El atributo "%{attribute_name}" tiene el valor no válido "%{value}".
+      incorrect_format: El atributo %{attribute_name} tiene el valor %{value} no válido. No es un JSON válido.
+  devise:
+    passwords:
+      new:
+        title: "¿Ha olvidado su contraseña?"
+        description: Le enviaremos instrucciones para restablecer su contraseña.
+        submit: Restablecer contraseña
+      edit:
+        title: Cambiar contraseña
+        new_password: Nueva contraseña
+        confirm_new_password: Confirmar nueva contraseña
+        submit: Guardar nueva contraseña
+    registrations:
+      new:
+        title: Inscribirse
+        submit: Inscribirse
+      edit:
+        title: Editar usuario
+        leave_description: Deje estos campos en blanco si no desea cambiar su contraseña.
+        new_password: Nueva contraseña
+        currently_waiting: A la espera de confirmación
+        current_password_description: Debe introducir su contraseña actual para realizar cambios.
+        submit: Actualización
+    sessions:
+      new:
+        title: Inscribirse
+        sign_up: Inscribirse
+        forgot_password: "¿Ha olvidado su contraseña?"
+        remember_me: Acuérdate de mí
+        submit: Inscribirse
+        single_sign_on: Inicio de sesión único (SSO)
+  helpers:
+    enter_state: Estado del orden
+    enter_user: Usuario
+    enter_order_type: Tipo de orden
+    enter_archived: Archivado
+    creation_date: Creado en
+    estimated_exec_date: Fecha de vencimiento
+    from: de
+    to: a
+    yes_no:
+      'yes': Sí
+      'no': 'No'
+    custom_fields_filter:
+      title: Campos personalizados del orden
+      add: Filtrar por campos personalizados
+      placeholder: Seleccionar campo
+  users:
+    new:
+      title: Añadir usuario
+    edit:
+      title: Perfil del usuario
+    index:
+      title: Usuarios
+    add:
+      added: Usuario añadido
+    show:
+      title: Perfil del usuario
+      generate_api_token: Generar token de API
+      renew_api_token: Renovar token de API
+      renew_api_token_warning: El nuevo token de API sustituirá al actual. ¿Está seguro?
+      clear_api_token: Eliminar token de API
+      clear_api_token_warning: Se eliminará el token de API actual. ¿Está seguro?
+      yes_clear: Sí, borrar
+      yes_renew: Sí, renovar
+      delete_user: Borrar usuario
+    empty: Vacío
+    destroy:
+      user_has_orders: No se puede eliminar el usuario %{user_name} porque es propietario de ordenes
+  orders:
+    new:
+      title: Añadir orden
+      label: Tipo de orden
+    states:
+      to_execute: Nuevo
+      in_progress: En curso
+      done: Completado
+    search_by_not_found: No se encontrado el orden con %{criteria}
+    index:
+      title: Ordenes
+      archived: Archivado
+      ext_code: Código externo
+      no_orders_found: No se han encontrado los ordenes
+    search_form:
+      filter_records: Lista de ordenes
+      search_for_record: Buscar el orden
+    search_by:
+      search: 'Buscar '
+      code: Código del orden
+      ext_code: Código externo del orden
+    filter_by:
+      search: 'Buscar '
+      print: Imprimir
+    show:
+      order_data: Datos del orden
+      edit_title: Editar los datos del orden
+      print_title: Imprimir datos del orden
+      empty_code_title: Para imprimir, introduzca un código de plantilla de impresión en el tipo de orden
+    print: Imprimir
+    print_pdf: Imprimir PDF
+    print_tasks:
+      started: Se ha iniciado el procesamiento de la tarea de impresión %{print_task_id}. Compruebe el resultado en su correo electrónico.
+      errors:
+        multiple_types: Los ordenes seleccionados son de distinto tipo. Para imprimir, seleccione ordenes del mismo tipo.
+        internal_error: El procesamiento de la tarea de impresión ha fallado debido a un error interno.
+    total_items: 'Ordenes encontrados:'
+  user_role:
+    user: Usuario
+    vip: Usuario avanzado
+    admin: Administrador
+  layouts:
+    navigation:
+      sign_in: Inscribirse
+      sign_up: Inscribirse
+      help: Ayuda
+      sign_out: Cerrar sesión
+      edit_account: Perfil
+      orders: Ordenes
+      users: Usuarios
+      setup_order_types: Tipos de ordenes
+      tasks: Tareas
+    form_errors:
+      errors:
+        one: "%{count} error impidió guardar el usuario:"
+        few: "%{count} errores impidieron guardar al usuario:"
+        many: "%{count} errores impidieron guardar el usuario:"
+        other: "%{count} errores impidieron guardar al usuario:"
+  admin:
+    order_types:
+      index:
+        title: Tipos de ordenes
+        add: Cargar tipo de orden desde un archivo YAML
+        order_type_removal: Borrar tipo de orden
+        confirmation: ¿Está seguro de que desea eliminar el tipo de orden "%{order_type}"? Los ordenes existentes no se verán afectados.
+        yes_remove: Sí, borrar
+      show:
+        activate_dismiss: Activar el tipo de orden si es correcto, o descartarlo
+        activated: Tipo de orden activado
+        back: Volver a la lista
+      create:
+        uploaded: Tipo de orden cargado correctamente
+        equal_exists: Ya existe un tipo de orden idéntico
+      dismiss:
+        dismissed: Tipo de orden desestimado
+      activate:
+        activated: Tipo de orden activado
+      destroy:
+        destroyed: Tipo de orden borrado
+  tasks:
+    index:
+      title: Tareas
+  activerecord:
+    models:
+      user:
+        one: Usuario
+        other: Usuarios
+      order_type:
+        one: Tipo de orden
+        other: Tipos de ordenes
+    attributes:
+      order:
+        code: Código
+        order_type_code: Tipo de orden
+        ext_code: Código externo
+        user: Usuario
+        bp_id: ID del proceso de negocio
+        bp_state: Estado del proceso de negocio
+        state: Estado
+        done_at: Completado en
+        archived: Archivado
+        data: Campos personalizados
+        created_at: Creado en
+        updated_at: Actualizado en
+        print_form_code: Imprimir código de plantilla
+        estimated_exec_date: Fecha de vencimiento
+      order_type:
+        code: Código
+        file: Contenido del archivo YAML cargado
+        fields: Campos personalizados
+        active: Activo
+      user:
+        name: Nombre
+        email: Correo electrónico
+        role: Función
+        middle_name: Segundo nombre
+        last_name: Apellido
+        full_name: Nombre completo
+        company: Empresa
+        department: Departamento
+        api_token: Token de API
+        password: Contraseña
+        password_confirmation: Confirmación de contraseña
+        current_password: Contraseña actual
+    errors:
+      models:
+        order_type:
+          attributes:
+            base:
+              cannot_delete_as_orders_exist: No se puede eliminar porque existen ordenes asociados
+            file:
+              invalid: Error de análisis de archivo
+        order:
+          attributes:
+            data:
+              fields_definition_invalid: 'Error fatal: el tipo de este orden tiene campos personalizados no válidos. Póngase en contacto con su administrador.'
+              form_key_missed_in_task: El formulario con la clave "%{form_key}" no se encuentra en la tarea actual.
+        user:
+          blank: no se especifica
+          attributes:
+            email:
+              invalid: no es válido
+              taken: ya está ocupado
+            name:
+              blank: no se especifica
+            last_name:
+              blank: no se especifica
+            company:
+              blank: no se especifica
+            department:
+              blank: no se especifica
+            password:
+              blank: no se especifica
+              too_short: es demasiado corto
+            password_confirmation:
+              confirmation: está en blanco
+  js:
+    cancel: Cancelar
+    error: Error
+    remove: Quitar
+    'yes': Sí
+    not_selected: No seleccionado
+    select2:
+      not_set: Vacío
+    columns_settings: Mostrar campos
+    from: de
+    to: a
+  doc:
+    common:
+      cases:
+        list: Lista
+        show: Reciba
+        create: Crear
+        update: Actualización
+        delete: Borrar
+      parameters:
+        default: Predeterminado
+        allowed_values: Valores permitidos
+        page_size: Ítems por página
+        page: Página actual
+    orders:
+      resource: Ordenes
+      cases:
+        update_data: Actualizar campos personalizados
+        update_base_fields: Actualizar campos básicos
+        update_user_email: Actualizar el correo electrónico del usuario
+      explanations:
+        update: Este método sólo actualiza los campos pasados, los demás permanecen inalterados.
+      parameters:
+        code: Código de orden
+        data: Campos personalizados
+        user_email: Correo electrónico del usuario
+        order_type_code: Código del tipo de orden
+        ext_code: Código de orden externo
+        bp_id: ID del proceso de negocio
+        bp_state: Estado del proceso de negocio
+        state: Estado del orden
+        done_at: Completado en
+        estimated_exec_date: Fecha de vencimiento
+        archived: Archivado
+    users:
+      resource: Usuarios
+      parameters:
+        email: Correo electrónico
+        first_name: Nombre
+        middle_name: Segundo nombre
+        last_name: Apellido
+        user_role: Función del usuario
+        company: Nombre de la empresa
+        department: Nombre del departamento
+        password: Contraseña
+        blocked: Bloqueado
+        external: Exterior
+        password_salt: Sal de contraseña
+        encrypted_password: Contraseña cifrada
+    profiles:
+      resource: Perfiles de filtro
+      parameters:
+        id: ID de perfil
+        data: Сampos personalizados del orden
+        user_email: Correo electrónico del usuario
+        order_type_code: Código del tipo de orden
