@@ -1,1 +1,74 @@
 es:
+  submit: Enviar
+  cancel: Cancelar proceso
+  confirm_cancel: "¿Cancelar el proceso?"
+  error: Error
+  more: Más
+  no_tasks: Sin tareas
+  tasks: Tareas
+  loading: Cargando
+  hide_widget: Esconder
+  bp_running: El proceso de negocio ya se está ejecutando o está asignado a otro usuario
+  no_bp_to_start: No hay procesos empresariales disponibles para iniciar.
+  errors:
+    camunda_is_unavailable: El servicio Camunda no está disponible
+    field_not_defined_in_bp: El campo con el nombre %{field_name} no está definido en las variables de proceso de negocio
+    cannot_obtain_available_actions: No se pueden obtener acciones disponibles
+    cannot_start_process: No se puede iniciar el proceso
+    file_list_name_empty: El campo %{field_name} debe tener el parámetro "file_list_name" no vacío
+    file_list_name_not_matched: Al formulario le falta un campo con tipo "file_list" y nombre "%{file_list_name}"
+    field_is_required: Campo obligatorio
+    task_already_claimed: La tarea %{task_name} ya ha sido reclamada
+    user_not_found: El usuario actual no se encuentra en Camunda
+  notifications:
+    new_assigned_task: 'Nueva tarea asignada: %{task_name}'
+    new_assigned_task_plural: "%{count} se han asignado nuevas tareas: %{task_names}"
+  components:
+    select:
+      searching: Buscando...
+      no_results_found: No se han encontrado resultados
+      enter_more_chars: Introduzca 2 o más caracteres
+    file_upload:
+      drag_and_drop: 'Arrastre y suelte los archivos para adjuntarlos, o '
+      browse: navegar
+    claiming:
+      open_tasks: Tareas pendientes
+      claim: Reclamación
+      tabs:
+        my: Mis tareas (%{count})
+        unassigned: Tareas no reclamadas (%{count})
+      table:
+        priority: Prioridad
+        title: Título
+        type: Tipo de tarea
+        description: Descripción de la tarea
+        sla: Creado/Debido
+        empty_description: "—"
+        empty_tasks: Sin tareas
+        priorities:
+          medium: Medio
+          high: Alta
+          urgent: Urgente
+      overview:
+        header: Resumen de tareas
+        due: Fecha de vencimiento
+        created: 'Creado en:'
+        priority: 'Prioridad:'
+        description: 'Descripción:'
+        claim_task: Reclamar tarea
+        claim_and_open: Reclamar e ir a la tarea
+        go_to_task: Ir a la tarea
+      created:
+        expired: caducado
+        past_due: fecha de vencimiento
+        to_deadline: a la fecha de vencimiento
+        ago: hace
+        periodUnits:
+          minute: m
+          hour: h
+          day: d
+          week: s
+          month: m
+          year: a
+      short_list:
+        view_all: Ver todos

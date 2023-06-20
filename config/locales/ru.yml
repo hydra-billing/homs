@@ -177,9 +177,13 @@ ru:
     models:
       user:
         one: Пользователь
+        few: Пользователей
+        many: Пользователей
         other: Пользователей
       order_type:
         one: Тип заказов
+        few: Типы заказов
+        many: Типы заказов
         other: Типы заказов
     attributes:
       order:
