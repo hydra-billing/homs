@@ -1,4 +1,4 @@
-v2.7.12 [unreleased]
+v2.7.12 [2023-02-01]
 -------------------
 ### Bugfixes
 - [#683](https://github.com/hydra-billing/homs/pull/689) Set focus to the first element in form.
