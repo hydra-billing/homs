@@ -1,4 +1,4 @@
-require_relative './minio/container'
+require_relative 'minio/container'
 module Minio
   Import = Dry::AutoInject(Container)
 
