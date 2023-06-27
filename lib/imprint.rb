@@ -1,4 +1,4 @@
-require_relative './imprint/container'
+require_relative 'imprint/container'
 
 module Imprint
   Import = Dry::AutoInject(Container)
