@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 ruby '2.7.8'
 
+rails_version = '5.2.8.1'
+
 gem 'apitome'
 gem 'aws-sdk-s3'
 gem 'coderay', '~> 1.1'
@@ -28,11 +30,22 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'pg', '0.20'
 gem 'pry-rails'
 gem 'rack', '~> 2.2.3'
-gem 'rails', '~> 5.2.4'
+
+%w[
+  actioncable
+  actionpack
+  actionview
+  activemodel
+  activerecord
+  activesupport
+  railties
+].each { |gem| gem gem, rails_version }
+
 gem 'redis', '~> 4'
 gem 'settingslogic'
 gem 'simple_form'
 gem 'sprockets', '~> 3.7'
+gem 'sprockets-rails'
 
 group :oracle do
   gem 'ruby-oci8', '2.2.3'
