@@ -8,7 +8,7 @@ modulejs.define('HBWFormText', ['React'], (React) => {
     static contextType = TranslationContext;
 
     state = {
-      value: this.props.value
+      value: this.props.value || ''
     };
 
     componentDidMount () {
