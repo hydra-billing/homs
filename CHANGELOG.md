@@ -55,11 +55,11 @@ v2.8.0 [2023-03-07]
   Token token=your.jwt.here
   ```
 
-
 ### Features
 - [#683](https://github.com/hydra-billing/homs/pull/693) Localize SSO authentication error messages.
-
+ 
 ### Bugfixes
+- [#708](https://github.com/hydra-billing/homs/pull/708) Don't install unused activestorage gem.
 - [#710](https://github.com/hydra-billing/homs/pull/710) Fix chromedriver link for tests.
 
 
