@@ -1,3 +1,9 @@
+v2.7.16 [unreleased]
+-------------------
+
+### Bugfixes
+- [#710](https://github.com/hydra-billing/homs/pull/710) Fix chromedriver link for tests.
+
 v2.7.12 [2023-02-01]
 -------------------
 ### Bugfixes
@@ -35,8 +41,8 @@ v2.7.7 [2022-07-11]
 - [#660](https://github.com/hydra-billing/homs/pull/660) Use scope parameter for SSO authentication.
 
 ### Bugfixes
-- [#664](https://github.com/hydra-billing/homs/pull/664) Fix hide start BP button in case of `candidate_starters` enabled.
 - [#662](https://github.com/hydra-billing/homs/pull/662) Change scope parameter to array.
+- [#664](https://github.com/hydra-billing/homs/pull/664) Fix hide start BP button in case of `candidate_starters` enabled.
 
 v2.7.6 [2022-06-28]
 -------------------
