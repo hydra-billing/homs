@@ -42,13 +42,13 @@ class SessionsController < Devise::SessionsController
   end
 
   def authenticate_by_keycloak
-    user = get_user(params[:code])
+    result = get_user(params[:code])
 
-    if user.success?
-      user_instance = user.value!
-      cef_logger.log_user_event(:login, {id: user_instance.id, email: user_instance.email}, request.headers)
+    if result.success?
+      user = result.value!
+      cef_logger.log_user_event(:login, {id: user.id, email: user.email}, request.headers)
 
-      sign_in(user_instance)
+      sign_in(user)
       redirect_to params.fetch(:redirect_to, '/')
     else
       user_data = {
@@ -59,12 +59,7 @@ class SessionsController < Devise::SessionsController
 
       cookies.delete('session_state')
 
-      flash[:error] = case user.failure
-                      in ::Dry::Schema::Result
-                        t('devise.failure.sso.user_attributes_error', message: user.failure.errors.to_h)
-                      else
-                        keycloak_client_error(user.failure)
-                      end
+      flash[:error] = process_sso_error(result.failure)
 
       redirect_to new_user_session_url
     end
@@ -115,5 +110,18 @@ class SessionsController < Devise::SessionsController
 
   def cef_logger
     HOMS.container[:cef_logger]
+  end
+
+  def process_sso_error(failure)
+    case failure
+    in ::Dry::Schema::Result
+      logger.error("Keycloak authentication user attribute error: #{failure.errors.to_h}")
+
+      t('devise.failure.sso.user_attributes_error', message: failure.errors.to_h)
+    else
+      logger.error("Keycloak authentication error: #{failure}")
+
+      keycloak_client_error(failure)
+    end
   end
 end

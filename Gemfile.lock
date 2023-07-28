@@ -238,7 +238,7 @@ GEM
       haml (>= 4.0)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
-    hydra-keycloak-client (0.1.18)
+    hydra-keycloak-client (0.1.19)
       dry-auto_inject
       dry-container
       dry-monads
