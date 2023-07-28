@@ -1,3 +1,7 @@
+v2.8.3 [unreleased]
+### Refactoring
+- [#712](https://github.com/hydra-billing/homs/pull/712) Log SSO authentication errors with stacktrace.
+
 v2.8.0 [2023-03-07]
 -------------------
 ### Breaking changes
