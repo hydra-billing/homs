@@ -16,6 +16,22 @@ es:
       unauthenticated: Tiene que iniciar sesión o registrarse antes de continuar.
       unconfirmed: Confirme su dirección de correo electrónico antes de continuar.
       blocked: El usuario está bloqueado
+      sso:
+        default_message: Error de autenticación de SSO
+        cant_create_session: No se pudo crear una sesión en el servidor de autenticación y autorización
+        user_data_validation_error: Conjunto de atributos de usuario no válido en el servidor de autenticación y autorización
+        not_authenticated: Error de autorización de SSO, el usuario no está autenticado
+        token_not_found: Error de almacenamiento en caché de datos, no se encontró el token en la memoria caché
+        auth_code_was_not_received: Error de almacenamiento en caché de datos, falta el código de autorización
+        username_or_password_is_empty: Error de autenticación del usuario del servicio, falta el nombre de usuario o la contraseña
+        token_not_active: Error de verificación del token, token caducado
+        token_refreshing_error: No se pudieron actualizar los tokens en el servidor de autenticación y autorización
+        bad_keycloak_response: Respuesta incorrecta del servidor de autenticación y autorización
+        keycloak_unavailable: El servidor de autenticación y autorización no está disponible
+        json_parser_error: No se pudo analizar la respuesta del servidor de autenticación y autorización
+        redis_unavailable: Error al acceder a redis durante la autenticación
+        memcached_unavailable: Error al acceder a memcached durante la autenticación
+        user_attributes_error: 'Atributos de usuario no válidos: %{message}'
     mailer:
       confirmation_instructions:
         subject: Confirme su correo electrónico

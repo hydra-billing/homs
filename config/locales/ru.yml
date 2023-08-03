@@ -90,7 +90,10 @@ ru:
       clear_api_token_warning: Текущий API-токен будет удален. Продолжить?
       yes_clear: Да, удалить
       yes_renew: Да, пересоздать
+      delete_user: Удалить пользователя
     empty: Не указан
+    destroy:
+      user_has_orders: Невозможно удалить пользователя %{user_name}, так как он владеет заказами
   orders:
     new:
       title: Добавление заказа
@@ -231,6 +234,7 @@ ru:
           attributes:
             data:
               fields_definition_invalid: 'Критическая ошибка: тип данного заказа содержит ошибки в настраиваемых полях. Пожалуйста, обратитесь к администратору.'
+              form_key_missed_in_task: Форма с ключом «%{form_key}» не найдена в текущей задаче
         user:
           blank: не указан
           attributes:
