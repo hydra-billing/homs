@@ -61,8 +61,9 @@ v2.8.0 [2023-03-07]
 
 ### Features
 - [#683](https://github.com/hydra-billing/homs/pull/693) Localize SSO authentication error messages.
- 
+
 ### Bugfixes
+- [#707](https://github.com/hydra-billing/homs/pull/707) Fix warning dangerous query methodю
 - [#708](https://github.com/hydra-billing/homs/pull/708) Don't install unused activestorage gem.
 - [#710](https://github.com/hydra-billing/homs/pull/710) Fix chromedriver link for tests.
 

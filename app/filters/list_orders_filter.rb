@@ -100,7 +100,7 @@ class ListOrdersFilter
         if MAPPING.keys.include?(column)
           rel.includes(:order_type).includes(:user).reorder(render_order_by_clause(MAPPING[column], order)).order('orders.created_at DESC')
         else
-          rel.reorder("data->>'#{column}' #{order} nulls last").order('orders.created_at DESC')
+          rel.reorder(Arel.sql("data->>'#{column}' #{order} nulls last")).order('orders.created_at DESC')
         end
       else
         rel
