@@ -179,11 +179,23 @@ modulejs.define(
       };
 
       buildTableHeader = () => {
-        const rowParams = this.props.params.row_params;
+        const {
+          name, params, task
+        } = this.props;
+        const rowParams = params.row_params;
         const result = [];
+        const tableHeaderNames = this.context.translateBP(`${task.process_key}.${task.key}.${name}.header`, {}, null);
 
-        [...rowParams].forEach((param) => {
-          result.push(<th className={this.buildCssFromConfig(param)} key={param.name}>{param.name}</th>);
+        [...rowParams].forEach((param, i) => {
+          if (tableHeaderNames !== null) {
+            result.push(
+              <th className={this.buildCssFromConfig(param)} key={tableHeaderNames[i]}>
+                {tableHeaderNames[i]}
+              </th>
+            );
+          } else {
+            result.push(<th className={this.buildCssFromConfig(param)} key={param.name}>{param.name}</th>);
+          }
         });
 
         return result;

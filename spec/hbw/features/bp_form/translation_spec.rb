@@ -32,6 +32,7 @@ feature 'BP form with existing russian translation', js: true do
       expect(page).to     have_content 'Поле string c regexp валидацией'
       expect(page).to     have_content 'Поле static с подстановкой ORD-1'
       expect(page).to     have_content 'Поле select_table'
+      expect(page).to     have_content 'Колонка 1'
       expect(page).to     have_content 'Поле text'
       expect(page).to     have_content 'Поле datetime'
       expect(page).to     have_content 'Группа'

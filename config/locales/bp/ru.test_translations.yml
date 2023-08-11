@@ -14,6 +14,8 @@ ru:
       staticField: <div class="alert alert-success"><h4>Поле static с подстановкой $homsOrderCode</h4></div>
       selectTableField:
         label: Поле select_table
+        header:
+          - Колонка 1
       textField:
         label: Поле text
       datetimeField:
