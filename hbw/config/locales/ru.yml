@@ -15,6 +15,8 @@ ru:
     field_not_defined_in_bp: Поле с именем %{field_name} отсутствует в переменных бизнес-процесса
     cannot_obtain_available_actions: Не удалось получить список доступных действий
     cannot_start_process: Не удалось начать процесс
+    file_list_name_empty: Поле %{field_name} не должно содержать пустой параметр «file_list_name»
+    file_list_name_not_matched: В форме отсутствует поле типа «file_list» и имени «%{file_list_name}»
     field_is_required: Обязательное поле
     task_already_claimed: Задача «%{task_name}» уже взята в работу
     user_not_found: Текущий пользователь не найден в Camunda
@@ -28,6 +30,7 @@ ru:
       enter_more_chars: Пожалуйста, введите больше одного символа
     file_upload:
       drag_and_drop: Перетащите файлы, чтобы прикрепить их
+      browse: просмотреть
     claiming:
       open_tasks: Открытые задачи
       claim: Взять в работу
