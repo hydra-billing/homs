@@ -1,4 +1,4 @@
-v2.8.4 [Unreleased]
+v2.8.4 [2023-08-16]
 ### Features
 - [#714](https://github.com/hydra-billing/homs/pull/714/files) Localize select-table header.
 
