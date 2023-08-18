@@ -1,6 +1,6 @@
 module HBW
   module Events
-    class TasksController < BaseController
+    class TasksController < ApiController
       def update
         event = {
           task_id:  params['id'],
