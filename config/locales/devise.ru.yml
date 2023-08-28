@@ -8,10 +8,10 @@ ru:
     failure:
       already_authenticated: Вы уже вошли в систему.
       inactive: Ваша учетная запись еще не активирована.
-      invalid: '%{authentication_keys} или пароль неверны.'
+      invalid: "%{authentication_keys} или пароль неверны."
       locked: Ваша учетная запись заблокирована.
       last_attempt: У вас осталась одна попытка, прежде чем ваша учетная запись будет заблокирована.
-      not_found_in_database: '%{authentication_keys} или пароль неверны.'
+      not_found_in_database: "%{authentication_keys} или пароль неверны."
       timeout: Время текущей сессии истекло. Пожалуйста, войдите, чтобы продолжить.
       unauthenticated: Чтобы продолжить, войдите или зарегистрируйтесь.
       unconfirmed: Чтобы продолжить, подтвердите ваш адрес электронной почты.
@@ -68,7 +68,7 @@ ru:
       not_found: не найдена
       not_locked: не была заблокирована
       not_saved:
-        one: '%{count} ошибка препятствует сохранению %{resource}:'
-        few: '%{count} ошибки препятствуют сохранению %{resource}:'
-        many: '%{count} ошибок препятствуют сохранению %{resource}:'
-        other: '%{count} ошибок препятствуют сохранению %{resource}:'
+        one: "%{count} ошибка препятствует сохранению %{resource}:"
+        few: "%{count} ошибки препятствуют сохранению %{resource}:"
+        many: "%{count} ошибок препятствуют сохранению %{resource}:"
+        other: "%{count} ошибок препятствуют сохранению %{resource}:"

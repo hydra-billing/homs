@@ -12,25 +12,25 @@ ru:
   user_deleted: Пользователь удален
   record_not_found: Запись не найдена
   config:
-    bad_entity_url: "Недопустимый параметр в entity_url '%{variable_name}'"
+    bad_entity_url: Недопустимый параметр в entity_url '%{variable_name}'
   custom_fields:
     definition:
-      missing_attribute: "Отсутствует атрибут '%{attribute_name}'"
-      unknown_type: "Неизвестный тип '%{type}'"
-      invalid_type: "Атрибут '%{attribute_name}' должен быть типа %{type}"
-      undefined_field: "Поле '%{field_name}' не описано в типе заказа"
-      max_length: "Длина атрибута '%{attribute_name}' не должна превышать %{max_length} символов"
+      missing_attribute: Отсутствует атрибут '%{attribute_name}'
+      unknown_type: Неизвестный тип '%{type}'
+      invalid_type: Атрибут '%{attribute_name}' должен быть типа %{type}
+      undefined_field: Поле '%{field_name}' не описано в типе заказа
+      max_length: Длина атрибута '%{attribute_name}' не должна превышать %{max_length} символов
       no_known_fields: Нет известных полей
-      invalid_value: "Атрибут '%{attribute_name}' со значением '%{value}' должен быть типа %{type}"
-      at_least: "Атрибут '%{attribute_name}' должен иметь минимум %{min_value} значений в %{in}"
-      not_in_set: "Атрибут '%{attribute_name}' со значением '%{value}' должен иметь значение из списка %{set}"
-      invalid: "Атрибут '%{attribute_name}' имеет недопустимое значение '%{value}'"
+      invalid_value: Атрибут '%{attribute_name}' со значением '%{value}' должен быть типа %{type}
+      at_least: Атрибут '%{attribute_name}' должен иметь минимум %{min_value} значений в %{in}
+      not_in_set: Атрибут '%{attribute_name}' со значением '%{value}' должен иметь значение из списка %{set}
+      invalid: Атрибут '%{attribute_name}' имеет недопустимое значение '%{value}'
       incorrect_format: У атрибута %{attribute_name} недопустимое значение %{value}. Неверный JSON.
   devise:
     passwords:
       new:
         title: Забыли пароль?
-        description: "Мы вышлем вам письмо с инструкцией по сбросу пароля"
+        description: Мы вышлем вам письмо с инструкцией по сбросу пароля
         submit: Сбросить пароль
       edit:
         title: Изменить пароль
@@ -43,7 +43,7 @@ ru:
         submit: Зарегистрироваться
       edit:
         title: Редактирование пользователя
-        leave_description: "Оставьте эти поля пустыми, если не хотите менять пароль."
+        leave_description: Оставьте эти поля пустыми, если не хотите менять пароль.
         new_password: Новый пароль
         currently_waiting: Ожидается подтверждение
         current_password_description: Чтобы сохранить изменения, введите текущий пароль.
@@ -66,8 +66,8 @@ ru:
     from: с
     to: по
     yes_no:
-      'yes': 'Да'
-      'no': 'Нет'
+      'yes': Да
+      'no': Нет
     custom_fields_filter:
       title: Настраиваемые поля заказа
       add: Фильтр по настраиваемым полям
@@ -148,17 +148,17 @@ ru:
       tasks: Задачи
     form_errors:
       errors:
-        one: "Из-за %{count} ошибки учетная запись не сохранена:"
-        few: "Из-за %{count} ошибок учетная запись не сохранена:"
-        many: "Из-за %{count} ошибок учетная запись не сохранена:"
-        other: "Из-за %{count} ошибок учетная запись не сохранена:"
+        one: 'Из-за %{count} ошибки учетная запись не сохранена:'
+        few: 'Из-за %{count} ошибок учетная запись не сохранена:'
+        many: 'Из-за %{count} ошибок учетная запись не сохранена:'
+        other: 'Из-за %{count} ошибок учетная запись не сохранена:'
   admin:
     order_types:
       index:
         title: Типы заказов
         add: Загрузить тип заказов из YAML-файла
         order_type_removal: Удалить тип заказов
-        confirmation: "Вы действительно хотите удалить тип заказов «%{order_type}»? Удаление не повлияет на существующие заказы."
+        confirmation: Вы действительно хотите удалить тип заказов «%{order_type}»? Удаление не повлияет на существующие заказы.
         yes_remove: Да, удалить
       show:
         activate_dismiss: Активируйте тип заказов, если его определение корректно, или отклоните его
@@ -258,7 +258,7 @@ ru:
     cancel: Отменить
     error: Ошибка
     remove: Удалить
-    'yes': 'Да'
+    'yes': Да
     not_selected: Не выбран
     select2:
       not_set: Не указан

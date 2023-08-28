@@ -1,7 +1,7 @@
 ru:
   simple_form:
-    'yes': 'Да'
-    'no': 'Нет'
+    'yes': Да
+    'no': Нет
     required:
       text: обязательное
       mark: "*"
