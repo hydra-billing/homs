@@ -12,25 +12,25 @@ en:
   user_deleted: User deleted
   record_not_found: Record not found
   config:
-    bad_entity_url: Wrong parameter in entity_url '%{variable_name}'
+    bad_entity_url: "Wrong parameter in entity_url '%{variable_name}'"
   custom_fields:
     definition:
-      missing_attribute: Missing attribute '%{attribute_name}'
-      unknown_type: Unknown type '%{type}'
-      invalid_type: Attribute '%{attribute_name}' should be of the %{type} type
-      undefined_field: Field '%{field_name}' is not defined in the order type
-      max_length: Attribute '%{attribute_name}' must not exceed %{max_length} characters
+      missing_attribute: "Missing attribute '%{attribute_name}'"
+      unknown_type: "Unknown type '%{type}'"
+      invalid_type: "Attribute '%{attribute_name}' should be of the %{type} type"
+      undefined_field: "Field '%{field_name}' is not defined in the order type"
+      max_length: "Attribute '%{attribute_name}' must not exceed %{max_length} characters"
       no_known_fields: No fields left after ignoring unknown ones
-      invalid_value: Attribute '%{attribute_name}' with the value '%{value}' should be of the %{type} type
-      at_least: Attribute '%{attribute_name}' must have at least %{min_value} value(s) in %{in}
-      not_in_set: Attribute '%{attribute_name}' with the value '%{value}' must have a value from the list %{set}
-      invalid: Attribute '%{attribute_name}' has the invalid value '%{value}'
+      invalid_value: "Attribute '%{attribute_name}' with the value '%{value}' should be of the %{type} type"
+      at_least: "Attribute '%{attribute_name}' must have at least %{min_value} value(s) in %{in}"
+      not_in_set: "Attribute '%{attribute_name}' with the value '%{value}' must have a value from the list %{set}"
+      invalid: "Attribute '%{attribute_name}' has the invalid value '%{value}'"
       incorrect_format: Attribute %{attribute_name} has invalid value %{value}. Not a valid JSON.
   devise:
     passwords:
       new:
         title: Forgot your password?
-        description: We'll send you instructions on how to reset your password
+        description: "We'll send you instructions on how to reset your password"
         submit: Reset password
       edit:
         title: Change password
@@ -43,7 +43,7 @@ en:
         submit: Sign up
       edit:
         title: Edit user
-        leave_description: Leave these fields blank if you don't want to change your password.
+        leave_description: "Leave these fields blank if you don't want to change your password."
         new_password: New password
         currently_waiting: Awaiting confirmation
         current_password_description: You must enter your current password to make changes.
@@ -158,7 +158,7 @@ en:
         title: Order types
         add: Load order type from a YAML file
         order_type_removal: Delete order type
-        confirmation: Are you sure you want to delete the order type «%{order_type}»? Existing orders won't be affected.
+        confirmation: "Are you sure you want to delete the order type «%{order_type}»? Existing orders won't be affected."
         yes_remove: Yes, delete
       show:
         activate_dismiss: Activate the order type if correct, or dismiss it
