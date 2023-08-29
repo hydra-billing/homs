@@ -98,6 +98,19 @@ You can login to [Camunda Admin interface](http://localhost:8766/camunda) with c
     ```
 1. Log in at [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*.
 
+### Updating dependencies
+* Update gems:
+    ```
+    bundle update
+    ```
+* Update js packages:
+    ```
+    yarn upgrade-interactive --latest
+    ```
+    Do not update:
+    * bootstrap and related packages
+    * jquery and related packages
+
 ### Work with SSO
 Requirements:
 * [Keycloak](https://www.keycloak.org/)
