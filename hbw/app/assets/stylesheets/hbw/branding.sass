@@ -28,7 +28,7 @@ $button-types: default primary danger info success warning cancel-process
   border-right: var(--hbw-border-light-gray, var(--base-hbw-border-light-gray))
 
 .has-error
-  border: var(--form-control-border-width, var(--base-form-control-border-width)) solid var(--hbw-red, var(--base-hbw-red))
+  border: var(--form-control-border-width, var(--base-form-control-border-width)) solid var(--hbw-red, var(--base-hbw-error-color))
 
 .field_with_errors
   .form-control
@@ -267,7 +267,7 @@ table.disabled
       font-style: var(--hbw-alert-font-style, var(--base-hbw-alert-font-style))
 
   .alert-danger
-    background-color: var(--hbw-red, var(--base-hbw-red))
+    background-color: var(--hbw-red, var(--base-hbw-error-color))
   .hbw-error
     .show-more
       color: var(--hbw-white, var(--base-hbw-white))
@@ -319,7 +319,7 @@ table.disabled
       font-weight: var(--hbw-form-group-select-font-weight, var(--base-hbw-form-group-select-font-weight))
       font-style: var(--hbw-form-group-select-font-style, var(--base-hbw-form-group-select-font-style))
     .invalid
-      border-color: var(--hbw-red, var(--base-hbw-red))
+      border-color: var(--hbw-red, var(--base-hbw-error-color))
     .description
       font-family: var(--base-hbw-font-family)
       font-size: var(--hbw-description-font-size, var(--base-hbw-description-font-size))
@@ -332,19 +332,19 @@ table.disabled
         font-size: var(--hbw-tooltip-red-font-size, var(--base-hbw-tooltip-red-font-size))
         font-weight: var(--hbw-tooltip-red-font-weight, var(--base-hbw-tooltip-red-font-weight))
         font-style: var(--hbw-tooltip-red-font-style, var(--base-hbw-tooltip-red-font-style))
-        background-color: var(--hbw-red, var(--base-hbw-red))
+        background-color: var(--hbw-red, var(--base-hbw-error-color))
 
         &[x-placement^="top"] .tooltip-arrow
-          border-top-color: var(--hbw-red, var(--base-hbw-red))
+          border-top-color: var(--hbw-red, var(--base-hbw-error-color))
 
         &[x-placement^="bottom"] .tooltip-arrow
-          border-bottom-color: var(--hbw-red, var(--base-hbw-red))
+          border-bottom-color: var(--hbw-red, var(--base-hbw-error-color))
 
         &[x-placement^="right"] .tooltip-arrow
-          border-right-color: var(--hbw-red, var(--base-hbw-red))
+          border-right-color: var(--hbw-red, var(--base-hbw-error-color))
 
         &[x-placement^="left"] .tooltip-arrow
-          border-left-color: var(--hbw-red, var(--base-hbw-red))
+          border-left-color: var(--hbw-red, var(--base-hbw-error-color))
 
   .form-control
     padding: var(--form-control-padding, var(--base-form-control-padding))
