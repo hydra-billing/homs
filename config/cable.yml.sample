@@ -3,5 +3,5 @@ development:
 test:
   adapter: async
 production:
-  url: <%= ENV['REDIS_URL'] %>
+  url: redis://<%= ENV['REDIS_HOST'] %>:<%= ENV['REDIS_PORT'] %>
   adapter: redis
