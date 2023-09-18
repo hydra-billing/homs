@@ -1,5 +1,5 @@
 
-v2.8.5 [Unreleased]
+v2.8.5 [2023-08-22]
 -------------------
 ### Bugfixes
 - [#715](https://github.com/hydra-billing/homs/pull/715) Set auth_header in Events::TasksController
