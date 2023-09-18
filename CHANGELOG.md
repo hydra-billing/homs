@@ -3,7 +3,7 @@ v2.9 [Unreleased]
 ### Breaking changes
 - [#719](https://github.com/hydra-billing/homs/pull/719) Use REDIS_HOST and REDIS_PORT env variables instead of REDIS_URL for actioncable.
 
-v2.8.5 [Unreleased]
+v2.8.5 [2023-08-22]
 -------------------
 ### Bugfixes
 - [#715](https://github.com/hydra-billing/homs/pull/715) Set auth_header in Events::TasksController
