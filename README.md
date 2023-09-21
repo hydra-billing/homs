@@ -180,6 +180,17 @@ jest
 jest --updateSnapshot
 ```
 
+## Upgrade PostgreSQL
+To upgrade PostgreSQL (HOMS database) to the 15.4 version, we recommend using the `pg_dumpall` utility:
+1. Copy service `db_homs` as `db_homs_new` in `docker-compose.yml`
+2. In `db_homs_new` set `image: postgres:15.4`, change volume to `./data/homs_new/postgresql:$HOMS_DB_PATH`, port to `15432:5432`, container name to `postgres-homs-new`
+3. Run `db_homs_new` and `db_homs` services `docker-compose up db_homs db_homs_new`. Wait for postgres instances to start up
+4. Dump `db_homs` data to file: `docker exec -it postgres-homs /usr/bin/pg_dumpall -U homs > dumpfile`
+5. Upload data to `db_homs_new`: `docker exec -i postgres-homs-new psql -U homs < dumpfile`
+6. Stop `db_homs_new` and `db_homs` containers. Replace old volume: `rm -rf ./data/homs && mv ./data/homs_new ./data/homs`
+7. In `db_homs` set `image: postgres:15.4`, remove `db_homs_new` in `docker-compose.yml`
+8. Re-hash password for `HOMS_DB_USER`: `source .env && docker exec -it postgres-homs psql -U $HOMS_DB_USER`, `\password`, enter twice value of `HOMS_DB_PASSWORD` from `.env` file and enter `quit;`
+
 ## Links
 
 1. [Repo with helper classes for BPMN development](https://github.com/latera/camunda-ext).

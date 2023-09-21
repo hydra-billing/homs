@@ -21,7 +21,7 @@ services:
     networks:
       - custom_network
   db_homs:
-    image: postgres:11.0
+    image: postgres:15.4-alpine
     hostname: postgres-homs
     container_name: postgres-homs
     restart: always
