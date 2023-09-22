@@ -74,7 +74,7 @@ group :development, :test, :staging do
 end
 
 group :development, :test do
-  gem 'puma', '< 6.0'
+  gem 'puma'
 end
 
 group :production, :staging do
