@@ -36,7 +36,7 @@ RSpec.configure do |config|
     Features::BPFormHelper,
     Features::I18nHelper,
     Features::FilesHelper,
-    Features::ApiHelper,
+    Features::APIHelper,
     Features::FillHelper,
     Features::ScopesHelper
   ].each { |helper| config.include(helper, type: :feature) }

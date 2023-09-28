@@ -16,7 +16,8 @@ echo "sources:
     type: 'static/bpm'
 " > config/sources.yml
 
-bundle exec rake db:migrate && bundle exec rake db:seed
+bundle exec rake db:migrate
+bundle exec rake db:seed SEED_DB=true
 
 # add source billing for tests
 echo "sources:

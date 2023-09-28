@@ -2,7 +2,7 @@ class MakeLastMiddleNamesCompanyDepartmentOfUserNotNull < ActiveRecord::Migratio
   def up
     undefined = ''
     User.all.map do |user|
-      user.update_attributes({
+      user.update({
         last_name:   user.last_name   || undefined,
         middle_name: user.middle_name || undefined,
         company:     user.company     || undefined,

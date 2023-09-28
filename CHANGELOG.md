@@ -1,4 +1,7 @@
 v2.9 [Unreleased]
+### Features
+- [#725](https://github.com/latera/homs/pull/531) Update Rails to 7
+
 -------------------
 ### Breaking changes
 - [#719](https://github.com/hydra-billing/homs/pull/719) Use REDIS_HOST and REDIS_PORT env variables instead of REDIS_URL for actioncable.

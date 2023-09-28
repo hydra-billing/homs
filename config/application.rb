@@ -33,6 +33,9 @@ module HOMS
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Moscow'
 
+    config.load_defaults 6.1
+    config.autoloader = :zeitwerk
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
@@ -53,6 +56,9 @@ module HOMS
 
     redis_config = config.app.fetch(:redis, {})
     config.cache_store = :redis_cache_store, {url: "redis://#{redis_config.fetch(:host)}:#{redis_config.fetch(:port)}/0"}
+
+    config.active_record.legacy_connection_handling = false
+    config.active_record.belongs_to_required_by_default = false
 
     require Rails.root.join('lib/imprint')
 

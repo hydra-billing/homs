@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   include KeycloakUtils
 
   before_action -> { ENV['DISABLE_PRY'] = nil }
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def authenticate_user!
     if use_keycloak?
@@ -26,6 +27,11 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+  end
 
   def keycloak_user(session_state)
     access_token = yield HOMS.container[:keycloak_client].access_token(session_state)
