@@ -1,4 +1,4 @@
-module HasApiToken
+module HasAPIToken
   extend ActiveSupport::Concern
 
   def api_token?

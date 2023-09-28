@@ -1,7 +1,7 @@
 require 'dry-effects'
 
 module HBW
-  class ApiController < BaseController
+  class APIController < BaseController
     include Dry::Effects::Handler.Reader(:auth_header)
 
     rescue_from HBW::Remote::RemoteError do |exception|

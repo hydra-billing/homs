@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   end
 
   include HasRole
-  include HasApiToken
+  include HasAPIToken
 
   default_scope { order(last_name: :asc, name: :asc, middle_name: :asc) }
 

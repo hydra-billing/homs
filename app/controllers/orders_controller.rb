@@ -53,7 +53,7 @@ class OrdersController < API::BaseController
 
   def update
     @order.data = params[:order][:data]
-    @order.update_attributes(order_common_params)
+    @order.update(order_common_params)
 
     if @order.save
       redirect_to order_url(@order.code)
@@ -112,6 +112,6 @@ class OrdersController < API::BaseController
     @order.order_type_id = params[:order_type_id] || OrderType.active.first.id
     @order.data = params[:order][:data]
     @order.user_id = current_user.id
-    @order.update_attributes(order_common_params)
+    @order.update(order_common_params)
   end
 end

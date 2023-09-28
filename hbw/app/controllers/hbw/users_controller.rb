@@ -1,5 +1,5 @@
 module HBW
-  class UsersController < ApiController
+  class UsersController < APIController
     def index
       @users = widget.users
     end

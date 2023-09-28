@@ -4,7 +4,7 @@
 import React, {
   Component, createContext, useContext, useEffect
 } from 'react';
-import ActionCable from 'actioncable';
+import { createConsumer } from '@rails/actioncable';
 import orderBy from 'lodash/orderBy';
 import partition from 'lodash/partition';
 import Messenger from 'messenger';
@@ -223,7 +223,7 @@ export const withStoreContext = ({
         ? `wss://${host}/widget/cable`
         : `ws://${host}/widget/cable`;
 
-      const ws = ActionCable.createConsumer(socketUrl);
+      const ws = createConsumer(socketUrl);
 
       ws.subscriptions.create({ channel: 'TaskChannel', user_identifier: userIdentifier }, {
         received: async (data) => {

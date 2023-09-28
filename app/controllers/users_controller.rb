@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       attributes.delete(:password)
       attributes.delete(:password_confirmation)
     end
-    if @user.update_attributes(attributes)
+    if @user.update(attributes)
       redirect_to users_path, notice: t('user_updated')
     else
       render action: :edit
