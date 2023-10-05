@@ -1,4 +1,4 @@
-v2.8.6 [Unreleased]
+v2.8.7 [Unreleased]
 -------------------
 ### Refactoring
 - [#727](https://github.com/hydra-billing/homs/pull/727) Use latest minio version for testing and development, use [RELEASE.2023-09-30T07-02-29Z](https://github.com/minio/minio/releases/tag/RELEASE.2023-09-30T07-02-29Z) for stable homs version.
