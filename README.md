@@ -16,7 +16,7 @@ Requirements:
 Compatibility:
 
 * [Camunda 7.9.0 compatible](https://docs.camunda.org/manual/7.9/introduction/supported-environments/#supported-database-products) with PostgreSQL 9.1 / 9.3 / 9.4 / 9.6
-* Minio [last release](https://github.com/minio/minio/releases)
+* Minio [latest release](https://github.com/minio/minio/releases)
 
 Resources:
 
