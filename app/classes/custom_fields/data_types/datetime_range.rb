@@ -13,9 +13,9 @@ module CustomFields
         coerce_value(value)
       rescue ArgumentError
         errors[attribute_name] << t('invalid_value',
-                                    attribute_name: attribute_name,
+                                    attribute_name:,
                                     type:           'DateTimeFilter',
-                                    value:          value)
+                                    value:)
       end
 
       def coerce_value(value)

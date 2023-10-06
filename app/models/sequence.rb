@@ -31,7 +31,7 @@ class Sequence < ActiveRecord::Base
 
   def self.create_for_model(model, prefix, start = 1)
     transaction do
-      create(name: model_sequence_name(model), prefix: prefix, start: start)
+      create(name: model_sequence_name(model), prefix:, start:)
       create_sequence(model_sequence_name(model), start)
     end
   end

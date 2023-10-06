@@ -5,7 +5,7 @@ module HBW
 
       class << self
         def build(yml_api_file_path)
-          new(YAML.load_file(yml_api_file_path))
+          new(YAML.load_file(yml_api_file_path, aliases: true))
         end
       end
 

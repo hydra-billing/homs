@@ -14,7 +14,7 @@ feature 'Edit order', js: true do
     expect(page).to     have_content 'Orders list'
 
     order_type = FactoryBot.create(:order_type, :support_request)
-    FactoryBot.create(:order, order_type: order_type)
+    FactoryBot.create(:order, order_type:)
   end
 
   scenario 'success' do

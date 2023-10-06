@@ -1,7 +1,7 @@
 module Features
   module TablesHelper
     def click_on_select_table_option(text)
-      page.find('td', text: text).click
+      page.find('td', text:).click
     end
 
     def selected_options

@@ -8,7 +8,7 @@ feature 'Control fields on form', js: true do
     expect(page).to     have_content 'Orders list'
 
     order_type = FactoryBot.create(:order_type, :support_request)
-    FactoryBot.create(:order, order_type: order_type)
+    FactoryBot.create(:order, order_type:)
 
     click_on 'Orders'
     expect(page).to have_content 'Orders list'

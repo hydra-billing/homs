@@ -1,6 +1,7 @@
 v2.9 [Unreleased]
 ### Features
-- [#725](https://github.com/latera/homs/pull/531) Update Rails to 7
+- [#725](https://github.com/latera/homs/pull/725) Update Rails to 7
+- [#706](https://github.com/latera/homs/pull/706) Update Ruby to 3.2.2
 
 -------------------
 ### Breaking changes

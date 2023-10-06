@@ -12,8 +12,8 @@ module HBW
 
     private
 
-    def provide_auth_header(&block)
-      with_auth_header(auth_header, &block)
+    def provide_auth_header(&)
+      with_auth_header(auth_header, &)
     end
 
     def auth_header

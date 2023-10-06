@@ -4,7 +4,7 @@ feature 'BP form with existing russian translation', js: true do
 
     user = FactoryBot.create(:user)
     order_type = FactoryBot.create(:order_type, :new_customer)
-    FactoryBot.create(:order, order_type: order_type)
+    FactoryBot.create(:order, order_type:)
 
     signin(user.email, user.password)
     expect(page).not_to have_content 'Sign in'

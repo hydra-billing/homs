@@ -10,7 +10,7 @@ class OrderType < ActiveRecord::Base
     end
 
     def id_from_code(code)
-      active.select(:id).find_by(code: code).try(:id)
+      active.select(:id).find_by(code:).try(:id)
     end
   end
 
@@ -24,7 +24,7 @@ class OrderType < ActiveRecord::Base
   serialize :fields
 
   scope :active, -> { where(active: true).order(name: :asc) }
-  scope :code, ->(code) { where(active: true, code: code) }
+  scope :code, ->(code) { where(active: true, code:) }
 
   def initialize(*)
     super

@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = 'HBW'
   s.description = '...'
   s.license     = 'Commercial'
-  s.required_ruby_version = '~> 2.7'
+  s.required_ruby_version = '~> 3.2'
 
   s.files = Dir['{app,config,db,lib}/**/*']
 

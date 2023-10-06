@@ -10,10 +10,10 @@ feature 'Check static field', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type)
-    FactoryBot.create(:order, order_type: order_type)
-    FactoryBot.create(:order, order_type: order_type)
-    FactoryBot.create(:order, order_type: order_type)
+    FactoryBot.create(:order, order_type:)
+    FactoryBot.create(:order, order_type:)
+    FactoryBot.create(:order, order_type:)
+    FactoryBot.create(:order, order_type:)
   end
 
   scenario 'with single substitution' do

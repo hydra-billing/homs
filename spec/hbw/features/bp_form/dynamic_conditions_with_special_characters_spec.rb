@@ -3,7 +3,7 @@ feature 'Dynamic conditions', js: true do
     set_camunda_api_mock_file('spec/hbw/features/bp_form/dynamic_conditions_with_special_characters_mock.yml')
 
     order_type = FactoryBot.create(:order_type, :support_request)
-    FactoryBot.create(:order, order_type: order_type) # ORD-1
+    FactoryBot.create(:order, order_type:) # ORD-1
     user = FactoryBot.create(:user)
 
     signin(user.email, user.password)

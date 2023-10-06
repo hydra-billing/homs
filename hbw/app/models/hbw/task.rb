@@ -11,7 +11,7 @@ module HBW
 
     def method_missing(variable_name)
       if variable(variable_name.to_s).blank?
-        raise I18n.t('config.bad_entity_url', variable_name: variable_name)
+        raise I18n.t('config.bad_entity_url', variable_name:)
       end
 
       variable(variable_name.to_s).value
@@ -45,7 +45,7 @@ module HBW
       def update_description(id, description)
         do_request(:put,
                    "task/#{id}",
-                   description: description)
+                   description:)
       end
 
       def list(email, entity_class)

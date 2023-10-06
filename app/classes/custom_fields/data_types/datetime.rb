@@ -12,9 +12,9 @@ module CustomFields
         Time.iso8601(value)
       rescue ArgumentError
         errors[attribute_name] << t('invalid_value',
-                                    attribute_name: attribute_name,
+                                    attribute_name:,
                                     type:           'DateTime',
-                                    value:          value)
+                                    value:)
       end
 
       def coerce_value(value)

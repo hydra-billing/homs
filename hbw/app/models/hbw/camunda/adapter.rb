@@ -26,12 +26,12 @@ module HBW
         form_definition = form(task_id, entity_class)
 
         variables = form_definition.extract_and_coerce_values(form_data).map do |key, value|
-          {name: key, value: value}
+          {name: key, value:}
         end
 
         variables = variables.to_h { |item| [item.delete(:name), item] }
 
-        response = api.post("task/#{task_id}/submit-form", variables: variables)
+        response = api.post("task/#{task_id}/submit-form", variables:)
 
         response.status == (Rails.env.test? ? 200 : 204)
       end
@@ -51,7 +51,7 @@ module HBW
 
       def start_process_response(id, variables, business_key)
         api.post("process-definition/#{id}/start",
-                 variables:   variables,
+                 variables:,
                  businessKey: business_key)
       end
     end

@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
   class << self
     def id_from_code(code)
-      select(:id, :order_type_id).find_by(code: code).try(:id)
+      select(:id, :order_type_id).find_by(code:).try(:id)
     end
   end
 
@@ -22,7 +22,7 @@ class Order < ActiveRecord::Base
   scope :data_fields, ->(data) { where('data @> ?', data.to_json) }
   scope :data_datetime_range, lambda { |field, from, to|
     where('(data->>:field)::timestamp between coalesce(:from, (data->>:field)::timestamp) and coalesce(:to, (data->>:field)::timestamp)',
-          {field: field, from: from, to: to})
+          {field:, from:, to:})
   }
 
   enum state: %i(to_execute in_progress done)

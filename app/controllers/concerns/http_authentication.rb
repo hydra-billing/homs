@@ -72,7 +72,7 @@ module HttpAuthentication
   end
 
   def fail_auth(email)
-    HOMS.container[:cef_logger].log_user_event(:failed_login, {id: nil, email: email}, request.headers)
+    HOMS.container[:cef_logger].log_user_event(:failed_login, {id: nil, email:}, request.headers)
 
     raise(Unauthorized)
   end

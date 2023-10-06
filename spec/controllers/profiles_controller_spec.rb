@@ -1,7 +1,7 @@
 describe ProfilesController, type: :controller do
   let(:order_type) { FactoryBot.create(:order_type, :support_request) }
   let(:user)       { FactoryBot.create(:user) }
-  let(:profile)    { FactoryBot.build(:profile, order_type: order_type, user: user) }
+  let(:profile)    { FactoryBot.build(:profile, order_type:, user:) }
 
   describe 'Profiles' do
     it 'create success' do

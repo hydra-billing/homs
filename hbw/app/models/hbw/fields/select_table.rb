@@ -38,26 +38,26 @@ module HBW
       self.contract = SelectTableContract.new
 
       def as_json
-        {name:          name,
-         type:          type,
-         mode:          mode,
-         label:         label,
-         css_class:     css_class,
-         placeholder:   placeholder,
-         label_css:     label_css,
+        {name:,
+         type:,
+         mode:,
+         label:,
+         css_class:,
+         placeholder:,
+         label_css:,
          choices:       processed_choices,
-         description:   description,
+         description:,
          row_params:    rows,
          nullable:      nullable?,
          editable:      editable?,
          delimiter:     delimiter?,
-         delete_if:     delete_if,
-         disable_if:    disable_if,
-         dynamic:       dynamic,
-         variables:     variables,
+         delete_if:,
+         disable_if:,
+         dynamic:,
+         variables:,
          current_value: value,
-         url:           url,
-         multi:         multi}
+         url:,
+         multi:}
       end
 
       def processed_choices
@@ -108,7 +108,7 @@ module HBW
           config
         end
 
-        unless contract.(rows: rows).success?
+        unless contract.(rows:).success?
           raise StandardError, 'Wrong config for select table'
         end
       end

@@ -39,7 +39,7 @@ class HBW::Widget
         buttons = allowed_bp_buttons(buttons, definitions)
       end
 
-      {buttons: buttons, bp_running: false}
+      {buttons:, bp_running: false}
     end
   end
 

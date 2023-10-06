@@ -10,11 +10,11 @@ feature 'Select table', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type) # ORD-1
-    FactoryBot.create(:order, order_type: order_type) # ORD-2
-    FactoryBot.create(:order, order_type: order_type) # ORD-3
-    FactoryBot.create(:order, order_type: order_type) # ORD-4
-    FactoryBot.create(:order, order_type: order_type) # ORD-5
+    FactoryBot.create(:order, order_type:) # ORD-1
+    FactoryBot.create(:order, order_type:) # ORD-2
+    FactoryBot.create(:order, order_type:) # ORD-3
+    FactoryBot.create(:order, order_type:) # ORD-4
+    FactoryBot.create(:order, order_type:) # ORD-5
   end
 
   scenario 'rendered with static variants' do
@@ -150,8 +150,8 @@ feature 'Select table', js: true do
     scenario 'filled required multi = false' do
       click_and_wait 'ORD-4'
       real_initial_table_values = {
-        table_options:    table_options,
-        selected_options: selected_options
+        table_options:,
+        selected_options:
       }
 
       expected_initial_table_values = {
@@ -178,8 +178,8 @@ feature 'Select table', js: true do
       click_and_wait 'ORD-5'
 
       real_initial_table_values = {
-        table_options:    table_options,
-        selected_options: selected_options
+        table_options:,
+        selected_options:
       }
 
       expected_initial_table_values = {

@@ -3,7 +3,7 @@ module UiElementsHelper
 
   def order_attribute_picker(name)
     content_tag(:select,
-                name:     name,
+                name:,
                 data:     {
                   allowClear:  false,
                   placeholder: I18n.t('helpers.custom_fields_filter.placeholder')
@@ -22,10 +22,10 @@ module UiElementsHelper
                   data:  {showClear: true},
                   class: "input-group date datetime-picker #{options[:class]}") do
         content_tag(:input,
-                    name:  name,
+                    name:,
                     type:  'text',
                     class: 'form-control',
-                    value: value) do
+                    value:) do
           content_tag(:span, class: 'input-group-addon') do
             content_tag(:span, class: 'fas fa-calendar') {}
           end
@@ -48,7 +48,7 @@ module UiElementsHelper
   end
 
   def order_state_picker(name, value: nil)
-    content_tag(:select, name:  name,
+    content_tag(:select, name:,
                          data:  {
                            allowClear:  true,
                            placeholder: I18n.t('helpers.enter_state')
@@ -59,19 +59,19 @@ module UiElementsHelper
   end
 
   def order_type_picker(name, value: nil)
-    content_tag(:select, name:  name,
+    content_tag(:select, name:,
                          data:  {
                            allowClear:  true,
                            placeholder: I18n.t('helpers.enter_order_type')
                          },
-                         value: value,
+                         value:,
                          class: 'form-control order_type-picker') do
                            '<option></option>'.html_safe + options_for_select(order_types_for_select, value)
                          end
   end
 
   def order_archived_picker(name, value: nil)
-    content_tag(:select, name:  name,
+    content_tag(:select, name:,
                          data:  {
                            allowClear:  true,
                            placeholder: I18n.t('helpers.enter_archived')

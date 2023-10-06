@@ -23,7 +23,7 @@ module ApplicationHelper
       value = val
       value[:localized] = localize_date_range(val) if type_attributes[attr][:type] == 'datetime'
 
-      fields[attr] = {value: value}
+      fields[attr] = {value:}
     end
 
     type_attributes.slice(*attributes.keys).deep_merge(prepared_fields)

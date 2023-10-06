@@ -10,8 +10,8 @@ feature 'File upload field', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type) # ORD-1
-    FactoryBot.create(:order, order_type: order_type) # ORD-2
+    FactoryBot.create(:order, order_type:) # ORD-1
+    FactoryBot.create(:order, order_type:) # ORD-2
 
     click_on 'Orders'
     expect(page).to have_content 'Orders list'
