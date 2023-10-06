@@ -59,7 +59,7 @@ module Features
     end
 
     def click_on_tab(text)
-      page.find('a', class: 'tab', text: text).click
+      page.find('a', class: 'tab', text:).click
     end
 
     def claim_task(row_number)

@@ -13,8 +13,8 @@ feature 'Check user picker', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type) # ORD-1
-    FactoryBot.create(:order, order_type: order_type) # ORD-2
+    FactoryBot.create(:order, order_type:) # ORD-1
+    FactoryBot.create(:order, order_type:) # ORD-2
   end
 
   scenario 'with placeholder' do

@@ -45,7 +45,7 @@ module CustomFields
 
       context 'Maximum allowed string length in string definition' do
         let(:options) do
-          {max_length: max_length}
+          {max_length:}
         end
 
         it_behaves_like 'a CustomFields::Base descendant' do

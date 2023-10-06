@@ -1,6 +1,6 @@
 describe OrdersController, type: :controller do
   let(:order_type) { FactoryBot.create(:order_type, :support_request) }
-  let(:order)      { FactoryBot.build(:order, order_type: order_type) }
+  let(:order)      { FactoryBot.build(:order, order_type:) }
   let(:user)       { FactoryBot.create(:user) }
 
   describe 'Orders' do

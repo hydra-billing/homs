@@ -14,7 +14,7 @@ feature 'Check datetime picker with', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type)
+    FactoryBot.create(:order, order_type:)
 
     click_on nav_button
     expect(page).to have_content title

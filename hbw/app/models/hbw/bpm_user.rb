@@ -5,7 +5,7 @@ module HBW
 
     class << self
       def fetch(email)
-        definition = do_request(:get, users_url, email: email).first
+        definition = do_request(:get, users_url, email:).first
         new(definition) if definition
       end
 

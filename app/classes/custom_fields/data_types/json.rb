@@ -9,8 +9,8 @@ module CustomFields
         JSON.parse(value) if value.present?
       rescue JSON::ParserError => _e
         errors[attribute_name] << t(:incorrect_format,
-                                    attribute_name: attribute_name,
-                                    value:          value)
+                                    attribute_name:,
+                                    value:)
       end
 
       def coerce_value(value)

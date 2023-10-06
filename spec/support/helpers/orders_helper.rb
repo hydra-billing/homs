@@ -23,7 +23,7 @@ module Features
     end
 
     def active_tab(text)
-      page.all('li.active').find { |node| node.find('a', text: text) }
+      page.all('li.active').find { |node| node.find('a', text:) }
     end
 
     def tab(text)

@@ -10,7 +10,7 @@ feature 'Check cancel process button', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type) # ORD-1
+    FactoryBot.create(:order, order_type:) # ORD-1
   end
 
   scenario 'presence by default' do

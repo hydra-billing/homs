@@ -3,7 +3,7 @@ feature 'Control fields with dynamic conditions by datetime', js: true do
     set_camunda_api_mock_file('spec/hbw/features/bp_form/dynamic_conditions_by_datetime_mock.yml')
 
     order_type = FactoryBot.create(:order_type, :new_customer)
-    FactoryBot.create(:order, order_type: order_type) # ORD-1
+    FactoryBot.create(:order, order_type:) # ORD-1
 
     user = FactoryBot.create(:user)
     signin(user.email, user.password)

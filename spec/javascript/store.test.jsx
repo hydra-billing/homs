@@ -22,7 +22,7 @@ const mockConsumer = {
   }
 };
 
-jest.mock('actioncable', () => ({ createConsumer: () => mockConsumer }));
+jest.mock('@rails/actioncable', () => ({ createConsumer: () => mockConsumer }));
 
 const serverURL = 'http://mockURL:3000';
 const userIdentifier = 'user@example.com';

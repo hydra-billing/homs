@@ -26,7 +26,7 @@ feature 'Create new order type', js: true do
     expect(page).to have_css     '.btn-primary',  text: 'Dismiss'
     expect_widget_presence
     expect(OrderType.find_by_code('support_request').active).to be_falsey
-    expect(page).to have_content(YAML.load(fixture('order_types/support_request.yml'))['order_type']['code'])
+    expect(page).to have_content(YAML.load(fixture('order_types/support_request.yml'), aliases: true)['order_type']['code'])
 
     click_on 'Activate'
     expect(page).to have_css     '.growl-notice', text: 'Order type activated'
@@ -66,7 +66,8 @@ feature 'Create new order type', js: true do
     expect(page).to have_css     '.btn-primary', text: 'Dismiss'
     expect_widget_presence
     expect(OrderType.find_by_code('support_request').active).to be_falsey
-    expect(page).to have_content(YAML.load(fixture('order_types/support_request.yml'))['order_type']['code'])
+    expect(page).to have_content(YAML.load(fixture('order_types/support_request.yml'),
+                                           aliases: true)['order_type']['code'])
 
     click_on 'Dismiss'
     expect(page).to have_no_content 'Support Request'

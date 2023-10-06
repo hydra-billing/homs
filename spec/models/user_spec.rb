@@ -27,7 +27,7 @@ describe User do
 
     users.each_with_index do |user_hash, i|
       email = "user#{i}@mail.ru"
-      create(:user, user_hash.merge(email: email))
+      create(:user, user_hash.merge(email:))
     end
 
     expect(User.lookup('').count).to eq users.count

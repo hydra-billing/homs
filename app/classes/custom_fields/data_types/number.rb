@@ -12,7 +12,7 @@ module CustomFields
                 end
 
         unless valid
-          errors[attribute_name] << t(:invalid, attribute_name: attribute_name, value: value)
+          errors[attribute_name] << t(:invalid, attribute_name:, value:)
         end
       end
 

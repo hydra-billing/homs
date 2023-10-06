@@ -4,7 +4,7 @@ module FileContainsYaml
   def hash_from_file
     return @hash if @hash
 
-    @hash = YAML.load(file)
+    @hash = YAML.load(file, aliases: true)
     @hash.is_a?(Hash) ? @hash.deep_symbolize_keys! : @hash = {}
   rescue Psych::SyntaxError
     logger.warn do

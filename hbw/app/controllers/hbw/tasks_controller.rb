@@ -52,7 +52,7 @@ module HBW
       field = form.field(params[:name])
       variants = field.lookup_values(params[:q])
 
-      render json: variants.map { |id, text| {id: id, text: text} }.to_json
+      render json: variants.map { |id, text| {id:, text:} }.to_json
     end
 
     def claim

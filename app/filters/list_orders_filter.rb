@@ -150,10 +150,10 @@ class ListOrdersFilter
         estimated_exec_date_from = params[:estimated_exec_date_from].try(:change, {offset: Time.zone.formatted_offset})
         estimated_exec_date_to = params[:estimated_exec_date_to].try(:change, {offset: Time.zone.formatted_offset})
 
-        {created_at_from:          created_at_from,
-         created_at_to:            created_at_to,
-         estimated_exec_date_from: estimated_exec_date_from,
-         estimated_exec_date_to:   estimated_exec_date_to}.with_indifferent_access
+        {created_at_from:,
+         created_at_to:,
+         estimated_exec_date_from:,
+         estimated_exec_date_to:}.with_indifferent_access
       end
   end
 

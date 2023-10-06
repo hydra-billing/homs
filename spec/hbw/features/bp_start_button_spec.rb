@@ -12,7 +12,7 @@ feature 'Check BP start button', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type)
+    FactoryBot.create(:order, order_type:)
   end
 
   scenario 'show with candidate_starters disabled' do

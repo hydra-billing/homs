@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   class << self
     def id_from_email(email)
-      select(:id).find_by(email: email).try(:id)
+      select(:id).find_by(email:).try(:id)
     end
 
     def lookup(query, limit = 10)

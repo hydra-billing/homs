@@ -43,35 +43,33 @@ class CEFLogger
     @enabled = enabled
   end
 
-  def log_event(event_name, **options)
+  def log_event(event_name, **)
     return unless @enabled
 
     time  = Time.now
     event = EVENTS[event_name]
 
-    print_line(time, event, **options)
+    print_line(time, event, **)
   end
 
   def log_user_event(event_name, user, headers)
     log_event(
       event_name,
-      {
-        source_address:      headers['Source-Address'],
-        destination_address: headers['Destination-Address'],
-        source_host_name:    headers['Source-Host-Name'],
-        source_user_id:      user[:id],
-        source_user_name:    user[:email]
-      }
+      source_address:      headers['Source-Address'],
+      destination_address: headers['Destination-Address'],
+      source_host_name:    headers['Source-Host-Name'],
+      source_user_id:      user[:id],
+      source_user_name:    user[:email]
     )
   end
 
   private
 
-  def print_line(time, event, **options)
+  def print_line(time, event, **)
     puts LOG_LINE_PATTERN % [
       time.iso8601,
       build_main_part(event),
-      build_extension_part(event, time.to_i, **options)
+      build_extension_part(event, time.to_i, **)
     ]
   end
 

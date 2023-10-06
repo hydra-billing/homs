@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.7.8'
+ruby '3.2.2'
 
 rails_version = '6.1.7'
 
@@ -27,7 +27,7 @@ gem 'kaminari'
 gem 'minipack'
 gem 'modulejs-rails'
 gem 'momentjs-rails', '>= 2.9.0'
-gem 'pg', '1.1'
+gem 'pg', '1.5'
 gem 'pry-rails'
 gem 'rack', '~> 2.2.3'
 
@@ -42,7 +42,6 @@ gem 'rack', '~> 2.2.3'
 ].each { |gem| gem gem, rails_version }
 
 gem 'redis', '~> 4'
-gem 'settingslogic'
 gem 'simple_form'
 gem 'sprockets', '~> 3.7'
 gem 'sprockets-rails'
@@ -64,7 +63,7 @@ group :development, :test, :staging do
   gem 'factory_bot_rails', '~> 4.8.2'
   gem 'faker'
   gem 'pry-byebug'
-  gem 'rspec_api_documentation', '~> 4.4'
+  gem 'rspec_api_documentation', git: 'https://github.com/hydra-billing/rspec_api_documentation'
   gem 'rspec_junit_formatter'
   gem 'rspec-mocks'
   gem 'rspec-rails'

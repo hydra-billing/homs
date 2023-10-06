@@ -10,7 +10,7 @@ module HBW
           users:    params['users'] || []
         }
 
-        HBW::TaskNotifier.(widget: widget, event: event)
+        HBW::TaskNotifier.(widget:, event:)
 
         head :ok
       end

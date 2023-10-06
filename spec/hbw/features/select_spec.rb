@@ -14,16 +14,16 @@ feature 'Check select', js: true do
 
     order_type = FactoryBot.create(:order_type, :support_request)
 
-    FactoryBot.create(:order, order_type: order_type) # ORD-1
-    FactoryBot.create(:order, order_type: order_type) # ORD-2
-    FactoryBot.create(:order, order_type: order_type) # ORD-3
-    FactoryBot.create(:order, order_type: order_type) # ORD-4
-    FactoryBot.create(:order, order_type: order_type) # ORD-5
-    FactoryBot.create(:order, order_type: order_type) # ORD-6
-    FactoryBot.create(:order, order_type: order_type) # ORD-7
-    FactoryBot.create(:order, order_type: order_type) # ORD-8
-    FactoryBot.create(:order, order_type: order_type) # ORD-9
-    FactoryBot.create(:order, order_type: order_type) # ORD-10
+    FactoryBot.create(:order, order_type:) # ORD-1
+    FactoryBot.create(:order, order_type:) # ORD-2
+    FactoryBot.create(:order, order_type:) # ORD-3
+    FactoryBot.create(:order, order_type:) # ORD-4
+    FactoryBot.create(:order, order_type:) # ORD-5
+    FactoryBot.create(:order, order_type:) # ORD-6
+    FactoryBot.create(:order, order_type:) # ORD-7
+    FactoryBot.create(:order, order_type:) # ORD-8
+    FactoryBot.create(:order, order_type:) # ORD-9
+    FactoryBot.create(:order, order_type:) # ORD-10
   end
 
   describe 'rendering with options' do

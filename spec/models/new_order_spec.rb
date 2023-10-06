@@ -1,6 +1,6 @@
 describe 'create new order' do
   let(:order_type) { FactoryBot.build(:order_type, :support_request) }
-  let(:order)      { FactoryBot.build(:order, order_type: order_type) }
+  let(:order)      { FactoryBot.build(:order, order_type:) }
 
   describe 'with errors in' do
     it 'number field' do

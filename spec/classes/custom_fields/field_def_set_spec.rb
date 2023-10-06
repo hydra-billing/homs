@@ -1,7 +1,7 @@
 describe CustomFields::FieldDefSet do
   let(:right_def) do
     (
-      YAML.load <<~YML
+      YAML.unsafe_load <<~YML
                 common: &common
                   required: true
                   multiple: false
@@ -23,7 +23,7 @@ describe CustomFields::FieldDefSet do
 
   let(:empty_def) do
     (
-      YAML.load <<~YML
+      YAML.unsafe_load <<~YML
                 common: &common
                   required: true
                   multiple: false

@@ -14,8 +14,8 @@ module CustomFields
         return true if value.in?(STRING_VALUES.values.flatten)
         return true if value.class.in?([TrueClass, FalseClass, NilClass])
 
-        errors[attribute_name] << t(:not_in_set, attribute_name: attribute_name,
-                                                 value:          value,
+        errors[attribute_name] << t(:not_in_set, attribute_name:,
+                                                 value:,
                                                  set:            STRING_VALUES[true].zip(STRING_VALUES[false]).flatten)
       end
 

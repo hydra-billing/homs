@@ -1,6 +1,6 @@
 describe Order do
   let(:order_type) { FactoryBot.create(:order_type) }
-  let(:order) { FactoryBot.create(:order, order_type: order_type) }
+  let(:order) { FactoryBot.create(:order, order_type:) }
 
   after(:all) do
     OrderSequenceService.new.destroy

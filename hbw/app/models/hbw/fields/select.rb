@@ -49,23 +49,23 @@ module HBW
       end
 
       def as_json
-        {name:        name,
-         type:        type,
-         mode:        mode,
-         label:       label,
-         css_class:   css_class,
-         placeholder: placeholder,
-         description: description,
-         label_css:   label_css,
-         choices:     choices,
+        {name:,
+         type:,
+         mode:,
+         label:,
+         css_class:,
+         placeholder:,
+         description:,
+         label_css:,
+         choices:,
          nullable:    nullable?,
          editable:    editable?,
          delimiter:   delimiter?,
-         delete_if:   delete_if,
-         disable_if:  disable_if,
-         dynamic:     dynamic,
-         variables:   variables,
-         url:         url}
+         delete_if:,
+         disable_if:,
+         dynamic:,
+         variables:,
+         url:}
       end
 
       def mode
@@ -82,7 +82,7 @@ module HBW
 
       def url
         if lookup?
-          lookup_task_path(task_id, name: name, entity_class: entity_class).gsub(HBW::Engine.routes.find_script_name({}), '')
+          lookup_task_path(task_id, name:, entity_class:).gsub(HBW::Engine.routes.find_script_name({}), '')
         end
       end
 
@@ -144,7 +144,7 @@ module HBW
       end
 
       def load_lookup_value
-        choices_to_array(loader(lookup_value_sql, variables_hash.merge(value: value)).load)
+        choices_to_array(loader(lookup_value_sql, variables_hash.merge(value:)).load)
       end
 
       def lookup_value_sql
