@@ -1,8 +1,9 @@
-v2.7.16 [unreleased]
+v2.7.17 [2023-09-10]
 -------------------
 
 ### Bugfixes
 - [#710](https://github.com/hydra-billing/homs/pull/710) Fix chromedriver link for tests.
+- [#727](https://github.com/hydra-billing/homs/pull/727) Freeze minio version
 
 v2.7.12 [2023-02-01]
 -------------------
