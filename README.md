@@ -22,12 +22,11 @@ Resources:
 
 * Documentation: [http://hydra-oms.com/docs](http://hydra-oms.com/docs)
 * Demo: [http://demo.hydra-oms.com](http://demo.hydra-oms.com)
-* Community: [http://community.hydra-oms.com](http://community.hydra-oms.com)
 * Tickets/Issues: [https://github.com/latera/homs/issues](https://github.com/latera/homs/issues)
 
 ## Installation
 
-The prefered way to install HOMS is to use [Docker](https://www.docker.com/).
+The preferred way to install HOMS is to use [Docker](https://www.docker.com/).
 
 ### In production
 
