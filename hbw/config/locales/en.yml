@@ -72,3 +72,21 @@ en:
           year: y
       short_list:
         view_all: View all
+    services_table:
+      table:
+        columns:
+          action: Action
+          equipmentName: Equipment Type
+          serviceName: Service
+          servicePrice: Price
+          serviceQuantity: Amount
+          serviceTotalPrice: Total
+          subscriptionBeginDate: Start date
+          subscriptionEndDate: End date
+          allowProvisioning: Allow provisioning
+          serviceAddress: Service address
+          macAddress: MAC
+          ipAddress: IP
+          vlan: VLAN
+          phone: Phone
+

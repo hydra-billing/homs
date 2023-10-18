@@ -5,6 +5,7 @@ import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
 import ConnectionContext from 'shared/context/connection';
 import FileList from './form/file_list';
+import ServicesTable from './form/services_table';
 import ClaimButton from './form/claim_button';
 import Error from './error';
 
@@ -163,6 +164,10 @@ modulejs.define(
             return <RadioButton
             {...opts}
             {...onRef} />;
+          case 'services_table':
+            return <ServicesTable
+            {...opts}
+            />;
           default: return <p>{name}: Unknown control type {params.type}</p>;
         }
       };
