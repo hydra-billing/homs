@@ -370,7 +370,7 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
       parser (>= 3.2.1.0)
-    ruby-oci8 (2.2.3)
+    ruby-oci8 (2.2.12)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     ruby_parser (3.20.3)
@@ -478,7 +478,7 @@ DEPENDENCIES
   rspec_api_documentation!
   rspec_junit_formatter
   rubocop
-  ruby-oci8 (= 2.2.3)
+  ruby-oci8 (= 2.2.12)
   ruby_parser
   selenium-webdriver
   simple_form

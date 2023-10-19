@@ -3,6 +3,7 @@ import compose from 'shared/utils/compose';
 import { withConditions, withErrorBoundary } from 'shared/hoc';
 import TranslationContext from 'shared/context/translation';
 import FileList from './file_list';
+import ServicesTable from './services_table';
 
 modulejs.define(
   'HBWFormGroup',
@@ -143,6 +144,10 @@ modulejs.define(
             {...opts}
             fileListNames={this.props.fileListNames}
             {...onRef} />;
+          case 'services_table':
+            return <ServicesTable
+            {...opts}
+            />;
           default: return <p>{name}: Unknown control type {params.type}</p>;
         }
       };

@@ -1,7 +1,7 @@
 7ac7ddc5fe94ec2b7c559964a1f696b0: []
 5c419acf4e8f81da5bc8479f899e4311:
   - id: 53225101
-    text: 'Found customer'
+    text: "Found customer"
 d17432408225ba41b1ccf192d5fca4d7:
   - id: 123
     text: Some text
@@ -13,3 +13,64 @@ d17432408225ba41b1ccf192d5fca4d7:
     text: Subject 1
   - id: 222
     text: Subject 2
+2cfb03357aef50241b16e53c251e64f0:
+  - id: 51477701.0
+    text:
+    subscriptionId: 51477701.0
+    parSubscriptionId:
+    serviceId: 51137401.0
+    serviceName: "Offre Residence"
+    equipmentId: 51475701.0
+    equipmentName: "Terminal equipment"
+    servicePrice: 690000.0
+    serviceQuantity:
+    serviceUnit: "-"
+    serviceTotalPrice: 690000.0
+    subscriptionBeginDate: "2023-09-28T07:20:05.824+0300"
+    subscriptionEndDate:
+    allowProvisioning: 0.1212e4
+    serviceAddress: "Nzérékoré, apt. 123, entrance 1, floor 1"
+    macAddress: "00-B0-D0-63-C2-26"
+    ipAddress: "192.168.1.1"
+    vlan:
+    phone:
+  - id: 51501901.0
+    text:
+    subscriptionId: 51501901.0
+    parSubscriptionId:
+    serviceId: 40219101.0
+    serviceName: "Employee"
+    equipmentId: 51479501.0
+    equipmentName: "Terminal equipment"
+    servicePrice: 250.0
+    serviceQuantity:
+    serviceUnit: "-"
+    serviceTotalPrice: 250.0
+    subscriptionBeginDate: "2023-10-01T12:48:42.824+0300"
+    subscriptionEndDate:
+    allowProvisioning: 0.2212e4
+    serviceAddress: "Some address here, apt. 1, floor 12"
+    macAddress:
+    ipAddress:
+    vlan:
+    phone: "88005553535"
+  - id: 51478301.0
+    text:
+    subscriptionId: 51478301.0
+    parSubscriptionId: 51477701.0
+    serviceId: 51138101.0
+    serviceName: "Evasion+"
+    equipmentId: 51475701.0
+    equipmentName: "Terminal equipment"
+    servicePrice: 310000.0
+    serviceQuantity: 3.0
+    serviceUnit: "pcs"
+    serviceTotalPrice: 930000.0
+    subscriptionBeginDate: "2023-09-28T07:20:13.824+0300"
+    subscriptionEndDate:
+    allowProvisioning: 0.1212e4
+    serviceAddress: "Nzérékoré, apt. 123, entrance 1, floor 1"
+    macAddress: "00-B0-D0-63-C2-26"
+    ipAddress: "192.168.1.1"
+    vlan:
+    phone:

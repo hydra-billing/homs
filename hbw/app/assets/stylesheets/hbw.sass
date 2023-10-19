@@ -168,6 +168,24 @@
     &::-webkit-scrollbar-track
       background: transparent
 
+  table.services-select-table
+    tr
+      &:hover
+        td
+          cursor: pointer
+      td
+        white-space: nowrap
+      .white-space-wrap
+        white-space: normal
+      .checkbox
+        vertical-align: middle
+        text-align: center
+      .service-name
+        display: flex
+        .prefix-icon
+          padding-right: 6px
+
+
   table.select-table
     tr
       &:hover
@@ -180,6 +198,8 @@
       text-align: center
     .text-align-right
       text-align: right
+
+
 
   .hbw-file-upload
     .attacher

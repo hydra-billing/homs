@@ -47,7 +47,7 @@ gem 'sprockets', '~> 3.7'
 gem 'sprockets-rails'
 
 group :oracle do
-  gem 'ruby-oci8', '2.2.3'
+  gem 'ruby-oci8', '2.2.12'
 end
 
 group :development do
