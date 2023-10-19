@@ -15,5 +15,4 @@ module CONST
     const_set(name, value)
     value
   end
-
 end

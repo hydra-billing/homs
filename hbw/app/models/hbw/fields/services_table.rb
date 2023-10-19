@@ -139,8 +139,8 @@ module HBW
 
       def get_db_value
         sql = get_db_value_sql % {
-          account_id:,
-          contract_id:,
+          account_id:      account_id,
+          contract_id:     contract_id,
           equipment_types: equipment.map { |equipment_entry| equipment_entry.fetch('id').to_i }.join(',')
         }
         db_value = loader(sql, {}).load
@@ -195,28 +195,28 @@ module HBW
       end
 
       def as_json
-        {name:,
-         value:,
-         type:,
-         label:,
-         css_class:,
-         label_css:,
+        {name:               name,
+         value:              value,
+         type:               type,
+         label:              label,
+         css_class:          css_class,
+         label_css:          label_css,
          nullable:           nullable?,
          editable:           editable?,
          delimiter:          delimiter?,
-         delete_if:,
-         disable_if:,
-         dynamic:,
-         variables:,
+         delete_if:          delete_if,
+         disable_if:         disable_if,
+         dynamic:            dynamic,
+         variables:          variables,
          current_value:      value,
-         customer_id:,
-         account_id:,
-         contract_id:,
-         currency_code:,
+         customer_id:        customer_id,
+         account_id:         account_id,
+         contract_id:        contract_id,
+         currency_code:      currency_code,
          equipment_types:    equipment,
          individual_pricing: individual_pricing?,
-         hidden_columns:,
-         date_format:}
+         hidden_columns:     hidden_columns,
+         date_format:        date_format}
       end
 
       def loader(condition, variables)
@@ -257,7 +257,7 @@ module HBW
       end
 
       def get_bpm_prop_value(prop_name, default_value = nil, required: true)
-        variable_name = get_definition_prop_value(prop_name, default_value, required:)
+        variable_name = get_definition_prop_value(prop_name, default_value, required: required)
         if variable_name == default_value
           return default_value
         end
