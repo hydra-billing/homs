@@ -5,7 +5,7 @@ import compose from 'shared/utils/compose';
 import { withCallbacks, withErrorBoundary } from 'shared/hoc';
 import ConnectionContext from 'shared/context/connection';
 import FileList from './form/file_list';
-import ServicesTable from './form/services_table';
+import ServicesTable from './form/services_table/services_table';
 import ClaimButton from './form/claim_button';
 import Error from './error';
 

@@ -216,7 +216,8 @@ module HBW
          equipment_types:    equipment,
          individual_pricing: individual_pricing?,
          hidden_columns:,
-         date_format:}
+         date_format:,
+         disable_search:}
       end
 
       def loader(condition, variables)
@@ -236,15 +237,15 @@ module HBW
       end
 
       def get_definition_prop_value(prop_name, default_value = nil, required: true)
-        variable_name = definition.fetch(prop_name, nil)
-        if variable_name.nil?
+        value = definition.fetch(prop_name, nil)
+        if value.nil?
           unless required
             return default_value
           end
 
           raise ArgumentError, '%s is not specified' % prop_name
         end
-        variable_name
+        value
       end
 
       def get_variable_value(variable_name)
@@ -263,6 +264,7 @@ module HBW
         end
 
         variable_value = get_variable_value(variable_name)
+
         # Second condition is to make it possible to show all columns ([] for hidden headers variable)
         unless variable_value.present? || (variable_value.instance_of? Array)
           raise ArgumentError, '%s variable is empty' % variable_name
@@ -298,6 +300,10 @@ module HBW
 
       def hidden_columns
         get_bpm_prop_value('hidden_columns_variable', nil, required: false)
+      end
+
+      def disable_search
+        get_definition_prop_value('disable_search', false, required: false)
       end
     end
   end
