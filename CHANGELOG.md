@@ -1,8 +1,9 @@
 v2.9 [Unreleased]
 ### Features
+- [#730](https://github.com/hydra-billing/homs/pull/730) Update dependencies.
 - [#726](https://github.com/hydra-billing/homs/pull/726/) Add services select table.
-- [#725](https://github.com/latera/homs/pull/725) Update Rails to 7
-- [#706](https://github.com/latera/homs/pull/706) Update Ruby to 3.2.2
+- [#725](https://github.com/latera/homs/pull/725) Update Rails to 7.
+- [#706](https://github.com/latera/homs/pull/706) Update Ruby to 3.2.2.
 
 -------------------
 ### Breaking changes
