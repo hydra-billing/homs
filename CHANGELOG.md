@@ -1,4 +1,4 @@
-v2.8.8 [Unreleased]
+v2.8.8 [2023-10-30]
 -------------------
 ### Features
 - [#726](https://github.com/hydra-billing/homs/pull/726/) Add services select table.
