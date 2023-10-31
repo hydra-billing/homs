@@ -74,6 +74,9 @@ en:
         view_all: View all
     services_table:
       table:
+        title:
+          search:
+            placeholder: Search
         columns:
           action: Action
           equipmentName: Equipment Type

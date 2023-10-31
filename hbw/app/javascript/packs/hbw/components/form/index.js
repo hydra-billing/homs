@@ -13,4 +13,4 @@ import './text.js';
 import './user.js';
 import './cancel_process_button.js';
 import './radio_button.js';
-import './services_table';
+import './services_table/services_table';

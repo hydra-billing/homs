@@ -14,8 +14,9 @@ feature 'Check services select table', js: true do
   end
 
   scenario 'should contain required subscriptions' do
+    # Table content
     expect(page).to have_content 'Terminal equipment'
-    expect(page).to have_content 'Evasion+'
+    expect(page).to have_content 'Employee'
     expect(page).to have_content '310000'
     expect(page).to have_content '3 pcs'
     expect(page).to have_content '930000'
@@ -24,5 +25,11 @@ feature 'Check services select table', js: true do
     expect(page).to have_content '00-B0-D0-63-C2-26'
     expect(page).to have_content '192.168.1.1'
     expect(page).to have_content '88005553535'
+
+    # Search option
+    expect(page).to have_selector '.input-wrapper'
+    fill_in 'Search', with: 'Offre'
+    expect(page).to have_content 'Offre Residence'
+    expect(page).not_to have_content 'Employee'
   end
 end

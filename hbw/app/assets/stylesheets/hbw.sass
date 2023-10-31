@@ -168,11 +168,36 @@
     &::-webkit-scrollbar-track
       background: transparent
 
-  table.services-select-table
+  .services-select-table
+    .table-title
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      height: 36px
+      margin-bottom: 10px
+
+      .left
+        display: flex
+        flex-direction: row
+        flex-basis: 50%
+        gap: 21px
+        align-items: center
+        .input-wrapper
+          flex-basis: 70%
+          display: flex
+          flex-direction: row
+          gap: 6px
+          height: 100%
+          input
+            flex-basis: 90%
+            height: 100%
+
     tr
       &:hover
         td
           cursor: pointer
+      th
+        white-space: nowrap
       td
         white-space: nowrap
       .white-space-wrap
