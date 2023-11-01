@@ -8,6 +8,7 @@ import {
   withConditions, withSelect, withErrorBoundary, withValidations, withCallbacks
 } from 'shared/hoc';
 import convertToDateFNSDateFormat from 'shared/utils/to_fns_date_format';
+import { MultiValue } from 'react-select';
 import { localizer } from '../../../init/date_localizer';
 import HBWServicesTableTitle from './table_title';
 
@@ -95,58 +96,58 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
     },
     {
       name:      'equipmentName',
-      label:     translate('components.services_table.table.columns.equipmentName'),
+      label:     translate('components.services_table.table.columns.equipment_name'),
       isVisible: true
     },
     {
       name:      'serviceName',
-      label:     translate('components.services_table.table.columns.serviceName'),
+      label:     translate('components.services_table.table.columns.service_name'),
       isVisible: true
     },
     {
       name:      'servicePrice',
-      label:     `${translate('components.services_table.table.columns.servicePrice')}, ${props.params.currency_code}`,
+      label:     `${translate('components.services_table.table.columns.service_price')}, ${props.params.currency_code}`,
       isVisible: true
     },
     {
       name:      'serviceQuantity',
-      label:     translate('components.services_table.table.columns.serviceQuantity'),
+      label:     translate('components.services_table.table.columns.service_quantity'),
       isVisible: true
     },
     {
       name:      'serviceTotalPrice',
       // eslint-disable-next-line max-len
-      label:     `${translate('components.services_table.table.columns.serviceTotalPrice')}, ${props.params.currency_code}`,
+      label:     `${translate('components.services_table.table.columns.service_total_price')}, ${props.params.currency_code}`,
       isVisible: true
     },
     {
       name:      'subscriptionBeginDate',
-      label:     translate('components.services_table.table.columns.subscriptionBeginDate'),
+      label:     translate('components.services_table.table.columns.subscription_begin_date'),
       isVisible: true
     },
     {
       name:      'subscriptionEndDate',
-      label:     translate('components.services_table.table.columns.subscriptionEndDate'),
+      label:     translate('components.services_table.table.columns.subscription_end_date'),
       isVisible: true
     },
     {
       name:      'allowProvisioning',
-      label:     translate('components.services_table.table.columns.allowProvisioning'),
+      label:     translate('components.services_table.table.columns.allow_provisioning'),
       isVisible: true
     },
     {
       name:      'serviceAddress',
-      label:     translate('components.services_table.table.columns.serviceAddress'),
+      label:     translate('components.services_table.table.columns.service_address'),
       isVisible: true
     },
     {
       name:      'macAddress',
-      label:     translate('components.services_table.table.columns.macAddress'),
+      label:     translate('components.services_table.table.columns.mac_address'),
       isVisible: true
     },
     {
       name:      'ipAddress',
-      label:     translate('components.services_table.table.columns.ipAddress'),
+      label:     translate('components.services_table.table.columns.ip_address'),
       isVisible: true
     },
     {
@@ -166,7 +167,7 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
 
   const [value] = useState(props.params.value);
   const [searchQuery, setSearchQuery] = useState('');
-  const [columns] = useState<readonly Column[]>(
+  const [columns, setColumns] = useState<readonly Column[]>(
     getColumnsToShow(tableColumns, props.params.hidden_columns || defaultHiddenColumns)
   );
 
@@ -186,6 +187,11 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
   const handleSearchQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
+
+  const handleColumnSettingsChange = (newValue: MultiValue<Column>) => setColumns(columns.map(column => ({
+    ...column,
+    isVisible: newValue.some(selectedColumn => selectedColumn.name === column.name)
+  })));
 
   const checkboxIcon = (checkboxValue: boolean) => {
     const checkedIcon = ['far', 'check-square'];
@@ -344,6 +350,11 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
         hidden:              props.params.disable_search,
         searchQuery,
         onSearchQueryChange: handleSearchQueryChange
+      }}
+      columnsControl={{
+        visibleColumns: columns.filter(column => column.isVisible),
+        columns:        tableColumns,
+        onChange:       handleColumnSettingsChange
       }}
       task={props.task}
     />

@@ -112,6 +112,23 @@ module Features
       expect(parent_node(page.find("[name='#{name}']"))).to have_no_selector('.select2-selection__clear')
     end
 
+    def expect_r_multi_select_presence(name)
+      expect(r_multi_select_container(name)).to have_selector('.react-select__value-container')
+    end
+
+    def r_multi_select_container(name)
+      page.find(".#{name}")
+    end
+
+    def set_r_multi_select_options(name, options)
+      r_multi_select = r_multi_select_container(name)
+      r_multi_select.find('.react-select__dropdown-indicator').click
+
+      r_multi_select.all('.react-select__option').select do |option|
+        options.include?(option.text)
+      end.map { |option| option.hover; option.click }
+    end
+
     def expect_r_select_presence(name)
       expect(r_select_container(name)).to have_selector('.react-select__input')
     end

@@ -31,5 +31,13 @@ feature 'Check services select table', js: true do
     fill_in 'Search', with: 'Offre'
     expect(page).to have_content 'Offre Residence'
     expect(page).not_to have_content 'Employee'
+    fill_in 'Search', with: ''
+
+    # Columns setting option
+    expect_r_multi_select_presence('react-select-container')
+    options = ['Amount', 'Service address']
+    set_r_multi_select_options('react-select-container', options)
+    expect(page).not_to have_content '3 pcs'
+    expect(page).not_to have_content 'Some address here, apt. 1, floor 12'
   end
 end
