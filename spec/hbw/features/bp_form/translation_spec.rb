@@ -28,6 +28,7 @@ feature 'BP form with existing russian translation', js: true do
       expect(page).to     have_content 'Форма для тестирования переводов'
 
       expect(page).to     have_content 'Поле select'
+      expect(page).to     have_content 'Другое поле select'
       expect(page).to     have_content 'Поле string'
       expect(page).to     have_content 'Поле string c regexp валидацией'
       expect(page).to     have_content 'Поле static с подстановкой ORD-1'
@@ -47,6 +48,9 @@ feature 'BP form with existing russian translation', js: true do
       fill_in 'stringRegexpField', with: '123dfgdfg'
 
       expect(page).to have_content 'Поле не соответствует regexp'
+
+      expect(r_select_options('selectField')).to eq ['Опция1']
+      expect(r_select_options('anotherSelectField')).to eq ['Первая опция']
 
       expect(page).not_to     have_content 'Test translations'
       expect(page).not_to     have_content 'Form for testing of field translations'
@@ -97,6 +101,9 @@ feature 'BP form with existing russian translation', js: true do
       fill_in 'stringRegexpField', with: '123dfgdfg'
 
       expect(page).to have_content 'Field does not match regexp'
+
+      expect(r_select_options('selectField')).to eq ['Option1']
+      expect(r_select_options('anotherSelectField')).to eq ['First option']
 
       expect(page).not_to have_content 'Тестирование переводов'
       expect(page).not_to have_content 'Форма для тестирования переводов'

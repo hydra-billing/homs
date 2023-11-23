@@ -23,7 +23,7 @@ modulejs.define(
       isValid, isAvailable, fireFieldValueUpdate, getChosenValue, hasValueInChoices, missFieldInVariables,
       trigger, bind, unbind,
     }) => {
-      const { translate: t, translateBP } = useContext(TranslationContext);
+      const { translate: t, translateBP, ready: translatorReady } = useContext(TranslationContext);
       const { request, serverURL } = useContext(ConnectionContext);
 
       const chosenValue = getChosenValue() || '';
@@ -93,16 +93,18 @@ modulejs.define(
       };
 
       useEffect(() => {
-        setTooltip(new Tooltip(
-          select.current,
-          {
-            title:     t('errors.field_is_required'),
-            container: tooltipContainer.current,
-            trigger:   'manual',
-            placement: 'top'
-          }
-        ));
-      }, []);
+        if (translatorReady) {
+          setTooltip(new Tooltip(
+            select.current,
+            {
+              title:     t('errors.field_is_required'),
+              container: tooltipContainer.current,
+              trigger:   'manual',
+              placement: 'top'
+            }
+          ));
+        }
+      }, [translatorReady]);
 
       useEffect(() => {
         bind(`hbw:validate-form-${id}`, onFormSubmit);
@@ -198,27 +200,33 @@ modulejs.define(
         return <div className="description" data-test={`description-${placement}`}>{text}</div>;
       };
 
-      const buildOptions = () => choices.map((variant) => {
-        const [optionValue, label] = Array.isArray(variant) ? variant : [variant, variant];
+      const buildOptions = () => {
+        const translations = translateBP(
+          `${task.process_key}.${task.key}.${name}.options`,
+          {},
+          choices
+        );
 
-        return {
-          label,
-          value: optionValue || '',
-          key:   optionValue || 'null'
-        };
-      });
+        const options = Array.isArray(choices[0])
+          ? translations
+          : translations.map((option, idx) => [choices[idx], option]);
 
-      const getDefaultValue = () => {
-        const variants = buildOptions();
+        return options.map(([k, v]) => ({
+          label: v,
+          value: k || '',
+          key:   k || 'null'
+        }));
+      };
 
+      const getDefaultValue = (options) => {
         if (value) {
-          return variants.filter(opt => `${value}` === `${opt.value}`);
+          return options.filter(opt => `${value}` === `${opt.value}`);
         }
 
         if (params.nullable) {
           return [];
         } else {
-          return [variants[0]];
+          return [options[0]];
         }
       };
 
@@ -351,10 +359,12 @@ modulejs.define(
         };
       };
 
+      const options = buildOptions();
+
       const opts = {
         name,
-        options:         buildOptions(),
-        defaultValue:    getDefaultValue(),
+        options,
+        defaultValue:    getDefaultValue(options),
         placeholder:     params.placeholder || '',
         isClearable:     params.nullable,
         isDisabled:      params.editable === false || disabled,
@@ -378,16 +388,18 @@ modulejs.define(
         className='tooltip-red'
       />;
 
-      return <div className={cssClass} title={params.tooltip} data-test={`select-${name}`}>
-        <span className={labelCss}>{label}</span>
-        <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
-        <div className='form-group' ref={select}>
-          {params.description?.placement === 'top' && renderDescription()}
-          {selectComponent(opts)}
-          {params.description?.placement === 'bottom' && renderDescription()}
+      return translatorReady ? (
+        <div className={cssClass} title={params.tooltip} data-test={`select-${name}`}>
+          <span className={labelCss}>{label}</span>
+          <div className={selectErrorMessageCss}>{selectErrorMessage}</div>
+          <div className='form-group' ref={select}>
+            {params.description?.placement === 'top' && renderDescription()}
+            {selectComponent(opts)}
+            {params.description?.placement === 'bottom' && renderDescription()}
+          </div>
+          {errorTooltip}
         </div>
-        {errorTooltip}
-      </div>;
+      ) : <></>;
     };
 
     return compose(withSelect, withCallbacks, withConditions, withValidations, withErrorBoundary)(FormSelect);

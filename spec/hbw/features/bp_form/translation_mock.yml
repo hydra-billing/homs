@@ -46,7 +46,15 @@ get:
               nullable: false
               required: true
               choices:
-                - someSity
+                - Option1
+              css_class: col-xs-6 col-sm-4 col-md-3
+            - name: anotherSelectField
+              type: select
+              label: Another select field
+              nullable: false
+              required: true
+              choices:
+                - [option_1, First option]
               css_class: col-xs-6 col-sm-4 col-md-3
             - name: stringField
               type: string
