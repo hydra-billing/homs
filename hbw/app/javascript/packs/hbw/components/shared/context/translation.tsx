@@ -15,8 +15,9 @@ export type ContextType = {
   Localizer: {
     localizeDatetime: (str: string) => string | null,
     localizeDayMonth: (str: string) => string | null,
-    localizeDayMonthYear:(str: string) => string | null
-  }
+    localizeDayMonthYear: (str: string) => string | null
+  },
+  ready: boolean
 }
 
 const TranslationContext = createContext<ContextType | null>(null);
@@ -35,6 +36,7 @@ export const withTranslationContext = (
     const connection = useContext(ConnectionContext) as ConnectionContextType;
 
     const [BPTranslator, setBPTranslator] = useState({ t: () => '' });
+    const [ready, setReady] = useState(false);
 
     useEffect(() => {
       const fetchBPTranslations = async () => {
@@ -46,6 +48,7 @@ export const withTranslationContext = (
         const BPTranslations = await response.json();
 
         setBPTranslator({ t: TranslatorFactory.getTranslatorForLocale(locale.code, BPTranslations) });
+        setReady(true);
       };
 
       fetchBPTranslations();
@@ -56,7 +59,7 @@ export const withTranslationContext = (
 
     return (
       <TranslationContext.Provider value={{
-        locale, translate, translateBP: BPTranslator.t, Localizer
+        locale, translate, translateBP: BPTranslator.t, Localizer, ready
       }}>
         <WrappedComponent {...props} />
       </TranslationContext.Provider>

@@ -4,7 +4,6 @@ feature 'Check select', js: true do
 
   before(:each) do
     set_camunda_api_mock_file('spec/hbw/features/select_mock.yml')
-    # set_camunda_api_mock_file('hbw/config/yml_api.test.camunda.yml')
 
     user = FactoryBot.create(:user)
 

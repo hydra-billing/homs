@@ -6,6 +6,12 @@ ru:
       group: Группа
       selectField:
         label: Поле select
+        options:
+          - Опция1
+      anotherSelectField:
+        label: Другое поле select
+        options:
+          - [option_1, Первая опция]
       stringField:
         label: Поле string
       stringRegexpField:

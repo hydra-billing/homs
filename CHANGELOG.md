@@ -1,10 +1,44 @@
 v2.9 [Unreleased]
 ### Features
-- [#730](https://github.com/hydra-billing/homs/pull/730) Update dependencies.
-- [#729](https://github.com/hydra-billing/homs/pull/729/) Add services select table search option.
-- [#726](https://github.com/hydra-billing/homs/pull/726/) Add services select table.
-- [#725](https://github.com/latera/homs/pull/725) Update Rails to 7.
 - [#706](https://github.com/latera/homs/pull/706) Update Ruby to 3.2.2.
+- [#725](https://github.com/latera/homs/pull/725) Update Rails to 7.
+- [#726](https://github.com/hydra-billing/homs/pull/726/) Add services select table.
+- [#729](https://github.com/hydra-billing/homs/pull/729/) Add services select table search option.
+- [#732](https://github.com/hydra-billing/homs/pull/732) Allow to localize select field options
+
+  It is possible to set translations for select field options. For example, if have this in the form config:
+  ```
+    fields:
+      - name: selectField
+        type: select
+        label: Select field
+        choices:
+          - Option1
+  ```
+  you can set translations in `locales/bp/ru.my_process.yml`:
+  ```
+    selectField:
+      label: Выпадающий список
+      options:
+        - Опция1
+  ```
+  or if you have it this way:
+  ```
+    fields:
+      - name: selectField
+        type: select
+        label: Select field
+        choices:
+          - [option_1, 'Really long first option']
+  ```
+  you can do it similarly:
+  ```
+    selectField:
+      label: Выпадающий список
+      options:
+        - [option_1, 'Очень длинная первая опция']
+  ```
+
 
 -------------------
 ### Breaking changes
