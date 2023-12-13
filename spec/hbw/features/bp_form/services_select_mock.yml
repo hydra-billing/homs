@@ -3,16 +3,16 @@ get:
     - params: "email=c.johnson@example.com"
       response:
         data:
-          - id:         'demo'
-            firstName:  'Demo'
-            lastName:   'Demo'
-            url:        'http://bpm.example.com'
-            email:      'c.johnson@example.com'
+          - id: "demo"
+            firstName: "Demo"
+            lastName: "Demo"
+            url: "http://bpm.example.com"
+            email: "c.johnson@example.com"
             pictureUrl: null
         total: 1
         start: 0
-        sort: 'id'
-        order: 'asc'
+        sort: "id"
+        order: "asc"
         size: 1
 
   # process definitions
@@ -54,7 +54,7 @@ get:
               currency_code_variable: currencyCode
               individual_pricing_allowed_variable: isIndividualPricing
               contract_id_variable: customerContractId
-              date_format: DD.MM.YYY HH:MM:SS
+              date_format: DD.MM.YYYY
               editable: false
               dynamic: true
               delete_if:

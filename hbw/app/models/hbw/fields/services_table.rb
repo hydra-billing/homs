@@ -9,6 +9,8 @@ module HBW
 
       class_attribute :get_db_value_sql
 
+      class_attribute :get_available_services_sql
+
       def value
         if variables_hash[name.to_sym].present? && variables_hash[name.to_sym].length.positive?
           return value.as_json
@@ -137,6 +139,49 @@ module HBW
         ORDER BY S.N_PAR_SUBSCRIPTION_ID DESC, S.D_BEGIN ASC
       "
 
+      self.get_available_services_sql = "
+        WITH PERMITTED_SERVICES AS (
+          SELECT N_PERMITTED_SERVICE_ID
+          FROM   SR_V_OBJ_SERVICE_PERMISSIONS
+          WHERE  N_GOOD_ID IN (%{equipment_types})
+          GROUP BY N_PERMITTED_SERVICE_ID),
+        AVAILABLE_SERVICES AS (
+          SELECT PC.N_PRICE_LINE_ID   N_PRICE_LINE_ID,
+                 PC.N_PAR_LINE_ID     N_PAR_PRICE_LINE_ID,
+                 PC.N_GOOD_ID         N_SERVICE_ID,
+                 PC.VC_GOOD_NAME      VC_SERVICE_NAME,
+                 PC.N_PRICE           N_PRICE,
+                 G.VC_UNIT_NAME       VC_UNIT_NAME,
+                 ROW_NUMBER() OVER(PARTITION BY PC.N_GOOD_ID ORDER BY CP.N_LEVEL, PC.N_LINE_NO) N_ROW
+          FROM   TABLE(SD_PRICE_ORDERS_PKG_S.GET_ORDERS_FOR_CONTRACT(
+                        num_N_CONTRACT_ID => %{contract_id}))    CP
+          INNER JOIN SD_V_PRICE_ORDERS_C   PC
+          ON  PC.N_DOC_ID      = CP.N_PRICE_ORDER_ID
+          AND PC.N_CURRENCY_ID = SYS_CONTEXT('CONST', '%{currency_code}')
+          INNER JOIN SR_V_GOODS   G
+          ON  G.N_GOOD_ID = PC.N_GOOD_ID
+          AND G.N_GOOD_TYPE_ID IN ( SYS_CONTEXT('CONST', 'Good_Packs'),  SYS_CONTEXT('CONST', 'GOOD_Serv'))
+          AND G.C_ACTIVE  = 'Y'
+          INNER JOIN SR_V_SERV_SCHEMES   SS
+          ON  SS.N_SERV_SCHEME_ID = G.N_SERV_SCHEME_ID
+          AND SS.N_SERV_TYPE_ID IN (SYS_CONTEXT('CONST', 'SERV_TYPE_Common'), SYS_CONTEXT('CONST', 'SERV_TYPE_TempBlock'))
+          INNER JOIN SR_V_GOODS   GP
+          ON  GP.N_GOOD_ID = G.N_PARENT_GOOD_ID
+          AND GP.C_ACTIVE  = 'Y'
+          WHERE CP.N_DOC_STATE_ID =  SYS_CONTEXT('CONST', 'DOC_STATE_Actual')
+        )
+        SELECT AVS.N_PRICE_LINE_ID       \"priceLineId\",
+               AVS.N_PAR_PRICE_LINE_ID   \"parPriceLineId\",
+               AVS.N_SERVICE_ID          \"serviceId\",
+               AVS.VC_SERVICE_NAME       \"serviceName\",
+               AVS.N_PRICE               \"servicePrice\",
+               AVS.VC_UNIT_NAME          \"serviceUnit\"
+        FROM   PERMITTED_SERVICES PS
+        INNER JOIN AVAILABLE_SERVICES AVS
+        ON  AVS.N_SERVICE_ID = NVL(PS.N_PERMITTED_SERVICE_ID, AVS.N_SERVICE_ID)
+        AND AVS.N_ROW = 1
+      "
+
       def get_db_value
         sql = get_db_value_sql % {
           account_id:,
@@ -162,6 +207,30 @@ module HBW
         end
 
         parent_subscriptions
+      end
+
+      def get_available_services
+        sql = get_available_services_sql % {
+          contract_id:,
+          currency_code:,
+          equipment_types: equipment.map { |equipment_entry| equipment_entry.fetch('id').to_i }.join(',')
+        }
+        available_services = loader(sql, {}).load
+        nest_services(available_services.as_json)
+      end
+
+      # nest child services into childServices within parent ones
+      def nest_services(services)
+        parent_services = services.select do |service|
+          service['parPriceLineId'].nil?
+        end
+        parent_services.each do |service|
+          service['childServices'] = services.select do |serv|
+            serv['parPriceLineId'] == service['priceLineId']
+          end
+        end
+
+        parent_services
       end
 
       class SourceLoader
@@ -214,6 +283,7 @@ module HBW
          contract_id:,
          currency_code:,
          equipment_types:    equipment,
+         available_services: get_available_services,
          individual_pricing: individual_pricing?,
          hidden_columns:,
          date_format:,
@@ -285,9 +355,9 @@ module HBW
         get_bpm_prop_value('contract_id_variable')
       end
 
-      # TODO: Add currency symbol fetching with a lib lib for money formatting
+      # TODO: Add currency symbol fetching with a lib for money formatting
       def currency_code
-        '$'
+        get_bpm_prop_value('currency_code_variable')
       end
 
       def equipment

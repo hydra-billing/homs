@@ -12,18 +12,19 @@ type Props = {
   label?: string,
   search: {
     hidden: boolean,
-    onSearchQueryChange: React.ChangeEventHandler<HTMLInputElement>
+    onSearchQueryChange: React.ChangeEventHandler<HTMLInputElement>,
   },
   columnsControl: {
     visibleColumns: Column[],
     columns: Column[],
-    onChange: ((newValue: MultiValue<Column>) => void)
+    onChange: ((newValue: MultiValue<Column>) => void),
   },
   task: {
     key: string,
-    process_key: string
-  }
-}
+    process_key: string,
+  },
+  handleAddServiceClick: React.MouseEventHandler<HTMLButtonElement>,
+};
 
 const HBWServicesTableTitle: React.FC<Props> = (props) => {
   const { translateBP, translate } = useContext(TranslationContext) as TranslationContextType;
@@ -32,7 +33,7 @@ const HBWServicesTableTitle: React.FC<Props> = (props) => {
     <div className="table-title">
       <div className="left">
         <span className="services-table-label">
-          { translateBP(`${props.task.process_key}.${props.task.key}.${props.name}.label`, {}, props.label) }
+          {translateBP(`${props.task.process_key}.${props.task.key}.${props.name}.label`, {}, props.label)}
         </span>
         <div className="input-wrapper">
           <input
@@ -56,12 +57,19 @@ const HBWServicesTableTitle: React.FC<Props> = (props) => {
             isClearable={false}
             isSearchable={false}
             placeholder={translate('components.services_table.table.title.columns_setting.placeholder')}
-            getOptionValue={option => option.name }
+            getOptionValue={option => option.name}
             defaultValue={props.columnsControl.visibleColumns}
             onChange={props.columnsControl.onChange}
             options={props.columnsControl.columns}
           />
         </div>
+        <button
+          type="button"
+          className="btn btn-info add-service-button"
+          onClick={props.handleAddServiceClick}
+        >
+          {translate('components.services_table.table.title.add_service')}
+        </button>
       </div>
     </div>);
 };

@@ -1,4 +1,6 @@
-import React, { ChangeEvent, useContext, useState } from 'react';
+import React, {
+  ChangeEvent, useContext, useEffect, useState
+} from 'react';
 import cn from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -11,6 +13,15 @@ import convertToDateFNSDateFormat from 'shared/utils/to_fns_date_format';
 import { MultiValue } from 'react-select';
 import { localizer } from '../../../init/date_localizer';
 import HBWServicesTableTitle from './table_title';
+import HBWServiceAddModal from './service_add_modal';
+import HBWServicesTableFooter from './table_footer';
+
+export const SERVICE_ROW_STATES = {
+  CURRENT: 'current',
+  NEW:     'new',
+  CHANGED: 'changed',
+  CLOSED:  'closed',
+};
 
 type Entry = {
   id: number,
@@ -26,6 +37,7 @@ type Props = {
   params: {
     name: string,
     value: Service[],
+    available_services: AvailableService[],
     current_value: string,
     label: string,
     editable: boolean,
@@ -40,24 +52,25 @@ type Props = {
     date_format: string,
     currency_code: string,
     disable_search: boolean,
-    variables: object[]
+    variables: object[],
   },
   task: {
     key: string,
-    process_key: string
-  }
+    process_key: string,
+  },
+  onRef: (obj: { serialize: () => Record<string, string> | null }) => void
 }
 
 type TableRow = {
   serviceId: number,
-  serviceName: string
-  equipmentId: number,
-  equipmentName: string,
+  serviceName: string,
+  equipmentId?: number,
+  equipmentName?: string,
   servicePrice: number,
   serviceQuantity?: number,
   serviceUnit: string,
   serviceTotalPrice: number,
-  subscriptionId: number,
+  subscriptionId?: number,
   parSubscriptionId?: number,
   subscriptionBeginDate: string,
   subscriptionEndDate?: string,
@@ -66,19 +79,37 @@ type TableRow = {
   macAddress?: string,
   ipAddress?: string,
   vlan?: number,
-  phone?: string
-  rowState: number
+  phone?: string,
+  rowState?: string,
 }
 
-type Service = TableRow & {
+export type Service = TableRow & {
   childServices: TableRow[]
+}
+
+export type AvailableService = {
+  priceLineId: number,
+  parPriceLineId?: number,
+  serviceId: number,
+  serviceName: string,
+  servicePrice: number,
+  serviceUnit: string,
 }
 
 export type Column = {
   name: string,
   label: string,
-  isVisible: boolean
+  isVisible: boolean,
 }
+
+const appendCurrentServicesStatus = (services: Service[]): Service[] => services.map(service => ({
+  ...service,
+  rowState:      SERVICE_ROW_STATES.CURRENT,
+  childServices: service.childServices.map(childService => ({
+    ...childService,
+    rowState: SERVICE_ROW_STATES.CURRENT
+  }))
+}));
 
 const getColumnsToShow = (tableColumns: Column[], hiddenColumns: string[]) => [...tableColumns].map(column => ({
   ...column,
@@ -165,11 +196,28 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
     'serviceAddress', 'macAddress', 'ipAddress', 'vlan', 'phone'
   ];
 
-  const [value] = useState(props.params.value);
+  const [value, setValue] = useState(appendCurrentServicesStatus(props.params.value));
   const [searchQuery, setSearchQuery] = useState('');
   const [columns, setColumns] = useState<readonly Column[]>(
     getColumnsToShow(tableColumns, props.params.hidden_columns || defaultHiddenColumns)
   );
+  const [addServiceModalShown, setAddServiceModalShown] = useState(false);
+
+  const serialize = () => {
+    if (props.params.editable === false || props.disabled || props.hidden) {
+      return null;
+    } else {
+      return { [props.params.name]: JSON.stringify(value) };
+    }
+  };
+
+  useEffect(() => {
+    props.onRef({ serialize });
+
+    return () => {
+      props.onRef({ serialize: () => null });
+    };
+  }, [value, props.disabled, props.hidden]);
 
   const dateTimeFormat = convertToDateFNSDateFormat(props.params.date_format);
   const { localizeDatetime } = localizer({ code: locale.code, dateTimeFormat });
@@ -192,6 +240,14 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
     ...column,
     isVisible: newValue.some(selectedColumn => selectedColumn.name === column.name)
   })));
+  const handleModalClose = () => {
+    setAddServiceModalShown(false);
+  };
+
+  const handleServiceAdd = (service: Service) => {
+    setValue([...value, service]);
+    handleModalClose();
+  };
 
   const checkboxIcon = (checkboxValue: boolean) => {
     const checkedIcon = ['far', 'check-square'];
@@ -201,64 +257,64 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
 
   const renderChildRow = (serviceRow: TableRow, index: number) => (
     <tr key={`_${index}_${serviceRow.serviceId}`}>
-      { isColumnVisible('action') && <td>
-          Child Action
-      </td> }
-      { isColumnVisible('equipmentName') && <td>
+      {isColumnVisible('action') && <td>
+        Child Action
+      </td>}
+      {isColumnVisible('equipmentName') && <td>
         {serviceRow.equipmentName}
-      </td> }
-      { isColumnVisible('serviceName') && <td>
-          <div className="service-name">
-              <div className="prefix-icon">
-                  <FontAwesomeIcon
-                      icon='chevron-right'
-                  />
-              </div>
-              <div>
-                {serviceRow.serviceName}
-              </div>
+      </td>}
+      {isColumnVisible('serviceName') && <td>
+        <div className="service-name">
+          <div className="prefix-icon">
+            <FontAwesomeIcon
+              icon='chevron-right'
+            />
           </div>
-      </td> }
-      { isColumnVisible('servicePrice') && <td>
+          <div>
+            {serviceRow.serviceName}
+          </div>
+        </div>
+      </td>}
+      {isColumnVisible('servicePrice') && <td>
         {serviceRow.servicePrice}
-      </td> }
-      { isColumnVisible('serviceQuantity') && <td>
+      </td>}
+      {isColumnVisible('serviceQuantity') && <td>
         {serviceRow.serviceQuantity} {serviceRow.serviceUnit}
-      </td> }
-      { isColumnVisible('serviceTotalPrice') && <td>
+      </td>}
+      {isColumnVisible('serviceTotalPrice') && <td>
         {serviceRow.serviceTotalPrice}
-      </td> }
-      { isColumnVisible('subscriptionBeginDate') && <td>
+      </td>}
+      {isColumnVisible('subscriptionBeginDate') && <td>
         {localizeDatetime(serviceRow.subscriptionBeginDate)}
-      </td> }
-      { isColumnVisible('subscriptionEndDate') && <td>
+      </td>}
+      {isColumnVisible('subscriptionEndDate') && <td>
         {serviceRow.subscriptionEndDate ? localizeDatetime(serviceRow.subscriptionEndDate) : '-'}
-      </td> }
-      { isColumnVisible('allowProvisioning') && <td>
-          <div className="form-check checkbox">
-              <div>
-                  <FontAwesomeIcon
-                      className='hbw-checkbox'
-                      icon={checkboxIcon(serviceRow.allowProvisioning) as IconProp}
-                  />
-              </div>
+      </td>}
+      {isColumnVisible('allowProvisioning') && <td>
+        <div className="form-check checkbox">
+          <div>
+            <FontAwesomeIcon
+              className='hbw-checkbox'
+              icon={checkboxIcon(serviceRow.allowProvisioning) as IconProp}
+            />
           </div>
-      </td> }
-      { isColumnVisible('serviceAddress') && <td className="white-space-wrap">
+        </div>
+      </td>}
+      {isColumnVisible('serviceAddress') && <td className="white-space-wrap">
         {serviceRow.serviceAddress}
-      </td> }
-      { isColumnVisible('macAddress') && <td>
+      </td>}
+      {isColumnVisible('macAddress') && <td>
         {serviceRow.macAddress}
-      </td> }
-      { isColumnVisible('ipAddress') && <td>
+      </td>}
+      {isColumnVisible('ipAddress') && <td>
         {serviceRow.ipAddress}
-      </td> }
-      { isColumnVisible('vlan') && <td>
+      </td>}
+      {isColumnVisible('vlan') && <td>
         {serviceRow.vlan}
-      </td> }
-      { isColumnVisible('phone') && <td>
+      </td>}
+      {isColumnVisible('phone') && <td>
         {serviceRow.phone}
-      </td> }
+      </td>}
     </tr>
   );
 
@@ -268,55 +324,55 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
     ) {
       const parentRow = (
         <tr key={`${index}_${serviceRow.serviceId}`}>
-          { isColumnVisible('action') && <td>
-              Action
-          </td> }
-          { isColumnVisible('equipmentName') && <td>
+          {isColumnVisible('action') && <td>
+            Action
+          </td>}
+          {isColumnVisible('equipmentName') && <td>
             {serviceRow.equipmentName}
-          </td> }
-          { isColumnVisible('serviceName') && <td>
+          </td>}
+          {isColumnVisible('serviceName') && <td>
             {serviceRow.serviceName}
-          </td> }
-          { isColumnVisible('servicePrice') && <td>
+          </td>}
+          {isColumnVisible('servicePrice') && <td>
             {serviceRow.servicePrice}
-          </td> }
-          { isColumnVisible('serviceQuantity') && <td>
+          </td>}
+          {isColumnVisible('serviceQuantity') && <td>
             {serviceRow.serviceQuantity} {serviceRow.serviceUnit}
-          </td> }
-          { isColumnVisible('serviceTotalPrice') && <td>
+          </td>}
+          {isColumnVisible('serviceTotalPrice') && <td>
             {serviceRow.serviceTotalPrice}
-          </td> }
-          { isColumnVisible('subscriptionBeginDate') && <td>
+          </td>}
+          {isColumnVisible('subscriptionBeginDate') && <td>
             {localizeDatetime(serviceRow.subscriptionBeginDate)}
-          </td> }
-          { isColumnVisible('subscriptionEndDate') && <td>
+          </td>}
+          {isColumnVisible('subscriptionEndDate') && <td>
             {serviceRow.subscriptionEndDate ? localizeDatetime(serviceRow.subscriptionEndDate) : '-'}
-          </td> }
-          { isColumnVisible('allowProvisioning') && <td>
-              <div className="form-check checkbox">
-                  <div>
-                      <FontAwesomeIcon
-                          className='hbw-checkbox'
-                          icon={checkboxIcon(serviceRow.allowProvisioning) as IconProp}
-                      />
-                  </div>
+          </td>}
+          {isColumnVisible('allowProvisioning') && <td>
+            <div className="form-check checkbox">
+              <div>
+                <FontAwesomeIcon
+                  className='hbw-checkbox'
+                  icon={checkboxIcon(serviceRow.allowProvisioning) as IconProp}
+                />
               </div>
-          </td> }
-          { isColumnVisible('serviceAddress') && <td className="white-space-wrap">
+            </div>
+          </td>}
+          {isColumnVisible('serviceAddress') && <td className="white-space-wrap">
             {serviceRow.serviceAddress}
-          </td> }
-          { isColumnVisible('macAddress') && <td>
+          </td>}
+          {isColumnVisible('macAddress') && <td>
             {serviceRow.macAddress}
-          </td> }
-          { isColumnVisible('ipAddress') && <td>
+          </td>}
+          {isColumnVisible('ipAddress') && <td>
             {serviceRow.ipAddress}
-          </td> }
-          { isColumnVisible('vlan') && <td>
+          </td>}
+          {isColumnVisible('vlan') && <td>
             {serviceRow.vlan}
-          </td> }
-          { isColumnVisible('phone') && <td>
+          </td>}
+          {isColumnVisible('phone') && <td>
             {serviceRow.phone}
-          </td> }
+          </td>}
         </tr>
       );
 
@@ -328,6 +384,33 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
     return [];
   };
 
+  const renderServiceAddModal = () => <HBWServiceAddModal
+    show={addServiceModalShown}
+    individualPricing
+    currencyCode={props.params.currency_code}
+    dateFormat={props.params.date_format}
+    services={props.params.available_services}
+    onSubmit={handleServiceAdd}
+    onClose={handleModalClose}
+  />;
+
+  const renderTableTitle = () => <HBWServicesTableTitle
+    name={props.name}
+    label={props.params.label}
+    search={{
+      hidden:              props.params.disable_search,
+      searchQuery,
+      onSearchQueryChange: handleSearchQueryChange
+    }}
+    columnsControl={{
+      visibleColumns: columns.filter(column => column.isVisible),
+      columns:        tableColumns,
+      onChange:       handleColumnSettingsChange
+    }}
+    task={props.task}
+    handleAddServiceClick={() => { setAddServiceModalShown(true); }}
+  />;
+
   const renderTableHeader = () => columns.map(column => (column.isVisible ? <th key={column.name}>
     {column.label}
   </th> : null));
@@ -336,6 +419,10 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
     {renderParentRow(serviceRow, index)}
   </>);
 
+  const renderTableFooter = () => <HBWServicesTableFooter
+    handleAddServiceClick={() => { setAddServiceModalShown(true); }}
+  />;
+
   const cssClass = cn('services-select-table', props.params.css_class, { hidden: props.hidden });
   const tableCss = cn('table', 'table-stripper', 'table-bordered', {
     disabled: !props.params.editable || props.disabled
@@ -343,33 +430,21 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
   const formGroupCss = cn('hbw-table', 'form-group');
 
   return <div className={cssClass}>
-    <HBWServicesTableTitle
-      name={props.name}
-      label={props.params.label}
-      search={{
-        hidden:              props.params.disable_search,
-        searchQuery,
-        onSearchQueryChange: handleSearchQueryChange
-      }}
-      columnsControl={{
-        visibleColumns: columns.filter(column => column.isVisible),
-        columns:        tableColumns,
-        onChange:       handleColumnSettingsChange
-      }}
-      task={props.task}
-    />
+    {renderServiceAddModal()}
+    {renderTableTitle()}
     <div className={formGroupCss}>
       <table className={tableCss}>
         <thead className='thead-inverse'>
-        <tr key='columns'>
-          {renderTableHeader()}
-        </tr>
+          <tr key='columns'>
+            {renderTableHeader()}
+          </tr>
         </thead>
         <tbody>
-        {renderTableBody()}
+          {renderTableBody()}
         </tbody>
       </table>
     </div>
+    {renderTableFooter()}
   </div>;
 };
 

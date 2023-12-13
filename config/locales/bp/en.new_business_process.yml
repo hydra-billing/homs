@@ -1,0 +1,13 @@
+ru:
+  new_business_process:
+    label: Подключение абонента
+    Form_1:
+      label: Заполните адрес абонента
+      homsOrderDataCustomerCity:
+        label: Город
+      homsOrderDataCustomerStreet:
+        label: Улица
+      homsOrderDataCustomerHouse:
+        label: Дом
+      homsOrderDataCustomerEntrance:
+        label: Подъезд

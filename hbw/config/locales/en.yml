@@ -21,7 +21,7 @@ en:
     task_already_claimed: Task %{task_name} is already claimed
     user_not_found: Current user is not found in Camunda
   notifications:
-    new_assigned_task: 'New assigned task: %{task_name}'
+    new_assigned_task: "New assigned task: %{task_name}"
     new_assigned_task_plural: "%{count} new tasks were assigned: %{task_names}"
   components:
     select:
@@ -29,7 +29,7 @@ en:
       no_results_found: No results found
       enter_more_chars: Please enter 2 or more characters
     file_upload:
-      drag_and_drop: 'Drag and drop files to attach, or '
+      drag_and_drop: "Drag and drop files to attach, or "
       browse: browse
     claiming:
       open_tasks: Open tasks
@@ -51,10 +51,10 @@ en:
           urgent: Urgent
       overview:
         header: Task overview
-        due: 'Due date:'
-        created: 'Created at:'
-        priority: 'Priority:'
-        description: 'Description:'
+        due: "Due date:"
+        created: "Created at:"
+        priority: "Priority:"
+        description: "Description:"
         claim_task: Claim task
         claim_and_open: Claim and go to task
         go_to_task: Go to task
@@ -79,6 +79,7 @@ en:
             placeholder: Search
           columns_setting:
             placeholder: Columns
+          add_service: Add service
         columns:
           action: Action
           equipment_name: Equipment Type
@@ -94,4 +95,16 @@ en:
           ip_address: IP
           vlan: VLAN
           phone: Phone
-
+      modals:
+        service_add:
+          title: Add subscription
+          service_select: Service
+          service_select_placeholder: Select service
+          price: Price
+          quantity: Amount
+          total_price: Total price
+          start_date: Start date
+          end_date: End date
+          allow_provisioning: Enable service
+          cancel: Cancel
+          submit: Add service

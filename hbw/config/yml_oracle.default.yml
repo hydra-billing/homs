@@ -74,3 +74,20 @@ d17432408225ba41b1ccf192d5fca4d7:
     ipAddress: "192.168.1.1"
     vlan:
     phone:
+08afe70c088e845ba99b4ba8cf0f50ed:
+  - id: 51477701.0
+    text:
+    priceLineId: 51477701.0
+    parPriceLineId:
+    serviceId: 51137401.0
+    serviceName: "Individual"
+    servicePrice: 2.11
+    serviceUnit: "pcs"
+  - id: 51477702.0
+    text:
+    priceLineId: 51477702.0
+    parPriceLineId:
+    serviceId: 51137402.0
+    serviceName: "Offre Residence"
+    servicePrice: 69000
+    serviceUnit: "pcs"
