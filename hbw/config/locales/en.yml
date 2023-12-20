@@ -77,19 +77,21 @@ en:
         title:
           search:
             placeholder: Search
+          columns_setting:
+            placeholder: Columns
         columns:
           action: Action
-          equipmentName: Equipment Type
-          serviceName: Service
-          servicePrice: Price
-          serviceQuantity: Amount
-          serviceTotalPrice: Total
-          subscriptionBeginDate: Start date
-          subscriptionEndDate: End date
-          allowProvisioning: Allow provisioning
-          serviceAddress: Service address
-          macAddress: MAC
-          ipAddress: IP
+          equipment_name: Equipment Type
+          service_name: Service
+          service_price: Price
+          service_quantity: Amount
+          service_total_price: Total
+          subscription_begin_date: Start date
+          subscription_end_date: End date
+          allow_provisioning: Allow provisioning
+          service_address: Service address
+          mac_address: MAC
+          ip_address: IP
           vlan: VLAN
           phone: Phone
 
