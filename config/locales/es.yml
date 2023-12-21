@@ -29,7 +29,7 @@ es:
   devise:
     passwords:
       new:
-        title: "¿Ha olvidado su contraseña?"
+        title: ¿Ha olvidado su contraseña?
         description: Le enviaremos instrucciones para restablecer su contraseña.
         submit: Restablecer contraseña
       edit:
@@ -52,7 +52,7 @@ es:
       new:
         title: Inscribirse
         sign_up: Inscribirse
-        forgot_password: "¿Ha olvidado su contraseña?"
+        forgot_password: ¿Ha olvidado su contraseña?
         remember_me: Acuérdate de mí
         submit: Inscribirse
         single_sign_on: Inicio de sesión único (SSO)
@@ -66,7 +66,7 @@ es:
     from: de
     to: a
     yes_no:
-      'yes': Sí
+      'yes': 'Sí'
       'no': 'No'
     custom_fields_filter:
       title: Campos personalizados del orden
@@ -254,7 +254,7 @@ es:
     cancel: Cancelar
     error: Error
     remove: Quitar
-    'yes': Sí
+    'yes': 'Sí'
     not_selected: No seleccionado
     select2:
       not_set: Vacío

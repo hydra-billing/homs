@@ -1,7 +1,7 @@
 es:
   submit: Enviar
   cancel: Cancelar proceso
-  confirm_cancel: "¿Cancelar el proceso?"
+  confirm_cancel: ¿Cancelar el proceso?
   error: Error
   more: Más
   no_tasks: Sin tareas
@@ -51,7 +51,7 @@ es:
           urgent: Urgente
       overview:
         header: Resumen de tareas
-        due: Fecha de vencimiento
+        due: 'Fecha de vencimiento'
         created: 'Creado en:'
         priority: 'Prioridad:'
         description: 'Descripción:'

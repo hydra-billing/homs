@@ -1,6 +1,6 @@
 es:
   simple_form:
-    'yes': Sí
+    'yes': 'Sí'
     'no': 'No'
     required:
       text: requerido
