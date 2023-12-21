@@ -45,7 +45,7 @@ ENV NOKOGIRI_USE_SYSTEM_LIBRARIES 1
 ENV REDIS_HOST                    redis
 ENV REDIS_PORT                    6379
 
-RUN gem install bundler
+RUN gem install bundler -v 2.4.22
 RUN bundle config --global frozen 1
 RUN bundle --without oracle test
 
