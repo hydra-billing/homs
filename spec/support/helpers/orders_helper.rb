@@ -124,9 +124,14 @@ module Features
       r_multi_select = r_multi_select_container(name)
       r_multi_select.find('.react-select__dropdown-indicator').click
 
-      r_multi_select.all('.react-select__option').select do |option|
+      r_multi_select_options = r_multi_select.all('.react-select__option').select do |option|
         options.include?(option.text)
-      end.map { |option| option.hover; option.click }
+      end
+
+      r_multi_select_options.map do |option|
+        option.hover
+        option.click
+      end
     end
 
     def expect_r_select_presence(name)
