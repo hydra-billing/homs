@@ -1,60 +1,6 @@
 pt-br:
-  devise:
-    login: login
-    confirmations:
-      confirmed: Seu endereço de e-mail foi confirmado.
-      send_instructions: Em alguns minutos, você receberá um e-mail de confirmação para verificar o seu endereço de e-mail.
-      send_paranoid_instructions: Se o seu endereço de email existe em nosso banco de dados, em poucos minutos você receberá um email de confirmação para verificá-lo.
-    failure:
-      already_authenticated: Você já está inscrito.
-      inactive: Sua conta Ainda não esta ativada.
-      invalid: Senha ou %{authentication_keys} inválida.
-      locked: Sua conta está bloqueada.
-      last_attempt: Você tem mais uma tentativa antes que sua conta seja bloqueada.
-      not_found_in_database: Senha ou %{authentication_keys} inválida.
-      timeout: Sua sessão expirou. Faça login novamente para continuar.
-      unauthenticated: Você precisa entrar ou se cadastrar antes de continuar.
-      unconfirmed: Por favor, confirme seu endereço de e-mail antes de continuar.
-      blocked: O usuário está bloqueado
-    mailer:
-      confirmation_instructions:
-        subject: Confirme seu email
-      reset_password_instructions:
-        subject: Redefinir sua senha
-      unlock_instructions:
-        subject: Desbloqueie sua conta
-    omniauth_callbacks:
-      failure: Não foi possível autenticá-lo de %{kind} porque "%{reason}".
-      success: Autenticado com sucesso da conta %{kind}.
-    passwords:
-      no_token: Você não pode acessar esta página sem vir de um e-mail de redefinição de senha. Se você veio do e-mail de redefinição de senha, certifique-se de usar o URL completa como fornecido.
-      send_instructions: Você receberá um e-mail com instruções sobre como redefinir sua senha em alguns minutos.
-      send_paranoid_instructions: Se o seu endereço de e-mail existir em nosso banco de dados, você receberá um link de recuperação de senha em seu endereço de e-mail em alguns minutos.
-      updated: Sua senha foi alterada com sucesso. Agora você está conectado.
-      updated_not_active: Sua senha foi alterada com sucesso.
-    registrations:
-      destroyed: Tchau! Sua conta foi cancelada com sucesso. Nós esperamos te ver novamente em breve.
-      signed_up: Bem-vindo! Você se inscreveu com sucesso.
-      signed_up_but_inactive: Você se inscreveu com sucesso. No entanto, não foi possível fazer seu login porque sua conta ainda não foi ativada.
-      signed_up_but_locked: Você se inscreveu com sucesso. No entanto, não foi possível fazer seu login porque sua conta está bloqueada.
-      signed_up_but_unconfirmed: Uma mensagem com um link de confirmação foi enviada para o seu endereço de e-mail. Por favor, siga o link para ativar sua conta.
-      update_needs_confirmation: Você atualizou sua conta com sucesso, mas precisamos verificar seu novo endereço de e-mail. Verifique seu e-mail e siga o link de confirmação para confirmar seu novo endereço de e-mail.
-      updated: Sua conta foi atualizada com sucesso.
-    sessions:
-      signed_in: ''
-      signed_out: ''
-      already_signed_out: ''
-    unlocks:
-      send_instructions: Você receberá um e-mail com instruções sobre como desbloquear sua conta em alguns minutos.
-      send_paranoid_instructions: Se sua conta existir, você receberá um e-mail com instruções sobre como desbloqueá-la em alguns minutos.
-      unlocked: Sua conta foi desbloqueada com sucesso.Faça login para continuar.
   errors:
     messages:
-      already_confirmed: já foi confirmado, por favor tente fazer login
-      confirmation_period_expired: precisava ser confirmado dentro de %{period}, por favor solicite um novo
-      expired: expirou, por favor solicite um novo
-      not_found: não encontrado
-      not_locked: não estava bloqueada
       not_saved:
         one: '1 erro impediu que este %{resource} fosse salvo:'
-        other: "%{count} erros impediram este %{resource} de ser salvo:"
+        other: '%{count} erros impediram este %{resource} de ser salvo:'
