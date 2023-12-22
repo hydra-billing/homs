@@ -18,7 +18,7 @@ module API
 
       def resource_set(resource = nil)
         resource ||= resource_class.find_by_email!(params[:id])
-        super resource
+        super(resource)
       end
     end
   end
