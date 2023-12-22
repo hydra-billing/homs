@@ -60,7 +60,7 @@ module OrdersHelper
   end
 
   def split_data(data, index = 10)
-    data = (data.presence || {})
+    data = data.presence || {}
     visible = data.keys[0...index]
     hidden = data.keys[index..]
     [data.slice(*visible), data.slice(*hidden)]
