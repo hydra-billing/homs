@@ -56,10 +56,6 @@ es:
       signed_up_but_unconfirmed: Se ha enviado un mensaje con un enlace de confirmación a su dirección de correo electrónico. Siga el enlace para activar su cuenta.
       update_needs_confirmation: Ha actualizado su cuenta correctamente, pero necesitamos verificar su nueva dirección de correo electrónico. Comprueba su correo electrónico y sigue el enlace de confirmación para confirmar su nueva dirección de correo electrónico.
       updated: Su cuenta se ha actualizado correctamente.
-    sessions:
-      signed_in: ''
-      signed_out: ''
-      already_signed_out: ''
     unlocks:
       send_instructions: En unos minutos recibirá un correo electrónico con instrucciones para desbloquear su cuenta.
       send_paranoid_instructions: Si su cuenta existe, en unos minutos recibirá un correo electrónico con instrucciones para desbloquearla.
