@@ -102,10 +102,10 @@
       padding-right: 0
 
   a > .fa
-    margin-right: .25em
+      margin-right: .25em
 
   header > nav > .container > .navbar-collapse
-    margin-left: -15px
+      margin-left: -15px
 
   .show-hidden-order-data
     margin-top: .5em
@@ -173,7 +173,7 @@
       display: flex
       flex-direction: row
       justify-content: space-between
-      height: 36px
+      height: 45px
       margin-bottom: 10px
 
       .left
@@ -198,12 +198,22 @@
         flex-basis: 50%
         gap: 21px
         align-items: center
-        .react-select-container
-          flex-basis: 60%
-          display: flex
-          flex-direction: row-reverse
-          gap: 6px
+        .columns-setting
           height: 100%
+          .react-select-container
+            flex-basis: 60%
+            display: flex
+            flex-direction: row-reverse
+            gap: 6px
+            height: 100%
+    .table-footer
+      display: flex
+      flex-direction: row-reverse
+      gap: 21px
+      align-items: center
+      height: 45px
+      margin-top: 10px
+      margin-bottom: 10px
 
     tr
       &:hover
@@ -223,6 +233,30 @@
         .prefix-icon
           padding-right: 6px
 
+  .react-datepicker-wrapper
+    width: 100%
+
+  .hbw-modal
+    width: 700px
+
+    .header
+      border-bottom: 0
+      font-size: 1.2em
+      font-weight: bold
+      padding: 24px
+      padding-top: 21px
+      padding-bottom: 15px
+
+    .body
+      padding: 9px
+
+    .footer
+      padding: 0px
+      padding-bottom: 24px
+      display: flex
+      justify-content: center
+      gap: 6px
+      border-top: 0
 
   table.select-table
     tr
@@ -236,8 +270,6 @@
       text-align: center
     .text-align-right
       text-align: right
-
-
 
   .hbw-file-upload
     .attacher

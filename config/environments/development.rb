@@ -1,4 +1,8 @@
 Rails.application.configure do
+  config.hosts = [
+    IPAddr.new('127.0.0.1'),
+    'host.docker.internal'
+  ]
   # Settings specified here will take precedence over those in
   # config/application.rb.
 

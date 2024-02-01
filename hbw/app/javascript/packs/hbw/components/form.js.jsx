@@ -167,6 +167,7 @@ modulejs.define(
           case 'services_table':
             return <ServicesTable
             {...opts}
+            {...onRef}
             />;
           default: return <p>{name}: Unknown control type {params.type}</p>;
         }

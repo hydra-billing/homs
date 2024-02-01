@@ -1,5 +1,6 @@
 v2.9 [Unreleased]
 ### Features
+- [#738] (https://github.com/hydra-billing/homs/pull/738) Add services select table service add option.
 - [#731](https://github.com/hydra-billing/homs/pull/731/) Add columns display management option.
 - [#706](https://github.com/latera/homs/pull/706) Update Ruby to 3.2.2.
 - [#725](https://github.com/latera/homs/pull/725) Update Rails to 7.
