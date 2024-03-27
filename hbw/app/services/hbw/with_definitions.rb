@@ -31,10 +31,8 @@ module HBW
     end
 
     def process_definitions_with_starter_candidates(user_email)
-      Rails.cache.fetch("process_definitions_#{user_email}") do
-        do_request(:get, 'process-definition', **query_params(user_email)).map do |definition|
-          ::HBW::ProcessDefinition.new(definition)
-        end
+      do_request(:get, 'process-definition', **query_params(user_email)).map do |definition|
+        ::HBW::ProcessDefinition.new(definition)
       end
     end
 
