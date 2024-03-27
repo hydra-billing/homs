@@ -1,7 +1,9 @@
 Rails.application.configure do
   config.hosts = [
-    IPAddr.new('127.0.0.1'),
-    'host.docker.internal'
+    IPAddr.new('0.0.0.0/0'),   # All IPv4 addresses.
+    IPAddr.new('::/0'),        # All IPv6 addresses.
+    'localhost',               # The localhost reserved domain.
+    'docker.for.mac.localhost' # Domain, accessible from docker
   ]
   # Settings specified here will take precedence over those in
   # config/application.rb.
