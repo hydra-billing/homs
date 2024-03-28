@@ -46,7 +46,17 @@ v2.9 [Unreleased]
 ### Breaking changes
 - [#719](https://github.com/hydra-billing/homs/pull/719) Use REDIS_HOST and REDIS_PORT env variables instead of REDIS_URL for actioncable.
 
-v2.8.7 [Unreleased]
+v2.8.10 [Unreleased]
+-------------------
+### Bugfixes
+- [#742](https://github.com/hydra-billing/homs/pull/742) Allow to change starter groups and starter users for business process without reloading HOMS
+
+v2.8.8 [2023-10-30]
+-------------------
+### Features
+- [#726](https://github.com/hydra-billing/homs/pull/726/) Add services select table.
+
+v2.8.7 [2023-10-10]
 -------------------
 ### Refactoring
 - [#727](https://github.com/hydra-billing/homs/pull/727) Use the latest minio version for testing and development, use [RELEASE.2023-09-30T07-02-29Z](https://github.com/minio/minio/releases/tag/RELEASE.2023-09-30T07-02-29Z) for stable HOMS version.
@@ -127,10 +137,21 @@ v2.8.0 [2023-03-07]
 - [#683](https://github.com/hydra-billing/homs/pull/693) Localize SSO authentication error messages.
 
 ### Bugfixes
-- [#707](https://github.com/hydra-billing/homs/pull/707) Fix warning dangerous query methodю
+- [#707](https://github.com/hydra-billing/homs/pull/707) Fix warning dangerous query method.
 - [#708](https://github.com/hydra-billing/homs/pull/708) Don't install unused activestorage gem.
 - [#710](https://github.com/hydra-billing/homs/pull/710) Fix chromedriver link for tests.
 
+
+v2.7.19 [Unreleased]
+-------------------
+### Bugfixes
+- [#742](https://github.com/hydra-billing/homs/pull/742) Allow to change starter groups and starter users for business process without reloading HOMS
+
+v2.7.17 [2023-09-10]
+-------------------
+### Bugfixes
+- [#710](https://github.com/hydra-billing/homs/pull/710) Fix chromedriver link for tests.
+- [#727](https://github.com/hydra-billing/homs/pull/727) Freeze minio version
 
 v2.7.12 [2023-02-01]
 -------------------
