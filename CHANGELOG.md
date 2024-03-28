@@ -1,6 +1,10 @@
+v2.7.19 [Unreleased]
+-------------------
+### Bugfixes
+- [#742](https://github.com/hydra-billing/homs/pull/742) Allow to change starter groups and starter users for business process without reloading HOMS
+
 v2.7.17 [2023-09-10]
 -------------------
-
 ### Bugfixes
 - [#710](https://github.com/hydra-billing/homs/pull/710) Fix chromedriver link for tests.
 - [#727](https://github.com/hydra-billing/homs/pull/727) Freeze minio version
