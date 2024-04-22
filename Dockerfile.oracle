@@ -1,4 +1,4 @@
-FROM ruby:3.2.2-slim-bullseye
+FROM ruby:3.2.4-slim-bullseye
 
 RUN mkdir -p /opt/homs
 RUN mkdir -p /opt/oracle

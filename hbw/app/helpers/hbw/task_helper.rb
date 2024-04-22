@@ -1,10 +1,8 @@
 module HBW
   module TaskHelper
     def entity_url(task, entity_class)
-      entity_url_params = []
-
-      HBW::Widget.config[:entities].fetch(entity_class)[:task_list][:entity_url_params].each do |param|
-        entity_url_params.append(task.send(param))
+      entity_url_params = HBW::Widget.config[:entities].fetch(entity_class)[:task_list][:entity_url_params].map do |param|
+        task.send(param)
       end
 
       HBW::Widget.config[:entities].fetch(entity_class)[:task_list][:entity_url] % entity_url_params

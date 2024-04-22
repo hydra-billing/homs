@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '3.2.2'
+ruby '3.2.4'
 
 rails_version = '6.1.7'
 
