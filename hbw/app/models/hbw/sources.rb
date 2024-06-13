@@ -14,7 +14,7 @@ module HBW
     end
 
     def build_source(source_name, source_config)
-      type = source_config.fetch('type')
+      type = source_config.fetch(:type)
 
       klass = case type
               when 'sql/oracle'

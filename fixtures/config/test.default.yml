@@ -1,0 +1,2 @@
+pool: 5
+test_var: <%= ENV['CONFIG_TEST_ENV'] %>
