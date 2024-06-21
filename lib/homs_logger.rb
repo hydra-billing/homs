@@ -12,7 +12,7 @@ class HomsFormatter < Logger::Formatter
   include ActiveSupport::TaggedLogging::Formatter
 
   def call(severity, time, program_name, message)
-    HOMS_FORMAT % super(severity, time, program_name, message)
+    HOMS_FORMAT % super
   end
 end
 
