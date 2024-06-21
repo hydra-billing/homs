@@ -42,9 +42,9 @@ module HBW
   end
 
   module RemoteWithConnection
-    def do_request(method, *args)
+    def do_request(method, *)
       ensure_connection_exists
-      super(method, *args)
+      super
     end
 
     def ensure_connection_exists
