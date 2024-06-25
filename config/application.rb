@@ -67,7 +67,9 @@ module HOMS
     config.after_initialize do
       HOMS.container[:cef_logger].log_event(:start)
 
-      I18n.locale = I18n.default_locale = (config.app.locale.fetch(:code) || :en).to_sym
+      locale = config.app.fetch(:locale, {})
+
+      I18n.locale = I18n.default_locale = (locale.fetch(:code) || :en).to_sym
     end
 
     require Rails.root.join('lib/datetime_format')

@@ -1,32 +1,39 @@
-require 'settingslogic'
+require_relative '../../lib/config'
 
 module Settings
-  class HBW < Settingslogic
-    source Rails.root.join('config/hbw.default.yml')
+  class HBW < Config
+    def self.base_path
+      Rails.root.join('config', 'hbw.default.yml')
+    end
 
-    custom_config_path = Rails.root.join('config/hbw.yml')
-
-    if File.exist?(custom_config_path) && File.read(custom_config_path).present?
-      instance.deep_merge!(Settings::HBW.new(custom_config_path))
+    def self.custom_path
+      Rails.root.join('config', 'hbw.yml')
     end
   end
 
-  class Imprint < Settingslogic
-    source Rails.root.join('config/imprint.default.yml')
+  class Imprint < Config
+    def self.base_path
+      Rails.root.join('config', 'imprint.default.yml')
+    end
 
-    custom_config_path = Rails.root.join('config/imprint.yml')
-
-    if File.exist?(custom_config_path) && File.read(custom_config_path).present?
-      instance.deep_merge!(Settings::Imprint.new(custom_config_path))
+    def self.custom_path
+      Rails.root.join('config', 'imprint.yml')
     end
   end
 
-  class BPM < Settingslogic
-    source Rails.root.join('config/bpm.yml')
+  class BPM < Config
+    def self.base_path
+      Rails.root.join('config', 'bpm.yml')
+    end
   end
 
-  class Sources < Settingslogic
-    source Rails.root.join('config/sources.yml')
-    namespace 'sources'
+  class Sources < Config
+    def self.base_path
+      Rails.root.join('config', 'sources.yml')
+    end
+
+    def self.namespace
+      'sources'
+    end
   end
 end
