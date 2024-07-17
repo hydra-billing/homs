@@ -3,6 +3,8 @@ $LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'hbw/version'
 
 Gem::Specification.new do |s|
+  rails_version = '7.0.8'
+
   s.name        = 'hbw'
   s.version     = HBW::VERSION
   s.authors     = ['Nikita Shilnikov']
@@ -15,14 +17,14 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*']
 
-  s.add_dependency 'actionpack', '~> 6.1.7'
-  s.add_dependency 'actionview', '~> 6.1.7'
-  s.add_dependency 'activemodel', '~> 6.1.7'
-  s.add_dependency 'activerecord', '~> 6.1.7'
-  s.add_dependency 'activesupport', '~> 6.1.7'
+  s.add_dependency 'actionpack', "~> #{rails_version}"
+  s.add_dependency 'actionview', "~> #{rails_version}"
+  s.add_dependency 'activemodel', "~> #{rails_version}"
+  s.add_dependency 'activerecord', "~> #{rails_version}"
+  s.add_dependency 'activesupport', "~> #{rails_version}"
   s.add_dependency 'coffee-rails'
   s.add_dependency 'faraday'
   s.add_dependency 'faraday-detailed_logger'
   s.add_dependency 'faraday_middleware'
-  s.add_dependency 'railties', '~> 6.1.7'
+  s.add_dependency 'railties', "~> #{rails_version}"
 end

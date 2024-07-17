@@ -36,7 +36,7 @@ module Imprint
       end
 
       def load
-        Imprint::API.config = Settings::Imprint[Rails.env].deep_symbolize_keys
+        Imprint::API.config = Settings::Imprint[Rails.env]
       end
     end
 

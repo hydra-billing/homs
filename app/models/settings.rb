@@ -33,7 +33,7 @@ module Settings
     end
 
     def self.namespace
-      'sources'
+      :sources
     end
   end
 end

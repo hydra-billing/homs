@@ -4,7 +4,7 @@ require 'hbw/config_validator'
 Rails.application.config.to_prepare do
   HBW::Sources.load
 
-  validated_config = HBW::ConfigValidator.(Settings::HBW.deep_symbolize_keys)
+  validated_config = HBW::ConfigValidator.(Settings::HBW.config)
 
   HBW::Widget.config = HBW::Config.new(validated_config.to_h)[:hbw]
 
