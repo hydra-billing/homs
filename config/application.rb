@@ -5,7 +5,6 @@ require 'active_record/railtie'
 require 'action_cable/engine'
 
 require 'dry-container'
-require 'dry-auto_inject'
 require 'dry-validation'
 
 # Require the gems listed in Gemfile, including any gems
@@ -58,7 +57,6 @@ module HOMS
     redis_config = config.app.fetch(:redis, {})
     config.cache_store = :redis_cache_store, {url: "redis://#{redis_config.fetch(:host)}:#{redis_config.fetch(:port)}/0"}
 
-    config.active_record.legacy_connection_handling = false
     config.active_record.belongs_to_required_by_default = false
 
     require Rails.root.join('lib/imprint')

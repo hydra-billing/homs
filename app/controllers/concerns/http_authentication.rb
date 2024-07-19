@@ -13,7 +13,7 @@ module HttpAuthentication
   protected
 
   def perform_http_authentication
-    realm = Rails.application.secrets.http_basic_realm || 'Latera OMS'
+    realm = Rails.application.credentials.http_basic_realm || 'Latera OMS'
 
     if sso_enabled? && token_present?
       authenticate_by_keycloak

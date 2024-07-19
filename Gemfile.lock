@@ -11,47 +11,57 @@ PATH
   remote: hbw
   specs:
     hbw (0.1)
-      actionpack (~> 7.0.8)
-      actionview (~> 7.0.8)
-      activemodel (~> 7.0.8)
-      activerecord (~> 7.0.8)
-      activesupport (~> 7.0.8)
+      actionpack (~> 7.1.3.4)
+      actionview (~> 7.1.3.4)
+      activemodel (~> 7.1.3.4)
+      activerecord (~> 7.1.3.4)
+      activesupport (~> 7.1.3.4)
       coffee-rails
       faraday
       faraday-detailed_logger
       faraday_middleware
-      railties (~> 7.0.8)
+      railties (~> 7.1.3.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (7.0.8)
-      actionpack (= 7.0.8)
-      activesupport (= 7.0.8)
+    actioncable (7.1.3.4)
+      actionpack (= 7.1.3.4)
+      activesupport (= 7.1.3.4)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionpack (7.0.8)
-      actionview (= 7.0.8)
-      activesupport (= 7.0.8)
-      rack (~> 2.0, >= 2.2.4)
+      zeitwerk (~> 2.6)
+    actionpack (7.1.3.4)
+      actionview (= 7.1.3.4)
+      activesupport (= 7.1.3.4)
+      nokogiri (>= 1.8.5)
+      racc
+      rack (>= 2.2.4)
+      rack-session (>= 1.0.1)
       rack-test (>= 0.6.3)
-      rails-dom-testing (~> 2.0)
-      rails-html-sanitizer (~> 1.0, >= 1.2.0)
-    actionview (7.0.8)
-      activesupport (= 7.0.8)
+      rails-dom-testing (~> 2.2)
+      rails-html-sanitizer (~> 1.6)
+    actionview (7.1.3.4)
+      activesupport (= 7.1.3.4)
       builder (~> 3.1)
-      erubi (~> 1.4)
-      rails-dom-testing (~> 2.0)
-      rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    activemodel (7.0.8)
-      activesupport (= 7.0.8)
-    activerecord (7.0.8)
-      activemodel (= 7.0.8)
-      activesupport (= 7.0.8)
-    activesupport (7.0.8)
+      erubi (~> 1.11)
+      rails-dom-testing (~> 2.2)
+      rails-html-sanitizer (~> 1.6)
+    activemodel (7.1.3.4)
+      activesupport (= 7.1.3.4)
+    activerecord (7.1.3.4)
+      activemodel (= 7.1.3.4)
+      activesupport (= 7.1.3.4)
+      timeout (>= 0.4.0)
+    activesupport (7.1.3.4)
+      base64
+      bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
+      connection_pool (>= 2.2.5)
+      drb
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
+      mutex_m
       tzinfo (~> 2.0)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
@@ -108,6 +118,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.3.3)
+    connection_pool (2.4.1)
     crass (1.0.6)
     dalli (3.2.8)
     database_cleaner (2.0.2)
@@ -127,6 +138,7 @@ GEM
       devise (>= 2.1.0)
     diff-lcs (1.5.1)
     docile (1.4.0)
+    drb (2.2.1)
     dry-auto_inject (1.0.1)
       dry-core (~> 1.0)
       zeitwerk (~> 2.6)
@@ -245,6 +257,10 @@ GEM
       glob (>= 0.4.0)
       i18n
     ice_nine (0.11.2)
+    io-console (0.7.2)
+    irb (1.14.0)
+      rdoc (>= 4.0.0)
+      reline (>= 0.4.2)
     jbuilder (2.12.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -289,6 +305,7 @@ GEM
       railties (>= 3.1)
     multipart-post (2.4.1)
     mustache (1.1.1)
+    mutex_m (0.2.0)
     nio4r (2.7.3)
     nokogiri (1.16.6)
       mini_portile2 (~> 2.8.2)
@@ -307,13 +324,20 @@ GEM
       pry (>= 0.13, < 0.15)
     pry-rails (0.3.11)
       pry (>= 0.13.0)
+    psych (5.1.2)
+      stringio
     public_suffix (6.0.0)
     puma (6.4.2)
       nio4r (~> 2.0)
     racc (1.8.0)
     rack (2.2.9)
+    rack-session (1.0.2)
+      rack (< 3)
     rack-test (2.1.0)
       rack (>= 1.3)
+    rackup (1.0.0)
+      rack (< 3)
+      webrick
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -322,18 +346,23 @@ GEM
       loofah (~> 2.21)
       nokogiri (~> 1.14)
     rails_layout (1.0.42)
-    railties (7.0.8)
-      actionpack (= 7.0.8)
-      activesupport (= 7.0.8)
-      method_source
+    railties (7.1.3.4)
+      actionpack (= 7.1.3.4)
+      activesupport (= 7.1.3.4)
+      irb
+      rackup (>= 1.0.0)
       rake (>= 12.2)
-      thor (~> 1.0)
-      zeitwerk (~> 2.5)
+      thor (~> 1.0, >= 1.2.2)
+      zeitwerk (~> 2.6)
     rainbow (3.1.1)
     raindrops (0.20.1)
     rake (13.2.1)
+    rdoc (6.7.0)
+      psych (>= 4.0.0)
     redis (4.8.1)
     regexp_parser (2.9.2)
+    reline (0.5.9)
+      io-console (~> 0.5)
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -410,6 +439,7 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
+    stringio (3.1.1)
     strscan (3.1.0)
     temping (4.1.1)
       activerecord (>= 6.0, < 7.2)
@@ -417,6 +447,7 @@ GEM
     temple (0.10.3)
     thor (1.3.1)
     tilt (2.4.0)
+    timeout (0.4.1)
     translit (0.1.5)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -426,6 +457,7 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.9)
       rack (>= 2.0.9)
+    webrick (1.8.1)
     websocket (1.2.11)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -438,12 +470,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actioncable (= 7.0.8)
-  actionpack (= 7.0.8)
-  actionview (= 7.0.8)
-  activemodel (= 7.0.8)
-  activerecord (= 7.0.8)
-  activesupport (= 7.0.8)
+  actioncable (= 7.1.3.4)
+  actionpack (= 7.1.3.4)
+  actionview (= 7.1.3.4)
+  activemodel (= 7.1.3.4)
+  activerecord (= 7.1.3.4)
+  activesupport (= 7.1.3.4)
   apitome
   aws-sdk-s3
   better_errors
@@ -482,7 +514,7 @@ DEPENDENCIES
   puma
   rack (~> 2.2.3)
   rails_layout
-  railties (= 7.0.8)
+  railties (= 7.1.3.4)
   redis (~> 4)
   rspec-mocks
   rspec-rails
