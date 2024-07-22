@@ -4,7 +4,7 @@ class CreateOrders < ActiveRecord::Migration[4.2]
       # Тип заказа
       t.references :order_type, null: false
       # Ответственный пользователь Заказницы
-      t.references :user, as: :owner
+      t.references :user
 
       # Код заказа
       t.string :code, null: false

@@ -1,9 +1,10 @@
-require File.expand_path('boot', __dir__)
+require_relative 'boot'
 
-require 'rails/all'
+require 'rails'
+require 'active_record/railtie'
+require 'action_cable/engine'
 
 require 'dry-container'
-require 'dry-auto_inject'
 require 'dry-validation'
 
 # Require the gems listed in Gemfile, including any gems
@@ -33,8 +34,7 @@ module HOMS
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Moscow'
 
-    config.load_defaults 6.1
-    config.autoloader = :zeitwerk
+    config.load_defaults 7.0
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
@@ -57,7 +57,6 @@ module HOMS
     redis_config = config.app.fetch(:redis, {})
     config.cache_store = :redis_cache_store, {url: "redis://#{redis_config.fetch(:host)}:#{redis_config.fetch(:port)}/0"}
 
-    config.active_record.legacy_connection_handling = false
     config.active_record.belongs_to_required_by_default = false
 
     require Rails.root.join('lib/imprint')

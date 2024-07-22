@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '3.2.4'
 
-rails_version = '6.1.7'
+rails_version = '7.1.3.4'
 
 gem 'apitome'
 gem 'aws-sdk-s3'

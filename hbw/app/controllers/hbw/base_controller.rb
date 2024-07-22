@@ -12,6 +12,10 @@ module HBW
     before_action :get_access_token, if: -> { sso_enabled? }
     after_action :log, unless: -> { Rails.env.test? }
 
+    def initialize(*)
+      super()
+    end
+
     protected
 
     def set_service_user_cookie
@@ -70,7 +74,7 @@ module HBW
     end
 
     def bpm_config
-      (Settings::BPM[Rails.env] || {}).deep_symbolize_keys
+      Settings::BPM[Rails.env] || {}
     end
 
     def auth_as_sso_service_user?

@@ -38,7 +38,7 @@ module HBW
         end
 
         def load
-          HBW::Common::API.config = (Settings::BPM[Rails.env] || {}).deep_symbolize_keys
+          HBW::Common::API.config = (Settings::BPM[Rails.env] || {})
         end
       end
     end

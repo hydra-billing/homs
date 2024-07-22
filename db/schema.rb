@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_12_040821) do
-
+ActiveRecord::Schema[7.1].define(version: 2022_05_12_040821) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,8 +22,8 @@ ActiveRecord::Schema.define(version: 2022_05_12_040821) do
     t.integer "width"
     t.integer "height"
     t.integer "crc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "order_types", id: :serial, force: :cascade do |t|
@@ -32,8 +31,8 @@ ActiveRecord::Schema.define(version: 2022_05_12_040821) do
     t.text "file", null: false
     t.text "fields", null: false
     t.boolean "active", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name", null: false
     t.string "print_form_code"
     t.index ["code", "active"], name: "index_order_types_on_code_and_active"
@@ -48,12 +47,12 @@ ActiveRecord::Schema.define(version: 2022_05_12_040821) do
     t.string "bp_id"
     t.string "bp_state"
     t.integer "state", default: 0
-    t.datetime "done_at"
+    t.datetime "done_at", precision: nil
     t.boolean "archived", default: false
     t.jsonb "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "estimated_exec_date"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+    t.datetime "estimated_exec_date", precision: nil
     t.index ["code"], name: "index_orders_on_code"
   end
 
@@ -61,8 +60,8 @@ ActiveRecord::Schema.define(version: 2022_05_12_040821) do
     t.integer "user_id", null: false
     t.integer "order_type_id", null: false
     t.json "data", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["order_type_id"], name: "index_profiles_on_order_type_id"
     t.index ["user_id", "order_type_id"], name: "index_profiles_on_user_id_and_order_type_id", unique: true
     t.index ["user_id"], name: "index_profiles_on_user_id"
@@ -79,19 +78,19 @@ ActiveRecord::Schema.define(version: 2022_05_12_040821) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "name", null: false
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
     t.integer "role"
     t.string "middle_name"
@@ -102,8 +101,6 @@ ActiveRecord::Schema.define(version: 2022_05_12_040821) do
     t.string "password_salt"
     t.boolean "external", default: false, null: false
     t.boolean "blocked", default: false, null: false
-    t.string "provider"
-    t.string "uid"
     t.string "directory", default: "internal", null: false
     t.index ["api_token"], name: "index_users_on_api_token"
     t.index ["email"], name: "index_users_on_email", unique: true

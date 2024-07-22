@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
   before_action -> { ENV['DISABLE_PRY'] = nil }
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def initialize(*)
+    super()
+  end
+
   def authenticate_user!
     if use_keycloak?
       session_state = cookies['session_state']

@@ -9,15 +9,15 @@ class Config
     end
 
     def [](key)
-      config[key.to_s]
+      config[key]
     end
 
     def []=(key, value)
-      config[key.to_s] = value
+      config[key] = value
     end
 
     def fetch(key, *, &)
-      config.fetch(key.to_s, *, &)
+      config.fetch(key, *, &)
     end
 
     def each(&)
@@ -25,18 +25,17 @@ class Config
     end
 
     def load_config
-      default_yaml_data = YAML.safe_load(ERB.new(File.read(base_path)).result, aliases: true)
+      default_yaml_data = YAML.safe_load(ERB.new(File.read(base_path)).result, aliases: true, symbolize_names: true)
       custom_yaml_data = {}
 
       if custom_path && File.exist?(custom_path) && File.read(custom_path).present?
-        custom_yaml_data = YAML.safe_load(ERB.new(File.read(custom_path)).result, aliases: true)
+        custom_yaml_data = YAML.safe_load(ERB.new(File.read(custom_path)).result, aliases: true, symbolize_names: true)
       end
 
       full_config = exclusive_deep_merge(default_yaml_data, custom_yaml_data)
 
       result = if namespace
-                 path = namespace.split('.')
-                 full_config.dig(*path)
+                 full_config[namespace]
                else
                  full_config
                end
@@ -55,7 +54,7 @@ class Config
     def wrap_in_hash(obj)
       case obj
       when Hash
-        HashWrapper.new(obj.transform_values { |v| wrap_in_hash(v) })
+        HashWrapper.wrap(obj.transform_values { |v| wrap_in_hash(v) })
       else
         obj
       end
@@ -74,10 +73,10 @@ class Config
     end
 
     def method_missing(name, *args, &)
-      if config.key?(name.to_s)
-        value = config[name.to_s]
+      if config.key?(name)
+        value = config[name]
         if value.is_a?(Hash)
-          HashWrapper.new(value)
+          HashWrapper.wrap(value)
         else
           value
         end
@@ -87,19 +86,18 @@ class Config
     end
 
     def respond_to_missing?(name, include_private = false)
-      config.key?(name.to_s) || super
+      config.key?(name) || super
     end
   end
 
-  class HashWrapper < Hash
-    def initialize(hash)
-      super()
-      update(hash)
+  class HashWrapper < HashWithIndifferentAccess
+    def self.wrap(hash)
+      new.update(hash)
     end
 
     def method_missing(name, *args, &)
-      if key?(name.to_s)
-        value = self[name.to_s]
+      if key?(name)
+        value = self[name]
         if value.is_a?(Hash)
           self.class.new(value)
         else
@@ -111,15 +109,7 @@ class Config
     end
 
     def respond_to_missing?(name, include_private = false)
-      key?(name.to_s) || super
-    end
-
-    def [](key)
-      super(key.to_s)
-    end
-
-    def fetch(key, *, &)
-      super(key.to_s, *, &)
+      key?(name) || super
     end
   end
 end
