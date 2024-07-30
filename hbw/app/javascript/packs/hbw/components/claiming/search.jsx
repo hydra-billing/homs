@@ -14,8 +14,8 @@ const HBWClaimingSearch = ({ query, search, clear }) => {
         value={query}
         onChange={search}
       />
-      <FontAwesomeIcon icon={['fas', 'search']} className="fas icon search"/>
-      {query.length > 0 && <FontAwesomeIcon icon={['fas', 'times']} className="fas icon cross" onClick={clear} />}
+      <FontAwesomeIcon icon={['fas', 'search']} className="icon"/>
+      {query.length > 0 && <FontAwesomeIcon icon={['fas', 'times']} className="icon cross" onClick={clear} />}
     </div>
   );
 };

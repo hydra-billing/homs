@@ -48,6 +48,8 @@ module HOMS
 
     config.action_controller.permit_all_parameters = true
 
+    config.action_controller.per_form_csrf_tokens = true
+
     # Allow to serialize Symbol
     config.active_record.yaml_column_permitted_classes = [Symbol]
 

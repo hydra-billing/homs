@@ -50,6 +50,7 @@ v2.8.10 [Unreleased]
 -------------------
 ### Bugfixes
 - [#742](https://github.com/hydra-billing/homs/pull/742) Allow to change starter groups and starter users for business process without reloading HOMS
+- [#748](https://github.com/hydra-billing/homs/pull/748) Return false expired in case if due is null
 
 v2.8.8 [2023-10-30]
 -------------------

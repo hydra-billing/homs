@@ -26,7 +26,7 @@ const HBWClaimingTaskOverview = ({
       </div>
       <div className="title">
         <a data-test="title-link" href={entityUrl}>
-          {task.icon && <FontAwesomeIcon icon={task.icon} className={task.icon}/>}
+          {task.icon && <FontAwesomeIcon icon={task.icon}/>}
           {processLabel} — {taskLabel}
         </a>
       </div>

@@ -32,7 +32,7 @@ const HBWClaimingShortList = ({
   const rowCN = due => (
     cx({
       row:     true,
-      expired: isPast(parseISO(due))
+      expired: due !== null ? isPast(parseISO(due)) : false
     })
   );
 
