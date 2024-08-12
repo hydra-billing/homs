@@ -1,1 +1,72 @@
-fr: {}
+fr:
+  devise:
+    login: Connexion
+    confirmations:
+      confirmed: Votre adresse e-mail a été confirmée.
+      send_instructions: Dans quelques minutes, vous recevrez un courriel de confirmation pour vérifier votre adresse électronique.
+      send_paranoid_instructions: Si votre adresse e-mail existe dans notre base de données, vous recevrez dans quelques minutes un e-mail de confirmation.
+    failure:
+      already_authenticated: Vous êtes déjà connecté.
+      inactive: Votre compte n'est pas encore activé.
+      invalid: '%{authentication_keys} ou mot de passe invalide.'
+      locked: Votre compte est bloqué.
+      last_attempt: Vous disposez d'une dernière tentative avant que votre compte ne soit bloqué.
+      not_found_in_database: '%{authentication_keys} ou mot de passe invalide.'
+      timeout: Votre session a expiré. Veuillez vous connecter à nouveau pour continuer.
+      unauthenticated: Vous devez vous connecter ou vous inscrire avant de continuer.
+      unconfirmed: Veuillez confirmer votre adresse électronique avant de continuer.
+      blocked: L'utilisateur est bloqué
+      sso:
+        default_message: Erreur d'authentification SSO
+        cant_create_session: Échec de la création d'une session sur le serveur d'authentification et d'autorisation
+        user_data_validation_error: Jeu d'attributs utilisateur non valide sur le serveur d'authentification et d'autorisation
+        not_authenticated: Erreur d'autorisation SSO, l'utilisateur n'est pas authentifié
+        token_not_found: Erreur de mise en cache des données, le jeton n'a pas été trouvé dans le cache
+        auth_code_was_not_received: Erreur de mise en cache des données, code d'autorisation manquant
+        username_or_password_is_empty: Erreur d'authentification de l'utilisateur du service, le login ou le mot de passe est manquant
+        token_not_active: Erreur de vérification du jeton, jeton expiré
+        token_refreshing_error: Échec de la mise à jour des jetons sur le serveur d'authentification et d'autorisation
+        bad_keycloak_response: Mauvaise réponse du serveur d'authentification et d'autorisation
+        keycloak_unavailable: Le serveur d'authentification et d'autorisation n'est pas disponible
+        json_parser_error: Échec de l'analyse de la réponse du serveur d'authentification et d'autorisation
+        redis_unavailable: Erreur d'accès à redis lors de l'authentification
+        memcached_unavailable: Erreur d'accès à memcached lors de l'authentification
+        user_attributes_error: 'Attributs de l''utilisateur non valides : %{message}'
+    mailer:
+      confirmation_instructions:
+        subject: Confirmez votre courriel
+      reset_password_instructions:
+        subject: Réinitialisation du mot de passe
+      unlock_instructions:
+        subject: Déverrouiller votre compte
+    omniauth_callbacks:
+      failure: Impossible de vous authentifier auprès de %{kind} car "%{reason}".
+      success: Authentification réussie à partir du compte %{kind}.
+    passwords:
+      no_token: Vous ne pouvez pas accéder à cette page sans avoir reçu un courriel de réinitialisation du mot de passe. Si vous venez d'un courriel de réinitialisation de mot de passe, assurez-vous d'avoir utilisé l'URL complète fournie.
+      send_instructions: Vous recevrez dans quelques minutes un courriel contenant des instructions sur la manière de réinitialiser votre mot de passe.
+      send_paranoid_instructions: Si votre adresse électronique figure dans notre base de données, vous recevrez dans quelques minutes un lien de récupération du mot de passe à votre adresse électronique.
+      updated: Votre mot de passe a été modifié avec succès. Vous êtes maintenant connecté.
+      updated_not_active: Votre mot de passe a été modifié avec succès.
+    registrations:
+      destroyed: Au revoir ! Votre compte a été annulé avec succès. Nous espérons vous revoir bientôt.
+      signed_up: Bienvenue à tous ! Vous vous êtes inscrit avec succès.
+      signed_up_but_inactive: Vous vous êtes inscrit avec succès. Cependant, nous n'avons pas pu vous connecter car votre compte n'est pas encore activé.
+      signed_up_but_locked: Vous vous êtes inscrit avec succès. Cependant, nous n'avons pas pu vous connecter car votre compte est bloqué.
+      signed_up_but_unconfirmed: Un message contenant un lien de confirmation a été envoyé à votre adresse électronique. Veuillez suivre le lien pour activer votre compte.
+      update_needs_confirmation: Vous avez mis à jour votre compte avec succès, mais nous devons vérifier votre nouvelle adresse électronique. Veuillez vérifier votre courrier électronique et suivre le lien de confirmation pour confirmer votre nouvelle adresse électronique.
+      updated: Votre compte a été mis à jour avec succès.
+    unlocks:
+      send_instructions: Vous recevrez dans quelques minutes un courriel contenant des instructions sur la manière de déverrouiller votre compte.
+      send_paranoid_instructions: Si votre compte existe, vous recevrez dans quelques minutes un courriel contenant des instructions sur la manière de le déverrouiller.
+      unlocked: Votre compte a été débloqué avec succès. Veuillez vous connecter pour continuer.
+  errors:
+    messages:
+      already_confirmed: a déjà été confirmée, veuillez essayer de vous connecter
+      confirmation_period_expired: n'a pas été confirmée à l'adresse %{period}, veuillez en demander une nouvelle
+      expired: a expiré, veuillez en demander un nouveau
+      not_found: non trouvé
+      not_locked: n'était pas verrouillé
+      not_saved:
+        one: '1 erreur a empêché l''enregistrement de ce site %{resource}:'
+        other: ''
