@@ -1,1 +1,91 @@
-fr: {}
+fr:
+  submit: Soumettre
+  cancel: Annuler le processus
+  confirm_cancel: Annuler le processus ?
+  error: Erreur
+  more: Plus
+  no_tasks: Pas de tâches
+  tasks: Tâches
+  loading: Chargement
+  hide_widget: Cacher
+  bp_running: Le processus de gestion est déjà en cours d'exécution ou assigné à un autre utilisateur
+  no_bp_to_start: Il n'y a pas de processus d'entreprise disponible pour démarrer.
+  errors:
+    camunda_is_unavailable: Le service Camunda n'est pas disponible
+    field_not_defined_in_bp: Le champ portant le nom %{field_name} n'est pas défini dans les variables BP
+    cannot_obtain_available_actions: Impossibilité d'obtenir les actions disponibles
+    cannot_start_process: Impossible de démarrer le processus
+    file_list_name_empty: Le champ %{field_name} doit avoir un paramètre "file_list_name" non vide
+    file_list_name_not_matched: Il manque au formulaire un champ de type "file_list" et de nom "%{file_list_name}"
+    field_is_required: Le champ est obligatoire
+    task_already_claimed: Task %{task_name} est déjà revendiqué
+    user_not_found: L'utilisateur actuel n'est pas trouvé à Camunda
+  notifications:
+    new_assigned_task: 'Nouvelle tâche assignée : %{task_name}'
+    new_assigned_task_plural: "%{count} de nouvelles tâches ont été attribuées : %{task_names}"
+  components:
+    select:
+      searching: Recherche...
+      no_results_found: Aucun résultat trouvé
+      enter_more_chars: Veuillez saisir 2 caractères ou plus
+    file_upload:
+      drag_and_drop: 'Glisser-déposer les fichiers à joindre, ou'
+      browse: parcourir
+    claiming:
+      open_tasks: Tâches ouvertes
+      claim: Revendiquer
+      tabs:
+        my: Mes tâches (%{count})
+        unassigned: Tâches non revendiquées (%{count})
+      table:
+        priority: Priorité
+        title: Titre
+        type: Type de tâche
+        description: Description des tâches
+        sla: Créé/échéance
+        empty_description: "-"
+        empty_tasks: Pas de tâches
+        priorities:
+          medium: Moyen
+          high: Haut
+          urgent: Urgent
+      overview:
+        header: Aperçu des tâches
+        due: 'Date d''échéance :'
+        created: 'Créé à :'
+        priority: 'Priorité :'
+        description: 'Description :'
+        claim_task: Revendiquer la tâche
+        claim_and_open: Revendiquer et accéder à la tâche
+        go_to_task: Aller à la tâche
+      created:
+        expired: expiré
+        past_due: date d'échéance dépassée
+        to_deadline: à la date d'échéance
+        ago: il y a
+        periodUnits:
+          minute: m
+          hour: h
+          day: d
+          week: s
+          month: m
+          year: a
+      short_list:
+        view_all: Voir tous
+    services_table:
+      table:
+        columns:
+          action: Action
+          equipmentName: Type d'équipement
+          serviceName: Service
+          servicePrice: Prix
+          serviceQuantity: Montant
+          serviceTotalPrice: Total
+          subscriptionBeginDate: Date de début
+          subscriptionEndDate: Date de fin
+          allowProvisioning: Autoriser le provisionnement
+          serviceAddress: Adresse de service
+          macAddress: MAC
+          ipAddress: IP
+          vlan: VLAN
+          phone: Téléphone

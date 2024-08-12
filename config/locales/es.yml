@@ -312,7 +312,6 @@ es:
     profiles:
       resource: Perfiles de filtro
       parameters:
-        id: ID de perfil
         data: Сampos personalizados del orden
         user_email: Correo electrónico del usuario
         order_type_code: Código del tipo de orden
