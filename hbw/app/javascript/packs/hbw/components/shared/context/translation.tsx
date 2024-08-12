@@ -7,7 +7,7 @@ import ConnectionContext, { ContextType as ConnectionContextType } from './conne
 
 export type ContextType = {
   locale: {
-    code: 'en' | 'ru' | 'es',
+    code: 'en' | 'ru' | 'es' | 'fr',
     dateTimeFormat: string
   }
   translate: (key: string, vars?: object, fallback?: string) => string,
@@ -23,7 +23,7 @@ const TranslationContext = createContext<ContextType | null>(null);
 
 type InitParams = {
   locale: {
-    code: 'en' | 'ru' | 'es',
+    code: 'en' | 'ru' | 'es' | 'fr',
     dateTimeFormat: string
   }
 }
