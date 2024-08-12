@@ -1,4 +1,9 @@
-v2.7.19 [Unreleased]
+v2.7.20 [unreleased]
+-------------------
+### Features
+- [#750](https://github.com/hydra-billing/homs/pull/750) Support fr locale.
+
+v2.7.19 [2024-04-04]
 -------------------
 ### Bugfixes
 - [#742](https://github.com/hydra-billing/homs/pull/742) Allow to change starter groups and starter users for business process without reloading HOMS
