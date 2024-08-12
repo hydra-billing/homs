@@ -1,1 +1,316 @@
-fr: {}
+fr:
+  logo: Hydra OMS
+  hello: Bonjour le monde
+  add: Ajouter
+  access_denied: Accès refusé
+  edit: Editer
+  save: Enregistrer
+  activate: Activer
+  dismiss: Rejeter
+  user: Utilisateur
+  user_updated: Mise à jour de l'utilisateur
+  user_deleted: Utilisateur supprimé
+  record_not_found: Enregistrement non trouvé
+  config:
+    bad_entity_url: Paramètre incorrect dans entity_url '%{variable_name}'
+  custom_fields:
+    definition:
+      missing_attribute: Attribut manquant '%{attribute_name}'
+      unknown_type: Type inconnu '%{type}'
+      invalid_type: 'L''attribut ''%{attribute_name}'' doit être du type %{type} '
+      undefined_field: Le champ '%{field_name}' n'est pas défini dans le type de commande
+      max_length: L'attribut '%{attribute_name}' ne doit pas dépasser %{max_length} caractères
+      no_known_fields: Il ne reste plus de champs après avoir ignoré les champs inconnus
+      invalid_value: 'L''attribut ''%{attribute_name}'' avec la valeur ''%{value}'' doit être du type %{type} '
+      at_least: L'attribut "%{attribute_name}" doit avoir au moins la valeur " %{min_value} " %{in}
+      not_in_set: L'attribut '%{attribute_name}' avec la valeur '%{value}' doit avoir une valeur de la liste %{set}
+      invalid: L'attribut '%{attribute_name}' a la valeur invalide '%{value}'
+      incorrect_format: L'attribut %{attribute_name} a une valeur invalide %{value}. Ce n'est pas un JSON valide.
+  devise:
+    passwords:
+      new:
+        title: Vous avez oublié votre mot de passe ?
+        description: Nous vous enverrons des instructions sur la manière de réinitialiser votre mot de passe
+        submit: Réinitialiser le mot de passe
+      edit:
+        title: Modifier le mot de passe
+        new_password: Nouveau mot de passe
+        confirm_new_password: Confirmer le nouveau mot de passe
+        submit: Enregistrer le nouveau mot de passe
+    registrations:
+      new:
+        title: S'inscrire
+        submit: S'inscrire
+      edit:
+        title: Modifier l'utilisateur
+        leave_description: Laissez ces champs vides si vous ne souhaitez pas modifier votre mot de passe.
+        new_password: Nouveau mot de passe
+        currently_waiting: En attente de confirmation
+        current_password_description: Vous devez saisir votre mot de passe actuel pour effectuer des modifications.
+        submit: Mise à jour
+    sessions:
+      new:
+        title: Se connecter
+        sign_up: S'inscrire
+        forgot_password: Mot de passe oublié ?
+        remember_me: Souvenez-vous de moi
+        submit: Se connecter
+        single_sign_on: Signature unique (SSO)
+  helpers:
+    enter_state: Statut de la commande
+    enter_user: Utilisateur
+    enter_order_type: Type de commande
+    enter_archived: Archivé
+    creation_date: Créé à
+    estimated_exec_date: Date d'échéance
+    from: de
+    to: à
+    yes_no:
+      'yes': 'Oui'
+      'no': 'Non'
+    custom_fields_filter:
+      title: Champs personnalisés de la commande
+      add: Filtrer par champs personnalisés
+      placeholder: Sélectionner un champ
+  users:
+    new:
+      title: Ajouter un utilisateur
+    edit:
+      title: Profil de l'utilisateur
+    index:
+      title: Utilisateurs
+    add:
+      added: Utilisateur ajouté
+    show:
+      title: Profil de l'utilisateur
+      generate_api_token: Générer un jeton API
+      renew_api_token: Renouveler le jeton API
+      renew_api_token_warning: Le nouveau jeton API remplacera le jeton actuel. Êtes-vous sûr ?
+      clear_api_token: Supprimer le jeton API
+      clear_api_token_warning: Le jeton API actuel sera supprimé. Êtes-vous sûr ?
+      yes_clear: Oui, supprimer
+      yes_renew: Oui, renouveler
+      delete_user: Supprimer un utilisateur
+    empty: Vide
+    destroy:
+      user_has_orders: Impossible de supprimer l'utilisateur %{user_name} car il possède des commandes
+  orders:
+    new:
+      title: Ajouter une commande
+      label: Type de commande
+    states:
+      to_execute: Nouveau
+      in_progress: En cours
+      done: Terminé
+    search_by_not_found: Ordre non trouvé avec %{criteria}
+    index:
+      title: Commandes
+      archived: Archivé
+      ext_code: Code externe
+      no_orders_found: Aucune commande trouvée
+    search_form:
+      filter_records: Liste des commandes
+      search_for_record: Trouver un ordre
+    search_by:
+      search: Recherche
+      code: Code de commande
+      ext_code: Code externe de commande
+    filter_by:
+      search: Recherche
+      print: Imprimer
+    show:
+      order_data: Données de commande
+      edit_title: Modifier les données de la commande
+      print_title: Imprimer les données de l'ordre
+      empty_code_title: Pour imprimer, veuillez saisir un code de modèle d'impression dans le type de commande
+    print: Imprimer
+    print_pdf: Imprimer le PDF
+    print_tasks:
+      started: Le traitement de la tâche d'impression %{print_task_id} a commencé. Veuillez consulter votre courrier électronique pour connaître le résultat.
+      errors:
+        multiple_types: Les commandes sélectionnées ont des types différents. Pour imprimer, veuillez sélectionner des commandes du même type.
+        internal_error: Le traitement de la tâche d'impression a échoué en raison d'une erreur interne.
+    total_items: 'Commandes trouvées :'
+  user_role:
+    user: Utilisateur
+    vip: Utilisateur avancé
+    admin: Administrateur
+  layouts:
+    navigation:
+      sign_in: Se connecter
+      sign_up: S'inscrire
+      help: Aide
+      sign_out: Se déconnecter
+      edit_account: Profil
+      orders: Commandes
+      users: Utilisateurs
+      setup_order_types: Types de commandes
+      tasks: Tâches
+    form_errors:
+      errors:
+        one: "%{count} erreur est empêché l'enregistrement de l'utilisateur :"
+        other: "%{count} Des erreurs ont empêché l'enregistrement de l'utilisateur :"
+  admin:
+    order_types:
+      index:
+        title: Types de commandes
+        add: Charger le type de commande à partir d'un fichier YAML
+        order_type_removal: Supprimer un type de commande
+        confirmation: Etes-vous sûr de vouloir supprimer le type d'ordre "%{order_type}" ? Les commandes existantes ne seront pas affectées.
+        yes_remove: Oui, supprimer
+      show:
+        activate_dismiss: Activer le type d'ordre s'il est correct ou le rejeter
+        activated: Type de commande activé
+        back: Retour à la liste
+      create:
+        uploaded: Le type d'ordre a été chargé avec succès
+        equal_exists: Le type d'ordre identique existe déjà
+      dismiss:
+        dismissed: Type d'ordre rejeté
+      activate:
+        activated: Type de commande activé
+      destroy:
+        destroyed: Type d'ordre supprimé
+  tasks:
+    index:
+      title: Tâches
+  activerecord:
+    models:
+      user:
+        one: ''
+        other: Utilisateurs
+      order_type:
+        one: ''
+        other: Types de commandes
+    attributes:
+      order:
+        code: Code
+        order_type_code: Type de commande
+        ext_code: Code externe
+        user: Utilisateur
+        bp_id: ID du processus d'entreprise
+        bp_state: Statut du processus de gestion
+        state: Statut
+        done_at: Terminé à
+        archived: Archivé
+        data: Champs personnalisés
+        created_at: Créé à
+        updated_at: Mise à jour à
+        print_form_code: Imprimer le code du modèle
+        estimated_exec_date: Date d'échéance
+      order_type:
+        code: Code
+        file: Contenu du fichier YAML chargé
+        fields: Fichiers personnalisés
+        active: Actif
+      user:
+        name: Prénom
+        email: Courriel
+        role: Rôle
+        middle_name: Deuxième prénom
+        last_name: Nom de famille
+        full_name: Nom complet
+        company: Entreprise
+        department: Département
+        api_token: Jeton API
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        current_password: Mot de passe actuel
+    errors:
+      models:
+        order_type:
+          attributes:
+            base:
+              cannot_delete_as_orders_exist: Ne peut être supprimé car des commandes associées existent
+            file:
+              invalid: Erreur d'analyse de fichier
+        order:
+          attributes:
+            data:
+              fields_definition_invalid: 'Erreur fatale : le type de cette commande a des champs personnalisés non valides. Veuillez contacter votre administrateur.'
+              form_key_missed_in_task: Le formulaire avec la clé "%{form_key}" n'est pas trouvé dans la tâche en cours
+        user:
+          blank: n'est pas spécifié
+          attributes:
+            email:
+              invalid: n'est pas valide
+              taken: est déjà pris
+            name:
+              blank: n'est pas spécifié
+            last_name:
+              blank: n'est pas spécifié
+            company:
+              blank: n'est pas spécifié
+            department:
+              blank: n'est pas spécifié
+            password:
+              blank: n'est pas spécifié
+              too_short: est trop courte
+            password_confirmation:
+              confirmation: est vide
+  js:
+    cancel: Annuler
+    error: Erreur
+    remove: Retirer
+    'yes': 'Oui'
+    not_selected: Non sélectionné
+    select2:
+      not_set: Vide
+    columns_settings: Champs d'affichage
+    from: de
+    to: à
+  doc:
+    common:
+      cases:
+        list: Liste
+        show: Obtenir
+        create: Créer
+        update: Mise à jour
+        delete: Supprimer
+      parameters:
+        default: Défaut
+        allowed_values: Valeurs autorisées
+        page_size: Articles par page
+        page: Page actuelle
+    orders:
+      resource: Commandes
+      cases:
+        update_data: Mise à jour des champs personnalisés
+        update_base_fields: Mise à jour des champs de base
+        update_user_email: Mise à jour de l'adresse électronique de l'utilisateur
+      explanations:
+        update: Cette méthode ne met à jour que les champs passés, les autres restent inchangés.
+      parameters:
+        code: Code de commande
+        data: Champs personnalisés
+        user_email: Courriel de l'utilisateur
+        order_type_code: Code du type de commande
+        ext_code: Code de commande externe
+        bp_id: ID du processus d'entreprise
+        bp_state: Statut du processus de gestion
+        state: Statut de la commande
+        done_at: Terminé à
+        estimated_exec_date: Date d'échéance
+        archived: Archivé
+    users:
+      resource: Utilisateurs
+      parameters:
+        email: Courriel
+        first_name: Prénom
+        middle_name: Deuxième prénom
+        last_name: Nom de famille
+        user_role: Rôle de l'utilisateur
+        company: Nom de l'entreprise
+        department: Nom du service
+        password: Mot de passe
+        blocked: Bloqué
+        external: Externe
+        password_salt: Sel du mot de passe
+        encrypted_password: Mot de passe crypté
+    profiles:
+      resource: Profils des filtres
+      parameters:
+        id: ID du profil
+        data: Champs personnalisés de la commande
+        user_email: Courriel de l'utilisateur
+        order_type_code: Code du type de commande
