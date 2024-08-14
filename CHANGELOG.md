@@ -1,4 +1,4 @@
-v2.7.20 [unreleased]
+v2.7.20 [2024-08-14]
 -------------------
 ### Features
 - [#750](https://github.com/hydra-billing/homs/pull/750) Support fr locale.
