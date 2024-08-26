@@ -72,3 +72,19 @@ ru:
           year: ' г.'
       short_list:
         view_all: Посмотреть все
+    services_table:
+      table:
+        columns:
+          action: Действие
+          equipmentName: Тип оборудования
+          serviceName: ''
+          servicePrice: Цена
+          serviceQuantity: Сумма
+          serviceTotalPrice: Итого
+          subscriptionBeginDate: Дата начала
+          subscriptionEndDate: Дата окончания
+          serviceAddress: Адрес службы
+          macAddress: MAC
+          ipAddress: IP
+          vlan: VLAN
+          phone: Телефон
