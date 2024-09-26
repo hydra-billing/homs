@@ -27,7 +27,7 @@ module HBW
         include HBW::Logger
 
         def build
-          conn = Faraday.new(url: config[:base_url]) do |faraday|
+          conn = Faraday.new(url: config.first[:url]) do |faraday|
             faraday.request :json
             faraday.response :json, content_type: /\bjson$/
             faraday.response :detailed_logger, logger
@@ -35,10 +35,6 @@ module HBW
           end
 
           new(conn)
-        end
-
-        def load
-          HBW::Common::API.config = (Settings::BPM[Rails.env] || {})
         end
       end
     end

@@ -41,6 +41,7 @@ v2.9 [Unreleased]
 - [#731](https://github.com/hydra-billing/homs/pull/731) Add columns display management option.
 - [#738](https://github.com/hydra-billing/homs/pull/738) Add services select table service add option.
 - [#750](https://github.com/hydra-billing/homs/pull/750) Support fr locale.
+- [#753](https://github.com/hydra-billing/homs/pull/753) Turn BPM config to a list.
 
 
 -------------------
