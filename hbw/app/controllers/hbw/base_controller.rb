@@ -74,7 +74,7 @@ module HBW
     end
 
     def bpm_config
-      Settings::BPM[Rails.env] || {}
+      HBW::Common::API.config.first || {}
     end
 
     def auth_as_sso_service_user?
