@@ -2,6 +2,7 @@ v2.8.13 [Unreleased]
 -------------------
 ### Features
 - [#757](https://github.com/hydra-billing/homs/pull/757) Allow to localize description for BP form fields.
+- [#753](https://github.com/hydra-billing/homs/pull/753) Turn BPM config to a list.
 
 v2.8.11 [2024-08-12]
 -------------------
