@@ -121,13 +121,15 @@ module HBW
         end
       end
 
-      def get_form_by_task_id(task_id)
+      def get_form_by_task_id(task_id, _process_key)
+        # use process_key to choose API client
         HBW::Form.with_connection(api) do
           HBW::Form.get_form_by_task_id(task_id)
         end
       end
 
-      def get_task_by_id(task_id)
+      def get_task_by_id(task_id, _process_key)
+        # use process_key to choose API client
         HBW::Task.with_connection(api) do
           HBW::Task.get_task_by_id(task_id)
         end

@@ -42,6 +42,7 @@ v2.9 [Unreleased]
 - [#738](https://github.com/hydra-billing/homs/pull/738) Add services select table service add option.
 - [#750](https://github.com/hydra-billing/homs/pull/750) Support fr locale.
 - [#753](https://github.com/hydra-billing/homs/pull/753) Turn BPM config to a list.
+- [#755](https://github.com/hydra-billing/homs/pull/755) Expect a process definition key in a task notification.
 
 
 -------------------
