@@ -14,7 +14,7 @@ describe 'Events::Tasks', type: :request do
   describe 'Events' do
     describe 'Tasks' do
       it 'assignment event success' do
-        expect(widget).to receive(:get_task_by_id).with('12345').and_return(
+        expect(widget).to receive(:get_task_by_id).with('12345', 'test_process').and_return(
           {id:                  '12345',
            name:                'Tasks events test form',
            assignee:            nil,
@@ -38,7 +38,7 @@ describe 'Events::Tasks', type: :request do
            tenantId:            nil}
         )
 
-        expect(widget).to receive(:get_form_by_task_id).with('12345').and_return(
+        expect(widget).to receive(:get_form_by_task_id).with('12345', 'test_process').and_return(
           'form: \
             name: Tasks events test form \
             css_class: col-xs-12 col-sm-6 col-md-5 col-lg-4 \
@@ -61,16 +61,20 @@ describe 'Events::Tasks', type: :request do
                                                                               {task_id:        '12345',
                                                                                event_name:     'assignment',
                                                                                version:        '1',
+                                                                               process_key:    'test_process',
                                                                                cache_key:      '12345_1672531200000_a1',
                                                                                assigned_to_me: true}.to_json)
 
         sign_in user
 
-        event_params = {id:         '12345',
-                        event_name: 'assignment',
-                        assignee:   'user@example.com',
-                        version:    '1',
-                        users:      ['user@example.com']}
+        event_params = {
+          id:          '12345',
+          event_name:  'assignment',
+          assignee:    'user@example.com',
+          version:     '1',
+          users:       ['user@example.com'],
+          process_key: 'test_process'
+        }
 
         put "/widget/events/tasks/#{event_params[:id]}", params: event_params
 
@@ -87,15 +91,19 @@ describe 'Events::Tasks', type: :request do
                                                                               {task_id:        '12345',
                                                                                event_name:     'complete',
                                                                                version:        '1',
+                                                                               process_key:    'test_process',
                                                                                assigned_to_me: true}.to_json)
 
         sign_in user
 
-        event_params = {id:         '12345',
-                        event_name: 'complete',
-                        assignee:   'user@example.com',
-                        version:    '1',
-                        users:      ['user@example.com']}
+        event_params = {
+          id:          '12345',
+          event_name:  'complete',
+          assignee:    'user@example.com',
+          version:     '1',
+          users:       ['user@example.com'],
+          process_key: 'test_process'
+        }
 
         put "/widget/events/tasks/#{event_params[:id]}", params: event_params
 

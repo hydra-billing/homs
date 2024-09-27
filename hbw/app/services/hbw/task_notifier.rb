@@ -3,9 +3,10 @@ module HBW
     class << self
       def call(widget:, event:)
         message = {
-          task_id:    event[:task_id],
-          event_name: event[:name],
-          version:    event[:version]
+          task_id:     event[:task_id],
+          event_name:  event[:name],
+          version:     event[:version],
+          process_key: event[:process_key]
         }
 
         if need_to_fetch_task?(event[:name])
@@ -14,8 +15,8 @@ module HBW
 
           Rails.cache.fetch(cache_key, expires_in: 300) do
             {
-              task: widget.get_task_by_id(event[:task_id]),
-              form: widget.get_form_by_task_id(event[:task_id])
+              task: widget.get_task_by_id(event[:task_id], event[:process_key]),
+              form: widget.get_form_by_task_id(event[:task_id], event[:process_key])
             }
           end
 
