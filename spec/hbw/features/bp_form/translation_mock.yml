@@ -43,6 +43,9 @@ get:
             - name: selectField
               type: select
               label: Select field
+              description: 
+                text: Description of select field
+                placement: top
               nullable: false
               required: true
               choices:
@@ -59,6 +62,9 @@ get:
             - name: stringField
               type: string
               label: String field
+              description: 
+                text: Description of string field
+                placement: top
               required: true
               css_class: col-xs-6 col-sm-4 col-md-3
             - name: stringRegexpField
@@ -75,6 +81,9 @@ get:
             - name: selectTableField
               type: select_table
               label: Select table field
+              description:
+                text: Description of select table field
+                placement: top
               css_class: col-xs-12
               required: true
               nullable: false
@@ -87,11 +96,17 @@ get:
             - name: textField
               type: text
               label: Text field
+              description:
+                text: Description of text field
+                placement: top
               rows: 6
               css_class: col-xs-6
             - name: datetimeField
               type: datetime
               label: Datetime field
+              description:
+                text: Description of datetime field
+                placement: top
               css_class: col-xs-6 col-sm-4 col-md-3
             - name: group
               type: group
@@ -101,16 +116,25 @@ get:
                 - name: fileUploadField
                   type: file_upload
                   label: File upload field
+                  description: 
+                    text: Description of file_upload field
+                    placement: top  
                   css_class: col-md-4 col-xs-4 col-lg-4
                   input_text: Put file here
                   browse_link_text: Upload files
                 - name: homsOrderDataFileList
                   type: file_list
                   label: File list field
+                  description: 
+                    text: Description of file_list field
+                    placement: top
                   css_class: col-md-8 col-xs-8 col-lg-8
             - name: checkboxField
               type: checkbox
               label: Checkbox field
+              description: 
+                text: Description of checkbox field
+                placement: top
               css_class: col-xs-12 col-sm-6 col-md-4
             - name: submitSelectField
               type: submit_select

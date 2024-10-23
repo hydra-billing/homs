@@ -76,9 +76,13 @@ modulejs.define('HBWFormDatetime', ['React'], (React) => {
     }
 
     renderDescription = () => {
-      const { placement, text } = this.props.params.description;
+      const { name, params, task } = this.props;
 
-      return <div className="description" data-test={`description-${placement}`}>{text}</div>;
+      const { placement, text } = params.description;
+
+      const translated = this.context.translateBP(`${task.process_key}.${task.key}.${name}.description`, {}, text);
+
+      return <div className="description" data-test={`description-${placement}`}>{translated}</div>;
     };
 
     componentWillUnmount () {
