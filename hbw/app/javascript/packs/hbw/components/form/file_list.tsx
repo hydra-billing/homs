@@ -65,7 +65,9 @@ const HBWFormFileList: React.FC<Props> = ({
   const renderDescription = () => {
     const { placement, text } = params.description;
 
-    return <div className="description" data-test={`description-${placement}`}>{text}</div>;
+    const translated = translateBP(`${task.process_key}.${task.key}.${name}.description`, {}, text);
+
+    return <div className="description" data-test={`description-${placement}`}>{translated}</div>;
   };
 
   const toggleLink = (link: Link) => {
