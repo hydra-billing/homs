@@ -53,10 +53,14 @@ modulejs.define('HBWFormText', ['React'], (React) => {
     }
 
     renderDescription = () => {
-      const { placement, text } = this.props.params.description;
+      const { name, params, task } = this.props;
 
-      return <div className="description" data-test={`description-${placement}`}>{text}</div>;
-    }
+      const { placement, text } = params.description;
+
+      const translated = this.context.translateBP(`${task.process_key}.${task.key}.${name}.description`, {}, text);
+
+      return <div className="description" data-test={`description-${placement}`}>{translated}</div>;
+    };
 
     serialize = () => {
       if (this.props.params.editable === false || this.props.disabled || this.props.hidden) {

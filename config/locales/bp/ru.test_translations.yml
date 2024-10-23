@@ -6,28 +6,36 @@ ru:
       group: Группа
       selectField:
         label: Поле select
+        description: Описание поля select
       stringField:
         label: Поле string
+        description: Описание поля string
       stringRegexpField:
         label: Поле string c regexp валидацией
         message: Поле не соответствует regexp
       staticField: <div class="alert alert-success"><h4>Поле static с подстановкой $homsOrderCode</h4></div>
       selectTableField:
         label: Поле select_table
+        description: Описание поля select_table
         header:
           - Колонка 1
       textField:
         label: Поле text
+        description: Описание поля text
       datetimeField:
         label: Поле datetime
+        description: Описание поля datetime
       fileUploadField:
         label: Поле file_upload
+        description: Описание поля file_upload
         input_text: Перенесите файл сюда
         browse_link_text: Прикрепите файлы
       homsOrderDataFileList:
         label: Поле file_list
+        description: Описание поля file_list
       checkboxField:
         label: Поле checkbox
+        description: Описание поля checkbox
       submitSelectButton1:
         label: Кнопка 1
       submitSelectButton2:
