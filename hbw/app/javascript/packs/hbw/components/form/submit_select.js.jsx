@@ -32,10 +32,10 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
       const buttons = params.options.map(option => self.buildButton(option));
 
       return showSubmit && !hidden
-      && <div className={cx('col-xs-12', params.css_class)}>
+        && <div className={cx('col-xs-12', params.css_class)}>
           <div className="control-buttons">
-            { showCancelButton && this.renderCancelButton() }
-            { buttons }
+            {showCancelButton && this.renderCancelButton()}
+            {buttons}
           </div>
           <input type="hidden" name={name} value={this.state.value} />
         </div>;
@@ -69,7 +69,10 @@ modulejs.define('HBWFormSubmitSelect', ['React'], (React) => {
     renderCancelButton = () => {
       const { task } = this.props;
 
-      return <CancelProcessButton processInstanceId={task.process_instance_id} />;
+      return <CancelProcessButton
+        processInstanceId={task.process_instance_id}
+        processKey={task.process_key}
+      />;
     };
 
     serialize = () => {

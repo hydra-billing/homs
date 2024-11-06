@@ -43,6 +43,7 @@ v2.9 [Unreleased]
 - [#750](https://github.com/hydra-billing/homs/pull/750) Support fr locale.
 - [#753](https://github.com/hydra-billing/homs/pull/753) Turn BPM config to a list.
 - [#755](https://github.com/hydra-billing/homs/pull/755) Expect a process definition key in a task notification.
+- [#758](https://github.com/hydra-billing/homs/pull/758) Support different BPM backends for different process types.
 
 
 -------------------

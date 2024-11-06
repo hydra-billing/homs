@@ -55,13 +55,14 @@ export const withStoreContext = ({
       this.initStore();
     }
 
-    getTaskById = async (taskId, cacheKey = null) => {
+    getTaskById = async (taskId, processKey, cacheKey = null) => {
       const result = await connection.request({
         url:    `${connection.serverURL}/tasks/${taskId}`,
         method: 'GET',
         data:   {
           cache_key:    cacheKey,
           entity_class: entityClassCode,
+          process_key:  processKey
         },
       });
 
@@ -113,8 +114,8 @@ export const withStoreContext = ({
       }
     };
 
-    fetchTask = async (taskId, cacheKey, assignedToMe, version) => {
-      const task = await this.getTaskById(taskId, cacheKey);
+    fetchTask = async (taskId, cacheKey, assignedToMe, processKey, version) => {
+      const task = await this.getTaskById(taskId, processKey, cacheKey);
 
       if (this.vesionIsOutdated(taskId, version)) {
         return;
@@ -133,6 +134,7 @@ export const withStoreContext = ({
       cache_key: cacheKey,
       event_name: eventName,
       assigned_to_me: assignedToMe,
+      process_key: processKey,
       version
     }) => {
       if (this.vesionIsOutdated(taskId, version)) {
@@ -145,7 +147,7 @@ export const withStoreContext = ({
       );
 
       if (['create', 'assignment'].includes(eventName)) {
-        await this.fetchTask(taskId, cacheKey, assignedToMe, version);
+        await this.fetchTask(taskId, cacheKey, assignedToMe, processKey, version);
       }
 
       if (['complete', 'delete'].includes(eventName)) {
@@ -192,7 +194,9 @@ export const withStoreContext = ({
       );
 
       return Object.entries(emptyFormEntityTasks).map(([, task]) => ({
-        task_id: task.id, entity_class: entityClassCode
+        task_id:      task.id,
+        entity_class: entityClassCode,
+        process_key:  task.process_key
       }));
     };
 

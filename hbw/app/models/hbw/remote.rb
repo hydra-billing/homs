@@ -1,5 +1,7 @@
 module HBW
   module Remote
+    include Dry::Effects.Reader(:connection)
+
     class RemoteError < StandardError
       def initialize(path, error, backtrace = nil)
         super('Failed to make a request to %s (%s)' % [path, error])
@@ -11,16 +13,8 @@ module HBW
       attr_accessor :connection
     end
 
-    def with_connection(connection)
-      before = Remote.connection
-      Remote.connection = connection
-      yield
-    ensure
-      Remote.connection = before
-    end
-
     def do_request(method, *args)
-      response = Remote.connection.send(method, *args)
+      response = connection.send(method, *args)
 
       if [200, 204].include?(response.status)
         case response.body
@@ -48,7 +42,7 @@ module HBW
     end
 
     def ensure_connection_exists
-      raise "You've not provided connection!" unless Remote.connection.present?
+      raise "You've not provided connection!" unless connection.present?
     end
   end
 

@@ -1,7 +1,7 @@
 require_relative '../../hbw/app/models/hbw/camunda/yml_api'
 
 module Imprint
-  class YMLAPI < HBW::Camunda::YMLAPI
+  class YMLAPI < HBW::Common::YMLAPI
     class << self
       def build
         new(YAML.load_file(Rails.root.join('spec/imprint/config/yml_imprint_api.yml')))

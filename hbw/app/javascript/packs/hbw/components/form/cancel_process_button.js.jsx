@@ -3,7 +3,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import TranslationContext from 'shared/context/translation';
 import ConnectionContext from 'shared/context/connection';
 
-const HBWFormCancelProcess = ({ processInstanceId, cancelButtonName, bind }) => {
+const HBWFormCancelProcess = ({
+  processInstanceId, processKey, cancelButtonName, bind
+}) => {
   const { translate: t } = useContext(TranslationContext);
   const { request, serverURL } = useContext(ConnectionContext);
 
@@ -18,7 +20,7 @@ const HBWFormCancelProcess = ({ processInstanceId, cancelButtonName, bind }) => 
 
     if (result) {
       request({
-        url:    `${serverURL}/tasks/${processInstanceId}`,
+        url:    `${serverURL}/tasks/${processInstanceId}?process_key=${processKey}`,
         method: 'DELETE',
         async:  false
       });

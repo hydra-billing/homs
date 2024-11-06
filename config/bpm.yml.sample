@@ -3,7 +3,7 @@ development:
     url: http://camunda:8080/engine-rest/
     login: <%= ENV['BPM_USER'] %>
     password: <%= ENV['BPM_PASSWORD'] %>
-    process_definitions:
+    process_keys:
       - new_process
 
 production:
@@ -11,13 +11,13 @@ production:
     url: http://camunda:8080/engine-rest/
     login: <%= ENV['BPM_USER'] %>
     password: <%= ENV['BPM_PASSWORD'] %>
-    process_definitions:
+    process_keys:
       - new_process
   - name: camunda_2
     url: http://camunda:8081/engine-rest/
     login: <%= ENV['BPM_USER'] %>
     password: <%= ENV['BPM_PASSWORD'] %>
-    processes:
+    process_keys:
       - old_process
 
 test:
@@ -25,5 +25,5 @@ test:
     url: http://camunda:8080/engine-rest/
     login: <%= ENV['BPM_USER'] %>
     password: <%= ENV['BPM_PASSWORD'] %>
-    process_definitions:
+    process_keys:
       - new_process
