@@ -44,7 +44,13 @@ const HBWClaimingTaskList = () => {
 
     const { ok } = await request({
       url:    `${serverURL}/tasks/${task.id}/claim`,
-      method: 'POST'
+      method: 'POST',
+      data:   {
+        process_key: task.process_key
+      },
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
 
     if (!ok) {

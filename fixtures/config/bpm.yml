@@ -3,12 +3,12 @@ test:
     url: http://localhost:8766/engine-rest/
     login: kermit
     password: kermit
-    process_definitions:
+    process_keys:
       - pizza_order
       - new_customer
   - name: camunda_2
     url: http://localhost:8767/engine-rest/
     login: kermit
     password: kermit
-    process_definitions:
+    process_keys:
       - relocate_customer

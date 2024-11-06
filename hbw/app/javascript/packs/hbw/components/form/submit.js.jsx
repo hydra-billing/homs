@@ -18,12 +18,13 @@ modulejs.define('HBWFormSubmit', ['React'], (React) => {
     }
 
     renderCancelButton = () => {
-      const { processInstanceId, cancelButtonName } = this.props;
+      const { processInstanceId, processKey, cancelButtonName } = this.props;
 
       return <CancelProcessButton
-               processInstanceId={processInstanceId}
-               cancelButtonName = {cancelButtonName}
-             />;
+        processInstanceId={processInstanceId}
+        processKey={processKey}
+        cancelButtonName={cancelButtonName}
+      />;
     };
 
     renderSubmitButton = () => {
@@ -37,8 +38,8 @@ modulejs.define('HBWFormSubmit', ['React'], (React) => {
 
       return (
         <button type="submit"
-                className={buttonCN}
-                disabled={formSubmitting || this.state.error}>
+          className={buttonCN}
+          disabled={formSubmitting || this.state.error}>
           <FontAwesomeIcon icon="check" />
           {` ${submitButtonName || this.context.translate('submit')}`}
         </button>

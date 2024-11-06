@@ -10,31 +10,38 @@ module HBW
 
       class_attribute :config
 
-      def initialize(conn)
+      attr_reader :process_keys
+
+      def initialize(conn, process_keys)
         @conn = conn
+        @process_keys = process_keys
       end
 
       %w(get put patch post delete).each do |method|
         define_method method do |url, *params|
-          @conn.send(method, url, *params) do |request|
-            request.headers['Content-type'] = 'application/json'
-            request.headers['Authorization'] = auth_header
-          end
+          @conn.send(method, url, *params)
         end
+      end
+
+      def process_supported?(key)
+        process_keys.include?(key)
       end
 
       class << self
         include HBW::Logger
+        include Dry::Effects.Reader(:auth_header)
 
-        def build
-          conn = Faraday.new(url: config.first[:url]) do |faraday|
+        def build(bpm_config)
+          conn = Faraday.new(url: bpm_config[:url]) do |faraday|
             faraday.request :json
+            faraday.headers['Content-type'] = 'application/json'
+            faraday.headers['Authorization'] = auth_header.(bpm_config[:login], bpm_config[:password])
             faraday.response :json, content_type: /\bjson$/
             faraday.response :detailed_logger, logger
             faraday.adapter Faraday.default_adapter
           end
 
-          new(conn)
+          new(conn, bpm_config[:process_keys])
         end
       end
     end

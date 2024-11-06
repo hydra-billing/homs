@@ -17,15 +17,17 @@ module HBW
     end
 
     def auth_header
-      if sso_enabled?
-        "Bearer #{@access_token}"
-      else
-        "Basic #{basic_auth_token}"
+      lambda do |login, password|
+        if sso_enabled?
+          "Bearer #{@access_token}"
+        else
+          "Basic #{basic_auth_token(login, password)}"
+        end
       end
     end
 
-    def basic_auth_token
-      Base64.strict_encode64 "#{bpm_config.fetch(:login)}:#{bpm_config.fetch(:password)}"
+    def basic_auth_token(login, password)
+      Base64.strict_encode64("#{login}:#{password}")
     end
   end
 end

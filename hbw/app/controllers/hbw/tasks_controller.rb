@@ -12,11 +12,11 @@ module HBW
     end
 
     def show
-      @task = widget.get_task_with_form(task_id, entity_class, cache_key)
+      @task = widget.get_task_with_form(task_id, entity_class, cache_key, process_key)
     end
 
     def destroy
-      result = widget.cancel_process(params[:id])
+      result = widget.cancel_process(params[:id], process_key)
 
       if result
         head :no_content
@@ -38,7 +38,7 @@ module HBW
         data[file_list_name] = file_list.to_json
       end
 
-      result = widget.submit(entity_class, task_id, data)
+      result = widget.submit(entity_class, task_id, data, process_key)
 
       if result
         head :no_content
@@ -48,7 +48,7 @@ module HBW
     end
 
     def lookup
-      form = widget.form(task_id, entity_class)
+      form = widget.form(task_id, entity_class, process_key)
       field = form.field(params[:name])
       variants = field.lookup_values(params[:q])
 
@@ -56,7 +56,7 @@ module HBW
     end
 
     def claim
-      widget.claim_task(current_user_identifier, task_id)
+      widget.claim_task(current_user_identifier, task_id, process_key)
       head :no_content
     end
 
