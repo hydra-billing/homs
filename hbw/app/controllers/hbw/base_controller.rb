@@ -43,9 +43,10 @@ module HBW
     end
 
     def auth_service_user
+      service_user_config = Rails.application.config.app[:sso][:service_user]
       session_state = yield HOMS.container[:keycloak_client].authenticate_by_password!(
-        bpm_config.fetch(:login),
-        bpm_config.fetch(:password)
+        service_user_config.fetch(:login),
+        service_user_config.fetch(:password)
       )
 
       cookies['service_user_session_state'] = {value: session_state, httponly: true}
@@ -67,10 +68,6 @@ module HBW
 
     def service_user_token
       HOMS.container[:keycloak_client].access_token(cookies['service_user_session_state']).fmap(&:source).value_or(nil)
-    end
-
-    def bpm_config
-      (HBW::Common::API.config.first || {}).deep_symbolize_keys
     end
 
     def auth_as_sso_service_user?

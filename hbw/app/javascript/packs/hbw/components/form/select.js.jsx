@@ -134,7 +134,8 @@ modulejs.define('HBWFormSelect',
           url,
           method: 'GET',
           data:   {
-            q: inputValue
+            q:           inputValue,
+            process_key: task.process_key
           }
         }).then(res => res.json())
           .catch((e) => {

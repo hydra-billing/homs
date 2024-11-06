@@ -31,5 +31,9 @@ module HBW
     def autorun_process_key
       params[:autorun_process_key]
     end
+
+    def process_key
+      params.require(:process_key)
+    end
   end
 end

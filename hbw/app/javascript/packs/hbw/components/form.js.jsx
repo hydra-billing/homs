@@ -60,7 +60,13 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWFormDatetime',
 
       await request({
         url:    `${serverURL}/tasks/${this.props.task.id}/claim`,
-        method: 'POST'
+        method: 'POST',
+        data:   {
+          process_key: this.props.task.process_key
+        },
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
 
       this.setState({ claiming: false });
@@ -116,6 +122,7 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWFormDatetime',
           return <SubmitSelect
             {...opts}
             showCancelButton={!form.hide_cancel_button}
+            processKey={task.process_key}
             {...onRef} />;
         case 'checkbox':
           return <Checkbox
@@ -164,7 +171,8 @@ modulejs.define('HBWForm', ['React', 'jQuery', 'HBWFormDatetime',
                        showCancelButton={!task.form.hide_cancel_button}
                        submitButtonName={task.form.submit_button_name}
                        cancelButtonName={task.form.cancel_button_name}
-                       processInstanceId={task.process_instance_id} />;
+                       processInstanceId={task.process_instance_id}
+                       processKey={task.process_key} />;
       }
 
       return null;

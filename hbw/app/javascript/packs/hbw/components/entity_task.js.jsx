@@ -29,7 +29,8 @@ modulejs.define(
         method: 'PUT',
         data:   {
           form_data:    variables,
-          entity_class: entityClassCode
+          entity_class: entityClassCode,
+          process_key:  task.process_key
         },
         headers: {
           'X-CSRF-Token': task.form.csrf_token,
