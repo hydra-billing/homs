@@ -5,11 +5,11 @@ module HBW
 
       class << self
         def build(path)
-          new(YAML.load_file(path, aliases: true), [])
+          new(YAML.load_file(path), [])
         end
 
         def for_prosess_keys(path, process_keys)
-          new(YAML.load_file(path, aliases: true), process_keys)
+          new(YAML.load_file(path), process_keys)
         end
       end
 
