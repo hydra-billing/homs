@@ -7,10 +7,12 @@ Rails.application.configure do
   # and recreated between test runs. Don't rely on the data there!
   config.cache_classes = false
 
-  # Do not eager load code on boot. This avoids loading your whole application
-  # just for the purpose of running a single test. If you are using a tool that
-  # preloads Rails for running tests, you may have to set it to true.
-  config.eager_load = false
+  # Eager loading to prevent thread locks when running something like
+  # Dry::Monads::Task[:io] do
+  #   MyClass.some_class_method
+  # end
+  # (this will hang the thread if MyClass is not preloaded until we have zeitwerk as a loader)
+  config.eager_load = true
 
   # Configure static file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
