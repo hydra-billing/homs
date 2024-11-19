@@ -1,4 +1,4 @@
-v2.8.13 [Unreleased]
+v2.8.13 [2024-11-19]
 -------------------
 ### Features
 - [#757](https://github.com/hydra-billing/homs/pull/757) Allow to localize description for BP form fields.
