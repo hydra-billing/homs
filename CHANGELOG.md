@@ -50,10 +50,15 @@ v2.9 [Unreleased]
 ### Breaking changes
 - [#719](https://github.com/hydra-billing/homs/pull/719) Use REDIS_HOST and REDIS_PORT env variables instead of REDIS_URL for actioncable.
 
-v2.8.12 [Unreleased]
+v2.8.13 [2024-11-19]
 -------------------
+### Breaking changes
+- [#753](https://github.com/hydra-billing/homs/pull/753) Turn BPM config to a list.
+
 ### Features
 - [#757](https://github.com/hydra-billing/homs/pull/757) Allow to localize description for BP form fields.
+- [#755](https://github.com/hydra-billing/homs/pull/755) Expect a process definition key in a task notification.
+- [#758](https://github.com/hydra-billing/homs/pull/758) Support different BPM backends for different process types.
 
 v2.8.11 [2024-08-12]
 -------------------
