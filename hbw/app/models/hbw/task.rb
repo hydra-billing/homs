@@ -62,8 +62,8 @@ module HBW
               ]
             }
 
-            do_request(:post, 'task', **options.merge(assignee: user.id)) +
-              do_request(:post, 'task', **options.merge(candidateUser: user.id))
+            do_request(:post, 'task', **options, assignee: user.id) +
+              do_request(:post, 'task', **options, candidateUser: user.id)
           end
         end
       end
