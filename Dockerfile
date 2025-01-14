@@ -1,4 +1,4 @@
-FROM ruby:3.2.5-slim-bullseye
+FROM ruby:3.2.6-slim-bullseye
 
 RUN mkdir -p /opt/homs
 
@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libxml2-dev \
   libxml2 \
   libxslt-dev \
+  libyaml-dev \
   make \
   nodejs \
   postgresql-client \
