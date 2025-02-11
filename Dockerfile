@@ -1,4 +1,4 @@
-FROM ruby:3.2.6-slim-bullseye
+FROM ruby:3.2.7-slim-bullseye
 
 RUN mkdir -p /opt/homs
 
