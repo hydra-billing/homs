@@ -77,7 +77,6 @@ ru:
         columns:
           action: Действие
           equipmentName: Тип оборудования
-          serviceName: ''
           servicePrice: Цена
           serviceQuantity: Сумма
           serviceTotalPrice: Итого
