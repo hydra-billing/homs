@@ -27,6 +27,7 @@ RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} && \
   libxml2 \
   libxml2-dev \
   libxslt-dev \
+  libyaml-dev \
   make \
   nodejs \
   pkg-config \
