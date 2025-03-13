@@ -19,11 +19,7 @@ module HBW
       end
 
       def process_supported?(key)
-        if process_keys.empty?
-          true
-        else
-          process_keys.include?(key)
-        end
+        process_keys.empty? || process_keys.include?(key)
       end
     end
   end
