@@ -31,7 +31,9 @@ module Features
     end
 
     def expect_widget_presence
-      expect(page.find('#hbw-tasks-list-button').all('*')).not_to be_empty
+      wait_for_ajax
+
+      expect(page.find('#hbw-tasks-list-button').all('*', wait: 5)).not_to be_empty
     end
 
     def placeholder(name)
