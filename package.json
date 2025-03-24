@@ -62,10 +62,13 @@
     "yaml-loader": "^0.8.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.27.0",
+    "@babel/core": "^7.26.10",
     "@babel/eslint-parser": "^7.25.9",
     "@babel/preset-env": "^7.26.8",
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^14.1.2",
+    "@types/babel__core": "^7",
     "@types/jest": "^29.5.14",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
@@ -86,5 +89,6 @@
     "ts-loader": "^9.5.2",
     "typescript": "^5.7.3",
     "webpack-cli": "^5.1.4"
-  }
+  },
+  "packageManager": "yarn@4.7.0"
 }
