@@ -90,10 +90,10 @@ module HBW
         api.find { |a| a.process_supported?(process_key) }
       end
 
-      def fetch_concurrently(&block)
+      def fetch_concurrently(&)
         result = List[*api].typed(Dry::Monads::Task).traverse do |c|
           Dry::Monads::Task[:io] do
-            with_connection(c, &block)
+            with_connection(c, &)
           end
         end.to_result
 
