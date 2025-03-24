@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '3.2.7'
+ruby '3.4.2'
 
 rails_version = '7.1.3.4'
 
@@ -60,7 +60,7 @@ group :development do
 end
 
 group :development, :test, :staging do
-  gem 'factory_bot_rails', '~> 4.8.2'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'pry-byebug'
   gem 'rspec_api_documentation', git: 'https://github.com/hydra-billing/rspec_api_documentation'

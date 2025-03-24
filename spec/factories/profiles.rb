@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :profile do
-    data({})
+    data { {} }
   end
 end
