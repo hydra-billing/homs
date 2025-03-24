@@ -12,7 +12,7 @@ RUN apt-get update -q && \
 RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} && \
   wget -O - http://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
   echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  wget -qO- https://deb.nodesource.com/setup_18.x | bash -
+  wget -qO- https://deb.nodesource.com/setup_22.x | bash -
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
   build-essential \
@@ -28,12 +28,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   postgresql-client \
   pkg-config \
   ruby-dev \
-  telnet \
-  yarn
+  telnet
+
+RUN npm install -g yarn && yarn set version stable
 
 ENV NLS_LANG=AMERICAN_RUSSIA.AL32UTF8
-
-
 
 USER homs
 WORKDIR /opt/homs
