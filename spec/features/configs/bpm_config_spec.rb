@@ -24,7 +24,7 @@ RSpec.describe BPM::ConfigValidator do
     it 'raises errors if config is invalid' do
       expect { validate('config/bpm_failed_validation.yml') }.to raise_error(
         RuntimeError,
-        'Application misconfigured: {:config=>["Names must be unique", "URLs must be unique", "Process keys must be unique"]}'
+        'Application misconfigured: {config: ["Names must be unique", "URLs must be unique", "Process keys must be unique"]}'
       )
     end
   end

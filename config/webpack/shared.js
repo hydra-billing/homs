@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const sass = require('sass-embedded');
 const yaml = require('./loaders/yaml');
 const modulejs = require('./loaders/modulejs');
 const tooltip = require('./loaders/tooltip');
@@ -16,7 +17,7 @@ const SymlinkAssets = require('./plugins/symlink');
 module.exports = (_, { mode }) => ({
   mode,
   output: {
-    filename:   '[name]-[hash].js',
+    filename:   '[name]-[fullhash].js',
     path:       path.resolve(__dirname, '../../public/assets/packs'),
     publicPath: '/assets/packs/'
   },
@@ -70,7 +71,19 @@ module.exports = (_, { mode }) => ({
             {
               loader:  'sass-loader',
               options: {
-                sourceMap: true,
+                api:            'legacy',
+                sourceMap:      true,
+                implementation: sass,
+                sassOptions:    {
+                  loadPaths: [
+                    path.resolve(__dirname, '../../app/javascript'),
+                    path.resolve(__dirname, '../../app/assets/stylesheets'),
+                    path.resolve(__dirname, '../../hbw/app/assets/stylesheets'),
+                    path.resolve(__dirname, '../../vendor/assets/stylesheets'),
+                    path.resolve(__dirname, '../../node_modules')
+                  ],
+                  quietDeps: true,
+                }
               }
             }
           ],

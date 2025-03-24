@@ -86,7 +86,7 @@ HBWClaimingTaskOverview.propTypes = {
     name:         PropTypes.string.isRequired,
     created:      PropTypes.string.isRequired,
     process_name: PropTypes.string.isRequired,
-    icon:         PropTypes.string,
+    icon:         PropTypes.arrayOf(PropTypes.string),
     due:          PropTypes.string,
     description:  PropTypes.string,
   }).isRequired,

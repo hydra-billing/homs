@@ -15,7 +15,7 @@ export default <P extends WithCallbacksProps>(WrappedComponent: ComponentType<P>
   const WithCallbacks: FC<WithCallbacksProps> = (props) => {
     const dispatcher = useContext(DispatcherContext) as DispatcherContextType;
 
-    const [guid] = useState(uuidv4);
+    const [guid] = useState(() => uuidv4());
 
     useEffect(() => () => {
       dispatcher.unbindAll(guid);

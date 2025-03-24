@@ -37,7 +37,7 @@ ENV NLS_LANG=AMERICAN_RUSSIA.AL32UTF8
 USER homs
 WORKDIR /opt/homs
 
-COPY --chown=homs Gemfile Gemfile.lock Rakefile config.ru package.json yarn.lock .eslintrc .babelrc tsconfig.json /opt/homs/
+COPY --chown=homs Gemfile Gemfile.lock Rakefile config.ru package.json yarn.lock eslint.config.mjs .yarnrc.yml .babelrc tsconfig.json /opt/homs/
 COPY --chown=homs hbw/*.gemspec /opt/homs/hbw/
 COPY --chown=homs hbw/lib/hbw/  /opt/homs/hbw/lib/hbw/
 
