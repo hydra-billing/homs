@@ -30,9 +30,6 @@ modulejs.define('HBWFormDatetime', ['React'], (React) => {
 
     ISODateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx";
 
-    popperOptions = [{ name: 'offset', options: { offset: [0, -8] } },
-      { name: 'flip', options: { fallbackPlacements: ['bottom-start'] } }];
-
     render () {
       const {
         name, params, disabled, hidden, task
@@ -60,7 +57,6 @@ modulejs.define('HBWFormDatetime', ['React'], (React) => {
             disabledKeyboardNavigation
             disabled={params.editable === false || disabled}
             popperPlacement="bottom-start"
-            popperModifiers={this.popperOptions}
             autoComplete='off'
             showTimeInput={params.set_time}
             timeInputLabel=""
