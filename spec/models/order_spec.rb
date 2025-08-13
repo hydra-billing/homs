@@ -22,7 +22,7 @@ describe Order do
     ]
   end
 
-  # Order#data default nil values ->
+  # Order#data default nil values  ->
 
   let(:order_type_vacation_request) do
     FactoryBot.create(:order_type, :vacation_request)
