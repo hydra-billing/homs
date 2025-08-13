@@ -4,6 +4,7 @@ module HBW
       self.default_data_type = :string
 
       include HBW::Engine.routes.url_helpers
+
       attr_reader :choices
 
       definition_reader :sql, :variable, :entity_class

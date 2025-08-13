@@ -86,7 +86,7 @@ class OrderType < ActiveRecord::Base
   end
 
   def check_for_orders
-    if orders.count.positive?
+    if orders.any?
       errors.add(:base, :cannot_delete_as_orders_exist)
       false
     else

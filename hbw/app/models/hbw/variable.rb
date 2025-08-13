@@ -1,6 +1,7 @@
 module HBW
   class Variable
     include HBW::Definition
+
     definition_reader :value, :name
 
     class << self

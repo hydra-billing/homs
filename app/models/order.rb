@@ -6,6 +6,7 @@ class Order < ActiveRecord::Base
   end
 
   include HasSequencedColumn
+
   has_sequenced_column :code
 
   belongs_to :order_type

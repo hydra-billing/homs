@@ -1,4 +1,5 @@
 include Warden::Test::Helpers
+
 Warden.test_mode!
 
 # Feature: User index page

@@ -1,4 +1,5 @@
 include Warden::Test::Helpers
+
 Warden.test_mode!
 
 feature 'User profile page', :devise, js: true do

@@ -231,7 +231,7 @@ module Features
     end
 
     def is_element(name, disabled: false)
-      page.evaluate_script("jQuery('[name=\"#{name}\"]#{disabled ? ':disabled' : ''}').length") > 0
+      page.evaluate_script("jQuery('[name=\"#{name}\"]#{':disabled' if disabled}').length") > 0
     end
 
     def set_datetime_picker_date(name, date)

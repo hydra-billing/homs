@@ -6,7 +6,6 @@ class Task
   def homs_order_code
     'ORD-1'
   end
-  alias homsOrderCode homs_order_code
 end
 
 describe HBW::TasksController, type: :controller do

@@ -1,22 +1,22 @@
 inherit_from: .rubocop_todo.yml
 
 AllCops:
-  TargetRubyVersion: 3.4.4
+  TargetRubyVersion: 3.4
   SuggestExtensions: false
   NewCops: enable
   Exclude:
-  - 'db/schema.rb'
-  - 'db/seeds.rb'
-  - 'db/migrate/*.rb'
-  - 'bin/**/*'
-  - 'vendor/bundle/**/*'
-  - 'node_modules/**/*'
-  - 'lib/settingslogic.rb'
+    - "db/schema.rb"
+    - "db/seeds.rb"
+    - "db/migrate/*.rb"
+    - "bin/**/*"
+    - "vendor/bundle/**/*"
+    - "node_modules/**/*"
+    - "lib/settingslogic.rb"
 
 Layout/LineLength:
   Max: 150
   Exclude:
-    - 'spec/**/*.rb'
+    - "spec/**/*.rb"
 
 Style/Documentation:
   Enabled: false
@@ -31,11 +31,11 @@ Style/ClassAndModuleChildren:
   Enabled: false
 
 Metrics/MethodLength:
-  CountAsOne: ['array', 'hash']
+  CountAsOne: ["array", "hash"]
 
 Metrics/BlockLength:
   Exclude:
-  - 'spec/**/*.rb'
+    - "spec/**/*.rb"
 
 Style/NumericLiterals:
   Enabled: false
@@ -69,7 +69,7 @@ Metrics/ClassLength:
 
 Metrics/ModuleLength:
   Exclude:
-    - 'spec/**/*.rb'
+    - "spec/**/*.rb"
 
 Layout/HashAlignment:
   EnforcedHashRocketStyle: table
@@ -92,3 +92,10 @@ Lint/DuplicateBranch:
 
 Gemspec/RequireMFA:
   Enabled: false
+
+Naming/PredicateMethod:
+  Enabled: false
+
+Naming/PredicatePrefix:
+  NamePrefix: ["is_", "does_"]
+  ForbiddenPrefixes: ["is_", "does_"]

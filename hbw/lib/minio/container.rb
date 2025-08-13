@@ -3,6 +3,7 @@ require 'aws-sdk-s3'
 module Minio
   class Container
     extend Dry::Container::Mixin
+
     @root = Pathname(__FILE__).realpath.dirname
     singleton_class.send(:attr_reader, :root)
 
