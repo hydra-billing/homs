@@ -1,5 +1,6 @@
 class DatetimePickerInput < SimpleForm::Inputs::Base
   include DatetimeFormat
+
   def input(*)
     template.content_tag(:div, class: %w(input-group date datetime-picker), language: I18n.locale) do
       @builder.text_field(attribute_name,

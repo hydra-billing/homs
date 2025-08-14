@@ -16,7 +16,7 @@ module Devise
 
         # Generate a SHA1 digest joining args. Generated token is something like
         def self.secure_digest(*tokens)
-          ::Digest::SHA1.hexdigest(tokens.reverse.flatten.join)
+          ::Digest::SHA1.hexdigest(tokens.reverse.join)
         end
       end
     end

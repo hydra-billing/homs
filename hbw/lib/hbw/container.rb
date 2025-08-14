@@ -5,6 +5,7 @@ require 'dry/container/stub'
 module HBW
   class Container
     extend Dry::Container::Mixin
+
     register(:api) do
       if Rails.env.development? && HBW::Widget.config.fetch(:use_bpm_stub)
         [HBW::Camunda::YMLAPI.build('hbw/config/yml_api.development.yml')]
