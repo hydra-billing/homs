@@ -48,5 +48,4 @@ describe Order do
                                               'employee'          => nil,
                                               'approver'          => 'kermit')
   end
-  # <-
 end
