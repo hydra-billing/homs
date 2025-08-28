@@ -2,16 +2,7 @@ module CustomFields
   class FieldDefSet < Base
     def validate_value(_name, fields_values)
       fields_values.each do |field_name, field_value|
-        fd = @fds[field_name] || @fds[field_name.intern]
-
-        if fd.nil?
-          fields_values.delete(field_name)
-          fields_values.delete(field_name.intern)
-          errors[field_name] << t('no_known_fields') if fields_values.empty?
-        else
-          fd.validate_value(field_name, field_value)
-          errors[field_name] += fd.errors[field_name] unless fd.valid?
-        end
+        validate_single_field!(field_name, field_value, fields_values)
       end
     end
 
@@ -47,6 +38,27 @@ module CustomFields
     end
 
     private
+
+    def validate_single_field!(field_name, field_value, fields_values)
+      fd = @fds[field_name] || @fds[field_name.intern]
+
+      if fd.nil?
+        remove_unknown_field!(field_name, fields_values)
+      else
+        validate_field_with_definition(fd, field_name, field_value)
+      end
+    end
+
+    def remove_unknown_field!(field_name, fields_values)
+      fields_values.delete(field_name)
+      fields_values.delete(field_name.intern)
+      errors[field_name] << t('no_known_fields') if fields_values.empty?
+    end
+
+    def validate_field_with_definition(field_def, field_name, field_value)
+      field_def.validate_value(field_name, field_value)
+      errors[field_name] += field_def.errors[field_name] unless field_def.valid?
+    end
 
     def field_def_class
       FieldDef

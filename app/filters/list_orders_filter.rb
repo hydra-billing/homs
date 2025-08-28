@@ -49,20 +49,29 @@ class ListOrdersFilter
     end
 
     def filter_by_custom_fields(relation, data)
-      if data[:custom_fields]
-        fields_definition = OrderType.find(data[:order_type_id]).fields
+      return relation unless data[:custom_fields]
 
-        string_field_names = fields_definition.select { |_k, v| %w(boolean number string).include? v[:type] }.keys
-        date_field_names   = fields_definition.select { |_k, v| v[:type] == 'datetime' }.keys
+      fields_definition = OrderType.find(data[:order_type_id]).fields
+      string_field_names = get_string_field_names(fields_definition)
+      date_field_names = get_date_field_names(fields_definition)
 
-        filter_string_fields = data[:custom_fields].slice(*string_field_names).compact
-        filter_date_fields   = data[:custom_fields].slice(*date_field_names).compact
+      filter_string_fields = data[:custom_fields].slice(*string_field_names).compact
+      filter_date_fields = data[:custom_fields].slice(*date_field_names).compact
 
-        filter_date_fields.reduce(relation.data_fields(filter_string_fields)) do |rel, (name, value)|
-          rel.data_datetime_range(name, value[:from], value[:to])
-        end
-      else
-        relation
+      apply_date_filters(relation.data_fields(filter_string_fields), filter_date_fields)
+    end
+
+    def get_string_field_names(fields_definition)
+      fields_definition.select { |_k, v| %w(boolean number string).include? v[:type] }.keys
+    end
+
+    def get_date_field_names(fields_definition)
+      fields_definition.select { |_k, v| v[:type] == 'datetime' }.keys
+    end
+
+    def apply_date_filters(relation, filter_date_fields)
+      filter_date_fields.reduce(relation) do |rel, (name, value)|
+        rel.data_datetime_range(name, value[:from], value[:to])
       end
     end
 

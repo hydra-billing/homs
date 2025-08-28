@@ -13,24 +13,38 @@ module UiElementsHelper
   end
 
   def datetime_picker(name, options = {})
-    value = if options[:value].present?
-              options[:value].strftime(datetime_format)
-            end
+    value = format_datetime_value(options[:value])
 
     content_tag(:div, class: 'form-group') do
-      content_tag(:div,
-                  data:  {showClear: true},
-                  class: "input-group date datetime-picker #{options[:class]}") do
-        content_tag(:input,
-                    name:,
-                    type:  'text',
-                    class: 'form-control',
-                    value:) do
-          content_tag(:span, class: 'input-group-addon') do
-            content_tag(:span, class: 'fas fa-calendar') {}
-          end
-        end
-      end
+      build_datetime_picker_input(name, value, options[:class])
+    end
+  end
+
+  def format_datetime_value(value)
+    value.strftime(datetime_format) if value.present?
+  end
+
+  def build_datetime_picker_input(name, value, css_class)
+    content_tag(:div,
+                data:  {showClear: true},
+                class: "input-group date datetime-picker #{css_class}") do
+      build_datetime_input_field(name, value)
+    end
+  end
+
+  def build_datetime_input_field(name, value)
+    content_tag(:input,
+                name:  name,
+                type:  'text',
+                class: 'form-control',
+                value: value) do
+      build_calendar_icon
+    end
+  end
+
+  def build_calendar_icon
+    content_tag(:span, class: 'input-group-addon') do
+      content_tag(:span, class: 'fas fa-calendar') {}
     end
   end
 
