@@ -1,8 +1,8 @@
-include Warden::Test::Helpers
-
-Warden.test_mode!
-
 feature 'User profile page', :devise, js: true do
+  include Warden::Test::Helpers
+
+  Warden.test_mode!
+
   before(:each) do
     set_camunda_api_mock_file('spec/features/users/users_mock.yml')
   end
