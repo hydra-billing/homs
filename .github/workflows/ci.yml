@@ -11,8 +11,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      GITHUB_TOKEN: ${{ secrets.HYDRA_BILLING_ROBOT_TOKEN }}
+
     steps:
       - name: run homs ci
-        run: gh workflow run ci.yml --repo hydra-billing/homs-ci -f branch=${{ github.head_ref || github.ref_name }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.HYDRA_BILLING_ROBOT_TOKEN }}
+        run: gh workflow run ci.yml -R hydra-billing/homs-ci -f branch=${{ github.head_ref || github.ref_name }} -f run_id=${{ github.run_id }}
+
+      - name: wait for homs ci
+        run: |
+          while [ -z "${run_id}" ]; do
+            run_id=$(gh run list -w ci.yml -R hydra-billing/homs-ci --json name,databaseId --jq '.[] | select(.name? | match(" ${{ github.run_id }}$")) | .databaseId')
+            sleep 5
+          done
+          gh run watch -R hydra-billing/homs-ci ${run_id} --exit-status -i 60 >/dev/null
