@@ -24,4 +24,4 @@ jobs:
             run_id=$(gh run list -w ci.yml -R hydra-billing/homs-ci --json name,databaseId --jq '.[] | select(.name? | match(" ${{ github.run_id }}$")) | .databaseId')
             sleep 5
           done
-          gh run watch -R hydra-billing/homs-ci ${run_id} --exit-status -i 30
+          gh run watch -R hydra-billing/homs-ci ${run_id} --exit-status -i 60 >/dev/null
