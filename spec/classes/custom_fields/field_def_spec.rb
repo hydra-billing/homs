@@ -17,7 +17,7 @@ describe CustomFields::FieldDef do
   let(:missing_type)  { right_def.dup.tap { |h| h.delete(:type) } }
   let(:missing_name)  { right_def.dup.tap { |h| h.delete(:name) } }
 
-  it 'Right definition should have certain getters' do
+  it 'Right definition should have certain getters new' do
     fd = CustomFields::FieldDef.new right_def
     expect(fd[:name]).to eq 'my_field'
     expect(fd[:type]).to eq 'string'
