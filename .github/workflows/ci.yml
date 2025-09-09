@@ -5,6 +5,7 @@ on:
     branches: [v2.8]
   pull_request:
     branches: [v2.8]
+  workflow_dispatch:
 
 jobs:
   run-homs-ci:
