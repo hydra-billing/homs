@@ -1,11 +1,14 @@
 module CustomFields
   module DataTypes
     class Number < CustomFields::Base
+      TRAILING_ZEROS_REGEX = /(\.\d*?)0+$/
+      TRAILING_DOT_REGEX = /\.$/
+
       def validate_value(attribute_name, value)
         return true if value.nil?
 
         valid = case value
-                when ::String then value.gsub(/(\.)?0+$/, '') == coerce_value(value).to_s
+                when ::String then valid_number_string?(value)
                 when NilClass, Numeric then true
                 else
                   false
@@ -28,14 +31,22 @@ module CustomFields
 
       private
 
+      def normalize_trailing_zeros(str)
+        str.gsub(TRAILING_ZEROS_REGEX, '\1').gsub(TRAILING_DOT_REGEX, '')
+      end
+
+      def valid_number_string?(str)
+        normalized = normalize_trailing_zeros(str)
+        coerced = coerce_value(normalized)
+        return false if coerced.nil?
+
+        normalized == coerced.to_s
+      end
+
       def string_to_number(str)
-        if str.empty?
-          nil
-        elsif str =~ /\.\d+\z/
-          str.to_f
-        else
-          str.to_i
-        end
+        return nil if str.empty?
+
+        str.include?('.') ? str.to_f : str.to_i
       end
     end
   end
