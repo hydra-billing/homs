@@ -1,0 +1,19 @@
+name: Release
+
+run-name: Release ${{ github.event.inputs.version }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version of homs'
+        required: true
+        type: string
+
+jobs:
+  run-homs-ci:
+    if: github.ref_name != github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: no action
+        run: true
