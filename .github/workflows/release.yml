@@ -1,0 +1,31 @@
+name: Release
+
+run-name: Release ${{ github.event.inputs.version }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version of homs'
+        required: true
+        type: string
+
+jobs:
+  run-homs-ci:
+
+    runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.HYDRA_BILLING_ROBOT_TOKEN }}
+
+    steps:
+      - name: run homs ci
+        run: gh workflow run release.yml -R hydra-billing/homs-ci -f version=${{ github.event.inputs.version }} -f run_id=${{ github.run_id }}
+
+      - name: wait for homs ci
+        run: |
+          while [ -z "${run_id}" ]; do
+            run_id=$(gh run list -w release.yml -R hydra-billing/homs-ci --json name,databaseId --jq '.[] | select(.name? | match(" ${{ github.run_id }}$")) | .databaseId')
+            sleep 5
+          done
+          gh run watch -R hydra-billing/homs-ci ${run_id} --exit-status -i 60 >/dev/null
