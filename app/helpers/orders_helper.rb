@@ -1,24 +1,28 @@
+FILE_LIST_SCHEMA = Dry::Schema.Params do
+  required(:file_list).array(:hash) do
+    required(:url).filled
+    required(:name).filled
+    required(:origin_name).filled
+    required(:real_name).filled
+    required(:field_name).filled
+    required(:upload_time).filled
+    required(:end_point).filled
+    required(:bucket).filled
+  end
+end
+
 module OrdersHelper
   EMPTY_VALUE = '—'.freeze
-
-  FILE_LIST_SCHEMA = Dry::Schema.Params do
-    required(:file_list).array(:hash) do
-      required(:url).filled
-      required(:name).filled
-      required(:origin_name).filled
-      required(:real_name).filled
-      required(:field_name).filled
-      required(:upload_time).filled
-      required(:end_point).filled
-      required(:bucket).filled
-    end
-  end
 
   def prettify_value(value, field = {})
     if value.is_a?(Array)
       return value.map { |v| prettify_value(v, field) }.join(', ')
     end
 
+    prettify_by_type(value, field)
+  end
+
+  def prettify_by_type(value, field)
     case field[:type]
     when 'datetime'
       prettify_date(value)

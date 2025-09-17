@@ -8,7 +8,7 @@ module Devise
 
         if user&.blocked
           @user = nil
-          fail(:blocked)
+          self.fail(:blocked) # this is not Ruby's `fail`, it is Warden's `fail`
         end
       end
     end

@@ -27,7 +27,16 @@ class User < ActiveRecord::Base
     end
 
     def from_keycloak(user_data)
-      user = where(email: user_data[:email]).first_or_create do |new_user|
+      user = find_or_create_user_from_keycloak(user_data)
+      user.update_attribute(:role, user_data[:role])
+
+      user
+    end
+
+    private
+
+    def find_or_create_user_from_keycloak(user_data)
+      where(email: user_data[:email]).first_or_create do |new_user|
         new_user.email = user_data[:email]
         new_user.name = user_data[:given_name]
         new_user.last_name = user_data[:family_name] || '-'
@@ -37,9 +46,6 @@ class User < ActiveRecord::Base
         new_user.directory = 'hydra_sso'
         new_user.role = user_data[:role]
       end
-
-      user.update_attribute(:role, user_data[:role])
-      user
     end
   end
 
