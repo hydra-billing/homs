@@ -5,6 +5,7 @@ v2.9 [Unreleased]
 - [#726](https://github.com/hydra-billing/homs/pull/726) Add services select table.
 - [#729](https://github.com/hydra-billing/homs/pull/729) Add services select table search option.
 - [#732](https://github.com/hydra-billing/homs/pull/732) Allow to localize select field options.
+- [#775](https://github.com/hydra-billing/homs/pull/775) Fix validate_value for trailing zeros.
 
   It is possible to set translations for select field options. For example, if have this in the form config:
   ```
