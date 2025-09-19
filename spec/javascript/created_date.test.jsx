@@ -1,12 +1,11 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import {
   addSeconds, addMinutes, addHours, addDays, addWeeks, addYears,
 } from 'date-fns';
 import { withTranslationContext } from 'hbw/components/shared/context/translation';
 import CreatedDate from 'hbw/components/shared/element/created_date';
 import { withConnectionContext } from 'hbw/components/shared/context/connection';
-import { waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import compose from 'shared/utils/compose';
 import ConnectionMock from './helpers/mock_connection';
 
@@ -24,16 +23,15 @@ describe('CreatedDate should render correctly', () => {
   const weeks = addWeeks(days, -3);
   const years = addYears(weeks, -1);
 
-  const createdDateComponent = date => (
-    renderer
-      .create(<CreatedDateWithContext dateISO={date.toISOString()} now={now} />)
-      .toJSON()
+  const renderCreatedDate = date => (
+    render(<CreatedDateWithContext dateISO={date.toISOString()} now={now} />)
   );
 
   const matchSnapshot = testCode => date => (
     it(testCode, async () => {
       await waitFor(() => {
-        expect(createdDateComponent(date)).toMatchSnapshot();
+        const { container } = renderCreatedDate(date);
+        expect(container).toMatchSnapshot();
       });
     })
   );

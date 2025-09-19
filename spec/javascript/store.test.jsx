@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import renderer from 'react-test-renderer';
+import React, { useContext, act } from 'react';
 import StoreContext, { withStoreContext } from 'hbw/components/shared/context/store';
 import Dispatcher from 'hbw/dispatcher';
 import { withTranslationContext } from 'hbw/components/shared/context/translation';
@@ -7,7 +6,7 @@ import { withDispatcherContext } from 'hbw/components/shared/context/dispatcher'
 import compose from 'shared/utils/compose';
 import { stringify } from 'qs';
 import { withConnectionContext } from 'hbw/components/shared/context/connection';
-import { waitFor } from '@testing-library/react';
+import { render, waitFor, cleanup } from '@testing-library/react';
 
 const dispatcher = new Dispatcher();
 let emitEvent;
@@ -115,62 +114,101 @@ describe('<StoreProvider />', () => {
     })
   );
 
-  let testComponent;
+  let renderResult;
 
   beforeEach(async () => {
     const Provider = withContext(TestingComponent);
-    await waitFor(() => {
-      testComponent = renderer.create(<Provider />);
+    await act(async () => {
+      renderResult = render(<Provider />);
     });
   });
 
   afterEach(() => {
-    testComponent.unmount();
+    cleanup();
   });
 
+  const getSnapshot = () => {
+    // Collect the text content of all relevant <p> elements for snapshot
+    const { container } = renderResult;
+    const tasks = container.querySelector('.tasks')?.textContent;
+    const events = container.querySelector('.events')?.textContent;
+    const versions = container.querySelector('.versions')?.textContent;
+    const fetching = container.querySelector('.fetching')?.textContent;
+    const ready = container.querySelector('.ready')?.textContent;
+    const activeTask = container.querySelector('.activeTask')?.textContent;
+    // Return a plain object for snapshotting
+    return { tasks, events, versions, fetching, ready, activeTask };
+  };
+
   it('initializes', async () => {
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(getSnapshot()).toMatchSnapshot();
+    });
   });
 
   it('adds task to state on create', async () => {
-    await emitEvent(testEvents.create);
+    await act(async () => {
+      await emitEvent(testEvents.create);
+    });
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(getSnapshot()).toMatchSnapshot();
+    });
   });
 
   it('adds task to state on assign', async () => {
-    await emitEvent(testEvents.assignment);
+    await act(async () => {
+      await emitEvent(testEvents.assignment);
+    });
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(getSnapshot()).toMatchSnapshot();
+    });
   });
 
   it('removes task from state on complete', async () => {
-    await emitEvent(testEvents.assignment);
-    await emitEvent(testEvents.complete);
+    await act(async () => {
+      await emitEvent(testEvents.assignment);
+      await emitEvent(testEvents.complete);
+    });
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(getSnapshot()).toMatchSnapshot();
+    });
   });
 
   it('removes task from state on delete', async () => {
-    await emitEvent(testEvents.assignment);
-    await emitEvent(testEvents.delete);
+    await act(async () => {
+      await emitEvent(testEvents.assignment);
+      await emitEvent(testEvents.delete);
+    });
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(getSnapshot()).toMatchSnapshot();
+    });
   });
 
   it('ignores task assigned to someone else', async () => {
-    await emitEvent({ ...testEvents.assignment, assigned_to_me: false });
+    await act(async () => {
+      await emitEvent({ ...testEvents.assignment, assigned_to_me: false });
+    });
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(getSnapshot()).toMatchSnapshot();
+    });
   });
 
   it('ignores event with outdated version', async () => {
     const task = longFetchedTask;
     const longCreateEvent = { ...testEvents.create, task_id: task.id };
     const completeEvent = { ...testEvents.complete, task_id: task.id };
-    await emitEvent(longCreateEvent);
-    await emitEvent(completeEvent);
+    await act(async () => {
+      await emitEvent(longCreateEvent);
+      await emitEvent(completeEvent);
+    });
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(getSnapshot()).toMatchSnapshot();
+    });
   });
 });
