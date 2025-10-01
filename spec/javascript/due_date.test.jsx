@@ -1,12 +1,11 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import {
   addSeconds, addMinutes, addHours, addDays, addWeeks, addYears,
 } from 'date-fns';
 import { withTranslationContext } from 'hbw/components/shared/context/translation';
 import DueDate from 'hbw/components/shared/element/due_date';
 import { withConnectionContext } from 'hbw/components/shared/context/connection';
-import { waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import compose from 'shared/utils/compose';
 import ConnectionMock from './helpers/mock_connection';
 
@@ -33,15 +32,13 @@ describe('DueDate should render correctly', () => {
   const expiredYears = addYears(now, -6);
 
   const dueDateComponent = date => (
-    renderer
-      .create(<DueDateWithContext dateISO={date.toISOString()} now={now} />)
-      .toJSON()
+    render(<DueDateWithContext dateISO={date.toISOString()} now={now} />)
   );
 
   const matchSnapshot = testCode => date => (
     it(testCode, async () => {
       await waitFor(() => {
-        expect(dueDateComponent(date)).toMatchSnapshot();
+        expect(dueDateComponent(date).container).toMatchSnapshot();
       });
     })
   );

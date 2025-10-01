@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import renderer from 'react-test-renderer';
 import StoreContext, { withStoreContext } from 'hbw/components/shared/context/store';
 import Dispatcher from 'hbw/dispatcher';
 import { withTranslationContext } from 'hbw/components/shared/context/translation';
@@ -7,7 +6,7 @@ import { withDispatcherContext } from 'hbw/components/shared/context/dispatcher'
 import compose from 'shared/utils/compose';
 import { stringify } from 'qs';
 import { withConnectionContext } from 'hbw/components/shared/context/connection';
-import { waitFor } from '@testing-library/react';
+import { render, waitFor, cleanup, act } from '@testing-library/react';
 
 const dispatcher = new Dispatcher();
 let emitEvent;
@@ -17,7 +16,11 @@ const mockConsumer = {
       _,
       received
     ) => {
-      emitEvent = async event => received.received(JSON.stringify(event));
+      emitEvent = async (event) => {
+        await act(async () => {
+          await received.received(JSON.stringify(event));
+        });
+      };
     }
   }
 };
@@ -115,53 +118,66 @@ describe('<StoreProvider />', () => {
     })
   );
 
-  let testComponent;
+  let rendered;
 
   beforeEach(async () => {
     const Provider = withContext(TestingComponent);
+
     await waitFor(() => {
-      testComponent = renderer.create(<Provider />);
+      rendered = render(<Provider />);
     });
   });
 
   afterEach(() => {
-    testComponent.unmount();
+    cleanup();
   });
 
   it('initializes', async () => {
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(rendered.container).toMatchSnapshot();
+    });
   });
 
   it('adds task to state on create', async () => {
     await emitEvent(testEvents.create);
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(rendered.container).toMatchSnapshot();
+    });
   });
 
   it('adds task to state on assign', async () => {
     await emitEvent(testEvents.assignment);
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(rendered.container).toMatchSnapshot();
+    });
   });
 
   it('removes task from state on complete', async () => {
     await emitEvent(testEvents.assignment);
     await emitEvent(testEvents.complete);
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(rendered.container).toMatchSnapshot();
+    });
   });
 
   it('removes task from state on delete', async () => {
     await emitEvent(testEvents.assignment);
     await emitEvent(testEvents.delete);
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(rendered.container).toMatchSnapshot();
+    });
   });
 
   it('ignores task assigned to someone else', async () => {
     await emitEvent({ ...testEvents.assignment, assigned_to_me: false });
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(rendered.container).toMatchSnapshot();
+    });
   });
 
   it('ignores event with outdated version', async () => {
@@ -171,6 +187,8 @@ describe('<StoreProvider />', () => {
     await emitEvent(longCreateEvent);
     await emitEvent(completeEvent);
 
-    expect(testComponent.toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(rendered.container).toMatchSnapshot();
+    });
   });
 });
