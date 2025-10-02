@@ -82,7 +82,7 @@ module.exports = {
   moduleNameMapper: {
     '^shared(.*)$':    '<rootDir>/hbw/app/javascript/packs/hbw/components/shared$1',
     '^messenger(.*)$': '<rootDir>/app/javascript/utils/messenger$1',
-  },
+ },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -178,7 +178,7 @@ module.exports = {
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   transformIgnorePatterns: [
-    '/node_modules/'
+    '/node_modules/(?!(uuid)/)'
   ],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them

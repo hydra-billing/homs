@@ -9,7 +9,7 @@ import { CamundaError, WidgetErrorType } from '../utils/errors';
 
 export type ContextType = {
   addError: Function,
-  formError: JSX.Element,
+  formError: React.JSX.Element,
   safeRequest: Function
 }
 
@@ -20,7 +20,7 @@ export const withErrorHandlingContext = () => (WrappedComponent: ComponentType) 
     const { translate: t } = useContext(TranslationContext) as TranslationContextType;
     const { request } = useContext(ConnectionContext) as ConnectionContextType;
 
-    const [formError, setFormError] = useState<JSX.Element>(() => <HBWError/>);
+    const [formError, setFormError] = useState<React.JSX.Element>(() => <HBWError/>);
 
     const notify = useCallback((error: WidgetErrorType) => {
       // @ts-ignore

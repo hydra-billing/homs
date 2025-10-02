@@ -1,13 +1,37 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`CreatedDate should render correctly with creation date in last days 1`] = `"4d ago"`;
+exports[`CreatedDate should render correctly with creation date in last days 1`] = `
+<div>
+  4d ago
+</div>
+`;
 
-exports[`CreatedDate should render correctly with creation date in last hours 1`] = `"3h ago"`;
+exports[`CreatedDate should render correctly with creation date in last hours 1`] = `
+<div>
+  3h ago
+</div>
+`;
 
-exports[`CreatedDate should render correctly with creation date in last minutes 1`] = `"2m ago"`;
+exports[`CreatedDate should render correctly with creation date in last minutes 1`] = `
+<div>
+  2m ago
+</div>
+`;
 
-exports[`CreatedDate should render correctly with creation date in last seconds 1`] = `"<1m ago"`;
+exports[`CreatedDate should render correctly with creation date in last seconds 1`] = `
+<div>
+  &lt;1m ago
+</div>
+`;
 
-exports[`CreatedDate should render correctly with creation date in last weeks 1`] = `"06 Nov"`;
+exports[`CreatedDate should render correctly with creation date in last weeks 1`] = `
+<div>
+  06 Nov
+</div>
+`;
 
-exports[`CreatedDate should render correctly with creation date in last year 1`] = `"06 Nov 2018"`;
+exports[`CreatedDate should render correctly with creation date in last year 1`] = `
+<div>
+  06 Nov 2018
+</div>
+`;
