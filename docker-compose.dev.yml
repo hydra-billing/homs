@@ -62,7 +62,7 @@ services:
   minio:
     image: minio/minio:latest
     container_name: minio
-    command: "server /opt/minio"
+    command: server /opt/minio --console-address ":9001"
     restart: always
     environment:
       MINIO_ACCESS_KEY: $MINIO_ACCESS_KEY
@@ -71,6 +71,7 @@ services:
       - ./data/minio:/opt/minio
     ports:
       - $MINIO_PORT:9000
+      - $MINIO_CONSOLE_PORT:9001
   redis:
     image: redis
     container_name: redis
