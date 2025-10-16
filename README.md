@@ -51,13 +51,15 @@ The preferred way to install HOMS is to use [Docker](https://www.docker.com/).
 
 1. Change [Minio](https://github.com/minio/minio) credentials in `.env` file. Generate `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` values with any credentials generator, e.g. `pwgen 32 2`.
 
+1. Set `MINIO_CONSOLE_PORT` in `.env` file.
+
 1. Run `docker-compose`:
 
     ```bash
     docker-compose up -d
     ```
 
-1. Navigate to [Minio control panel](http://localhost:9000) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
+1. Navigate to [Minio control panel](http://localhost:9001) and create a bucket with name equal to `MINIO_BUCKET_NAME` value from `.env` file.
 
 1. Login to [HydraOMS](http://localhost:3000) with *`user@example.com`*/*`changeme`*. Now you are able to start Pizza Order demo process.
 
@@ -171,7 +173,7 @@ bundle exec rspec spec/PATH/TO/FILE_spec.rb
 # Run a subset of tests
 bundle exec rspec spec/PATH/TO/DIR
 ```
-HBW Widget uses jest and [snapshots](https://jestjs.io/docs/snapshot-testing#snapshot-testing-with-jest) for tests. 
+HBW Widget uses jest and [snapshots](https://jestjs.io/docs/snapshot-testing#snapshot-testing-with-jest) for tests.
 ```bash
 # Run frontend tests
 jest
