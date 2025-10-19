@@ -1,5 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { flushSync } from 'react-dom';
 import { withStoreContext } from 'shared/context/store';
 import { withTranslationContext } from 'shared/context/translation';
 import { withConnectionContext } from 'shared/context/connection';
@@ -35,6 +36,8 @@ modulejs.define(
         this.availableTaskListContainer = document.querySelector(this.options.availableTaskListContainer);
 
         this.dispatcher.bind('hbw:task-clicked', 'widget', this.changeTask);
+
+        this.appRoot = createRoot(document.createElement('div'));
 
         this.renderApp();
       }
@@ -99,11 +102,13 @@ modulejs.define(
 
         const AppWithContext = withContext(App);
 
-        createRoot(document.createElement('div')).render(
-          <AppWithContext Forms={this.Forms}
-                          Button={this.Button}
-                          TaskList={this.TaskList} />
-        );
+        flushSync(() => {
+          this.appRoot.render(
+            <AppWithContext Forms={this.Forms}
+                            Button={this.Button}
+                            TaskList={this.TaskList} />
+          );
+        });
       };
 
       renderWidget = async (container, taskId) => {

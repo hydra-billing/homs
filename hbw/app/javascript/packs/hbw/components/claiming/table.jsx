@@ -132,7 +132,7 @@ class HBWTasksTable extends Component {
 
     const chosenCN = cx({
       chosen:  cursor === index,
-      expired: row.due !== null ? isBefore(parseISO(row.due), new Date()) : false,
+      expired: row.due ? isBefore(parseISO(row.due), new Date()) : false,
       opened,
       claiming
     });
