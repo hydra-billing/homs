@@ -36,6 +36,12 @@ modulejs.define(
 
         this.dispatcher.bind('hbw:task-clicked', 'widget', this.changeTask);
 
+        // Wait for App component to bind event handlers before triggering portal events
+        this.appReady = false;
+        this.dispatcher.bind('hbw:app-rendered', 'widget', () => {
+          this.appReady = true;
+        });
+
         this.renderApp();
       }
 
@@ -61,7 +67,13 @@ modulejs.define(
       };
 
       render = () => {
-        this.renderPortals();
+        if (this.appReady) {
+          this.renderPortals();
+        } else {
+          this.dispatcher.bind('hbw:app-rendered', 'widget-render', () => {
+            this.renderPortals();
+          });
+        }
       };
 
       renderPortals = async () => {
