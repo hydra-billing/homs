@@ -2,5 +2,5 @@ pt-br:
   errors:
     messages:
       not_saved:
-        one: '1 erro impediu que este %{resource} fosse salvo:'
+        one: '%{count} erro impediu que este %{resource} fosse salvo:'
         other: '%{count} erros impediram este %{resource} de ser salvo:'

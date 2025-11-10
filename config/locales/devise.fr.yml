@@ -68,5 +68,5 @@ fr:
       not_found: non trouvé
       not_locked: n'était pas verrouillé
       not_saved:
-        one: '1 erreur a empêché l''enregistrement de ce site %{resource}:'
+        one: '%{count} erreur a empêché l''enregistrement de ce site %{resource}:'
         other: ''
