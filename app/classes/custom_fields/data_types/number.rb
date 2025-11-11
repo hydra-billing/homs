@@ -1,8 +1,8 @@
 module CustomFields
   module DataTypes
     class Number < CustomFields::Base
-      TRAILING_ZEROS_REGEX = /(\.\d*?)0+$/
-      TRAILING_DOT_REGEX = /\.$/
+      TRAILING_ZEROS_REGEX = /(\.\d*?)0+$/.freeze
+      TRAILING_DOT_REGEX = /\.$/.freeze
 
       def validate_value(attribute_name, value)
         return true if value.nil?
