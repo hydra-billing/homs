@@ -51,6 +51,11 @@ v2.9 [Unreleased]
 ### Breaking changes
 - [#719](https://github.com/hydra-billing/homs/pull/719) Use REDIS_HOST and REDIS_PORT env variables instead of REDIS_URL for actioncable.
 
+v2.8.16 [2025-11-11]
+-------------------
+### Bugfixes
+- [#775](https://github.com/hydra-billing/homs/pull/775) Fix validate_value for trailing zeros.
+
 v2.8.13 [2024-11-19]
 -------------------
 ### Breaking changes
