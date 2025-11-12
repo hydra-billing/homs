@@ -1,4 +1,4 @@
-v2.8.16 2025-11-11
+v2.8.16 [2025-11-11]
 -------------------
 ### Bugfixes
 - [#775](https://github.com/hydra-billing/homs/pull/775) Fix validate_value for trailing zeros.
