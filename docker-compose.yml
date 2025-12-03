@@ -53,7 +53,7 @@ services:
       - $MINIO_PORT:9000
       - $MINIO_CONSOLE_PORT:9001
   homs:
-    image: latera/homs
+    image: hydrabilling/homs
     container_name: homs
     env_file:
       - ".env"
@@ -75,7 +75,7 @@ services:
     networks:
       - custom_network
   camunda:
-    image: latera/camunda
+    image: hydrabilling/camunda
     container_name: camunda
     env_file:
       - ".env"

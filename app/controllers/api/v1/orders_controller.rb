@@ -14,12 +14,10 @@ module API
       end
 
       def order_params
-        p = params.require(:order).permit(*PARAMS_ATTRIBUTES).tap do |params|
+        params.require(:order).permit(*PARAMS_ATTRIBUTES, data: {}).tap do |params|
           replace_user_email! params if params[:user_email]
           replace_order_type_code! params if params[:order_type_code]
         end
-
-        params[:order][:data] ? p.merge(data: params[:order][:data]) : p
       end
 
       def replace_user_email!(params)

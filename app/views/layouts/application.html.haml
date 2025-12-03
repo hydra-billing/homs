@@ -25,4 +25,4 @@
     - if hbw_available?
       #hbw-tasks
       :coffee
-        window.HBWidget = new (modulejs.require('HBW'))(#{hbw_options.to_json.html_safe})
+        window.HBWidget = new (window.HBW)(#{hbw_options.to_json.html_safe})

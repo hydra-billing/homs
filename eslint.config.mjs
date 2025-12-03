@@ -39,7 +39,6 @@ export default defineConfig([{
             ...globals.jquery,
             Application: true,
             I18n: true,
-            modulejs: true,
             moment: true,
             node: true,
         },

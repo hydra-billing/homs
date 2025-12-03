@@ -40,7 +40,7 @@ services:
     networks:
       - custom_network
   camunda:
-    image: latera/camunda
+    image: hydrabilling/camunda
     container_name: camunda
     env_file:
       - ".env"
@@ -73,7 +73,7 @@ services:
       - $MINIO_CONSOLE_PORT:9001
       - $MINIO_PORT:9000
   homs:
-    image: latera/homs-with-oracle
+    image: hydrabilling/homs-with-oracle
     container_name: homs
     restart: always
     env_file:

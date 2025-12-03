@@ -7,7 +7,6 @@
 import 'application.sass';
 import 'logo.svg';
 
-import '../init/unwrap_jquery';
 import '../init/translations';
 import 'jquery-ujs';
 import 'select2/select2.full';
