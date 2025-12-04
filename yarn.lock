@@ -6624,7 +6624,6 @@ __metadata:
     js-yaml: "npm:^4.1.0"
     lodash: "npm:^4.17.21"
     mini-css-extract-plugin: "npm:^2.9.4"
-    modulejs: "npm:2.11.0"
     moment: "npm:2.30.1"
     non-digest-webpack-plugin: "npm:^0.0.1"
     prop-types: "npm:^15.8.1"
@@ -8410,13 +8409,6 @@ __metadata:
   bin:
     mkdirp: dist/cjs/src/bin.js
   checksum: 10c0/9f2b975e9246351f5e3a40dcfac99fcd0baa31fbfab615fe059fb11e51f10e4803c63de1f384c54d656e4db31d000e4767e9ef076a22e12a641357602e31d57d
-  languageName: node
-  linkType: hard
-
-"modulejs@npm:2.11.0":
-  version: 2.11.0
-  resolution: "modulejs@npm:2.11.0"
-  checksum: 10c0/de85782db137217c4b1333f4473a6454d92697f0e67fe85dd25efde4bbcf118a10a47f087cf35d7c5527bda690b23d753b53364b89e91ebcde2ff0919028ea00
   languageName: node
   linkType: hard
 

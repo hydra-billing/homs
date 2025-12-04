@@ -6,7 +6,6 @@ const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const sass = require('sass-embedded');
 const yaml = require('./loaders/yaml');
-const modulejs = require('./loaders/modulejs');
 const tooltip = require('./loaders/tooltip');
 const ts = require('./loaders/ts');
 const file = require('./loaders/file');
@@ -38,7 +37,6 @@ module.exports = (_, { mode }) => ({
     ],
     alias: {
       jquery:                     'jquery/src/jquery',
-      modulejs:                   'modulejs/dist/modulejs',
       tooltip:                    'tooltip.js/dist/umd/tooltip.js',
       'bootstrap-datetimepicker': 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
       'bootstrap-multiselect':    'bootstrap-multiselect/dist/js/bootstrap-multiselect',
@@ -93,7 +91,6 @@ module.exports = (_, { mode }) => ({
         babel,
         yaml,
         ts,
-        modulejs,
         tooltip
       ]
   },

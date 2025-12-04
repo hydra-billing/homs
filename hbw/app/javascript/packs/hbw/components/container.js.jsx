@@ -1,71 +1,69 @@
+import React, { useContext, useEffect, useState } from 'react';
 import { withCallbacks } from 'shared/hoc';
 import StoreContext from 'shared/context/store';
 import Messenger from 'messenger';
-import { useContext, useEffect, useState } from 'react';
 import ConnectionContext from 'shared/context/connection';
 import TranslationContext from 'shared/context/translation';
 import ErrorHandlingContext from 'shared/context/error_handling';
+import Buttons from './buttons.js';
+import Tasks from './entity_tasks.js';
 
-modulejs.define(
-  'HBWContainer',
-  ['React', 'HBWButtons', 'HBWEntityTasks'],
-  (React, Buttons, Tasks) => {
-    const Container = ({
-      entityCode, entityTypeCode, entityClassCode, autorunProcessKey, bind, unbind, initialVariables
-    }) => {
-      const {
-        tasks, fetching, error, getFormsForTasks
-      } = useContext(StoreContext);
+const Container = ({
+  entityCode, entityTypeCode, entityClassCode, autorunProcessKey, bind, unbind, initialVariables
+}) => {
+  const {
+    tasks, fetching, error, getFormsForTasks
+  } = useContext(StoreContext);
 
-      const { serverURL } = useContext(ConnectionContext);
-      const { translate } = useContext(TranslationContext);
-      const { safeRequest } = useContext(ErrorHandlingContext);
+  const { serverURL } = useContext(ConnectionContext);
+  const { translate } = useContext(TranslationContext);
+  const { safeRequest } = useContext(ErrorHandlingContext);
 
-      const [processInstanceId, setProcessInstanceId] = useState(null);
-      const [userExists, setUserExists] = useState(false);
+  const [processInstanceId, setProcessInstanceId] = useState(null);
+  const [userExists, setUserExists] = useState(false);
 
-      const onFormSubmit = (task) => {
-        // remember execution id of the last submitted form to open next form if
-        // task with the same processInstanceId will be loaded
-        setProcessInstanceId(task.process_instance_id);
-      };
+  const onFormSubmit = (task) => {
+    // remember execution id of the last submitted form to open next form if
+    // task with the same processInstanceId will be loaded
+    setProcessInstanceId(task.process_instance_id);
+  };
 
-      const checkBpmUser = async () => {
-        const response = await safeRequest({
-          url:    `${serverURL}/users/check`,
-          method: 'GET',
-          async:  false
-        });
+  const checkBpmUser = async () => {
+    const response = await safeRequest({
+      url:    `${serverURL}/users/check`,
+      method: 'GET',
+      async:  false
+    });
 
-        const { user_exists } = await response.json();
+    const { user_exists } = await response.json();
 
-        setUserExists(user_exists);
+    setUserExists(user_exists);
 
-        if (!user_exists) {
-          Messenger.warn(translate('errors.user_not_found'));
-        }
-      };
+    if (!user_exists) {
+      Messenger.warn(translate('errors.user_not_found'));
+    }
+  };
 
-      useEffect(() => {
-        bind('hbw:form-submitted', onFormSubmit);
-        checkBpmUser();
+  useEffect(() => {
+    bind('hbw:form-submitted', onFormSubmit);
+    checkBpmUser();
 
-        return () => {
-          unbind('hbw:form-submitted');
-        };
-      }, []);
+    return () => {
+      unbind('hbw:form-submitted');
+    };
+  }, []);
 
-      const activeTasks = () => tasks.filter(task => task.entity_code === entityCode
+  const activeTasks = () => tasks.filter(task => task.entity_code === entityCode
                                                      && task.entity_types.includes(entityTypeCode)).reverse();
 
-      const resetProcess = () => {
-        setProcessInstanceId(null);
-      };
+  const resetProcess = () => {
+    setProcessInstanceId(null);
+  };
 
-      if (activeTasks().length > 0) {
-        getFormsForTasks(activeTasks());
+  if (activeTasks().length > 0) {
+    getFormsForTasks(activeTasks());
 
-        return <div className='hbw-body'>
+    return <div className='hbw-body'>
             {error}
             <Tasks tasks={activeTasks()}
                     entityCode={entityCode}
@@ -74,8 +72,8 @@ modulejs.define(
                     processInstanceId={processInstanceId}
             />
           </div>;
-      } else {
-        return <div className='hbw-body'>
+  } else {
+    return <div className='hbw-body'>
             {error}
             <Buttons entityCode={entityCode}
                       entityTypeCode={entityTypeCode}
@@ -86,9 +84,9 @@ modulejs.define(
                       userExists={userExists}
                       resetProcess={resetProcess}/>
           </div>;
-      }
-    };
-
-    return withCallbacks(Container);
   }
-);
+};
+
+const ContainerWrapped = withCallbacks(Container);
+
+export default ContainerWrapped;

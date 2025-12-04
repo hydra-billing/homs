@@ -40,7 +40,7 @@ services:
     networks:
       - custom_network
   camunda:
-    image: latera/camunda
+    image: hydrabilling/camunda
     container_name: camunda
     env_file:
       - ".env"

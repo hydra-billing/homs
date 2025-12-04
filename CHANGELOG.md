@@ -50,6 +50,9 @@ v2.9 [Unreleased]
 -------------------
 ### Breaking changes
 - [#719](https://github.com/hydra-billing/homs/pull/719) Use REDIS_HOST and REDIS_PORT env variables instead of REDIS_URL for actioncable.
+- [#787](https://github.com/hydra-billing/homs/pull/787) Dropped modulejs dependency in the Widget. Now it's available as a global object `HBW`.
+
+  Migrate your code from `modulejs.require('HBW')` to `HBW` or `window.HBW`.
 
 v2.8.16 [2025-11-11]
 -------------------
