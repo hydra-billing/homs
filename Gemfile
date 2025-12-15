@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '3.4.5'
+ruby '3.4.7'
 
-rails_version = '7.1.3.4'
+rails_version = '~> 7.2.3'
 
 gem 'apitome'
 gem 'aws-sdk-s3'
@@ -40,6 +40,7 @@ gem 'rack', '~> 2.2.3'
   railties
 ].each { |gem| gem gem, rails_version }
 
+gem 'connection_pool', '~> 2.4'
 gem 'redis', '~> 4'
 gem 'simple_form'
 gem 'sprockets', '~> 3.7'

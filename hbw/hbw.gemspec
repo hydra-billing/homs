@@ -3,7 +3,7 @@ $LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'hbw/version'
 
 Gem::Specification.new do |s|
-  rails_version = '7.1.3.4'
+  rails_version = '7.2.3'
 
   s.name        = 'hbw'
   s.version     = HBW::VERSION
