@@ -77,6 +77,11 @@ EXPOSE 3000
 
 USER homs
 
+ARG YARN_REGISTRY
+RUN if [ -n "$YARN_REGISTRY" ]; then \
+  yarn config set npmRegistryServer "$YARN_REGISTRY"; \
+  fi
+
 RUN yarn install && \
   yarn lint && \
   yarn build && \
