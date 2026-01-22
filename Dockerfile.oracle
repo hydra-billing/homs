@@ -64,6 +64,12 @@ ENV REDIS_PORT                    6379
 
 RUN gem install bundler
 RUN bundle config --global frozen 1
+
+ARG RUBYGEMS_MIRROR
+RUN if [ -n "$RUBYGEMS_MIRROR" ]; then \
+  bundle config mirror.https://rubygems.org "$RUBYGEMS_MIRROR"; \
+  fi
+
 RUN bundle --with oracle --without test
 
 COPY --chown=homs app/      /opt/homs/app/
