@@ -36,9 +36,9 @@ module CustomFields
       end
 
       def valid_number_string?(str)
-        normalized = normalize_trailing_zeros(str)
+        normalized = normalize_trailing_zeros(str.strip)
         coerced = coerce_value(normalized)
-        return false if coerced.nil?
+        return false if coerced.nil? && !(str.nil? || str.empty?)
 
         normalized == coerced.to_s
       end
