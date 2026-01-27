@@ -2,7 +2,7 @@ module CustomFields
   module DataTypes
     class Number < CustomFields::Base
       TRAILING_ZEROS_REGEX = /(\.\d*?)0+$/.freeze
-      TRAILING_DOT_REGEX = /\.$/.freeze
+      TRAILING_DOT_REGEX = /(?<=.)\.$/.freeze
 
       def validate_value(attribute_name, value)
         return true if value.nil?
@@ -36,9 +36,8 @@ module CustomFields
       end
 
       def valid_number_string?(str)
-        normalized = normalize_trailing_zeros(str)
+        normalized = normalize_trailing_zeros(str.strip)
         coerced = coerce_value(normalized)
-        return false if coerced.nil?
 
         normalized == coerced.to_s
       end
