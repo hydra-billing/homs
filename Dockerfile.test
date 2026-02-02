@@ -41,6 +41,16 @@ COPY --chown=homs ./run_tests.sh ./.rubocop.yml ./.rubocop_todo.yml /
 COPY --chown=homs ./.rubocop.yml ./.rubocop_todo.yml ./jest.config.js /opt/homs/
 
 USER homs
+ARG YARN_REGISTRY
+RUN if [ -n "$YARN_REGISTRY" ]; then \
+  yarn config set npmRegistryServer "$YARN_REGISTRY"; \
+  fi
+
+ARG RUBYGEMS_MIRROR
+RUN if [ -n "$RUBYGEMS_MIRROR" ]; then \
+  bundle config mirror.https://rubygems.org "$RUBYGEMS_MIRROR"; \
+  fi
+
 RUN yarn install && \
   bundle --with test --without oracle
 
