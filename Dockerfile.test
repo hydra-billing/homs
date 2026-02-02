@@ -46,6 +46,11 @@ RUN if [ -n "$YARN_REGISTRY" ]; then \
   yarn config set npmRegistryServer "$YARN_REGISTRY"; \
   fi
 
+ARG RUBYGEMS_MIRROR
+RUN if [ -n "$RUBYGEMS_MIRROR" ]; then \
+  bundle config mirror.https://rubygems.org "$RUBYGEMS_MIRROR"; \
+  fi
+
 RUN yarn install && \
   bundle --with test --without oracle
 
