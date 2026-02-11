@@ -67,7 +67,7 @@ module CustomFields
       context 'Valid string values with trailing zeros' do
         let(:options) { {} }
 
-        ['100.0', '100.00', '0.0', '0.00', '100.500'].each do |test_value|
+        ['', ' 100 ', '100 ', ' 100', '100.0', ' ', '100.00', '0.0', '0.00', '100.500', '100.'].each do |test_value|
           context "with value '#{test_value}'" do
             let(:value) { test_value }
             it_behaves_like 'a CustomFields::Base descendant' do
@@ -94,7 +94,7 @@ module CustomFields
       context 'Invalid string values' do
         let(:options) { {} }
 
-        ['', '100abc', 'abc100', '.', ' 100 ', '100 ', ' 100', '00100', '+100', '1e10'].each do |test_value|
+        ['100abc', 'abc100', '.', '00100', '+100', '1e10'].each do |test_value|
           context "with value '#{test_value}'" do
             let(:value) { test_value }
             it_behaves_like 'a CustomFields::Base descendant' do
