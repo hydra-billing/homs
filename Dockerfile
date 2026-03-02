@@ -10,9 +10,7 @@ RUN apt-get update -q && \
   apt-get install --no-install-recommends -yq wget gnupg
 
 RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} && \
-  wget -O - http://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-  echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  wget -qO- https://deb.nodesource.com/setup_14.x | bash -
+  wget -qO- https://deb.nodesource.com/setup_20.x | bash -
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
   build-essential \
@@ -27,8 +25,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   postgresql-client \
   pkg-config \
   ruby-dev \
-  telnet \
-  yarn
+  telnet
+
+RUN corepack enable
 
 ENV NLS_LANG=AMERICAN_RUSSIA.AL32UTF8
 
@@ -41,9 +40,9 @@ COPY --chown=homs Gemfile Gemfile.lock Rakefile config.ru package.json yarn.lock
 COPY --chown=homs hbw/*.gemspec /opt/homs/hbw/
 COPY --chown=homs hbw/lib/hbw/  /opt/homs/hbw/lib/hbw/
 
-ENV NOKOGIRI_USE_SYSTEM_LIBRARIES 1
-ENV REDIS_HOST                    redis
-ENV REDIS_PORT                    6379
+ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
+ENV REDIS_HOST=redis
+ENV REDIS_PORT=6379
 
 RUN gem install bundler -v 2.4.22
 RUN bundle config --global frozen 1

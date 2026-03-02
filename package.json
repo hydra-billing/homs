@@ -3,6 +3,7 @@
   "description": "Web application for order and business process management.",
   "repository": "latera/homs",
   "license": "Apache-2.0",
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "dev": "webpack --config config/webpack/development.js --mode development --watch",
     "build": "webpack --config config/webpack/production.js --mode production",
