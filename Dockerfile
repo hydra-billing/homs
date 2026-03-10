@@ -1,4 +1,4 @@
-FROM ruby:3.4.7-slim-bookworm
+FROM ruby:3.4.8-slim-bookworm
 
 RUN mkdir -p /opt/homs
 
@@ -41,9 +41,9 @@ COPY --chown=homs Gemfile Gemfile.lock Rakefile config.ru package.json yarn.lock
 COPY --chown=homs hbw/*.gemspec /opt/homs/hbw/
 COPY --chown=homs hbw/lib/hbw/  /opt/homs/hbw/lib/hbw/
 
-ENV NOKOGIRI_USE_SYSTEM_LIBRARIES 1
-ENV REDIS_HOST                    redis
-ENV REDIS_PORT                    6379
+ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
+ENV REDIS_HOST=redis
+ENV REDIS_PORT=6379
 
 RUN gem install bundler
 RUN bundle config --global frozen 1
@@ -53,7 +53,8 @@ RUN if [ -n "$RUBYGEMS_MIRROR" ]; then \
   bundle config mirror.https://rubygems.org "$RUBYGEMS_MIRROR"; \
   fi
 
-RUN bundle --without oracle test
+RUN bundle config set --local without 'oracle test' && \
+  bundle install
 
 COPY --chown=homs app/      /opt/homs/app/
 COPY --chown=homs bin/      /opt/homs/bin/

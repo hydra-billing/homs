@@ -11,9 +11,11 @@ module HBW
             'process-instance',
             active:    true,
             variables: [
-              name:     entity_code_key(entity_class),
-              value:    entity_code,
-              operator: :eq
+              {
+                name:     entity_code_key(entity_class),
+                value:    entity_code,
+                operator: :eq
+              }
             ]
           )
         end

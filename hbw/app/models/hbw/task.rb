@@ -56,9 +56,11 @@ module HBW
             options = {
               active:           true,
               processVariables: [
-                name:     entity_code_variable_name,
-                operator: :like,
-                value:    '%'
+                {
+                  name:     entity_code_variable_name,
+                  operator: :like,
+                  value:    '%'
+                }
               ]
             }
 
