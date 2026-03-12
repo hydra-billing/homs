@@ -1,4 +1,4 @@
-FROM ruby:3.4.7-slim-bookworm
+FROM ruby:3.4.8-slim-bookworm
 
 RUN mkdir -p /opt/homs
 RUN mkdir -p /opt/oracle
@@ -46,10 +46,10 @@ RUN unzip 'instantclient*.zip' && \
   ln -s libocci.so.11.1 libocci.so && \
   ln -s libsqora.so.11.1 libsqora.so
 
-ENV TNS_ADMIN         /etc/oracle/
-ENV LD_LIBRARY_PATH   /opt/oracle/instantclient_11_2
-ENV DYLD_LIBRARY_PATH /opt/oracle/instantclient_11_2
-ENV NLS_LANG          AMERICAN_RUSSIA.AL32UTF8
+ENV TNS_ADMIN=/etc/oracle/
+ENV LD_LIBRARY_PATH=/opt/oracle/instantclient_11_2
+ENV DYLD_LIBRARY_PATH=/opt/oracle/instantclient_11_2
+ENV NLS_LANG=AMERICAN_RUSSIA.AL32UTF8
 
 USER homs
 WORKDIR /opt/homs
@@ -59,8 +59,8 @@ COPY --chown=homs hbw/*.gemspec /opt/homs/hbw/
 COPY --chown=homs hbw/lib/hbw/ /opt/homs/hbw/lib/hbw/
 
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
-ENV REDIS_HOST                    redis
-ENV REDIS_PORT                    6379
+ENV REDIS_HOST=redis
+ENV REDIS_PORT=6379
 
 RUN gem install bundler
 RUN bundle config --global frozen 1
@@ -70,7 +70,9 @@ RUN if [ -n "$RUBYGEMS_MIRROR" ]; then \
   bundle config mirror.https://rubygems.org "$RUBYGEMS_MIRROR"; \
   fi
 
-RUN bundle --with oracle --without test
+RUN bundle config set --local with 'oracle' && \
+  bundle config set --local without 'test' && \
+  bundle install
 
 COPY --chown=homs app/      /opt/homs/app/
 COPY --chown=homs bin/      /opt/homs/bin/

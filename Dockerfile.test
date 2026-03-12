@@ -52,6 +52,8 @@ RUN if [ -n "$RUBYGEMS_MIRROR" ]; then \
   fi
 
 RUN yarn install && \
-  bundle --with test --without oracle
+  bundle config set --local without 'oracle' && \
+  bundle config set --local with 'test' && \
+  bundle install
 
 ENTRYPOINT ["/run_tests.sh"]

@@ -54,7 +54,7 @@ const HBWServiceAddModal = (props: Props) => {
   };
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = parseInt(event.target.value);
+    const newQuantity = parseInt(event.target.value, 10);
     setQuantity(newQuantity);
     setTotalPrice(+(price * (newQuantity || 1)).toFixed(2));
   };

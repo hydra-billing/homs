@@ -42,7 +42,7 @@ class OrderList extends React.Component {
         this.setState(() => ({
           orders:       data,
           page:         2,
-          hasMorePages: data.length === parseInt(this.props.pageSize)
+          hasMorePages: data.length === parseInt(this.props.pageSize, 10)
         }));
       }
     });
@@ -137,7 +137,7 @@ class OrderList extends React.Component {
         this.setState(prevState => ({
           orders:       prevState.orders.concat(data),
           page:         prevState.page + 1,
-          hasMorePages: data.length === parseInt(this.props.pageSize)
+          hasMorePages: data.length === parseInt(this.props.pageSize, 10)
         }));
       },
       complete: () => {
