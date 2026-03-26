@@ -25,17 +25,23 @@ RUN apt-get update && \
   libxss1 \
   libxtst6 \
   unzip \
+  jq \
   xdg-utils \
   zip
 
 ARG CHROME_DEB_LINK
 
-RUN wget -O google-chrome.deb $CHROME_DEB_LINK && \
-  dpkg -i google-chrome.deb
-RUN chrome_version=$(google-chrome --version | grep -oE '[.[0-9]+]*') && \
-  wget https://storage.googleapis.com/chrome-for-testing-public/$chrome_version/linux64/chromedriver-linux64.zip && \
-  unzip -jq chromedriver-linux64.zip chromedriver-linux64/chromedriver -d /usr/local/bin/ && \
-  chmod +x /usr/local/bin/chromedriver
+RUN CFT_JSON=https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json && \
+    CHROME_URL=$(curl -fsSL "$CFT_JSON" | jq -r '.channels.Stable.downloads.chrome[] | select(.platform=="linux64") | .url') && \
+    DRIVER_URL=$(curl -fsSL "$CFT_JSON" | jq -r '.channels.Stable.downloads.chromedriver[] | select(.platform=="linux64") | .url') && \
+    curl -fsSL "$CHROME_URL" -o chrome.zip && \
+    curl -fsSL "$DRIVER_URL" -o chromedriver.zip && \
+    unzip -q chrome.zip -d /opt && \
+    unzip -q chromedriver.zip -d /opt && \
+    ln -s /opt/chrome-linux64/chrome /usr/local/bin/google-chrome && \
+    ln -s /opt/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver && \
+    chmod +x /opt/chrome-linux64/chrome /opt/chromedriver-linux64/chromedriver && \
+    rm -f chrome.zip chromedriver.zip
 
 COPY --chown=homs ./run_tests.sh ./.rubocop.yml ./.rubocop_todo.yml /
 COPY --chown=homs ./.rubocop.yml ./.rubocop_todo.yml ./jest.config.js /opt/homs/
