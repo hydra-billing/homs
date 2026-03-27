@@ -1,4 +1,5 @@
-v2.9 [Unreleased]
+v3.0 [Unreleased]
+v2.9 [2025-03-27]
 ### Features
 - [#706](https://github.com/hydra-billing/homs/pull/706) Update Ruby to 3.2.2.
 - [#725](https://github.com/hydra-billing/homs/pull/725) Update Rails to 7.
