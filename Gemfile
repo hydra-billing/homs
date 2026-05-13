@@ -29,6 +29,7 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'pg', '1.5'
 gem 'pry-rails'
 gem 'rack', '~> 2.2.3'
+gem 'parallel', '< 2'
 
 %w[
   actioncable
@@ -85,7 +86,7 @@ group :test do
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 4.41.0'
   gem 'simplecov'
   gem 'temping'
 end
