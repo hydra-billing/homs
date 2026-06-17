@@ -131,6 +131,9 @@ Name | Mapper type | User attribute | Token clain name | Claim JSON type | Add t
 sso:
   enabled: true
   use_regular_login: true
+  service_user:
+    login: "service_user_login"
+    password: "service_user_password"
   keycloak:
     auth_server_url: "http://keycloak_host:keycloak_port/auth/"
     realm: hydra
@@ -141,6 +144,8 @@ sso:
     scope:
       - homs
 ```
+
+`service_user` is required when SSO is enabled on Camunda but HOMS users log in via regular login (`use_regular_login: true`). The widget authenticates to Keycloak with these credentials to obtain tokens for Camunda API calls. A single service user is shared across all Camunda instances configured for the widget.
 
 ### Filter business processes by user
 
