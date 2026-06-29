@@ -24,6 +24,9 @@ base_url: '/'
 sso:
   enabled: false
   use_regular_login: true
+  service_user:
+    login: login
+    password: password
   keycloak:
     auth_server_url: "http://0.0.0.0:8080/auth/"
     realm: hydra
