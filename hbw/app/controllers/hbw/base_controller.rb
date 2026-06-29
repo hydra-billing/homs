@@ -43,7 +43,7 @@ module HBW
     end
 
     def auth_service_user
-      service_user_config = Rails.application.config.app[:sso][:service_user]
+      service_user_config = Rails.application.config.app[:sso].fetch(:service_user)
       session_state = yield HOMS.container[:keycloak_client].authenticate_by_password!(
         service_user_config.fetch(:login),
         service_user_config.fetch(:password)
