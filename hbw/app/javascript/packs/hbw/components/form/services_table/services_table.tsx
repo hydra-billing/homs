@@ -147,7 +147,7 @@ const HBWFormServicesTable: React.FC<Props> = (props) => {
     },
     {
       name:      'serviceTotalPrice',
-      // eslint-disable-next-line max-len
+      // eslint-disable-next-line @stylistic/max-len
       label:     `${translate('components.services_table.table.columns.service_total_price')}, ${props.params.currency_code}`,
       isVisible: true
     },

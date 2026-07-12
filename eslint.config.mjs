@@ -1,12 +1,15 @@
 import { defineConfig } from "eslint/config";
 import react from "eslint-plugin-react";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
+import stylistic from "@stylistic/eslint-plugin";
+import importPlugin from "eslint-plugin-import";
 import globals from "globals";
 import tsParser from "@typescript-eslint/parser";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
 import { FlatCompat } from "@eslint/eslintrc";
+import airbnbRules from "./eslint.airbnb-rules.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,25 +19,32 @@ const compat = new FlatCompat({
     allConfig: js.configs.all
 });
 
+const FILES = [
+    'app/javascript/**/*.{js,jsx}',
+    'hbw/app/javascript/**/*.{js,jsx}'
+];
+
 export default defineConfig([{
-    files: [
-        'app/javascript/**/*.{js,jsx}',
-        'hbw/app/javascript/**/*.{js,jsx}'
-    ],
+    files: FILES,
     extends: compat.extends(
         "eslint:recommended",
-        "airbnb-base",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/eslint-recommended",
     ),
 
     plugins: {
         react,
-        "@typescript-eslint": typescriptEslint
+        "@typescript-eslint": typescriptEslint,
+        "@stylistic": stylistic,
+        import: importPlugin
     },
 
     languageOptions: {
         globals: {
+            // airbnb-base declared env: { node: true, es6: true }, which FlatCompat expanded
+            // into globals. Without them console/require and Promise/Map/Set/Symbol vanish → no-undef.
+            ...globals.node,
+            ...globals.es2015,
             ...globals.browser,
             ...globals.jquery,
             Application: true,
@@ -50,16 +60,35 @@ export default defineConfig([{
         react: {
             version: "16.14.0",
         },
+
+        // Came from eslint-config-airbnb-base/rules/imports.js.
+        // Without 'import/ignore' the plugin goes off resolving imports into node_modules.
+        'import/resolver': {
+            node: {
+                extensions: ['.mjs', '.js', '.json'],
+            },
+        },
+        'import/extensions': ['.js', '.mjs', '.jsx'],
+        'import/core-modules': [],
+        'import/ignore': ['node_modules', '\\.(coffee|scss|css|less|hbs|svg|json)$'],
     },
+
+    rules: airbnbRules,
+},
+{
+    // Separate layer: an entry like `camelcase: "off"` changes only severity and keeps the
+    // options from the previous layer. Within a single rules object a spread would overwrite them
+    // along with their options.
+    files: FILES,
 
     rules: {
         camelcase: "off",
-        "comma-dangle": [1, "only-multiline"],
+        "@stylistic/comma-dangle": [1, "only-multiline"],
         "class-methods-use-this": 0,
         "func-names": [1, "never"],
         "import/extensions": 0,
         "import/no-unresolved": 0,
-        "key-spacing": [1, {
+        "@stylistic/key-spacing": [1, {
             singleLine: {
                 beforeColon: false,
                 afterColon: true,
@@ -72,7 +101,7 @@ export default defineConfig([{
             },
         }],
 
-        "max-len": [1, {
+        "@stylistic/max-len": [1, {
             code: 121,
             ignoreComments: true,
         }],
@@ -96,9 +125,9 @@ export default defineConfig([{
             skipUndeclared: true,
         }],
 
-        "space-before-function-paren": [1, "always"],
+        "@stylistic/space-before-function-paren": [1, "always"],
 
-        "arrow-parens": ["error", "as-needed", {
+        "@stylistic/arrow-parens": ["error", "as-needed", {
             requireForBlockBody: true,
         }],
 
