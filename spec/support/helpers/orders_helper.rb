@@ -33,7 +33,7 @@ module Features
     def expect_widget_presence
       wait_for_ajax
 
-      expect(page.find('#hbw-tasks-list-button').all('*', wait: 5)).not_to be_empty
+      expect(page.find('#hbw-tasks-list-button')).to have_css('*', minimum: 1)
     end
 
     def placeholder(name)

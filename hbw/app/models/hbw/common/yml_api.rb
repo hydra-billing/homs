@@ -43,10 +43,14 @@ module HBW
       #     - params: <body-2 or querystring-2>
       #       response: <response-2>
       def fetch_response(method, url, params)
-        responses.fetch(method)
-                 .fetch(url)
-                 .find { |el| el['params'] == Addressable::URI.unescape(params.to_query) }
-                 .fetch('response')
+        query = Addressable::URI.unescape(params.to_query)
+        entry = responses.dig(method, url)&.find { |el| el['params'] == query }
+
+        Rails.logger.info("[camunda-mock] #{entry ? 'HIT ' : 'MISS'} #{method.upcase} #{url} params=#{query.inspect}")
+
+        raise KeyError, "no camunda mock entry for #{method.upcase} #{url} params=#{query.inspect}" if entry.nil?
+
+        entry.fetch('response')
       end
     end
 

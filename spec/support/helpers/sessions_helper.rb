@@ -20,6 +20,12 @@ module Features
       visit new_user_session_path
       fill_in 'Email', with: email
       fill_in 'Password', with: password
+      # Also the path for the invalid-credentials specs, so this must assert nothing about the
+      # sign-in outcome — only that the typed value actually stuck before submitting.
+      unless page.has_field?('Email', with: email)
+        fill_in 'Email', with: email
+        fill_in 'Password', with: password
+      end
       click_button 'Sign in'
     end
 

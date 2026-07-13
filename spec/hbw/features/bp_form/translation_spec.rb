@@ -20,7 +20,7 @@ feature 'BP form with existing russian translation', js: true do
   describe 'with current lang = ru' do
     let(:locale) { :ru }
 
-    scenario 'should be translated to russian' do
+    scenario 'should be translated to russian [Q]' do
       click_and_wait 'ORD-1'
 
       expect(page).to     have_content 'Тестирование переводов'

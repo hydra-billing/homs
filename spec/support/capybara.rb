@@ -17,6 +17,11 @@ Capybara.register_driver :chrome do |app|
                                           browser: :chrome,
                                           options: opts)
 
+  timeouts = driver.browser.manage.timeouts
+  timeouts.page_load     = 30 # whole navigation — the outer bound, was Selenium's 300s default
+  timeouts.script        = 20 # a single async script — tighter than a full page load
+  timeouts.implicit_wait = 0  # element lookup — left to Capybara.default_max_wait_time
+
   # https://bugs.chromium.org/p/chromium/issues/detail?id=696481#c89
   bridge = driver.browser.send(:bridge)
   path = "/session/#{bridge.session_id}/chromium/send_command"
@@ -32,7 +37,6 @@ end
 
 Capybara.asset_host = 'http://localhost:3000'
 Capybara.javascript_driver = :chrome
-Capybara.automatic_reload = false
 
 Capybara::Screenshot.register_driver(:chrome) do |driver, path|
   driver.browser.save_screenshot(path)
@@ -44,7 +48,7 @@ end
 Capybara.default_max_wait_time = 10
 
 Capybara.server = :puma, {
-  Threads:        '0:1',
+  Threads:        '1:1',
   workers:        0,
   queue_requests: false
 }
