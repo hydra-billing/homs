@@ -7,6 +7,14 @@ module HBW
 
     include Dry::Monads::Do.for(:auth_service_user)
 
+    # Requests authenticated by the Authorization header (Basic/Bearer: CRM and
+    # portal backends proxying the widget, camunda-ext task events) carry no
+    # Rails session — there is no ambient credential to forge and no session to
+    # validate a CSRF token against. Session-authenticated browser requests
+    # (widget embedded into HOMS UI) stay protected and must send X-CSRF-Token
+    # (see hbw connection.js).
+    skip_forgery_protection if: -> { request.authorization.present? }
+
     before_action :start, unless: -> { Rails.env.test? }
     before_action :set_service_user_cookie, if: -> { !Rails.env.test? && auth_as_sso_service_user? }
     before_action :get_access_token, if: -> { sso_enabled? }
