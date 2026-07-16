@@ -5,7 +5,7 @@ feature 'Delete user', :devise, js: true do
     signin(admin.email, admin.password)
   end
 
-  scenario 'we can delete user' do
+  scenario 'we can delete user [Q]' do
     visit '/users'
     click_link("#{@user.name} #{@user.last_name}")
     expect(page).to have_content I18n.t('users.edit.title')

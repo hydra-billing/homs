@@ -88,7 +88,7 @@ feature 'Check table with tasks', js: true do
       expect(page).to have_content 'Check test form'
     end
 
-    it 'for unassigned task' do
+    it 'for unassigned task [Q]' do
       click_on_tab 'Unclaimed tasks (3)'
 
       expect(tasks_table_content.length).to eq(3)

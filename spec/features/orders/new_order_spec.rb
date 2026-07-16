@@ -49,7 +49,7 @@ feature 'Create new order', js: true do
       expect_widget_presence
     end
 
-    scenario 'vacation request' do
+    scenario 'vacation request [Q]' do
       expect(select_options('order_type_id')).to eq([support_request_type_name,
                                                      vacation_request_type_name])
 

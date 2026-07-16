@@ -22,7 +22,7 @@ feature 'Sign in', :devise, js: true do
     expect(page).to have_content I18n.t('devise.failure.invalid', authentication_keys: I18n.t('activerecord.attributes.user.email').downcase)
   end
 
-  scenario 'user cannot sign in with wrong password' do
+  scenario 'user cannot sign in with wrong password [Q]' do
     signin(user.email, 'invalidpass')
     expect(page).to have_content I18n.t 'layouts.navigation.sign_in'
     expect(page).to have_content I18n.t('devise.failure.invalid', authentication_keys: I18n.t('activerecord.attributes.user.email').downcase)

@@ -7,7 +7,7 @@ feature 'User is', js: true do
   let!(:john)          { FactoryBot.create(:user, :john) }
   let!(:blocked_admin) { FactoryBot.create(:user, :blocked_admin) }
 
-  scenario 'created without validation errors' do
+  scenario 'created without validation errors [Q]' do
     signin(admin.email, admin.password)
 
     click_on 'Users'
@@ -100,7 +100,7 @@ feature 'User is', js: true do
     expect(mark.department).to  eq 'Administrators'
   end
 
-  scenario 'able to control API token' do
+  scenario 'able to control API token [Q]' do
     signin(admin.email, admin.password)
 
     click_on 'Users'

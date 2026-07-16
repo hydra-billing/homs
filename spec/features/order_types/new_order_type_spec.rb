@@ -53,7 +53,7 @@ feature 'Create new order type', js: true do
     expect(OrderType.find_by_code('support_request').active).to be_falsey
   end
 
-  scenario 'dismissed' do
+  scenario 'dismissed [Q]' do
     attach_file('order_type_file',
                 fixtures_path('order_types/support_request.yml'),
                 visible: false)
