@@ -276,7 +276,7 @@ feature 'User is', js: true do
     expect(john.encrypted_password).not_to eq previous_password
   end
 
-  scenario 'inaccessible for ordinary user' do
+  scenario 'inaccessible for ordinary user [Q]' do
     signin(john.email, john.password)
 
     expect(page).not_to have_content 'Users'

@@ -33,7 +33,7 @@ feature 'Check table with tasks', js: true do
       )
     end
 
-    it 'for unclaimed tasks' do
+    it 'for unclaimed tasks [Q]' do
       click_on_tab 'Unclaimed tasks (3)'
 
       expect(tasks_table_header).to eq ['Priority', 'Title', 'Task type', 'Task description', 'Created/Due', '']
@@ -116,7 +116,7 @@ feature 'Check table with tasks', js: true do
   end
 
   describe 'table row disabled' do
-    it 'for claimed task' do
+    it 'for claimed task [Q]' do
       click_on_tab 'Unclaimed tasks (3)'
 
       claim_task(1)

@@ -14,7 +14,7 @@ feature 'Check available tasks counter', js: true do
   end
 
   describe 'when rendered' do
-    it 'should contain assigned/unassigned tasks count' do
+    it 'should contain assigned/unassigned tasks count [Q]' do
       expect(tasks_count).to eq '2/3'
     end
   end
@@ -57,7 +57,7 @@ feature 'Check available tasks counter', js: true do
       expect_widget_presence
     end
 
-    it 'should allow to navigate to full task list' do
+    it 'should allow to navigate to full task list [Q]' do
       expect(page).to have_content 'View all'
 
       click_on 'View all'

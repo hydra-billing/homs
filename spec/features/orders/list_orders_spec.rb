@@ -69,7 +69,7 @@ feature 'List orders', js: true do
     expect(calendar_value('estimated_exec_date_to')).to be_nil
   end
 
-  scenario 'with changing filter parameters' do
+  scenario 'with changing filter parameters [Q]' do
     current_orders_list = [['ORD-1', 'Empty order type', 'In progress',
                             in_current_locale(vacation_request_order.created_at), '', 'ext_code', '',
                             in_current_locale(vacation_request_order.estimated_exec_date)]]

@@ -12,7 +12,7 @@ feature 'Create new order type', js: true do
     expect_widget_presence
   end
 
-  scenario 'success' do
+  scenario 'success [Q]' do
     attach_file('order_type_file',
                 fixtures_path('order_types/support_request.yml'),
                 visible: false)
@@ -104,7 +104,7 @@ feature 'Create new order type', js: true do
     expect(OrderType.find_by_code('support_request').present?).to be_falsey
   end
 
-  scenario 'failed with invalid yml' do
+  scenario 'failed with invalid yml [Q]' do
     attach_file('order_type_file',
                 fixtures_path('order_types/invalid_yml_request.yml'),
                 visible: false)

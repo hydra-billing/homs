@@ -29,7 +29,7 @@ feature 'Using two BPM data sources', js: true do
   end
 
   describe 'task form rendered' do
-    scenario 'from the first data source' do
+    scenario 'from the first data source [Q]' do
       click_on 'Orders'
       expect(page).to have_content 'Orders list'
       expect_widget_presence

@@ -93,7 +93,7 @@ feature 'Create new order', js: true do
     end
   end
 
-  scenario 'failed' do
+  scenario 'failed [Q]' do
     click_on 'Orders'
     expect(page).to have_content 'Orders list'
     expect_widget_presence

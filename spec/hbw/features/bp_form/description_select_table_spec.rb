@@ -13,7 +13,7 @@ feature 'Check description on top and botton of text', js: true do
     click_and_wait 'ORD-1'
   end
 
-  scenario 'should contain a top and bottom text descriptions' do
+  scenario 'should contain a top and bottom text descriptions [Q]' do
     parent_top = page.find('.select-table-top')
     expect(find_by_dt('description-top', parent_top).text).to eq 'Top description test'
 

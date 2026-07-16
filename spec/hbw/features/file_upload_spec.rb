@@ -24,7 +24,7 @@ feature 'File upload field', js: true do
       expect(page).to have_content 'ORD-1'
     end
 
-    scenario 'with multuple = true should allow to attach several files' do
+    scenario 'with multuple = true should allow to attach several files [Q]' do
       expect(page).to have_field('multipleFileUpload', type: :file, visible: :hidden)
       expect(page.find_field('multipleFileUpload', type: :file, visible: :hidden).multiple?).to be true
     end
@@ -171,7 +171,7 @@ feature 'File upload field', js: true do
         expect(preview_row.find(:dp, 'far')).to eq preview_row.find(:di, 'file')
       end
 
-      scenario 'thumbnailed preview should allow to remove attached file' do
+      scenario 'thumbnailed preview should allow to remove attached file [Q]' do
         preview_row = page.find('.files-preview-row')
 
         expect(preview_row).to have_content 'logo.svg'
@@ -192,7 +192,7 @@ feature 'File upload field', js: true do
       expect(page).to have_content 'ORD-2'
     end
 
-    scenario 'should render error if file_list_name parameter empty / not matched / not unique' do
+    scenario 'should render error if file_list_name parameter empty / not matched / not unique [Q]' do
       real_error_messages = {
         fieldParamEmpty:      file_upload_error_message('fieldParamEmpty'),
         fieldParamEmptyStr:   file_upload_error_message('fieldParamEmptyStr'),
