@@ -1,4 +1,4 @@
-/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable @stylistic/implicit-arrow-linebreak */
 import React, { useContext } from 'react';
 import {
   differenceInHours, differenceInDays, differenceInWeeks, differenceInYears
