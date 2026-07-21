@@ -3,6 +3,8 @@ feature 'Delete user', :devise, js: true do
     admin = FactoryBot.create(:user, :admin)
     @user = FactoryBot.create(:user, :john)
     signin(admin.email, admin.password)
+    expect(page).not_to have_content 'Sign in'
+    expect(page).to     have_content 'Orders list'
   end
 
   scenario 'we can delete user' do
@@ -11,7 +13,7 @@ feature 'Delete user', :devise, js: true do
     expect(page).to have_content I18n.t('users.edit.title')
 
     click_link(I18n.t('users.show.delete_user'))
-    expect(current_path.should).to   eq('/users')
-    expect(page).to have_no_content  @user.email
+    expect(page).to have_current_path('/users')
+    expect(page).to have_no_content @user.email
   end
 end

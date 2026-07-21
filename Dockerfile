@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   ruby-dev \
   telnet
 
-RUN npm install -g yarn && yarn set version stable
+RUN npm install -g corepack@latest && corepack enable
 
 ENV NLS_LANG=AMERICAN_RUSSIA.AL32UTF8
 

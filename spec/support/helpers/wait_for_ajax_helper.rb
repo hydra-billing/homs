@@ -1,8 +1,10 @@
 module Features
   module WaitForAjaxHelper
+    POLL_INTERVAL = 0.05
+
     def wait_for_ajax
       Timeout.timeout(Capybara.default_max_wait_time) do
-        loop until finished_all_ajax_requests?
+        sleep(POLL_INTERVAL) until finished_all_ajax_requests?
       end
     end
 

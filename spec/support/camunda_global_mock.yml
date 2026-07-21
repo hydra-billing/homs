@@ -1,0 +1,10 @@
+get:
+  # The business-process definition list. The widget queries it two ways on every page: bare (the
+  # full list) and filtered by the BP user for the start button (/widget/buttons). An empty list
+  # means "nothing to start", so the widget renders no start button — correct for any test that
+  # does not drive process starting. A test that does provides its own entry, which wins.
+  process-definition:
+    - params: ''
+      response: []
+    - params: 'latestVersion=true&startableBy=demo'
+      response: []

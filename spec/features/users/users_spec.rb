@@ -123,7 +123,7 @@ feature 'User is', js: true do
     ]
 
     user_generate_api_token(admin).click
-    expect(user_generate_api_token(admin).text).to eq 'Renew API token'
+    expect(page).to have_link('Renew API token', href: "/users/#{admin.id}/generate_api_token")
     expect(is_button_red?("/users/#{admin.id}/generate_api_token")).to be true
 
     admin.reload
