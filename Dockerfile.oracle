@@ -36,7 +36,7 @@ RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} && \
   telnet \
   unzip
 
-RUN npm install -g yarn && yarn set version stable
+RUN npm install -g corepack@latest && corepack enable
 
 WORKDIR /opt/oracle
 
