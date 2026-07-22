@@ -17,19 +17,9 @@ module Features
 
     # rubocop:enable Metrics/ParameterLists
     def signin(email, password)
-      # Also the path for the invalid-credentials specs, so this must assert nothing about the
-      # sign-in outcome — only that each typed value actually stuck before submitting.
-      fill = lambda do |field, value|
-        fill_in field, with: value
-        return if page.has_field?(field, with: value)
-
-        fill_in field, with: value
-        warn "[signin] #{field} did not take; retry #{page.has_field?(field, with: value) ? 'stuck' : 'was lost too'} at #{RSpec.current_example&.location}"
-      end
-
       visit new_user_session_path
-      fill.call('Email', email)
-      fill.call('Password', password)
+      fill_in 'user_email', with: email
+      fill_in 'user_password', with: password
       click_button 'Sign in'
     end
 
