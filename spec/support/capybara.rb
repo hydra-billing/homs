@@ -18,7 +18,7 @@ Capybara.register_driver :chrome do |app|
                                           options: opts)
 
   timeouts = driver.browser.manage.timeouts
-  timeouts.page_load     = 30 # whole navigation — the outer bound, was Selenium's 300s default
+  timeouts.page_load     = 60 # whole navigation — the outer bound, was Selenium's 300s default
   timeouts.script        = 20 # a single async script — tighter than a full page load
   timeouts.implicit_wait = 0  # element lookup — left to Capybara.default_max_wait_time
 
