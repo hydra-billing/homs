@@ -7,8 +7,7 @@ RUN apt-get update && \
   libfontconfig1 \
   libfontconfig1-dev \
   libfreetype6 \
-  libfreetype6-dev \
-  libqt5webkit5-dev
+  libfreetype6-dev
 
 RUN apt-get update && \
   apt-get install -y \
@@ -16,9 +15,9 @@ RUN apt-get update && \
   gstreamer1.0-plugins-base \
   gstreamer1.0-tools \
   gstreamer1.0-x \
-  libayatana-indicator7 \
-  libasound2 \
-  libgtk-3-0 \
+  libayatana-indicator3-7 \
+  libasound2t64 \
+  libgtk-3-0t64 \
   libnspr4 \
   libnss3 \
   libu2f-udev \

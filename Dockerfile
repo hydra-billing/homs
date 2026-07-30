@@ -1,4 +1,4 @@
-FROM ruby:3.4.8-slim-bookworm
+FROM ruby:3.4.10-slim-trixie
 
 RUN mkdir -p /opt/homs
 
@@ -6,13 +6,10 @@ RUN useradd --uid 2004 --home /opt/homs --shell /bin/bash --comment "HOMS" homs 
   chown -R homs /opt/homs
 
 RUN apt-get update -q && \
-  apt-get purge -y cmdtest && \
   apt-get install --no-install-recommends -yq wget gnupg
 
 RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} && \
-  wget -O - http://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-  echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  wget -qO- https://deb.nodesource.com/setup_22.x | bash -
+  wget -qO- https://deb.nodesource.com/setup_24.x | bash -
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
   build-essential \
