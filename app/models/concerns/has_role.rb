@@ -12,7 +12,7 @@ module HasRole
   end
 
   def role_i18n_key
-    self.class.role_i18n_key(self.role)
+    self.class.role_i18n_key(role)
   end
 
   module ClassMethods

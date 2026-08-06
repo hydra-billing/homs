@@ -1,4 +1,4 @@
-FROM ruby:3.4.8-slim-bookworm
+FROM ruby:3.4.10-slim-trixie
 
 RUN mkdir -p /opt/homs
 RUN mkdir -p /opt/oracle
@@ -9,12 +9,9 @@ RUN useradd --uid 2004 --home /opt/homs --shell /bin/bash --comment "HOMS" homs 
 COPY --chown=homs instantclient*.zip /opt/oracle/
 
 RUN apt-get update -q && \
-  apt-get purge -y cmdtest && \
   apt-get install --no-install-recommends -yq wget gnupg
 
-RUN wget -O - http://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-  echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  wget -qO- https://deb.nodesource.com/setup_22.x | bash -
+RUN wget -qO- https://deb.nodesource.com/setup_24.x | bash -
 
 RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} && \
   apt-get update && \
@@ -22,7 +19,7 @@ RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} && \
   build-essential \
   curl \
   git \
-  libaio1 \
+  libaio1t64 \
   libpq-dev \
   libxml2 \
   libxml2-dev \
@@ -37,6 +34,8 @@ RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} && \
   unzip
 
 RUN npm install -g corepack@latest && corepack enable
+
+RUN ln -sf /usr/lib/x86_64-linux-gnu/libaio.so.1t64 /usr/lib/x86_64-linux-gnu/libaio.so.1
 
 WORKDIR /opt/oracle
 
