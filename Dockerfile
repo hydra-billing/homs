@@ -1,4 +1,4 @@
-FROM ruby:3.4.10-slim-trixie
+FROM ruby:3.4.11-slim-trixie
 
 RUN mkdir -p /opt/homs
 
