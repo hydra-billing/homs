@@ -22,6 +22,8 @@ gem 'hbw', path: File.join(File.dirname(__FILE__), 'hbw')
 gem 'hydra-keycloak-client'
 gem 'i18n-js'
 gem 'jbuilder'
+# activesupport 7.2 passes quirks_mode to JSON.generate, json 3 rejects unknown options
+gem 'json', '< 3'
 gem 'jwt'
 gem 'kaminari'
 gem 'minipack'
