@@ -11,29 +11,29 @@ PATH
   remote: hbw
   specs:
     hbw (0.1)
-      actionpack (~> 7.2.3)
-      actionview (~> 7.2.3)
-      activemodel (~> 7.2.3)
-      activerecord (~> 7.2.3)
-      activesupport (~> 7.2.3)
+      actionpack (~> 7.2.4)
+      actionview (~> 7.2.4)
+      activemodel (~> 7.2.4)
+      activerecord (~> 7.2.4)
+      activesupport (~> 7.2.4)
       coffee-rails
       faraday
       faraday-detailed_logger
       faraday_middleware
-      railties (~> 7.2.3)
+      railties (~> 7.2.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (7.2.3)
-      actionpack (= 7.2.3)
-      activesupport (= 7.2.3)
+    actioncable (7.2.4)
+      actionpack (= 7.2.4)
+      activesupport (= 7.2.4)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
       zeitwerk (~> 2.6)
-    actionpack (7.2.3)
-      actionview (= 7.2.3)
-      activesupport (= 7.2.3)
+    actionpack (7.2.4)
+      actionview (= 7.2.4)
+      activesupport (= 7.2.4)
       cgi
       nokogiri (>= 1.8.5)
       racc
@@ -43,29 +43,29 @@ GEM
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
       useragent (~> 0.16)
-    actionview (7.2.3)
-      activesupport (= 7.2.3)
+    actionview (7.2.4)
+      activesupport (= 7.2.4)
       builder (~> 3.1)
       cgi
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    activemodel (7.2.3)
-      activesupport (= 7.2.3)
-    activerecord (7.2.3)
-      activemodel (= 7.2.3)
-      activesupport (= 7.2.3)
+    activemodel (7.2.4)
+      activesupport (= 7.2.4)
+    activerecord (7.2.4)
+      activemodel (= 7.2.4)
+      activesupport (= 7.2.4)
       timeout (>= 0.4.0)
-    activesupport (7.2.3)
+    activesupport (7.2.4)
       base64
       benchmark (>= 0.3)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.3.1)
-      connection_pool (>= 2.2.5)
+      connection_pool (>= 2.2.5, < 3)
       drb
       i18n (>= 1.6, < 2)
       logger (>= 1.4.2)
-      minitest (>= 5.1)
+      minitest (>= 5.1, < 6)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
     addressable (2.9.0)
@@ -75,7 +75,7 @@ GEM
       railties
     ast (2.4.3)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1293.0)
+    aws-partitions (1.1294.0)
     aws-sdk-core (3.257.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -319,9 +319,7 @@ GEM
     minipack (0.3.6)
       actionview
       railties (>= 4.2)
-    minitest (6.0.6)
-      drb (~> 2.0)
-      prism (~> 1.5)
+    minitest (5.27.0)
     momentjs-rails (2.29.4.1)
       railties (>= 3.1)
     multipart-post (2.4.1)
@@ -382,9 +380,9 @@ GEM
       loofah (~> 2.25, >= 2.25.2)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
     rails_layout (1.0.42)
-    railties (7.2.3)
-      actionpack (= 7.2.3)
-      activesupport (= 7.2.3)
+    railties (7.2.4)
+      actionpack (= 7.2.4)
+      activesupport (= 7.2.4)
       cgi
       irb (~> 1.13)
       rackup (>= 1.0.0)
@@ -522,12 +520,12 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  actioncable (~> 7.2.3)
-  actionpack (~> 7.2.3)
-  actionview (~> 7.2.3)
-  activemodel (~> 7.2.3)
-  activerecord (~> 7.2.3)
-  activesupport (~> 7.2.3)
+  actioncable (~> 7.2.4)
+  actionpack (~> 7.2.4)
+  actionview (~> 7.2.4)
+  activemodel (~> 7.2.4)
+  activerecord (~> 7.2.4)
+  activesupport (~> 7.2.4)
   apitome
   aws-sdk-s3
   better_errors
@@ -567,7 +565,7 @@ DEPENDENCIES
   puma
   rack (~> 2.2.3)
   rails_layout
-  railties (~> 7.2.3)
+  railties (~> 7.2.4)
   redis (~> 4)
   rspec-mocks
   rspec-rails
