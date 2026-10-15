@@ -84,8 +84,8 @@ RSpec.describe OrderType, type: :model do
   it '.lookup' do
     FactoryBot.create(:order_type, code: 'Vacation request', name: 'Vacation request')
     FactoryBot.create(:order_type, code: 'Support Request', name: 'Support Request')
-    a_c2 = FactoryBot.create(:order_type, :active,  code: 'Support Request', name: 'Support Request')
-    a_c1 = FactoryBot.create(:order_type, :active,  code: 'Vacation request', name: 'Vacation request')
+    a_c2 = FactoryBot.create(:order_type, :active, code: 'Support Request', name: 'Support Request')
+    a_c1 = FactoryBot.create(:order_type, :active, code: 'Vacation request', name: 'Vacation request')
 
     expect(OrderType.lookup('va')).to eq([{id: a_c1.id, text: a_c1.code}])
     expect(OrderType.lookup('su')).to eq([{id: a_c2.id, text: a_c2.code}])

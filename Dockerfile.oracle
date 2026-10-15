@@ -1,4 +1,4 @@
-FROM ruby:3.4.10-slim-trixie
+FROM ruby:3.4.11-slim-trixie
 
 RUN mkdir -p /opt/homs
 RUN mkdir -p /opt/oracle
@@ -61,7 +61,7 @@ ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 ENV REDIS_HOST=redis
 ENV REDIS_PORT=6379
 
-RUN gem install bundler
+RUN gem install bundler -v 2.6.9
 RUN bundle config --global frozen 1
 
 ARG RUBYGEMS_MIRROR

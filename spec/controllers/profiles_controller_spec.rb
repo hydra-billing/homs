@@ -9,7 +9,7 @@ describe ProfilesController, type: :controller do
 
       profile.data['contractNumber'] = {type: 'number',   label: 'Contract number', show:  true}
       profile.data['creationDate']   = {type: 'datetime', label: 'Creation date',   show:  true}
-      profile.data['callBack']       = {type: 'boolean',  label: 'Callback',        show:  false}
+      profile.data['callBack']       = {type: 'boolean',  label: 'Callback',        show: false}
 
       post 'create', params: {order_type_id: profile.order_type.id, data: profile.data}
       expect(response.body).to eq(Profile.by_order_type_and_user(profile.order_type.id, profile.user.id).to_json)
@@ -29,13 +29,13 @@ describe ProfilesController, type: :controller do
 
       profile.data['contractNumber'] = {type: 'number',   label: 'Contract number', show:  true}
       profile.data['creationDate']   = {type: 'datetime', label: 'Creation date',   show:  true}
-      profile.data['callBack']       = {type: 'boolean',  label: 'Callback',        show:  false}
+      profile.data['callBack']       = {type: 'boolean',  label: 'Callback',        show: false}
 
       patch 'update', params: {id: profile.id, data: profile.data}
 
       expect(Profile.find(profile.id).data['contractNumber']).to eq({type: 'number',   label: 'Contract number', show:  true}.with_indifferent_access)
       expect(Profile.find(profile.id).data['creationDate']).to   eq({type: 'datetime', label: 'Creation date',   show:  true}.with_indifferent_access)
-      expect(Profile.find(profile.id).data['callBack']).to       eq({type: 'boolean',  label: 'Callback',        show:  false}.with_indifferent_access)
+      expect(Profile.find(profile.id).data['callBack']).to       eq({type: 'boolean',  label: 'Callback',        show: false}.with_indifferent_access)
     end
   end
 end

@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '3.4.10'
+ruby '3.4.11'
 
-rails_version = '~> 7.2.3'
+rails_version = '~> 7.2.4'
 
 gem 'apitome'
 gem 'aws-sdk-s3'
@@ -22,6 +22,8 @@ gem 'hbw', path: File.join(File.dirname(__FILE__), 'hbw')
 gem 'hydra-keycloak-client'
 gem 'i18n-js'
 gem 'jbuilder'
+# faraday 1.x passes parser options to JSON.parse positionally, json 3 takes keywords only
+gem 'json', '< 3'
 gem 'jwt'
 gem 'kaminari'
 gem 'minipack'

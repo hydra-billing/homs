@@ -3,11 +3,10 @@ class Task
     '12345'
   end
 
-  # rubocop:disable Naming/MethodName
+  # rubocop:disable-next Naming/MethodName
   def homsOrderCode
     'ORD-1'
   end
-  # rubocop:enable Naming/MethodName
 end
 
 describe HBW::TasksController, type: :controller do
