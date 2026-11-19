@@ -5,6 +5,11 @@ RUN mkdir -p /opt/homs
 RUN useradd --uid 2004 --home /opt/homs --shell /bin/bash --comment "HOMS" homs && \
   chown -R homs /opt/homs
 
+RUN echo "deb http://archive.debian.org/debian/ bullseye main" > /etc/apt/sources.list && \
+  echo "deb http://archive.debian.org/debian/ bullseye-updates main contrib" >> /etc/apt/sources.list && \
+  echo "deb http://archive.debian.org/debian bullseye-backports main contrib" >> /etc/apt/sources.list && \
+  echo "deb [check-valid-until=no] http://snapshot.debian.org/archive/debian-security/20260903T220410Z/ bullseye-security main" >> /etc/apt/sources.list
+
 RUN apt-get update -q && \
   apt-get purge -y cmdtest && \
   apt-get install --no-install-recommends -yq wget gnupg
