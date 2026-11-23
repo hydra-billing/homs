@@ -43,7 +43,7 @@
     "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^2.2.0",
     "modulejs": "2.9.0",
-    "moment": "2.29.4",
+    "moment": "2.31.0",
     "non-digest-webpack-plugin": "^0.0.1",
     "prop-types": "^15.6.2",
     "qs": "^6.9.2",
